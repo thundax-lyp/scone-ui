@@ -14,8 +14,9 @@
 
 ## Governance Entry Map
 
-- 文档写作、目录、RUNBOOK 和提交口径：本文档。
-- TODO 协作、删除、测试检查和提交收口：[`TODO-RULES.md`](./TODO-RULES.md)。
+- 文档写作、目录和 RUNBOOK：本文档。
+- Commit 标题、type/scope 白名单和提交粒度：根 [`AGENTS.md`](../../AGENTS.md)。
+- TODO 协作、任务项格式、删除和收窄：[`TODO-RULES.md`](./TODO-RULES.md)。
 - PR 描述、阶段性交付和验证证据：[`PR-RULES.md`](./PR-RULES.md)。
 
 ## Language Rules
