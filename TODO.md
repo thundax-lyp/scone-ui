@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `09-docs-update-implementation-coverage`：更新 Implementation Coverage
-    - 任务类型：执行任务
-    - 依据文档：`docs/00-governance/TODO-RULES.md`
-    - 范围对象：`docs/40-readiness/IMPLEMENTATION-COVERAGE.md`、`docs/30-designs/DESIGN-ADMIN-UI.md`、`docs/10-specs/COMPONENT-SELECTION.md`
-    - 处理动作：根据 DESIGN 记录设计覆盖范围、待实现能力、验证规划和风险，不声明代码已实现。
-    - 验收点：Implementation Coverage 与 DESIGN 和 `COMPONENT-SELECTION.md` 对齐，并明确当前是设计覆盖记录而非实现完成证据。
-    - 重要度：10/10
-
 - [ ] `10-close-runbook-todo`：清理 RUNBOOK 并收窄 TODO
     - 任务类型：执行任务
     - 依据文档：`docs/00-governance/DOCUMENT-RULES.md`
