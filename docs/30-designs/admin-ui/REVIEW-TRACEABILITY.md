@@ -1,0 +1,55 @@
+# Admin UI Review And Traceability
+
+## DESIGN Self Review
+
+依据文件：
+
+- `docs/30-designs/DESIGN-ADMIN-UI.md`
+- `docs/30-designs/admin-ui/*.md`
+- `docs/00-governance/DOCUMENT-RULES.md`
+
+自审结果：
+
+| 检查项 | 结论 | 回改结果 |
+| --- | --- | --- |
+| Input Files 是否全部被覆盖，且引用精确到文件名。 | 已覆盖核心 SPEC、分组 SPEC、组件 SPEC、Pattern SPEC 和 Recipe SPEC。 | `Source Files` 已列出精确路径。 |
+| File Placement Design 是否精确到目标文件名，且每个文件都有职责说明。 | 已覆盖 designs 索引、Admin UI 总入口、拆分设计文档、样式、类型、组件族入口、组件、Pattern、Recipe、测试和公共入口。 | `File Placement Design` 与 `Source Layout Design` 已补齐。 |
+| Coverage Matrix 是否覆盖全部能力矩阵和 Export Groups。 | 已覆盖 `COMPONENT-SELECTION.md` 的能力矩阵和 Export Groups。 | `Coverage Matrix` 已补齐目标源码文件、类型位置和验证策略。 |
+| Type And Data Structure Design 是否说明公共类型、私有类型、props、事件 payload、状态结构、compound part 类型、ref 类型、provider/service 类型。 | 已覆盖。 | `Type And Data Structure Design` 已补齐类型归属、命名、泛型、事件和 service 类型。 |
+| Component Family Designs 是否覆盖全部 `Scone*` export 和 service export。 | 已覆盖 Form、Data Display、Layout、Feedback And Overlay、Navigation、Media。 | 已补齐各组件族导出、状态、DOM/ref/className、可访问性和验证点。 |
+| Admin Pattern Designs 是否覆盖全部 Pattern，并明确状态归属和业务边界。 | 已覆盖。 | 已补齐 AppShell、Page、Section、FilterBar、DataTable、FormPage、DetailPage、SettingsPage、MasterDetail。 |
+| Recipe Designs 是否覆盖全部 Recipe，并明确不新增正式 `Scone*` export 的原因。 | 已覆盖。 | 已补齐 DrawerForm、ConfirmationFlow、Popover、Logo、Result、Dashboard Metric、Grid。 |
+| Verification Design 是否对每类能力给出可执行验证入口。 | 已覆盖。 | 已按能力类型和最小验证清单列出目标入口。 |
+| Decision Traceability 是否能把关键决策追溯到精确 SPEC 文件。 | 已覆盖。 | 见 `Decision Traceability`。 |
+| Review Questions 是否只保留影响实现结构或 API 的问题。 | 已收窄。 | 见 `Review Questions`。 |
+
+自审后的设计状态：
+
+- 本 DESIGN 仍是设计阶段文档，不声明源码、测试或覆盖证据已经完成。
+- Review Questions 当前无影响实现结构或公共 API 的未决问题。
+- `docs/40-readiness/IMPLEMENTATION-COVERAGE.md` 应记录设计覆盖和待实现状态，不应声明组件已实现。
+
+## Decision Traceability
+
+| 设计决策 | 依据文件 | DESIGN 落点 |
+| --- | --- | --- |
+| `scone-ui` 是 admin-ui 组件库和 UI 治理 workspace，不沉淀产品应用规则。 | `docs/10-specs/ADMIN-UI-SPEC.md` | `Purpose`、`Architecture Decisions` |
+| 依赖方向为 Foundation -> Primitive -> Component/Layout -> Admin Pattern -> Recipe。 | `docs/10-specs/ADMIN-UI-SPEC.md` | `Architecture Decisions` |
+| Source strategy 映射为 `vendored-shadcn`、`scone-wrapper`、`pattern-only`、`direct-docs-only`、`custom`、`no-component` 的不同设计形态。 | `docs/10-specs/ADMIN-UI-SPEC.md`、`docs/10-specs/COMPONENT-SELECTION.md` | `Architecture Decisions`、`Export Surface Design` |
+| `src/styles/theme.css` 是 CSS variables 唯一数值源。 | `docs/10-specs/FOUNDATIONS-SPEC.md` | `File Placement Design`、`Theme And Foundation Design` |
+| 不创建第二套 `tokens.ts` 数值源。 | `docs/10-specs/FOUNDATIONS-SPEC.md` | `Theme And Foundation Design` |
+| Export Groups 决定 `src/index.ts` 公共导出。 | `docs/10-specs/COMPONENT-SELECTION.md` | `Export Surface Design`、`Coverage Matrix` |
+| Pattern 只导出 compound parts，不设计万能配置对象。 | `docs/10-specs/ADMIN-UI-SPEC.md`、`docs/10-specs/ADMIN-PATTERNS-SPEC.md` | `Admin Pattern Designs` |
+| Page 和 Section Pattern 固定使用 `Page`、`Section` 命名空间导出，不使用 `SconePage`、`SconeSection`。 | 用户审核结论、`docs/10-specs/COMPONENT-SELECTION.md` | `Admin Pattern Designs` |
+| Recipe 不产生新的正式 `Scone*` API。 | `docs/10-specs/README.md`、`docs/10-specs/recipes/*.md` | `Recipe Designs` |
+| 公共类型按组件族分散定义并从组件族入口汇总；`src/types/foundation.ts` 只保留跨组件共享词表和基础类型。 | 用户审核结论、`docs/10-specs/FOUNDATIONS-SPEC.md` | `Type And Data Structure Design` |
+| DataTable 与 `SconeTable`、`SconePagination`、`FilterBar` 职责分离。 | `docs/10-specs/patterns/DATA-TABLE.md`、`docs/10-specs/components/data-display/SCONE-TABLE.md` | `Admin Pattern Designs / DataTable` |
+| Toast 和 Notification 作为 provider/service export，service API 返回稳定 id，且不承载订阅来源、持久化或已读状态。 | 用户审核结论、`docs/10-specs/COMPONENT-SELECTION.md`、`docs/10-specs/components/feedback-overlay/SCONE-TOAST.md`、`docs/10-specs/components/feedback-overlay/SCONE-NOTIFICATION.md` | `Type And Data Structure Design`、`Feedback And Overlay` |
+| DataTable 不引入 TanStack Table 作为推荐 recipe 基座，只留出外部状态库 adapter/interface 边界。 | 用户审核结论、`docs/10-specs/patterns/DATA-TABLE.md` | `Admin Pattern Designs / DataTable` |
+| 测试文件按组件、Pattern、utility 同目录放置，命名为同名 `*.test.ts` 或 `*.test.tsx`。 | 用户审核结论 | `File Placement Design`、`Verification Design` |
+| 全部 Recipe 保持文档和示例边界，不创建 `src/recipes/` 源码入口。 | 用户审核结论、`docs/10-specs/recipes/*.md` | `Recipe Designs` |
+| Custom 能力必须单独定义键盘、ARIA、状态和验证策略。 | `docs/10-specs/ADMIN-UI-SPEC.md`、单组件 SPEC | `Coverage Matrix`、`Component Family Designs`、`Verification Design` |
+
+## Review Questions
+
+当前无影响实现结构或公共 API 的未决问题。

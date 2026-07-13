@@ -2,7 +2,7 @@
 
 ## Purpose
 
-本文档记录 `docs/30-designs/DESIGN-ADMIN-UI.md` 对 admin-ui SPEC 的设计覆盖状态。
+本文档记录 `docs/30-designs/DESIGN-ADMIN-UI.md` 及 `docs/30-designs/admin-ui/` 下拆分设计文档对 admin-ui SPEC 的设计覆盖状态。
 
 当前状态是设计覆盖记录，不是实现完成证据：
 
@@ -13,6 +13,16 @@
 ## Source Documents
 
 - `docs/30-designs/DESIGN-ADMIN-UI.md`
+- `docs/30-designs/admin-ui/ARCHITECTURE-DESIGN.md`
+- `docs/30-designs/admin-ui/FILE-PLACEMENT-DESIGN.md`
+- `docs/30-designs/admin-ui/FOUNDATION-DESIGN.md`
+- `docs/30-designs/admin-ui/TYPE-DATA-DESIGN.md`
+- `docs/30-designs/admin-ui/EXPORT-SURFACE-DESIGN.md`
+- `docs/30-designs/admin-ui/COMPONENT-FAMILY-DESIGN.md`
+- `docs/30-designs/admin-ui/PATTERN-DESIGN.md`
+- `docs/30-designs/admin-ui/RECIPE-DESIGN.md`
+- `docs/30-designs/admin-ui/VERIFICATION-DESIGN.md`
+- `docs/30-designs/admin-ui/REVIEW-TRACEABILITY.md`
 - `docs/10-specs/COMPONENT-SELECTION.md`
 - `docs/10-specs/ADMIN-UI-SPEC.md`
 - `docs/10-specs/FOUNDATIONS-SPEC.md`
@@ -22,19 +32,19 @@
 
 | 覆盖对象 | 设计状态 | 依据 |
 | --- | --- | --- |
-| Foundation/theme | 已完成设计 | `DESIGN-ADMIN-UI.md` 的 Theme And Foundation Design |
-| Type/data structure | 已完成设计 | `DESIGN-ADMIN-UI.md` 的 Type And Data Structure Design |
-| Public export surface | 已完成设计 | `DESIGN-ADMIN-UI.md` 的 Export Surface Design 和 Coverage Matrix |
-| Form components | 已完成设计 | `DESIGN-ADMIN-UI.md` 的 Component Family Designs / Form |
-| Data display components | 已完成设计 | `DESIGN-ADMIN-UI.md` 的 Component Family Designs / Data Display |
-| Layout primitives | 已完成设计 | `DESIGN-ADMIN-UI.md` 的 Component Family Designs / Layout |
-| Feedback and overlay components | 已完成设计 | `DESIGN-ADMIN-UI.md` 的 Component Family Designs / Feedback And Overlay |
-| Navigation components | 已完成设计 | `DESIGN-ADMIN-UI.md` 的 Component Family Designs / Navigation |
-| Media components | 已完成设计 | `DESIGN-ADMIN-UI.md` 的 Component Family Designs / Media |
-| Admin patterns | 已完成设计 | `DESIGN-ADMIN-UI.md` 的 Admin Pattern Designs |
-| Recipes | 已完成设计 | `DESIGN-ADMIN-UI.md` 的 Recipe Designs |
-| Verification strategy | 已完成设计 | `DESIGN-ADMIN-UI.md` 的 Verification Design |
-| Design self review and traceability | 已完成设计 | `DESIGN-ADMIN-UI.md` 的 DESIGN Self Review 和 Decision Traceability |
+| Foundation/theme | 已完成设计 | `docs/30-designs/admin-ui/FOUNDATION-DESIGN.md` |
+| Type/data structure | 已完成设计 | `docs/30-designs/admin-ui/TYPE-DATA-DESIGN.md` |
+| Public export surface | 已完成设计 | `docs/30-designs/admin-ui/EXPORT-SURFACE-DESIGN.md` |
+| Form components | 已完成设计 | `docs/30-designs/admin-ui/COMPONENT-FAMILY-DESIGN.md` |
+| Data display components | 已完成设计 | `docs/30-designs/admin-ui/COMPONENT-FAMILY-DESIGN.md` |
+| Layout primitives | 已完成设计 | `docs/30-designs/admin-ui/COMPONENT-FAMILY-DESIGN.md` |
+| Feedback and overlay components | 已完成设计 | `docs/30-designs/admin-ui/COMPONENT-FAMILY-DESIGN.md` |
+| Navigation components | 已完成设计 | `docs/30-designs/admin-ui/COMPONENT-FAMILY-DESIGN.md` |
+| Media components | 已完成设计 | `docs/30-designs/admin-ui/COMPONENT-FAMILY-DESIGN.md` |
+| Admin patterns | 已完成设计 | `docs/30-designs/admin-ui/PATTERN-DESIGN.md` |
+| Recipes | 已完成设计 | `docs/30-designs/admin-ui/RECIPE-DESIGN.md` |
+| Verification strategy | 已完成设计 | `docs/30-designs/admin-ui/VERIFICATION-DESIGN.md` |
+| Design self review and traceability | 已完成设计 | `docs/30-designs/admin-ui/REVIEW-TRACEABILITY.md` |
 
 ## Capability Coverage
 
