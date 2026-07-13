@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `03-design-export-coverage`：生成导出面和覆盖矩阵章节
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SPEC-TO-DESIGN.md`
-    - 范围对象：`docs/30-designs/DESIGN-ADMIN-UI.md`、`docs/10-specs/COMPONENT-SELECTION.md`
-    - 处理动作：编写 Export Surface Design 和 Coverage Matrix。
-    - 验收点：矩阵覆盖 `COMPONENT-SELECTION.md` 的全部能力矩阵和 Export Groups，并列出导出名、目标源码文件、类型文件、测试文件和 DESIGN 章节。
-    - 重要度：10/10
-
 - [ ] `04-design-form-data-display`：生成 Form 和 Data Display 组件族设计章节
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SPEC-TO-DESIGN.md`
