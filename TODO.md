@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `08-sync-main-before-close`：同步 main 分支代码
-    - 任务类型：执行任务
-    - 依据文档：`AGENTS.md`
-    - 范围对象：`docs/spec-design-runbook` 分支、`origin/main`、工作区改动
-    - 处理动作：在文档收口前同步 `origin/main` 到当前工作分支并处理冲突。
-    - 验收点：当前分支包含最新 `origin/main`，工作区无非预期冲突或混入改动。
-    - 重要度：10/10
-
 - [ ] `09-docs-update-implementation-coverage`：更新 Implementation Coverage
     - 任务类型：执行任务
     - 依据文档：`docs/00-governance/TODO-RULES.md`
