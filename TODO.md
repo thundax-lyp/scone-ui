@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `06-design-patterns-recipes`：生成 Admin Pattern 和 Recipe 设计章节
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SPEC-TO-DESIGN.md`
-    - 范围对象：`docs/30-designs/DESIGN-ADMIN-UI.md`、`docs/10-specs/ADMIN-PATTERNS-SPEC.md`、`docs/10-specs/patterns/DATA-TABLE.md`、`docs/10-specs/recipes/DRAWER-FORM.md`
-    - 处理动作：编写 Admin Pattern Designs 和 Recipe Designs。
-    - 验收点：DESIGN 覆盖全部 Pattern 和 Recipe，明确 compound parts、slot、状态所有权、业务边界、docs-only 边界、目标文件名和不新增 `Scone*` API 的原因。
-    - 重要度：9/10
-
 - [ ] `07-design-verification-review`：生成验证、追溯和自审章节并回改 DESIGN
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SPEC-TO-DESIGN.md`
