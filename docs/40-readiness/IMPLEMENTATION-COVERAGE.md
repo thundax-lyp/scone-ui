@@ -55,11 +55,11 @@
 
 后续实现阶段至少需要完成：
 
-1. 创建 DESIGN 指定的 `src/` 目录结构、公共入口和类型入口。
+1. 创建 DESIGN 指定的 `src/` 目录结构、公共入口和组件族类型入口。
 2. 按 `docs/10-specs/COMPONENT-SELECTION.md` 的 source strategy 实现 wrapper、vendored primitive、custom component、pattern-only 和 docs-only 边界。
-3. 创建 `src/styles/theme.css`，并确认 Tailwind theme 映射是否需要新增 `tailwind.config.ts`。
-4. 实现组件族、Pattern 和允许源码化的 Recipe；docs-only Recipe 不应导出新的正式 `Scone*` API。
-5. 按 DESIGN 的 Verification Design 创建测试和静态检查，生成真正的实现覆盖证据。
+3. 创建 `src/styles/theme.css`，并维护默认 `tailwind.config.ts` 到 CSS variables 的映射。
+4. 实现组件族和 Pattern；Recipe 全部保持文档和示例边界，不创建 `src/recipes/` 源码入口。
+5. 按 DESIGN 的 Verification Design 在被测文件同目录创建 `*.test.ts` 或 `*.test.tsx`，并生成真正的实现覆盖证据。
 6. 在实现后更新本 readiness 文档，区分已实现、已测试、未覆盖和延期项。
 
 ## Verification Plan
@@ -71,20 +71,12 @@
 - Accessibility：label、description、message、ARIA、keyboard、focus trap、focus restore。
 - State semantics：loading、empty、error、disabled、readOnly、invalid、selected、expanded 的归属和优先级。
 - Composition boundaries：Pattern 不发起请求、不判断权限、不承载产品流程。
-- Recipe boundaries：Recipe 可复制组合，且不创建未批准的正式 `Scone*` API。
+- Recipe boundaries：Recipe 可复制组合，全部保持文档和示例边界，且不创建正式 `Scone*` API 或 `src/recipes/` 源码入口。
 - Custom interactions：Tree、SplitPane、NumberInput、DatePicker、Upload、Timeline 的键盘和边界条件。
 
 ## Known Design Review Questions
 
-以下问题仍需在实现前或实现初期确认：
-
-- Pattern 导出命名使用 `Page`/`Section` 命名空间，还是使用 `SconePage`/`SconeSection`。
-- 是否新增 `tailwind.config.ts` 作为必要目标文件。
-- 公共类型集中在 `src/types/foundation.ts`，还是按组件族拆分后汇总导出。
-- Toast 和 Notification service API 是否返回稳定 id，以及是否提供 `dismiss(id)`、`update(id, options)`。
-- DataTable 是否引入 TanStack Table 作为推荐但非强制 recipe 基座。
-- `src/recipes/` 是否存在源码示例目录，还是全部 Recipe 保持文档和示例边界。
-- 测试文件采用同目录、`__tests__/`，还是集中 `tests/`。
+当前无影响实现结构或公共 API 的未决问题。
 
 ## Current Status
 
