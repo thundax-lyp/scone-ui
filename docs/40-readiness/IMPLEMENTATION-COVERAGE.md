@@ -84,7 +84,7 @@
 - Recipe boundaries：Recipe 可复制组合，全部保持文档和示例边界，且不创建正式 `Scone*` API 或 `src/recipes/` 源码入口。
 - Custom interactions：Tree、SplitPane、NumberInput、DatePicker、Upload、Timeline 的键盘和边界条件。
 
-## Known Design Review Questions
+## Design Review Status
 
 当前无影响实现结构或公共 API 的未决问题。
 

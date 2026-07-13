@@ -57,17 +57,19 @@ Pattern 目标文件：
 | SettingsPage | `src/patterns/settings-page.tsx` |
 | MasterDetail | `src/patterns/master-detail.tsx` |
 
-Recipe 目标文件：
+Recipe 文档边界：
 
 | Recipe | 目标落点 |
 | --- | --- |
-| DrawerForm | docs-only：`docs/10-specs/recipes/DRAWER-FORM.md`，不创建 `src/recipes/drawer-form.tsx`。 |
-| ConfirmationFlow | docs-only：`docs/10-specs/recipes/CONFIRMATION-FLOW.md`，不创建 `src/recipes/confirmation-flow.tsx`。 |
-| Popover | docs-only：`docs/10-specs/recipes/POPOVER.md`，不创建 `SconePopover`。 |
-| Logo | docs-only：`docs/10-specs/recipes/LOGO.md`，不创建 `SconeLogo`。 |
-| Result | docs-only：`docs/10-specs/recipes/RESULT.md`，不创建 `SconeResult`。 |
-| Dashboard Metric | docs-only：`docs/10-specs/recipes/DASHBOARD-METRIC.md`，不创建 `src/recipes/dashboard-metric.tsx`。 |
-| Grid | docs-only：`docs/10-specs/recipes/GRID.md`，不创建 `src/recipes/grid.tsx`。 |
+| DrawerForm | `docs/10-specs/recipes/DRAWER-FORM.md` |
+| ConfirmationFlow | `docs/10-specs/recipes/CONFIRMATION-FLOW.md` |
+| Popover | `docs/10-specs/recipes/POPOVER.md` |
+| Logo | `docs/10-specs/recipes/LOGO.md` |
+| Result | `docs/10-specs/recipes/RESULT.md` |
+| Dashboard Metric | `docs/10-specs/recipes/DASHBOARD-METRIC.md` |
+| Grid | `docs/10-specs/recipes/GRID.md` |
+
+Recipe 全部保持 docs-only，不创建 `src/recipes/` 源码入口、recipe service 或新的正式 `Scone*` API。
 
 测试目标文件：
 
@@ -77,7 +79,7 @@ Recipe 目标文件：
 | Shared utilities | 与 `src/lib/*.ts` 同目录的同名 `*.test.ts`。 |
 | Components | 与 `src/components/**/*.tsx` 同目录的同名 `*.test.tsx`。 |
 | Patterns | 与 `src/patterns/*.tsx` 同目录的同名 `*.test.tsx`。 |
-| Recipes | 文档和示例验证，不创建 `src/recipes/recipes.test.tsx`。 |
+| Recipes | 文档和示例验证。 |
 | Public exports | `src/index.test.ts` |
 
 ## Source Layout Design
@@ -103,7 +105,6 @@ src/
     navigation/
   lib/
   patterns/
-  recipes/
   styles/
   types/
   index.ts

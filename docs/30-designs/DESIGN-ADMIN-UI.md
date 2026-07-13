@@ -18,8 +18,8 @@
 | [Component Family Design](./admin-ui/COMPONENT-FAMILY-DESIGN.md) | Form、Data Display、Layout、Feedback、Navigation、Media 组件族设计。 |
 | [Pattern Design](./admin-ui/PATTERN-DESIGN.md) | Admin Pattern 结构、状态归属和业务边界。 |
 | [Recipe Design](./admin-ui/RECIPE-DESIGN.md) | docs-only Recipe 组合边界。 |
-| [Verification Design](./admin-ui/VERIFICATION-DESIGN.md) | 后续实现验证策略。 |
-| [Review And Traceability](./admin-ui/REVIEW-TRACEABILITY.md) | 自审结果、决策追溯和未决问题状态。 |
+| [Verification Design](./admin-ui/VERIFICATION-DESIGN.md) | 实现验证策略。 |
+| [Review And Traceability](./admin-ui/REVIEW-TRACEABILITY.md) | 自审结果、决策追溯和审核状态。 |
 
 ## Current Review Decisions
 
