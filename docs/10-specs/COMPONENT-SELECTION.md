@@ -52,7 +52,7 @@
 | Stack / Inline / Compact / Toolbar     | Layout        | `custom`            | 是              | 否       | 不承载业务状态                           | 可实现    |
 | Separator / ScrollArea                 | Layout        | `vendored-shadcn`   | 是              | ScrollArea 支持 | 不承载业务状态                    | 可实现    |
 | SplitPane                              | Layout        | `custom`            | 是              | 否       | 不承载业务状态                           | 可实现    |
-| Page / Section / FilterBar / DataTable | Admin Pattern | `pattern-only`      | Pattern parts   | 支持     | data / sticky / selection 按 Pattern     | 可实现    |
+| AppShell / Page / Section / FilterBar / DataTable | Admin Pattern | `pattern-only`      | Pattern parts   | 支持     | data / sticky / selection 按 Pattern     | 可实现    |
 | Table                                  | Component     | `scone-wrapper`     | 是              | 否       | standalone loading / empty / error       | 可实现    |
 | Pagination                             | Component     | `custom`            | 是              | 否       | disabled                                 | 可实现    |
 | Drawer                                 | Component     | `scone-wrapper`     | 是              | 支持     | loading / close reason                   | 可实现    |
@@ -82,7 +82,7 @@
 
 | 归属                  | 导出/标题                                                                                                                                             |
 | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Admin Pattern exports | `Page.Root/Header/Content/StickyActions`、`Section.Root/Header/Content/Footer`、`DataTable.Root/FilterBar/Toolbar/BulkActions/TableRegion/Pagination` |
+| Admin Pattern exports | `AppShell.Root/Sidebar/Header/Main/Aside`、`Page.Root/Header/Content/StickyActions`、`Section.Root/Header/Content/Footer`、`FilterBar.Root/Search/Fields/Actions/Summary`、`DataTable.Root/FilterBar/Toolbar/BulkActions/TableRegion/Pagination` |
 | Typography            | `SconeTypography`、`SconeText`、`SconeTitle`、`SconeParagraph`                                                                                        |
 | Form components       | `SconeButton`、`SconeInput`、`SconeSearchInput`、`SconePasswordInput`、`SconeTextArea`、`SconeSelect`、`SconeForm`、`SconeField`                      |
 | Form helpers          | `SconeFieldGroup`、`SconeFormSection`、`SconeFormActions`                                                                                             |
