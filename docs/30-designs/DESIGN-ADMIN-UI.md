@@ -1301,3 +1301,91 @@ Recipe 非目标：
 
 - 不导出 `SconePopover`、`SconeLogo`、`SconeResult` 或 `SconeGrid`。
 - 不把产品身份、业务结果动作、指标口径、请求或权限写入通用库。
+
+## Verification Design
+
+依据文件：
+
+- `docs/10-specs/ADMIN-UI-SPEC.md`
+- `docs/10-specs/FOUNDATIONS-SPEC.md`
+- `docs/10-specs/COMPONENT-SELECTION.md`
+
+本文档只定义后续验证策略，不表示测试文件已经创建。
+
+| 能力类型 | 验证对象 | 验证行为 | 目标入口 |
+| --- | --- | --- | --- |
+| Foundation/theme | CSS variables、Tailwind 映射、token 消费 | `src/styles/theme.css` 是唯一数值源；Tailwind 只映射变量；不创建第二套 `tokens.ts` 数值源。 | `src/types/foundation.test.ts`、静态检查 |
+| Public exports | `src/index.ts`、组件族入口、Pattern 入口 | Export Groups 与 `docs/10-specs/COMPONENT-SELECTION.md` 一致；docs-only Recipe 不导出。 | `src/index.test.ts` |
+| Component 基础行为 | `className`、`ref`、可访问名称、核心状态 | 每个组件的稳定 DOM 边界可透传 `className` 和 ref；无可见 label 时支持 `ariaLabel`。 | 各组件族测试 |
+| Radix/shadcn wrapper | focus、keyboard、ARIA、close、`asChild` | wrapper 不破坏 focus trap、focus restore、roving focus、typeahead、Escape、outside interaction、ARIA 和 `asChild`。 | 各组件族测试 |
+| Custom component | keyboard、ARIA、受控/非受控、边界条件 | Tree、SplitPane、NumberInput、DatePicker、Upload、Timeline 等 custom 能力必须单独验证交互模型。 | 各组件族测试 |
+| Pattern | slot 组合、状态归属、滚动/sticky、业务职责不进入 | Page 主滚动唯一；DataTable 状态由调用方或 recipe 拥有；Pattern 不发起请求或判断权限。 | `src/patterns/patterns.test.tsx` |
+| Recipe | 组合可复制、无新增正式 API、关键状态可验证 | docs-only Recipe 明确无源码落点；源码 Recipe 不导出新的 `Scone*` API。 | `src/recipes/recipes.test.tsx` 或文档验证 |
+| Type/data structure | 公共类型导出、私有类型不泄漏、事件 payload、service options、ref 类型 | 公共类型从约定入口导出；回调不承载业务对象；service 类型不泄漏内部 queue/store。 | `src/types/foundation.test.ts`、`src/index.test.ts` |
+
+最小验证清单：
+
+- Form：label、description、message、invalid、required、disabled、readOnly 与 control 关联。
+- Data Display：Table/List 的 `loading > error > empty` 优先级；Table 不承接 pagination、selection、请求。
+- Layout：ScrollArea viewport、SplitPane 键盘 resize、Toolbar wrap 和 density。
+- Feedback/Overlay：Drawer/Dialog/Confirm 的 focus trap、focus restore、close reason、ariaLabel/title。
+- Navigation：Tabs ARIA 关联、Dropdown/Menu 键盘、Tree ARIA tree、Pagination state。
+- Media：Image/Avatar fallback、alt、preview open。
+- Pattern：DataTable.TableRegion、Page.Content 主滚动、Section 非 Card、FilterBar submit intent。
+- Recipe：DrawerForm dirty close、ConfirmationFlow destructive description、Popover/Logo/Result docs-only。
+
+## DESIGN Self Review
+
+依据文件：
+
+- `docs/30-designs/RUNBOOK-SPEC-TO-DESIGN.md`
+
+自审结果：
+
+| 检查项 | 结论 | 回改结果 |
+| --- | --- | --- |
+| Input Files 是否全部被覆盖，且引用精确到文件名。 | 已覆盖核心 SPEC、分组 SPEC、组件 SPEC、Pattern SPEC 和 Recipe SPEC。 | `Source Files` 已列出精确路径。 |
+| File Placement Design 是否精确到目标文件名，且每个文件都有职责说明。 | 已覆盖 DESIGN、RUNBOOK、样式、类型、组件族入口、组件、Pattern、Recipe、测试和公共入口。 | `File Placement Design` 与 `Source Layout Design` 已补齐。 |
+| Coverage Matrix 是否覆盖全部能力矩阵和 Export Groups。 | 已覆盖 `COMPONENT-SELECTION.md` 的能力矩阵和 Export Groups。 | `Coverage Matrix` 已补齐目标源码文件、类型位置和验证策略。 |
+| Type And Data Structure Design 是否说明公共类型、私有类型、props、事件 payload、状态结构、compound part 类型、ref 类型、provider/service 类型。 | 已覆盖。 | `Type And Data Structure Design` 已补齐类型归属、命名、泛型、事件和 service 类型。 |
+| Component Family Designs 是否覆盖全部 `Scone*` export 和 service export。 | 已覆盖 Form、Data Display、Layout、Feedback And Overlay、Navigation、Media。 | 已补齐各组件族导出、状态、DOM/ref/className、可访问性和验证点。 |
+| Admin Pattern Designs 是否覆盖全部 Pattern，并明确状态归属和业务边界。 | 已覆盖。 | 已补齐 AppShell、Page、Section、FilterBar、DataTable、FormPage、DetailPage、SettingsPage、MasterDetail。 |
+| Recipe Designs 是否覆盖全部 Recipe，并明确不新增正式 `Scone*` export 的原因。 | 已覆盖。 | 已补齐 DrawerForm、ConfirmationFlow、Popover、Logo、Result、Dashboard Metric、Grid。 |
+| Verification Design 是否对每类能力给出可执行验证入口。 | 已覆盖。 | 已按能力类型和最小验证清单列出目标入口。 |
+| Decision Traceability 是否能把关键决策追溯到精确 SPEC 文件。 | 已覆盖。 | 见 `Decision Traceability`。 |
+| Review Questions 是否只保留影响实现结构或 API 的问题。 | 已收窄。 | 见 `Review Questions`。 |
+
+自审后的设计状态：
+
+- 本 DESIGN 仍是设计阶段文档，不声明源码、测试或覆盖证据已经完成。
+- 后续实现前仍需人工确认 Review Questions 中的结构性问题。
+- `docs/40-readiness/IMPLEMENTATION-COVERAGE.md` 应记录设计覆盖和待实现状态，不应声明组件已实现。
+
+## Decision Traceability
+
+| 设计决策 | 依据文件 | DESIGN 落点 |
+| --- | --- | --- |
+| `scone-ui` 是 admin-ui 组件库和 UI 治理 workspace，不沉淀产品应用规则。 | `docs/10-specs/ADMIN-UI-SPEC.md` | `Purpose`、`Architecture Decisions` |
+| 依赖方向为 Foundation -> Primitive -> Component/Layout -> Admin Pattern -> Recipe。 | `docs/10-specs/ADMIN-UI-SPEC.md` | `Architecture Decisions` |
+| Source strategy 映射为 `vendored-shadcn`、`scone-wrapper`、`pattern-only`、`direct-docs-only`、`custom`、`no-component` 的不同设计形态。 | `docs/10-specs/ADMIN-UI-SPEC.md`、`docs/10-specs/COMPONENT-SELECTION.md` | `Architecture Decisions`、`Export Surface Design` |
+| `src/styles/theme.css` 是 CSS variables 唯一数值源。 | `docs/10-specs/FOUNDATIONS-SPEC.md` | `File Placement Design`、`Theme And Foundation Design` |
+| 不创建第二套 `tokens.ts` 数值源。 | `docs/10-specs/FOUNDATIONS-SPEC.md` | `Theme And Foundation Design` |
+| Export Groups 决定 `src/index.ts` 公共导出。 | `docs/10-specs/COMPONENT-SELECTION.md` | `Export Surface Design`、`Coverage Matrix` |
+| Pattern 只导出 compound parts，不设计万能配置对象。 | `docs/10-specs/ADMIN-UI-SPEC.md`、`docs/10-specs/ADMIN-PATTERNS-SPEC.md` | `Admin Pattern Designs` |
+| Recipe 不产生新的正式 `Scone*` API。 | `docs/10-specs/README.md`、`docs/10-specs/recipes/*.md` | `Recipe Designs` |
+| 公共类型集中于 `src/types/foundation.ts`，组件紧耦合 props 可留在组件文件。 | `docs/10-specs/FOUNDATIONS-SPEC.md` | `Type And Data Structure Design` |
+| DataTable 与 `SconeTable`、`SconePagination`、`FilterBar` 职责分离。 | `docs/10-specs/patterns/DATA-TABLE.md`、`docs/10-specs/components/data-display/SCONE-TABLE.md` | `Admin Pattern Designs / DataTable` |
+| Toast 和 Notification 作为 provider/service export，不承载订阅来源、持久化或已读状态。 | `docs/10-specs/COMPONENT-SELECTION.md`、`docs/10-specs/components/feedback-overlay/SCONE-TOAST.md`、`docs/10-specs/components/feedback-overlay/SCONE-NOTIFICATION.md` | `Type And Data Structure Design`、`Feedback And Overlay` |
+| Custom 能力必须单独定义键盘、ARIA、状态和验证策略。 | `docs/10-specs/ADMIN-UI-SPEC.md`、单组件 SPEC | `Coverage Matrix`、`Component Family Designs`、`Verification Design` |
+
+## Review Questions
+
+以下问题影响后续实现结构或公共 API，需要人工审核：
+
+- Pattern 导出命名使用 `Page`/`Section` 命名空间，还是使用 `SconePage`/`SconeSection`。
+- `tailwind.config.ts` 是否作为必要目标文件引入；当前仓库尚未存在该文件，但 Foundation SPEC 要求 Tailwind theme 映射 CSS variables。
+- 公共类型是否集中在 `src/types/foundation.ts` 后由 `src/index.ts` 汇总导出，还是按组件族分散再汇总。
+- Toast 和 Notification service API 是否返回稳定 id，以及是否提供 `dismiss(id)`、`update(id, options)` 这类 imperative function。
+- DataTable 是否引入 TanStack Table 作为推荐但非强制的 recipe 基座。
+- `src/recipes/` 是否存在源码示例目录，还是全部 Recipe 保持文档和示例边界。
+- 测试文件采用按组件同目录放置，还是集中在 `src/**/__tests__/` 或 `tests/` 下。

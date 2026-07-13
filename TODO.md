@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `07-design-verification-review`：生成验证、追溯和自审章节并回改 DESIGN
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SPEC-TO-DESIGN.md`
-    - 范围对象：`docs/30-designs/DESIGN-ADMIN-UI.md`、`docs/10-specs/ADMIN-UI-SPEC.md`、`docs/10-specs/FOUNDATIONS-SPEC.md`
-    - 处理动作：编写 Verification Design、DESIGN Self Review、Decision Traceability 和 Review Questions，并根据自审结果修改 DESIGN 正文和矩阵。
-    - 验收点：DESIGN 通过自审清单，所有关键目录、导出、类型、状态、可访问性和验证决策均可追溯到精确 SPEC 文件。
-    - 重要度：10/10
-
 - [ ] `08-sync-main-before-close`：同步 main 分支代码
     - 任务类型：执行任务
     - 依据文档：`AGENTS.md`
