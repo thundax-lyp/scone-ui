@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `01-design-source-placement`：生成 DESIGN 的来源、架构和文件落点章节
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SPEC-TO-DESIGN.md`
-    - 范围对象：`docs/30-designs/DESIGN-ADMIN-UI.md`、`docs/10-specs/README.md`、`docs/10-specs/ADMIN-UI-SPEC.md`、`docs/10-specs/COMPONENT-SELECTION.md`
-    - 处理动作：编写 DESIGN 的 Purpose、Source Files、Architecture Decisions 和 File Placement Design。
-    - 验收点：DESIGN 明确自身落点、输入 SPEC 文件、后续源码/类型/样式/测试/Recipe/provider/service/shared utility 的目标文件名，且不创建任何代码文件。
-    - 重要度：10/10
-
 - [ ] `02-design-foundation-types`：生成 Foundation、theme 和数据结构设计章节
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SPEC-TO-DESIGN.md`
