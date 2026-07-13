@@ -16,7 +16,6 @@
 
 - 文档写作、目录和 RUNBOOK：本文档。
 - Commit 标题、type/scope 白名单和提交粒度：根 [`AGENTS.md`](../../AGENTS.md)。
-- admin-ui 组件库规格、组件族边界、API 收敛：`docs/10-specs/`。
 - TODO 协作、任务项格式、删除和收窄：[`TODO-RULES.md`](./TODO-RULES.md)。
 - PR 描述、阶段性交付和验证证据：[`PR-RULES.md`](./PR-RULES.md)。
 
@@ -30,7 +29,6 @@
 
 - 文档必须清晰、明确、可执行。
 - `docs/00-governance/` 只沉淀稳定规则，不记录任务执行过程。
-- `docs/10-specs/` 承载 admin-ui 组件库稳定规格。
 - `docs/30-designs/` 承载专项设计和临时 RUNBOOK。
 - `docs/40-readiness/` 承载验证证据、覆盖度和收口状态。
 - 同一规则不得在多处重复且表述不一致。

@@ -4,13 +4,6 @@
 
 本规格覆盖 admin-ui 基础导航、菜单、媒体和辅助展示组件。
 
-## Source Signals
-
-- Tree 用于层级选择和权限/目录类场景，说明需要基础树组件。
-- Tabs / Segmented 用于页内视图和模式切换。
-- Dropdown / Menu / Tooltip 用于更多操作、导航和辅助说明。
-- Image / Avatar / Logo 用于资源、用户和品牌占位展示。
-
 ## Components
 
 ### SconeTabs

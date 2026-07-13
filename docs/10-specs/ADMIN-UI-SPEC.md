@@ -2,19 +2,9 @@
 
 ## Purpose
 
-本文档定义 `scone-ui` admin-ui 基础组件库的规格总览。`docs/ADMIN-WEB-CONTROLS-INVENTORY.md` 只作为使用率和场景信号来源；本规格不照搬源项目组件命名、业务页面组合或 Ant Design API。
+本文档定义 `scone-ui` admin-ui 基础组件库的规格总览。
 
-目标是从现有 admin-web 控件使用中抽象出可复用、业务中性、可长期维护的基础组件。
-
-## Source Signals
-
-- 高频操作：`Button` 使用 350 处。
-- 高频输入：`Input` 系列约 186 处，`Select` 97 处，`Form` / `Form.Item` 201 处。
-- 高频展示：`Descriptions` 248 处，`Card` 96 处，`Table` / 封装表格合计 46 处。
-- 高频布局：空间布局类合计约 196 处。
-- 高频浮层和反馈：抽屉 45 处，提示 51 处，弹窗确认 12 处。
-
-这些信号只用于判断优先级和基础能力，不作为组件 API 的直接来源。
+目标是定义可复用、业务中性、可长期维护的基础组件。本文档是独立规格，不依赖外部盘点文档、源项目组件命名或第三方 UI 库 API。
 
 ## Spec Documents
 
@@ -26,20 +16,20 @@
 
 ## Priority
 
-| 优先级 | 来源信号           | 基础组件族                                                                    | 处理策略                                   |
-| ------ | ------------------ | ----------------------------------------------------------------------------- | ------------------------------------------ |
-| P0     | 高频且跨页面通用   | Button、Input、Select、Form、Stack、Table、Descriptions                       | 首批实现，定义稳定 API、可访问性和测试标准 |
-| P1     | 高频但可按场景扩展 | Card、Alert、Drawer、Tag、List、Toolbar、Empty、Loading                       | 建立基础能力和状态表达，保留组合空间       |
-| P2     | 中频或交互较强     | Modal、Confirm、Tree、Tabs、Segmented、Dropdown、Tooltip                      | 做轻量基础封装，不绑定业务流程             |
-| P3     | 低频或依赖资源形态 | Upload、Image、Avatar、Timeline、Statistic、Progress、Logo、RichContentViewer | 先定义基础边界，等真实复用稳定后扩展       |
+| 优先级 | 基础组件族                                                                    | 处理策略                                   |
+| ------ | ----------------------------------------------------------------------------- | ------------------------------------------ |
+| P0     | Button、Input、Select、Form、Stack、Table、Descriptions                       | 首批实现，定义稳定 API、可访问性和测试标准 |
+| P1     | Card、Alert、Drawer、Tag、List、Toolbar、Empty、Loading                       | 建立基础能力和状态表达，保留组合空间       |
+| P2     | Modal、Confirm、Tree、Tabs、Segmented、Dropdown、Tooltip                      | 做轻量基础封装，不绑定业务流程             |
+| P3     | Upload、Image、Avatar、Timeline、Statistic、Progress、Logo、RichContentViewer | 先定义基础边界，等真实复用稳定后扩展       |
 
 ## Naming
 
 - 组件库导出统一使用 `Scone*` 前缀。
 - 基础组件使用通用名词，例如 `SconeButton`、`SconeInput`、`SconeTable`、`SconeDrawer`。
 - 页面级组合如 `ListPage`、`PageShell`、`FilterPanel` 暂不作为首批基础组件；可以在 patterns 文档或后续组件族中讨论。
-- 不沿用源项目的 `Kuzhambu*` 命名。
-- 不复制 Ant Design prop 命名作为唯一标准；只保留被证明高频、稳定、业务中性的能力。
+- 不沿用其他项目的组件命名。
+- 不复制第三方 UI 库 prop 命名作为唯一标准；只保留稳定、业务中性的能力。
 
 ## API Principles
 
