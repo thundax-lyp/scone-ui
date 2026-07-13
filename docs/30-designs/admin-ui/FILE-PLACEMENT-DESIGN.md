@@ -47,10 +47,10 @@ Pattern 目标文件：
 
 | Pattern | 目标文件 |
 | --- | --- |
-| AppShell | 待审核：`src/patterns/app-shell.tsx`，或保持文档组合边界。 |
+| AppShell | `src/patterns/app-shell.tsx` |
 | Page | `src/patterns/page.tsx` |
 | Section | `src/patterns/section.tsx` |
-| FilterBar | 待审核：独立 `src/patterns/filter-bar.tsx`，或仅作为 `DataTable.FilterBar` part。 |
+| FilterBar | `src/patterns/filter-bar.tsx`，并可被 `src/patterns/data-table.tsx` 组合为 `DataTable.FilterBar`。 |
 | DataTable | `src/patterns/data-table.tsx` |
 | FormPage | 文档组合边界，不创建 `src/patterns/form-page.tsx`。 |
 | DetailPage | 文档组合边界，不创建 `src/patterns/detail-page.tsx`。 |
@@ -117,6 +117,8 @@ src/
 - 跨组件共享词表和基础状态桥接类型才提升到 `src/types/foundation.ts`。
 - `src/lib/*.ts` 只承载组件库通用工具，不承载产品业务、请求、权限、路由或状态机。
 - `src/patterns/*.tsx` 只导出 Pattern compound parts，不导出大配置对象。
+- `src/patterns/app-shell.tsx` 导出 `AppShell.Root/Sidebar/Header/Main/Aside`，不定义产品导航、路由、权限或 logo 数据结构。
+- `src/patterns/filter-bar.tsx` 导出独立 `FilterBar.Root/Search/Fields/Actions/Summary` 和筛选状态类型；`DataTable.FilterBar` 只能复用或组合该边界，不重复定义第二套筛选 schema。
 - Recipe 全部保持文档和示例边界，不创建 `src/recipes/` 源码入口，不新增 `Scone*` export。
 - `src/styles/theme.css` 是 CSS variables 唯一数值源；`src/styles.css` 只负责引入 theme、Tailwind layers 和全局基础样式。
 - `src/index.ts` 汇总公共 API，导出范围必须与 `docs/10-specs/COMPONENT-SELECTION.md` 的 Export Groups 一致。

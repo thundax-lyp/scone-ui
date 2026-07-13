@@ -24,10 +24,10 @@ Pattern 总规则：
 
 | Pattern | 目标文件 | Compound parts | 状态归属 | 验证点 |
 | --- | --- | --- | --- | --- |
-| AppShell | 待审核：`src/patterns/app-shell.tsx`，或保持文档组合边界。 | `AppShell.Root/Sidebar/Header/Main/Aside` | Sidebar collapsed、Aside open 只管理展示状态 | 全局空间、Main 收缩、唯一 Page 入口 |
+| AppShell | `src/patterns/app-shell.tsx` | `AppShell.Root/Sidebar/Header/Main/Aside` | Sidebar collapsed、Aside open 只管理展示状态 | 全局空间、Main 收缩、唯一 Page 入口 |
 | Page | `src/patterns/page.tsx` | `Page.Root/Header/Content/StickyActions` | Page density/maxWidth/sticky padding；不拥有数据 | 主滚动唯一、actions 分层、StickyActions 不遮挡 |
 | Section | `src/patterns/section.tsx` | `Section.Root/Header/Content/Footer` | Section density；不拥有数据 | 语义 section、Header actions 分区级、非视觉 Card |
-| FilterBar | 待审核：独立 `src/patterns/filter-bar.tsx`，或仅作为 `DataTable.FilterBar` part。 | `FilterBar.Root/Search/Fields/Actions/Summary` | searchValue、filters、expanded 由调用方管理 | onApply/onReset、窄屏换行、展开区 |
+| FilterBar | `src/patterns/filter-bar.tsx` | `FilterBar.Root/Search/Fields/Actions/Summary` | searchValue、filters、expanded 由调用方管理 | onApply/onReset、窄屏换行、展开区 |
 | DataTable | `src/patterns/data-table.tsx` | `DataTable.Root/FilterBar/Toolbar/BulkActions/TableRegion/Pagination` | sorting/filtering/pagination/selection/columnVisibility 由调用方拥有；DataTable 只留出 props/callback 边界 | TableRegion、loading/error/empty、pagination 唯一入口 |
 | FormPage | 文档组合边界 | Page + `SconeForm` + `SconeFormSection` + `SconeFormActions` | 表单状态库由调用方拥有 | 长表单页面滚动、FormActions sticky |
 | DetailPage | 文档组合边界 | Page + Section + Descriptions/List/Card | 详情数据由调用方拥有 | Descriptions/List/Card 组合，不用 disabled input |
@@ -37,6 +37,12 @@ Pattern 总规则：
 ### AppShell
 
 `AppShell.Root/Sidebar/Header/Main/Aside` 定义后台应用全局空间。`Sidebar` 管理 collapsed 展示状态，`Aside` 管理 open 展示状态；菜单数据、路由、权限和产品 logo 均由产品侧提供。
+
+文件落点：
+
+- 组件和 part props：`src/patterns/app-shell.tsx`。
+- 测试：`src/patterns/app-shell.test.tsx`。
+- 公共汇总：`src/patterns/index.ts`、`src/index.ts`。
 
 设计边界：
 
@@ -67,6 +73,13 @@ Pattern 总规则：
 ### FilterBar
 
 FilterBar 是列表页筛选 Pattern，可作为 DataTable part 导出，也可单独组合。它只提交筛选意图，不直接修改 Table 内部状态。
+
+文件落点：
+
+- 组件、part props 和筛选状态类型：`src/patterns/filter-bar.tsx`。
+- 测试：`src/patterns/filter-bar.test.tsx`。
+- 公共汇总：`src/patterns/index.ts`、`src/index.ts`。
+- DataTable 组合入口：`src/patterns/data-table.tsx` 中的 `DataTable.FilterBar` 复用或包装该 Pattern，不重复定义筛选数据结构。
 
 状态和事件：
 

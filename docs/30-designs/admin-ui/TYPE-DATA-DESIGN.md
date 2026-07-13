@@ -63,6 +63,344 @@
 | `SconeToastItem` | `src/components/feedback-overlay/toast.tsx` | Toast 队列展示项。 | 不承载业务来源、持久化或通知订阅状态。 |
 | `SconeNotificationItem` | `src/components/feedback-overlay/notification.tsx` | Notification 队列展示项。 | 已读、订阅来源和持久化由产品侧处理。 |
 
+## Concrete Data Structure Definitions
+
+以下定义是实现阶段的目标 TypeScript shape。实现时可以按 React 类型导入补齐 `ReactNode`、`ComponentPropsWithoutRef` 等基础类型，但不得改变字段语义、字段所有权或文件落点。
+
+### Foundation Types
+
+文件落点：`src/types/foundation.ts`。
+
+```ts
+export type Key = string | number;
+
+export type Breakpoint = "sm" | "md" | "lg" | "xl";
+
+export type ResponsiveValue<T> =
+  | T
+  | Partial<Record<Breakpoint, T>>;
+
+export type SconeTone =
+  | "neutral"
+  | "info"
+  | "success"
+  | "warning"
+  | "danger";
+
+export type SconeSpacingToken =
+  | "none"
+  | "xs"
+  | "sm"
+  | "md"
+  | "lg"
+  | "xl";
+
+export type SconeControlSize = "sm" | "md" | "lg";
+
+export type SconeDensity = "compact" | "default" | "comfortable";
+
+export type SconeOrientation = "horizontal" | "vertical";
+
+export type SconeAlign = "start" | "center" | "end";
+
+export type SconeSide = "top" | "right" | "bottom" | "left";
+
+export type SconeStatus = "idle" | "active" | "success" | "error";
+
+export type OverlayCloseReason =
+  | "escapeKeyDown"
+  | "pointerDownOutside"
+  | "closeButton"
+  | "cancel"
+  | "confirm"
+  | "programmatic";
+
+export interface SconeOption<Value = string> {
+  value: Value;
+  label: React.ReactNode;
+  disabled?: boolean;
+  description?: React.ReactNode;
+}
+
+export interface SconeBaseItem {
+  key: Key;
+  label: React.ReactNode;
+  disabled?: boolean;
+  icon?: React.ReactNode;
+  description?: React.ReactNode;
+}
+```
+
+### Data Display Structures
+
+文件落点：`src/components/data-display/descriptions.tsx`。
+
+```ts
+export interface SconeDescriptionItem {
+  key: Key;
+  label: React.ReactNode;
+  value: React.ReactNode;
+  span?: 1 | 2 | 3 | 4;
+  emptyFallback?: React.ReactNode;
+}
+```
+
+文件落点：`src/components/data-display/table.tsx`。
+
+```ts
+export interface SconeTableColumn<T> {
+  key: Key;
+  title: React.ReactNode;
+  dataIndex?: keyof T | readonly (string | number)[];
+  width?: number | string;
+  minWidth?: number;
+  align?: SconeAlign;
+  sortable?: boolean;
+  render?: (value: unknown, record: T, index: number) => React.ReactNode;
+  className?: string;
+  headerClassName?: string;
+}
+
+export interface SconeTableScroll {
+  x?: number | string | true;
+}
+```
+
+文件落点：`src/components/data-display/timeline.tsx`。
+
+```ts
+export interface SconeTimelineItem {
+  key: Key;
+  title: React.ReactNode;
+  description?: React.ReactNode;
+  time?: React.ReactNode;
+  tone?: SconeTone;
+  icon?: React.ReactNode;
+}
+```
+
+### Navigation Structures
+
+文件落点：`src/components/navigation/pagination.tsx`。
+
+```ts
+export interface SconePaginationState {
+  page: number;
+  pageSize: number;
+  total?: number;
+}
+
+export type SconePaginationChangeReason = "page" | "pageSize";
+```
+
+文件落点：`src/components/navigation/dropdown.tsx`。
+
+```ts
+export interface SconeActionItem extends SconeBaseItem {
+  onSelect?: () => void;
+  destructive?: boolean;
+  shortcut?: React.ReactNode;
+}
+```
+
+文件落点：`src/components/navigation/menu.tsx`。
+
+```ts
+export interface SconeNavigationItem extends SconeBaseItem {
+  href?: string;
+  active?: boolean;
+  children?: SconeNavigationItem[];
+}
+```
+
+文件落点：`src/components/navigation/breadcrumb.tsx`。
+
+```ts
+export interface SconeBreadcrumbItem {
+  key: Key;
+  label: React.ReactNode;
+  href?: string;
+  current?: boolean;
+}
+```
+
+文件落点：`src/components/navigation/command.tsx`。
+
+```ts
+export interface SconeCommandItem extends SconeBaseItem {
+  value: string;
+  group?: string;
+  keywords?: string[];
+  onSelect?: (value: string) => void;
+}
+```
+
+文件落点：`src/components/navigation/tree.tsx`。
+
+```ts
+export interface SconeTreeNode {
+  key: Key;
+  label: React.ReactNode;
+  disabled?: boolean;
+  icon?: React.ReactNode;
+  children?: SconeTreeNode[];
+}
+```
+
+文件落点：`src/components/navigation/accordion.tsx`。
+
+```ts
+export interface SconeAccordionItem {
+  value: string;
+  trigger: React.ReactNode;
+  content: React.ReactNode;
+  disabled?: boolean;
+}
+```
+
+### Feedback Service Structures
+
+文件落点：`src/components/feedback-overlay/toast.tsx`。
+
+```ts
+export type ToastPosition =
+  | "top-left"
+  | "top-right"
+  | "bottom-left"
+  | "bottom-right";
+
+export type ToastCloseReason =
+  | "timeout"
+  | "closeButton"
+  | "programmatic";
+
+export interface ToastOptions {
+  id?: string;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  tone?: SconeTone;
+  duration?: number;
+  action?: React.ReactNode;
+  onAction?: (id: string) => void;
+  onDismiss?: (id: string, reason: ToastCloseReason) => void;
+}
+
+export interface SconeToastItem extends ToastOptions {
+  id: string;
+}
+
+export interface SconeToastProviderProps {
+  children: React.ReactNode;
+  position?: ToastPosition;
+  duration?: number;
+  maxVisible?: number;
+  onOpenChange?: (items: SconeToastItem[]) => void;
+}
+
+export interface ToastService {
+  show: (options: ToastOptions) => string;
+  success: (options: ToastOptions) => string;
+  error: (options: ToastOptions) => string;
+  update: (id: string, options: Partial<ToastOptions>) => void;
+  dismiss: (id: string, reason?: ToastCloseReason) => void;
+  clear: () => void;
+}
+```
+
+文件落点：`src/components/feedback-overlay/notification.tsx`。
+
+```ts
+export type NotificationPlacement =
+  | "top-left"
+  | "top-right"
+  | "bottom-left"
+  | "bottom-right";
+
+export type NotificationCloseReason =
+  | "closeButton"
+  | "programmatic";
+
+export interface NotificationOptions {
+  id?: string;
+  title: React.ReactNode;
+  description?: React.ReactNode;
+  tone?: SconeTone;
+  time?: React.ReactNode;
+  persistent?: boolean;
+  action?: React.ReactNode;
+  onAction?: (id: string) => void;
+  onClose?: (id: string, reason: NotificationCloseReason) => void;
+}
+
+export interface SconeNotificationItem extends NotificationOptions {
+  id: string;
+}
+
+export interface SconeNotificationProviderProps {
+  children: React.ReactNode;
+  placement?: NotificationPlacement;
+  maxVisible?: number;
+  onOpenChange?: (items: SconeNotificationItem[]) => void;
+}
+
+export interface NotificationService {
+  open: (options: NotificationOptions) => string;
+  update: (id: string, options: Partial<NotificationOptions>) => void;
+  close: (id: string, reason?: NotificationCloseReason) => void;
+  clear: () => void;
+}
+```
+
+### Pattern State Structures
+
+文件落点：`src/patterns/filter-bar.tsx`。
+
+```ts
+export type FilterValue =
+  | string
+  | number
+  | boolean
+  | null
+  | undefined
+  | readonly (string | number | boolean)[];
+
+export type FilterBarFilters = Record<string, FilterValue>;
+
+export interface FilterBarState {
+  searchValue: string;
+  filters: FilterBarFilters;
+}
+```
+
+文件落点：`src/patterns/data-table.tsx`。
+
+```ts
+export interface SconeTableSorting {
+  key: Key;
+  direction: "asc" | "desc";
+}
+
+export interface SconeRowSelection<T> {
+  selectedRowKeys: Key[];
+  selectedRows?: T[];
+  onChange?: (selectedRowKeys: Key[], selectedRows: T[]) => void;
+}
+
+export interface DataTableState<T> {
+  sorting?: SconeTableSorting;
+  filters?: FilterBarFilters;
+  pagination?: SconePaginationState;
+  selection?: SconeRowSelection<T>;
+  columnVisibility?: Record<Key, boolean>;
+}
+```
+
+实现边界：
+
+- 以上数据结构只表达组件库 UI 状态、展示数据和调用方意图；不得加入请求函数、权限表达式、router 对象、业务实体 schema 或后端字段约定。
+- 同名类型必须定义在表中指定文件，并由对应组件族入口或 `src/patterns/index.ts` 汇总；只有跨组件共享类型可提升到 `src/types/foundation.ts`。
+- `DataTableState<T>` 是可选的状态聚合类型，不是 DataTable 的万能配置对象；各 part props 仍应按 slot 拆分。
+
 Props 类型命名：
 
 - 单组件 props 使用 `{ExportName}Props`，例如 `SconeButtonProps`、`SconeTableProps`。
@@ -91,7 +429,7 @@ Props 类型命名：
 | `onClear` | `() => void` | 否 | 否 |
 | `onApply` | `(state) => void`，用于 FilterBar/DataTable 等 Pattern 状态。 | 否 | 否 |
 | `onReset` | `() => void` | 否 | 否 |
-| `onDismiss` | `(id: string) => void`，用于 Toast/Notification service item。 | 否 | 否 |
+| `onDismiss` / `onClose` | `(id: string, reason) => void`，用于 Toast/Notification service item。 | 否 | 否 |
 
 状态结构边界：
 

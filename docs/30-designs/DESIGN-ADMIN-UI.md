@@ -30,10 +30,12 @@
 - DataTable 不引入 TanStack Table 作为推荐 recipe 基座，只留出外部状态库 props/callback 边界。
 - 测试文件按组件、Pattern、utility 同目录放置，命名为同名 `*.test.ts` 或 `*.test.tsx`。
 - 全部 Recipe 保持文档和示例边界，不创建 `src/recipes/` 源码入口。
+- `AppShell.*` 和独立 `FilterBar.*` 补入公共 Pattern 导出面，目标文件分别为 `src/patterns/app-shell.tsx` 和 `src/patterns/filter-bar.tsx`。
+- DESIGN 必须包含关键公共数据结构的具体 TypeScript shape，并精确到定义文件名。
 
 ## Status
 
 - 设计覆盖：完成。
 - 实现覆盖：未开始。
 - 测试覆盖：未开始。
-- 未决问题：需确认是否将 `AppShell.*` 和独立 `FilterBar.*` 补入公共导出面；建议补入。
+- 未决问题：无。

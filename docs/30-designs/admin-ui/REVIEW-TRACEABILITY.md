@@ -15,7 +15,7 @@
 | Input Files 是否全部被覆盖，且引用精确到文件名。 | 已覆盖核心 SPEC、分组 SPEC、组件 SPEC、Pattern SPEC 和 Recipe SPEC。 | `Source Files` 已列出精确路径。 |
 | File Placement Design 是否精确到目标文件名，且每个文件都有职责说明。 | 已覆盖 designs 索引、Admin UI 总入口、拆分设计文档、样式、类型、组件族入口、组件、Pattern、Recipe、测试和公共入口。 | `File Placement Design` 与 `Source Layout Design` 已补齐。 |
 | Coverage Matrix 是否覆盖全部能力矩阵和 Export Groups。 | 已覆盖 `COMPONENT-SELECTION.md` 的能力矩阵和 Export Groups。 | `Coverage Matrix` 已补齐目标源码文件、类型位置和验证策略。 |
-| Type And Data Structure Design 是否说明公共类型、私有类型、props、事件 payload、状态结构、compound part 类型、ref 类型、provider/service 类型。 | 已覆盖。 | `Type And Data Structure Design` 已补齐类型归属、命名、泛型、事件和 service 类型。 |
+| Type And Data Structure Design 是否说明公共类型、私有类型、props、事件 payload、状态结构、compound part 类型、ref 类型、provider/service 类型。 | 已覆盖。 | `Type And Data Structure Design` 已补齐类型归属、命名、泛型、事件、service 类型和关键公共数据结构的字段级 TypeScript shape。 |
 | Component Family Designs 是否覆盖全部 `Scone*` export 和 service export。 | 已覆盖 Form、Data Display、Layout、Feedback And Overlay、Navigation、Media。 | 已补齐各组件族导出、状态、DOM/ref/className、可访问性和验证点。 |
 | Admin Pattern Designs 是否覆盖全部 Pattern，并明确状态归属和业务边界。 | 已覆盖。 | 已补齐 AppShell、Page、Section、FilterBar、DataTable、FormPage、DetailPage、SettingsPage、MasterDetail。 |
 | Recipe Designs 是否覆盖全部 Recipe，并明确不新增正式 `Scone*` export 的原因。 | 已覆盖。 | 已补齐 DrawerForm、ConfirmationFlow、Popover、Logo、Result、Dashboard Metric、Grid。 |
@@ -26,7 +26,7 @@
 自审后的设计状态：
 
 - 本 DESIGN 仍是设计阶段文档，不声明源码、测试或覆盖证据已经完成。
-- Review Questions 当前只保留 `AppShell.*` 和独立 `FilterBar.*` 是否补入公共导出面的确认项。
+- Review Questions 当前无未决项；`AppShell.*` 和独立 `FilterBar.*` 已按用户审核结论补入公共导出面。
 - `docs/40-readiness/IMPLEMENTATION-COVERAGE.md` 应记录设计覆盖和待实现状态，不应声明组件已实现。
 
 ## Decision Traceability
@@ -48,16 +48,10 @@
 | DataTable 不引入 TanStack Table 作为推荐 recipe 基座，只留出外部状态库 props/callback 边界。 | 用户审核结论、`docs/10-specs/patterns/DATA-TABLE.md` | `Admin Pattern Designs / DataTable` |
 | 测试文件按组件、Pattern、utility 同目录放置，命名为同名 `*.test.ts` 或 `*.test.tsx`。 | 用户审核结论 | `File Placement Design`、`Verification Design` |
 | 全部 Recipe 保持文档和示例边界，不创建 `src/recipes/` 源码入口。 | 用户审核结论、`docs/10-specs/recipes/*.md` | `Recipe Designs` |
+| `AppShell.*` 和独立 `FilterBar.*` 补入公共 Pattern 导出面，且保留状态和业务边界。 | 用户审核结论、`docs/10-specs/patterns/APP-SHELL.md`、`docs/10-specs/patterns/FILTER-BAR.md` | `Export Surface Design`、`Admin Pattern Designs` |
+| DESIGN 需给出关键公共数据结构的具体 TypeScript shape，并精确到定义文件名。 | 用户审核结论 | `Type And Data Structure Design` |
 | Custom 能力必须单独定义键盘、ARIA、状态和验证策略。 | `docs/10-specs/ADMIN-UI-SPEC.md`、单组件 SPEC | `Coverage Matrix`、`Component Family Designs`、`Verification Design` |
 
 ## Review Questions
 
-需确认是否将 `AppShell.*` 和独立 `FilterBar.*` 补入公共导出面。
-
-建议：补入。
-
-理由：
-
-- `docs/10-specs/patterns/APP-SHELL.md` 已标记 `Export status: Admin Pattern export`。
-- `docs/10-specs/patterns/FILTER-BAR.md` 已说明 FilterBar 可作为 DataTable part 导出，也可在列表页单独组合。
-- 补入后，`src/patterns/index.ts` 和 `src/index.ts` 的公共 Pattern 导出与单项 SPEC 一致；不补入则实现时会出现 Pattern 文件存在但公共入口缺失的问题。
+无。
