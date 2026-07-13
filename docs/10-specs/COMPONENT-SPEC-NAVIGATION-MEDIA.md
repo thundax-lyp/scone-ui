@@ -1,161 +1,45 @@
 # Navigation And Media Component Spec
 
+本文档是该分组的索引和共享规则。单组件合同已拆分到更小颗粒度的 SPEC 文件。
+
 ## Scope
 
-本规格覆盖 admin-ui 基础导航、菜单、媒体和辅助展示组件。
+本规格覆盖 admin-ui 基础导航、菜单、浮动辅助和媒体展示组件。导航组件只处理选择、切换、菜单结构和可访问交互，不内置路由、权限、菜单数据加载或产品身份。
 
-## Components
+跨组件词汇和可访问性以 [`FOUNDATIONS-SPEC.md`](./FOUNDATIONS-SPEC.md) 为准；相似组件选择以 [`COMPONENT-SELECTION.md`](./COMPONENT-SELECTION.md) 为准。
 
-### SconeTabs
+## Component Index
 
-页内视图切换。
+导航、菜单和媒体组件均属于当前实现范围。它们只处理选择、切换、菜单结构、浮动辅助、媒体 fallback 和可访问交互，不内置路由、权限、菜单数据加载、产品身份或业务导航策略。
 
-建议能力：
+### Navigation components
 
-- `items`
-- `activeKey`
-- `onChange`
-- `aria-label`
-- `className`
+- [`SconeBreadcrumb`](./components/navigation/SCONE-BREADCRUMB.md)
+- [`SconePagination`](./components/navigation/SCONE-PAGINATION.md)
+- [`SconeTabs`](./components/navigation/SCONE-TABS.md)
+- [`SconeSegmented`](./components/navigation/SCONE-SEGMENTED.md)
+- [`SconeTree`](./components/navigation/SCONE-TREE.md)
+- [`SconeDropdown`](./components/navigation/SCONE-DROPDOWN.md)
+- [`SconeMenu`](./components/navigation/SCONE-MENU.md)
+- [`SconeTooltip`](./components/navigation/SCONE-TOOLTIP.md)
+- [`SconeCommand`](./components/navigation/SCONE-COMMAND.md)
+- [`SconeAccordion`](./components/navigation/SCONE-ACCORDION.md)
+- [`SconeCollapsible`](./components/navigation/SCONE-COLLAPSIBLE.md)
 
-规则：
+### Media components
 
-- 用于同一对象或同一工作区内的视图切换。
-- 不承载产品全局导航约束。
+- [`SconeImage`](./components/media/SCONE-IMAGE.md)
+- [`SconeAvatar`](./components/media/SCONE-AVATAR.md)
 
-### SconeSegmented
+## Recipes
 
-轻量模式切换。
+- [Popover Recipe](./recipes/POPOVER.md)
+- [Logo Recipe](./recipes/LOGO.md)
 
-建议能力：
+## Anti-patterns
 
-- `options`
-- `value`
-- `onChange`
-- `aria-label`
-- `className`
-
-规则：
-
-- 选项数量建议 2-5 个。
-- 长文案使用 tabs 或 select。
-
-### SconeTree
-
-层级数据展示和选择。
-
-建议能力：
-
-- `treeData`
-- `selectedKeys`
-- `checkedKeys`
-- `expandedKeys`
-- `defaultExpandAll`
-- `checkable`
-- `selectable`
-- `blockNode`
-- `onSelect`
-- `onCheck`
-- `onExpand`
-- `className`
-
-规则：
-
-- 节点 key 必须稳定。
-- 大数据量树的虚拟滚动或异步加载作为显式能力，不隐式开启。
-
-### SconeDropdown
-
-下拉浮层和更多操作入口。
-
-建议能力：
-
-- `items`
-- `trigger`
-- `children`
-- `className`
-
-规则：
-
-- 入口必须有可见文本或稳定可访问名称。
-- 危险操作只提供 `danger` 语义，不内置业务确认。
-
-### SconeMenu
-
-菜单。
-
-建议能力：
-
-- `items`
-- `mode`
-- `selectedKeys`
-- `defaultOpenKeys`
-- `onSelect`
-- `className`
-
-规则：
-
-- 菜单只处理展示和选择，不内置路由。
-
-### SconeTooltip
-
-短提示。
-
-建议能力：
-
-- `content`
-- `children`
-- `placement`
-- `className`
-
-规则：
-
-- Tooltip 只放短解释，不放复杂交互。
-- 阻断性错误必须使用 Alert 或表单错误。
-
-### SconeImage
-
-图片展示。
-
-建议能力：
-
-- `src`
-- `alt`
-- `preview`
-- `width`
-- `height`
-- `className`
-
-规则：
-
-- `alt` 必须传入。
-- 预览能力默认可关闭。
-
-### SconeAvatar
-
-头像或对象标识图。
-
-建议能力：
-
-- `src`
-- `fallback`
-- `icon`
-- `size`
-- `alt`
-- `className`
-
-### SconeLogo
-
-品牌占位 primitive。
-
-建议能力：
-
-- `label`
-- `mark`
-- `children`
-- `className`
-
-规则：
-
-- 不写死产品名称。
-- 产品侧通过 `label`、`mark` 或 `children` 组合。
+- 用 Dropdown 做表单选择。
+- 用 Tabs 做全局导航或路由系统。
+- 用 Tooltip 放错误文案、表单说明或可点击内容。
+- 在基础 Menu 中内置权限过滤和路由匹配。
+- 在未定义键盘模型前实现复杂 Tree。

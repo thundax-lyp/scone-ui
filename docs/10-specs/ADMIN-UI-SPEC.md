@@ -1,68 +1,122 @@
-# Admin UI Component Spec
+# Admin UI Spec
 
 ## Purpose
 
-本文档定义 `scone-ui` admin-ui 基础组件库的规格总览。
+本文档定义 `scone-ui` admin-ui 组件库的规格入口。`scone-ui` 面向后台管理系统、内部工具、运营平台和数据管理界面，提供比直接使用 `shadcn/ui` 更稳定的 Admin 语义、信息密度、组合规则和迁移约束。
 
-目标是定义可复用、业务中性、可长期维护的基础组件。本文档是独立规格，不依赖外部盘点文档、源项目组件命名或第三方 UI 库 API。
+本仓库不是产品应用仓库，不沉淀业务流程、权限策略、接口协议、路由规则或产品专属 UI 政策。
+
+## Positioning
+
+`admin-ui` 的价值不是复制 Ant Design，也不是把每个 `shadcn/ui` 组件重命名为 `Scone*`。
+
+| 对象             | 关系                                                                           |
+| ---------------- | ------------------------------------------------------------------------------ |
+| `shadcn/ui`      | 作为主要实现基座，复用 Tailwind、CVA、组合式源码和常见组件结构。               |
+| Radix primitives | 继承焦点管理、键盘交互、ARIA 语义和受控/非受控模型。二次封装不得破坏这些行为。 |
+| Ant Design       | 作为 Admin 场景能力参照，不复制复杂配置对象、历史 API 或完整组件矩阵。         |
+| 产品业务组件     | 不进入通用库。业务字段、业务权限、业务流程和接口状态由产品侧组合。             |
 
 ## Spec Documents
 
-- [`COMPONENT-SPEC-LAYOUT.md`](./COMPONENT-SPEC-LAYOUT.md)：基础布局 primitives、容器、间距、工具栏和分割布局。
-- [`COMPONENT-SPEC-DATA-DISPLAY.md`](./COMPONENT-SPEC-DATA-DISPLAY.md)：表格、详情、列表、标签、卡片、富文本和统计展示。
-- [`COMPONENT-SPEC-FORM.md`](./COMPONENT-SPEC-FORM.md)：按钮、输入、选择、表单、开关、日期、数字和上传。
-- [`COMPONENT-SPEC-FEEDBACK-OVERLAY.md`](./COMPONENT-SPEC-FEEDBACK-OVERLAY.md)：抽屉、弹窗、确认、提示、加载、空状态和进度。
-- [`COMPONENT-SPEC-NAVIGATION-MEDIA.md`](./COMPONENT-SPEC-NAVIGATION-MEDIA.md)：Tabs、Segmented、Tree、Menu、Dropdown、Tooltip、Image、Avatar 和 Logo。
+- [`README.md`](./README.md)：SPEC 工程索引和读取协议，导航到核心合同、单组件 SPEC、Pattern 和 Recipe。
+- [`FOUNDATIONS-SPEC.md`](./FOUNDATIONS-SPEC.md)：Layer、API vocabulary、Shared Types、状态、尺寸、响应式和可访问性规则。
+- [`COMPONENT-COVERAGE-AUDIT.md`](./COMPONENT-COVERAGE-AUDIT.md)：对照 Ant Design 与 shadcn/ui 的覆盖审计、缺项处理和不纳入清单。
+- [`COMPONENT-SELECTION.md`](./COMPONENT-SELECTION.md)：当前实现范围、组件选择指南和能力矩阵。
+- [`components/`](./components/)：单组件 API、状态、事件、组合边界和 shadcn/Radix 映射。
+- [`ADMIN-PATTERNS-SPEC.md`](./ADMIN-PATTERNS-SPEC.md)：Page、FilterBar、DataTable、FormPage、DetailPage、SettingsPage、DrawerForm 等 Admin Pattern 和 Recipe。
 
-## Priority
+## Source Of Truth
 
-| 优先级 | 基础组件族                                                                    | 处理策略                                   |
-| ------ | ----------------------------------------------------------------------------- | ------------------------------------------ |
-| P0     | Button、Input、Select、Form、Stack、Table、Descriptions                       | 首批实现，定义稳定 API、可访问性和测试标准 |
-| P1     | Card、Alert、Drawer、Tag、List、Toolbar、Empty、Loading                       | 建立基础能力和状态表达，保留组合空间       |
-| P2     | Modal、Confirm、Tree、Tabs、Segmented、Dropdown、Tooltip                      | 做轻量基础封装，不绑定业务流程             |
-| P3     | Upload、Image、Avatar、Timeline、Statistic、Progress、Logo、RichContentViewer | 先定义基础边界，等真实复用稳定后扩展       |
+| 信息类型                                        | 权威文件                                                       |
+| ----------------------------------------------- | -------------------------------------------------------------- |
+| SPEC 入口、读取顺序和文件定位                  | [`README.md`](./README.md)                                    |
+| Layer、API 词汇、Shared Types、响应式和状态语义 | [`FOUNDATIONS-SPEC.md`](./FOUNDATIONS-SPEC.md)                 |
+| 当前实现范围、导出清单和能力矩阵                       | [`COMPONENT-SELECTION.md`](./COMPONENT-SELECTION.md)           |
+| Page、Section、DataTable、DrawerForm 等组合模式 | [`ADMIN-PATTERNS-SPEC.md`](./ADMIN-PATTERNS-SPEC.md)           |
+| 单组件 API、状态和 shadcn/Radix 映射            | [`README.md`](./README.md) 索引的 `components/**/*.md`          |
+| 覆盖审计和不纳入依据                            | [`COMPONENT-COVERAGE-AUDIT.md`](./COMPONENT-COVERAGE-AUDIT.md) |
 
-## Naming
+## Layer Model
 
-- 组件库导出统一使用 `Scone*` 前缀。
-- 基础组件使用通用名词，例如 `SconeButton`、`SconeInput`、`SconeTable`、`SconeDrawer`。
-- 页面级组合如 `ListPage`、`PageShell`、`FilterPanel` 暂不作为首批基础组件；可以在 patterns 文档或后续组件族中讨论。
-- 不沿用其他项目的组件命名。
-- 不复制第三方 UI 库 prop 命名作为唯一标准；只保留稳定、业务中性的能力。
+每项能力必须归入唯一主层级。允许在文档中引用其他层，但不得跨层倒置依赖。
+
+| 层级               | 定义                                                               | 准入条件                                 | 示例                                                             | 禁止事项                            |
+| ------------------ | ------------------------------------------------------------------ | ---------------------------------------- | ---------------------------------------------------------------- | ----------------------------------- |
+| Foundation         | 跨组件共享规则。                                                   | 影响多个组件族，且应统一维护。           | spacing、size、density、tone、state、responsive、accessibility。 | 写入业务场景或组件私有实现。        |
+| Primitive          | 底层交互或语义能力，通常继承 Radix 或原生 HTML。                   | 行为稳定、组合粒度低、可被上层复用。     | Dialog primitive、Select primitive、Menu primitive。             | 重写 Radix 焦点、键盘和 ARIA 模型。 |
+| Component          | 有稳定语义、结构和可复用 API 的 UI 单元。                          | 业务中性，可单独实现和测试。             | `SconeButton`、`SconeInput`、`SconeTable`、`SconeDrawer`。       | 内置请求、权限、路由或产品文案。    |
+| Layout             | 只负责空间、排列、滚动和区域组织的组件。                           | 不表达业务状态，不生成业务动作。         | `SconeStack`、`SconeInline`、`SconeToolbar`、`SconeSplitPane`。  | 把整页工作流封装为布局组件。        |
+| Admin Pattern      | 多个组件组成的高频 Admin 结构，有推荐 anatomy 但不固定为单一 API。 | 多个页面反复出现，且规则可业务中性表达。 | Page、PageHeader、FilterBar、DataTable、FormPage、DetailPage。   | 把具体业务字段或流程写入 Pattern。  |
+| Recipe             | 针对常见情境的组合规范。                                           | 可复制为起点，但不形成正式组件 API。     | DrawerForm、SearchableTable、ConfirmationFlow。                  | 为一次性场景新增公共组件。          |
+| Business Component | 与具体领域模型、业务流程或产品身份耦合。                           | 不进入 `admin-ui`。                      | 权限菜单树、特定资源选择器、业务审批流。                         | 迁移到通用库。                      |
+
+依赖方向：Foundation -> Primitive -> Component/Layout -> Admin Pattern -> Recipe。业务组件只能依赖前面各层，不能反向影响通用 SPEC。
+
+## shadcn/ui And Radix Strategy
+
+封装必须提供明确系统价值：统一 token、统一 Admin 语义、补充必要状态、提供稳定 slots、修复一致性问题或沉淀高频组合。仅为统一导出名而包装不成立。
+
+### Source Strategy
+
+`shadcn/ui` 是源码基座，不是普通运行时依赖。每个能力必须在 [`COMPONENT-SELECTION.md`](./COMPONENT-SELECTION.md) 标注下列一种 source strategy，并明确是否产生 `Scone*` export。
+
+| Source strategy    | 使用条件                                                       | 是否产生 `Scone*` export | 要求                                                  |
+| ------------------ | -------------------------------------------------------------- | ------------------------ | ----------------------------------------------------- |
+| `vendored-shadcn`  | 复制 shadcn/Radix 组件源码，仅做 token、密度或 class 调整。    | 可选                     | 保留原组合模型、`ref`、`asChild` 和 DOM 语义。        |
+| `scone-wrapper`    | 需要统一 `tone`、`size`、`loading`、`ariaLabel` 或稳定 slots。 | 是                       | wrapper 不吞掉 compound parts，不隐藏底层可访问行为。 |
+| `pattern-only`     | 单个底层组件不足以表达 Admin 场景。                            | 只导出明确 Pattern parts | 不定义万能配置对象。                                  |
+| `direct-docs-only` | 底层组件已经满足需求，admin-ui 只给使用边界。                  | 否                       | 文档记录选择规则，不创建无价值 wrapper。              |
+| `custom`           | `shadcn/ui`/Radix 无成熟基座或 Admin 语义明显不同。            | 按 SPEC 决定             | 必须单独定义键盘、ARIA、状态和测试策略。              |
+| `no-component`     | 通用价值不足或业务耦合高。                                     | 否                       | 在选择指南中说明替代组合方式。                        |
+
+通用保留规则：
+
+- 保留 Radix 的 focus trap、focus restore、roving focus、typeahead、Escape、outside interaction 和 ARIA 语义。
+- 支持 `className` 透传到稳定 DOM 边界；样式通过 Tailwind utility 和 token 覆盖。
+- 需要 polymorphic 行为时优先沿用 `asChild`，不得改成不兼容的 `as` API。
+- 支持 `ref` 转发；不得因 wrapper 破坏测量、聚焦和动画控制。
+- CVA 只管理稳定变体，不承载业务状态推导。
+
+## Implementation Scope
+
+当前 SPEC 只描述可直接进入实现、导出和测试的能力。候选但未纳入当前范围的组件不保留实现级 props，统一在 [`COMPONENT-COVERAGE-AUDIT.md`](./COMPONENT-COVERAGE-AUDIT.md) 的排除清单中说明原因。
+
+所有组件、Pattern 和 Recipe 的工程入口统一为 [`README.md`](./README.md)。实现时不得绕过 README 直接按文件名猜测 API 归属。
 
 ## API Principles
 
-- 高频 props 进入显式 API；低频能力进入 `className`、`style`、`children`、`slots` 或受控组合。
-- 所有组件必须支持 `className`；样式覆盖优先通过 Tailwind utility 和设计 token。
-- 可交互组件必须具备稳定可访问名称；优先可见文本，其次 `aria-label` 或 `aria-labelledby`。
-- 数据型组件必须明确 `loading`、`empty`、`error` 的表达方式。
-- 危险操作只提供视觉和语义能力；确认流程由 `SconeConfirm` 或调用方组合。
-- 不把产品业务语义、权限、接口请求、路由、菜单数据或页面流程写入基础组件库。
+统一词汇以 [`FOUNDATIONS-SPEC.md`](./FOUNDATIONS-SPEC.md) 为准。组件文件只说明自身差异，不重复定义跨组件语义。
 
-## Composition Boundary
+- React 组件 API 使用 `ariaLabel` 表示组件级可访问名称，底层透传为 `aria-label`；原生 attributes 仍可通过 rest props 传入。
+- header 右侧操作统一为 `actions`；底部区域统一为 `footer`；单个提示动作使用 `action`。
+- `tone` 表示语义色；`status` 表示流程或任务状态；危险动作使用 `destructive`，不再新增 `danger` boolean。
+- `size` 表示控件尺寸；`density` 表示信息密度；容器宽度使用 `widthPreset` 或布局 token，不复用 `size`。
+- 数据展示组件必须明确 `loading`、`empty`、`error` 的优先级：`loading` 优先，其次 `error`，最后 `empty`。
 
-基础组件库优先提供 primitives：
+## Props And Events Policy
 
-- Layout primitives：`Stack`、`Inline`、`Toolbar`、`Panel`、`SplitPane`
-- Form primitives：`Button`、`Input`、`Select`、`Form`、`FormItem`
-- Data primitives：`Table`、`Descriptions`、`Card`、`Tag`、`List`
-- Feedback primitives：`Drawer`、`Modal`、`Confirm`、`Alert`、`Empty`、`Loading`
+- 组件 SPEC 表必须列出组件新增语义 props、受控状态、非原生事件和稳定 slot。
+- `value/defaultValue/onValueChange`、`open/defaultOpen/onOpenChange`、`checked/defaultChecked/onCheckedChange` 是受控/非受控命名基线。
+- 用户明确动作使用 `onSelect`、`onConfirm`、`onCancel`、`onClear`、`onApply`、`onReset`、`onDismiss` 等动词事件，不塞入通用 `onChange`。
+- 原生 DOM 事件和属性通过 rest props 透传到文档定义的稳定 DOM 边界，例如 `onClick`、`onFocus`、`onBlur`、`onKeyDown`、`id`、`name`、`role`、`data-*`。只有会改变组件语义或状态所有权的事件才在组件表中显式列出。
+- Callback 不发起请求、不判断权限、不修改路由；它只把用户意图和当前 UI 状态交给调用方。
+- 同一状态不得同时由多个事件表达。例如 Select 选值只用 `onValueChange`，打开状态只用 `onOpenChange`。
 
-页面级组合不作为默认目标：
+## Non-goals
 
-- 不内置数据请求。
-- 不内置权限判断。
-- 不内置业务路由。
-- 不内置产品级文案。
-- 不要求业务页面必须使用某个完整 page template。
+- 不实现完整 Ant Design Table、Form 或 Modal API。
+- 不为每个 `shadcn/ui` 组件增加 `Scone*` wrapper。
+- 不提供产品级 `ListPage`、权限菜单、请求状态机、路由绑定或业务字典映射。
+- 不把 Dashboard、审批、资源选择等业务页面封装为通用组件。
+- 不在 SPEC 阶段固定所有 TypeScript 类型；但语义、状态和组合边界必须稳定。
 
 ## Verification
 
-每个基础组件至少覆盖：
+每个进入实现的组件至少覆盖：
 
-- 类型导出稳定。
-- 基础渲染成功。
-- 可访问名称可被 Testing Library 查询。
-- `className` 透传到稳定 DOM 边界。
-- 核心状态可检查，例如 `loading`、`disabled`、`empty`、`error`。
+- 类型导出稳定，`className` 和 `ref` 透传到文档定义的稳定边界。
+- 可访问名称可被 Testing Library 查询；复合组件的 label、description、message 关联可验证。
+- 核心状态可检查，例如 `loading`、`disabled`、`readOnly`、`invalid`、`empty`、`error`。
+- Radix/shadcn 基座组件的键盘、焦点和关闭行为未被 wrapper 破坏。
+- 示例符合本 SPEC 的层级、词汇和选择规则。

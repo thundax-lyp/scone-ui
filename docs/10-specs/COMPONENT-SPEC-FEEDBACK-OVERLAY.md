@@ -1,138 +1,81 @@
 # Feedback And Overlay Component Spec
 
+本文档是该分组的索引和共享规则。单组件合同已拆分到更小颗粒度的 SPEC 文件。
+
 ## Scope
 
-本规格覆盖 admin-ui 基础反馈和浮层组件。反馈组件只负责状态表达、浮层结构、确认语义和异步状态，不绑定创建、编辑、详情等业务流程。
+本规格覆盖 admin-ui 基础反馈和浮层组件。反馈组件表达状态、空态、进度和恢复动作；浮层组件提供任务容器、确认语义、焦点管理和关闭行为，不绑定创建、编辑、详情等业务流程。
 
-## Components
+跨组件状态和可访问性以 [`FOUNDATIONS-SPEC.md`](./FOUNDATIONS-SPEC.md) 为准；DrawerForm、ConfirmationFlow 等组合以 [`ADMIN-PATTERNS-SPEC.md`](./ADMIN-PATTERNS-SPEC.md) 为准。
 
-### SconeDrawer
+## Overlay Principles
 
-侧向浮层容器。
+- 优先继承 Radix/shadcn 的 focus trap、focus restore、Escape、outside interaction 和 ARIA 行为。
+- 浮层必须有标题或 `ariaLabel`。
+- 关闭行为必须可预测，并通过 close contract 区分用户关闭、提交成功关闭和外部受控关闭。
+- 不在 Dialog/Drawer 内再打开复杂 Dialog；危险确认可使用 AlertDialog，但应控制嵌套深度。
+- 长内容必须有明确滚动区域；footer 不随内容滚走，除非 recipe 明确。
 
-| Prop             | 类型                             | 说明         |
-| ---------------- | -------------------------------- | ------------ |
-| `open`           | `boolean`                        | 打开状态     |
-| `onClose`        | `() => void`                     | 关闭         |
-| `title`          | `ReactNode`                      | 标题         |
-| `size`           | `"sm" \| "md" \| "lg" \| "full"` | 尺寸         |
-| `footer`         | `ReactNode`                      | 底部区域     |
-| `extra`          | `ReactNode`                      | 标题辅助区域 |
-| `loading`        | `boolean`                        | 加载         |
-| `destroyOnClose` | `boolean`                        | 关闭后销毁   |
-| `aria-label`     | `string`                         | 可访问名称   |
-| `className`      | `string`                         | 样式         |
+## Overlay Close Contract
 
-规则：
+Drawer 和 Dialog 使用受控 `open`。基础事件分两层：
 
-- 抽屉只提供浮层结构，不内置保存、取消或详情业务。
-- `footer` 是布局 slot，不定义具体按钮。
-- 加载状态必须避免误操作。
+- `onOpenChange(open)`：底层 Radix 状态变化桥接，保持与 shadcn/Radix 兼容。
+- `onRequestClose(reason)`：用户请求关闭时触发；调用方可以选择是否把 `open` 置为 `false`。
 
-### SconeModal
+`reason` 取值：
 
-居中弹窗。
+权威类型为 [`FOUNDATIONS-SPEC.md`](./FOUNDATIONS-SPEC.md) 中的 `OverlayCloseReason`。本节只解释触发来源，不维护第二套词表。
 
-建议能力：
+| reason         | 来源                                       |
+| -------------- | ------------------------------------------ |
+| `escape`       | 用户按 Escape。                            |
+| `outside`      | 用户点击或交互到浮层外。                   |
+| `closeButton`  | 用户点击关闭按钮。                         |
+| `footerAction` | footer 中取消、关闭等显式操作。            |
+| `programmatic` | 调用方因提交成功、路由变化等外部状态关闭。 |
 
-- `open`
-- `title`
-- `onConfirm`
-- `onCancel`
-- `confirmLoading`
-- `footer`
-- `confirmText`
-- `cancelText`
-- `className`
+## Close Rules
 
-规则：
+- `onRequestClose` 只用于关闭请求，不自动改变 `open`。
+- `programmatic` 不来自 Radix outside/escape；调用方关闭成功后可记录该 reason。
+- 需要脏表单拦截时，调用方在 `onRequestClose` 中打开 Confirm，确认后再设置 `open=false`。
+- 基础 Drawer/Dialog 不内置 dirty 判断或二次确认。
+- 不使用 `close-button`、`footer-action` 等 kebab-case reason；事件协议统一使用 Foundation 的 camelCase 词表。
 
-- 长表单优先由调用方选择抽屉或页面承载，基础弹窗不限制内容。
-- 弹窗必须有明确标题或可访问名称。
+## Component Index
 
-### SconeConfirm
+反馈和浮层组件均属于当前实现范围。它们可以表达 UI 状态、关闭原因、队列和 provider/service 边界，但不内置请求、权限、路由、通知订阅、持久化或业务确认文案。
 
-确认交互。
+- [`SconeDrawer`](./components/feedback-overlay/SCONE-DRAWER.md)
+- [`SconeDialog`](./components/feedback-overlay/SCONE-DIALOG.md)
+- [`SconeConfirm`](./components/feedback-overlay/SCONE-CONFIRM.md)
+- [`SconeAlert`](./components/feedback-overlay/SCONE-ALERT.md)
+- [`SconeEmpty`](./components/feedback-overlay/SCONE-EMPTY.md)
+- [`SconeLoading`](./components/feedback-overlay/SCONE-LOADING.md)
+- [`SconeProgress`](./components/feedback-overlay/SCONE-PROGRESS.md)
+- [`SconeToast`](./components/feedback-overlay/SCONE-TOAST.md)
+- [`SconeNotification`](./components/feedback-overlay/SCONE-NOTIFICATION.md)
 
-| Prop          | 类型                          | 说明     |
-| ------------- | ----------------------------- | -------- |
-| `title`       | `ReactNode`                   | 确认标题 |
-| `description` | `ReactNode`                   | 影响说明 |
-| `onConfirm`   | `() => void \| Promise<void>` | 确认     |
-| `cancelText`  | `string`                      | 取消文案 |
-| `confirmText` | `string`                      | 确认文案 |
-| `danger`      | `boolean`                     | 危险语义 |
-| `disabled`    | `boolean`                     | 禁用     |
+## Recipes
 
-规则：
+- [Result Recipe](./recipes/RESULT.md)
 
-- 危险确认必须允许传入影响说明。
-- 异步确认必须支持 loading。
+## Overlay Behavior Matrix
 
-### SconeAlert
+| 能力          | Drawer                             | Dialog     | Confirm                  |
+| ------------- | ---------------------------------- | ---------- | ------------------------ |
+| Radix 基座    | Sheet/Drawer                       | Dialog     | AlertDialog              |
+| focus trap    | 继承                               | 继承       | 继承                     |
+| focus restore | 继承                               | 继承       | 继承                     |
+| Escape 关闭   | 默认支持，可由受控逻辑阻止         | 默认支持   | 默认支持但危险动作不执行 |
+| outside click | 默认可关闭，表单脏状态由调用方拦截 | 默认可关闭 | 通常不作为确认           |
+| footer        | 支持                               | 支持       | 固定取消/确认区域        |
+| 长内容        | 内容区滚动，footer 固定            | 谨慎使用   | 不适用                   |
 
-状态提示。
+## Anti-patterns
 
-建议能力：
-
-- `tone`: `"info" | "success" | "warning" | "danger"`
-- `title`
-- `description`
-- `icon`
-- `action`
-- `className`
-
-规则：
-
-- 错误信息必须可读，不只展示错误码。
-- `action` 只放与提示直接相关的操作。
-
-### SconeEmpty
-
-空状态。
-
-建议能力：
-
-- `title`
-- `description`
-- `image`
-- `action`
-- `className`
-
-规则：
-
-- 空状态必须说明当前没有什么。
-- 可恢复时提供明确操作入口。
-
-### SconeLoading
-
-加载状态。
-
-建议能力：
-
-- `loading`
-- `variant`: `"spinner" | "skeleton"`
-- `size`
-- `children`
-- `className`
-
-规则：
-
-- 页面级初次加载优先 skeleton。
-- 操作级加载优先按钮 loading。
-
-### SconeProgress
-
-进度展示。
-
-建议能力：
-
-- `value`
-- `max`
-- `status`
-- `showLabel`
-- `className`
-
-规则：
-
-- 长任务进度必须配合状态文案。
+- 用 Dialog 承载长表单或复杂数据表。
+- 在 Tooltip 或 Dropdown 中放确认表单。
+- 自写 focus trap、Escape 关闭或 ARIA role 替代 Radix。
+- 用 `destructive` 颜色代替确认流程和影响说明。
