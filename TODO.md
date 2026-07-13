@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `02-design-foundation-types`：生成 Foundation、theme 和数据结构设计章节
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SPEC-TO-DESIGN.md`
-    - 范围对象：`docs/30-designs/DESIGN-ADMIN-UI.md`、`docs/10-specs/FOUNDATIONS-SPEC.md`
-    - 处理动作：编写 Theme And Foundation Design 和 Type And Data Structure Design。
-    - 验收点：DESIGN 明确 token 唯一数值源、Tailwind 映射、shared types、props/事件/状态/ref/provider/service 类型边界，并只描述文件落点不落代码。
-    - 重要度：10/10
-
 - [ ] `03-design-export-coverage`：生成导出面和覆盖矩阵章节
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SPEC-TO-DESIGN.md`

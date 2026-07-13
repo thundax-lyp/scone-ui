@@ -288,3 +288,235 @@ src/
 - `src/recipes/*.tsx` 不是正式组件 API 入口；若存在，只作为可复制示例或组合辅助，不能新增 `Scone*` export。
 - `src/styles/theme.css` 是 CSS variables 唯一数值源；`src/styles.css` 只负责引入 theme、Tailwind layers 和全局基础样式。
 - `src/index.ts` 汇总公共 API，导出范围必须与 `docs/10-specs/COMPONENT-SELECTION.md` 的 Export Groups 一致。
+
+## Theme And Foundation Design
+
+依据文件：
+
+- `docs/10-specs/FOUNDATIONS-SPEC.md`
+- `docs/10-specs/ADMIN-UI-SPEC.md`
+
+Theme 是 `admin-ui` 的视觉实现合约。后续实现必须把语义 token 映射为 CSS variables、Tailwind theme 和组件 class，不在组件文件或组件 SPEC 中散落固定 px/rem、hex、阴影、字体数值或 z-index 数值。
+
+目标文件：
+
+| 文件 | 职责 |
+| --- | --- |
+| `src/styles/theme.css` | CSS variables 唯一数值源。 |
+| `src/styles.css` | 引入 theme、Tailwind layers 和全局基础样式。 |
+| `tailwind.config.ts` | 只映射 `src/styles/theme.css` 中的 CSS variables；若项目不引入 Tailwind 配置，需要在 Review Questions 中确认等价映射方案。 |
+
+硬约束：
+
+- 不创建第二套 `tokens.ts` 数值源。
+- 若后续需要 TypeScript token 名称，只允许导出 token key，不导出 token 数值。
+- CSS variables 使用 `--scone-*` 前缀，例如 `--scone-color-background`、`--scone-spacing-md`、`--scone-radius-sm`。
+- 组件 class 只能消费语义 token，例如 `bg-background`、`text-foreground`、`border-border`、`ring-ring`。
+- `tone` 到颜色的映射由 theme 决定，组件只传递 `tone` 语义。
+- 当前主题目标只覆盖 light theme；dark mode 后续若纳入，必须先补 contrast、surface、overlay 和 chart/token 映射。
+
+Token families：
+
+| 族 | 最小 key | 设计要求 |
+| --- | --- | --- |
+| Color | `background`、`foreground`、`muted`、`muted-foreground`、`border`、`ring`、`primary`、`primary-foreground`、`neutral`、`info`、`success`、`warning`、`danger` | 覆盖背景、前景、边框、焦点、状态和语义色；不得直接使用产品品牌色或后端状态名。 |
+| Spacing | `2xs`、`xs`、`sm`、`md`、`lg`、`xl` | 用于组件内部间距、组件间距和页面分段；默认 API 不接受任意 number。 |
+| Radius | `sm`、`md`、`lg`、`full` | 控件、卡片、浮层和可交互元素圆角；组件不得内联任意圆角。 |
+| Shadow | `sm`、`md`、`lg` | 浮层、弹窗、抽屉和悬浮菜单层级；状态变化不得依赖阴影作为唯一反馈。 |
+| Typography | `body`、`label`、`title`、`mono` | 字号、行高、字重和等宽字体语义层级。 |
+| Focus | `ring`、`ring-offset` | 键盘焦点可见样式，所有可交互组件共享。 |
+| Motion | `duration-fast`、`duration-default`、`easing-standard` | 浮层、折叠、加载和状态切换动画；不得阻断 reduced motion。 |
+| Z-index | `sticky`、`dropdown`、`popover`、`drawer`、`modal`、`toast` | 由 theme 或 overlay policy 管理，组件不得私自递增数字。 |
+| Control | `control-height-sm/md/lg`、`icon-size-sm/md/lg`、`hit-area-min`、`table-row-height-*`、`list-row-height-*`、`toolbar-height-*` | 控件高度、图标尺寸、点击热区和数据行高度。 |
+
+Size 和 density：
+
+| 名称 | 值 | 适用范围 |
+| --- | --- | --- |
+| `SconeControlSize` | `sm`、`md`、`lg` | Button、Input、SearchInput、PasswordInput、Select、Segmented、Checkbox、Switch、Radio、NumberInput、DatePicker 等控件高度。 |
+| `SconeDensity` | `compact`、`default`、`comfortable` | Table、List、Descriptions、Toolbar 和 DataTable 区域的信息密度。 |
+
+规则：
+
+- `size` 表达单个可交互控件高度，不表达 Drawer 宽度、Card 体量或页面宽度。
+- `density` 表达信息区域的行高、内边距和扫描节奏，不替代控件 `size`。
+- Toolbar `density="compact"` 默认搭配 `size="sm"` 控件；`density="default"` 默认搭配 `size="md"` 控件。
+- `comfortable` 只用于阅读性优先的详情或设置区域，不用于大批量数据表。
+- 图标按钮的可点击区域不得小于 `hit-area-min`。
+
+Layout preset：
+
+| 语义 | token / preset | 使用对象 |
+| --- | --- | --- |
+| page width | `page-width-narrow/content/wide/full` | `Page.Root` |
+| drawer width | `drawer-width-sm/md/lg/full` | `SconeDrawer` |
+| split pane size | `split-pane-size-narrow/medium/wide/fill` | `SconeSplitPane` |
+| table region | `table-region-height-sm/md/lg/full` | `DataTable.TableRegion` |
+| scroll viewport | `scroll-viewport-height-sm/md/lg` | `SconeScrollArea` |
+| sticky offset | `sticky-offset-header/footer` | Page、DataTable 和 FormActions |
+
+布局规则：
+
+- 布局尺寸使用 preset 和 CSS 长度边界，不把无单位 `number` 作为公共 API。
+- 覆盖字段必须带单位或百分比，例如 `320px`、`40rem`、`50%`。
+- 主滚动容器只能有一个；页面使用 `Page.Content`，局部区域使用 `SconeScrollArea` 或 Pattern 定义的 viewport slot。
+- sticky header/footer 必须绑定到同一个 scroll viewport，并由对应 Pattern 负责留出 padding 或 offset。
+
+Loading categories：
+
+| 类别 | 使用对象 | 行为 |
+| --- | --- | --- |
+| `action` | Button、单个提交动作 | 保持原尺寸，默认禁用重复触发。 |
+| `region` | Drawer、Card、Section 区域 | 设置 `aria-busy`，保留内容容器尺寸。 |
+| `data` | Table、List、DataTable | `loading > error > empty`，由数据区域决定状态容器。 |
+
+Icon policy：
+
+- 不提供独立 `SconeIcon` 组件。
+- 图标由调用方传入，组件只规定尺寸、语义和可访问边界。
+- 图标按钮必须提供可见文本或 `ariaLabel`。
+- 装饰性图标必须对辅助技术隐藏。
+- 产品业务图标、品牌图形、资源类型图标和权限图标由产品侧组合，不进入 Foundation token 或通用组件。
+
+State semantics：
+
+| 状态 | 设计要求 |
+| --- | --- |
+| Focus visible | 键盘聚焦必须可见，不移除浏览器或 Radix 可访问焦点行为。 |
+| Disabled | 不触发交互，不作为唯一权限表达。 |
+| Readonly | 可聚焦、可复制、不可修改，与 disabled 视觉可区分。 |
+| Loading | 保留原尺寸；操作级默认禁用重复提交；区域级设置 `aria-busy`。 |
+| Invalid | 使用 `aria-invalid` 和 `aria-describedby`，并与错误文案关联。 |
+| Empty | 说明当前没有什么；可恢复时提供 `action`。 |
+| Error | 数据型组件中优先级高于 empty。 |
+| Selected | 与 hover/focus 区分，并能通过键盘或状态属性识别。 |
+| Expanded | 使用 `aria-expanded` 或底层 Radix 状态。 |
+
+Responsive 和 accessibility：
+
+- Admin UI 最小支持内容宽度为 `360px`。
+- 页面主滚动由 `Page.Content` 承担；局部滚动使用 `SconeScrollArea`。
+- 表格窄屏优先横向滚动或列裁剪 recipe，不默认改造成卡片列表。
+- 工具栏窄屏允许换行，主操作优先可见，次要操作进入菜单。
+- Drawer 窄屏可提升为 `full` 宽度；Dialog 不承载长表单。
+- 基于 Radix 的组件必须保留原有键盘、焦点、ARIA 和关闭行为。
+- Tooltip 不能承载必读信息；阻断性错误使用 Alert 或字段错误。
+- 颜色状态必须配合文本、图标或结构，不得只依赖色彩。
+
+## Type And Data Structure Design
+
+依据文件：
+
+- `docs/10-specs/FOUNDATIONS-SPEC.md`
+- `docs/10-specs/ADMIN-UI-SPEC.md`
+
+类型文件归属：
+
+| 文件 | 类型范围 | 导出边界 |
+| --- | --- | --- |
+| `src/types/foundation.ts` | Foundation shared types、词表类型、基础状态桥接类型。 | 从 `src/index.ts` 公开导出。 |
+| `src/components/*/*.tsx` | 与单组件紧耦合的 props 和 item 类型。 | 组件公共 props 可从组件族入口导出；内部 helper 类型不导出。 |
+| `src/patterns/*.tsx` | Pattern compound parts props、slot props 和 Pattern 状态桥接。 | Pattern 公共 props 可从 `src/patterns/index.ts` 和 `src/index.ts` 导出。 |
+| `src/components/feedback-overlay/toast.tsx` | Toast provider props、service options、queue item、返回 id 和关闭原因。 | Provider、service function 和公共 option 类型公开导出。 |
+| `src/components/feedback-overlay/notification.tsx` | Notification provider props、service options、queue item、返回 id 和关闭原因。 | Provider、service function 和公共 option 类型公开导出。 |
+
+公共 Foundation 类型：
+
+| 类型 | 定义位置 | 导出 | 适用组件 | 非目标 |
+| --- | --- | --- | --- | --- |
+| `Breakpoint` | `src/types/foundation.ts` | 是 | `ResponsiveValue<T>` | 不定义 `mobile/tablet/desktop` 第二套断点。 |
+| `ResponsiveValue<T>` | `src/types/foundation.ts` | 是 | Page、Drawer、SplitPane、Descriptions、Toolbar | 不使用数组形态。 |
+| `Key` | `src/types/foundation.ts` | 是 | Tree、Table、Timeline、Descriptions、selection | 不默认表达 URL 或网络 id 规范化。 |
+| `SconeTone` | `src/types/foundation.ts` | 是 | Alert、Tag、Badge、Progress、Toast、Notification、Timeline | 不表达业务枚举、后端状态或流程阶段。 |
+| `SconeSpacingToken` | `src/types/foundation.ts` | 是 | Layout、section spacing、局部间距 API | 不接受任意 number 作为默认公共 API。 |
+| `SconeControlSize` | `src/types/foundation.ts` | 是 | 控件型组件 | 不表达容器宽度。 |
+| `SconeDensity` | `src/types/foundation.ts` | 是 | Table、List、Descriptions、Toolbar、DataTable | 不替代控件高度。 |
+| `SconeOption<Value = string>` | `src/types/foundation.ts` | 是 | Select、Segmented、Combobox、RadioGroup | 不把整条业务对象作为默认 value。 |
+| `OverlayCloseReason` | `src/types/foundation.ts` | 是 | Drawer、Dialog、Confirm | 不表达业务取消原因。 |
+
+词表类型：
+
+| 类型 | 值 |
+| --- | --- |
+| `SconeOrientation` | `horizontal`、`vertical` |
+| `SconeAlign` | `start`、`center`、`end` |
+| `SconeSide` | `top`、`right`、`bottom`、`left` |
+| `SconeStatus` | `idle`、`active`、`success`、`error` |
+
+数据结构类型：
+
+| 类型 | 定义位置 | 用途 | 设计边界 |
+| --- | --- | --- | --- |
+| `SconeDescriptionItem` | `src/types/foundation.ts` | Descriptions 键值展示项。 | 不直接使用后端字段名；空值 fallback 由调用方或 recipe 处理。 |
+| `SconePaginationState` | `src/types/foundation.ts` | Pagination、Table、DataTable 分页桥接。 | 只表达 UI 和查询意图，不发起请求。 |
+| `SconePaginationChangeReason` | `src/types/foundation.ts` | 分页变化原因。 | 值限定为 `page`、`pageSize`。 |
+| `SconeTableSorting` | `src/types/foundation.ts` | DataTable 排序状态桥接。 | 不在组件内发起请求。 |
+| `SconeTableColumn<T>` | `src/types/foundation.ts` 或 `src/components/data-display/table.tsx` | 基础表格列定义。 | 不承载请求、权限、字典加载或业务动作执行。 |
+| `SconeTableScroll` | `src/types/foundation.ts` 或 `src/components/data-display/table.tsx` | 基础表格横向滚动配置。 | 不沿用 AntD `{ x, y }` 完整语义；垂直滚动由 TableRegion 管理。 |
+| `SconeRowSelection<T>` | `src/types/foundation.ts` 或 `src/patterns/data-table.tsx` | DataTable selection UI 状态桥接。 | 不属于基础 `SconeTable` prop，不定义批量动作。 |
+| `SconeBaseItem` | `src/types/foundation.ts` | 动作、导航、路径和命令项共享最小字段。 | 各组件必须扩展自己的 item 类型，不复用万能 schema。 |
+| `SconeActionItem` | `src/types/foundation.ts` | Dropdown、ActionMenu 和行操作菜单。 | `destructive` 不自动打开确认；权限过滤由调用方完成。 |
+| `SconeNavigationItem` | `src/types/foundation.ts` | Menu、Sidebar 和导航集合。 | 不把 router API 写入 item schema。 |
+| `SconeBreadcrumbItem` | `src/types/foundation.ts` | Breadcrumb 路径。 | 不支持 destructive 或动作回调。 |
+| `SconeCommandItem` | `src/types/foundation.ts` | Command 搜索项。 | 不表达表单值；表单选择由 Combobox 增加语义。 |
+| `SconeTreeNode` | `src/types/foundation.ts` | Tree 和层级选择能力。 | 异步加载、虚拟滚动和拖拽单独扩展。 |
+| `SconeAccordionItem` | `src/types/foundation.ts` 或 `src/components/navigation/accordion.tsx` | Accordion 简化配置。 | 复杂内容优先使用 compound children。 |
+| `SconeTimelineItem` | `src/types/foundation.ts` 或 `src/components/data-display/timeline.tsx` | Timeline 通用事件项。 | 不承载审批、权限或流程状态机。 |
+| `SconeToastItem` | `src/components/feedback-overlay/toast.tsx` | Toast 队列展示项。 | 不承载业务来源、持久化或通知订阅状态。 |
+| `SconeNotificationItem` | `src/components/feedback-overlay/notification.tsx` | Notification 队列展示项。 | 已读、订阅来源和持久化由产品侧处理。 |
+
+Props 类型命名：
+
+- 单组件 props 使用 `{ExportName}Props`，例如 `SconeButtonProps`、`SconeTableProps`。
+- Compound part props 使用 `{Namespace}{Part}Props`，例如 `PageRootProps`、`DataTableTableRegionProps`。
+- Provider props 使用 `{ExportName}ProviderProps`，例如 `SconeToastProviderProps`。
+- Service option 类型使用 `{serviceName}Options` 或 `{ExportName}Options`，例如 `ToastOptions`、`NotificationOptions`。
+- 组件内部 helper 类型不从 `src/index.ts` 导出。
+
+泛型策略：
+
+- `SconeOption<Value = string>` 默认 value 为 string；Select、Combobox、RadioGroup、Segmented 可通过泛型扩展。
+- `SconeTableColumn<T>` 和 `SconeRowSelection<T>` 的 `T` 代表调用方数据行类型；组件不假设业务字段。
+- `SconeTreeNode` 默认 key 使用 `Key`，不以数组 index 作为稳定标识。
+- 回调 payload 使用稳定值、key 或 UI 状态，不传递整条业务对象作为默认行为；确需 `record` 的表格 render 和 selection 场景由泛型显式表达。
+
+事件 payload：
+
+| 回调 | 参数设计 | DOM event | 业务对象 |
+| --- | --- | --- | --- |
+| `onValueChange` | `(value: Value) => void` | 否 | 否 |
+| `onOpenChange` | `(open: boolean) => void` | 否 | 否 |
+| `onCheckedChange` | `(checked: boolean) => void` | 否 | 否 |
+| `onSelect` | `(keyOrValue) => void`，具体类型由组件定义。 | 否 | 否 |
+| `onConfirm` | `() => void` 或 `(reason)`，仅在 SPEC 明确时扩展。 | 否 | 否 |
+| `onCancel` | `() => void` 或 `(reason)`，仅在 SPEC 明确时扩展。 | 否 | 否 |
+| `onClear` | `() => void` | 否 | 否 |
+| `onApply` | `(state) => void`，用于 FilterBar/DataTable 等 Pattern 状态。 | 否 | 否 |
+| `onReset` | `() => void` | 否 | 否 |
+| `onDismiss` | `(id: string) => void` 或 close reason，按 service 定义。 | 否 | 否 |
+
+状态结构边界：
+
+- 受控状态必须成组出现：`value/defaultValue/onValueChange`、`open/defaultOpen/onOpenChange`、`checked/defaultChecked/onCheckedChange`。
+- 内部派生状态只能用于 UI 展开、焦点、hover、loading 展示等组件内部行为，不泄漏为业务状态。
+- `loading`、`empty`、`error`、`invalid`、`selected`、`expanded` 的所有权必须在组件族或 Pattern 章节中说明。
+- DataTable 的筛选、排序、分页、选择只表达 UI 状态和调用方意图，不封装请求状态机。
+
+DOM/ref 类型：
+
+- 每个组件或 part 必须在对应组件族章节说明 ref 指向的稳定 DOM 边界。
+- 支持 `asChild` 的组件沿用底层 Radix/shadcn 类型模型，不改成不兼容的 `as` API。
+- `className` 透传到文档定义的稳定 DOM 边界；slot className 需要按组件 SPEC 明确。
+
+Provider/service 类型：
+
+| 服务 | 公共导出 | 类型边界 |
+| --- | --- | --- |
+| Toast | `SconeToastProvider`、`toast`、`ToastOptions`、`SconeToastItem`、`ToastPosition` | service 生成或接收 id，返回稳定 id；不承载业务来源或持久化。 |
+| Notification | `SconeNotificationProvider`、`notification`、`NotificationOptions`、`SconeNotificationItem`、`NotificationPlacement` | 支持 persistent UI 语义；已读、订阅来源和持久化由产品侧处理。 |
+
+类型验证入口：
+
+- `src/types/foundation.test.ts` 验证公共类型导出和关键泛型默认值。
+- `src/index.test.ts` 验证公共类型和 service 类型没有从私有文件隐式泄漏。
+- 组件族测试验证 props、事件 payload、ref 和可访问名称行为。
