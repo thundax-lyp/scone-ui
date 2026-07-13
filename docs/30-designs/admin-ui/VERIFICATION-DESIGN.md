@@ -17,7 +17,7 @@
 | Component 基础行为 | `className`、`ref`、可访问名称、核心状态 | 每个组件的稳定 DOM 边界可透传 `className` 和 ref；无可见 label 时支持 `ariaLabel`。 | 与组件文件同目录的 `*.test.tsx` |
 | Radix/shadcn wrapper | focus、keyboard、ARIA、close、`asChild` | wrapper 不破坏 focus trap、focus restore、roving focus、typeahead、Escape、outside interaction、ARIA 和 `asChild`。 | 与 wrapper 文件同目录的 `*.test.tsx` |
 | Custom component | keyboard、ARIA、受控/非受控、边界条件 | Tree、SplitPane、NumberInput、DatePicker、Upload、Timeline 等 custom 能力必须单独验证交互模型。 | 与组件文件同目录的 `*.test.tsx` |
-| Pattern | slot 组合、状态归属、滚动/sticky、业务职责不进入 | Page 主滚动唯一；DataTable 状态由调用方拥有并只留 adapter/interface；Pattern 不发起请求或判断权限。 | 与 Pattern 文件同目录的 `*.test.tsx` |
+| Pattern | slot 组合、状态归属、滚动/sticky、业务职责不进入 | Page 主滚动唯一；DataTable 状态由调用方拥有并只留 props/callback 边界；Pattern 不发起请求或判断权限。 | 与 Pattern 文件同目录的 `*.test.tsx` |
 | Recipe | 组合可复制、无新增正式 API、关键状态可验证 | docs-only Recipe 明确无源码落点；不创建 `src/recipes/` 源码入口。 | 文档和示例验证 |
 | Type/data structure | 公共类型导出、私有类型不泄漏、事件 payload、service options、ref 类型 | 公共类型从约定入口导出；回调不承载业务对象；service 类型不泄漏内部 queue/store。 | `src/types/foundation.test.ts`、`src/index.test.ts` |
 

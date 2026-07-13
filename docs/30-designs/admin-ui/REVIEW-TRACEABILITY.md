@@ -26,7 +26,7 @@
 自审后的设计状态：
 
 - 本 DESIGN 仍是设计阶段文档，不声明源码、测试或覆盖证据已经完成。
-- Review Questions 当前无影响实现结构或公共 API 的未决问题。
+- Review Questions 当前只保留 `AppShell.*` 和独立 `FilterBar.*` 是否补入公共导出面的确认项。
 - `docs/40-readiness/IMPLEMENTATION-COVERAGE.md` 应记录设计覆盖和待实现状态，不应声明组件已实现。
 
 ## Decision Traceability
@@ -45,11 +45,19 @@
 | 公共类型按组件族分散定义并从组件族入口汇总；`src/types/foundation.ts` 只保留跨组件共享词表和基础类型。 | 用户审核结论、`docs/10-specs/FOUNDATIONS-SPEC.md` | `Type And Data Structure Design` |
 | DataTable 与 `SconeTable`、`SconePagination`、`FilterBar` 职责分离。 | `docs/10-specs/patterns/DATA-TABLE.md`、`docs/10-specs/components/data-display/SCONE-TABLE.md` | `Admin Pattern Designs / DataTable` |
 | Toast 和 Notification 作为 provider/service export，service API 返回稳定 id，且不承载订阅来源、持久化或已读状态。 | 用户审核结论、`docs/10-specs/COMPONENT-SELECTION.md`、`docs/10-specs/components/feedback-overlay/SCONE-TOAST.md`、`docs/10-specs/components/feedback-overlay/SCONE-NOTIFICATION.md` | `Type And Data Structure Design`、`Feedback And Overlay` |
-| DataTable 不引入 TanStack Table 作为推荐 recipe 基座，只留出外部状态库 adapter/interface 边界。 | 用户审核结论、`docs/10-specs/patterns/DATA-TABLE.md` | `Admin Pattern Designs / DataTable` |
+| DataTable 不引入 TanStack Table 作为推荐 recipe 基座，只留出外部状态库 props/callback 边界。 | 用户审核结论、`docs/10-specs/patterns/DATA-TABLE.md` | `Admin Pattern Designs / DataTable` |
 | 测试文件按组件、Pattern、utility 同目录放置，命名为同名 `*.test.ts` 或 `*.test.tsx`。 | 用户审核结论 | `File Placement Design`、`Verification Design` |
 | 全部 Recipe 保持文档和示例边界，不创建 `src/recipes/` 源码入口。 | 用户审核结论、`docs/10-specs/recipes/*.md` | `Recipe Designs` |
 | Custom 能力必须单独定义键盘、ARIA、状态和验证策略。 | `docs/10-specs/ADMIN-UI-SPEC.md`、单组件 SPEC | `Coverage Matrix`、`Component Family Designs`、`Verification Design` |
 
 ## Review Questions
 
-当前无影响实现结构或公共 API 的未决问题。
+需确认是否将 `AppShell.*` 和独立 `FilterBar.*` 补入公共导出面。
+
+建议：补入。
+
+理由：
+
+- `docs/10-specs/patterns/APP-SHELL.md` 已标记 `Export status: Admin Pattern export`。
+- `docs/10-specs/patterns/FILTER-BAR.md` 已说明 FilterBar 可作为 DataTable part 导出，也可在列表页单独组合。
+- 补入后，`src/patterns/index.ts` 和 `src/index.ts` 的公共 Pattern 导出与单项 SPEC 一致；不补入则实现时会出现 Pattern 文件存在但公共入口缺失的问题。

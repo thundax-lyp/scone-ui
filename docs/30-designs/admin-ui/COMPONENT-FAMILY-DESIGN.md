@@ -73,7 +73,7 @@ DOM/ref/className 边界：
 - 输入控件必须可通过 label 查询；无可见 label 时必须提供 `ariaLabel`。
 - `SconeField.Label` 的 `htmlFor` 指向 `fieldId`；非 labelable trigger 使用 `aria-labelledby`。
 - `SconeField.Description` 和 `SconeField.Message` 的 id 必须合并到 control 的 `aria-describedby`。
-- invalid 时 control 必须有 `aria-invalid=true` 或 Radix trigger 的等价 ARIA/data 状态。
+- invalid 时 control 必须有 `aria-invalid=true`；Radix trigger 同时保留底层 data 状态。
 - required 必须体现在 label 标记和 control 的 `aria-required` 或原生 `required`。
 - Checkbox、Switch、RadioGroup、Slider、Select、Combobox、DatePicker 必须保留键盘操作。
 
@@ -117,15 +117,15 @@ Source strategy 处理：
 
 | 导出 | Source strategy | Compound | 目标文件 | 状态能力 | 类型位置 |
 | --- | --- | --- | --- | --- | --- |
-| `SconeDescriptions` | `custom` | 否 | `src/components/data-display/descriptions.tsx` | density / bordered | `src/types/foundation.ts`、组件文件 |
-| `SconeTable` | `scone-wrapper` | 否 | `src/components/data-display/table.tsx` | loading / empty / error | `src/types/foundation.ts`、组件文件 |
+| `SconeDescriptions` | `custom` | 否 | `src/components/data-display/descriptions.tsx` | density / bordered | 组件文件；共享词表来自 `src/types/foundation.ts` |
+| `SconeTable` | `scone-wrapper` | 否 | `src/components/data-display/table.tsx` | loading / empty / error | 组件文件；共享词表来自 `src/types/foundation.ts` |
 | `SconeCard` | `scone-wrapper` | 否 | `src/components/data-display/card.tsx` | loading | `src/components/data-display/card.tsx` |
 | `SconeTag` | `custom` | 否 | `src/components/data-display/tag.tsx` | tone / closable | `src/components/data-display/tag.tsx` |
 | `SconeBadge` | `custom` | 否 | `src/components/data-display/badge.tsx` | count / dot / tone | `src/components/data-display/badge.tsx` |
-| `SconeList` | `custom` | 否 | `src/components/data-display/list.tsx` | loading / empty / error | `src/components/data-display/list.tsx`、`src/types/foundation.ts` |
+| `SconeList` | `custom` | 否 | `src/components/data-display/list.tsx` | loading / empty / error | 组件文件；共享词表来自 `src/types/foundation.ts` |
 | `SconeTypography`、`SconeText`、`SconeTitle`、`SconeParagraph` | `custom` | 否 | `src/components/data-display/typography.tsx` | tone / truncate | `src/components/data-display/typography.tsx` |
 | `SconeStatistic` | `custom` | 否 | `src/components/data-display/statistic.tsx` | tone | `src/components/data-display/statistic.tsx` |
-| `SconeTimeline` | `custom` | 否 | `src/components/data-display/timeline.tsx` | event sequence | `src/types/foundation.ts`、组件文件 |
+| `SconeTimeline` | `custom` | 否 | `src/components/data-display/timeline.tsx` | event sequence | 组件文件；`Key`/`SconeTone` 来自 `src/types/foundation.ts` |
 
 状态模型：
 
@@ -137,7 +137,7 @@ Source strategy 处理：
 
 DOM/ref/className 边界：
 
-- `SconeTable` ref 指向 table 外层稳定容器或 table 元素，具体边界需在实现前固定；`className` 透传到表格根容器。
+- `SconeTable` ref 指向 table 外层稳定容器；`className` 透传到同一根容器。
 - `SconeDescriptions` ref 指向 descriptions 根容器；item className 仅影响项级样式。
 - `SconeCard` ref 指向 card 根容器，`actions`、`footer` 是稳定 slot。
 - Tag、Badge、Statistic、Typography ref 指向根文本或展示元素。
@@ -317,21 +317,21 @@ DOM/ref/className 边界：
 
 | 导出 | Source strategy | Compound | 目标文件 | 状态能力 | 类型位置 |
 | --- | --- | --- | --- | --- | --- |
-| `SconeBreadcrumb` | `vendored-shadcn` | 支持 | `src/components/navigation/breadcrumb.tsx` | current | `src/types/foundation.ts`、组件文件 |
-| `SconePagination` | `custom` | 否 | `src/components/navigation/pagination.tsx` | disabled / page state | `src/types/foundation.ts` |
-| `SconeTabs` | `vendored-shadcn` | 支持 | `src/components/navigation/tabs.tsx` | selected | 组件文件、`src/types/foundation.ts` |
-| `SconeSegmented` | `vendored-shadcn` | 支持 | `src/components/navigation/segmented.tsx` | selected / disabled | 组件文件、`src/types/foundation.ts` |
-| `SconeTree` | `custom` | 否 | `src/components/navigation/tree.tsx` | selected / checked / expanded | `src/types/foundation.ts`、组件文件 |
-| `SconeDropdown` | `vendored-shadcn` | 支持 | `src/components/navigation/dropdown.tsx` | open / action select | `src/types/foundation.ts`、组件文件 |
-| `SconeMenu` | `vendored-shadcn` 或自研 menu/list navigation | 支持 | `src/components/navigation/menu.tsx` | selected / expanded / collapsed | `src/types/foundation.ts`、组件文件 |
+| `SconeBreadcrumb` | `vendored-shadcn` | 支持 | `src/components/navigation/breadcrumb.tsx` | current | 组件文件；`SconeBaseItem` 来自 `src/types/foundation.ts` |
+| `SconePagination` | `custom` | 否 | `src/components/navigation/pagination.tsx` | disabled / page state | 组件文件 |
+| `SconeTabs` | `vendored-shadcn` | 支持 | `src/components/navigation/tabs.tsx` | selected | 组件文件；共享词表来自 `src/types/foundation.ts` |
+| `SconeSegmented` | `vendored-shadcn` | 支持 | `src/components/navigation/segmented.tsx` | selected / disabled | 组件文件；`SconeOption` 来自 `src/types/foundation.ts` |
+| `SconeTree` | `custom` | 否 | `src/components/navigation/tree.tsx` | selected / checked / expanded | 组件文件；`Key` 来自 `src/types/foundation.ts` |
+| `SconeDropdown` | `vendored-shadcn` | 支持 | `src/components/navigation/dropdown.tsx` | open / action select | 组件文件；`SconeBaseItem` 来自 `src/types/foundation.ts` |
+| `SconeMenu` | `vendored-shadcn` | 支持 | `src/components/navigation/menu.tsx` | selected / expanded / collapsed | 组件文件；`SconeNavigationItem` 来自 `src/components/navigation/menu.tsx` |
 | `SconeTooltip` | `vendored-shadcn` | 支持 | `src/components/navigation/tooltip.tsx` | hover / focus | 组件文件 |
-| `SconeCommand` | `scone-wrapper` | 支持 | `src/components/navigation/command.tsx` | loading / empty / selected | `src/types/foundation.ts`、组件文件 |
-| `SconeAccordion` | `vendored-shadcn` | 支持 | `src/components/navigation/accordion.tsx` | expanded | `src/types/foundation.ts`、组件文件 |
+| `SconeCommand` | `scone-wrapper` | 支持 | `src/components/navigation/command.tsx` | loading / empty / selected | 组件文件；`SconeBaseItem` 来自 `src/types/foundation.ts` |
+| `SconeAccordion` | `vendored-shadcn` | 支持 | `src/components/navigation/accordion.tsx` | expanded | 组件文件 |
 | `SconeCollapsible` | `vendored-shadcn` | 支持 | `src/components/navigation/collapsible.tsx` | expanded | 组件文件 |
 
 状态模型：
 
-- Tabs、Segmented、Accordion 使用 `value/defaultValue/onValueChange` 或底层 Radix 等价模型。
+- Tabs、Segmented、Accordion 使用 `value/defaultValue/onValueChange`。
 - Dropdown、Tooltip、Collapsible 使用 `open/defaultOpen/onOpenChange`。
 - Pagination 使用 `SconePaginationState` 和 `SconePaginationChangeReason`，只表达分页状态，不发起请求。
 - Menu 只表达 UI 选中和展开，不等同权限或 URL 解析。
@@ -386,7 +386,7 @@ DOM/ref/className 边界：
 
 - Image preview 使用 `previewOpen/defaultPreviewOpen/onPreviewOpenChange`。
 - Image 加载失败必须展示 fallback，不能只留下破图图标。
-- Avatar 图片失败时必须显示 fallback 或 icon。
+- Avatar 图片失败时必须显示 fallback；icon 只能作为 fallback 内容传入。
 - Avatar 不内置在线状态、业务角色、权限标识或跳转行为。
 
 DOM/ref/className 边界：

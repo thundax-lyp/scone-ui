@@ -86,7 +86,7 @@
 
 ## Design Review Status
 
-当前无影响实现结构或公共 API 的未决问题。
+需确认是否将 `AppShell.*` 和独立 `FilterBar.*` 补入公共导出面；建议补入。
 
 ## Current Status
 

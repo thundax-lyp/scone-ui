@@ -53,8 +53,8 @@
 | `SconeTableScroll` | `src/components/data-display/table.tsx` | 基础表格横向滚动配置。 | 不沿用 AntD `{ x, y }` 完整语义；垂直滚动由 TableRegion 管理。 |
 | `SconeRowSelection<T>` | `src/patterns/data-table.tsx` | DataTable selection UI 状态桥接。 | 不属于基础 `SconeTable` prop，不定义批量动作。 |
 | `SconeBaseItem` | `src/types/foundation.ts` | 动作、导航、路径和命令项共享最小字段。 | 各组件必须扩展自己的 item 类型，不复用万能 schema。 |
-| `SconeActionItem` | `src/components/navigation/dropdown.tsx` 或 `src/components/navigation/menu.tsx` | Dropdown、ActionMenu 和行操作菜单。 | `destructive` 不自动打开确认；权限过滤由调用方完成。 |
-| `SconeNavigationItem` | `src/components/navigation/menu.tsx` 或 `src/patterns/app-shell.tsx` | Menu、Sidebar 和导航集合。 | 不把 router API 写入 item schema。 |
+| `SconeActionItem` | `src/components/navigation/dropdown.tsx` | Dropdown 和行操作菜单。 | `destructive` 不自动打开确认；权限过滤由调用方完成。 |
+| `SconeNavigationItem` | `src/components/navigation/menu.tsx` | Menu、Sidebar 和导航集合。 | 不把 router API 写入 item schema；AppShell 复用该类型但不定义路由。 |
 | `SconeBreadcrumbItem` | `src/components/navigation/breadcrumb.tsx` | Breadcrumb 路径。 | 不支持 destructive 或动作回调。 |
 | `SconeCommandItem` | `src/components/navigation/command.tsx` | Command 搜索项。 | 不表达表单值；表单选择由 Combobox 增加语义。 |
 | `SconeTreeNode` | `src/components/navigation/tree.tsx` | Tree 和层级选择能力。 | 异步加载、虚拟滚动和拖拽单独扩展。 |
@@ -68,7 +68,7 @@ Props 类型命名：
 - 单组件 props 使用 `{ExportName}Props`，例如 `SconeButtonProps`、`SconeTableProps`。
 - Compound part props 使用 `{Namespace}{Part}Props`，例如 `PageRootProps`、`DataTableTableRegionProps`。
 - Provider props 使用 `{ExportName}ProviderProps`，例如 `SconeToastProviderProps`。
-- Service option 类型使用 `{serviceName}Options` 或 `{ExportName}Options`，例如 `ToastOptions`、`NotificationOptions`。
+- Service option 类型使用 PascalCase service 名称，例如 `ToastOptions`、`NotificationOptions`。
 - 组件内部 helper 类型不从 `src/index.ts` 导出。
 
 泛型策略：
@@ -86,12 +86,12 @@ Props 类型命名：
 | `onOpenChange` | `(open: boolean) => void` | 否 | 否 |
 | `onCheckedChange` | `(checked: boolean) => void` | 否 | 否 |
 | `onSelect` | `(keyOrValue) => void`，具体类型由组件定义。 | 否 | 否 |
-| `onConfirm` | `() => void` 或 `(reason)`，仅在 SPEC 明确时扩展。 | 否 | 否 |
-| `onCancel` | `() => void` 或 `(reason)`，仅在 SPEC 明确时扩展。 | 否 | 否 |
+| `onConfirm` | `() => void \| Promise<void>`。 | 否 | 否 |
+| `onCancel` | `() => void`。 | 否 | 否 |
 | `onClear` | `() => void` | 否 | 否 |
 | `onApply` | `(state) => void`，用于 FilterBar/DataTable 等 Pattern 状态。 | 否 | 否 |
 | `onReset` | `() => void` | 否 | 否 |
-| `onDismiss` | `(id: string) => void` 或 close reason，按 service 定义。 | 否 | 否 |
+| `onDismiss` | `(id: string) => void`，用于 Toast/Notification service item。 | 否 | 否 |
 
 状态结构边界：
 

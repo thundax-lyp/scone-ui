@@ -47,15 +47,15 @@ Pattern 目标文件：
 
 | Pattern | 目标文件 |
 | --- | --- |
-| AppShell | `src/patterns/app-shell.tsx` |
+| AppShell | 待审核：`src/patterns/app-shell.tsx`，或保持文档组合边界。 |
 | Page | `src/patterns/page.tsx` |
 | Section | `src/patterns/section.tsx` |
-| FilterBar | `src/patterns/filter-bar.tsx` |
+| FilterBar | 待审核：独立 `src/patterns/filter-bar.tsx`，或仅作为 `DataTable.FilterBar` part。 |
 | DataTable | `src/patterns/data-table.tsx` |
-| FormPage | `src/patterns/form-page.tsx` |
-| DetailPage | `src/patterns/detail-page.tsx` |
-| SettingsPage | `src/patterns/settings-page.tsx` |
-| MasterDetail | `src/patterns/master-detail.tsx` |
+| FormPage | 文档组合边界，不创建 `src/patterns/form-page.tsx`。 |
+| DetailPage | 文档组合边界，不创建 `src/patterns/detail-page.tsx`。 |
+| SettingsPage | 文档组合边界，不创建 `src/patterns/settings-page.tsx`。 |
+| MasterDetail | 文档组合边界，不创建 `src/patterns/master-detail.tsx`。 |
 
 Recipe 文档边界：
 

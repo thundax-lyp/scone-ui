@@ -27,7 +27,7 @@
 - `tailwind.config.ts` 是必要目标文件，默认只映射 `src/styles/theme.css` 中的 CSS variables。
 - 公共类型按组件族分散定义并从组件族入口汇总；`src/types/foundation.ts` 只保留跨组件共享词表和基础类型。
 - Toast 和 Notification service API 返回稳定 id。
-- DataTable 不引入 TanStack Table 作为推荐 recipe 基座，只留出外部状态库 adapter/interface 边界。
+- DataTable 不引入 TanStack Table 作为推荐 recipe 基座，只留出外部状态库 props/callback 边界。
 - 测试文件按组件、Pattern、utility 同目录放置，命名为同名 `*.test.ts` 或 `*.test.tsx`。
 - 全部 Recipe 保持文档和示例边界，不创建 `src/recipes/` 源码入口。
 
@@ -36,4 +36,4 @@
 - 设计覆盖：完成。
 - 实现覆盖：未开始。
 - 测试覆盖：未开始。
-- 未决问题：当前无影响实现结构或公共 API 的未决问题。
+- 未决问题：需确认是否将 `AppShell.*` 和独立 `FilterBar.*` 补入公共导出面；建议补入。
