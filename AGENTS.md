@@ -10,7 +10,7 @@
 
 ## Project Scope
 
-`scone-ui` is a foundational UI library and UI governance workspace. It is not a product application repository.
+`scone-ui` is an admin-ui component library and UI governance workspace. It is not a product application repository.
 
 Keep repository content focused on reusable UI components, component usage inventory, library-level conventions, documentation, and migration support. Do not add product-specific UI rules, business workflows, backend contracts, or application runtime assumptions unless the repository later adds those modules explicitly.
 
@@ -60,10 +60,14 @@ Type(scope): 中文说明
 `scope` 固定使用以下白名单：
 
 - `app`：React 应用入口、页面、运行时 UI。
-- `styles`：Tailwind、全局样式、样式配置。
-- `build`：Vite、TypeScript、package、pnpm、lint/test 工具链。
-- `governance`：`AGENTS.md`、`docs/00-governance/`、PR/TODO 规则。
+- `components`：通用组件实现、组件 API、组件组合。
+- `styles`：Tailwind、设计 token、主题、全局样式。
+- `icons`：图标封装、图标映射、图标资产。
+- `hooks`：组件库内部 hooks。
+- `utils`：组件库工具函数、className 合并、格式化辅助。
 - `docs`：普通文档、盘点、README。
+- `governance`：`AGENTS.md`、协作规则、PR/TODO 规则。
+- `build`：Vite、TypeScript、package、pnpm、发布配置、lint/test 工具链。
 - `test`：测试支撑和测试用例。
 
 新增 `Type` 或 `scope` 必须先更新本文档，再用于 commit message。
