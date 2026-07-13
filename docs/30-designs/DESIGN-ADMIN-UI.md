@@ -32,6 +32,8 @@
 - 全部 Recipe 保持文档和示例边界，不创建 `src/recipes/` 源码入口。
 - `AppShell.*` 和独立 `FilterBar.*` 补入公共 Pattern 导出面，目标文件分别为 `src/patterns/app-shell.tsx` 和 `src/patterns/filter-bar.tsx`。
 - DESIGN 必须包含关键公共数据结构的具体 TypeScript shape，并精确到定义文件名。
+- DESIGN 必须包含公共组件 props、Pattern part props 和 service API 的字段级 TypeScript shape，避免实现阶段自行猜 API。
+- `OverlayCloseReason` 必须沿用 `FOUNDATIONS-SPEC.md` 的 `escape/outside/closeButton/footerAction/programmatic` 词表。
 
 ## Status
 

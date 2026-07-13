@@ -108,11 +108,10 @@ export type SconeSide = "top" | "right" | "bottom" | "left";
 export type SconeStatus = "idle" | "active" | "success" | "error";
 
 export type OverlayCloseReason =
-  | "escapeKeyDown"
-  | "pointerDownOutside"
+  | "escape"
+  | "outside"
   | "closeButton"
-  | "cancel"
-  | "confirm"
+  | "footerAction"
   | "programmatic";
 
 export interface SconeOption<Value = string> {
@@ -401,6 +400,552 @@ export interface DataTableState<T> {
 - 同名类型必须定义在表中指定文件，并由对应组件族入口或 `src/patterns/index.ts` 汇总；只有跨组件共享类型可提升到 `src/types/foundation.ts`。
 - `DataTableState<T>` 是可选的状态聚合类型，不是 DataTable 的万能配置对象；各 part props 仍应按 slot 拆分。
 
+## Public Props Contracts
+
+以下 props contract 是实现阶段的最小公共 API。实现可在对应文件中继承原生 HTML props 或 Radix/shadcn props，但必须保留这些字段名、受控状态组合和业务边界。
+
+### Shared Props Building Blocks
+
+文件落点：按使用组件所在文件定义；跨组件共享词表仍来自 `src/types/foundation.ts`。
+
+```ts
+export interface SconeCommonProps {
+  className?: string;
+  children?: React.ReactNode;
+}
+
+export interface SconeAriaLabelProps {
+  ariaLabel?: string;
+}
+
+export interface SconeLoadingStateProps {
+  loading?: boolean;
+}
+
+export interface SconeDisabledProps {
+  disabled?: boolean;
+}
+
+export interface SconeReadonlyProps {
+  readOnly?: boolean;
+}
+
+export interface SconeInvalidProps {
+  invalid?: boolean;
+}
+
+export interface SconeOpenStateProps {
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}
+
+export interface SconeValueStateProps<Value> {
+  value?: Value;
+  defaultValue?: Value;
+  onValueChange?: (value: Value) => void;
+}
+
+export interface SconeCheckedStateProps {
+  checked?: boolean;
+  defaultChecked?: boolean;
+  onCheckedChange?: (checked: boolean) => void;
+}
+```
+
+### Form Props
+
+文件落点：`src/components/form/*.tsx`。
+
+```ts
+export interface SconeButtonProps
+  extends SconeCommonProps,
+    SconeAriaLabelProps,
+    SconeLoadingStateProps,
+    SconeDisabledProps {
+  variant?: "primary" | "secondary" | "ghost" | "destructive";
+  size?: SconeControlSize;
+  icon?: React.ReactNode;
+  iconPosition?: "start" | "end";
+  asChild?: boolean;
+}
+
+export interface SconeInputProps
+  extends SconeCommonProps,
+    SconeAriaLabelProps,
+    SconeDisabledProps,
+    SconeReadonlyProps,
+    SconeInvalidProps,
+    SconeValueStateProps<string> {
+  placeholder?: string;
+  size?: SconeControlSize;
+}
+
+export interface SconeSearchInputProps extends SconeInputProps, SconeLoadingStateProps {
+  clearable?: boolean;
+  onClear?: () => void;
+}
+
+export interface SconePasswordInputProps extends SconeInputProps {
+  visibilityLabel?: string;
+  defaultVisible?: boolean;
+}
+
+export interface SconeTextAreaProps extends SconeInputProps {
+  rows?: number;
+  autoSize?: boolean;
+  maxLength?: number;
+  showCount?: boolean;
+}
+
+export interface SconeSelectProps<Value = string>
+  extends SconeCommonProps,
+    SconeAriaLabelProps,
+    SconeDisabledProps,
+    SconeReadonlyProps,
+    SconeInvalidProps,
+    SconeOpenStateProps,
+    SconeValueStateProps<Value> {
+  options?: SconeOption<Value>[];
+  placeholder?: string;
+  size?: SconeControlSize;
+}
+
+export interface SconeFormProps extends SconeCommonProps {
+  disabled?: boolean;
+  readOnly?: boolean;
+  requiredMark?: boolean | "optional";
+}
+
+export interface SconeFieldProps
+  extends SconeCommonProps,
+    SconeDisabledProps,
+    SconeReadonlyProps,
+    SconeInvalidProps {
+  id?: string;
+  label?: React.ReactNode;
+  description?: React.ReactNode;
+  message?: React.ReactNode;
+  required?: boolean;
+}
+
+export interface SconeFieldGroupProps extends SconeCommonProps {
+  legend?: React.ReactNode;
+  description?: React.ReactNode;
+  orientation?: SconeOrientation;
+}
+
+export interface SconeFormSectionProps extends SconeCommonProps {
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  actions?: React.ReactNode;
+}
+
+export interface SconeFormActionsProps extends SconeCommonProps {
+  align?: "start" | "end" | "between";
+  sticky?: boolean;
+}
+
+export interface SconeComboboxProps<Value = string>
+  extends SconeSelectProps<Value>,
+    SconeLoadingStateProps {
+  empty?: React.ReactNode;
+  searchValue?: string;
+  defaultSearchValue?: string;
+  onSearchChange?: (value: string) => void;
+}
+
+export interface SconeSwitchProps
+  extends SconeCommonProps,
+    SconeDisabledProps,
+    SconeInvalidProps,
+    SconeCheckedStateProps {}
+
+export interface SconeCheckboxProps
+  extends SconeCommonProps,
+    SconeDisabledProps,
+    SconeInvalidProps {
+  checked?: boolean | "indeterminate";
+  defaultChecked?: boolean;
+  onCheckedChange?: (checked: boolean | "indeterminate") => void;
+}
+
+export interface SconeRadioGroupProps<Value = string>
+  extends SconeCommonProps,
+    SconeDisabledProps,
+    SconeInvalidProps,
+    SconeValueStateProps<Value> {
+  options?: SconeOption<Value>[];
+  orientation?: SconeOrientation;
+}
+
+export interface SconeNumberInputProps
+  extends SconeCommonProps,
+    SconeAriaLabelProps,
+    SconeDisabledProps,
+    SconeReadonlyProps,
+    SconeInvalidProps,
+    SconeValueStateProps<number | null> {
+  min?: number;
+  max?: number;
+  step?: number;
+  placeholder?: string;
+}
+
+export interface SconeSliderProps
+  extends SconeCommonProps,
+    SconeDisabledProps,
+    SconeInvalidProps,
+    SconeValueStateProps<number[]> {
+  min?: number;
+  max?: number;
+  step?: number;
+}
+
+export interface SconeDatePickerProps
+  extends SconeCommonProps,
+    SconeAriaLabelProps,
+    SconeDisabledProps,
+    SconeReadonlyProps,
+    SconeInvalidProps,
+    SconeOpenStateProps,
+    SconeValueStateProps<Date | null> {
+  placeholder?: string;
+  disabledDate?: (date: Date) => boolean;
+}
+
+export interface SconeUploadFile {
+  id: string;
+  file: File;
+  status?: "ready" | "uploading" | "success" | "error";
+  error?: React.ReactNode;
+}
+
+export interface SconeUploadReject {
+  file: File;
+  reason: "type" | "size" | "count" | "custom";
+  message?: React.ReactNode;
+}
+
+export interface SconeUploadProps
+  extends SconeCommonProps,
+    SconeDisabledProps {
+  files?: SconeUploadFile[];
+  defaultFiles?: SconeUploadFile[];
+  onFilesChange?: (files: SconeUploadFile[]) => void;
+  accept?: string;
+  multiple?: boolean;
+  maxFiles?: number;
+  maxSize?: number;
+  beforeAdd?: (file: File) => boolean | Promise<boolean>;
+  onReject?: (reject: SconeUploadReject) => void;
+}
+```
+
+### Data Display Props
+
+文件落点：`src/components/data-display/*.tsx`。
+
+```ts
+export interface SconeDescriptionsProps extends SconeCommonProps {
+  items: SconeDescriptionItem[];
+  columns?: ResponsiveValue<1 | 2 | 3 | 4>;
+  density?: SconeDensity;
+  bordered?: boolean;
+}
+
+export interface SconeTableProps<T> extends SconeCommonProps, SconeAriaLabelProps {
+  columns: SconeTableColumn<T>[];
+  dataSource: T[];
+  rowKey: keyof T | ((record: T) => Key);
+  density?: SconeDensity;
+  loading?: boolean;
+  empty?: React.ReactNode;
+  error?: React.ReactNode;
+  scroll?: SconeTableScroll;
+  onRow?: (record: T, index: number) => React.HTMLAttributes<HTMLTableRowElement>;
+}
+
+export interface SconeCardProps extends SconeCommonProps, SconeLoadingStateProps {
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  actions?: React.ReactNode;
+  footer?: React.ReactNode;
+}
+
+export interface SconeTagProps extends SconeCommonProps {
+  tone?: SconeTone;
+  closable?: boolean;
+  onClose?: () => void;
+}
+
+export interface SconeBadgeProps extends SconeCommonProps, SconeAriaLabelProps {
+  count?: number;
+  dot?: boolean;
+  tone?: SconeTone;
+  overflowCount?: number;
+}
+
+export interface SconeListProps<T> extends SconeCommonProps {
+  items: T[];
+  renderItem: (item: T, index: number) => React.ReactNode;
+  rowKey?: keyof T | ((item: T) => Key);
+  density?: SconeDensity;
+  loading?: boolean;
+  empty?: React.ReactNode;
+  error?: React.ReactNode;
+}
+
+export interface SconeTypographyProps extends SconeCommonProps {
+  as?: "span" | "p" | "div";
+  tone?: SconeTone;
+  truncate?: boolean;
+}
+
+export interface SconeTextProps extends SconeTypographyProps {}
+
+export interface SconeTitleProps extends SconeCommonProps {
+  level?: 1 | 2 | 3 | 4;
+}
+
+export interface SconeParagraphProps extends SconeTypographyProps {}
+
+export interface SconeStatisticProps extends SconeCommonProps {
+  label: React.ReactNode;
+  value: React.ReactNode;
+  tone?: SconeTone;
+  suffix?: React.ReactNode;
+}
+
+export interface SconeTimelineProps extends SconeCommonProps {
+  items: SconeTimelineItem[];
+  pending?: React.ReactNode;
+  reverse?: boolean;
+  onItemClick?: (key: Key) => void;
+}
+```
+
+### Layout Props
+
+文件落点：`src/components/layout/*.tsx`。
+
+```ts
+export interface SconeStackProps extends SconeCommonProps {
+  gap?: SconeSpacingToken;
+  align?: SconeAlign;
+}
+
+export interface SconeInlineProps extends SconeCommonProps {
+  gap?: SconeSpacingToken;
+  align?: SconeAlign;
+  wrap?: boolean;
+}
+
+export interface SconeCompactProps extends SconeCommonProps {
+  orientation?: SconeOrientation;
+}
+
+export interface SconeToolbarProps extends SconeCommonProps {
+  start?: React.ReactNode;
+  end?: React.ReactNode;
+  actions?: React.ReactNode;
+  density?: SconeDensity;
+  wrap?: boolean;
+}
+
+export interface SconeSplitPaneProps extends SconeCommonProps {
+  leading: React.ReactNode;
+  trailing: React.ReactNode;
+  orientation?: SconeOrientation;
+  size?: string;
+  defaultSize?: string;
+  onSizeChange?: (size: string) => void;
+  minSize?: string;
+  maxSize?: string;
+}
+
+export interface SconeSeparatorProps extends SconeCommonProps {
+  orientation?: SconeOrientation;
+  decorative?: boolean;
+}
+
+export interface SconeScrollAreaProps extends SconeCommonProps {
+  viewportClassName?: string;
+  onScroll?: React.UIEventHandler<HTMLDivElement>;
+}
+```
+
+### Feedback And Overlay Props
+
+文件落点：`src/components/feedback-overlay/*.tsx`。
+
+```ts
+export interface SconeDrawerProps
+  extends SconeCommonProps,
+    SconeOpenStateProps,
+    SconeLoadingStateProps,
+    SconeAriaLabelProps {
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  footer?: React.ReactNode;
+  widthPreset?: "sm" | "md" | "lg" | "full";
+  onRequestClose?: (reason: OverlayCloseReason) => void;
+}
+
+export interface SconeDialogProps
+  extends SconeCommonProps,
+    SconeOpenStateProps,
+    SconeAriaLabelProps {
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  footer?: React.ReactNode;
+  onRequestClose?: (reason: OverlayCloseReason) => void;
+}
+
+export interface SconeConfirmProps
+  extends SconeCommonProps,
+    SconeOpenStateProps,
+    SconeLoadingStateProps {
+  title: React.ReactNode;
+  description?: React.ReactNode;
+  destructive?: boolean;
+  confirmText?: React.ReactNode;
+  cancelText?: React.ReactNode;
+  onConfirm?: () => void | Promise<void>;
+  onCancel?: () => void;
+}
+
+export interface SconeAlertProps extends SconeCommonProps {
+  tone?: SconeTone;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  action?: React.ReactNode;
+}
+
+export interface SconeEmptyProps extends SconeCommonProps {
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  action?: React.ReactNode;
+}
+
+export interface SconeLoadingProps extends SconeCommonProps {
+  label?: React.ReactNode;
+  size?: SconeControlSize;
+}
+
+export interface SconeProgressProps extends SconeCommonProps {
+  value?: number;
+  max?: number;
+  status?: SconeStatus;
+  label?: React.ReactNode;
+}
+```
+
+### Navigation And Media Props
+
+文件落点：`src/components/navigation/*.tsx` 和 `src/components/media/*.tsx`。
+
+```ts
+export interface SconeBreadcrumbProps extends SconeCommonProps {
+  items: SconeBreadcrumbItem[];
+}
+
+export interface SconePaginationProps
+  extends SconeCommonProps,
+    SconeDisabledProps {
+  state: SconePaginationState;
+  pageSizeOptions?: number[];
+  onChange?: (
+    nextState: SconePaginationState,
+    reason: SconePaginationChangeReason
+  ) => void;
+}
+
+export interface SconeTabsProps<Value = string>
+  extends SconeCommonProps,
+    SconeValueStateProps<Value> {
+  orientation?: SconeOrientation;
+  activationMode?: "automatic" | "manual";
+}
+
+export interface SconeSegmentedProps<Value = string>
+  extends SconeCommonProps,
+    SconeValueStateProps<Value> {
+  options: SconeOption<Value>[];
+}
+
+export interface SconeTreeProps extends SconeCommonProps {
+  nodes: SconeTreeNode[];
+  selectedKeys?: Key[];
+  checkedKeys?: Key[];
+  expandedKeys?: Key[];
+  onSelectedKeysChange?: (keys: Key[]) => void;
+  onCheckedKeysChange?: (keys: Key[]) => void;
+  onExpandedKeysChange?: (keys: Key[]) => void;
+}
+
+export interface SconeDropdownProps
+  extends SconeCommonProps,
+    SconeOpenStateProps {
+  trigger: React.ReactNode;
+  items?: SconeActionItem[];
+  onSelect?: (key: Key) => void;
+}
+
+export interface SconeMenuProps extends SconeCommonProps {
+  items: SconeNavigationItem[];
+  selectedKey?: Key;
+  expandedKeys?: Key[];
+  collapsed?: boolean;
+  onSelect?: (key: Key) => void;
+  onExpandedKeysChange?: (keys: Key[]) => void;
+}
+
+export interface SconeTooltipProps extends SconeCommonProps, SconeOpenStateProps {
+  content: React.ReactNode;
+}
+
+export interface SconeCommandProps extends SconeCommonProps {
+  items?: SconeCommandItem[];
+  value?: string;
+  defaultValue?: string;
+  onValueChange?: (value: string) => void;
+  onSelect?: (value: string) => void;
+  loading?: boolean;
+  empty?: React.ReactNode;
+}
+
+export interface SconeAccordionProps
+  extends SconeCommonProps,
+    SconeValueStateProps<string | string[]> {
+  items?: SconeAccordionItem[];
+  type?: "single" | "multiple";
+}
+
+export interface SconeCollapsibleProps
+  extends SconeCommonProps,
+    SconeOpenStateProps {}
+
+export interface SconeImageProps
+  extends SconeCommonProps,
+    SconeAriaLabelProps {
+  src: string;
+  alt: string;
+  width?: number | string;
+  height?: number | string;
+  fallback?: React.ReactNode;
+  previewOpen?: boolean;
+  defaultPreviewOpen?: boolean;
+  onPreviewOpenChange?: (open: boolean) => void;
+}
+
+export interface SconeAvatarProps extends SconeCommonProps {
+  src?: string;
+  alt: string;
+  fallback: React.ReactNode;
+}
+```
+
 Props 类型命名：
 
 - 单组件 props 使用 `{ExportName}Props`，例如 `SconeButtonProps`、`SconeTableProps`。
@@ -423,13 +968,13 @@ Props 类型命名：
 | `onValueChange` | `(value: Value) => void` | 否 | 否 |
 | `onOpenChange` | `(open: boolean) => void` | 否 | 否 |
 | `onCheckedChange` | `(checked: boolean) => void` | 否 | 否 |
-| `onSelect` | `(keyOrValue) => void`，具体类型由组件定义。 | 否 | 否 |
+| `onSelect` | Dropdown：`(key: Key) => void`；Command：`(value: string) => void`；Tree：`(keys: Key[]) => void`。 | 否 | 否 |
 | `onConfirm` | `() => void \| Promise<void>`。 | 否 | 否 |
 | `onCancel` | `() => void`。 | 否 | 否 |
 | `onClear` | `() => void` | 否 | 否 |
-| `onApply` | `(state) => void`，用于 FilterBar/DataTable 等 Pattern 状态。 | 否 | 否 |
+| `onApply` | `(state: FilterBarState) => void`，用于 FilterBar/DataTable 筛选提交。 | 否 | 否 |
 | `onReset` | `() => void` | 否 | 否 |
-| `onDismiss` / `onClose` | `(id: string, reason) => void`，用于 Toast/Notification service item。 | 否 | 否 |
+| `onDismiss` / `onClose` | Toast：`(id: string, reason: ToastCloseReason) => void`；Notification：`(id: string, reason: NotificationCloseReason) => void`。 | 否 | 否 |
 
 状态结构边界：
 
