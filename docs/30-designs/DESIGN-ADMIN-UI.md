@@ -610,3 +610,175 @@ Provider/service 类型：
 - Coverage Matrix 中的目标文件均为设计落点，不代表已经创建。
 - 后续如果 SPEC 新增或排除能力，必须同步本矩阵和 `docs/10-specs/COMPONENT-SELECTION.md`。
 - 若某个能力在单组件 SPEC 中调整 source strategy，以单组件 SPEC 和 `COMPONENT-SELECTION.md` 更新后的交集为准。
+
+## Component Family Designs
+
+### Form
+
+依据文件：
+
+- `docs/10-specs/COMPONENT-SPEC-FORM.md`
+- `docs/10-specs/components/form/SCONE-BUTTON.md`
+- `docs/10-specs/components/form/SCONE-INPUT.md`
+- `docs/10-specs/components/form/SCONE-SEARCH-INPUT.md`
+- `docs/10-specs/components/form/SCONE-PASSWORD-INPUT.md`
+- `docs/10-specs/components/form/SCONE-TEXTAREA.md`
+- `docs/10-specs/components/form/SCONE-SELECT.md`
+- `docs/10-specs/components/form/SCONE-FORM.md`
+- `docs/10-specs/components/form/SCONE-FIELD.md`
+- `docs/10-specs/components/form/SCONE-FIELD-GROUP.md`
+- `docs/10-specs/components/form/SCONE-FORM-SECTION.md`
+- `docs/10-specs/components/form/SCONE-FORM-ACTIONS.md`
+- `docs/10-specs/components/form/SCONE-COMBOBOX.md`
+- `docs/10-specs/components/form/SCONE-SWITCH.md`
+- `docs/10-specs/components/form/SCONE-CHECKBOX.md`
+- `docs/10-specs/components/form/SCONE-RADIO-GROUP.md`
+- `docs/10-specs/components/form/SCONE-NUMBER-INPUT.md`
+- `docs/10-specs/components/form/SCONE-SLIDER.md`
+- `docs/10-specs/components/form/SCONE-DATE-PICKER.md`
+- `docs/10-specs/components/form/SCONE-UPLOAD.md`
+
+导出清单和目标文件：
+
+| 导出 | Source strategy | Compound | 目标文件 | 状态能力 | 类型位置 |
+| --- | --- | --- | --- | --- | --- |
+| `SconeButton` | `scone-wrapper` | 支持 `asChild` | `src/components/form/button.tsx` | loading / disabled | `src/components/form/button.tsx` |
+| `SconeInput` | `scone-wrapper` | 否 | `src/components/form/input.tsx` | disabled / readOnly / invalid via Field | `src/components/form/input.tsx` |
+| `SconeSearchInput` | `scone-wrapper` | 否 | `src/components/form/search-input.tsx` | disabled / readOnly / loading / clearable | `src/components/form/search-input.tsx` |
+| `SconePasswordInput` | `scone-wrapper` | 否 | `src/components/form/password-input.tsx` | disabled / readOnly / visibility toggle | `src/components/form/password-input.tsx` |
+| `SconeTextArea` | `scone-wrapper` | 否 | `src/components/form/textarea.tsx` | disabled / readOnly / autoSize / count | `src/components/form/textarea.tsx` |
+| `SconeSelect` | `scone-wrapper` | 支持 | `src/components/form/select.tsx` | disabled / readOnly / invalid / open / selected | `src/components/form/select.tsx`、`src/types/foundation.ts` |
+| `SconeForm` | `custom` | 支持 | `src/components/form/form.tsx` | disabled / readOnly / requiredMark | `src/components/form/form.tsx` |
+| `SconeField` | `custom` | 支持 | `src/components/form/field.tsx` | invalid / disabled / readOnly / required | `src/components/form/field.tsx` |
+| `SconeFieldGroup` | `pattern-only` | 否 | `src/components/form/field-group.tsx` | semantic grouping | `src/components/form/field-group.tsx` |
+| `SconeFormSection` | `pattern-only` | 部分 | `src/components/form/form-section.tsx` | section grouping | `src/components/form/form-section.tsx` |
+| `SconeFormActions` | `pattern-only` | 部分 | `src/components/form/form-actions.tsx` | sticky / align | `src/components/form/form-actions.tsx` |
+| `SconeCombobox` | `scone-wrapper` | 支持 | `src/components/form/combobox.tsx` | loading / empty / selected / expanded | `src/components/form/combobox.tsx`、`src/types/foundation.ts` |
+| `SconeSwitch` | `vendored-shadcn` | 否 | `src/components/form/switch.tsx` | checked / disabled / invalid via Field | `src/components/form/switch.tsx` |
+| `SconeCheckbox` | `vendored-shadcn` | 否 | `src/components/form/checkbox.tsx` | checked / indeterminate / disabled / invalid via Field | `src/components/form/checkbox.tsx` |
+| `SconeRadioGroup` | `vendored-shadcn` | 支持 | `src/components/form/radio-group.tsx` | selected / disabled / invalid via Field | `src/components/form/radio-group.tsx`、`src/types/foundation.ts` |
+| `SconeNumberInput` | `custom` | 否 | `src/components/form/number-input.tsx` | disabled / readOnly / invalid | `src/components/form/number-input.tsx` |
+| `SconeSlider` | `vendored-shadcn` | 支持 | `src/components/form/slider.tsx` | selected range / disabled / invalid via Field | `src/components/form/slider.tsx` |
+| `SconeDatePicker` | `custom` | 否 | `src/components/form/date-picker.tsx` | open / disabled / readOnly / invalid | `src/components/form/date-picker.tsx` |
+| `SconeUpload` | `custom` | 否 | `src/components/form/upload.tsx` | files / disabled / reject | `src/components/form/upload.tsx` |
+
+状态模型：
+
+- 输入值统一以 `value/defaultValue/onValueChange` 表达，原生 `onChange` 仅作为 DOM event 透传。
+- 打开状态统一以 `open/defaultOpen/onOpenChange` 表达，适用于 Select、Combobox、DatePicker。
+- 勾选状态统一以 `checked/defaultChecked/onCheckedChange` 表达，适用于 Switch、Checkbox。
+- `SconeForm` 提供表单级 `disabled`、`readOnly` 和 `requiredMark` context；字段级 props 可覆盖表单级值。
+- `SconeField` 负责 label、description、message、invalid、required、disabled、readOnly 的 ARIA 关联和状态传播。
+- `loading` 在 Button/SearchInput/Combobox 等操作或局部选择场景中只表达 UI 等待，不发起请求。
+
+DOM/ref/className 边界：
+
+- `SconeButton` ref 指向 button 或 `asChild` child 的稳定交互元素；`className` 透传到可交互根节点。
+- 文本输入、SearchInput、PasswordInput、TextArea、NumberInput ref 指向原生 input/textarea。
+- Select、Combobox、DatePicker ref 指向 trigger/input 的稳定交互边界，浮层内容 slot 单独接受样式边界。
+- `SconeField.Root` ref 指向字段容器；`SconeField.Control` 使用 Slot/asChild 向 control 注入 id、ARIA 和状态。
+- Form helpers ref 指向语义容器，不创建额外业务层。
+
+可访问性边界：
+
+- 输入控件必须可通过 label 查询；无可见 label 时必须提供 `ariaLabel`。
+- `SconeField.Label` 的 `htmlFor` 指向 `fieldId`；非 labelable trigger 使用 `aria-labelledby`。
+- `SconeField.Description` 和 `SconeField.Message` 的 id 必须合并到 control 的 `aria-describedby`。
+- invalid 时 control 必须有 `aria-invalid=true` 或 Radix trigger 的等价 ARIA/data 状态。
+- required 必须体现在 label 标记和 control 的 `aria-required` 或原生 `required`。
+- Checkbox、Switch、RadioGroup、Slider、Select、Combobox、DatePicker 必须保留键盘操作。
+
+Source strategy 处理：
+
+- `scone-wrapper` 组件只补充 Admin 语义、token、size、loading、ariaLabel、Field 状态关联和稳定 slot，不破坏底层 ref/asChild/ARIA。
+- `vendored-shadcn` 组件只调整 token、density、class 边界，保留 Radix checked/value/keyboard 语义。
+- `custom` 组件必须在实现前补齐键盘、ARIA、受控/非受控和边界条件测试，尤其是 Form/Field、NumberInput、DatePicker、Upload。
+- `pattern-only` Form helpers 只表达结构，不内置保存、请求、路由、权限、校验规则对象或业务文案。
+
+验证点：
+
+- `src/components/form/form.test.tsx` 验证 Form/Field label、description、message、required、disabled、readOnly 和 invalid 传播。
+- `src/components/form/controls.test.tsx` 验证各控件的受控值、默认值、回调、ref、className、可访问名称和核心键盘行为。
+- Upload 验证 `accept`、`multiple`、`maxFiles`、`maxSize`、`beforeAdd`、`onReject` 和 disabled 行为。
+- DatePicker 验证键盘打开、选择、关闭、`disabledDate` 和 Field 错误关联。
+
+明确非目标：
+
+- 不绑定 React Hook Form、Formik 或自研 store。
+- 不提供 AntD Form 风格全局 `form` 实例和 rules 系统。
+- 不内置请求、字典加载、权限判断、业务校验规则或保存文案。
+- 不用 placeholder 替代 label。
+
+### Data Display
+
+依据文件：
+
+- `docs/10-specs/COMPONENT-SPEC-DATA-DISPLAY.md`
+- `docs/10-specs/components/data-display/SCONE-DESCRIPTIONS.md`
+- `docs/10-specs/components/data-display/SCONE-TABLE.md`
+- `docs/10-specs/components/data-display/SCONE-CARD.md`
+- `docs/10-specs/components/data-display/SCONE-TAG.md`
+- `docs/10-specs/components/data-display/SCONE-BADGE.md`
+- `docs/10-specs/components/data-display/SCONE-LIST.md`
+- `docs/10-specs/components/data-display/SCONE-TYPOGRAPHY.md`
+- `docs/10-specs/components/data-display/SCONE-STATISTIC.md`
+- `docs/10-specs/components/data-display/SCONE-TIMELINE.md`
+
+导出清单和目标文件：
+
+| 导出 | Source strategy | Compound | 目标文件 | 状态能力 | 类型位置 |
+| --- | --- | --- | --- | --- | --- |
+| `SconeDescriptions` | `custom` | 否 | `src/components/data-display/descriptions.tsx` | density / bordered | `src/types/foundation.ts`、组件文件 |
+| `SconeTable` | `scone-wrapper` | 否 | `src/components/data-display/table.tsx` | loading / empty / error | `src/types/foundation.ts`、组件文件 |
+| `SconeCard` | `scone-wrapper` | 否 | `src/components/data-display/card.tsx` | loading | `src/components/data-display/card.tsx` |
+| `SconeTag` | `custom` | 否 | `src/components/data-display/tag.tsx` | tone / closable | `src/components/data-display/tag.tsx` |
+| `SconeBadge` | `custom` | 否 | `src/components/data-display/badge.tsx` | count / dot / tone | `src/components/data-display/badge.tsx` |
+| `SconeList` | `custom` | 否 | `src/components/data-display/list.tsx` | loading / empty / error | `src/components/data-display/list.tsx`、`src/types/foundation.ts` |
+| `SconeTypography`、`SconeText`、`SconeTitle`、`SconeParagraph` | `custom` | 否 | `src/components/data-display/typography.tsx` | tone / truncate | `src/components/data-display/typography.tsx` |
+| `SconeStatistic` | `custom` | 否 | `src/components/data-display/statistic.tsx` | tone | `src/components/data-display/statistic.tsx` |
+| `SconeTimeline` | `custom` | 否 | `src/components/data-display/timeline.tsx` | event sequence | `src/types/foundation.ts`、组件文件 |
+
+状态模型：
+
+- Table 和 List 的数据状态优先级固定为 `loading > error > empty`。
+- Card 的 `loading` 是 region loading，必须保留内容容器尺寸并可设置 `aria-busy`。
+- Descriptions 不使用 disabled input 表达只读详情；编辑态交给 Form/Field。
+- Tag/Badge 的 `tone` 只表达语义色，业务枚举到 `tone` 的映射由调用方处理。
+- Timeline 只表达通用事件序列，不承载审批、权限或业务状态机。
+
+DOM/ref/className 边界：
+
+- `SconeTable` ref 指向 table 外层稳定容器或 table 元素，具体边界需在实现前固定；`className` 透传到表格根容器。
+- `SconeDescriptions` ref 指向 descriptions 根容器；item className 仅影响项级样式。
+- `SconeCard` ref 指向 card 根容器，`actions`、`footer` 是稳定 slot。
+- Tag、Badge、Statistic、Typography ref 指向根文本或展示元素。
+- `SconeTimeline` ref 指向 timeline 根容器，item click 不作为业务动作执行器。
+
+可访问性边界：
+
+- Table 无外部标题时必须提供 `ariaLabel`。
+- Table 操作列应有明确列标题或 `ariaLabel`；危险动作使用 `destructive` 并配合 Confirm recipe。
+- Badge `dot` 不能只靠颜色传递状态，必须通过相邻文本、`ariaLabel` 或被标记对象的可读状态说明补足语义。
+- Typography 保持语义 HTML 和可读对比度，不内置业务文案样式。
+- Timeline item 的时间、标题和描述必须可读，时间格式由调用方处理。
+
+Source strategy 处理：
+
+- `SconeTable` 可复用 shadcn Table 的基础结构和 token，但不暴露 TanStack 实例，不复制 AntD Table API。
+- `custom` 数据展示组件必须明确 item/column 数据结构、density、状态展示和 ref/className 边界。
+- Card/Alert/Empty/Loading/Progress 等视觉容器和反馈组件在各自组件族中处理；Data Display 只处理业务中性展示。
+
+验证点：
+
+- `src/components/data-display/data-display.test.tsx` 验证 Table/List 的 `loading > error > empty` 优先级。
+- 验证 Table columns、rowKey、cell render、横向 scroll、行操作列可访问名称和 ref/className。
+- 验证 Descriptions columns 的 `ResponsiveValue<number>`、density、label 可读文本和长文本换行。
+- 验证 Badge dot 的 `ariaLabel` 要求、Tag closable 的 `onClose`、Typography 的语义标签和 truncate。
+- 验证 Timeline items、pending、reverse 和 `onItemClick` 不承载业务状态机。
+
+明确非目标：
+
+- 不绑定业务数据模型、请求协议、权限判断或路由。
+- 基础 `SconeTable` 不内置筛选、toolbar、pagination controls、selection checkbox column、bulk actions、fixed column、sticky header、虚拟滚动或 DataGrid 键盘模型。
+- 不用 disabled input 伪装只读详情。
+- 不在 Badge/Tag 内写入业务枚举含义。
