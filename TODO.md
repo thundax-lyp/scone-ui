@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `05-design-layout-overlay-navigation-media`：生成 Layout、Overlay、Navigation 和 Media 组件族设计章节
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SPEC-TO-DESIGN.md`
-    - 范围对象：`docs/30-designs/DESIGN-ADMIN-UI.md`、`docs/10-specs/COMPONENT-SPEC-LAYOUT.md`、`docs/10-specs/COMPONENT-SPEC-FEEDBACK-OVERLAY.md`、`docs/10-specs/COMPONENT-SPEC-NAVIGATION-MEDIA.md`
-    - 处理动作：编写 Layout、Feedback And Overlay、Navigation 和 Media 的 Component Family Designs。
-    - 验收点：DESIGN 覆盖对应 `Scone*`、provider/service export、source strategy、状态模型、可访问性边界、目标文件名和验证点。
-    - 重要度：9/10
-
 - [ ] `06-design-patterns-recipes`：生成 Admin Pattern 和 Recipe 设计章节
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SPEC-TO-DESIGN.md`
