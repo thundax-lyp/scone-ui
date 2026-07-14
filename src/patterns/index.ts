@@ -16,6 +16,16 @@ export type {
     DataTableTableRegionProps,
     DataTableToolbarProps,
 } from "./data-table";
+export { FilterBar } from "./filter-bar";
+export type {
+    FilterBarActionsProps,
+    FilterBarFieldsProps,
+    FilterBarFilters,
+    FilterBarRootProps,
+    FilterBarSearchProps,
+    FilterBarState,
+    FilterBarSummaryProps,
+} from "./filter-bar";
 export { Page } from "./page";
 export type {
     PageContentProps,

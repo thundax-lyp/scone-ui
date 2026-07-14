@@ -10,14 +10,6 @@
 
 ## 当前任务项
 
-- [ ] `04 FilterBar`：实现 FilterBar 交互边界
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-ADMIN-SHELL-PATTERNS.md`
-    - 范围对象：`src/patterns/filter-bar.tsx`、`src/patterns/filter-bar.test.tsx`、`src/patterns/index.ts`
-    - 处理动作：实现 `FilterBar.Root/Search/Fields/Actions/Summary`、`FilterBarFilters`、`FilterBarState` 和 search/filters/expanded 事件边界。
-    - 验收点：FilterBar 测试覆盖搜索输入、筛选控件 slot、展开/收起、应用、重置、摘要和窄屏换行语义。
-    - 重要度：9/10
-
 - [ ] `05 Public exports`：完成公共导出和 DataTable 回归确认
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-ADMIN-SHELL-PATTERNS.md`
