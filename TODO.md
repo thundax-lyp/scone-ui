@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `9 src/components/feedback-overlay/notification.tsx`：实现 Notification Provider 和 service
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-OVERLAY.md`
-    - 范围对象：`src/components/feedback-overlay/notification.tsx`、`src/components/feedback-overlay/notification.test.tsx`
-    - 处理动作：实现 `SconeNotificationProvider`、`notification` 和 Notification 类型，覆盖 open、update、close、clear、placement、maxVisible、persistent。
-    - 验收点：Notification 测试验证稳定 id、定向 update、action 点击、closeButton、programmatic、persistent 和队列展示。
-    - 重要度：10/10
-
 - [ ] `10 src/index.ts`：导出 Feedback / Overlay 公共 API
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-OVERLAY.md`
