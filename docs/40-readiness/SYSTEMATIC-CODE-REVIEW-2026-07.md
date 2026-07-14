@@ -438,6 +438,45 @@ Recent evidence before this review branch:
 * **功能风险**：低；semantics change may affect tests that currently assume alert role for all tones.
 * **置信度**：中
 
+## 15 Feedback Overlays And Services
+
+### Evidence
+
+- `SconeDrawer` and `SconeDialog` delegate focus/outside/escape behavior to Radix Dialog and expose close reasons.
+- `SconeConfirm` delegates alert dialog behavior to Radix AlertDialog and manages async `onConfirm` busy state.
+- `toast` and `notification` are module-level services backed by `useSyncExternalStore` providers.
+- Tests cover drawer/dialog title and close reasons, confirm duplicate async prevention, toast/notification update/dismiss/clear reasons, visible limits, and persistent notification marker.
+
+### Assessment
+
+- Drawer/Dialog close reason handling is explicit and avoids product workflow assumptions.
+- Toast/Notification public services are intentionally exported with providers and have focused tests.
+- Confirm async error handling is incomplete.
+
+### Candidate Findings
+
+### [P1] Confirm can create unhandled promise rejections
+
+* **位置**：`src/components/feedback-overlay/confirm.tsx`
+* **类别**：错误处理 / 副作用
+* **问题**：`handleConfirm` awaits `onConfirm` inside `try/finally` but does not catch or surface rejection; the click handler calls it with `void handleConfirm()`.
+* **影响**：If `onConfirm` rejects, the dialog remains open but the promise rejection can escape as an unhandled error, and the component gives no stable error callback or state path.
+* **证据**：`await onConfirm?.(); setOpen(false);` is followed only by `finally { setConfirming(false); }`; no `catch` exists and the event handler discards the promise.
+* **建议**：Either catch and keep the dialog open with an `onError` callback, or require callers to handle errors and wrap `onConfirm` execution defensively.
+* **功能风险**：中；error semantics are user-facing and should be clarified before changing behavior.
+* **置信度**：高
+
+### [P2] Toast timers reset on unrelated provider rerenders
+
+* **位置**：`src/components/feedback-overlay/toast.tsx`
+* **类别**：副作用 / 状态
+* **问题**：`visibleItems` is created with `items.slice(-maxVisible)` on every render and used directly in the timer effect dependency list.
+* **影响**：A parent rerender can recreate `visibleItems`, clean up existing timers, and start new timers, extending toast lifetime unexpectedly.
+* **证据**：`const visibleItems = items.slice(-maxVisible);` and `React.useEffect(..., [duration, visibleItems])`.
+* **建议**：Memoize `visibleItems` by `[items, maxVisible]` or derive timer dependencies from stable item ids/durations.
+* **功能风险**：低；localized to toast timeout behavior.
+* **置信度**：中
+
 ## 09 Form Layout Helpers
 
 ### Evidence

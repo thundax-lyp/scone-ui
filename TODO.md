@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `15-feedback-overlays`：15 审核浮层组件
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`src/components/feedback-overlay/drawer.tsx`、`src/components/feedback-overlay/dialog.tsx`、`src/components/feedback-overlay/confirm.tsx`、`src/components/feedback-overlay/toast.tsx`、`src/components/feedback-overlay/notification.tsx`
-    - 处理动作：检查 close reason、focus 行为、队列 service、Provider API 和异步确认边界。
-    - 验收点：输出浮层和 service 是否存在内部实现泄漏、状态入口过多或副作用风险的结论。
-    - 重要度：9/10
-
 - [ ] `16-navigation-primary`：16 审核基础导航组件
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
