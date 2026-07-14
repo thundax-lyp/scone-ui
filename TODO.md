@@ -6,16 +6,9 @@
 - 宏观任务必须先讨论边界，再拆解为可执行 TODO。
 - 已完成任务必须删除，不在 `TODO.md` 中打勾保留。
 - 完成历史保留在工程历史中。
+- 本任务按数字编号顺序执行；第 6、7 项为最终收口步骤。
 
 ## 当前任务项
-
-- [ ] `14 sync-main`：同步 main 分支代码
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`
-    - 范围对象：`feat/form-family-closure`、`main`
-    - 处理动作：在收口验证前同步 `main` 最新代码到当前分支并解决本范围冲突。
-    - 验收点：当前分支包含 `main` 最新提交，且没有引入 Form 闭环范围外修改。
-    - 重要度：10/10
 
 - [ ] `15 final-verification`：运行 Form 闭环验证
     - 任务类型：执行任务

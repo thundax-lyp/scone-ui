@@ -88,6 +88,7 @@ export type {
 } from "./components/form";
 
 export { ariaBoolean, ariaValue, hasAriaValue, mergeAriaDescribedBy, mergeIds } from "./lib/aria";
+export { SconePagination } from "./components/navigation";
 export { SconeAlert } from "./components/feedback-overlay/alert";
 export { SconeConfirm } from "./components/feedback-overlay/confirm";
 export { SconeDialog } from "./components/feedback-overlay/dialog";
@@ -100,6 +101,7 @@ export {
 } from "./components/feedback-overlay/notification";
 export { SconeProgress } from "./components/feedback-overlay/progress";
 export { SconeToastProvider, toast } from "./components/feedback-overlay/toast";
+export { DataTable } from "./patterns";
 export { SconeCompact } from "./components/layout/compact";
 export { SconeInline } from "./components/layout/inline";
 export { SconeScrollArea } from "./components/layout/scroll-area";
@@ -141,6 +143,16 @@ export type { SconeSeparatorProps } from "./components/layout/separator";
 export type { SconeSplitPaneProps, SconeSplitPaneSizePreset } from "./components/layout/split-pane";
 export type { SconeStackProps } from "./components/layout/stack";
 export type { SconeToolbarProps } from "./components/layout/toolbar";
+export type { SconePaginationProps } from "./components/navigation";
+export type {
+    DataTableAction,
+    DataTableBulkActionsProps,
+    DataTableFilterBarProps,
+    DataTablePaginationProps,
+    DataTableRootProps,
+    DataTableTableRegionProps,
+    DataTableToolbarProps,
+} from "./patterns";
 
 export type {
     Breakpoint,
@@ -153,6 +165,9 @@ export type {
     SconeDensity,
     SconeOption,
     SconeOrientation,
+    SconePaginationChangeReason,
+    SconePaginationState,
+    SconeRowSelection,
     SconeSide,
     SconeSpacingToken,
     SconeStatus,
