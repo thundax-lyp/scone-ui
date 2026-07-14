@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `8 src/components/feedback-overlay/toast.tsx`：实现 Toast Provider 和 service
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-OVERLAY.md`
-    - 范围对象：`src/components/feedback-overlay/toast.tsx`、`src/components/feedback-overlay/toast.test.tsx`
-    - 处理动作：实现 `SconeToastProvider`、`toast` 和 Toast 类型，覆盖 show、success、error、update、dismiss、clear、position、duration、maxVisible。
-    - 验收点：Toast 测试验证稳定 id、定向 update、action 点击、closeButton、timeout、programmatic 和队列展示。
-    - 重要度：10/10
-
 - [ ] `9 src/components/feedback-overlay/notification.tsx`：实现 Notification Provider 和 service
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-OVERLAY.md`
