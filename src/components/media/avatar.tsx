@@ -38,6 +38,11 @@ export const SconeAvatar = React.forwardRef<HTMLDivElement, SconeAvatarProps>(
         ref,
     ) => {
         const [failed, setFailed] = React.useState(!src);
+
+        React.useEffect(() => {
+            setFailed(!src);
+        }, [src]);
+
         const showImage = src && !failed;
 
         return (

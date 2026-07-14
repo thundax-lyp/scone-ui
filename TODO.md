@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `4-avatar-src-reset`：4. 修复 Avatar 动态 src 失败状态重置
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-NAV-MEDIA-STATE-EDGES.md`
-    - 范围对象：`src/components/media/avatar.tsx`、`src/components/media/avatar.test.tsx`
-    - 处理动作：在 `SconeAvatar` 的 `src` 变化时重置内部 `failed` 状态为 `!src`。
-    - 验收点：当前 `src` 触发 error 后 rerender 为新的非空 `src` 时，fallback 或 icon 被 `<img>` 替换，且新 `<img>` 使用新 `src`。
-    - 重要度：9/10
-
 - [ ] `5-readiness-closure`：5. 同步 readiness 并清理临时 RUNBOOK
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-NAV-MEDIA-STATE-EDGES.md`、`docs/00-governance/TODO-RULES.md`
