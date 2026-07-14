@@ -31,6 +31,29 @@ describe("SconeNumberInput", () => {
         expect(handleChange).toHaveBeenNthCalledWith(4, 2);
     });
 
+    it("keeps non-finite step values from committing invalid numbers", () => {
+        const handleChange = vi.fn();
+
+        render(
+            <SconeNumberInput
+                ariaLabel="Quantity"
+                defaultValue={4}
+                min={0}
+                max={5}
+                step={Number.POSITIVE_INFINITY}
+                onValueChange={handleChange}
+            />,
+        );
+
+        fireEvent.click(screen.getByRole("button", { name: "Increment value" }));
+        fireEvent.click(screen.getByRole("button", { name: "Increment value" }));
+        fireEvent.click(screen.getByRole("button", { name: "Decrement value" }));
+
+        expect(handleChange).toHaveBeenNthCalledWith(1, 5);
+        expect(handleChange).toHaveBeenNthCalledWith(2, 4);
+        expect(handleChange).toHaveBeenCalledTimes(2);
+    });
+
     it("keeps the input ref", () => {
         const ref = React.createRef<HTMLInputElement>();
 

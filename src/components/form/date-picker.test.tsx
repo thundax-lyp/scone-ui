@@ -35,6 +35,30 @@ describe("SconeDatePicker", () => {
         expect(handleChange).toHaveBeenNthCalledWith(2, undefined);
     });
 
+    it("opens with pointer and closes with Escape and outside clicks", () => {
+        const handleOpenChange = vi.fn();
+
+        render(
+            <SconeDatePicker
+                ariaLabel="Due date"
+                defaultValue={new Date(2026, 6, 14)}
+                formatLabel={formatLabel}
+                onOpenChange={handleOpenChange}
+            />,
+        );
+
+        fireEvent.click(screen.getByRole("button", { name: "Due date" }));
+        expect(screen.getByRole("dialog", { name: "Choose date" })).toBeInTheDocument();
+
+        fireEvent.keyDown(screen.getByRole("dialog", { name: "Choose date" }), { key: "Escape" });
+        expect(handleOpenChange).toHaveBeenLastCalledWith(false);
+
+        fireEvent.click(screen.getByRole("button", { name: "Due date" }));
+        fireEvent.pointerDown(document.body, { button: 0 });
+        fireEvent.mouseDown(document.body);
+        expect(handleOpenChange).toHaveBeenLastCalledWith(false);
+    });
+
     it("keeps disabled dates from changing the value", () => {
         const handleChange = vi.fn();
 
@@ -52,6 +76,29 @@ describe("SconeDatePicker", () => {
         fireEvent.click(screen.getByRole("button", { name: "2026-07-15" }));
 
         expect(handleChange).not.toHaveBeenCalled();
+    });
+
+    it("supports controlled open and value fields", () => {
+        const handleChange = vi.fn();
+        const handleOpenChange = vi.fn();
+
+        render(
+            <SconeDatePicker
+                ariaLabel="Due date"
+                open
+                value={new Date(2026, 6, 14)}
+                formatLabel={formatLabel}
+                onOpenChange={handleOpenChange}
+                onValueChange={handleChange}
+            />,
+        );
+
+        fireEvent.click(screen.getByRole("button", { name: "2026-07-15" }));
+        fireEvent.click(screen.getByRole("button", { name: "Clear date" }));
+
+        expect(handleChange).toHaveBeenNthCalledWith(1, new Date(2026, 6, 15));
+        expect(handleChange).toHaveBeenNthCalledWith(2, undefined);
+        expect(handleOpenChange).toHaveBeenCalledWith(false);
     });
 
     it("uses Field invalid state on the trigger", () => {

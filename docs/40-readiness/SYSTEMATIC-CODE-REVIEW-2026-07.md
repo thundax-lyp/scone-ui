@@ -20,7 +20,7 @@
 
 最影响清晰度和简洁度的问题：
 
-- 一部分复杂交互被手写在上层组件中，尤其是 Combobox、DatePicker、Dropdown；这些组件承担 overlay、focus、keyboard、selection 等多类职责。
+- 一部分复杂交互被手写在上层组件中，尤其是 Dropdown；这些组件承担 overlay、focus、keyboard、selection 等多类职责。
 - readiness 和部分 Pattern SPEC/DESIGN 对实现状态描述偏乐观，容易把“覆盖完成”误读成“无已知实现问题”。
 - 若干公共 API 暴露了未兑现或过宽的行为，例如 AppShell change callbacks、Section Root shorthand、Form context internals。
 
@@ -38,7 +38,7 @@
 
 1. 修复明确 P1 行为问题：Confirm async rejection。
 2. 收口 Pattern API 与文档：AppShell callbacks、Section Root shorthand、FilterBar hidden search state，逐项决定实现还是修正文档。
-3. 降低复杂交互维护成本：优先用现有 primitives 重构或约束 Combobox、DatePicker、Dropdown 的 overlay/focus/keyboard 行为。
+3. 降低复杂交互维护成本：优先用现有 primitives 重构或约束 Dropdown 的 overlay/focus/keyboard 行为。
 
 ### 问题清单索引
 
@@ -48,8 +48,6 @@ P0：未发现。
 
 P1：
 
-- Combobox hand-rolls complex overlay and listbox behavior.
-- DatePicker hand-rolls dialog calendar behavior.
 - Confirm can create unhandled promise rejections.
 - Dropdown hand-rolls menu popover behavior without outside-click close.
 - AppShell exposes change callbacks that are never called.
@@ -101,7 +99,7 @@ src/lib/cn.ts
 1. 低风险、高收益修改：修复 Confirm async rejection。
 2. 模块边界和 API 调整：收口 AppShell callbacks、Section Root shorthand、FilterBar hidden search；决定 Form context internals 是否继续公开；统一 `cn` import path。
 3. 状态与副作用重构：落实 Toast timer stability、Command filtered active state、Alert role/tone semantics。
-4. 需要人工确认的修改：Combobox/DatePicker/Dropdown 是否迁移到现有 primitives；Section Root shorthand 是实现还是从 SPEC 移除；AppShell callbacks 是移除还是补交互触发；Form context 公共导出是否允许未来 breaking change。
+4. 需要人工确认的修改：Dropdown 是否迁移到现有 primitives；Section Root shorthand 是实现还是从 SPEC 移除；AppShell callbacks 是移除还是补交互触发；Form context 公共导出是否允许未来 breaking change。
 
 ## 01 Baseline
 
@@ -287,35 +285,22 @@ Recent evidence before this review branch:
 
 - `SconeSelect` delegates core select behavior to Radix/shadcn primitives and separately controls value and open state.
 - `SconeSwitch`, `SconeCheckbox`, and `SconeRadioGroup` wrap Radix/shadcn primitives and consistently treat `readOnly` as disabled interaction.
-- `SconeCombobox` implements its own popover, search input, option list, keyboard handling, and clear action.
+- `SconeCombobox` delegates overlay behavior to `Popover` and search/list behavior to `Command`, with an independent clear button.
 - Tests cover selection, controlled open, Field invalid state, checkbox indeterminate state, and basic combobox search/select/clear behavior.
 
 ### Assessment
 
 - Select, Switch, Checkbox, and RadioGroup APIs are predictable and aligned with existing Foundation option/state types.
 - Choice controls consistently route Field state through `getSconeControlStateProps`.
-- The custom Combobox carries significantly more interaction responsibility than the other controls in this group.
-
-### Candidate Finding
-
-### [P1] Combobox hand-rolls complex overlay and listbox behavior
-
-- **位置**：`src/components/form/combobox.tsx`
-- **类别**：复杂度 / 副作用 / 可访问性
-- **问题**：Combobox implements popover visibility, filtering, keyboard selection, listbox rendering, and clear interaction manually. It nests a `span role="button"` clear control inside the trigger `button`, and it does not handle outside click, focus-out close, highlighted option state, or `aria-activedescendant`.
-- **影响**：This increases maintenance cost and accessibility risk compared with neighboring controls that delegate interaction primitives to Radix/shadcn. Keyboard and focus behavior can diverge from expected combobox/listbox patterns.
-- **证据**：`SconeCombobox` renders the overlay with a conditional absolute `<div>`, manual `onKeyDown` handlers, `role="listbox"` buttons, and a nested clear `span role="button"` inside the trigger.
-- **建议**：Replace the hand-rolled overlay/listbox behavior with established primitives already in the repo, such as Popover + Command, or split the clear button outside the trigger and add focused tests for outside click, Escape, tab flow, active option, and disabled options.
-- **功能风险**：中；Combobox selection/search behavior is user-facing and tests should be preserved before refactoring.
-- **置信度**：高
+- Combobox overlay/listbox/focus/keyboard behavior is now covered by focused tests for trigger, Escape, outside click, keyboard selection, disabled option, clear button, and controlled fields.
 
 ## 08 Form Custom Inputs And Helpers
 
 ### Evidence
 
-- `SconeNumberInput` parses native number input text with `Number(rawValue)` and stores `number | undefined`.
+- `SconeNumberInput` rejects non-finite values before committing numeric state.
 - `SconeSlider` delegates range behavior to the shadcn/Radix slider primitive.
-- `SconeDatePicker` implements its own trigger, dialog, date grid, selected state, disabled dates, clear action, and open state.
+- `SconeDatePicker` delegates overlay behavior to `Popover`, keeps date selection local, and exposes an independent clear button.
 - `SconeUpload` validates `accept`, `maxSize`, `maxFiles`, and async `beforeAdd`, then reports structured rejections.
 - `SconeFormActions` only expresses alignment and sticky action layout.
 
@@ -323,20 +308,7 @@ Recent evidence before this review branch:
 
 - Slider, Upload, and FormActions have clear responsibilities and focused tests.
 - Upload rejection behavior is explicit enough for consumers and does not introduce backend/product assumptions.
-- DatePicker carries the same hand-rolled overlay risk as Combobox.
-
-### Candidate Findings
-
-### [P1] DatePicker hand-rolls dialog calendar behavior
-
-- **位置**：`src/components/form/date-picker.tsx`
-- **类别**：复杂度 / 副作用 / 可访问性
-- **问题**：DatePicker manually implements open state, dialog rendering, calendar grid, date buttons, and clear interaction. It also nests a `span role="button"` clear control inside the trigger `button`.
-- **影响**：Focus management, outside click, Escape close, calendar navigation, and nested interactive semantics are easy to regress and hard to reason about.
-- **证据**：The open calendar is a conditional absolute `<div role="dialog">`; the trigger handles Enter/Space manually; the clear action is `span role="button"` within the trigger.
-- **建议**：Use existing Popover/Dialog primitives for overlay behavior and make the clear control a real sibling button. Add focused tests for focus return, Escape/outside close, disabled dates, and keyboard date movement.
-- **功能风险**：中；calendar interaction is user-facing and should be refactored behind behavior-preserving tests.
-- **置信度**：高
+- DatePicker overlay/focus/clear behavior is now covered by focused tests for trigger, Enter/Space, Escape, outside click, disabled date, controlled fields, and clear button.
 
 ## 10 Data Display Core
 
@@ -640,7 +612,7 @@ Recent evidence before this review branch:
 
 - No P0/P1/P2 issue found in the vendored boundary itself.
 - The UI files act as primitive bases and do not encode product workflow, routing, permissions, backend contracts, or business vocabulary.
-- The main reuse opportunity is at higher layers: custom Dropdown, Combobox, and DatePicker behavior should consider existing Radix/shadcn primitives before adding more hand-rolled interaction code.
+- The main reuse opportunity is at higher layers: custom Dropdown behavior should consider existing Radix/shadcn primitives before adding more hand-rolled interaction code.
 
 ## 09 Form Layout Helpers
 
