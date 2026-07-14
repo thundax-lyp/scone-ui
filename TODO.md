@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `15 docs/30-designs/runbook cleanup`：完成收口验证并清理 RUNBOOK
-    - 任务类型：执行任务
-    - 依据文档：`docs/00-governance/TODO-RULES.md`、`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`
-    - 范围对象：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`、`TODO.md`
-    - 处理动作：在完整验证通过并确认长期结论已迁移后删除临时 RUNBOOK。
-    - 验收点：`pnpm format:check`、`pnpm lint`、`pnpm test`、`pnpm build` 通过，RUNBOOK 被删除，TODO 收窄为剩余未完成项或清空。
-    - 重要度：10/10
-
 ## 待审阅任务项
 
 ## 待讨论项
