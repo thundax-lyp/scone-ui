@@ -1,6 +1,12 @@
 export { SconeButton } from "./button";
 export type { SconeButtonProps } from "./button";
 
+export { SconeInput } from "./input";
+export type { SconeInputProps } from "./input";
+
+export { SconeTextArea } from "./textarea";
+export type { SconeTextAreaProps } from "./textarea";
+
 export { SconeForm, useSconeFormContext } from "./form";
 export type { SconeFormContextValue, SconeFormProps } from "./form";
 

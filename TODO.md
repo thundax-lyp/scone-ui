@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `03 text-inputs`：基础文本输入闭环
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`
-    - 范围对象：`src/components/form/input.tsx`、`src/components/form/textarea.tsx`、`src/components/form/input.test.tsx`、`src/components/form/textarea.test.tsx`、`src/components/form/index.ts`
-    - 处理动作：实现 `SconeInput` 和 `SconeTextArea` 的 value/defaultValue/onValueChange、readOnly、invalid、autoSize 和 count 行为。
-    - 验收点：输入、清空、多行、计数、ref 和 Field invalid 测试通过。
-    - 重要度：9/10
-
 - [ ] `04 search-password-inputs`：SearchInput 和 PasswordInput 闭环
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`
