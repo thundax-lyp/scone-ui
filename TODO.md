@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `3-input-search-text-control`：3. 收敛 Input 和 SearchInput 文本值 plumbing
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FORM-PUBLIC-API-CONTRACT.md`
-    - 范围对象：`src/components/form/input.tsx`、`src/components/form/input.test.tsx`、`src/components/form/search-input.tsx`、`src/components/form/search-input.test.tsx`、`src/components/form/text-control.ts`
-    - 处理动作：新增 `text-control.ts` 内部 helper，并让 `SconeInput`、`SconeSearchInput` 复用受控值、Field 注入和 change 提交流程。
-    - 验收点：`SconeInput` 输入和 `SconeSearchInput` 输入均保持先 `onValueChange` 后原生 `onChange`，且 Search clear、loading、readOnly、disabled 行为保持不变。
-    - 重要度：8/10
-
 - [ ] `4-password-textarea-text-control`：4. 收敛 PasswordInput 和 TextArea 文本值 plumbing
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FORM-PUBLIC-API-CONTRACT.md`
