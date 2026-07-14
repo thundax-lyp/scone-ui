@@ -77,7 +77,7 @@ Recipe 守护：
 | 命令                | 状态 | 说明                                                              |
 | ------------------- | ---- | ----------------------------------------------------------------- |
 | `pnpm format:check` | 通过 | 全仓库格式符合 Prettier。                                         |
-| `pnpm test`         | 通过 | 69 个 test files、258 个 tests。                                  |
+| `pnpm test`         | 通过 | 69 个 test files、260 个 tests。                                  |
 | `pnpm typecheck`    | 通过 | TypeScript 无类型错误。                                           |
 | `pnpm lint`         | 通过 | compound component / Pattern 文件已在 ESLint 配置中设置明确例外。 |
 | `pnpm build`        | 通过 | Vite production build 成功。                                      |

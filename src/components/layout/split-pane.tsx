@@ -81,14 +81,23 @@ function nextKeyboardSize(
 function resolveSizeBounds(
     minSizePreset: SconeSplitPaneSizePreset,
     maxSizePreset: SconeSplitPaneSizePreset,
+    fillPixels?: number,
 ): SconeSplitPaneSizeBounds {
-    const minPixels = presetPixels[minSizePreset];
-    const maxPixels = presetPixels[maxSizePreset];
+    const minPixels = resolvePresetPixels(minSizePreset, fillPixels);
+    const maxPixels = resolvePresetPixels(maxSizePreset, fillPixels);
 
     return {
         minPixels: Math.min(minPixels, maxPixels),
         maxPixels: Math.max(minPixels, maxPixels),
     };
+}
+
+function resolvePresetPixels(preset: SconeSplitPaneSizePreset, fillPixels?: number): number {
+    if (preset === "fill" && fillPixels != null && fillPixels > 0) {
+        return fillPixels;
+    }
+
+    return presetPixels[preset];
 }
 
 function clampSizePixels(value: number, bounds: SconeSplitPaneSizeBounds): number {
@@ -127,10 +136,6 @@ export const SconeSplitPane = React.forwardRef<HTMLDivElement, SconeSplitPanePro
         );
         const resolvedSize = resolveSize({ size, sizePreset, internalSize });
         const resolvedPreset = sizePreset ?? defaultSizePreset;
-        const sizeBounds = React.useMemo(
-            () => resolveSizeBounds(minSizePreset, maxSizePreset),
-            [maxSizePreset, minSizePreset],
-        );
         const childItems = React.Children.toArray(children);
         const isHorizontal = orientation === "horizontal";
 
@@ -148,6 +153,13 @@ export const SconeSplitPane = React.forwardRef<HTMLDivElement, SconeSplitPanePro
             },
             [onSizeChange, onSizeCommit, size, sizePreset],
         );
+
+        const resolveCurrentSizeBounds = React.useCallback(() => {
+            const rect = rootRef.current?.getBoundingClientRect();
+            const fillPixels = rect ? (isHorizontal ? rect.width : rect.height) : undefined;
+
+            return resolveSizeBounds(minSizePreset, maxSizePreset, fillPixels);
+        }, [isHorizontal, maxSizePreset, minSizePreset]);
 
         const cleanupActiveDrag = React.useCallback(() => {
             activeDragCleanupRef.current?.();
@@ -171,7 +183,9 @@ export const SconeSplitPane = React.forwardRef<HTMLDivElement, SconeSplitPanePro
                     const nextValue = isHorizontal
                         ? pointerEvent.clientX - rect.left
                         : pointerEvent.clientY - rect.top;
-                    const nextSize = formatPixelSize(clampSizePixels(nextValue, sizeBounds));
+                    const nextSize = formatPixelSize(
+                        clampSizePixels(nextValue, resolveCurrentSizeBounds()),
+                    );
 
                     updateSize(nextSize, commit);
                 };
@@ -192,7 +206,7 @@ export const SconeSplitPane = React.forwardRef<HTMLDivElement, SconeSplitPanePro
                 window.addEventListener("pointermove", handlePointerMove);
                 window.addEventListener("pointerup", handlePointerUp);
             },
-            [cleanupActiveDrag, isHorizontal, sizeBounds, updateSize],
+            [cleanupActiveDrag, isHorizontal, resolveCurrentSizeBounds, updateSize],
         );
 
         const handleKeyDown = React.useCallback(
@@ -207,16 +221,21 @@ export const SconeSplitPane = React.forwardRef<HTMLDivElement, SconeSplitPanePro
                 }
 
                 event.preventDefault();
-                const nextSize = nextKeyboardSize(resolvedSize, resolvedPreset, delta, sizeBounds);
+                const nextSize = nextKeyboardSize(
+                    resolvedSize,
+                    resolvedPreset,
+                    delta,
+                    resolveCurrentSizeBounds(),
+                );
                 updateSize(nextSize, true);
                 onSizePresetChange?.("fill");
             },
             [
                 isHorizontal,
                 onSizePresetChange,
+                resolveCurrentSizeBounds,
                 resolvedPreset,
                 resolvedSize,
-                sizeBounds,
                 updateSize,
             ],
         );
