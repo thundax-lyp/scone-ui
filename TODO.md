@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `3.4 SplitPane`：开放 SplitPane root attrs 且保护 grid style
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
-    - 范围对象：`src/components/layout/split-pane.tsx`、`src/components/layout/split-pane.test.tsx`
-    - 处理动作：扩展 `SconeSplitPaneProps` root `div` HTML attributes 并合并 root `style`。
-    - 验收点：root `div` 接收 `ref`、`className`、`style`、`id`、`data-*`、`aria-*`、`role`，调用方 `style` 不能覆盖内部 `gridTemplateColumns` 或 `gridTemplateRows`。
-    - 重要度：9/10
-
 - [ ] `4.1 layout cn imports`：统一 layout `cn` 导入
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`

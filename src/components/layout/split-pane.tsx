@@ -4,7 +4,10 @@ import { cn } from "../../lib/utils";
 
 export type SconeSplitPaneSizePreset = "narrow" | "medium" | "wide" | "fill";
 
-export interface SconeSplitPaneProps {
+export interface SconeSplitPaneProps extends Omit<
+    React.HTMLAttributes<HTMLDivElement>,
+    "children"
+> {
     orientation?: "horizontal" | "vertical";
     defaultSizePreset?: Exclude<SconeSplitPaneSizePreset, "fill">;
     sizePreset?: SconeSplitPaneSizePreset;
@@ -16,7 +19,6 @@ export interface SconeSplitPaneProps {
     onSizeChange?: (size: string) => void;
     onSizeCommit?: (size: string) => void;
     children?: React.ReactNode;
-    className?: string;
 }
 
 interface SconeSplitPaneSizeBounds {
@@ -123,6 +125,8 @@ export const SconeSplitPane = React.forwardRef<HTMLDivElement, SconeSplitPanePro
             onSizeCommit,
             children,
             className,
+            style,
+            ...props
         },
         ref,
     ) => {
@@ -243,6 +247,7 @@ export const SconeSplitPane = React.forwardRef<HTMLDivElement, SconeSplitPanePro
         return (
             <div
                 ref={rootRef}
+                {...props}
                 data-scone-layout="split-pane"
                 data-orientation={orientation}
                 data-size-preset={sizePreset ?? undefined}
@@ -251,8 +256,14 @@ export const SconeSplitPane = React.forwardRef<HTMLDivElement, SconeSplitPanePro
                 className={cn("grid min-h-0 min-w-0", className)}
                 style={
                     isHorizontal
-                        ? { gridTemplateColumns: `${resolvedSize} auto minmax(0,1fr)` }
-                        : { gridTemplateRows: `${resolvedSize} auto minmax(0,1fr)` }
+                        ? {
+                              ...style,
+                              gridTemplateColumns: `${resolvedSize} auto minmax(0,1fr)`,
+                          }
+                        : {
+                              ...style,
+                              gridTemplateRows: `${resolvedSize} auto minmax(0,1fr)`,
+                          }
                 }
             >
                 <div

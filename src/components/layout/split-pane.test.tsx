@@ -46,12 +46,14 @@ describe("SconeSplitPane", () => {
     it("updates size with keyboard controls and commits the change", () => {
         const handleSizeChange = vi.fn();
         const handleSizeCommit = vi.fn();
+        const handleSizePresetChange = vi.fn();
 
         render(
             <SconeSplitPane
                 defaultSize="320px"
                 onSizeChange={handleSizeChange}
                 onSizeCommit={handleSizeCommit}
+                onSizePresetChange={handleSizePresetChange}
             >
                 <div>Primary</div>
                 <div>Secondary</div>
@@ -62,7 +64,44 @@ describe("SconeSplitPane", () => {
 
         expect(handleSizeChange).toHaveBeenCalledWith("336px");
         expect(handleSizeCommit).toHaveBeenCalledWith("336px");
+        expect(handleSizePresetChange).toHaveBeenCalledWith("fill");
         expect(screen.getByRole("separator")).toHaveAttribute("aria-valuetext", "336px");
+    });
+
+    it("passes root attributes and preserves component-owned grid style", () => {
+        const ref = React.createRef<HTMLDivElement>();
+
+        render(
+            <SconeSplitPane
+                ref={ref}
+                id="settings-split"
+                role="group"
+                aria-label="Settings split"
+                data-owner="layout"
+                data-testid="split-root"
+                className="custom-split"
+                defaultSize="320px"
+                style={{
+                    minHeight: "240px",
+                    gridTemplateColumns: "1px 1px 1px",
+                }}
+            >
+                <div>Primary</div>
+                <div>Secondary</div>
+            </SconeSplitPane>,
+        );
+
+        const root = screen.getByTestId("split-root");
+
+        expect(ref.current).toBe(root);
+        expect(root).toHaveAttribute("id", "settings-split");
+        expect(root).toHaveAttribute("role", "group");
+        expect(root).toHaveAttribute("aria-label", "Settings split");
+        expect(root).toHaveAttribute("data-owner", "layout");
+        expect(root).toHaveAttribute("data-scone-layout", "split-pane");
+        expect(root).toHaveClass("custom-split");
+        expect(root).toHaveStyle({ minHeight: "240px" });
+        expect(root).toHaveStyle({ gridTemplateColumns: "320px auto minmax(0,1fr)" });
     });
 
     it("updates size with pointer drag and commits on pointer up", () => {
