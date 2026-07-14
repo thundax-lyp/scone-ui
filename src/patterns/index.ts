@@ -30,13 +30,17 @@ export { Page } from "./page";
 export type {
     PageContentProps,
     PageHeaderProps,
+    PageMainProps,
     PageRootProps,
     PageStickyActionsProps,
 } from "./page";
 export { Section } from "./section";
 export type {
+    SectionActionsProps,
     SectionContentProps,
+    SectionDescriptionProps,
     SectionFooterProps,
     SectionHeaderProps,
     SectionRootProps,
+    SectionTitleProps,
 } from "./section";

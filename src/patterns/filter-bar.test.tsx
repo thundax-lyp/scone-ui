@@ -36,7 +36,7 @@ describe("FilterBar", () => {
         ).toBeInTheDocument();
     });
 
-    it("updates search value through controlled boundary", () => {
+    it("updates search value through controlled compound boundary", () => {
         const onSearchChange = vi.fn();
 
         render(
@@ -108,22 +108,119 @@ describe("FilterBar", () => {
         ).not.toHaveAttribute("data-expanded");
     });
 
-    it("exposes wrapping layout semantics for narrow screens", () => {
-        render(
-            <FilterBar.Root defaultExpanded>
-                <FilterBar.Search />
-                <FilterBar.Fields>Fields</FilterBar.Fields>
-                <FilterBar.Actions>
-                    <button type="button">Apply</button>
-                </FilterBar.Actions>
-            </FilterBar.Root>,
+    it("renders controlled built-in search input and reports changes", () => {
+        const onSearchChange = vi.fn();
+
+        render(<FilterBar.Root searchValue="" onSearchChange={onSearchChange} />);
+
+        fireEvent.change(screen.getByRole("searchbox", { name: "Search" }), {
+            target: { value: "abc" },
+        });
+
+        expect(onSearchChange).toHaveBeenCalledWith("abc");
+    });
+
+    it("uses a search slot instead of the built-in search input", () => {
+        render(<FilterBar.Root search={<input aria-label="Custom search" />} searchValue="abc" />);
+
+        expect(screen.getByLabelText("Custom search")).toBeInTheDocument();
+        expect(screen.queryByRole("searchbox", { name: "Search" })).not.toBeInTheDocument();
+    });
+
+    it("renders filter controls and controlled expanded content", () => {
+        const { rerender } = render(
+            <FilterBar.Root
+                filters={<button type="button">Status</button>}
+                expandedContent={<label htmlFor="owner">Owner</label>}
+                expanded={false}
+            />,
         );
 
-        expect(screen.getByText("Fields").closest("[data-scone-pattern='filter-bar']")).toHaveClass(
-            "flex-wrap",
+        expect(screen.getByRole("button", { name: "Status" })).toBeInTheDocument();
+        expect(screen.queryByText("Owner")).not.toBeInTheDocument();
+
+        rerender(
+            <FilterBar.Root
+                filters={<button type="button">Status</button>}
+                expandedContent={<label htmlFor="owner">Owner</label>}
+                expanded
+            />,
         );
-        expect(
-            screen.getByText("Fields").closest("[data-scone-filter-bar-part='fields']"),
-        ).toHaveAttribute("data-expanded", "true");
+
+        expect(screen.getByText("Owner")).toBeInTheDocument();
+    });
+
+    it("requests expanded state changes without mutating controlled state", () => {
+        const onExpandedChange = vi.fn();
+
+        render(
+            <FilterBar.Root
+                expanded={false}
+                onExpandedChange={onExpandedChange}
+                expandedContent={<div>Advanced filters</div>}
+            />,
+        );
+
+        fireEvent.click(screen.getByRole("button", { name: "More filters" }));
+
+        expect(onExpandedChange).toHaveBeenCalledWith(true);
+        expect(screen.queryByText("Advanced filters")).not.toBeInTheDocument();
+    });
+
+    it("handles uncontrolled expanded state", () => {
+        const onExpandedChange = vi.fn();
+
+        render(
+            <FilterBar.Root
+                defaultExpanded
+                onExpandedChange={onExpandedChange}
+                expandedContent={<div>Advanced filters</div>}
+            />,
+        );
+
+        expect(screen.getByText("Advanced filters")).toBeInTheDocument();
+
+        fireEvent.click(screen.getByRole("button", { name: "Less filters" }));
+
+        expect(onExpandedChange).toHaveBeenCalledWith(false);
+        expect(screen.queryByText("Advanced filters")).not.toBeInTheDocument();
+    });
+
+    it("calls built-in Apply and Reset without clearing controlled inputs", () => {
+        const onApply = vi.fn();
+        const onReset = vi.fn();
+        const onSearchChange = vi.fn();
+
+        render(
+            <FilterBar.Root
+                searchValue="abc"
+                onSearchChange={onSearchChange}
+                onApply={onApply}
+                onReset={onReset}
+            />,
+        );
+
+        fireEvent.click(screen.getByRole("button", { name: "Apply" }));
+        fireEvent.click(screen.getByRole("button", { name: "Reset" }));
+
+        expect(onApply).toHaveBeenCalledWith({ searchValue: "abc", filters: {} });
+        expect(onReset).toHaveBeenCalledTimes(1);
+        expect(screen.getByRole("searchbox", { name: "Search" })).toHaveValue("abc");
+        expect(onSearchChange).not.toHaveBeenCalled();
+    });
+
+    it("disables built-in Apply and Reset independently", () => {
+        const onApply = vi.fn();
+        const onReset = vi.fn();
+
+        render(<FilterBar.Root onApply={onApply} onReset={onReset} applyDisabled resetDisabled />);
+
+        fireEvent.click(screen.getByRole("button", { name: "Apply" }));
+        fireEvent.click(screen.getByRole("button", { name: "Reset" }));
+
+        expect(screen.getByRole("button", { name: "Apply" })).toBeDisabled();
+        expect(screen.getByRole("button", { name: "Reset" })).toBeDisabled();
+        expect(onApply).not.toHaveBeenCalled();
+        expect(onReset).not.toHaveBeenCalled();
     });
 });
