@@ -56,9 +56,9 @@
 - Additional form inputs：`SconeCombobox`、`SconeSwitch`、`SconeCheckbox`、`SconeRadioGroup`、`SconeNumberInput`、`SconeSlider`、`SconeDatePicker`、`SconeUpload`。
 - Layout primitives：已实现并测试 `SconeStack`、`SconeInline`、`SconeCompact`、`SconeToolbar`、`SconeSplitPane`、`SconeSeparator`、`SconeScrollArea`。
 - Data display：已实现并测试 `SconeDescriptions`、`SconeTable`、`SconeCard`、`SconeTag`、`SconeBadge`、`SconeList`、`SconeStatistic`、`SconeTimeline`。
-- Navigation and media：`SconeBreadcrumb`、`SconePagination`、`SconeTabs`、`SconeSegmented`、`SconeTree`、`SconeDropdown`、`SconeMenu`、`SconeTooltip`、`SconeCommand`、`SconeAccordion`、`SconeCollapsible`、`SconeImage`、`SconeAvatar`。
+- Navigation and media：已实现并测试 `SconePagination`；`SconeBreadcrumb`、`SconeTabs`、`SconeSegmented`、`SconeTree`、`SconeDropdown`、`SconeMenu`、`SconeTooltip`、`SconeCommand`、`SconeAccordion`、`SconeCollapsible`、`SconeImage`、`SconeAvatar`。
 - Feedback：已实现并测试 `SconeDrawer`、`SconeDialog`、`SconeConfirm`、`SconeAlert`、`SconeEmpty`、`SconeLoading`、`SconeProgress`、`SconeToastProvider`、`toast`、`SconeNotificationProvider`、`notification`。
-- Admin Pattern exports：`AppShell`、`Page`、`Section`、`FilterBar`、`DataTable` compound parts。
+- Admin Pattern exports：已实现并测试 `DataTable` compound parts；`AppShell`、`Page`、`Section`、`FilterBar`。
 - Recipes：DrawerForm、ConfirmationFlow、Popover、Logo、Result、Dashboard Metric、Grid。
 
 ## Implementation Coverage Evidence
@@ -216,6 +216,101 @@
 
 - 其他组件族、Pattern 和 Recipe 仍未进入实现覆盖。
 
+### Navigation / Pagination
+
+实现状态：已完成。
+
+测试状态：已完成。
+
+源码文件：
+
+- `src/components/navigation/pagination.tsx`
+- `src/components/navigation/index.ts`
+- `src/types/foundation.ts`
+- `src/index.ts`
+
+测试文件：
+
+- `src/components/navigation/pagination.test.tsx`
+- `src/types/foundation.test.ts`
+- `src/index.test.ts`
+
+覆盖能力：
+
+- `SconePaginationState`：`page`、`pageSize`、`total` 受控分页状态。
+- `SconePaginationChangeReason`：`"page"` 与 `"pageSize"` 变更原因。
+- `SconePagination`：`nav` 语义、上一页、下一页、页码按钮、page size `select`、总数文本、`aria-current`、边界 disabled、density、`className`、ref。
+- `pageSize` 变化默认提交 `{ page: 1, pageSize, total }`。
+- Public exports：Navigation 局部入口和库级入口。
+
+验证结果：
+
+- `pnpm format`：通过。
+- `pnpm lint`：通过。
+- `pnpm build`：通过。
+- `pnpm test`：通过，35 个 test files、128 个 tests。
+- `pnpm test -- src/types/foundation.test.ts`：通过，35 个 test files、128 个 tests。
+- `pnpm test -- src/components/navigation/pagination.test.tsx src/patterns/data-table.test.tsx`：通过，35 个 test files、128 个 tests。
+- `pnpm test -- src/index.test.ts`：通过，35 个 test files、128 个 tests。
+- `pnpm typecheck`：通过。
+
+说明：
+
+- Pagination 只表达受控分页状态和交互，不发起请求、不读取 URL、不持久化分页状态。
+- 服务端分页、游标分页和 URL 同步仍由调用方或后续 recipe 处理。
+
+### Admin Pattern / DataTable
+
+实现状态：已完成。
+
+测试状态：已完成。
+
+源码文件：
+
+- `src/patterns/data-table.tsx`
+- `src/patterns/index.ts`
+- `src/components/navigation/pagination.tsx`
+- `src/components/data-display/table.tsx`
+- `src/components/layout/toolbar.tsx`
+- `src/types/foundation.ts`
+- `src/index.ts`
+
+测试文件：
+
+- `src/patterns/data-table.test.tsx`
+- `src/components/navigation/pagination.test.tsx`
+- `src/components/data-display/table.test.tsx`
+- `src/components/layout/toolbar.test.tsx`
+- `src/types/foundation.test.ts`
+- `src/index.test.ts`
+
+覆盖能力：
+
+- `DataTable.Root`：density、rowSelection、pagination、onPaginationChange context。
+- `DataTable.FilterBar`：slot 边界，不定义筛选 schema。
+- `DataTable.Toolbar`：复用 `SconeToolbar`，展示 title、start、end、actions 和 selected count。
+- `DataTable.BulkActions`：根据 selected count 展示 action，支持清空选择。
+- `DataTable.TableRegion`：`loading > error > empty` 状态优先级、局部 viewport、数据模式组合 `SconeTable`、selection column 注入、children escape hatch。
+- `DataTable.Pagination`：唯一 DataTable 分页入口，组合 `SconePagination` 并透传 props/context 状态。
+- Public exports：Pattern 局部入口和库级入口。
+
+验证结果：
+
+- `pnpm format`：通过。
+- `pnpm lint`：通过；`src/patterns/data-table.tsx` 保留 compound parts 触发的 `react-refresh/only-export-components` warning，退出码为 0。
+- `pnpm build`：通过。
+- `pnpm test`：通过，35 个 test files、128 个 tests。
+- `pnpm test -- src/types/foundation.test.ts`：通过，35 个 test files、128 个 tests。
+- `pnpm test -- src/components/navigation/pagination.test.tsx src/patterns/data-table.test.tsx`：通过，35 个 test files、128 个 tests。
+- `pnpm test -- src/index.test.ts`：通过，35 个 test files、128 个 tests。
+- `pnpm typecheck`：通过。
+
+说明：
+
+- `SconeTable` 公共 API 未加入 `pagination` 或 `rowSelection`；selection column 只由 `DataTable.TableRegion` 在数据模式下注入。
+- `DataTable.FilterBar` 本轮只实现 slot，不实现独立 `src/patterns/filter-bar.tsx`。
+- `DataTable` 不发起请求、不判断权限、不读取业务 store，不引入 TanStack Table 默认依赖。
+
 ## Pending Implementation Work
 
 后续实现阶段至少需要完成：
@@ -223,7 +318,7 @@
 1. 创建 DESIGN 指定的其余 `src/` 目录结构、公共入口和组件族类型入口。
 2. 按 `docs/10-specs/COMPONENT-SELECTION.md` 的 source strategy 实现 wrapper、vendored primitive、custom component、pattern-only 和 docs-only 边界。
 3. 继续维护 `src/styles/theme.css` 作为 CSS variables 唯一数值源，并维护默认 `tailwind.config.ts` 到 CSS variables 的映射。
-4. 实现 Data Display、Layout primitives 和 Feedback / Overlay 以外的组件族和 Pattern；Recipe 全部保持文档和示例边界，不创建 `src/recipes/` 源码入口。
+4. 实现已完成 Data Display、Layout primitives、Feedback / Overlay、`SconePagination` 和 `DataTable` 以外的组件族和 Pattern；Recipe 全部保持文档和示例边界，不创建 `src/recipes/` 源码入口。
 5. 按 DESIGN 的 Verification Design 在被测文件同目录创建 `*.test.ts` 或 `*.test.tsx`，并生成真正的实现覆盖证据。
 6. 在后续实现后更新本 readiness 文档，区分已实现、已测试、未覆盖和延期项。
 
