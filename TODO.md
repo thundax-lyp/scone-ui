@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `23-docs-spec-design-alignment`：23 审核 SPEC、DESIGN 和 readiness 对齐
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`docs/10-specs/COMPONENT-SELECTION.md`、`docs/30-designs/admin-ui/EXPORT-SURFACE-DESIGN.md`、`docs/30-designs/admin-ui/VERIFICATION-DESIGN.md`、`docs/40-readiness/IMPLEMENTATION-COVERAGE.md`
-    - 处理动作：检查需求矩阵、设计落点、验证矩阵和实现证据是否一致且不过期。
-    - 验收点：输出文档与源码是否存在状态不一致、重复规则或过期证据的结论。
-    - 重要度：9/10
-
 - [ ] `24-review-report`：24 汇总系统性代码审核报告
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`

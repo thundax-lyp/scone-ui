@@ -733,3 +733,45 @@ Recent evidence before this review branch:
 * **建议**：Either treat it explicitly as a demo smoke test, or remove it once the package-level and component-level tests cover the intended library behavior.
 * **功能风险**：低；removing or weakening the test does not change runtime code.
 * **置信度**：高
+
+## 23 SPEC, DESIGN, And Readiness Alignment
+
+### Evidence
+
+- `docs/10-specs/COMPONENT-SELECTION.md` and `docs/30-designs/admin-ui/EXPORT-SURFACE-DESIGN.md` agree that Export Groups are the public surface and Recipes are docs-only.
+- `docs/30-designs/admin-ui/VERIFICATION-DESIGN.md` points public export validation to `src/index.test.ts`, which now explicitly guards public Pattern exports and negative Recipe exports.
+- `docs/40-readiness/IMPLEMENTATION-COVERAGE.md` records all component families, Admin Patterns, and Recipes as complete, and says there is no pending implementation work.
+- `docs/10-specs/patterns/SECTION.md` lists `Section.Root` shorthand props `title`, `description`, and `actions`, but source implements those props on `Section.Header`.
+- `docs/10-specs/patterns/APP-SHELL.md` and `docs/30-designs/admin-ui/PATTERN-DESIGN.md` list AppShell change callbacks, while source explicitly ignores them.
+- `docs/10-specs/patterns/FILTER-BAR.md` lists `defaultSearchValue`; source initializes the state but does not render the built-in search control when only `defaultSearchValue` is provided.
+
+### Assessment
+
+- Public export and Recipe docs-only boundaries are aligned across SPEC, DESIGN, readiness, source, and tests.
+- The verification design remains useful as a matrix, but edge-case findings from this audit are not reflected in readiness.
+- The current readiness document uses "完成" for implementation coverage and also says there is no pending implementation work. After this audit, that wording should be narrowed: coverage is complete, but remediation work remains.
+- Pattern API mismatches should be resolved by either implementing the documented behavior or correcting the SPEC/DESIGN/readiness text. They should not stay as silent divergence.
+
+### Candidate Finding
+
+### [P1] Readiness says there is no pending implementation work despite verified audit findings
+
+* **位置**：`docs/40-readiness/IMPLEMENTATION-COVERAGE.md`
+* **类别**：文档对齐 / 错误处理
+* **问题**：The readiness document concludes the covered Admin UI scope is complete and says "当前无未完成实现项", but this audit found multiple source-backed P1/P2 issues, including stale Tailwind token config, ignored AppShell callbacks, unimplemented Section Root shorthand, invalid Progress/NumberInput edge cases, duplicate Tooltip ids, and media fallback reset gaps.
+* **影响**：Readers can mistake "coverage complete" for "no known implementation work", which hides the actual remediation backlog and makes planning less accurate.
+* **证据**：`IMPLEMENTATION-COVERAGE.md` marks all rows as complete and has no pending work list; this audit report contains source-backed findings across sections 04, 08, 13, 14, 18, 19, and 20.
+* **建议**：In the closure task, keep coverage status as complete where accurate, but add a concise pending implementation work summary that points to this audit report.
+* **功能风险**：低；docs-only correction.
+* **置信度**：高
+
+### [P1] Pattern documentation includes behavior not implemented in source
+
+* **位置**：`docs/10-specs/patterns/APP-SHELL.md`、`docs/10-specs/patterns/SECTION.md`、`docs/10-specs/patterns/FILTER-BAR.md`、`src/patterns/app-shell.tsx`、`src/patterns/section.tsx`、`src/patterns/filter-bar.tsx`
+* **类别**：文档对齐 / API
+* **问题**：Several Pattern docs describe props or behavior that source does not fully deliver: AppShell change callbacks are ignored, Section Root shorthand is absent, and FilterBar can carry default search state without rendering the built-in search control.
+* **影响**：Consumers following SPEC/DESIGN can write code against behavior that appears supported but is incomplete or invisible at runtime.
+* **证据**：Earlier findings document `void onCollapsedChange`, `void onOpenChange`, the Section Root shorthand mismatch, and `shouldRenderSearch` ignoring `defaultSearchValue`.
+* **建议**：Treat these as remediation items. For each one, choose one direction explicitly: implement the documented behavior with tests, or narrow the docs and public type expectations.
+* **功能风险**：中；implementing behavior changes runtime API semantics, while narrowing docs may expose that current code is intentionally smaller than SPEC.
+* **置信度**：高
