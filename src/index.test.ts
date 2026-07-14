@@ -1,5 +1,6 @@
 import { describe, expect, expectTypeOf, it } from "vitest";
 
+import { cn, composeRefs, useControllableState } from "./index";
 import type {
     Breakpoint,
     Key,
@@ -43,7 +44,17 @@ describe("public index exports", () => {
         expectTypeOf<SconeBaseItem["key"]>().toEqualTypeOf<Key>();
     });
 
-    it("does not create runtime exports before public utilities exist", async () => {
-        await expect(import("./index")).resolves.toEqual({});
+    it("exports public utilities from the public entry", async () => {
+        expect(cn("px-2", "px-4")).toBe("px-4");
+        expect(typeof composeRefs).toBe("function");
+        expect(typeof useControllableState).toBe("function");
+
+        const publicExports = await import("./index");
+
+        expect(Object.keys(publicExports).sort()).toEqual([
+            "cn",
+            "composeRefs",
+            "useControllableState",
+        ]);
     });
 });

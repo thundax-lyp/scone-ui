@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `8. utility-exports`：导出公共工具函数
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`
-    - 范围对象：`src/index.ts`、`src/index.test.ts`、`src/lib/cn.ts`、`src/lib/compose-refs.ts`、`src/lib/use-controllable-state.ts`
-    - 处理动作：从库级入口导出 `cn`、`composeRefs`、`useControllableState`。
-    - 验收点：`src/index.test.ts` 精确断言公共工具导出清单，且调用方不需要依赖 `src/lib/*` 私有路径。
-    - 重要度：10/10
-
 - [ ] `9. aria-exports`：导出公共 ARIA helper
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`
