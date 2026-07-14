@@ -221,6 +221,81 @@ describe("SconeSplitPane", () => {
         expect(screen.getByRole("separator")).toHaveAttribute("aria-valuetext", "640px");
     });
 
+    it("uses the container size for the fill max preset when available", () => {
+        const handleSizeChange = vi.fn();
+        const handleSizeCommit = vi.fn();
+
+        render(
+            <SconeSplitPane
+                defaultSize="632px"
+                maxSizePreset="fill"
+                onSizeChange={handleSizeChange}
+                onSizeCommit={handleSizeCommit}
+            >
+                <div>Primary</div>
+                <div>Secondary</div>
+            </SconeSplitPane>,
+        );
+
+        const root = screen.getByText("Primary").closest("[data-scone-layout='split-pane']");
+
+        vi.spyOn(root as HTMLElement, "getBoundingClientRect").mockReturnValue({
+            bottom: 200,
+            height: 200,
+            left: 20,
+            right: 920,
+            top: 0,
+            width: 900,
+            x: 20,
+            y: 0,
+            toJSON: () => undefined,
+        });
+
+        fireEvent.keyDown(screen.getByRole("separator"), { key: "ArrowRight" });
+
+        expect(handleSizeChange).toHaveBeenCalledWith("648px");
+        expect(handleSizeCommit).toHaveBeenCalledWith("648px");
+        expect(screen.getByRole("separator")).toHaveAttribute("aria-valuetext", "648px");
+    });
+
+    it("allows pointer drag beyond the fallback fill pixels in wide containers", () => {
+        const handleSizeChange = vi.fn();
+        const handleSizeCommit = vi.fn();
+
+        render(
+            <SconeSplitPane
+                maxSizePreset="fill"
+                onSizeChange={handleSizeChange}
+                onSizeCommit={handleSizeCommit}
+            >
+                <div>Primary</div>
+                <div>Secondary</div>
+            </SconeSplitPane>,
+        );
+
+        const root = screen.getByText("Primary").closest("[data-scone-layout='split-pane']");
+        const handle = screen.getByRole("separator");
+
+        vi.spyOn(root as HTMLElement, "getBoundingClientRect").mockReturnValue({
+            bottom: 200,
+            height: 200,
+            left: 20,
+            right: 920,
+            top: 0,
+            width: 900,
+            x: 20,
+            y: 0,
+            toJSON: () => undefined,
+        });
+
+        fireEvent.pointerDown(handle, { clientX: 120 });
+        fireEvent.pointerMove(window, { clientX: 820 });
+        fireEvent.pointerUp(window, { clientX: 920 });
+
+        expect(handleSizeChange).toHaveBeenCalledWith("800px");
+        expect(handleSizeCommit).toHaveBeenCalledWith("900px");
+    });
+
     it("cleans up pointer listeners when unmounted during drag", () => {
         const handleSizeChange = vi.fn();
         const handleSizeCommit = vi.fn();
