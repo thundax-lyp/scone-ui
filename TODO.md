@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `09 src/components/navigation/tabs`：补齐 Tabs root props 和 ref passthrough
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`
-    - 范围对象：`src/components/navigation/tabs.tsx`、`src/components/navigation/tabs.test.tsx`、`docs/10-specs/components/navigation/SCONE-TABS.md`
-    - 处理动作：让 `SconeTabsRootProps` 扩展 root HTML attributes，并让 `SconeTabs.Root` forward root ref。
-    - 验收点：root `id`、`data-*`、`aria-label`、`className` 和 `ref` 落到 tabs root DOM。
-    - 重要度：7/10
-
 - [ ] `10 src/components/navigation/segmented`：锁定 Segmented keyboard focus 行为
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`

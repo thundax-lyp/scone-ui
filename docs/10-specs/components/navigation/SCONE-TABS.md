@@ -12,16 +12,17 @@
 
 内容面板切换，用于同一对象或同一工作区内的视图切换。
 
-| Prop                     | 类型                         | 说明                  |
-| ------------------------ | ---------------------------- | --------------------- |
-| `value` / `defaultValue` | `string`                     | 当前 tab。            |
-| `onValueChange`          | `(value: string) => void`    | 切换回调。            |
-| `orientation`            | `"horizontal" \| "vertical"` | 方向。                |
-| `activationMode`         | `"automatic" \| "manual"`    | 激活方式。            |
-| `items`                  | `SconeOption<string>[]`      | 简单场景 helper。     |
-| `ariaLabel`              | `string`                     | 无可见 label 时必填。 |
-| `children`               | `ReactNode`                  | compound parts。      |
-| `className`              | `string`                     | 样式。                |
+| Prop                     | 类型                             | 说明                  |
+| ------------------------ | -------------------------------- | --------------------- |
+| `value` / `defaultValue` | `string`                         | 当前 tab。            |
+| `onValueChange`          | `(value: string) => void`        | 切换回调。            |
+| `orientation`            | `"horizontal" \| "vertical"`     | 方向。                |
+| `activationMode`         | `"automatic" \| "manual"`        | 激活方式。            |
+| `items`                  | `SconeOption<string>[]`          | 简单场景 helper。     |
+| `ariaLabel`              | `string`                         | 无可见 label 时必填。 |
+| `children`               | `ReactNode`                      | compound parts。      |
+| `className`              | `string`                         | 样式。                |
+| root HTML props          | `HTMLAttributes<HTMLDivElement>` | 透传到 root DOM。     |
 
 ## Usage
 
@@ -32,6 +33,7 @@
 
 - 权威模型是 compound parts：TabsList、TabsTrigger、TabsContent。
 - `items` 只用于简单场景，不替代 compound 组合能力。
+- Root 支持 div HTML attributes 和 ref passthrough，便于调用方接入标识、ARIA 和测量。
 - Tabs 切换内容面板；只切换一个轻量值时使用 Segmented。
 - shadcn mapping：基于 Radix Tabs，保留 roving focus。
 
