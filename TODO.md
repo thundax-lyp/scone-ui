@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `1 src/components/feedback-overlay/alert.tsx`：实现 Alert 状态反馈组件
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-OVERLAY.md`
-    - 范围对象：`src/components/feedback-overlay/alert.tsx`、`src/components/feedback-overlay/alert.test.tsx`
-    - 处理动作：实现 `SconeAlert` 和 `SconeAlertProps`，覆盖 tone、icon、title、description、action 的渲染与可读状态。
-    - 验收点：Alert 测试验证错误说明可读、action 可点击、状态不只靠颜色表达。
-    - 重要度：9/10
-
 - [ ] `2 src/components/feedback-overlay/empty.tsx`：实现 Empty 空态组件
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-OVERLAY.md`
