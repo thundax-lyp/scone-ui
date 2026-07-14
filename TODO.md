@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `06-navigation-menu`：06 实现 Menu
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
-    - 范围对象：`src/components/navigation/menu.tsx`、`src/components/navigation/menu.test.tsx`
-    - 处理动作：实现按 spec API 行为定义的 menu/list navigation 菜单。
-    - 验收点：selectedKeys、openKeys、collapsed 可访问名称、disabled item、vertical/horizontal 键盘导航均有测试覆盖，且不内置路由、权限、URL 解析或数据加载。
-    - 重要度：9/10
-
 - [ ] `07-navigation-command`：07 实现 Command
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
