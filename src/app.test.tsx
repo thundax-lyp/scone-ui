@@ -3,13 +3,10 @@ import { render, screen } from "@testing-library/react";
 import { App } from "./app";
 
 describe("App", () => {
-    it("renders the project heading", () => {
+    it("renders the demo entry shell", () => {
         render(<App />);
 
-        expect(
-            screen.getByRole("heading", {
-                name: "React + TailwindCSS frontend project",
-            }),
-        ).toBeInTheDocument();
+        expect(screen.getByRole("main")).toBeInTheDocument();
+        expect(screen.getAllByRole("heading").length).toBeGreaterThan(0);
     });
 });

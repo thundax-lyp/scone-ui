@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `2-pattern-filter-table-app-tests`：清理筛选表格和 demo 测试断言
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-TEST-DOC-MAINTENANCE.md`
-    - 范围对象：`src/patterns/filter-bar.test.tsx`、`src/patterns/data-table.test.tsx`、`src/app.test.tsx`
-    - 处理动作：用 input/select/button 操作和 callback payload 断言替代内部 DOM traversal，并移除或改写 demo copy 断言。
-    - 验收点：search input、Query input、Status select、Apply button、Reset button、Toggle button、table rows 和 demo entry 测试不再验证低价值内部细节或固定文案。
-    - 重要度：8/10
-
 - [ ] `3-systematic-review-test-status`：收窄系统性审核测试维护状态
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-TEST-DOC-MAINTENANCE.md`

@@ -18,24 +18,21 @@ const columns = [{ key: "name", title: "Name", dataIndex: "name" as const }];
 describe("DataTable", () => {
     it("renders Root and FilterBar as layout and slot boundaries", () => {
         render(
-            <DataTable.Root density="compact">
-                <DataTable.FilterBar>
+            <DataTable.Root role="group" aria-label="Users table controls" density="compact">
+                <DataTable.FilterBar role="group" aria-label="Users filters">
                     <label htmlFor="query">Query</label>
                     <input id="query" />
                 </DataTable.FilterBar>
             </DataTable.Root>,
         );
 
+        const root = screen.getByRole("group", { name: "Users table controls" });
+        const filters = screen.getByRole("group", { name: "Users filters" });
+
         expect(screen.getByLabelText("Query")).toBeInTheDocument();
-        expect(
-            screen.getByLabelText("Query").closest("[data-scone-pattern='data-table']"),
-        ).toHaveAttribute("data-density", "compact");
-        expect(
-            screen.getByLabelText("Query").closest("[data-scone-data-table-part='filter-bar']"),
-        ).toBeInTheDocument();
-        expect(
-            screen.getByLabelText("Query").closest("[data-scone-pattern='filter-bar']"),
-        ).toBeInTheDocument();
+        expect(root).toHaveAttribute("data-density", "compact");
+        expect(filters).toHaveAttribute("data-scone-data-table-part", "filter-bar");
+        expect(filters).toHaveAttribute("data-scone-pattern", "filter-bar");
     });
 
     it("uses the shared FilterBar behavior for DataTable.FilterBar controls", () => {
@@ -75,13 +72,21 @@ describe("DataTable", () => {
 
         render(
             <DataTable.Root rowSelection={{ selectedRowKeys: ["1", "2"] }}>
-                <DataTable.Toolbar title="Users" start="Filtered" end="Columns" actions={actions} />
+                <DataTable.Toolbar
+                    role="toolbar"
+                    aria-label="Users table toolbar"
+                    title="Users"
+                    start="Filtered"
+                    end="Columns"
+                    actions={actions}
+                />
             </DataTable.Root>,
         );
 
-        expect(
-            screen.getByText("Users").closest("[data-scone-layout='toolbar']"),
-        ).toBeInTheDocument();
+        expect(screen.getByRole("toolbar", { name: "Users table toolbar" })).toHaveAttribute(
+            "data-scone-layout",
+            "toolbar",
+        );
         expect(screen.getByText("Filtered")).toBeInTheDocument();
         expect(screen.getByText("Columns")).toBeInTheDocument();
         expect(screen.getByText("2 selected")).toBeInTheDocument();
