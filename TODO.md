@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `05 src/components/data-display/table.tsx`：实现基础 Table region
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DATA-DISPLAY-CLOSURE.md`
-    - 范围对象：`src/components/data-display/table.tsx`、`src/components/data-display/table.test.tsx`、`src/components/ui/table.tsx`
-    - 处理动作：基于 shadcn Table 基座实现并测试基础 `SconeTable`。
-    - 验收点：覆盖 columns、rowKey、dataIndex、render、onRow、onCell、scroll.x、ariaLabel 和 `loading > error > empty`，不引入 DataTable 能力。
-    - 重要度：10/10
-
 - [ ] `06 src/components/data-display/timeline.tsx`：实现 Timeline 和公共导出
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DATA-DISPLAY-CLOSURE.md`
