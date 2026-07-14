@@ -30,4 +30,14 @@ export default tseslint.config(
             "react-refresh/only-export-components": "off",
         },
     },
+    {
+        files: [
+            "src/components/form/field.tsx",
+            "src/components/form/form.tsx",
+            "src/patterns/*.tsx",
+        ],
+        rules: {
+            "react-refresh/only-export-components": "off",
+        },
+    },
 );
