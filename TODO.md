@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `4-password-textarea-text-control`：4. 收敛 PasswordInput 和 TextArea 文本值 plumbing
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FORM-PUBLIC-API-CONTRACT.md`
-    - 范围对象：`src/components/form/password-input.tsx`、`src/components/form/password-input.test.tsx`、`src/components/form/textarea.tsx`、`src/components/form/textarea.test.tsx`、`src/components/form/text-control.ts`
-    - 处理动作：让 `SconePasswordInput` 和 `SconeTextArea` 复用同一个内部文本控件 helper。
-    - 验收点：Password 输入和 TextArea 输入均保持先 `onValueChange` 后原生 `onChange`，visibility toggle、disabled/readOnly toggle 禁用、count 和 autoSize 行为保持不变。
-    - 重要度：8/10
-
 - [ ] `5-form-public-api-closure`：5. 同步审查和覆盖度文档并清理 RUNBOOK
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FORM-PUBLIC-API-CONTRACT.md`

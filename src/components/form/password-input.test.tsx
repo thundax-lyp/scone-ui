@@ -27,6 +27,22 @@ describe("SconePasswordInput", () => {
         expect(handleChange).toHaveBeenCalledWith("new-secret");
     });
 
+    it("calls onValueChange before the native onChange handler", () => {
+        const calls: string[] = [];
+
+        render(
+            <SconePasswordInput
+                ariaLabel="Password"
+                onValueChange={() => calls.push("value")}
+                onChange={() => calls.push("change")}
+            />,
+        );
+
+        fireEvent.change(screen.getByLabelText("Password"), { target: { value: "secret" } });
+
+        expect(calls).toEqual(["value", "change"]);
+    });
+
     it("does not toggle visibility when disabled", () => {
         render(<SconePasswordInput ariaLabel="Password" defaultValue="secret" disabled />);
 

@@ -3,11 +3,9 @@ import * as React from "react";
 
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/cn";
-import { useControllableState } from "@/lib/use-controllable-state";
 import type { SconeControlSize } from "@/types/foundation";
 
-import { getSconeControlStateProps, normalizeSconeAriaInvalid } from "./control";
-import { useSconeFieldContext } from "./field";
+import { useSconeTextControl } from "./text-control";
 
 export interface SconePasswordInputProps extends Omit<
     React.InputHTMLAttributes<HTMLInputElement>,
@@ -49,19 +47,19 @@ export const SconePasswordInput = React.forwardRef<HTMLInputElement, SconePasswo
         },
         ref,
     ) => {
-        const field = useSconeFieldContext();
         const [visible, setVisible] = React.useState(false);
-        const [currentValue, setCurrentValue] = useControllableState<string>({
+        const { currentValue, controlProps, handleChange } = useSconeTextControl({
             value,
             defaultValue,
             onValueChange,
-        });
-        const controlProps = getSconeControlStateProps(field, {
-            ...props,
-            disabled,
-            readOnly,
-            "aria-label": ariaLabel ?? props["aria-label"],
-            "aria-invalid": normalizeSconeAriaInvalid(invalid ?? props["aria-invalid"]),
+            onChange,
+            ariaLabel,
+            invalid,
+            controlProps: {
+                ...props,
+                disabled,
+                readOnly,
+            },
         });
         const canToggle = !controlProps.disabled && !controlProps.readOnly;
 
@@ -72,10 +70,7 @@ export const SconePasswordInput = React.forwardRef<HTMLInputElement, SconePasswo
                     type={visible ? "text" : "password"}
                     value={currentValue}
                     className={cn(inputSizeClassNames[size], className)}
-                    onChange={(event) => {
-                        setCurrentValue(event.currentTarget.value);
-                        onChange?.(event);
-                    }}
+                    onChange={handleChange}
                     {...controlProps}
                 />
                 <button

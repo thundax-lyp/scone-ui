@@ -2,11 +2,9 @@ import * as React from "react";
 
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/cn";
-import { useControllableState } from "@/lib/use-controllable-state";
 import type { SconeControlSize } from "@/types/foundation";
 
-import { getSconeControlStateProps, normalizeSconeAriaInvalid } from "./control";
-import { useSconeFieldContext } from "./field";
+import { useSconeTextControl } from "./text-control";
 
 export interface SconeTextAreaProps extends Omit<
     React.TextareaHTMLAttributes<HTMLTextAreaElement>,
@@ -47,16 +45,14 @@ export const SconeTextArea = React.forwardRef<HTMLTextAreaElement, SconeTextArea
         },
         ref,
     ) => {
-        const field = useSconeFieldContext();
-        const [currentValue, setCurrentValue] = useControllableState<string>({
+        const { currentValue, controlProps, handleChange } = useSconeTextControl({
             value,
             defaultValue,
             onValueChange,
-        });
-        const controlProps = getSconeControlStateProps(field, {
-            ...props,
-            "aria-label": ariaLabel ?? props["aria-label"],
-            "aria-invalid": normalizeSconeAriaInvalid(invalid ?? props["aria-invalid"]),
+            onChange,
+            ariaLabel,
+            invalid,
+            controlProps: props,
         });
         const count = currentValue?.length ?? 0;
 
@@ -72,10 +68,7 @@ export const SconeTextArea = React.forwardRef<HTMLTextAreaElement, SconeTextArea
                         autoSize && "field-sizing-content",
                         className,
                     )}
-                    onChange={(event) => {
-                        setCurrentValue(event.currentTarget.value);
-                        onChange?.(event);
-                    }}
+                    onChange={handleChange}
                     {...controlProps}
                 />
                 {showCount ? (
