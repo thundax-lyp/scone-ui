@@ -295,6 +295,33 @@ Recent evidence before this review branch:
 * **功能风险**：低；existing tests assert CSS variables on `<dl>`, so tests need a small update if this is fixed.
 * **置信度**：高
 
+## 11 Data Display Atoms
+
+### Evidence
+
+- `SconeCard` wraps shadcn card slots and exposes title, description, actions, footer, loading, and variant.
+- `SconeTag`, `SconeBadge`, `SconeStatistic`, and `SconeTimeline` use Foundation tone vocabulary without embedding product-specific statuses.
+- Tests cover loading card overlay, tag close action, badge overflow/dot/children, statistic slots, timeline reverse/pending/click, refs, and className.
+
+### Assessment
+
+- These components are mostly small, business-neutral wrappers.
+- Tone/status naming is consistent with Foundation vocabulary.
+- No unnecessary product workflows, request assumptions, or global state were found.
+
+### Candidate Finding
+
+### [P2] Badge root props do not target the same element as the forwarded ref
+
+* **位置**：`src/components/data-display/badge.tsx`
+* **类别**：API / 封装
+* **问题**：When `children` is present, the forwarded `ref` points to the outer wrapper span, but `className` and remaining span props are applied to the inner indicator span.
+* **影响**：Consumers cannot reliably style or annotate the root element through normal `className` / HTML prop passthrough. This differs from neighboring atom components where ref, className, and props target the same root.
+* **证据**：The children branch returns `<span ref={ref} className="relative ...">` and nests `{indicator}`; `indicator` applies `className` and `{...props}`.
+* **建议**：Separate wrapper props from indicator props or introduce an explicit `indicatorClassName`; keep root `className` and HTML props aligned with `ref`.
+* **功能风险**：低；visual positioning may change if className targeting is corrected, so update badge tests with both root and indicator assertions.
+* **置信度**：高
+
 ## 09 Form Layout Helpers
 
 ### Evidence

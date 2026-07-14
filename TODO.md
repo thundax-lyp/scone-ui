@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `11-data-display-atoms`：11 审核数据展示原子组件
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`src/components/data-display/card.tsx`、`src/components/data-display/tag.tsx`、`src/components/data-display/badge.tsx`、`src/components/data-display/statistic.tsx`、`src/components/data-display/timeline.tsx`
-    - 处理动作：检查 tone/status、loading、closable、计数、时间线 item 和业务中性边界。
-    - 验收点：输出原子展示组件是否存在命名误导、业务语义泄漏或防御性判断噪音的结论。
-    - 重要度：8/10
-
 - [ ] `12-typography-layout`：12 审核 Typography 和 Layout primitives
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
