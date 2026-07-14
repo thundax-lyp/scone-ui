@@ -29,13 +29,15 @@ const toneLabels: Record<SconeTone, string> = {
 
 export const SconeAlert = React.forwardRef<HTMLDivElement, SconeAlertProps>(
     (
-        { tone = "neutral", title, description, icon, action, className, children, ...props },
+        { tone = "neutral", title, description, icon, action, role, className, children, ...props },
         ref,
     ) => {
+        const defaultRole = tone === "danger" || tone === "warning" ? "alert" : "status";
+
         return (
             <div
                 ref={ref}
-                role="alert"
+                role={role ?? defaultRole}
                 data-scone-alert=""
                 data-tone={tone}
                 className={cn(

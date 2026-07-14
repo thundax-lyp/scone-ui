@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `04 src/components/feedback-overlay/alert`：调整 Alert urgent 与 non-urgent role 语义
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`
-    - 范围对象：`src/components/feedback-overlay/alert.tsx`、`src/components/feedback-overlay/alert.test.tsx`、`docs/10-specs/components/feedback-overlay/SCONE-ALERT.md`
-    - 处理动作：按 tone 默认映射 `role`，并允许调用方显式 `role` override。
-    - 验收点：`error`、`warning` 默认 `alert`，`success`、`info`、`neutral` 默认 `status`，显式 role 不被覆盖。
-    - 重要度：8/10
-
 - [ ] `05 src/components/feedback-overlay/status imports`：统一状态类 feedback 文件的 `cn` import
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`
