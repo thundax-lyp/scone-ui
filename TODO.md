@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `19-pattern-shell-page-section`：19 审核 AppShell、Page 和 Section Pattern
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`src/patterns/app-shell.tsx`、`src/patterns/page.tsx`、`src/patterns/section.tsx`、`src/patterns/index.ts`
-    - 处理动作：检查页面主滚动、全局空间、分区语义、compound parts 和公共导出边界。
-    - 验收点：输出 shell/page/section 是否存在职责重叠、命名不准或产品应用假设的结论。
-    - 重要度：10/10
-
 - [ ] `20-pattern-filter-data-table`：20 审核 FilterBar 和 DataTable Pattern
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`

@@ -594,6 +594,45 @@ Recent evidence before this review branch:
 * **功能风险**：低；behavior becomes more correct for dynamic media.
 * **置信度**：高
 
+## 19 AppShell, Page, And Section Patterns
+
+### Evidence
+
+- `AppShell` exposes Root/Sidebar/Header/Main/Aside compound parts and keeps `Main` as a non-scrolling page host.
+- `Page` exposes Root/Header/Main/Content/StickyActions and owns max width, density, main scroll, and sticky action inset.
+- `Section` exposes Root/Header/Title/Description/Actions/Content/Footer and avoids card styling.
+- Tests cover shell slots, controlled/default display state, main shrink behavior, page scroll/sticky inset, and Section semantic non-card structure.
+
+### Assessment
+
+- Pattern components do not import routing, permissions, product logo, request, or store code.
+- Main scroll ownership is mostly aligned with AppShell/Page design.
+- AppShell and Section expose or document behavior that is not actually implemented.
+
+### Candidate Findings
+
+### [P1] AppShell exposes change callbacks that are never called
+
+* **位置**：`src/patterns/app-shell.tsx`
+* **类别**：API / 状态
+* **问题**：`AppShell.Sidebar` exposes `onCollapsedChange` and `AppShell.Aside` exposes `onOpenChange`, but both callbacks are ignored with `void`.
+* **影响**：The API suggests interactive controlled/uncontrolled state, but the components only render based on props. Consumers cannot observe or initiate changes through these callbacks.
+* **证据**：`AppShellSidebar` computes `effectiveCollapsed = collapsed ?? defaultCollapsed` then `void onCollapsedChange`; `AppShellAside` computes `effectiveOpen = open ?? defaultOpen` then `void onOpenChange`.
+* **建议**：Either remove the callbacks until trigger behavior exists, or add explicit trigger/toggle affordances that call them.
+* **功能风险**：中；removing props is breaking, adding behavior needs design confirmation.
+* **置信度**：高
+
+### [P1] Section Root shorthand is specified but not implemented
+
+* **位置**：`docs/10-specs/patterns/SECTION.md`、`src/patterns/section.tsx`
+* **类别**：文档对齐 / API
+* **问题**：The SPEC table lists `Section.Root` props `title`, `description`, and `actions` as shorthand, but `SectionRootProps` only accepts `children` and `density` beyond HTML attributes.
+* **影响**：Consumers reading the SPEC will expect Root shorthand that does not exist, and implementation coverage can be overstated.
+* **证据**：`docs/10-specs/patterns/SECTION.md` says `Section.Root` supports title/description/actions; source implements those only on `Section.Header`.
+* **建议**：Decide whether Root shorthand is required. Either implement it with tests or correct the SPEC/design/readiness language to Header-only shorthand.
+* **功能风险**：低 to 中；doc-only correction is low risk, implementation adds API surface.
+* **置信度**：高
+
 ## 09 Form Layout Helpers
 
 ### Evidence
