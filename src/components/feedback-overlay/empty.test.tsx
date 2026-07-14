@@ -1,5 +1,4 @@
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
 import { SconeEmpty } from "./empty";
@@ -21,7 +20,6 @@ describe("SconeEmpty", () => {
 
     it("renders a recoverable action", async () => {
         const onCreate = vi.fn();
-        const user = userEvent.setup();
 
         render(
             <SconeEmpty
@@ -31,7 +29,7 @@ describe("SconeEmpty", () => {
             />,
         );
 
-        await user.click(screen.getByRole("button", { name: "Clear filters" }));
+        fireEvent.click(screen.getByRole("button", { name: "Clear filters" }));
 
         expect(onCreate).toHaveBeenCalledTimes(1);
     });

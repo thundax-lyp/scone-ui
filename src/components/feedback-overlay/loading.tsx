@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Loader2Icon } from "lucide-react";
 
-import { cn } from "@/lib/utils";
-import type { SconeControlSize } from "@/types/foundation";
+import { cn } from "../../lib/utils";
+import type { SconeControlSize } from "../../types/foundation";
 
 export interface SconeLoadingProps extends React.HTMLAttributes<HTMLDivElement> {
     loading?: boolean;

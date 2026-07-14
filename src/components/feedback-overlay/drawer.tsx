@@ -2,9 +2,8 @@ import * as React from "react";
 import { Dialog as DialogPrimitive } from "radix-ui";
 import { XIcon } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import type { OverlayCloseReason } from "@/types/foundation";
+import { cn } from "../../lib/utils";
+import type { OverlayCloseReason } from "../../types/foundation";
 
 export interface SconeDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
     open?: boolean;
@@ -140,15 +139,14 @@ export const SconeDrawer = React.forwardRef<HTMLDivElement, SconeDrawerProps>(
                         </div>
                         {actions ? <div className="shrink-0">{actions}</div> : null}
                         <DialogPrimitive.Close asChild>
-                            <Button
+                            <button
                                 aria-label="Close drawer"
-                                size="icon-sm"
+                                className="inline-flex size-7 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none"
                                 type="button"
-                                variant="ghost"
                                 onClick={() => requestClose("closeButton")}
                             >
-                                <XIcon />
-                            </Button>
+                                <XIcon aria-hidden="true" className="size-4" />
+                            </button>
                         </DialogPrimitive.Close>
                     </div>
                     <div

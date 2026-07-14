@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `6 src/components/feedback-overlay/dialog.tsx`：实现 Dialog 居中浮层组件
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-OVERLAY.md`
-    - 范围对象：`src/components/feedback-overlay/dialog.tsx`、`src/components/feedback-overlay/dialog.test.tsx`
-    - 处理动作：实现 `SconeDialog` 和 `SconeDialogProps`，覆盖 open、onRequestClose、title、description、children、footer、widthPreset、ariaLabel。
-    - 验收点：Dialog 测试验证可访问名称、Escape、outside、closeButton、footerAction、focus trap 和 focus restore。
-    - 重要度：10/10
-
 - [ ] `7 src/components/feedback-overlay/confirm.tsx`：实现 Confirm 确认组件
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-OVERLAY.md`

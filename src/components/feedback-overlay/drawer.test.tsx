@@ -1,5 +1,4 @@
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
 import { SconeDrawer } from "./drawer";
@@ -39,7 +38,6 @@ describe("SconeDrawer", () => {
 
     it("reports close button and footer close reasons", async () => {
         const onRequestClose = vi.fn();
-        const user = userEvent.setup();
 
         render(
             <SconeDrawer
@@ -52,8 +50,8 @@ describe("SconeDrawer", () => {
             </SconeDrawer>,
         );
 
-        await user.click(screen.getByRole("button", { name: "Cancel" }));
-        await user.click(screen.getByRole("button", { name: "Close drawer" }));
+        fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
+        fireEvent.click(screen.getByRole("button", { name: "Close drawer" }));
 
         expect(onRequestClose).toHaveBeenCalledWith("footerAction");
         expect(onRequestClose).toHaveBeenCalledWith("closeButton");

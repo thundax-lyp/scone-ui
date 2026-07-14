@@ -1,8 +1,8 @@
 import * as React from "react";
+import { Progress as ProgressPrimitive } from "radix-ui";
 
-import { Progress } from "@/components/ui/progress";
-import { cn } from "@/lib/utils";
-import type { SconeStatus } from "@/types/foundation";
+import { cn } from "../../lib/utils";
+import type { SconeStatus } from "../../types/foundation";
 
 export interface SconeProgressProps extends React.HTMLAttributes<HTMLDivElement> {
     value?: number;
@@ -55,12 +55,22 @@ export const SconeProgress = React.forwardRef<HTMLDivElement, SconeProgressProps
                         ) : null}
                     </div>
                 ) : null}
-                <Progress
+                <ProgressPrimitive.Root
                     value={normalizedValue}
                     max={max}
                     aria-valuetext={`${percent}%`}
-                    className={cn(statusClasses[status])}
-                />
+                    className={cn(
+                        "relative flex h-1 w-full items-center overflow-x-hidden rounded-full bg-muted",
+                        statusClasses[status],
+                    )}
+                    data-slot="progress"
+                >
+                    <ProgressPrimitive.Indicator
+                        className="size-full flex-1 bg-primary transition-all"
+                        data-slot="progress-indicator"
+                        style={{ transform: `translateX(-${100 - percent}%)` }}
+                    />
+                </ProgressPrimitive.Root>
             </div>
         );
     },

@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import { cn } from "@/lib/utils";
-import type { SconeTone } from "@/types/foundation";
+import { cn } from "../../lib/utils";
+import type { SconeTone } from "../../types/foundation";
 
 export interface SconeAlertProps extends React.HTMLAttributes<HTMLDivElement> {
     tone?: SconeTone;

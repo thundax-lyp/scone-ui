@@ -1,5 +1,4 @@
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
 import { SconeAlert } from "./alert";
@@ -26,7 +25,6 @@ describe("SconeAlert", () => {
 
     it("renders a directly related action", async () => {
         const onRetry = vi.fn();
-        const user = userEvent.setup();
 
         render(
             <SconeAlert
@@ -37,7 +35,7 @@ describe("SconeAlert", () => {
             />,
         );
 
-        await user.click(screen.getByRole("button", { name: "Retry" }));
+        fireEvent.click(screen.getByRole("button", { name: "Retry" }));
 
         expect(onRetry).toHaveBeenCalledTimes(1);
     });
