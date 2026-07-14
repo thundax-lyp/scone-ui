@@ -37,7 +37,7 @@ export interface DataTableAction {
     disabled?: boolean;
 }
 
-export interface DataTableToolbarProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DataTableToolbarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
     title?: React.ReactNode;
     start?: React.ReactNode;
     end?: React.ReactNode;
