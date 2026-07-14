@@ -115,6 +115,9 @@ export interface SectionRootProps {
     children: React.ReactNode;
     className?: string;
     density?: SconeDensity;
+    title?: React.ReactNode;
+    description?: React.ReactNode;
+    actions?: React.ReactNode;
 }
 
 export interface SectionHeaderProps {

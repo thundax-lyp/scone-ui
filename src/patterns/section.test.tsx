@@ -46,6 +46,31 @@ describe("Section", () => {
         ).toBeInTheDocument();
     });
 
+    it("renders root shorthand title, description, actions, and content", () => {
+        render(
+            <Section.Root
+                title="Billing"
+                description="Invoice settings"
+                actions={<button type="button">Edit section</button>}
+            >
+                <Section.Content>Payment methods</Section.Content>
+            </Section.Root>,
+        );
+
+        const header = screen
+            .getByRole("heading", { name: "Billing" })
+            .closest("[data-scone-section-part='header']") as HTMLElement;
+        const content = screen
+            .getByText("Payment methods")
+            .closest("[data-scone-section-part='content']") as HTMLElement;
+
+        expect(header).toBeInTheDocument();
+        expect(header).toContainElement(screen.getByText("Invoice settings"));
+        expect(header).toContainElement(screen.getByRole("button", { name: "Edit section" }));
+        expect(content).toBeInTheDocument();
+        expect(content).not.toContainElement(header);
+    });
+
     it("keeps explicit actions in the header and outside content", () => {
         render(
             <Section.Root>

@@ -50,5 +50,6 @@ Section 是无装饰结构分段，用于表单区块、详情分区、设置分
 ## Rules
 
 - Section 不增加边框、阴影或背景层级；视觉容器使用 Card。
+- `Section.Root` 的 `title`、`description`、`actions` shorthand 自动生成 `Section.Header`，复杂头部仍可显式组合 `Section.Header`。
 - Section 可以包含 Card 列表；Card 不应再包多个 Section 模拟页面。
 - 表单语境下 `SconeFormSection` 是 Section 的 helper/shorthand，slot 规则与 Section 对齐。

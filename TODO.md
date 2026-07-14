@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `12 src/patterns/section`：实现 Section Root shorthand
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`
-    - 范围对象：`src/patterns/section.tsx`、`src/patterns/section.test.tsx`、`docs/10-specs/patterns/SECTION.md`、`docs/30-designs/admin-ui/PATTERN-DESIGN.md`
-    - 处理动作：为 `SectionRootProps` 新增 `title?: React.ReactNode`、`description?: React.ReactNode`、`actions?: React.ReactNode`。
-    - 验收点：`Section.Root` shorthand 自动渲染 header 区域，children 和显式 `Section.Header` 组合不破坏非 Card 结构。
-    - 重要度：9/10
-
 - [ ] `13 src/patterns/filter-bar`：修复 FilterBar hidden search state
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`

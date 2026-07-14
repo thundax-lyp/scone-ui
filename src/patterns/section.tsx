@@ -6,6 +6,9 @@ import type { SconeDensity } from "@/types/foundation";
 export interface SectionRootProps extends React.HTMLAttributes<HTMLElement> {
     children: React.ReactNode;
     density?: SconeDensity;
+    title?: React.ReactNode;
+    description?: React.ReactNode;
+    actions?: React.ReactNode;
 }
 
 export interface SectionHeaderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
@@ -37,7 +40,17 @@ const sectionDensityClassNames: Record<SconeDensity, string> = {
     comfortable: "gap-md",
 };
 
-function SectionRoot({ density = "default", className, children, ...props }: SectionRootProps) {
+function SectionRoot({
+    density = "default",
+    title,
+    description,
+    actions,
+    className,
+    children,
+    ...props
+}: SectionRootProps) {
+    const hasHeaderShorthand = Boolean(title || description || actions);
+
     return (
         <section
             data-scone-pattern="section"
@@ -45,6 +58,9 @@ function SectionRoot({ density = "default", className, children, ...props }: Sec
             className={cn("flex min-w-0 flex-col", sectionDensityClassNames[density], className)}
             {...props}
         >
+            {hasHeaderShorthand ? (
+                <SectionHeader title={title} description={description} actions={actions} />
+            ) : null}
             {children}
         </section>
     );
