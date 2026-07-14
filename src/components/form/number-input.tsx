@@ -77,10 +77,20 @@ export const SconeNumberInput = React.forwardRef<HTMLInputElement, SconeNumberIn
             "aria-invalid": normalizeSconeAriaInvalid(invalid ?? props["aria-invalid"]),
         });
         const isDisabled = controlProps.disabled || controlProps.readOnly;
-        const stepValue = Number(step) || 1;
+        const numericStep = Number(step);
+        const stepValue = Number.isFinite(numericStep) && numericStep !== 0 ? numericStep : 1;
 
         const commitNumber = (nextValue: number | undefined) => {
-            setCurrentValue(nextValue === undefined ? undefined : clampNumber(nextValue, min, max));
+            if (nextValue === undefined) {
+                setCurrentValue(undefined);
+                return;
+            }
+
+            if (!Number.isFinite(nextValue)) {
+                return;
+            }
+
+            setCurrentValue(clampNumber(nextValue, min, max));
         };
 
         return (
@@ -95,7 +105,11 @@ export const SconeNumberInput = React.forwardRef<HTMLInputElement, SconeNumberIn
                     className={cn(inputSizeClassNames[size], className)}
                     onChange={(event) => {
                         const rawValue = event.currentTarget.value;
-                        commitNumber(rawValue === "" ? undefined : Number(rawValue));
+                        if (rawValue === "") {
+                            commitNumber(undefined);
+                        } else {
+                            commitNumber(Number(rawValue));
+                        }
                         onChange?.(event);
                     }}
                     {...controlProps}

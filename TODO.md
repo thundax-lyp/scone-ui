@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `03-number-input-non-finite`：3. 修复 `SconeNumberInput` 非有限数字提交
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-TOKEN-NUMBER-PROGRESS-EDGES.md`
-    - 范围对象：`src/components/form/number-input.tsx`、`src/components/form/number-input.test.tsx`
-    - 处理动作：阻止非空输入解析出的非有限数字进入 `setCurrentValue` 和 `onValueChange`，并保留清空、合法数字和 stepper 行为。
-    - 验收点：非有限中间态输入不触发 `onValueChange(NaN)`，清空仍提交 `undefined`，合法输入和 `Increment value` / `Decrement value` 仍正常提交。
-    - 重要度：9/10
-
 - [ ] `04-review-coverage-runbook-closure`：4. 同步 review/coverage 文档并清理 RUNBOOK
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-TOKEN-NUMBER-PROGRESS-EDGES.md`

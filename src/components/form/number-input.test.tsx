@@ -38,4 +38,28 @@ describe("SconeNumberInput", () => {
 
         expect(ref.current).toBe(screen.getByLabelText("Quantity"));
     });
+
+    it("does not commit non-finite typed values", () => {
+        const handleChange = vi.fn();
+
+        render(
+            <SconeNumberInput ariaLabel="Quantity" defaultValue={2} onValueChange={handleChange} />,
+        );
+
+        const input = screen.getByLabelText("Quantity");
+
+        Object.defineProperty(input, "value", {
+            configurable: true,
+            value: "1e",
+            writable: true,
+        });
+        fireEvent.change(input);
+        Reflect.deleteProperty(input, "value");
+        fireEvent.change(input, { target: { value: "" } });
+        fireEvent.change(input, { target: { value: "4" } });
+
+        expect(handleChange).not.toHaveBeenCalledWith(Number.NaN);
+        expect(handleChange).toHaveBeenNthCalledWith(1, undefined);
+        expect(handleChange).toHaveBeenNthCalledWith(2, 4);
+    });
 });
