@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `6. aria-helpers`：实现基础 ARIA helper
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`
-    - 范围对象：`src/lib/aria.ts`、`src/lib/aria.test.ts`
-    - 处理动作：实现 id 合并、`aria-describedby` 合并、ARIA boolean 属性和值存在性判断。
-    - 验收点：helper 不生成无效 ARIA 属性，能稳定支持控件聚焦、读屏描述读取和错误状态描述更新。
-    - 重要度：8/10
-
 - [ ] `7. foundation-type-exports`：导出 Foundation 公共类型
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`

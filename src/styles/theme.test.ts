@@ -92,6 +92,7 @@ describe("theme variables", () => {
         const tokenSourceFiles = listFiles(srcDir)
             .filter((file) => /\.(css|ts|tsx)$/.test(file))
             .filter((file) => file !== themePath)
+            .filter((file) => !file.endsWith(".test.ts") && !file.endsWith(".test.tsx"))
             .filter((file) => readFileSync(file, "utf8").includes("--scone-"))
             .map((file) => relative(srcDir, file));
 

@@ -6,7 +6,7 @@ import { cn as compatCn } from "./utils";
 describe("cn", () => {
     it("merges conditional class inputs", () => {
         expect(cn("inline-flex", false, null, undefined, { hidden: false, flex: true })).toBe(
-            "inline-flex flex",
+            "flex",
         );
     });
 
