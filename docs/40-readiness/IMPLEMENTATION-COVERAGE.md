@@ -108,6 +108,13 @@ Recipe 守护：
 - `src/index.test.ts` 覆盖 `SconeFieldContextValue.fieldId`、`labelId`、`descriptionId`、`messageId` 作为当前公共类型契约。
 - `src/components/form/input.test.tsx`、`search-input.test.tsx`、`password-input.test.tsx`、`textarea.test.tsx` 覆盖 text controls 继续先触发 `onValueChange`，再触发原生 `onChange`。
 
+测试维护证据：
+
+- `src/patterns/app-shell.test.tsx`、`src/patterns/page.test.tsx`、`src/patterns/section.test.tsx` 已将非契约用途的 DOM traversal 改为 role、text、button 操作或公开 layout contract 断言。
+- `src/patterns/filter-bar.test.tsx`、`src/patterns/data-table.test.tsx` 已将筛选、表格和 toolbar 相关断言改为 input/select/button 操作、callback payload 和明确组合边界断言。
+- `src/app.test.tsx` 已改为 demo entry smoke test，不再验证固定 demo copy。
+- 本批次验证已执行 `pnpm exec prettier --write ...`、`pnpm lint`、`pnpm build`；全部代码任务完成后执行 `pnpm test`，结果为 69 个 test files、288 个 tests 通过。
+
 ## Boundaries
 
 - 本仓库仍是 admin-ui 组件库和 UI 治理工作区，不沉淀产品应用级 UI 规则。
@@ -122,7 +129,7 @@ Recipe 守护：
 本节只记录从本次系统性审核沉淀出的待修复方向；详细证据和风险见系统性审核报告。
 
 1. 降低复杂交互维护成本：持续关注 Combobox、DatePicker 的 overlay、focus 和 keyboard 行为。
-2. 处理剩余 P2/P3 维护项：Data Display / Layout root props 边界、剩余 `cn` import path、测试内部标记耦合。
+2. 处理剩余 P2/P3 维护项：Data Display / Layout root props 边界、剩余 `cn` import path、layout / feedback-overlay 测试内部标记耦合。
 
 后续维护要求：
 

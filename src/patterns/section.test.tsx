@@ -39,11 +39,6 @@ describe("Section", () => {
         );
         expect(screen.getByText("Header note")).toBeInTheDocument();
         expect(screen.getByRole("button", { name: "Edit section" })).toBeInTheDocument();
-        expect(
-            screen
-                .getByRole("button", { name: "Edit section" })
-                .closest("[data-scone-section-part='actions']"),
-        ).toBeInTheDocument();
     });
 
     it("renders root shorthand title, description, actions, and content", () => {
@@ -57,47 +52,36 @@ describe("Section", () => {
             </Section.Root>,
         );
 
-        const header = screen
-            .getByRole("heading", { name: "Billing" })
-            .closest("[data-scone-section-part='header']") as HTMLElement;
-        const content = screen
-            .getByText("Payment methods")
-            .closest("[data-scone-section-part='content']") as HTMLElement;
-
-        expect(header).toBeInTheDocument();
-        expect(header).toContainElement(screen.getByText("Invoice settings"));
-        expect(header).toContainElement(screen.getByRole("button", { name: "Edit section" }));
-        expect(content).toBeInTheDocument();
-        expect(content).not.toContainElement(header);
+        expect(screen.getByRole("heading", { name: "Billing" })).toBeInTheDocument();
+        expect(screen.getByText("Invoice settings")).toBeInTheDocument();
+        expect(screen.getByRole("button", { name: "Edit section" })).toBeInTheDocument();
+        expect(screen.getByText("Payment methods")).toHaveAttribute(
+            "data-scone-section-part",
+            "content",
+        );
     });
 
     it("keeps explicit actions in the header and outside content", () => {
         render(
             <Section.Root>
-                <Section.Header>
+                <Section.Header role="group" aria-label="User details header">
                     <div>
                         <Section.Title>User details</Section.Title>
                         <Section.Description>Profile metadata</Section.Description>
                     </div>
-                    <Section.Actions>
+                    <Section.Actions role="group" aria-label="User details actions">
                         <button type="button">Edit</button>
                     </Section.Actions>
                 </Section.Header>
-                <Section.Content>
+                <Section.Content role="region" aria-label="User details body">
                     <div>Form body</div>
                 </Section.Content>
             </Section.Root>,
         );
 
-        const actions = screen
-            .getByRole("button", { name: "Edit" })
-            .closest("[data-scone-section-part='actions']") as HTMLElement;
-        const header = screen
-            .getByText("User details")
-            .closest("[data-scone-section-part='header']") as HTMLElement;
-        const content = screen
-            .getByText("Form body")
-            .closest("[data-scone-section-part='content']") as HTMLElement;
+        const actions = screen.getByRole("group", { name: "User details actions" });
+        const header = screen.getByRole("group", { name: "User details header" });
+        const content = screen.getByRole("region", { name: "User details body" });
 
         expect(actions).toBeInTheDocument();
         expect(header).toContainElement(actions);
@@ -113,12 +97,12 @@ describe("Section", () => {
             </Section.Root>,
         );
 
-        expect(screen.getByText("Rows").closest("[data-scone-section-part='content']")).toHaveClass(
-            "min-w-0",
+        expect(screen.getByText("Rows")).toHaveAttribute("data-scone-section-part", "content");
+        expect(screen.getByText("Rows")).toHaveClass("min-w-0");
+        expect(screen.getByText("Updated yesterday")).toHaveAttribute(
+            "data-scone-section-part",
+            "footer",
         );
-        expect(
-            screen.getByText("Updated yesterday").closest("[data-scone-section-part='footer']"),
-        ).toBeInTheDocument();
     });
 
     it("supports heading levels and sparse composition", () => {

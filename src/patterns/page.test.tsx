@@ -6,13 +6,19 @@ import { Page } from "./page";
 describe("Page", () => {
     it("renders root with maxWidth, density, and sticky action attributes", () => {
         render(
-            <Page.Root maxWidth="wide" density="comfortable" hasStickyActions>
+            <Page.Root
+                role="group"
+                aria-label="Users page"
+                maxWidth="wide"
+                density="comfortable"
+                hasStickyActions
+            >
                 <Page.Main>Content</Page.Main>
             </Page.Root>,
         );
 
-        const root = screen.getByText("Content").closest("[data-scone-pattern='page']");
-        const main = screen.getByText("Content").closest("[data-scone-page-part='main']");
+        const root = screen.getByRole("group", { name: "Users page" });
+        const main = screen.getByRole("main");
 
         expect(root).toHaveAttribute("data-max-width", "wide");
         expect(root).toHaveAttribute("data-density", "comfortable");
@@ -35,23 +41,23 @@ describe("Page", () => {
         expect(screen.getByText("Manage access")).toBeInTheDocument();
         expect(screen.getByText("Extra header content")).toBeInTheDocument();
         expect(screen.getByRole("button", { name: "Create" })).toBeInTheDocument();
-        expect(
-            screen
-                .getByRole("button", { name: "Create" })
-                .closest("[data-scone-page-header-actions]"),
-        ).toBeInTheDocument();
     });
 
     it("keeps Content as a primary scroll container with sticky inset support", () => {
         render(
             <Page.Root hasStickyActions>
-                <Page.Content>Scrollable region</Page.Content>
+                <Page.Content role="region" aria-label="Scrollable region">
+                    Scrollable region
+                </Page.Content>
             </Page.Root>,
         );
 
-        expect(
-            screen.getByText("Scrollable region").closest("[data-scone-page-part='content']"),
-        ).toHaveClass("min-h-0", "min-w-0", "overflow-auto", "pb-24");
+        expect(screen.getByRole("region", { name: "Scrollable region" })).toHaveClass(
+            "min-h-0",
+            "min-w-0",
+            "overflow-auto",
+            "pb-24",
+        );
     });
 
     it("keeps Main without sticky inset when StickyActions is not declared", () => {
@@ -61,26 +67,24 @@ describe("Page", () => {
             </Page.Root>,
         );
 
-        expect(
-            screen.getByText("Scrollable content").closest("[data-scone-page-part='main']"),
-        ).not.toHaveAttribute("data-inset-for-sticky-actions");
+        expect(screen.getByRole("main")).not.toHaveAttribute("data-inset-for-sticky-actions");
     });
 
     it("supports StickyActions alignment states", () => {
         render(
             <Page.Root hasStickyActions>
                 <Page.Main>Content</Page.Main>
-                <Page.StickyActions align="between">
+                <Page.StickyActions role="group" aria-label="Page actions" align="between">
                     <button type="button">Cancel</button>
                     <button type="button">Save</button>
                 </Page.StickyActions>
             </Page.Root>,
         );
 
-        const actions = screen
-            .getByRole("button", { name: "Cancel" })
-            .closest("[data-scone-page-part='sticky-actions']");
+        const actions = screen.getByRole("group", { name: "Page actions" });
 
+        expect(screen.getByRole("button", { name: "Cancel" })).toBeInTheDocument();
+        expect(screen.getByRole("button", { name: "Save" })).toBeInTheDocument();
         expect(actions).toHaveAttribute("data-align", "between");
         expect(actions).toHaveClass("sticky", "bottom-0", "justify-between");
     });

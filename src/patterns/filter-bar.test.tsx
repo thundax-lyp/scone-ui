@@ -8,14 +8,14 @@ describe("FilterBar", () => {
         render(
             <FilterBar.Root>
                 <FilterBar.Search ariaLabel="Search users" placeholder="Find users" />
-                <FilterBar.Fields>
+                <FilterBar.Fields role="group" aria-label="Filter fields">
                     <label htmlFor="status">Status</label>
                     <select id="status" />
                 </FilterBar.Fields>
-                <FilterBar.Actions>
+                <FilterBar.Actions role="group" aria-label="Filter actions">
                     <button type="button">Apply</button>
                 </FilterBar.Actions>
-                <FilterBar.Summary>2 filters active</FilterBar.Summary>
+                <FilterBar.Summary role="status">2 filters active</FilterBar.Summary>
             </FilterBar.Root>,
         );
 
@@ -23,17 +23,15 @@ describe("FilterBar", () => {
             "data-scone-filter-bar-part",
             "search",
         );
-        expect(
-            screen.getByLabelText("Status").closest("[data-scone-filter-bar-part='fields']"),
-        ).toBeInTheDocument();
-        expect(
-            screen
-                .getByRole("button", { name: "Apply" })
-                .closest("[data-scone-filter-bar-part='actions']"),
-        ).toBeInTheDocument();
-        expect(
-            screen.getByText("2 filters active").closest("[data-scone-filter-bar-part='summary']"),
-        ).toBeInTheDocument();
+        expect(screen.getByRole("group", { name: "Filter fields" })).toHaveAttribute(
+            "data-scone-filter-bar-part",
+            "fields",
+        );
+        expect(screen.getByLabelText("Status")).toBeInTheDocument();
+        expect(screen.getByRole("group", { name: "Filter actions" })).toContainElement(
+            screen.getByRole("button", { name: "Apply" }),
+        );
+        expect(screen.getByRole("status")).toHaveTextContent("2 filters active");
     });
 
     it("updates search value through controlled compound boundary", () => {
@@ -91,7 +89,9 @@ describe("FilterBar", () => {
 
         render(
             <FilterBar.Root expanded={false} onExpandedChange={onExpandedChange}>
-                <FilterBar.Fields>Advanced filters</FilterBar.Fields>
+                <FilterBar.Fields role="group" aria-label="Advanced filters">
+                    Advanced filters
+                </FilterBar.Fields>
                 <FilterBar.Actions>
                     <button type="button" data-scone-filter-bar-action="toggle">
                         Expand
@@ -103,9 +103,9 @@ describe("FilterBar", () => {
         fireEvent.click(screen.getByRole("button", { name: "Expand" }));
 
         expect(onExpandedChange).toHaveBeenCalledWith(true);
-        expect(
-            screen.getByText("Advanced filters").closest("[data-scone-filter-bar-part='fields']"),
-        ).not.toHaveAttribute("data-expanded");
+        expect(screen.getByRole("group", { name: "Advanced filters" })).not.toHaveAttribute(
+            "data-expanded",
+        );
     });
 
     it("renders controlled built-in search input and reports changes", () => {

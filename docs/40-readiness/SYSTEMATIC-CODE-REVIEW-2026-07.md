@@ -32,10 +32,10 @@
 - 组件、Pattern、Foundation 的依赖方向整体合理。
 - 剩余边界问题主要集中在部分 root props 目标元素和测试内部标记耦合。
 
-建议优先处理的三个方向：
+建议优先处理的方向：
 
 1. 持续清理组件 root props 和剩余 `cn` import path 的一致性维护项。
-2. 减少非布局契约测试对内部 slot 标记的非必要耦合。
+2. 继续清理 layout / feedback-overlay 测试中对内部 slot 标记的非必要耦合。
 
 ### 问题清单索引
 
@@ -50,13 +50,12 @@ P2：
 - Descriptions `style` prop is applied to an internal `dl`, not the root.
 - Badge root props do not target the same element as the forwarded ref.
 - Layout primitive props are narrower than neighboring root components.
-- Some tests are tightly coupled to internal slot markup.
+- Layout / feedback-overlay tests still contain internal slot markup coupling.
 
 P3：
 
 - Public entry grouping is harder to scan than family barrels.
 - `cn` import path is inconsistent.
-- Demo App test validates copy instead of library behavior.
 
 ### 推荐的目录结构调整
 
@@ -81,9 +80,8 @@ src/lib/cn.ts
 
 ### 建议执行顺序
 
-1. 需要人工确认的修改：Form context 公共导出是否允许未来 breaking change。
-2. 模块边界和 API 调整：统一剩余 `cn` import path，收口 Data Display / Layout root props 边界。
-3. 测试维护：减少非布局契约测试对内部 slot 标记的耦合。
+1. 模块边界和 API 调整：统一剩余 `cn` import path，收口 Data Display / Layout root props 边界。
+2. 测试维护：继续清理 layout / feedback-overlay 中非布局契约测试对内部 slot 标记的耦合。
 
 ## 01 Baseline
 
@@ -474,39 +472,29 @@ Recent evidence before this review branch:
 - `vitest.config.ts` uses jsdom, a single `@` alias, and one setup file.
 - `src/test/setup.ts` only installs jest-dom and a minimal `ResizeObserver` mock.
 - The repository currently has 69 test files.
-- A search for `data-scone`, `data-slot`, `closest(`, `querySelector`, `toHaveClass`, and `toHaveAttribute` found 220 matching test lines. Many of these are valid layout-slot assertions, but they also make some tests sensitive to internal markup.
-- `src/app.test.tsx` only asserts the demo heading text in `src/app.tsx`.
+- Pattern tests now use roles, labels, visible controls, callback payloads, and explicit public contract assertions for the reviewed container/filter/table cases.
+- `src/app.test.tsx` is a demo entry smoke test and no longer asserts fixed demo copy.
+- Remaining target files with internal marker/traversal cleanup potential are `src/components/layout/*.test.tsx` and `src/components/feedback-overlay/*.test.tsx`.
 
 ### Assessment
 
 - The package-level export guard is strong and aligned with the docs-only Recipe boundary.
 - Test setup is intentionally small and does not hide behavior behind heavy mocks.
-- Component tests generally exercise public DOM behavior through Testing Library, with some justified use of documented `data-scone-*` slot attributes for layout Patterns.
-- The main test maintenance risk is not coverage absence; it is over-reliance on internal slot/class details in areas where user-observable roles, labels, values, and callbacks would be more stable.
+- Component tests generally exercise public DOM behavior through Testing Library, with justified use of documented `data-scone-*` slot attributes for layout and Pattern contracts.
+- The remaining test maintenance risk is not coverage absence; it is over-reliance on internal slot/class details in layout and feedback / overlay tests where user-observable roles, labels, values, ARIA state, and callbacks would be more stable.
 
 ### Candidate Findings
 
-### [P2] Some tests are tightly coupled to internal slot markup
+### [P2] Layout / feedback-overlay tests still contain internal slot markup coupling
 
-- **位置**：`src/patterns/*.test.tsx`、`src/components/layout/*.test.tsx`、`src/components/feedback-overlay/*.test.tsx`
+- **位置**：`src/components/layout/*.test.tsx`、`src/components/feedback-overlay/*.test.tsx`
 - **类别**：测试 / 封装
-- **问题**：A meaningful share of tests locate elements through `closest("[data-scone-*]")`, `querySelector("[data-scone-*]")`, `data-slot`, or class assertions. This is useful when the slot attribute is a documented layout contract, but it becomes brittle when the test intent is user-facing behavior.
+- **问题**：Pattern / App 范围已完成测试表达方式清理；layout 和 feedback / overlay 范围仍包含通过 `closest("[data-scone-*]")`、`querySelector("[data-scone-*]")`、`data-slot` 或 class assertions 定位内部结构的测试。slot attribute 属于 documented layout contract 时应保留，但测试意图是用户可观察行为时仍偏脆弱。
 - **影响**：Markup-only refactors can fail tests even when public behavior is unchanged, which raises maintenance cost and makes future simplification feel riskier.
-- **证据**：`rg "data-scone|data-slot|closest\\(|querySelector|toHaveClass|toHaveAttribute" src -g "*.test.*"` returns 220 lines across Pattern, layout, feedback, and data-display tests.
+- **证据**：`rg "data-scone|data-slot|closest\\(|querySelector|toHaveClass|toHaveAttribute" src/components/layout/*.test.tsx src/components/feedback-overlay/*.test.tsx` still returns matches in layout and feedback / overlay tests. Pattern cleanup completed in `src/patterns/app-shell.test.tsx`、`src/patterns/page.test.tsx`、`src/patterns/section.test.tsx`、`src/patterns/filter-bar.test.tsx`、`src/patterns/data-table.test.tsx`; `src/app.test.tsx` no longer validates demo copy.
 - **建议**：Keep data attribute assertions only for documented slot/layout contracts. When touching a test, prefer roles, labels, text, ARIA state, values, callbacks, and public props for behavior assertions.
 - **功能风险**：低；this is a testing strategy cleanup and should not change runtime behavior.
 - **置信度**：中
-
-### [P3] Demo App test validates copy instead of library behavior
-
-- **位置**：`src/app.test.tsx`
-- **类别**：测试 / 无效代码
-- **问题**：The test asserts the demo heading text `"React + TailwindCSS frontend project"` rather than a component-library behavior or public package contract.
-- **影响**：This is low-cost but low-value coverage. Demo copy edits can fail CI without indicating a library regression.
-- **证据**：`src/app.test.tsx` renders `App` and only checks one heading name.
-- **建议**：Either treat it explicitly as a demo smoke test, or remove it once the package-level and component-level tests cover the intended library behavior.
-- **功能风险**：低；removing or weakening the test does not change runtime code.
-- **置信度**：高
 
 ## 23 SPEC, DESIGN, And Readiness Alignment
 
