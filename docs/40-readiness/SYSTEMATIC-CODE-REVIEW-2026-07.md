@@ -265,3 +265,19 @@ Recent evidence before this review branch:
 * **建议**：Use existing Popover/Dialog primitives for overlay behavior and make the clear control a real sibling button. Add focused tests for focus return, Escape/outside close, disabled dates, and keyboard date movement.
 * **功能风险**：中；calendar interaction is user-facing and should be refactored behind behavior-preserving tests.
 * **置信度**：高
+
+## 09 Form Layout Helpers
+
+### Evidence
+
+- `SconeFieldGroup` renders a semantic `fieldset`, optional `legend`, optional description, and a bounded 1/2/3-column grid.
+- `SconeFormSection` renders a form-local `section`, optional header copy, local actions, and content wrapper.
+- Tests cover semantic group lookup, description, column data attribute, title/actions/content rendering, ref, and className passthrough.
+- Specs and designs explicitly describe `SconeFormSection` as a form-context helper/shorthand, not a replacement for the general `Section` Pattern.
+
+### Assessment
+
+- No P0/P1/P2 issue found in this task scope.
+- Naming and file placement match responsibilities.
+- The helpers are small but not arbitrary wrappers: they preserve fieldset and section semantics and encode documented form layout choices.
+- The overlap with `Section` Pattern is documented and intentionally scoped to form pages.

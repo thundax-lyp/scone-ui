@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `09-form-layout-helpers`：09 审核 Form 分组和分区 helper
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`src/components/form/field-group.tsx`、`src/components/form/form-section.tsx`、`src/components/form/field-group.test.tsx`、`src/components/form/form-section.test.tsx`
-    - 处理动作：检查 helper 是否只表达结构语义，是否与 Section Pattern 或 Layout 组件职责重叠。
-    - 验收点：输出表单 helper 的命名、职责边界和测试覆盖是否清晰的结论。
-    - 重要度：7/10
-
 - [ ] `10-data-display-core`：10 审核数据展示核心组件
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
