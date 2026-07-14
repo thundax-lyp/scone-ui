@@ -3,7 +3,7 @@ import * as React from "react";
 import { cn } from "../../lib/utils";
 import type { SconeTone } from "../../types/foundation";
 
-export interface SconeAlertProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SconeAlertProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
     tone?: SconeTone;
     title?: React.ReactNode;
     description?: React.ReactNode;

@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "../../lib/utils";
 
-export interface SconeEmptyProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SconeEmptyProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
     title?: React.ReactNode;
     description?: React.ReactNode;
     image?: React.ReactNode;

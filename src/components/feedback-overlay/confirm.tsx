@@ -3,7 +3,7 @@ import { AlertDialog as AlertDialogPrimitive } from "radix-ui";
 
 import { cn } from "../../lib/utils";
 
-export interface SconeConfirmProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SconeConfirmProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
     open?: boolean;
     defaultOpen?: boolean;
     onOpenChange?: (open: boolean) => void;

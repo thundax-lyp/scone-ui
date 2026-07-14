@@ -5,7 +5,7 @@ import { XIcon } from "lucide-react";
 import { cn } from "../../lib/utils";
 import type { OverlayCloseReason } from "../../types/foundation";
 
-export interface SconeDrawerProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SconeDrawerProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
     open?: boolean;
     defaultOpen?: boolean;
     onOpenChange?: (open: boolean) => void;
