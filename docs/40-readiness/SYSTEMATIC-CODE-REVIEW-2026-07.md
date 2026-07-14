@@ -20,7 +20,6 @@
 
 最影响清晰度和简洁度的问题：
 
-- 若干公共 API 暴露过宽的行为，例如 Form context internals。
 - 部分组件 root props、测试断言和导入路径仍有低风险一致性维护空间。
 
 是否存在明显的过度设计：
@@ -31,13 +30,12 @@
 是否存在模块边界问题：
 
 - 组件、Pattern、Foundation 的依赖方向整体合理。
-- 主要边界问题是 public API 边界偏宽：Form context internals 进入公共入口。
+- 剩余边界问题主要集中在部分 root props 目标元素和测试内部标记耦合。
 
 建议优先处理的三个方向：
 
-1. 收口 public API 边界：决定 Form context internals 是否继续公开。
-2. 持续清理组件 root props 和剩余 `cn` import path 的一致性维护项。
-3. 减少非布局契约测试对内部 slot 标记的非必要耦合。
+1. 持续清理组件 root props 和剩余 `cn` import path 的一致性维护项。
+2. 减少非布局契约测试对内部 slot 标记的非必要耦合。
 
 ### 问题清单索引
 
@@ -49,9 +47,6 @@ P1：未发现未关闭项。
 
 P2：
 
-- Controlled state helper cannot represent `undefined` as a controlled value.
-- Form context internals are part of the public package surface.
-- Text input value plumbing is duplicated across sibling components.
 - Descriptions `style` prop is applied to an internal `dl`, not the root.
 - Badge root props do not target the same element as the forwarded ref.
 - Layout primitive props are narrower than neighboring root components.
@@ -180,19 +175,6 @@ Recent evidence before this review branch:
 - Utility functions have real cross-family reuse and are not premature global abstractions.
 - No duplicated className, ARIA id, ref composition, or controlled/uncontrolled helper was found in this layer.
 
-### Candidate Finding
-
-### [P2] Controlled state helper cannot represent `undefined` as a controlled value
-
-- **位置**：`src/lib/use-controllable-state.ts`
-- **类别**：状态 / API / 类型
-- **问题**：`isControlled` is derived from `value !== undefined`; components using this helper cannot distinguish omitted `value` from an intentionally controlled `undefined` value.
-- **影响**：For components where `undefined` is the documented empty value, controlled clearing must usually be represented by omitting `value` or using a different sentinel. This is easy to miss when reviewing custom inputs.
-- **证据**：`UseControllableStateOptions<T>` declares `value?: T`, `defaultValue?: T | (() => T)`, and the hook returns `T | undefined`; callers include `SconeNumberInput`, `SconeDatePicker`, `SconeUpload`, `SconeImage`, `FilterBar`, and multiple navigation/form controls.
-- **建议**：Do not change the helper globally during this audit. When fixing related components, either document this contract explicitly or introduce a controlled sentinel only where `undefined` must be a valid controlled value.
-- **功能风险**：中；changing this helper would affect many controls and could alter controlled/uncontrolled behavior.
-- **置信度**：高
-
 ## 04 Styles, Theme, And Demo Entry
 
 ### Evidence
@@ -226,27 +208,14 @@ Recent evidence before this review branch:
 - `control.ts` is a real shared helper, not a one-off abstraction.
 - Fast Refresh warning exceptions for `form.tsx` and `field.tsx` match the compound/context export pattern.
 
-### Candidate Finding
-
-### [P2] Form context internals are part of the public package surface
-
-- **位置**：`src/components/form/form.tsx`、`src/components/form/field.tsx`、`src/components/form/index.ts`、`src/index.ts`
-- **类别**：API / 封装
-- **问题**：`useSconeFormContext`, `useSconeFieldContext`, `SconeFormContextValue`, and `SconeFieldContextValue` are exported from the public package entry. `SconeFieldContextValue` includes internal id fields such as `fieldId`, `labelId`, `descriptionId`, and `messageId`.
-- **影响**：Consumers can couple to internal Field wiring. Future changes to id generation, description/message semantics, or context shape become public compatibility concerns.
-- **证据**：`src/index.ts` exports both hooks and context value types; `src/index.test.ts` asserts these exports; internal callers are form controls plus `src/components/form/control.ts`.
-- **建议**：Keep current exports for compatibility. For a future breaking or migration release, consider keeping hooks internal or exporting a smaller read-only field-state type that excludes generated ids.
-- **功能风险**：中；removing or narrowing these exports would affect consumers and public export tests.
-- **置信度**：高
-
 ## 06 Form Text Inputs And Button Controls
 
 ### Evidence
 
 - `SconeButton` wraps the shadcn button, maps Scone size tokens, blocks click handling while loading, and exposes `ariaLabel` for icon-only cases.
-- `SconeInput`, `SconeSearchInput`, `SconePasswordInput`, and `SconeTextArea` all use `useControllableState` and `getSconeControlStateProps`.
+- `SconeInput`, `SconeSearchInput`, `SconePasswordInput`, and `SconeTextArea` all use the internal `useSconeTextControl` helper for controlled/uncontrolled text value state, Field prop injection, ARIA normalization, and `onChange` ordering.
 - Text controls omit native `value`, `defaultValue`, and `onChange` from inherited props, then reintroduce explicit value APIs plus native `onChange`.
-- Tests cover uncontrolled changes, clear action, password visibility, loading-disabled button behavior, Field state, refs, and count display.
+- Tests cover uncontrolled changes, clear action, password visibility, loading-disabled button behavior, Field state, refs, count display, and `onValueChange` before native `onChange` ordering.
 
 ### Assessment
 
@@ -254,19 +223,6 @@ Recent evidence before this review branch:
 - Field integration is centralized enough to avoid divergent ARIA behavior.
 - `loading`, `disabled`, `readOnly`, and `invalid` semantics are explicit and covered by focused tests.
 - No immediate functionality bug found in this task scope.
-
-### Candidate Finding
-
-### [P2] Text input value plumbing is duplicated across sibling components
-
-- **位置**：`src/components/form/input.tsx`、`src/components/form/search-input.tsx`、`src/components/form/password-input.tsx`、`src/components/form/textarea.tsx`
-- **类别**：重复代码 / 状态
-- **问题**：Each text control repeats the same controlled/uncontrolled setup, Field prop injection, `ariaLabel` merge, invalid normalization, and `onChange` ordering.
-- **影响**：The code is still readable, but fixes to value semantics or Field injection must be manually mirrored across four files. This raises maintenance risk for future behavior changes.
-- **证据**：All four components call `useControllableState<string>`, `useSconeFieldContext`, `getSconeControlStateProps`, and `normalizeSconeAriaInvalid`, then call `setCurrentValue` before user `onChange`.
-- **建议**：Do not introduce a broad abstraction now. If a second behavior fix touches these files, extract a small internal hook local to `components/form` for text control state and field props.
-- **功能风险**：中；an extraction would affect all text controls, so it should be paired with existing focused tests.
-- **置信度**：高
 
 ## 07 Form Choice Controls
 

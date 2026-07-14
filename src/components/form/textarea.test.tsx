@@ -27,6 +27,22 @@ describe("SconeTextArea", () => {
         expect(handleChange).toHaveBeenCalledWith("Line one\nLine two");
     });
 
+    it("calls onValueChange before the native onChange handler", () => {
+        const calls: string[] = [];
+
+        render(
+            <SconeTextArea
+                ariaLabel="Notes"
+                onValueChange={() => calls.push("value")}
+                onChange={() => calls.push("change")}
+            />,
+        );
+
+        fireEvent.change(screen.getByLabelText("Notes"), { target: { value: "Line one" } });
+
+        expect(calls).toEqual(["value", "change"]);
+    });
+
     it("uses Field invalid state and keeps the textarea ref", () => {
         const ref = React.createRef<HTMLTextAreaElement>();
 

@@ -77,7 +77,7 @@ Recipe 守护：
 | 命令                | 状态 | 说明                                                              |
 | ------------------- | ---- | ----------------------------------------------------------------- |
 | `pnpm format:check` | 通过 | 全仓库格式符合 Prettier。                                         |
-| `pnpm test`         | 通过 | 69 个 test files、288 个 tests。                                  |
+| `pnpm test`         | 通过 | 69 个 test files、293 个 tests。                                  |
 | `pnpm typecheck`    | 通过 | TypeScript 无类型错误。                                           |
 | `pnpm lint`         | 通过 | compound component / Pattern 文件已在 ESLint 配置中设置明确例外。 |
 | `pnpm build`        | 通过 | Vite production build 成功。                                      |
@@ -104,6 +104,9 @@ Recipe 守护：
 - `src/components/navigation/segmented.test.tsx` 覆盖 arrow key selection 与 focus 同步并跳过 disabled option。
 - `src/patterns/section.test.tsx` 覆盖 `Section.Root` title / description / actions shorthand。
 - `src/patterns/filter-bar.test.tsx` 覆盖 `defaultSearchValue` 渲染内置 search input 并提交可见 search value。
+- `src/lib/use-controllable-state.test.tsx` 覆盖 `value={undefined}` 继续按 uncontrolled sentinel 处理，并保留 setter 本地更新和 `onValueChange` 通知。
+- `src/index.test.ts` 覆盖 `SconeFieldContextValue.fieldId`、`labelId`、`descriptionId`、`messageId` 作为当前公共类型契约。
+- `src/components/form/input.test.tsx`、`search-input.test.tsx`、`password-input.test.tsx`、`textarea.test.tsx` 覆盖 text controls 继续先触发 `onValueChange`，再触发原生 `onChange`。
 
 ## Boundaries
 
@@ -118,9 +121,8 @@ Recipe 守护：
 
 本节只记录从本次系统性审核沉淀出的待修复方向；详细证据和风险见系统性审核报告。
 
-1. 降低复杂交互维护成本：优先处理 Combobox、DatePicker 的 overlay、focus 和 keyboard 行为。
-2. 处理 public API 边界：决定 Form context public surface 是否继续作为稳定导出。
-3. 处理剩余 P2/P3 维护项：Controlled state helper 的 `undefined` 语义、Data Display / Layout root props 边界、剩余 `cn` import path、测试内部标记耦合。
+1. 降低复杂交互维护成本：持续关注 Combobox、DatePicker 的 overlay、focus 和 keyboard 行为。
+2. 处理剩余 P2/P3 维护项：Data Display / Layout root props 边界、剩余 `cn` import path、测试内部标记耦合。
 
 后续维护要求：
 

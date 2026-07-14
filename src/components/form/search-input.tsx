@@ -3,11 +3,9 @@ import * as React from "react";
 
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/cn";
-import { useControllableState } from "@/lib/use-controllable-state";
 import type { SconeControlSize } from "@/types/foundation";
 
-import { getSconeControlStateProps, normalizeSconeAriaInvalid } from "./control";
-import { useSconeFieldContext } from "./field";
+import { useSconeTextControl } from "./text-control";
 
 export interface SconeSearchInputProps extends Omit<
     React.InputHTMLAttributes<HTMLInputElement>,
@@ -51,18 +49,18 @@ export const SconeSearchInput = React.forwardRef<HTMLInputElement, SconeSearchIn
         },
         ref,
     ) => {
-        const field = useSconeFieldContext();
-        const [currentValue, setCurrentValue] = useControllableState<string>({
+        const { currentValue, setCurrentValue, controlProps, handleChange } = useSconeTextControl({
             value,
             defaultValue,
             onValueChange,
-        });
-        const controlProps = getSconeControlStateProps(field, {
-            ...props,
-            disabled,
-            readOnly,
-            "aria-label": ariaLabel ?? props["aria-label"],
-            "aria-invalid": normalizeSconeAriaInvalid(invalid ?? props["aria-invalid"]),
+            onChange,
+            ariaLabel,
+            invalid,
+            controlProps: {
+                ...props,
+                disabled,
+                readOnly,
+            },
         });
         const hasValue = Boolean(currentValue);
         const canClear = clearable && hasValue && !controlProps.disabled && !controlProps.readOnly;
@@ -78,10 +76,7 @@ export const SconeSearchInput = React.forwardRef<HTMLInputElement, SconeSearchIn
                     type="search"
                     value={currentValue}
                     className={cn(inputSizeClassNames[size], className)}
-                    onChange={(event) => {
-                        setCurrentValue(event.currentTarget.value);
-                        onChange?.(event);
-                    }}
+                    onChange={handleChange}
                     {...controlProps}
                 />
                 {loading ? (

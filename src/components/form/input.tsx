@@ -2,11 +2,9 @@ import * as React from "react";
 
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/cn";
-import { useControllableState } from "@/lib/use-controllable-state";
 import type { SconeControlSize } from "@/types/foundation";
 
-import { getSconeControlStateProps, normalizeSconeAriaInvalid } from "./control";
-import { useSconeFieldContext } from "./field";
+import { useSconeTextControl } from "./text-control";
 
 export interface SconeInputProps extends Omit<
     React.InputHTMLAttributes<HTMLInputElement>,
@@ -42,16 +40,14 @@ export const SconeInput = React.forwardRef<HTMLInputElement, SconeInputProps>(
         },
         ref,
     ) => {
-        const field = useSconeFieldContext();
-        const [currentValue, setCurrentValue] = useControllableState<string>({
+        const { currentValue, controlProps, handleChange } = useSconeTextControl({
             value,
             defaultValue,
             onValueChange,
-        });
-        const controlProps = getSconeControlStateProps(field, {
-            ...props,
-            "aria-label": ariaLabel ?? props["aria-label"],
-            "aria-invalid": normalizeSconeAriaInvalid(invalid ?? props["aria-invalid"]),
+            onChange,
+            ariaLabel,
+            invalid,
+            controlProps: props,
         });
 
         return (
@@ -59,10 +55,7 @@ export const SconeInput = React.forwardRef<HTMLInputElement, SconeInputProps>(
                 ref={ref}
                 value={currentValue}
                 className={cn(inputSizeClassNames[size], className)}
-                onChange={(event) => {
-                    setCurrentValue(event.currentTarget.value);
-                    onChange?.(event);
-                }}
+                onChange={handleChange}
                 {...controlProps}
             />
         );

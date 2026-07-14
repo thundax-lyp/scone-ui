@@ -24,6 +24,22 @@ describe("SconeSearchInput", () => {
         expect(handleChange).toHaveBeenNthCalledWith(2, "");
     });
 
+    it("calls onValueChange before the native onChange handler", () => {
+        const calls: string[] = [];
+
+        render(
+            <SconeSearchInput
+                ariaLabel="Search users"
+                onValueChange={() => calls.push("value")}
+                onChange={() => calls.push("change")}
+            />,
+        );
+
+        fireEvent.change(screen.getByLabelText("Search users"), { target: { value: "grace" } });
+
+        expect(calls).toEqual(["value", "change"]);
+    });
+
     it("shows loading and disables clear for readOnly inputs", () => {
         const handleChange = vi.fn();
 

@@ -20,6 +20,22 @@ describe("SconeInput", () => {
         expect(handleChange).toHaveBeenNthCalledWith(2, "");
     });
 
+    it("calls onValueChange before the native onChange handler", () => {
+        const calls: string[] = [];
+
+        render(
+            <SconeInput
+                ariaLabel="Name"
+                onValueChange={() => calls.push("value")}
+                onChange={() => calls.push("change")}
+            />,
+        );
+
+        fireEvent.change(screen.getByLabelText("Name"), { target: { value: "Grace" } });
+
+        expect(calls).toEqual(["value", "change"]);
+    });
+
     it("uses Field state and keeps the input ref", () => {
         const ref = React.createRef<HTMLInputElement>();
 

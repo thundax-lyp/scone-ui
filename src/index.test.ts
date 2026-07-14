@@ -383,6 +383,9 @@ describe("public index exports", () => {
         >();
         expectTypeOf<SconeFieldRootProps["invalid"]>().toEqualTypeOf<boolean | undefined>();
         expectTypeOf<SconeFieldContextValue["fieldId"]>().toEqualTypeOf<string>();
+        expectTypeOf<SconeFieldContextValue["labelId"]>().toEqualTypeOf<string>();
+        expectTypeOf<SconeFieldContextValue["descriptionId"]>().toEqualTypeOf<string>();
+        expectTypeOf<SconeFieldContextValue["messageId"]>().toEqualTypeOf<string>();
         expectTypeOf<SconeFieldGroupProps["columns"]>().toEqualTypeOf<1 | 2 | 3 | undefined>();
         expectTypeOf<SconeFormSectionProps["title"]>().toEqualTypeOf<React.ReactNode>();
         expectTypeOf<SconeFormActionsProps["align"]>().toEqualTypeOf<SconeAlign | undefined>();
