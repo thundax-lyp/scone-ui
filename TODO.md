@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `4.4 ui cn imports batch 3`：统一 ui 第三批 `cn` 导入
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
-    - 范围对象：`src/components/ui/dropdown-menu.tsx`、`src/components/ui/input-group.tsx`、`src/components/ui/input.tsx`、`src/components/ui/popover.tsx`
-    - 处理动作：将本批 ui 文件中的 `@/lib/utils` 导入改为 `@/lib/cn`。
-    - 验收点：本批文件不再引用 `@/lib/utils`，DOM 结构、className 内容和 export 不变。
-    - 重要度：7/10
-
 - [ ] `4.5 ui cn imports batch 4`：统一 ui 第四批 `cn` 导入
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
