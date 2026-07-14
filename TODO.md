@@ -10,14 +10,6 @@
 
 ## 当前任务项
 
-- [ ] `5. src/index.ts`：完成公共导出和集成测试
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DATA-TABLE-PAGINATION-PATTERN.md`
-    - 范围对象：`src/index.ts`、`src/index.test.ts`、`src/components/navigation/index.ts`、`src/patterns/index.ts`
-    - 处理动作：收束公共入口导出并补充入口集成测试。
-    - 验收点：公共入口能消费 `SconePagination`、`DataTable`、分页类型、selection 类型和相关 props 类型，且 `src/index.test.ts` 不重复组件交互测试。
-    - 重要度：9/10
-
 - [ ] `6. main`：同步 main 分支代码并执行验证
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DATA-TABLE-PAGINATION-PATTERN.md`

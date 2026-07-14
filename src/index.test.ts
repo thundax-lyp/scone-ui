@@ -5,6 +5,7 @@ import {
     ariaValue,
     cn,
     composeRefs,
+    DataTable,
     hasAriaValue,
     mergeAriaDescribedBy,
     mergeIds,
@@ -23,6 +24,7 @@ import {
     SconeLoading,
     SconeNotificationProvider,
     SconeParagraph,
+    SconePagination,
     SconeProgress,
     SconeScrollArea,
     SconeSeparator,
@@ -42,6 +44,10 @@ import {
 } from "./index";
 import type {
     Breakpoint,
+    DataTableAction,
+    DataTablePaginationProps,
+    DataTableRootProps,
+    DataTableTableRegionProps,
     Key,
     NotificationCloseReason,
     NotificationOptions,
@@ -64,7 +70,11 @@ import type {
     SconeNotificationProviderProps,
     SconeOption,
     SconeOrientation,
+    SconePaginationChangeReason,
+    SconePaginationProps,
+    SconePaginationState,
     SconeProgressProps,
+    SconeRowSelection,
     SconeSide,
     SconeSplitPaneProps,
     SconeSplitPaneSizePreset,
@@ -104,6 +114,13 @@ describe("public index exports", () => {
         expectTypeOf<OverlayCloseReason>().toEqualTypeOf<
             "escape" | "outside" | "closeButton" | "footerAction" | "programmatic"
         >();
+        expectTypeOf<SconePaginationState>().toEqualTypeOf<{
+            page: number;
+            pageSize: number;
+            total: number;
+        }>();
+        expectTypeOf<SconePaginationChangeReason>().toEqualTypeOf<"page" | "pageSize">();
+        expectTypeOf<SconeRowSelection<{ id: string }>["selectedRowKeys"]>().toEqualTypeOf<Key[]>();
         expectTypeOf<SconeOption["value"]>().toEqualTypeOf<string>();
         expectTypeOf<SconeBaseItem["key"]>().toEqualTypeOf<Key>();
         expectTypeOf<SconeTableColumn<{ id: string }>["key"]>().toEqualTypeOf<Key>();
@@ -126,6 +143,27 @@ describe("public index exports", () => {
         >();
         expectTypeOf<SconeSplitPaneProps["onSizeCommit"]>().toEqualTypeOf<
             ((size: string) => void) | undefined
+        >();
+    });
+
+    it("exports navigation and pattern component APIs", () => {
+        expect(typeof SconePagination).toBe("object");
+        expect(typeof DataTable).toBe("object");
+        expect(typeof DataTable.Root).toBe("function");
+        expect(typeof DataTable.TableRegion).toBe("function");
+        expect(typeof DataTable.Pagination).toBe("function");
+
+        expectTypeOf<SconePaginationProps["state"]>().toEqualTypeOf<SconePaginationState>();
+        expectTypeOf<DataTableAction["key"]>().toEqualTypeOf<Key>();
+        expectTypeOf<DataTableRootProps<{ id: string }>["rowSelection"]>().toEqualTypeOf<
+            SconeRowSelection<{ id: string }> | undefined
+        >();
+        expectTypeOf<DataTableTableRegionProps<{ id: string }>["rowKey"]>().toEqualTypeOf<
+            string | ((record: { id: string }) => Key) | undefined
+        >();
+        expectTypeOf<DataTablePaginationProps["onChange"]>().toEqualTypeOf<
+            | ((nextState: SconePaginationState, reason: SconePaginationChangeReason) => void)
+            | undefined
         >();
     });
 
@@ -198,6 +236,7 @@ describe("public index exports", () => {
                 "SconeCard",
                 "SconeCompact",
                 "SconeConfirm",
+                "DataTable",
                 "SconeDescriptions",
                 "SconeDialog",
                 "SconeDrawer",
@@ -207,6 +246,7 @@ describe("public index exports", () => {
                 "SconeLoading",
                 "SconeNotificationProvider",
                 "SconeParagraph",
+                "SconePagination",
                 "SconeProgress",
                 "SconeScrollArea",
                 "SconeSeparator",
