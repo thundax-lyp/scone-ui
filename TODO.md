@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `4. src/components/form/input.tsx`：评估 text input value plumbing 是否需要同步
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FORM-INTERACTION-HARDENING.md`
-    - 范围对象：`src/components/form/input.tsx`、`src/components/form/search-input.tsx`、`src/components/form/password-input.tsx`、`src/components/form/textarea.tsx`
-    - 处理动作：检查 text input、search input、password input、textarea 是否因本轮 value、Field 或 ARIA 语义变化需要同步修正。
-    - 验收点：若无直接修复收益则不改代码；若必须修改，现有 `value`、`defaultValue`、`onValueChange`、`onChange` 语义和对应测试保持一致。
-    - 重要度：6/10
-
 - [ ] `5. docs/40-readiness/SYSTEMATIC-CODE-REVIEW-2026-07.md`：收口审核报告和 RUNBOOK
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FORM-INTERACTION-HARDENING.md`
