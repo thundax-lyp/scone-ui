@@ -10,14 +10,6 @@
 
 ## 当前任务项
 
-- [ ] `05 Public exports`：完成公共导出和 DataTable 回归确认
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-ADMIN-SHELL-PATTERNS.md`
-    - 范围对象：`src/patterns/index.ts`、`src/index.ts`、`src/patterns/data-table.tsx`、`src/patterns/data-table.test.tsx`
-    - 处理动作：从 patterns 入口和包公共入口导出新增 Pattern 与公开类型，并确认不修改 DataTable 内部。
-    - 验收点：新增导出不覆盖既有 `DataTable` 导出，`src/patterns/data-table.test.tsx` 继续通过。
-    - 重要度：9/10
-
 - [ ] `06 Implementation Coverage`：更新 Admin Pattern 实现覆盖证据
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-ADMIN-SHELL-PATTERNS.md`

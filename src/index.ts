@@ -143,7 +143,7 @@ export {
 } from "./components/feedback-overlay/notification";
 export { SconeProgress } from "./components/feedback-overlay/progress";
 export { SconeToastProvider, toast } from "./components/feedback-overlay/toast";
-export { DataTable } from "./patterns";
+export { AppShell, DataTable, FilterBar, Page, Section } from "./patterns";
 export { SconeCompact } from "./components/layout/compact";
 export { SconeInline } from "./components/layout/inline";
 export { SconeScrollArea } from "./components/layout/scroll-area";
@@ -187,6 +187,11 @@ export type { SconeStackProps } from "./components/layout/stack";
 export type { SconeToolbarProps } from "./components/layout/toolbar";
 export type { SconePaginationProps } from "./components/navigation";
 export type {
+    AppShellAsideProps,
+    AppShellHeaderProps,
+    AppShellMainProps,
+    AppShellRootProps,
+    AppShellSidebarProps,
     DataTableAction,
     DataTableBulkActionsProps,
     DataTableFilterBarProps,
@@ -194,6 +199,21 @@ export type {
     DataTableRootProps,
     DataTableTableRegionProps,
     DataTableToolbarProps,
+    FilterBarActionsProps,
+    FilterBarFieldsProps,
+    FilterBarFilters,
+    FilterBarRootProps,
+    FilterBarSearchProps,
+    FilterBarState,
+    FilterBarSummaryProps,
+    PageContentProps,
+    PageHeaderProps,
+    PageRootProps,
+    PageStickyActionsProps,
+    SectionContentProps,
+    SectionFooterProps,
+    SectionHeaderProps,
+    SectionRootProps,
 } from "./patterns";
 
 export type {

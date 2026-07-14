@@ -3,9 +3,11 @@ import { describe, expect, expectTypeOf, it } from "vitest";
 import {
     ariaBoolean,
     ariaValue,
+    AppShell,
     cn,
     composeRefs,
     DataTable,
+    FilterBar,
     hasAriaValue,
     mergeAriaDescribedBy,
     mergeIds,
@@ -70,17 +72,24 @@ import {
     SconeTree,
     SconeTypography,
     SconeUpload,
+    Page,
+    Section,
     toast,
     useControllableState,
     useSconeFieldContext,
     useSconeFormContext,
 } from "./index";
 import type {
+    AppShellAsideProps,
+    AppShellSidebarProps,
     Breakpoint,
     DataTableAction,
     DataTablePaginationProps,
     DataTableRootProps,
     DataTableTableRegionProps,
+    FilterBarFilters,
+    FilterBarRootProps,
+    FilterBarState,
     Key,
     NotificationCloseReason,
     NotificationOptions,
@@ -158,6 +167,10 @@ import type {
     ToastOptions,
     ToastPosition,
     ToastService,
+    PageRootProps,
+    PageStickyActionsProps,
+    SectionHeaderProps,
+    SectionRootProps,
 } from "./index";
 
 describe("public index exports", () => {
@@ -216,12 +229,43 @@ describe("public index exports", () => {
 
     it("exports navigation and pattern component APIs", () => {
         expect(typeof SconePagination).toBe("object");
+        expect(typeof AppShell).toBe("object");
+        expect(typeof AppShell.Root).toBe("function");
+        expect(typeof AppShell.Main).toBe("function");
+        expect(typeof Page).toBe("object");
+        expect(typeof Page.Content).toBe("function");
+        expect(typeof Section).toBe("object");
+        expect(typeof Section.Header).toBe("function");
+        expect(typeof FilterBar).toBe("object");
+        expect(typeof FilterBar.Search).toBe("function");
         expect(typeof DataTable).toBe("object");
         expect(typeof DataTable.Root).toBe("function");
         expect(typeof DataTable.TableRegion).toBe("function");
         expect(typeof DataTable.Pagination).toBe("function");
 
         expectTypeOf<SconePaginationProps["state"]>().toEqualTypeOf<SconePaginationState>();
+        expectTypeOf<AppShellSidebarProps["onCollapsedChange"]>().toEqualTypeOf<
+            ((collapsed: boolean) => void) | undefined
+        >();
+        expectTypeOf<AppShellAsideProps["onOpenChange"]>().toEqualTypeOf<
+            ((open: boolean) => void) | undefined
+        >();
+        expectTypeOf<PageRootProps["maxWidth"]>().toEqualTypeOf<
+            "narrow" | "content" | "wide" | "full" | undefined
+        >();
+        expectTypeOf<PageStickyActionsProps["align"]>().toEqualTypeOf<
+            "start" | "end" | "between" | undefined
+        >();
+        expectTypeOf<SectionRootProps["density"]>().toEqualTypeOf<SconeDensity | undefined>();
+        expectTypeOf<SectionHeaderProps["actions"]>().toEqualTypeOf<React.ReactNode>();
+        expectTypeOf<FilterBarFilters>().toEqualTypeOf<Record<string, unknown>>();
+        expectTypeOf<FilterBarState>().toEqualTypeOf<{
+            searchValue: string;
+            filters: FilterBarFilters;
+        }>();
+        expectTypeOf<FilterBarRootProps["onApply"]>().toEqualTypeOf<
+            ((state: FilterBarState) => void) | undefined
+        >();
         expectTypeOf<DataTableAction["key"]>().toEqualTypeOf<Key>();
         expectTypeOf<DataTableRootProps<{ id: string }>["rowSelection"]>().toEqualTypeOf<
             SconeRowSelection<{ id: string }> | undefined
@@ -370,6 +414,11 @@ describe("public index exports", () => {
 
         expect(Object.keys(publicExports).sort()).toEqual(
             [
+                "AppShell",
+                "DataTable",
+                "FilterBar",
+                "Page",
+                "Section",
                 "SconeAccordion",
                 "SconeAlert",
                 "SconeAvatar",
@@ -383,7 +432,6 @@ describe("public index exports", () => {
                 "SconeCompact",
                 "SconeCombobox",
                 "SconeConfirm",
-                "DataTable",
                 "SconeDatePicker",
                 "SconeDescriptions",
                 "SconeDialog",
