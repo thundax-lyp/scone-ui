@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `12 form-section-actions`：FormSection 和 FormActions 闭环
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`
-    - 范围对象：`src/components/form/form-section.tsx`、`src/components/form/form-actions.tsx`、`src/components/form/form-section.test.tsx`、`src/components/form/form-actions.test.tsx`、`src/components/form/index.ts`
-    - 处理动作：实现 `SconeFormSection` 与 `SconeFormActions` 的标题、说明、局部 actions、align、sticky 和响应式换行。
-    - 验收点：分区内容、header actions、sticky actions、窄屏换行和 ref 测试通过。
-    - 重要度：7/10
-
 - [ ] `13 public-export`：Form 公共导出闭环
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`

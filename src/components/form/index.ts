@@ -13,6 +13,12 @@ export type { SconeDatePickerProps } from "./date-picker";
 export { SconeFieldGroup } from "./field-group";
 export type { SconeFieldGroupProps } from "./field-group";
 
+export { SconeFormActions } from "./form-actions";
+export type { SconeFormActionsProps } from "./form-actions";
+
+export { SconeFormSection } from "./form-section";
+export type { SconeFormSectionProps } from "./form-section";
+
 export { SconeInput } from "./input";
 export type { SconeInputProps } from "./input";
 
