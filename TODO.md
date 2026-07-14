@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `24-review-report`：24 汇总系统性代码审核报告
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`、`docs/40-readiness/IMPLEMENTATION-COVERAGE.md`
-    - 处理动作：按 RUNBOOK 输出总体评价、问题清单、目录结构调整、重命名清单和建议执行顺序。
-    - 验收点：审核报告按 P0/P1/P2/P3 排序，所有建议都有证据、影响范围和功能风险。
-    - 重要度：10/10
-
 - [ ] `25-readiness-runbook-closure`：25 更新 Implementation Coverage 并清理 RUNBOOK
     - 任务类型：执行任务
     - 依据文档：`docs/00-governance/TODO-RULES.md`、`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`

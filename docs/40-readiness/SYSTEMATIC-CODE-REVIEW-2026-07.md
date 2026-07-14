@@ -7,6 +7,114 @@
 - Source of execution order: `TODO.md`.
 - Temporary runbook: `docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`.
 
+## Final Review Summary
+
+### 总体评价
+
+当前代码库的主要优点：
+
+- 技术栈和仓库边界清晰：这是 admin-ui 组件库和 UI 治理仓库，没有引入路由、请求层、全局 store 或产品业务模型。
+- 公共导出守护强：`src/index.test.ts` 同时验证完整 runtime exports、代表性类型、Admin Pattern compound objects、Recipe no-source/no-export 边界。
+- 组件族组织基本稳定：Form、Data Display、Layout、Feedback / Overlay、Navigation、Media、Patterns 的目录职责清楚，`src/components/ui` 没有外泄为公共 API。
+- 测试覆盖广：当前 69 个测试文件覆盖组件、Pattern、导出、Foundation、theme 和 utilities。
+
+最影响清晰度和简洁度的问题：
+
+- 一部分复杂交互被手写在上层组件中，尤其是 Combobox、DatePicker、Dropdown；这些组件承担 overlay、focus、keyboard、selection 等多类职责。
+- readiness 和部分 Pattern SPEC/DESIGN 对实现状态描述偏乐观，容易把“覆盖完成”误读成“无已知实现问题”。
+- 若干公共 API 暴露了未兑现或过宽的行为，例如 AppShell change callbacks、Section Root shorthand、Form context internals。
+- 少数边界状态没有被明确建模，例如 invalid number/progress input、media `src` 变化后的失败状态、Tooltip id 唯一性。
+
+是否存在明显的过度设计：
+
+- 没有发现大型全局架构过度设计；整体依赖少、层次浅。
+- 局部存在“手写复杂交互”的错误复杂度，不是抽象层过多，而是没有充分复用已有 Radix/shadcn primitives。
+
+是否存在模块边界问题：
+
+- 组件、Pattern、Foundation 的依赖方向整体合理。
+- 主要边界问题是 public API 边界偏宽：Form context internals 进入公共入口，Pattern docs/types 暴露了未实现或不完整行为。
+
+建议优先处理的三个方向：
+
+1. 修复明确 P1 行为问题：Tailwind stale token config、NumberInput/Progress invalid numeric edge cases、Tooltip duplicate id、Image/Avatar `src` reset、Pagination clamping、Confirm async rejection。
+2. 收口 Pattern API 与文档：AppShell callbacks、Section Root shorthand、FilterBar hidden search state，逐项决定实现还是修正文档。
+3. 降低复杂交互维护成本：优先用现有 primitives 重构或约束 Combobox、DatePicker、Dropdown 的 overlay/focus/keyboard 行为。
+
+### 问题清单索引
+
+完整问题字段见下方逐任务章节；本索引用于按严重程度阅读。
+
+P0：未发现。
+
+P1：
+
+- Tailwind config references stale token variable names.
+- Combobox hand-rolls complex overlay and listbox behavior.
+- NumberInput can commit `NaN` into component state.
+- DatePicker hand-rolls dialog calendar behavior.
+- SplitPane min/max presets are not enforced.
+- Progress can render `NaN%` when `max` is invalid.
+- Confirm can create unhandled promise rejections.
+- Pagination range text can use an out-of-range page.
+- Dropdown hand-rolls menu popover behavior without outside-click close.
+- Tooltip uses a fixed DOM id.
+- Image and Avatar do not reset failure state when `src` changes.
+- AppShell exposes change callbacks that are never called.
+- Section Root shorthand is specified but not implemented.
+- Readiness says there is no pending implementation work despite verified audit findings.
+- Pattern documentation includes behavior not implemented in source.
+
+P2：
+
+- Controlled state helper cannot represent `undefined` as a controlled value.
+- Form context internals are part of the public package surface.
+- Text input value plumbing is duplicated across sibling components.
+- Descriptions `style` prop is applied to an internal `dl`, not the root.
+- Badge root props do not target the same element as the forwarded ref.
+- Layout primitive props are narrower than neighboring root components.
+- SplitPane pointer listeners lack unmount cleanup.
+- Alert always announces as urgent.
+- Toast timers reset on unrelated provider rerenders.
+- Tabs and Segmented expose weaker root passthrough than peer components.
+- Command active item can become stale after filtering.
+- FilterBar can keep hidden search state.
+- Some tests are tightly coupled to internal slot markup.
+
+P3：
+
+- Public entry grouping is harder to scan than family barrels.
+- `cn` import path is inconsistent.
+- Demo App test validates copy instead of library behavior.
+
+### 推荐的目录结构调整
+
+当前没有必须立即执行的目录搬迁。后续可以在触及相关代码时做一项低风险整理：
+
+```text
+调整前：
+src/lib/cn.ts
+src/lib/utils.ts  # one-line re-export
+
+调整后：
+src/lib/cn.ts
+```
+
+理由：`src/lib/utils.ts` 只重新导出 `cn`，导致 `../../lib/utils` 与 `@/lib/cn` 两种导入路径并存。删除前需要统一所有调用方 import，并确认公共入口仍从 `src/lib/cn.ts` 导出 `cn`。
+
+### 推荐的重命名清单
+
+| 当前名称 | 建议名称 | 位置 | 原因 | 影响范围 |
+| ---- | ---- | -- | -- | ---- |
+| 无必须重命名项 | 无 | 全仓库 | 本次审核没有发现高收益且低歧义的命名修正；主要问题是行为、边界和文档对齐。 | 无 |
+
+### 建议执行顺序
+
+1. 低风险、高收益修改：修复 stale Tailwind token config、Tooltip unique id、Image/Avatar `src` reset、Progress/NumberInput invalid numeric handling、Pagination range clamp、Confirm async rejection。
+2. 模块边界和 API 调整：收口 AppShell callbacks、Section Root shorthand、FilterBar hidden search；决定 Form context internals 是否继续公开；统一 `cn` import path。
+3. 状态与副作用重构：落实 SplitPane min/max 和 listener cleanup、Toast timer stability、Command filtered active state、Alert role/tone semantics。
+4. 需要人工确认的修改：Combobox/DatePicker/Dropdown 是否迁移到现有 primitives；Section Root shorthand 是实现还是从 SPEC 移除；AppShell callbacks 是移除还是补交互触发；Form context 公共导出是否允许未来 breaking change。
+
 ## 01 Baseline
 
 ### Project Facts
