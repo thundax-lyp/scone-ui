@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `08 feat/data-display-closure`：同步 main 分支代码
-    - 任务类型：执行任务
-    - 依据文档：`docs/00-governance/TODO-RULES.md`
-    - 范围对象：`feat/data-display-closure`、`main`
-    - 处理动作：在收口前同步最新 `main` 到当前分支并处理与本闭环相关的冲突。
-    - 验收点：当前分支包含最新 `main`，工作区无无关冲突或未解释改动。
-    - 重要度：9/10
-
 - [ ] `09 docs/40-readiness/IMPLEMENTATION-COVERAGE.md`：更新实现覆盖证据
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DATA-DISPLAY-CLOSURE.md`
