@@ -9,6 +9,46 @@
 
 ## 当前任务项
 
+- [ ] `1. src/components/layout/split-pane.tsx`：实现 SplitPane resize preset 边界和 drag cleanup
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-SPLIT-PANE-BOUNDS-CLEANUP.md`
+    - 范围对象：`src/components/layout/split-pane.tsx`
+    - 处理动作：兑现 `minSizePreset` / `maxSizePreset` 对 pointer resize 与 keyboard resize 的 clamp，并补齐 active drag unmount listener cleanup。
+    - 验收点：pointer、keyboard、受控 size 回调和 `aria-valuetext` 均使用 clamp 后的 size，active drag unmount 后不再保留 window pointer listener。
+    - 重要度：9/10
+
+- [ ] `2. src/components/layout/split-pane.test.tsx`：补齐 SplitPane 边界和卸载交互测试
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-SPLIT-PANE-BOUNDS-CLEANUP.md`
+    - 范围对象：`src/components/layout/split-pane.test.tsx`
+    - 处理动作：新增 pointer min/max、keyboard min/max 和 active drag unmount 后续 pointer event 不触发 callback 的测试。
+    - 验收点：`pnpm test src/components/layout/split-pane.test.tsx` 通过，且测试覆盖 resize handle 的 pointer drag 与 Arrow 键操作边界。
+    - 重要度：9/10
+
+- [ ] `3. docs/40-readiness/SYSTEMATIC-CODE-REVIEW-2026-07.md`：删除已处理 SplitPane 审核章节
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-SPLIT-PANE-BOUNDS-CLEANUP.md`
+    - 范围对象：`docs/40-readiness/SYSTEMATIC-CODE-REVIEW-2026-07.md`
+    - 处理动作：在实现和测试完全覆盖后，删除已关闭的 `SplitPane min/max presets are not enforced` 与 `SplitPane pointer listeners lack unmount cleanup` 章节。
+    - 验收点：Systematic Code Review 2026-07 不再保留已完全处理的 SplitPane P1/P2 问题章节。
+    - 重要度：8/10
+
+- [ ] `4. docs/40-readiness/IMPLEMENTATION-COVERAGE.md`：同步 SplitPane 修复覆盖状态
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-SPLIT-PANE-BOUNDS-CLEANUP.md`
+    - 范围对象：`docs/40-readiness/IMPLEMENTATION-COVERAGE.md`
+    - 处理动作：更新 Pending Implementation Work 或验证证据，使 SplitPane min/max 边界和 listener cleanup 的当前状态与实现一致。
+    - 验收点：Implementation Coverage 不再把已完成的 SplitPane listener cleanup 作为待处理项，且记录最小相关验证入口。
+    - 重要度：8/10
+
+- [ ] `5. docs/30-designs/RUNBOOK-SPLIT-PANE-BOUNDS-CLEANUP.md`：完成后清理临时 RUNBOOK
+    - 任务类型：执行任务
+    - 依据文档：`docs/00-governance/DOCUMENT-RULES.md`
+    - 范围对象：`docs/30-designs/RUNBOOK-SPLIT-PANE-BOUNDS-CLEANUP.md`、`docs/30-designs/README.md`
+    - 处理动作：任务完成并通过验证后删除临时 RUNBOOK，并从 Active Runbooks 移除对应链接。
+    - 验收点：`docs/30-designs/RUNBOOK-SPLIT-PANE-BOUNDS-CLEANUP.md` 不存在，`docs/30-designs/README.md` 的 Active Runbooks 不再引用该 RUNBOOK。
+    - 重要度：7/10
+
 ## 待审阅任务项
 
 ## 待讨论项
