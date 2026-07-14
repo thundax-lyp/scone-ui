@@ -50,5 +50,14 @@ describe("SconeProgress", () => {
         expect(progress).toHaveAttribute("aria-valuetext", "50%");
         expect(screen.getByText("50%")).toBeInTheDocument();
         expect(indicator).toHaveStyle({ transform: "translateX(-50%)" });
+
+        rerender(<SconeProgress value={50} max={Infinity} showLabel />);
+        progress = screen.getByRole("progressbar");
+        indicator = progress.querySelector("[data-slot='progress-indicator']");
+
+        expect(progress).toHaveAttribute("aria-valuemax", "100");
+        expect(progress).toHaveAttribute("aria-valuetext", "50%");
+        expect(screen.getByText("50%")).toBeInTheDocument();
+        expect(indicator).toHaveStyle({ transform: "translateX(-50%)" });
     });
 });

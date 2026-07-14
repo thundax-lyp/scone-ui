@@ -20,9 +20,8 @@
 
 最影响清晰度和简洁度的问题：
 
-- 一部分复杂交互被手写在上层组件中，尤其是 Dropdown；这些组件承担 overlay、focus、keyboard、selection 等多类职责。
-- readiness 和部分 Pattern SPEC/DESIGN 对实现状态描述偏乐观，容易把“覆盖完成”误读成“无已知实现问题”。
-- 若干公共 API 暴露了未兑现或过宽的行为，例如 AppShell change callbacks、Section Root shorthand、Form context internals。
+- 若干公共 API 暴露过宽的行为，例如 Form context internals。
+- 部分组件 root props、测试断言和导入路径仍有低风险一致性维护空间。
 
 是否存在明显的过度设计：
 
@@ -32,13 +31,13 @@
 是否存在模块边界问题：
 
 - 组件、Pattern、Foundation 的依赖方向整体合理。
-- 主要边界问题是 public API 边界偏宽：Form context internals 进入公共入口，Pattern docs/types 暴露了未实现或不完整行为。
+- 主要边界问题是 public API 边界偏宽：Form context internals 进入公共入口。
 
 建议优先处理的三个方向：
 
-1. 修复明确 P1 行为问题：Confirm async rejection。
-2. 收口 Pattern API 与文档：AppShell callbacks、Section Root shorthand、FilterBar hidden search state，逐项决定实现还是修正文档。
-3. 降低复杂交互维护成本：优先用现有 primitives 重构或约束 Dropdown 的 overlay/focus/keyboard 行为。
+1. 收口 public API 边界：决定 Form context internals 是否继续公开。
+2. 持续清理组件 root props 和剩余 `cn` import path 的一致性维护项。
+3. 减少非布局契约测试对内部 slot 标记的非必要耦合。
 
 ### 问题清单索引
 
@@ -46,25 +45,16 @@
 
 P0：未发现。
 
-P1：
-
-- Confirm can create unhandled promise rejections.
-- Dropdown hand-rolls menu popover behavior without outside-click close.
-- AppShell exposes change callbacks that are never called.
-- Section Root shorthand is specified but not implemented.
-- Readiness says there is no pending implementation work despite verified audit findings.
-- Pattern documentation includes behavior not implemented in source.
+P1：未发现未关闭项。
 
 P2：
 
 - Controlled state helper cannot represent `undefined` as a controlled value.
 - Form context internals are part of the public package surface.
 - Text input value plumbing is duplicated across sibling components.
-- Alert always announces as urgent.
-- Toast timers reset on unrelated provider rerenders.
-- Tabs and Segmented expose weaker root passthrough than peer components.
-- Command active item can become stale after filtering.
-- FilterBar can keep hidden search state.
+- Descriptions `style` prop is applied to an internal `dl`, not the root.
+- Badge root props do not target the same element as the forwarded ref.
+- Layout primitive props are narrower than neighboring root components.
 - Some tests are tightly coupled to internal slot markup.
 
 P3：
@@ -96,10 +86,9 @@ src/lib/cn.ts
 
 ### 建议执行顺序
 
-1. 低风险、高收益修改：修复 Confirm async rejection。
-2. 模块边界和 API 调整：收口 AppShell callbacks、Section Root shorthand、FilterBar hidden search；决定 Form context internals 是否继续公开；统一 `cn` import path。
-3. 状态与副作用重构：落实 Toast timer stability、Command filtered active state、Alert role/tone semantics。
-4. 需要人工确认的修改：Dropdown 是否迁移到现有 primitives；Section Root shorthand 是实现还是从 SPEC 移除；AppShell callbacks 是移除还是补交互触发；Form context 公共导出是否允许未来 breaking change。
+1. 需要人工确认的修改：Form context 公共导出是否允许未来 breaking change。
+2. 模块边界和 API 调整：统一剩余 `cn` import path，收口 Data Display / Layout root props 边界。
+3. 测试维护：减少非布局契约测试对内部 slot 标记的耦合。
 
 ## 01 Baseline
 
@@ -388,68 +377,31 @@ Recent evidence before this review branch:
 
 ### Evidence
 
-- `SconeAlert` uses Foundation tone, title/description/icon/action slots, and currently always renders `role="alert"`.
+- `SconeAlert` uses Foundation tone, title/description/icon/action slots, maps urgent tones to `alert`, maps non-urgent tones to `status`, and allows explicit role override.
 - `SconeEmpty` renders title, description, image, action, and children without owning recovery logic.
 - `SconeLoading` marks busy regions and provides spinner/skeleton status content.
 - `SconeProgress` wraps Radix Progress and clamps value range before passing it to the primitive.
-- Tests cover alert tone text, actions, empty actions, loading busy state, skeleton, not-loading state, progress ARIA values, status text, and clamping.
+- Tests cover alert tone text, actions, role mapping/override, empty actions, loading busy state, skeleton, not-loading state, progress ARIA values, status text, and clamping including invalid max values.
 
 ### Assessment
 
 - Empty and Loading responsibilities are clear and business-neutral.
-- Alert and Progress need small semantic hardening around urgency and invalid max values.
-
-### Candidate Findings
-
-### [P2] Alert always announces as urgent
-
-- **位置**：`src/components/feedback-overlay/alert.tsx`
-- **类别**：可访问性 / API
-- **问题**：All tones render `role="alert"`, including neutral and info notices.
-- **影响**：Non-urgent informational content may be announced with assertive urgency by assistive technologies, increasing noise.
-- **证据**：The root div has a fixed `role="alert"`; tone labels include neutral `Notice` and info `Information`.
-- **建议**：Map severe tones to `alert` and non-severe tones to `status` or allow an explicit `role` override without forcing alert.
-- **功能风险**：低；semantics change may affect tests that currently assume alert role for all tones.
-- **置信度**：中
+- Alert and Progress semantic hardening from this audit is complete.
 
 ## 15 Feedback Overlays And Services
 
 ### Evidence
 
 - `SconeDrawer` and `SconeDialog` delegate focus/outside/escape behavior to Radix Dialog and expose close reasons.
-- `SconeConfirm` delegates alert dialog behavior to Radix AlertDialog and manages async `onConfirm` busy state.
+- `SconeConfirm` delegates alert dialog behavior to Radix AlertDialog, manages async `onConfirm` busy state, catches rejected confirmations, and reports failures through `onError`.
 - `toast` and `notification` are module-level services backed by `useSyncExternalStore` providers.
-- Tests cover drawer/dialog title and close reasons, confirm duplicate async prevention, toast/notification update/dismiss/clear reasons, visible limits, and persistent notification marker.
+- Tests cover drawer/dialog title and close reasons, confirm duplicate async prevention and rejection handling, toast/notification update/dismiss/clear reasons, visible limits, toast timer rerender stability, and persistent notification marker.
 
 ### Assessment
 
 - Drawer/Dialog close reason handling is explicit and avoids product workflow assumptions.
 - Toast/Notification public services are intentionally exported with providers and have focused tests.
-- Confirm async error handling is incomplete.
-
-### Candidate Findings
-
-### [P1] Confirm can create unhandled promise rejections
-
-- **位置**：`src/components/feedback-overlay/confirm.tsx`
-- **类别**：错误处理 / 副作用
-- **问题**：`handleConfirm` awaits `onConfirm` inside `try/finally` but does not catch or surface rejection; the click handler calls it with `void handleConfirm()`.
-- **影响**：If `onConfirm` rejects, the dialog remains open but the promise rejection can escape as an unhandled error, and the component gives no stable error callback or state path.
-- **证据**：`await onConfirm?.(); setOpen(false);` is followed only by `finally { setConfirming(false); }`; no `catch` exists and the event handler discards the promise.
-- **建议**：Either catch and keep the dialog open with an `onError` callback, or require callers to handle errors and wrap `onConfirm` execution defensively.
-- **功能风险**：中；error semantics are user-facing and should be clarified before changing behavior.
-- **置信度**：高
-
-### [P2] Toast timers reset on unrelated provider rerenders
-
-- **位置**：`src/components/feedback-overlay/toast.tsx`
-- **类别**：副作用 / 状态
-- **问题**：`visibleItems` is created with `items.slice(-maxVisible)` on every render and used directly in the timer effect dependency list.
-- **影响**：A parent rerender can recreate `visibleItems`, clean up existing timers, and start new timers, extending toast lifetime unexpectedly.
-- **证据**：`const visibleItems = items.slice(-maxVisible);` and `React.useEffect(..., [duration, visibleItems])`.
-- **建议**：Memoize `visibleItems` by `[items, maxVisible]` or derive timer dependencies from stable item ids/durations.
-- **功能风险**：低；localized to toast timeout behavior.
-- **置信度**：中
+- Confirm async error handling and Toast timer stability findings from this audit are complete.
 
 ## 16 Primary Navigation
 
@@ -459,26 +411,13 @@ Recent evidence before this review branch:
 - `SconePagination` is controlled by `SconePaginationState` and emits `page` or `pageSize` change reasons.
 - `SconeTabs` supports item helper mode and compound mode with roving tab keyboard behavior.
 - `SconeSegmented` uses radiogroup semantics and controlled/uncontrolled selection.
-- Tests cover current breadcrumb, collapsed breadcrumb, pagination changes, tabs activation modes, vertical tab keyboard flow, and segmented selection.
+- Tests cover current breadcrumb, collapsed breadcrumb, pagination changes, tabs activation modes, tabs root passthrough/ref, vertical tab keyboard flow, segmented selection, and segmented keyboard focus movement.
 
 ### Assessment
 
 - Navigation components do not introduce routing assumptions.
 - State ownership is caller-controlled where it should be: pagination and selected values are not hidden in global state.
-- Tabs and Segmented have narrower root prop/ref APIs than most public components, but no immediate behavior bug was found in normal usage.
-
-### Candidate Finding
-
-### [P2] Tabs and Segmented expose weaker root passthrough than peer components
-
-- **位置**：`src/components/navigation/tabs.tsx`、`src/components/navigation/segmented.tsx`
-- **类别**：API / 一致性
-- **问题**：`SconeTabs` root has no forwarded ref and does not extend root HTML attributes; `SconeSegmented` has root attrs/ref but uses custom selection keyboard logic without focus movement tests.
-- **影响**：Consumers have less ability to instrument tabs roots, and segmented keyboard behavior can leave focus and selected item out of sync in edge cases.
-- **证据**：`SconeTabsRoot` is a plain function component; tests do not cover root ref/props. `SconeSegmented` handles arrows at root and changes value but does not focus the next option.
-- **建议**：Add root ref/HTML passthrough to Tabs and add segmented keyboard focus tests before changing focus behavior.
-- **功能风险**：低 to 中；Tabs ref passthrough is additive, Segmented focus changes affect keyboard users.
-- **置信度**：中
+- Tabs root passthrough and Segmented keyboard focus findings from this audit are complete.
 
 ## 17 Menu, Command, And Tree Navigation
 
@@ -488,36 +427,13 @@ Recent evidence before this review branch:
 - `SconeMenu` owns selected/open key arrays and nested menu rendering without route assumptions.
 - `SconeCommand` owns search input, filtering, grouping, active item, loading, empty state, and selection.
 - `SconeTree` owns expanded/selected/checked key arrays, flattening, keyboard navigation, treeitem rendering, and checkbox state.
-- Tests cover item selection, disabled states, keyboard movement, tree expand/check/select, command filtering, and service-free navigation behavior.
+- Tests cover item selection, disabled states, dropdown outside close, dropdown keyboard initial focus, keyboard movement, tree expand/check/select, command filtering, filtered active command selection, and service-free navigation behavior.
 
 ### Assessment
 
 - Menu and Tree have larger state surfaces but remain UI-level, not product workflow-level.
-- Dropdown and Command hand-roll interaction behavior that is usually delegated to Radix/cmdk primitives.
-
-### Candidate Findings
-
-### [P1] Dropdown hand-rolls menu popover behavior without outside-click close
-
-- **位置**：`src/components/navigation/dropdown.tsx`
-- **类别**：复杂度 / 可访问性
-- **问题**：Dropdown manually renders an absolute menu and keyboard loop, but does not close on outside pointer/focus and does not focus the first item when opened by keyboard.
-- **影响**：Open menus can remain visible after unrelated interactions, and keyboard users need extra navigation before reaching menu items.
-- **证据**：The component conditionally renders `<div role="menu">` and handles Escape/Arrow keys internally; no document listener, Popover/Menu primitive, or focus-first effect exists.
-- **建议**：Use existing Radix dropdown primitive or add outside interaction and initial focus behavior with tests.
-- **功能风险**：中；menu interaction behavior is user-facing.
-- **置信度**：高
-
-### [P2] Command active item can become stale after filtering
-
-- **位置**：`src/components/navigation/command.tsx`
-- **类别**：状态 / 可访问性
-- **问题**：`activeKey` is initialized from `selectedKey` and updated by keyboard/mouse, but filtering does not move it to the first enabled filtered item.
-- **影响**：After typing a search query, pressing Enter may do nothing until the user presses ArrowDown, even when results are visible.
-- **证据**：`filteredItems` and `enabledItems` are derived each render; `selectActive` only selects an item matching `activeKey`; no effect resets `activeKey` when `normalizedQuery` or `enabledItems` changes.
-- **建议**：When filtered enabled items change, set activeKey to the first enabled item unless `selectedKey` is externally controlling it.
-- **功能风险**：低；behavior becomes more predictable but should be covered with a filter-then-enter test.
-- **置信度**：高
+- Dropdown outside interaction and Command filtered active item findings from this audit are complete.
+- Dropdown remains a custom wrapper; future broad simplification can still consider deeper Radix primitive alignment.
 
 ## 18 Disclosure And Media Components
 
@@ -537,40 +453,16 @@ Recent evidence before this review branch:
 
 ### Evidence
 
-- `AppShell` exposes Root/Sidebar/Header/Main/Aside compound parts and keeps `Main` as a non-scrolling page host.
+- `AppShell` exposes Root/Sidebar/Header/Main/Aside compound parts, keeps `Main` as a non-scrolling page host, and no longer exposes unused change callbacks.
 - `Page` exposes Root/Header/Main/Content/StickyActions and owns max width, density, main scroll, and sticky action inset.
-- `Section` exposes Root/Header/Title/Description/Actions/Content/Footer and avoids card styling.
-- Tests cover shell slots, controlled/default display state, main shrink behavior, page scroll/sticky inset, and Section semantic non-card structure.
+- `Section` exposes Root/Header/Title/Description/Actions/Content/Footer, implements Root shorthand for title/description/actions, and avoids card styling.
+- Tests cover shell slots, controlled/default display state, main shrink behavior, page scroll/sticky inset, Section Root shorthand, and Section semantic non-card structure.
 
 ### Assessment
 
 - Pattern components do not import routing, permissions, product logo, request, or store code.
-- Main scroll ownership is mostly aligned with AppShell/Page design.
-- AppShell and Section expose or document behavior that is not actually implemented.
-
-### Candidate Findings
-
-### [P1] AppShell exposes change callbacks that are never called
-
-- **位置**：`src/patterns/app-shell.tsx`
-- **类别**：API / 状态
-- **问题**：`AppShell.Sidebar` exposes `onCollapsedChange` and `AppShell.Aside` exposes `onOpenChange`, but both callbacks are ignored with `void`.
-- **影响**：The API suggests interactive controlled/uncontrolled state, but the components only render based on props. Consumers cannot observe or initiate changes through these callbacks.
-- **证据**：`AppShellSidebar` computes `effectiveCollapsed = collapsed ?? defaultCollapsed` then `void onCollapsedChange`; `AppShellAside` computes `effectiveOpen = open ?? defaultOpen` then `void onOpenChange`.
-- **建议**：Either remove the callbacks until trigger behavior exists, or add explicit trigger/toggle affordances that call them.
-- **功能风险**：中；removing props is breaking, adding behavior needs design confirmation.
-- **置信度**：高
-
-### [P1] Section Root shorthand is specified but not implemented
-
-- **位置**：`docs/10-specs/patterns/SECTION.md`、`src/patterns/section.tsx`
-- **类别**：文档对齐 / API
-- **问题**：The SPEC table lists `Section.Root` props `title`, `description`, and `actions` as shorthand, but `SectionRootProps` only accepts `children` and `density` beyond HTML attributes.
-- **影响**：Consumers reading the SPEC will expect Root shorthand that does not exist, and implementation coverage can be overstated.
-- **证据**：`docs/10-specs/patterns/SECTION.md` says `Section.Root` supports title/description/actions; source implements those only on `Section.Header`.
-- **建议**：Decide whether Root shorthand is required. Either implement it with tests or correct the SPEC/design/readiness language to Header-only shorthand.
-- **功能风险**：低 to 中；doc-only correction is low risk, implementation adds API surface.
-- **置信度**：高
+- Main scroll ownership is aligned with AppShell/Page design.
+- AppShell callback and Section Root shorthand findings from this audit are complete.
 
 ## 20 FilterBar And DataTable Patterns
 
@@ -579,26 +471,13 @@ Recent evidence before this review branch:
 - `FilterBar.Root` owns search/filter/expanded state boundaries and provides compound parts through context.
 - `DataTable.Root` provides density, selection, and pagination context; `TableRegion` composes `SconeTable`; `Pagination` composes `SconePagination`.
 - `DataTable` keeps sorting/filtering request logic out of the pattern and does not import route/request/store code.
-- Tests cover FilterBar controlled/uncontrolled search and expanded state, built-in and compound actions, DataTable selection injection, bulk actions, state priority, children escape hatch, and pagination context/prop override.
+- Tests cover FilterBar controlled/uncontrolled search, default-only search visibility, apply payloads, expanded state, built-in and compound actions, DataTable selection injection, bulk actions, state priority, children escape hatch, and pagination context/prop override.
 
 ### Assessment
 
 - DataTable is not a monolithic request table; state ownership remains mostly with callers.
 - Selection injection is isolated to `DataTable.TableRegion`, leaving base `SconeTable` simpler.
-- FilterBar has an overloaded `filters` prop and one hidden-state edge case.
-
-### Candidate Finding
-
-### [P2] FilterBar can keep hidden search state
-
-- **位置**：`src/patterns/filter-bar.tsx`
-- **类别**：状态 / API
-- **问题**：The built-in search input renders only when `search`, `searchValue`, or `onSearchChange` is provided. `defaultSearchValue` alone initializes state but does not render the search control.
-- **影响**：A default search value can be included in `onApply` while no search UI is visible, which makes the active state hard to understand.
-- **证据**：`shouldRenderSearch` ignores `defaultSearchValue`; `useControllableState` still initializes `effectiveSearchValue` from `defaultSearchValue`; `onApply` always includes `searchValue`.
-- **建议**：Include `defaultSearchValue` in `shouldRenderSearch`, or avoid initializing search state when no search UI is rendered.
-- **功能风险**：低；could add a visible search input in a currently hidden edge case.
-- **置信度**：高
+- FilterBar has an overloaded `filters` prop, but the hidden search state finding from this audit is complete.
 
 ## 21 Vendored UI Boundary
 
@@ -679,38 +558,14 @@ Recent evidence before this review branch:
 
 - `docs/10-specs/COMPONENT-SELECTION.md` and `docs/30-designs/admin-ui/EXPORT-SURFACE-DESIGN.md` agree that Export Groups are the public surface and Recipes are docs-only.
 - `docs/30-designs/admin-ui/VERIFICATION-DESIGN.md` points public export validation to `src/index.test.ts`, which now explicitly guards public Pattern exports and negative Recipe exports.
-- `docs/40-readiness/IMPLEMENTATION-COVERAGE.md` records all component families, Admin Patterns, and Recipes as complete, and says there is no pending implementation work.
-- `docs/10-specs/patterns/SECTION.md` lists `Section.Root` shorthand props `title`, `description`, and `actions`, but source implements those props on `Section.Header`.
-- `docs/10-specs/patterns/APP-SHELL.md` and `docs/30-designs/admin-ui/PATTERN-DESIGN.md` list AppShell change callbacks, while source explicitly ignores them.
-- `docs/10-specs/patterns/FILTER-BAR.md` lists `defaultSearchValue`; source initializes the state but does not render the built-in search control when only `defaultSearchValue` is provided.
+- `docs/40-readiness/IMPLEMENTATION-COVERAGE.md` records all component families, Admin Patterns, and Recipes as complete, while separately listing remaining remediation work.
+- `docs/10-specs/patterns/SECTION.md` lists `Section.Root` shorthand props `title`, `description`, and `actions`; source implements those props on `Section.Root`.
+- `docs/10-specs/patterns/APP-SHELL.md` and `docs/30-designs/admin-ui/PATTERN-DESIGN.md` no longer describe unused AppShell change callbacks.
+- `docs/10-specs/patterns/FILTER-BAR.md` lists `defaultSearchValue`; source renders the built-in search control when only `defaultSearchValue` is provided.
 
 ### Assessment
 
 - Public export and Recipe docs-only boundaries are aligned across SPEC, DESIGN, readiness, source, and tests.
 - The verification design remains useful as a matrix, but edge-case findings from this audit are not reflected in readiness.
-- The current readiness document uses "完成" for implementation coverage and also says there is no pending implementation work. After this audit, that wording should be narrowed: coverage is complete, but remediation work remains.
-- Pattern API mismatches should be resolved by either implementing the documented behavior or correcting the SPEC/DESIGN/readiness text. They should not stay as silent divergence.
-
-### Candidate Finding
-
-### [P1] Readiness says there is no pending implementation work despite verified audit findings
-
-- **位置**：`docs/40-readiness/IMPLEMENTATION-COVERAGE.md`
-- **类别**：文档对齐 / 错误处理
-- **问题**：The readiness document concludes the covered Admin UI scope is complete and says "当前无未完成实现项", but this audit found multiple source-backed P1/P2 issues, including ignored AppShell callbacks, unimplemented Section Root shorthand, and Confirm async rejection handling.
-- **影响**：Readers can mistake "coverage complete" for "no known implementation work", which hides the actual remediation backlog and makes planning less accurate.
-- **证据**：`IMPLEMENTATION-COVERAGE.md` marks all rows as complete; this audit report contains source-backed findings across sections 04, 08, 13, 14, 19, and 20.
-- **建议**：In the closure task, keep coverage status as complete where accurate, but add a concise pending implementation work summary that points to this audit report.
-- **功能风险**：低；docs-only correction.
-- **置信度**：高
-
-### [P1] Pattern documentation includes behavior not implemented in source
-
-- **位置**：`docs/10-specs/patterns/APP-SHELL.md`、`docs/10-specs/patterns/SECTION.md`、`docs/10-specs/patterns/FILTER-BAR.md`、`src/patterns/app-shell.tsx`、`src/patterns/section.tsx`、`src/patterns/filter-bar.tsx`
-- **类别**：文档对齐 / API
-- **问题**：Several Pattern docs describe props or behavior that source does not fully deliver: AppShell change callbacks are ignored, Section Root shorthand is absent, and FilterBar can carry default search state without rendering the built-in search control.
-- **影响**：Consumers following SPEC/DESIGN can write code against behavior that appears supported but is incomplete or invisible at runtime.
-- **证据**：Earlier findings document `void onCollapsedChange`, `void onOpenChange`, the Section Root shorthand mismatch, and `shouldRenderSearch` ignoring `defaultSearchValue`.
-- **建议**：Treat these as remediation items. For each one, choose one direction explicitly: implement the documented behavior with tests, or narrow the docs and public type expectations.
-- **功能风险**：中；implementing behavior changes runtime API semantics, while narrowing docs may expose that current code is intentionally smaller than SPEC.
-- **置信度**：高
+- The readiness document now distinguishes implementation coverage completion from remaining remediation work.
+- Pattern API mismatches identified in this audit are resolved by implementation or documentation narrowing.

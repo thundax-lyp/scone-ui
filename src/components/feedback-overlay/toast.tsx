@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/cn";
 import type { SconeTone } from "../../types/foundation";
 
 export type ToastPosition = "top-left" | "top-right" | "bottom-left" | "bottom-right";
@@ -132,7 +132,7 @@ export function SconeToastProvider({
     onOpenChange,
 }: SconeToastProviderProps) {
     const items = React.useSyncExternalStore(subscribeToasts, getToastSnapshot, getToastSnapshot);
-    const visibleItems = items.slice(-maxVisible);
+    const visibleItems = React.useMemo(() => items.slice(-maxVisible), [items, maxVisible]);
 
     React.useEffect(() => {
         onOpenChange?.(items);

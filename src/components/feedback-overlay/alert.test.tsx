@@ -23,6 +23,24 @@ describe("SconeAlert", () => {
         expect(screen.getByTestId("alert-icon")).toBeInTheDocument();
     });
 
+    it("maps non-urgent tones to status by default", () => {
+        render(<SconeAlert tone="info" title="Import queued" />);
+
+        const alert = screen.getByRole("status");
+
+        expect(alert).toHaveAttribute("data-tone", "info");
+        expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+    });
+
+    it("allows callers to override the announced role", () => {
+        render(<SconeAlert tone="info" role="alert" title="Connection interrupted" />);
+
+        const alert = screen.getByRole("alert");
+
+        expect(alert).toHaveAttribute("data-tone", "info");
+        expect(screen.queryByRole("status")).not.toBeInTheDocument();
+    });
+
     it("renders a directly related action", async () => {
         const onRetry = vi.fn();
 

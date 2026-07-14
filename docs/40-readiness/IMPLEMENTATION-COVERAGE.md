@@ -77,7 +77,7 @@ Recipe 守护：
 | 命令                | 状态 | 说明                                                              |
 | ------------------- | ---- | ----------------------------------------------------------------- |
 | `pnpm format:check` | 通过 | 全仓库格式符合 Prettier。                                         |
-| `pnpm test`         | 通过 | 69 个 test files、267 个 tests。                                  |
+| `pnpm test`         | 通过 | 69 个 test files、288 个 tests。                                  |
 | `pnpm typecheck`    | 通过 | TypeScript 无类型错误。                                           |
 | `pnpm lint`         | 通过 | compound component / Pattern 文件已在 ESLint 配置中设置明确例外。 |
 | `pnpm build`        | 通过 | Vite production build 成功。                                      |
@@ -95,6 +95,15 @@ Recipe 守护：
 - `src/styles/theme.test.ts` 覆盖 Tailwind config 不再引用 stale token 变量名，并引用当前 `theme.css` token。
 - `src/components/feedback-overlay/progress.test.tsx` 覆盖 invalid `max` 不再产生非有限百分比、ARIA 或 indicator transform。
 - `src/components/form/number-input.test.tsx` 覆盖非有限输入不会提交 `NaN`，并保留清空和合法输入提交行为。
+- `src/components/feedback-overlay/confirm.test.tsx` 覆盖 async confirmation rejection 后 dialog 保持打开、busy 恢复并调用 `onError`。
+- `src/components/feedback-overlay/toast.test.tsx` 覆盖 provider 无关 rerender 不重置 toast timeout。
+- `src/components/feedback-overlay/alert.test.tsx` 覆盖 urgent / non-urgent role mapping 和显式 role override。
+- `src/components/navigation/dropdown.test.tsx` 覆盖 outside pointer/focus close 和 keyboard open initial focus。
+- `src/components/navigation/command.test.tsx` 覆盖 filter 后直接 Enter 选择可见 enabled item 且不选择 disabled filtered item。
+- `src/components/navigation/tabs.test.tsx` 覆盖 Tabs root HTML props 和 ref passthrough。
+- `src/components/navigation/segmented.test.tsx` 覆盖 arrow key selection 与 focus 同步并跳过 disabled option。
+- `src/patterns/section.test.tsx` 覆盖 `Section.Root` title / description / actions shorthand。
+- `src/patterns/filter-bar.test.tsx` 覆盖 `defaultSearchValue` 渲染内置 search input 并提交可见 search value。
 
 ## Boundaries
 
@@ -109,10 +118,9 @@ Recipe 守护：
 
 本节只记录从本次系统性审核沉淀出的待修复方向；详细证据和风险见系统性审核报告。
 
-1. 修复 P1 行为问题：Confirm async rejection。
-2. 收口 Pattern API 与文档：AppShell callbacks、Section Root shorthand、FilterBar hidden search state，逐项决定实现还是修正文档。
-3. 降低复杂交互维护成本：优先处理 Combobox、DatePicker、Dropdown 的 overlay、focus、keyboard 和 outside interaction 行为。
-4. 处理 P2 维护项：Toast timer stability、Command filtered active state、Alert role/tone semantics、Form context public surface、测试内部标记耦合。
+1. 降低复杂交互维护成本：优先处理 Combobox、DatePicker 的 overlay、focus 和 keyboard 行为。
+2. 处理 public API 边界：决定 Form context public surface 是否继续作为稳定导出。
+3. 处理剩余 P2/P3 维护项：Controlled state helper 的 `undefined` 语义、Data Display / Layout root props 边界、剩余 `cn` import path、测试内部标记耦合。
 
 后续维护要求：
 

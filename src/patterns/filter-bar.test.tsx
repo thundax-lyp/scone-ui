@@ -120,6 +120,20 @@ describe("FilterBar", () => {
         expect(onSearchChange).toHaveBeenCalledWith("abc");
     });
 
+    it("renders built-in search for default search values and applies visible input state", () => {
+        const onApply = vi.fn();
+
+        render(<FilterBar.Root defaultSearchValue="alice" onApply={onApply} />);
+
+        const search = screen.getByRole("searchbox", { name: "Search" });
+        expect(search).toHaveValue("alice");
+
+        fireEvent.change(search, { target: { value: "bob" } });
+        fireEvent.click(screen.getByRole("button", { name: "Apply" }));
+
+        expect(onApply).toHaveBeenCalledWith({ searchValue: "bob", filters: {} });
+    });
+
     it("uses a search slot instead of the built-in search input", () => {
         render(<FilterBar.Root search={<input aria-label="Custom search" />} searchValue="abc" />);
 

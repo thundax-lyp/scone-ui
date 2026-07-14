@@ -10,7 +10,6 @@ export interface AppShellSidebarProps extends React.HTMLAttributes<HTMLElement> 
     children?: React.ReactNode;
     collapsed?: boolean;
     defaultCollapsed?: boolean;
-    onCollapsedChange?: (collapsed: boolean) => void;
 }
 
 export interface AppShellHeaderProps extends React.HTMLAttributes<HTMLElement> {
@@ -26,7 +25,6 @@ export interface AppShellAsideProps extends React.HTMLAttributes<HTMLElement> {
     children?: React.ReactNode;
     open?: boolean;
     defaultOpen?: boolean;
-    onOpenChange?: (open: boolean) => void;
 }
 
 function AppShellRoot({ className, children, ...props }: AppShellRootProps) {
@@ -44,13 +42,11 @@ function AppShellRoot({ className, children, ...props }: AppShellRootProps) {
 function AppShellSidebar({
     collapsed,
     defaultCollapsed = false,
-    onCollapsedChange,
     className,
     children,
     ...props
 }: AppShellSidebarProps) {
     const effectiveCollapsed = collapsed ?? defaultCollapsed;
-    void onCollapsedChange;
 
     return (
         <aside
@@ -108,13 +104,11 @@ function AppShellMain({ className, children, ...props }: AppShellMainProps) {
 function AppShellAside({
     open,
     defaultOpen = false,
-    onOpenChange,
     className,
     children,
     ...props
 }: AppShellAsideProps) {
     const effectiveOpen = open ?? defaultOpen;
-    void onOpenChange;
 
     return (
         <aside

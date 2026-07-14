@@ -1,3 +1,4 @@
+import * as React from "react";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
@@ -76,6 +77,48 @@ describe("toast", () => {
         });
 
         expect(onDismiss).toHaveBeenCalledWith("failed", "timeout");
+    });
+
+    it("does not reset timeout timers on unrelated provider rerenders", () => {
+        vi.useFakeTimers();
+        const onDismiss = vi.fn();
+
+        function Wrapper() {
+            const [version, setVersion] = React.useState(0);
+
+            return (
+                <SconeToastProvider duration={1000}>
+                    <button type="button" onClick={() => setVersion((current) => current + 1)}>
+                        Rerender {version}
+                    </button>
+                </SconeToastProvider>
+            );
+        }
+
+        render(<Wrapper />);
+
+        act(() => {
+            toast.show({ id: "stable", title: "Stable timer", onDismiss });
+        });
+
+        act(() => {
+            vi.advanceTimersByTime(500);
+        });
+
+        fireEvent.click(screen.getByRole("button", { name: "Rerender 0" }));
+
+        act(() => {
+            vi.advanceTimersByTime(499);
+        });
+
+        expect(screen.getByText("Stable timer")).toBeInTheDocument();
+
+        act(() => {
+            vi.advanceTimersByTime(1);
+        });
+
+        expect(screen.queryByText("Stable timer")).not.toBeInTheDocument();
+        expect(onDismiss).toHaveBeenCalledWith("stable", "timeout");
     });
 
     it("limits visible items without changing queue data", () => {

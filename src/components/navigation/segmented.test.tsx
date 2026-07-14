@@ -38,6 +38,19 @@ describe("SconeSegmented", () => {
         expect(onValueChange).toHaveBeenCalledWith("grid");
     });
 
+    it("moves focus with keyboard selection and skips disabled options", () => {
+        render(<SconeSegmented options={options} defaultValue="grid" />);
+
+        const grid = screen.getByRole("radio", { name: "Grid" });
+        grid.focus();
+
+        fireEvent.keyDown(grid, { key: "ArrowRight" });
+
+        expect(screen.getByRole("radio", { name: "List" })).toHaveFocus();
+        expect(screen.getByRole("radio", { name: "Kanban" })).not.toHaveFocus();
+        expect(screen.getByRole("radio", { name: "List" })).toHaveAttribute("aria-checked", "true");
+    });
+
     it("does not change disabled controls or options", () => {
         const onValueChange = vi.fn();
 

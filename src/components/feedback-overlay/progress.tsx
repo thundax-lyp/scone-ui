@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Progress as ProgressPrimitive } from "radix-ui";
 
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/cn";
 import type { SconeStatus } from "../../types/foundation";
 
 export interface SconeProgressProps extends React.HTMLAttributes<HTMLDivElement> {

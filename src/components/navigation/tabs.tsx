@@ -11,7 +11,10 @@ export interface SconeTabsItem {
     disabled?: boolean;
 }
 
-export interface SconeTabsProps {
+export interface SconeTabsProps extends Omit<
+    React.HTMLAttributes<HTMLDivElement>,
+    "defaultValue" | "onChange"
+> {
     value?: string;
     defaultValue?: string;
     onValueChange?: (value: string) => void;
@@ -20,7 +23,6 @@ export interface SconeTabsProps {
     items?: SconeTabsItem[];
     ariaLabel?: string;
     children?: React.ReactNode;
-    className?: string;
 }
 
 interface SconeTabsContextValue {
@@ -41,72 +43,81 @@ function useSconeTabsContext(component: string): SconeTabsContextValue {
     return context;
 }
 
-function SconeTabsRoot({
-    value,
-    defaultValue,
-    onValueChange,
-    orientation = "horizontal",
-    activationMode = "automatic",
-    items,
-    ariaLabel,
-    children,
-    className,
-}: SconeTabsProps) {
-    const generatedId = React.useId();
-    const firstEnabledItem = items?.find((item) => !item.disabled)?.value;
-    const [currentValue, setCurrentValue] = useControllableState({
-        value,
-        defaultValue: defaultValue ?? firstEnabledItem,
-        onValueChange,
-    });
-    const context = React.useMemo(
-        () => ({
-            value: currentValue,
-            setValue: (nextValue: string) => setCurrentValue(nextValue),
-            orientation,
-            activationMode,
-            baseId: generatedId,
-        }),
-        [activationMode, currentValue, generatedId, orientation, setCurrentValue],
-    );
+const SconeTabsRoot = React.forwardRef<HTMLDivElement, SconeTabsProps>(
+    (
+        {
+            value,
+            defaultValue,
+            onValueChange,
+            orientation = "horizontal",
+            activationMode = "automatic",
+            items,
+            ariaLabel,
+            children,
+            className,
+            ...props
+        },
+        ref,
+    ) => {
+        const generatedId = React.useId();
+        const firstEnabledItem = items?.find((item) => !item.disabled)?.value;
+        const [currentValue, setCurrentValue] = useControllableState({
+            value,
+            defaultValue: defaultValue ?? firstEnabledItem,
+            onValueChange,
+        });
+        const context = React.useMemo(
+            () => ({
+                value: currentValue,
+                setValue: (nextValue: string) => setCurrentValue(nextValue),
+                orientation,
+                activationMode,
+                baseId: generatedId,
+            }),
+            [activationMode, currentValue, generatedId, orientation, setCurrentValue],
+        );
 
-    return (
-        <SconeTabsContext.Provider value={context}>
-            <div
-                data-scone-navigation="tabs"
-                data-orientation={orientation}
-                className={cn(
-                    "flex min-w-0 gap-3",
-                    orientation === "vertical" ? "flex-row" : "flex-col",
-                    className,
-                )}
-            >
-                {items ? (
-                    <>
-                        <SconeTabsList aria-label={ariaLabel}>
+        return (
+            <SconeTabsContext.Provider value={context}>
+                <div
+                    ref={ref}
+                    data-scone-navigation="tabs"
+                    data-orientation={orientation}
+                    className={cn(
+                        "flex min-w-0 gap-3",
+                        orientation === "vertical" ? "flex-row" : "flex-col",
+                        className,
+                    )}
+                    {...props}
+                >
+                    {items ? (
+                        <>
+                            <SconeTabsList aria-label={ariaLabel}>
+                                {items.map((item) => (
+                                    <SconeTabsTrigger
+                                        key={item.value}
+                                        value={item.value}
+                                        disabled={item.disabled}
+                                    >
+                                        {item.label}
+                                    </SconeTabsTrigger>
+                                ))}
+                            </SconeTabsList>
                             {items.map((item) => (
-                                <SconeTabsTrigger
-                                    key={item.value}
-                                    value={item.value}
-                                    disabled={item.disabled}
-                                >
-                                    {item.label}
-                                </SconeTabsTrigger>
+                                <SconeTabsContent key={item.value} value={item.value}>
+                                    {item.content}
+                                </SconeTabsContent>
                             ))}
-                        </SconeTabsList>
-                        {items.map((item) => (
-                            <SconeTabsContent key={item.value} value={item.value}>
-                                {item.content}
-                            </SconeTabsContent>
-                        ))}
-                    </>
-                ) : (
-                    children
-                )}
-            </div>
-        </SconeTabsContext.Provider>
-    );
-}
+                        </>
+                    ) : (
+                        children
+                    )}
+                </div>
+            </SconeTabsContext.Provider>
+        );
+    },
+);
+SconeTabsRoot.displayName = "SconeTabsRoot";
 
 export interface SconeTabsListProps extends React.HTMLAttributes<HTMLDivElement> {
     className?: string;

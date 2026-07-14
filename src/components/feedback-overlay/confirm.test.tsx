@@ -61,4 +61,26 @@ describe("SconeConfirm", () => {
             expect(screen.queryByRole("alertdialog")).not.toBeInTheDocument();
         });
     });
+
+    it("keeps the dialog open and reports async confirmation errors", async () => {
+        const error = new Error("Import failed");
+        const onError = vi.fn();
+        const onConfirm = vi.fn(() => Promise.reject(error));
+
+        render(
+            <SconeConfirm defaultOpen title="Run import" onConfirm={onConfirm} onError={onError} />,
+        );
+
+        fireEvent.click(screen.getByRole("button", { name: "Confirm" }));
+
+        expect(screen.getByRole("button", { name: "Loading" })).toBeDisabled();
+
+        await waitFor(() => {
+            expect(onError).toHaveBeenCalledWith(error);
+        });
+
+        expect(screen.getByRole("alertdialog", { name: "Run import" })).toBeInTheDocument();
+        expect(screen.getByRole("button", { name: "Confirm" })).not.toBeDisabled();
+        expect(screen.getByRole("button", { name: "Cancel" })).not.toBeDisabled();
+    });
 });

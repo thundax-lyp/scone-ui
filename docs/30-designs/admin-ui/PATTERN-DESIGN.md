@@ -53,7 +53,6 @@ export interface AppShellSidebarProps {
     className?: string;
     collapsed?: boolean;
     defaultCollapsed?: boolean;
-    onCollapsedChange?: (collapsed: boolean) => void;
 }
 
 export interface AppShellHeaderProps {
@@ -72,7 +71,6 @@ export interface AppShellAsideProps {
     className?: string;
     open?: boolean;
     defaultOpen?: boolean;
-    onOpenChange?: (open: boolean) => void;
 }
 ```
 
@@ -117,6 +115,9 @@ export interface SectionRootProps {
     children: React.ReactNode;
     className?: string;
     density?: SconeDensity;
+    title?: React.ReactNode;
+    description?: React.ReactNode;
+    actions?: React.ReactNode;
 }
 
 export interface SectionHeaderProps {

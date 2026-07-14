@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+import * as React from "react";
 import { describe, expect, it, vi } from "vitest";
 
 import { SconeTabs } from "./tabs";
@@ -30,6 +31,29 @@ describe("SconeTabs", () => {
 
         expect(onValueChange).toHaveBeenCalledWith("activity");
         expect(screen.getByRole("tabpanel")).toHaveTextContent("Activity panel");
+    });
+
+    it("passes root attributes and ref to the root element", () => {
+        const ref = React.createRef<HTMLDivElement>();
+
+        render(
+            <SconeTabs
+                ref={ref}
+                id="record-tabs"
+                data-testid="tabs-root"
+                aria-label="Record tabs root"
+                className="custom-tabs"
+                items={items}
+                defaultValue="overview"
+            />,
+        );
+
+        const root = screen.getByTestId("tabs-root");
+
+        expect(root).toHaveAttribute("id", "record-tabs");
+        expect(root).toHaveAttribute("aria-label", "Record tabs root");
+        expect(root).toHaveClass("custom-tabs");
+        expect(ref.current).toBe(root);
     });
 
     it("moves focus without selection in manual activation", () => {
