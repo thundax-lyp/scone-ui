@@ -10,6 +10,7 @@ export interface SconeConfirmProps extends Omit<React.HTMLAttributes<HTMLDivElem
     title: React.ReactNode;
     description?: React.ReactNode;
     onConfirm?: () => void | Promise<void>;
+    onError?: (error: unknown) => void;
     onCancel?: () => void;
     cancelText?: React.ReactNode;
     confirmText?: React.ReactNode;
@@ -28,6 +29,7 @@ export const SconeConfirm = React.forwardRef<HTMLDivElement, SconeConfirmProps>(
             title,
             description,
             onConfirm,
+            onError,
             onCancel,
             cancelText = "Cancel",
             confirmText = "Confirm",
@@ -75,10 +77,12 @@ export const SconeConfirm = React.forwardRef<HTMLDivElement, SconeConfirmProps>(
                 setConfirming(true);
                 await onConfirm?.();
                 setOpen(false);
+            } catch (error) {
+                onError?.(error);
             } finally {
                 setConfirming(false);
             }
-        }, [disabled, isBusy, onConfirm, setOpen]);
+        }, [disabled, isBusy, onConfirm, onError, setOpen]);
 
         return (
             <AlertDialogPrimitive.Root open={currentOpen} onOpenChange={setOpen}>

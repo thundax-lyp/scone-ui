@@ -20,6 +20,7 @@
 | `title`        | `ReactNode`                   | 确认标题。         |
 | `description`  | `ReactNode`                   | 影响说明。         |
 | `onConfirm`    | `() => void \| Promise<void>` | 确认回调。         |
+| `onError`      | `(error: unknown) => void`    | 确认失败回调。     |
 | `onCancel`     | `() => void`                  | 取消回调。         |
 | `cancelText`   | `string`                      | 取消文案。         |
 | `confirmText`  | `string`                      | 确认文案。         |
@@ -38,6 +39,7 @@
 - Confirm 只表达确认语义，不执行业务删除、权限判断或请求。
 - 危险确认必须有 `description`，`destructive` 不替代影响说明。
 - 异步 `onConfirm` 执行期间确认按钮进入 loading，并防止重复提交。
+- 异步 `onConfirm` rejected 时 dialog 保持打开、loading 结束，并通过 `onError(error)` 通知调用方。
 - service recipe 可以基于该组件，但不得成为唯一 API。
 - shadcn mapping：基于 AlertDialog。
 

@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `02 src/components/feedback-overlay/confirm`：补齐 Confirm async rejection 语义
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`
-    - 范围对象：`src/components/feedback-overlay/confirm.tsx`、`src/components/feedback-overlay/confirm.test.tsx`、`docs/10-specs/components/feedback-overlay/SCONE-CONFIRM.md`
-    - 处理动作：为 `SconeConfirmProps` 新增 `onError?: (error: unknown) => void` 并捕获 rejected `onConfirm`。
-    - 验收点：confirm button 触发 rejected promise 时 dialog 保持打开、busy 恢复、调用 `onError` 且无 unhandled rejection。
-    - 重要度：10/10
-
 - [ ] `03 src/components/feedback-overlay/toast`：稳定 Toast timer rerender 行为
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`
