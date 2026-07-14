@@ -197,3 +197,31 @@ Recent evidence before this review branch:
 * **建议**：Do not introduce a broad abstraction now. If a second behavior fix touches these files, extract a small internal hook local to `components/form` for text control state and field props.
 * **功能风险**：中；an extraction would affect all text controls, so it should be paired with existing focused tests.
 * **置信度**：高
+
+## 07 Form Choice Controls
+
+### Evidence
+
+- `SconeSelect` delegates core select behavior to Radix/shadcn primitives and separately controls value and open state.
+- `SconeSwitch`, `SconeCheckbox`, and `SconeRadioGroup` wrap Radix/shadcn primitives and consistently treat `readOnly` as disabled interaction.
+- `SconeCombobox` implements its own popover, search input, option list, keyboard handling, and clear action.
+- Tests cover selection, controlled open, Field invalid state, checkbox indeterminate state, and basic combobox search/select/clear behavior.
+
+### Assessment
+
+- Select, Switch, Checkbox, and RadioGroup APIs are predictable and aligned with existing Foundation option/state types.
+- Choice controls consistently route Field state through `getSconeControlStateProps`.
+- The custom Combobox carries significantly more interaction responsibility than the other controls in this group.
+
+### Candidate Finding
+
+### [P1] Combobox hand-rolls complex overlay and listbox behavior
+
+* **位置**：`src/components/form/combobox.tsx`
+* **类别**：复杂度 / 副作用 / 可访问性
+* **问题**：Combobox implements popover visibility, filtering, keyboard selection, listbox rendering, and clear interaction manually. It nests a `span role="button"` clear control inside the trigger `button`, and it does not handle outside click, focus-out close, highlighted option state, or `aria-activedescendant`.
+* **影响**：This increases maintenance cost and accessibility risk compared with neighboring controls that delegate interaction primitives to Radix/shadcn. Keyboard and focus behavior can diverge from expected combobox/listbox patterns.
+* **证据**：`SconeCombobox` renders the overlay with a conditional absolute `<div>`, manual `onKeyDown` handlers, `role="listbox"` buttons, and a nested clear `span role="button"` inside the trigger.
+* **建议**：Replace the hand-rolled overlay/listbox behavior with established primitives already in the repo, such as Popover + Command, or split the clear button outside the trigger and add focused tests for outside click, Escape, tab flow, active option, and disabled options.
+* **功能风险**：中；Combobox selection/search behavior is user-facing and tests should be preserved before refactoring.
+* **置信度**：高

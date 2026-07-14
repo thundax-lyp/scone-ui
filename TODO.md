@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `07-form-choice-controls`：07 审核 Form 选择和开关控件
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`src/components/form/select.tsx`、`src/components/form/combobox.tsx`、`src/components/form/switch.tsx`、`src/components/form/checkbox.tsx`、`src/components/form/radio-group.tsx`
-    - 处理动作：检查 value / open / checked 状态模型、选项类型、键盘交互边界和 Field 关联。
-    - 验收点：输出选择类控件是否存在重复 API、状态冲突或复杂控制流的结论。
-    - 重要度：9/10
-
 - [ ] `08-form-custom-helpers`：08 审核 Form 自定义输入和表单 helper
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
