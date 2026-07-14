@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { composeRefs } from "@/lib/compose-refs";
 import { useControllableState } from "@/lib/use-controllable-state";
 import type { SconeOption } from "@/types/foundation";
 
@@ -35,6 +36,7 @@ export const SconeSegmented = React.forwardRef<HTMLDivElement, SconeSegmentedPro
         },
         ref,
     ) => {
+        const rootRef = React.useRef<HTMLDivElement | null>(null);
         const [currentValue, setCurrentValue] = useControllableState({
             value,
             defaultValue: defaultValue ?? options.find((option) => !option.disabled)?.value,
@@ -42,9 +44,9 @@ export const SconeSegmented = React.forwardRef<HTMLDivElement, SconeSegmentedPro
         });
 
         const enabledOptions = options.filter((option) => !option.disabled);
-        const moveSelection = (direction: 1 | -1) => {
+        const moveSelection = (direction: 1 | -1): string | undefined => {
             if (disabled || enabledOptions.length === 0) {
-                return;
+                return undefined;
             }
 
             const currentIndex = enabledOptions.findIndex(
@@ -54,12 +56,30 @@ export const SconeSegmented = React.forwardRef<HTMLDivElement, SconeSegmentedPro
                 currentIndex < 0
                     ? 0
                     : (currentIndex + direction + enabledOptions.length) % enabledOptions.length;
-            setCurrentValue(enabledOptions[nextIndex]?.value);
+            const nextValue = enabledOptions[nextIndex]?.value;
+
+            if (nextValue) {
+                setCurrentValue(nextValue);
+            }
+
+            return nextValue;
+        };
+
+        const focusOption = (optionValue: string | undefined) => {
+            if (!optionValue) {
+                return;
+            }
+
+            const optionButton = Array.from(
+                rootRef.current?.querySelectorAll<HTMLButtonElement>("[data-value]") ?? [],
+            ).find((button) => button.dataset.value === optionValue);
+
+            optionButton?.focus();
         };
 
         return (
             <div
-                ref={ref}
+                ref={composeRefs(rootRef, ref)}
                 role="radiogroup"
                 aria-label={ariaLabel}
                 aria-disabled={disabled || undefined}
@@ -72,11 +92,11 @@ export const SconeSegmented = React.forwardRef<HTMLDivElement, SconeSegmentedPro
                 onKeyDown={(event) => {
                     if (event.key === "ArrowRight" || event.key === "ArrowDown") {
                         event.preventDefault();
-                        moveSelection(1);
+                        focusOption(moveSelection(1));
                     }
                     if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
                         event.preventDefault();
-                        moveSelection(-1);
+                        focusOption(moveSelection(-1));
                     }
                 }}
                 {...props}
@@ -93,6 +113,7 @@ export const SconeSegmented = React.forwardRef<HTMLDivElement, SconeSegmentedPro
                             aria-checked={selected}
                             disabled={optionDisabled}
                             tabIndex={selected ? 0 : -1}
+                            data-value={option.value}
                             className={cn(
                                 "inline-flex min-w-0 items-center justify-center rounded-sm font-medium whitespace-nowrap transition-colors focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none",
                                 sizeClassNames[size],

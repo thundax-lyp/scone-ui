@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `10 src/components/navigation/segmented`：锁定 Segmented keyboard focus 行为
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`
-    - 范围对象：`src/components/navigation/segmented.tsx`、`src/components/navigation/segmented.test.tsx`、`docs/10-specs/components/navigation/SCONE-SEGMENTED.md`
-    - 处理动作：补齐 arrow key selection 与 focus 同步行为或用测试明确当前语义。
-    - 验收点：ArrowLeft、ArrowRight、ArrowUp、ArrowDown 不让 selection 和 focus 分离，并跳过 disabled option。
-    - 重要度：7/10
-
 - [ ] `11 src/patterns/app-shell`：移除 AppShell 未兑现 callback 语义
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`
