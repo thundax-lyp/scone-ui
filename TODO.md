@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `11. main-sync`：同步 main 分支最新代码
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`、`docs/00-governance/TODO-RULES.md`
-    - 范围对象：`main`、`feat/foundation-public-api`
-    - 处理动作：在收口前同步 `main` 分支最新代码到当前工作分支。
-    - 验收点：当前分支包含 `main` 最新代码，且同步后相关验证仍通过或已记录需要修复的本闭环问题。
-    - 重要度：10/10
-
 - [ ] `12. runbook-cleanup`：清理 RUNBOOK 和已完成 TODO
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`、`docs/00-governance/TODO-RULES.md`
