@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `11 src/patterns/app-shell`：移除 AppShell 未兑现 callback 语义
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`
-    - 范围对象：`src/patterns/app-shell.tsx`、`src/patterns/app-shell.test.tsx`、`docs/10-specs/patterns/APP-SHELL.md`、`docs/30-designs/admin-ui/PATTERN-DESIGN.md`
-    - 处理动作：移除 `AppShellSidebarProps.onCollapsedChange` 和 `AppShellAsideProps.onOpenChange` 并同步文档为纯结构状态 props。
-    - 验收点：AppShell 不再暴露无法由内部交互触发的 callbacks，`collapsed/defaultCollapsed` 和 `open/defaultOpen` 行为保持。
-    - 重要度：9/10
-
 - [ ] `12 src/patterns/section`：实现 Section Root shorthand
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`
