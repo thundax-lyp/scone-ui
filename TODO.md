@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `04-navigation-tooltip`：04 实现 Tooltip
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
-    - 范围对象：`src/components/navigation/tooltip.tsx`、`src/components/navigation/tooltip.test.tsx`
-    - 处理动作：实现短提示 Tooltip 的 hover、focus、delay、side 和关闭交互。
-    - 验收点：hover、focus、blur、Escape、受控 open、defaultOpen 和短内容展示均有测试覆盖，content 不承载可交互控件。
-    - 重要度：8/10
-
 - [ ] `05-navigation-dropdown`：05 实现 Dropdown
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
