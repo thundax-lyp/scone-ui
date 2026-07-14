@@ -79,6 +79,30 @@ describe("SconeCommand", () => {
         expect(onSelect).toHaveBeenCalledWith("open", items[0]);
     });
 
+    it("selects the first enabled filtered item when pressing Enter after search", () => {
+        const onSelect = vi.fn();
+
+        render(<SconeCommand items={items} onSelect={onSelect} />);
+
+        const input = screen.getByRole("textbox", { name: "Command search" });
+        fireEvent.change(input, { target: { value: "settings" } });
+        fireEvent.keyDown(input, { key: "Enter" });
+
+        expect(onSelect).toHaveBeenCalledWith("settings", items[2]);
+    });
+
+    it("does not select disabled filtered items with Enter", () => {
+        const onSelect = vi.fn();
+
+        render(<SconeCommand items={items} onSelect={onSelect} />);
+
+        const input = screen.getByRole("textbox", { name: "Command search" });
+        fireEvent.change(input, { target: { value: "archive" } });
+        fireEvent.keyDown(input, { key: "Enter" });
+
+        expect(onSelect).not.toHaveBeenCalled();
+    });
+
     it("does not select disabled items", () => {
         const onSelect = vi.fn();
 

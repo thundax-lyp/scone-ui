@@ -62,22 +62,56 @@ export const SconeCommand = React.forwardRef<HTMLDivElement, SconeCommandProps>(
         });
         const [activeKey, setActiveKey] = React.useState<string | undefined>(selectedKey);
         const normalizedQuery = (searchValue ?? "").trim().toLowerCase();
-        const filteredItems = normalizedQuery
-            ? items.filter((item) => itemSearchText(item).includes(normalizedQuery))
-            : items;
-        const enabledItems = filteredItems.filter((item) => !item.disabled);
-        const groupedItems = filteredItems.reduce<Record<string, SconeCommandItem[]>>(
-            (acc, item) => {
-                const group = item.group ?? "";
-                acc[group] = [...(acc[group] ?? []), item];
-                return acc;
-            },
-            {},
+        const previousQueryRef = React.useRef(normalizedQuery);
+        const filteredItems = React.useMemo(
+            () =>
+                normalizedQuery
+                    ? items.filter((item) => itemSearchText(item).includes(normalizedQuery))
+                    : items,
+            [items, normalizedQuery],
+        );
+        const enabledItems = React.useMemo(
+            () => filteredItems.filter((item) => !item.disabled),
+            [filteredItems],
+        );
+        const groupedItems = React.useMemo(
+            () =>
+                filteredItems.reduce<Record<string, SconeCommandItem[]>>((acc, item) => {
+                    const group = item.group ?? "";
+                    acc[group] = [...(acc[group] ?? []), item];
+                    return acc;
+                }, {}),
+            [filteredItems],
         );
 
         React.useEffect(() => {
             setActiveKey(selectedKey);
         }, [selectedKey]);
+
+        React.useEffect(() => {
+            if (selectedKey !== undefined) {
+                return;
+            }
+
+            const previousQuery = previousQueryRef.current;
+            previousQueryRef.current = normalizedQuery;
+
+            if (previousQuery === normalizedQuery) {
+                return;
+            }
+
+            setActiveKey((currentActiveKey) => {
+                if (enabledItems.length === 0) {
+                    return undefined;
+                }
+
+                if (enabledItems.some((item) => item.key === currentActiveKey)) {
+                    return currentActiveKey;
+                }
+
+                return enabledItems[0]?.key;
+            });
+        }, [enabledItems, normalizedQuery, selectedKey]);
 
         const moveActive = (delta: 1 | -1) => {
             if (enabledItems.length === 0) {

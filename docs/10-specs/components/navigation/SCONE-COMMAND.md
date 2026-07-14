@@ -34,6 +34,7 @@
 - Command 表达命令、搜索结果或可执行项，不默认写入表单值。
 - Combobox 可以复用 Command，但必须增加表单值语义。
 - 支持分组、空状态和键盘选择。
+- 搜索过滤后，非受控 active item 必须指向可见 enabled 结果；过滤后直接按 Enter 不得选择 stale 或 disabled item。
 - shadcn mapping：基于 Command。
 
 测试：

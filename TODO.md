@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `08 src/components/navigation/command`：修复 Command filter 后 active item
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`
-    - 范围对象：`src/components/navigation/command.tsx`、`src/components/navigation/command.test.tsx`、`docs/10-specs/components/navigation/SCONE-COMMAND.md`
-    - 处理动作：让内部 `activeKey` 在 query 或 filtered enabled items 变化后指向可见可用结果。
-    - 验收点：用户过滤后直接按 Enter 会选择可见 enabled option，不会选中 disabled 或 stale option。
-    - 重要度：8/10
-
 - [ ] `09 src/components/navigation/tabs`：补齐 Tabs root props 和 ref passthrough
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`
