@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `5.4 full verification`：运行全量验证
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
-    - 范围对象：`package.json`、`vitest.config.ts`、`tsconfig.json`、`eslint.config.mjs`、`vite.config.ts`
-    - 处理动作：运行全量 test、typecheck、lint 和 build。
-    - 验收点：全量验证全部通过，失败项必须修复或记录明确剩余风险。
-    - 重要度：9/10
-
 - [ ] `6.1 readiness docs`：同步 readiness 文档
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
