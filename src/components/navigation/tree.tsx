@@ -135,7 +135,7 @@ export const SconeTree = React.forwardRef<HTMLDivElement, SconeTreeProps>(
                 return;
             }
             setActiveKey(key);
-            queueMicrotask(() => itemRefs.current.get(String(key))?.focus());
+            itemRefs.current.get(String(key))?.focus();
         };
 
         const updateExpanded = (node: SconeTreeNode, expanded: boolean) => {

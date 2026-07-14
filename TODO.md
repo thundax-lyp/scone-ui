@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `10-public-export`：10 接入 Navigation 和 Media public export
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
-    - 范围对象：`src/components/navigation/index.ts`、`src/components/media/index.ts`、`src/index.ts`、`src/index.test.ts`
-    - 处理动作：从组件族入口和库入口导出本次 Navigation + Media 组件和 public props type。
-    - 验收点：消费者可从 `src/index.ts` 导入本次全部组件和类型，且 `SconePagination` 不从任何入口导出。
-    - 重要度：9/10
-
 - [ ] `11-final-main-sync`：11 同步 main 分支代码
     - 任务类型：执行任务
     - 依据文档：`docs/00-governance/TODO-RULES.md`
