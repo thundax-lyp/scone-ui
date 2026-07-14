@@ -26,16 +26,24 @@ export const SconeFieldGroup = React.forwardRef<HTMLFieldSetElement, SconeFieldG
                 {...props}
             >
                 {title !== undefined || description !== undefined ? (
-                    <div className="space-y-1">
+                    <>
                         {title !== undefined ? (
                             <legend className="text-sm font-medium text-foreground">{title}</legend>
                         ) : null}
                         {description !== undefined ? (
-                            <p className="text-sm text-muted-foreground">{description}</p>
+                            <p className="mt-1 text-sm text-muted-foreground">{description}</p>
                         ) : null}
-                    </div>
+                    </>
                 ) : null}
-                <div className={cn("grid gap-md", columnsClassNames[columns])}>{children}</div>
+                <div
+                    className={cn(
+                        "grid gap-md",
+                        (title !== undefined || description !== undefined) && "mt-sm",
+                        columnsClassNames[columns],
+                    )}
+                >
+                    {children}
+                </div>
             </fieldset>
         );
     },

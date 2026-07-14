@@ -4,7 +4,12 @@ import { describe, expect, it, vi } from "vitest";
 import { SconeField } from "./field";
 import { SconeDatePicker } from "./date-picker";
 
-const formatLabel = (date: Date) => date.toISOString().slice(0, 10);
+const formatLabel = (date: Date) =>
+    [
+        date.getFullYear(),
+        String(date.getMonth() + 1).padStart(2, "0"),
+        String(date.getDate()).padStart(2, "0"),
+    ].join("-");
 
 describe("SconeDatePicker", () => {
     it("opens with keyboard, selects dates, and clears values", () => {
@@ -19,7 +24,9 @@ describe("SconeDatePicker", () => {
             />,
         );
 
-        const trigger = screen.getByRole("button", { name: /2026-07-14/ });
+        const trigger = screen.getByRole("button", { name: "Due date" });
+        expect(screen.getByText("2026-07-14")).toBeInTheDocument();
+
         fireEvent.keyDown(trigger, { key: "Enter" });
         fireEvent.click(screen.getByRole("button", { name: "2026-07-15" }));
         fireEvent.click(screen.getByRole("button", { name: "Clear date" }));
@@ -41,7 +48,7 @@ describe("SconeDatePicker", () => {
             />,
         );
 
-        fireEvent.click(screen.getByRole("button", { name: /2026-07-14/ }));
+        fireEvent.click(screen.getByRole("button", { name: "Due date" }));
         fireEvent.click(screen.getByRole("button", { name: "2026-07-15" }));
 
         expect(handleChange).not.toHaveBeenCalled();
