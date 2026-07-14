@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `1 src/patterns/page.tsx src/patterns/page.test.tsx`：实现 Page pattern 主滚动与 StickyActions 边界
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-PATTERN-PAGE-SECTION-FILTER-BAR.md`
-    - 范围对象：`src/patterns/page.tsx`、`src/patterns/page.test.tsx`
-    - 处理动作：新增 `Page.Root`、`Page.Main`、`Page.StickyActions` 及对应测试。
-    - 验收点：主滚动区、`hasStickyActions` bottom padding、`StickyActions align` 和 data 边界均有测试覆盖。
-    - 重要度：9/10
-
 - [ ] `2 src/patterns/section.tsx src/patterns/section.test.tsx`：实现非 Card Section pattern
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-PATTERN-PAGE-SECTION-FILTER-BAR.md`
