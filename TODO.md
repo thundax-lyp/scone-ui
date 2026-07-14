@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `07-navigation-command`：07 实现 Command
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
-    - 范围对象：`src/components/navigation/command.tsx`、`src/components/navigation/command.test.tsx`
-    - 处理动作：实现命令搜索输入、过滤结果、分组、loading、empty 和键盘选择。
-    - 验收点：搜索过滤、受控 value、selectedKey、group、loading、empty、disabled item、ArrowUp/ArrowDown 和 Enter 选择均有测试覆盖，Command 不写入表单值。
-    - 重要度：9/10
-
 - [ ] `08-navigation-tree`：08 实现 Tree
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
