@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `3.3 ScrollArea Separator`：补齐 Radix layout root attrs
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
-    - 范围对象：`src/components/layout/scroll-area.tsx`、`src/components/layout/separator.tsx`
-    - 处理动作：确认并测试 ScrollArea 和 Separator 的 Radix root props passthrough。
-    - 验收点：ScrollArea root 接收 root props，`viewportClassName` 和 `onScroll` 只作用于 viewport；Separator root 接收 `orientation`、`decorative`、`className` 和 root HTML attributes。
-    - 重要度：8/10
-
 - [ ] `3.4 SplitPane`：开放 SplitPane root attrs 且保护 grid style
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`

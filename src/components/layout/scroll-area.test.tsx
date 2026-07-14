@@ -26,17 +26,30 @@ describe("SconeScrollArea", () => {
         const handleScroll = vi.fn();
 
         render(
-            <SconeScrollArea ref={ref} onScroll={handleScroll}>
+            <SconeScrollArea
+                ref={ref}
+                id="activity-scroll"
+                role="region"
+                aria-label="Activity"
+                data-owner="layout"
+                data-testid="scroll-root"
+                style={{ maxHeight: "160px" }}
+                onScroll={handleScroll}
+            >
                 <div>Scrollable content</div>
             </SconeScrollArea>,
         );
 
-        const root = screen
-            .getByText("Scrollable content")
-            .closest("[data-scone-layout='scroll-area']");
+        const root = screen.getByTestId("scroll-root");
         const viewport = root?.querySelector("[data-scone-scroll-area-viewport]");
 
         expect(ref.current).toBe(root);
+        expect(root).toHaveAttribute("id", "activity-scroll");
+        expect(root).toHaveAttribute("role", "region");
+        expect(root).toHaveAttribute("aria-label", "Activity");
+        expect(root).toHaveAttribute("data-owner", "layout");
+        expect(root).toHaveStyle({ maxHeight: "160px" });
+        expect(viewport).not.toHaveAttribute("data-owner");
         fireEvent.scroll(viewport as Element);
         expect(handleScroll).toHaveBeenCalledTimes(1);
     });
