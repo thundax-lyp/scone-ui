@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `4.7 ui cn imports batch 6`：统一 ui 第六批 `cn` 导入
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
-    - 范围对象：`src/components/ui/table.tsx`、`src/components/ui/tabs.tsx`、`src/components/ui/textarea.tsx`、`src/components/ui/tooltip.tsx`
-    - 处理动作：将本批 ui 文件中的 `@/lib/utils` 导入改为 `@/lib/cn`。
-    - 验收点：本批文件不再引用 `@/lib/utils`，DOM 结构、className 内容和 export 不变。
-    - 重要度：7/10
-
 - [ ] `4.8 navigation cn imports batch 1`：统一 navigation 第一批 `cn` 导入
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
