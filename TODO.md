@@ -9,6 +9,38 @@
 
 ## 当前任务项
 
+- [ ] `01-tailwind-token-config`：1. 修复 Tailwind stale token 配置
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-TOKEN-NUMBER-PROGRESS-EDGES.md`
+    - 范围对象：`tailwind.config.ts`、`src/styles/theme.test.ts`
+    - 处理动作：将 Tailwind config 中 stale token 引用替换为当前 `theme.css` 变量名，并删除无对应当前 token 的 `fontSize` stale extension。
+    - 验收点：`theme.test.ts` 覆盖旧变量名不存在和当前变量名存在，且目标测试通过。
+    - 重要度：9/10
+
+- [ ] `02-progress-invalid-max`：2. 修复 `SconeProgress` invalid `max` 百分比
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-TOKEN-NUMBER-PROGRESS-EDGES.md`
+    - 范围对象：`src/components/feedback-overlay/progress.tsx`、`src/components/feedback-overlay/progress.test.tsx`
+    - 处理动作：统一归一化 `value`、`max`、`percent`，避免 progressbar、可见百分比和 indicator transform 使用原始 invalid `max`。
+    - 验收点：`max={0}` 和 `max={Number.NaN}` 渲染时 `aria-valuetext`、可见 label、indicator transform 和 `aria-valuemax` 均不包含非有限结果。
+    - 重要度：9/10
+
+- [ ] `03-number-input-non-finite`：3. 修复 `SconeNumberInput` 非有限数字提交
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-TOKEN-NUMBER-PROGRESS-EDGES.md`
+    - 范围对象：`src/components/form/number-input.tsx`、`src/components/form/number-input.test.tsx`
+    - 处理动作：阻止非空输入解析出的非有限数字进入 `setCurrentValue` 和 `onValueChange`，并保留清空、合法数字和 stepper 行为。
+    - 验收点：非有限中间态输入不触发 `onValueChange(NaN)`，清空仍提交 `undefined`，合法输入和 `Increment value` / `Decrement value` 仍正常提交。
+    - 重要度：9/10
+
+- [ ] `04-review-coverage-runbook-closure`：4. 同步 review/coverage 文档并清理 RUNBOOK
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-TOKEN-NUMBER-PROGRESS-EDGES.md`
+    - 范围对象：`docs/40-readiness/SYSTEMATIC-CODE-REVIEW-2026-07.md`、`docs/40-readiness/IMPLEMENTATION-COVERAGE.md`、`docs/30-designs/RUNBOOK-TOKEN-NUMBER-PROGRESS-EDGES.md`、`docs/30-designs/README.md`
+    - 处理动作：在修复和验证完成后删除已完全处理的 review findings，更新 Implementation Coverage，并移除临时 RUNBOOK 及索引入口。
+    - 验收点：Systematic Code Review 不再保留三项已处理 P1 finding，Implementation Coverage 反映本次覆盖状态，RUNBOOK 文件和 Active Runbooks 入口均已清理。
+    - 重要度：8/10
+
 ## 待审阅任务项
 
 ## 待讨论项
