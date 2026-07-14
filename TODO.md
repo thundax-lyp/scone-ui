@@ -9,6 +9,46 @@
 
 ## 当前任务项
 
+- [ ] `1 src/patterns/page.tsx src/patterns/page.test.tsx`：实现 Page pattern 主滚动与 StickyActions 边界
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-PATTERN-PAGE-SECTION-FILTER-BAR.md`
+    - 范围对象：`src/patterns/page.tsx`、`src/patterns/page.test.tsx`
+    - 处理动作：新增 `Page.Root`、`Page.Main`、`Page.StickyActions` 及对应测试。
+    - 验收点：主滚动区、`hasStickyActions` bottom padding、`StickyActions align` 和 data 边界均有测试覆盖。
+    - 重要度：9/10
+
+- [ ] `2 src/patterns/section.tsx src/patterns/section.test.tsx`：实现非 Card Section pattern
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-PATTERN-PAGE-SECTION-FILTER-BAR.md`
+    - 范围对象：`src/patterns/section.tsx`、`src/patterns/section.test.tsx`
+    - 处理动作：新增 `Section.Root`、`Section.Header`、`Section.Title`、`Section.Description`、`Section.Actions`、`Section.Content` 及对应测试。
+    - 验收点：Section 不使用 Card 边界，actions 位于 header 内，标题、描述、操作区和内容区组合均有测试覆盖。
+    - 重要度：9/10
+
+- [ ] `3 src/patterns/filter-bar.tsx src/patterns/filter-bar.test.tsx`：实现独立 FilterBar pattern 受控组合
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-PATTERN-PAGE-SECTION-FILTER-BAR.md`
+    - 范围对象：`src/patterns/filter-bar.tsx`、`src/patterns/filter-bar.test.tsx`
+    - 处理动作：新增 `FilterBar.Root` 的 search、filters、expandedContent、expanded、onApply、onReset 组合和测试。
+    - 验收点：搜索输入、搜索插槽、常驻筛选、高级筛选展开、Apply、Reset、禁用态和受控展开行为均有测试覆盖。
+    - 重要度：10/10
+
+- [ ] `4 src/patterns/data-table.tsx src/patterns/data-table.test.tsx src/patterns/index.ts src/index.ts src/index.test.ts`：对齐 DataTable.FilterBar 与新增 pattern 导出
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-PATTERN-PAGE-SECTION-FILTER-BAR.md`
+    - 范围对象：`src/patterns/data-table.tsx`、`src/patterns/data-table.test.tsx`、`src/patterns/index.ts`、`src/index.ts`、`src/index.test.ts`
+    - 处理动作：让 `DataTable.FilterBar` 包装独立 `FilterBar.Root`，并导出 `Page`、`Section`、`FilterBar` 及 props 类型。
+    - 验收点：`DataTable.FilterBar` 同时保留 DataTable 槽位标识和 FilterBar pattern 标识，children-only 兼容，根导出测试通过。
+    - 重要度：10/10
+
+- [ ] `5 docs/40-readiness/IMPLEMENTATION-COVERAGE.md docs/30-designs/RUNBOOK-PATTERN-PAGE-SECTION-FILTER-BAR.md TODO.md`：更新实现覆盖证据并清理临时任务文档
+    - 任务类型：执行任务
+    - 依据文档：`docs/00-governance/TODO-RULES.md`、`docs/30-designs/RUNBOOK-PATTERN-PAGE-SECTION-FILTER-BAR.md`
+    - 范围对象：`docs/40-readiness/IMPLEMENTATION-COVERAGE.md`、`docs/30-designs/RUNBOOK-PATTERN-PAGE-SECTION-FILTER-BAR.md`、`TODO.md`
+    - 处理动作：在实现和验证完成后更新 Implementation Coverage，删除 RUNBOOK，并从 TODO 中删除已完成任务。
+    - 验收点：Implementation Coverage 记录 Page、Section、FilterBar、DataTable.FilterBar 的源码、测试和验证命令，RUNBOOK 已删除，TODO 仅保留未完成项。
+    - 重要度：9/10
+
 ## 待审阅任务项
 
 ## 待讨论项
