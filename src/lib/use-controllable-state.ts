@@ -19,7 +19,10 @@ export function useControllableState<T>({
 
     const setValue = useCallback<ControllableStateSetter<T>>(
         (next) => {
-            const nextValue = typeof next === "function" ? next(currentValue) : next;
+            const nextValue =
+                typeof next === "function"
+                    ? (next as (previous: T | undefined) => T)(currentValue)
+                    : next;
 
             if (Object.is(currentValue, nextValue)) {
                 return;

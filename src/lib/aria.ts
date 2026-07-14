@@ -33,5 +33,9 @@ export function hasAriaValue(value: unknown): boolean {
 export function ariaValue<T extends string | number | boolean>(
     value: T | null | undefined,
 ): T | undefined {
-    return hasAriaValue(value) ? value : undefined;
+    if (value === null || value === undefined || value === "") {
+        return undefined;
+    }
+
+    return value;
 }

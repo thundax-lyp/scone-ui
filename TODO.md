@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `10. verification`：运行 Foundation + Public API 最小验证
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`
-    - 范围对象：`package.json`、`src/styles/theme.css`、`src/types/foundation.ts`、`src/lib/aria.ts`、`src/index.ts`
-    - 处理动作：运行 `pnpm typecheck`、`pnpm test`、`pnpm lint` 并修复本闭环引入的问题。
-    - 验收点：三项验证通过，失败时仅修复与 Foundation + Public API 闭环相关的问题。
-    - 重要度：10/10
-
 - [ ] `11. main-sync`：同步 main 分支最新代码
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`、`docs/00-governance/TODO-RULES.md`
