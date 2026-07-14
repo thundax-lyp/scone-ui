@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `3 src/patterns/filter-bar.tsx src/patterns/filter-bar.test.tsx`：实现独立 FilterBar pattern 受控组合
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-PATTERN-PAGE-SECTION-FILTER-BAR.md`
-    - 范围对象：`src/patterns/filter-bar.tsx`、`src/patterns/filter-bar.test.tsx`
-    - 处理动作：新增 `FilterBar.Root` 的 search、filters、expandedContent、expanded、onApply、onReset 组合和测试。
-    - 验收点：搜索输入、搜索插槽、常驻筛选、高级筛选展开、Apply、Reset、禁用态和受控展开行为均有测试覆盖。
-    - 重要度：10/10
-
 - [ ] `4 src/patterns/data-table.tsx src/patterns/data-table.test.tsx src/patterns/index.ts src/index.ts src/index.test.ts`：对齐 DataTable.FilterBar 与新增 pattern 导出
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-PATTERN-PAGE-SECTION-FILTER-BAR.md`
