@@ -421,8 +421,55 @@
 说明：
 
 - `SconeTable` 公共 API 未加入 `pagination` 或 `rowSelection`；selection column 只由 `DataTable.TableRegion` 在数据模式下注入。
-- `DataTable.FilterBar` 本轮只实现 slot，不实现独立 `src/patterns/filter-bar.tsx`。
+- `DataTable.FilterBar` 保持既有 slot 边界；本轮未修改 DataTable 内部来复用独立 `src/patterns/filter-bar.tsx`。
 - `DataTable` 不发起请求、不判断权限、不读取业务 store，不引入 TanStack Table 默认依赖。
+
+### Admin Shell Patterns
+
+实现状态：已完成。
+
+测试状态：已完成。
+
+源码文件：
+
+- `src/patterns/app-shell.tsx`
+- `src/patterns/page.tsx`
+- `src/patterns/section.tsx`
+- `src/patterns/filter-bar.tsx`
+- `src/patterns/index.ts`
+- `src/index.ts`
+
+测试文件：
+
+- `src/patterns/app-shell.test.tsx`
+- `src/patterns/page.test.tsx`
+- `src/patterns/section.test.tsx`
+- `src/patterns/filter-bar.test.tsx`
+- `src/patterns/data-table.test.tsx`
+- `src/index.test.ts`
+
+覆盖能力：
+
+- `AppShell.Root/Sidebar/Header/Main/Aside`：后台应用全局空间、侧栏 collapsed 展示状态、辅助区 open 展示状态、Header actions slot、Main 可收缩 Page host。
+- `Page.Root/Header/Content/StickyActions`：`maxWidth`、`density`、页面级 header actions、`Page.Content` 主滚动容器、底部 sticky actions 对齐。
+- `Section.Root/Header/Content/Footer`：语义分区、分区级 actions、content/footer 结构 slot、非 Card 视觉边界。
+- `FilterBar.Root/Search/Fields/Actions/Summary`：搜索输入、筛选控件 slot、调用方 action 按钮、apply/reset/toggle action 边界、摘要 slot、窄屏换行语义。
+- Public exports：Pattern 局部入口和库级入口导出 `AppShell`、`Page`、`Section`、`FilterBar` 以及对应公开 props/state 类型。
+
+验证结果：
+
+- `pnpm format`：通过。
+- `pnpm lint`：通过；新增 compound parts 文件与既有 `DataTable` 一样触发 `react-refresh/only-export-components` warning，退出码为 0。
+- `pnpm build`：通过。
+- `pnpm test -- src/patterns/app-shell.test.tsx src/patterns/page.test.tsx src/patterns/section.test.tsx src/patterns/filter-bar.test.tsx src/patterns/data-table.test.tsx src/index.test.ts`：通过，39 个 test files、145 个 tests。
+
+说明：
+
+- `AppShell` 不内置菜单、路由、权限、产品 logo 或切换按钮；调用方通过 props 和自有控件管理展示状态。
+- `Page.Content` 是页面主滚动边界；`AppShell.Main` 只承接 Page，不接管页面滚动。
+- `Section` 只表达结构分区；需要 Card 视觉时由调用方组合 `SconeCard`。
+- `FilterBar` 不解析业务筛选 schema，不绑定 DataTable 内部状态；`Fields` 和 `Actions` 由调用方放置具体控件。
+- `DataTable` 内部未在本轮修改，回归测试继续通过。
 
 ## Pending Implementation Work
 
@@ -431,7 +478,7 @@
 1. 创建 DESIGN 指定的其余 `src/` 目录结构、公共入口和组件族类型入口。
 2. 按 `docs/10-specs/COMPONENT-SELECTION.md` 的 source strategy 实现 wrapper、vendored primitive、custom component、pattern-only 和 docs-only 边界。
 3. 继续维护 `src/styles/theme.css` 作为 CSS variables 唯一数值源，并维护默认 `tailwind.config.ts` 到 CSS variables 的映射。
-4. 实现已完成 Data Display、Layout primitives、Feedback / Overlay、Navigation / Media 和 `DataTable` 以外的组件族和 Pattern；Recipe 全部保持文档和示例边界，不创建 `src/recipes/` 源码入口。
+4. 实现已完成 Data Display、Form、Layout primitives、Feedback / Overlay、Navigation / Media、`DataTable` 和 Admin Shell Patterns 以外的组件族和 Pattern；Recipe 全部保持文档和示例边界，不创建 `src/recipes/` 源码入口。
 5. 按 DESIGN 的 Verification Design 在被测文件同目录创建 `*.test.ts` 或 `*.test.tsx`，并生成真正的实现覆盖证据。
 6. 在后续实现后更新本 readiness 文档，区分已实现、已测试、未覆盖和延期项。
 
@@ -455,6 +502,6 @@
 
 设计覆盖：完成。
 
-实现覆盖：部分完成。Data Display、Layout primitives、Feedback / Overlay、Navigation / Media 与 `DataTable` 已实现；其余组件族、Pattern 和 Recipe 未完成。
+实现覆盖：部分完成。Data Display、Form、Layout primitives、Feedback / Overlay、Navigation / Media、`DataTable` 和 Admin Shell Patterns 已实现；其余组件族、Pattern 和 Recipe 未完成。
 
-测试覆盖：部分完成。Data Display、Layout primitives、Feedback / Overlay、Navigation / Media 与 `DataTable` 已测试；其余组件族、Pattern 和 Recipe 未完成。
+测试覆盖：部分完成。Data Display、Form、Layout primitives、Feedback / Overlay、Navigation / Media、`DataTable` 和 Admin Shell Patterns 已测试；其余组件族、Pattern 和 Recipe 未完成。

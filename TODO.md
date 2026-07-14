@@ -10,14 +10,6 @@
 
 ## 当前任务项
 
-- [ ] `06 Implementation Coverage`：更新 Admin Pattern 实现覆盖证据
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-ADMIN-SHELL-PATTERNS.md`
-    - 范围对象：`docs/40-readiness/IMPLEMENTATION-COVERAGE.md`、`src/patterns/app-shell.test.tsx`、`src/patterns/page.test.tsx`、`src/patterns/section.test.tsx`、`src/patterns/filter-bar.test.tsx`
-    - 处理动作：在 Implementation Coverage 中记录 Admin Shell Patterns 的实现状态、源码文件、测试文件和验证命令。
-    - 验收点：Implementation Coverage 明确 `AppShell`、`Page`、`Section`、`FilterBar` 已实现并测试，且记录通过的验证命令。
-    - 重要度：8/10
-
 - [ ] `07 Closure`：清理临时 RUNBOOK 并收窄 TODO
     - 任务类型：执行任务
     - 依据文档：`docs/00-governance/TODO-RULES.md`
