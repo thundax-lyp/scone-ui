@@ -225,3 +225,43 @@ Recent evidence before this review branch:
 * **建议**：Replace the hand-rolled overlay/listbox behavior with established primitives already in the repo, such as Popover + Command, or split the clear button outside the trigger and add focused tests for outside click, Escape, tab flow, active option, and disabled options.
 * **功能风险**：中；Combobox selection/search behavior is user-facing and tests should be preserved before refactoring.
 * **置信度**：高
+
+## 08 Form Custom Inputs And Helpers
+
+### Evidence
+
+- `SconeNumberInput` parses native number input text with `Number(rawValue)` and stores `number | undefined`.
+- `SconeSlider` delegates range behavior to the shadcn/Radix slider primitive.
+- `SconeDatePicker` implements its own trigger, dialog, date grid, selected state, disabled dates, clear action, and open state.
+- `SconeUpload` validates `accept`, `maxSize`, `maxFiles`, and async `beforeAdd`, then reports structured rejections.
+- `SconeFormActions` only expresses alignment and sticky action layout.
+
+### Assessment
+
+- Slider, Upload, and FormActions have clear responsibilities and focused tests.
+- Upload rejection behavior is explicit enough for consumers and does not introduce backend/product assumptions.
+- DatePicker carries the same hand-rolled overlay risk as Combobox.
+
+### Candidate Findings
+
+### [P1] NumberInput can commit `NaN` into component state
+
+* **位置**：`src/components/form/number-input.tsx`
+* **类别**：状态 / 错误处理
+* **问题**：`onChange` converts non-empty input text with `Number(rawValue)` and commits the result without checking `Number.isFinite`.
+* **影响**：Native number inputs can transiently contain invalid text such as exponent fragments. Committing `NaN` can produce React value warnings and unstable `onValueChange` payloads.
+* **证据**：`commitNumber(rawValue === "" ? undefined : Number(rawValue))` passes `NaN` through `clampNumber`; `clampNumber` only validates min/max, not the candidate value.
+* **建议**：Treat non-finite parsed values as an uncommitted display state or reject them before calling `setCurrentValue` / `onValueChange`.
+* **功能风险**：中；fixing this changes edge-case typing behavior and should preserve empty-value handling.
+* **置信度**：高
+
+### [P1] DatePicker hand-rolls dialog calendar behavior
+
+* **位置**：`src/components/form/date-picker.tsx`
+* **类别**：复杂度 / 副作用 / 可访问性
+* **问题**：DatePicker manually implements open state, dialog rendering, calendar grid, date buttons, and clear interaction. It also nests a `span role="button"` clear control inside the trigger `button`.
+* **影响**：Focus management, outside click, Escape close, calendar navigation, and nested interactive semantics are easy to regress and hard to reason about.
+* **证据**：The open calendar is a conditional absolute `<div role="dialog">`; the trigger handles Enter/Space manually; the clear action is `span role="button"` within the trigger.
+* **建议**：Use existing Popover/Dialog primitives for overlay behavior and make the clear control a real sibling button. Add focused tests for focus return, Escape/outside close, disabled dates, and keyboard date movement.
+* **功能风险**：中；calendar interaction is user-facing and should be refactored behind behavior-preserving tests.
+* **置信度**：高

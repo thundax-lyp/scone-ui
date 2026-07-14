@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `08-form-custom-helpers`：08 审核 Form 自定义输入和表单 helper
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`src/components/form/number-input.tsx`、`src/components/form/slider.tsx`、`src/components/form/date-picker.tsx`、`src/components/form/upload.tsx`、`src/components/form/form-actions.tsx`
-    - 处理动作：检查自定义交互、边界值、文件 rejection、日期状态和动作区布局职责。
-    - 验收点：输出自定义输入是否存在错误处理缺口、隐式状态或可测试性问题的结论。
-    - 重要度：9/10
-
 - [ ] `09-form-layout-helpers`：09 审核 Form 分组和分区 helper
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
