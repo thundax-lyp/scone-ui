@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `4.1 layout cn imports`：统一 layout `cn` 导入
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
-    - 范围对象：`src/components/layout/scroll-area.tsx`、`src/components/layout/separator.tsx`、`src/components/layout/split-pane.tsx`
-    - 处理动作：将 layout 文件中的 `../../lib/utils` 导入改为 `@/lib/cn`。
-    - 验收点：三个文件不再引用 `../../lib/utils`，组件行为和 DOM 结构不变。
-    - 重要度：8/10
-
 - [ ] `4.2 ui cn imports batch 1`：统一 ui 第一批 `cn` 导入
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
