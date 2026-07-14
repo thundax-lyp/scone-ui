@@ -10,47 +10,56 @@ import {
     mergeIds,
     notification,
     SconeAlert,
+    SconeCompact,
     SconeConfirm,
     SconeDialog,
     SconeDrawer,
     SconeEmpty,
+    SconeInline,
     SconeLoading,
     SconeNotificationProvider,
     SconeProgress,
+    SconeScrollArea,
+    SconeSeparator,
+    SconeSplitPane,
+    SconeStack,
     SconeToastProvider,
+    SconeToolbar,
     toast,
     useControllableState,
 } from "./index";
 import type {
     Breakpoint,
     Key,
-    OverlayCloseReason,
-    ResponsiveValue,
-    SconeAlign,
-    SconeBaseItem,
-    SconeControlSize,
-    SconeDensity,
-    SconeOption,
-    SconeOrientation,
-    SconeSide,
-    SconeSpacingToken,
-    SconeStatus,
-    SconeTone,
-} from "./index";
-import type {
     NotificationCloseReason,
     NotificationOptions,
     NotificationPlacement,
     NotificationService,
+    OverlayCloseReason,
+    ResponsiveValue,
     SconeAlertProps,
+    SconeAlign,
+    SconeBaseItem,
     SconeConfirmProps,
+    SconeControlSize,
+    SconeDensity,
     SconeDialogProps,
     SconeDrawerProps,
     SconeEmptyProps,
+    SconeInlineProps,
     SconeLoadingProps,
     SconeNotificationItem,
     SconeNotificationProviderProps,
+    SconeOption,
+    SconeOrientation,
     SconeProgressProps,
+    SconeSide,
+    SconeSplitPaneProps,
+    SconeSplitPaneSizePreset,
+    SconeStackProps,
+    SconeSpacingToken,
+    SconeStatus,
+    SconeTone,
     SconeToastItem,
     SconeToastProviderProps,
     ToastCloseReason,
@@ -85,41 +94,23 @@ describe("public index exports", () => {
         expectTypeOf<SconeBaseItem["key"]>().toEqualTypeOf<Key>();
     });
 
-    it("exports public utilities from the public entry", async () => {
-        expect(cn("px-2", "px-4")).toBe("px-4");
-        expect(typeof composeRefs).toBe("function");
-        expect(typeof useControllableState).toBe("function");
-        expect(mergeIds("label", "description")).toBe("label description");
-        expect(mergeAriaDescribedBy("description", "error")).toBe("description error");
-        expect(ariaBoolean(false)).toBeUndefined();
-        expect(hasAriaValue(0)).toBe(true);
-        expect(ariaValue("polite")).toBe("polite");
+    it("exports layout component APIs", () => {
+        expect(typeof SconeStack).toBe("object");
+        expect(typeof SconeInline).toBe("object");
+        expect(typeof SconeCompact).toBe("object");
+        expect(typeof SconeToolbar).toBe("object");
+        expect(typeof SconeSeparator).toBe("object");
+        expect(typeof SconeScrollArea).toBe("object");
+        expect(typeof SconeSplitPane).toBe("object");
 
-        const publicExports = await import("./index");
-
-        expect(Object.keys(publicExports).sort()).toEqual(
-            [
-                "ariaBoolean",
-                "ariaValue",
-                "cn",
-                "composeRefs",
-                "hasAriaValue",
-                "mergeAriaDescribedBy",
-                "mergeIds",
-                "notification",
-                "SconeAlert",
-                "SconeConfirm",
-                "SconeDialog",
-                "SconeDrawer",
-                "SconeEmpty",
-                "SconeLoading",
-                "SconeNotificationProvider",
-                "SconeProgress",
-                "SconeToastProvider",
-                "toast",
-                "useControllableState",
-            ].sort(),
-        );
+        expectTypeOf<SconeStackProps["gap"]>().toEqualTypeOf<SconeSpacingToken | undefined>();
+        expectTypeOf<SconeInlineProps["wrap"]>().toEqualTypeOf<boolean | undefined>();
+        expectTypeOf<SconeSplitPaneSizePreset>().toEqualTypeOf<
+            "narrow" | "medium" | "wide" | "fill"
+        >();
+        expectTypeOf<SconeSplitPaneProps["onSizeCommit"]>().toEqualTypeOf<
+            ((size: string) => void) | undefined
+        >();
     });
 
     it("exports feedback and overlay component APIs", () => {
@@ -170,5 +161,49 @@ describe("public index exports", () => {
         expectTypeOf<NotificationService["open"]>().toEqualTypeOf<
             (options: NotificationOptions) => string
         >();
+    });
+
+    it("exports public utilities from the public entry", async () => {
+        expect(cn("px-2", "px-4")).toBe("px-4");
+        expect(typeof composeRefs).toBe("function");
+        expect(typeof useControllableState).toBe("function");
+        expect(mergeIds("label", "description")).toBe("label description");
+        expect(mergeAriaDescribedBy("description", "error")).toBe("description error");
+        expect(ariaBoolean(false)).toBeUndefined();
+        expect(hasAriaValue(0)).toBe(true);
+        expect(ariaValue("polite")).toBe("polite");
+
+        const publicExports = await import("./index");
+
+        expect(Object.keys(publicExports).sort()).toEqual(
+            [
+                "SconeAlert",
+                "SconeCompact",
+                "SconeConfirm",
+                "SconeDialog",
+                "SconeDrawer",
+                "SconeEmpty",
+                "SconeInline",
+                "SconeLoading",
+                "SconeNotificationProvider",
+                "SconeProgress",
+                "SconeScrollArea",
+                "SconeSeparator",
+                "SconeSplitPane",
+                "SconeStack",
+                "SconeToastProvider",
+                "SconeToolbar",
+                "ariaBoolean",
+                "ariaValue",
+                "cn",
+                "composeRefs",
+                "hasAriaValue",
+                "mergeAriaDescribedBy",
+                "mergeIds",
+                "notification",
+                "toast",
+                "useControllableState",
+            ].sort(),
+        );
     });
 });
