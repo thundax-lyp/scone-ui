@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `13 docs/30-designs/RUNBOOK-FEEDBACK-OVERLAY.md`：清理临时 RUNBOOK
-    - 任务类型：执行任务
-    - 依据文档：`docs/00-governance/DOCUMENT-RULES.md`
-    - 范围对象：`docs/30-designs/RUNBOOK-FEEDBACK-OVERLAY.md`
-    - 处理动作：闭环完成并迁移必要证据后删除临时 RUNBOOK。
-    - 验收点：RUNBOOK 已删除，长期结论已进入 readiness 或治理文档，`TODO.md` 中已无本闭环完成项。
-    - 重要度：8/10
-
 ## 待审阅任务项
 
 ## 待讨论项
