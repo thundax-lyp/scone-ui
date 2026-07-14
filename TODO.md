@@ -10,14 +10,6 @@
 
 ## 当前任务项
 
-- [ ] `2. src/components/navigation/pagination.tsx`：实现受控分页控件
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DATA-TABLE-PAGINATION-PATTERN.md`
-    - 范围对象：`src/components/navigation/pagination.tsx`、`src/components/navigation/pagination.test.tsx`、`src/components/navigation/index.ts`、`src/index.ts`
-    - 处理动作：实现 `SconePagination` 受控组件和 navigation 局部导出。
-    - 验收点：`nav`、上一页按钮、下一页按钮、页码按钮、page size `select`、总数文本、`aria-current`、边界 disabled、`pageSize -> page: 1`、density 和 className 有测试覆盖。
-    - 重要度：10/10
-
 - [ ] `3. src/patterns/data-table.tsx`：实现 DataTable Root、FilterBar slot、Toolbar 和 BulkActions
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DATA-TABLE-PAGINATION-PATTERN.md`

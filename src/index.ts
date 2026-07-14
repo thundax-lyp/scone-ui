@@ -36,6 +36,7 @@ export type {
 } from "./components/data-display";
 
 export { ariaBoolean, ariaValue, hasAriaValue, mergeAriaDescribedBy, mergeIds } from "./lib/aria";
+export { SconePagination } from "./components/navigation";
 export { SconeAlert } from "./components/feedback-overlay/alert";
 export { SconeConfirm } from "./components/feedback-overlay/confirm";
 export { SconeDialog } from "./components/feedback-overlay/dialog";
@@ -89,6 +90,7 @@ export type { SconeSeparatorProps } from "./components/layout/separator";
 export type { SconeSplitPaneProps, SconeSplitPaneSizePreset } from "./components/layout/split-pane";
 export type { SconeStackProps } from "./components/layout/stack";
 export type { SconeToolbarProps } from "./components/layout/toolbar";
+export type { SconePaginationProps } from "./components/navigation";
 
 export type {
     Breakpoint,
