@@ -477,6 +477,46 @@ Recent evidence before this review branch:
 * **功能风险**：低；localized to toast timeout behavior.
 * **置信度**：中
 
+## 16 Primary Navigation
+
+### Evidence
+
+- `SconeBreadcrumb` renders nav/ol structure, current page marker, collapse expansion, disabled handling, links/buttons, and optional `asChild`.
+- `SconePagination` is controlled by `SconePaginationState` and emits `page` or `pageSize` change reasons.
+- `SconeTabs` supports item helper mode and compound mode with roving tab keyboard behavior.
+- `SconeSegmented` uses radiogroup semantics and controlled/uncontrolled selection.
+- Tests cover current breadcrumb, collapsed breadcrumb, pagination changes, tabs activation modes, vertical tab keyboard flow, and segmented selection.
+
+### Assessment
+
+- Navigation components do not introduce routing assumptions.
+- State ownership is caller-controlled where it should be: pagination and selected values are not hidden in global state.
+- Tabs and Segmented have narrower root prop/ref APIs than most public components, but no immediate behavior bug was found in normal usage.
+
+### Candidate Finding
+
+### [P1] Pagination range text can use an out-of-range page
+
+* **位置**：`src/components/navigation/pagination.tsx`
+* **类别**：状态 / 错误处理
+* **问题**：The component clamps `currentPage` for controls, but `getPageRange(state)` uses the original `state.page`.
+* **影响**：If a caller passes a page beyond `pageCount`, controls behave as if clamped while the visible range can show impossible values such as a start greater than total.
+* **证据**：`currentPage = Math.min(Math.max(state.page, 1), pageCount)` is used for buttons; `<span>{getPageRange(state)}</span>` passes unclamped state.
+* **建议**：Compute range from the same normalized page state used by controls.
+* **功能风险**：低；only affects invalid external state display and should add a regression test.
+* **置信度**：高
+
+### [P2] Tabs and Segmented expose weaker root passthrough than peer components
+
+* **位置**：`src/components/navigation/tabs.tsx`、`src/components/navigation/segmented.tsx`
+* **类别**：API / 一致性
+* **问题**：`SconeTabs` root has no forwarded ref and does not extend root HTML attributes; `SconeSegmented` has root attrs/ref but uses custom selection keyboard logic without focus movement tests.
+* **影响**：Consumers have less ability to instrument tabs roots, and segmented keyboard behavior can leave focus and selected item out of sync in edge cases.
+* **证据**：`SconeTabsRoot` is a plain function component; tests do not cover root ref/props. `SconeSegmented` handles arrows at root and changes value but does not focus the next option.
+* **建议**：Add root ref/HTML passthrough to Tabs and add segmented keyboard focus tests before changing focus behavior.
+* **功能风险**：低 to 中；Tabs ref passthrough is additive, Segmented focus changes affect keyboard users.
+* **置信度**：中
+
 ## 09 Form Layout Helpers
 
 ### Evidence

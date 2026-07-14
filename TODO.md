@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `16-navigation-primary`：16 审核基础导航组件
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`src/components/navigation/breadcrumb.tsx`、`src/components/navigation/pagination.tsx`、`src/components/navigation/tabs.tsx`、`src/components/navigation/segmented.tsx`
-    - 处理动作：检查路径、分页、内容切换、模式切换的命名、状态和可访问性边界。
-    - 验收点：输出基础导航是否存在 API 冲突、状态重复或测试过度依赖内部实现的结论。
-    - 重要度：8/10
-
 - [ ] `17-navigation-menu-command`：17 审核菜单、命令和树组件
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
