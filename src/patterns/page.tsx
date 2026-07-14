@@ -9,7 +9,7 @@ export interface PageRootProps extends React.HTMLAttributes<HTMLDivElement> {
     density?: SconeDensity;
 }
 
-export interface PageHeaderProps extends React.HTMLAttributes<HTMLElement> {
+export interface PageHeaderProps extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
     children?: React.ReactNode;
     title?: React.ReactNode;
     description?: React.ReactNode;

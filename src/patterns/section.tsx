@@ -8,7 +8,7 @@ export interface SectionRootProps extends React.HTMLAttributes<HTMLElement> {
     density?: SconeDensity;
 }
 
-export interface SectionHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SectionHeaderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
     children?: React.ReactNode;
     title?: React.ReactNode;
     description?: React.ReactNode;
