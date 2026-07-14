@@ -1,6 +1,9 @@
 export { SconeButton } from "./button";
 export type { SconeButtonProps } from "./button";
 
+export { SconeCheckbox } from "./checkbox";
+export type { SconeCheckboxProps } from "./checkbox";
+
 export { SconeInput } from "./input";
 export type { SconeInputProps } from "./input";
 
@@ -12,6 +15,9 @@ export type { SconeSearchInputProps } from "./search-input";
 
 export { SconeSelect } from "./select";
 export type { SconeSelectProps } from "./select";
+
+export { SconeSwitch } from "./switch";
+export type { SconeSwitchProps } from "./switch";
 
 export { SconeTextArea } from "./textarea";
 export type { SconeTextAreaProps } from "./textarea";
