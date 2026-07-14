@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `21-ui-vendored-boundary`：21 审核 shadcn/Radix vendored 边界
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`src/components/ui/button.tsx`、`src/components/ui/dialog.tsx`、`src/components/ui/dropdown-menu.tsx`、`src/components/ui/select.tsx`、`src/components/ui/table.tsx`
-    - 处理动作：检查底层 UI 文件是否只作为 primitive 基座，是否被公共 API 或业务语义错误穿透。
-    - 验收点：输出 vendored 基座是否存在不必要包装、重复依赖或跨边界内部引用的结论。
-    - 重要度：7/10
-
 - [ ] `22-tests-public-behavior`：22 审核测试策略和公共行为覆盖
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`

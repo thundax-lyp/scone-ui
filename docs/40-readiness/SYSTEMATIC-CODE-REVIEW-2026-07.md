@@ -661,6 +661,20 @@ Recent evidence before this review branch:
 * **功能风险**：低；could add a visible search input in a currently hidden edge case.
 * **置信度**：高
 
+## 21 Vendored UI Boundary
+
+### Evidence
+
+- Reviewed representative shadcn/Radix files: `button.tsx`, `dialog.tsx`, `dropdown-menu.tsx`, `select.tsx`, and `table.tsx`.
+- `src/index.ts`, component-family barrels, and Pattern barrels do not export `src/components/ui/*`.
+- Direct callers are wrapper components or other UI primitives, for example `SconeButton`, `SconeSelect`, `SconeTable`, and internal shadcn dialog/sheet/alert-dialog/command files.
+
+### Assessment
+
+- No P0/P1/P2 issue found in the vendored boundary itself.
+- The UI files act as primitive bases and do not encode product workflow, routing, permissions, backend contracts, or business vocabulary.
+- The main reuse opportunity is at higher layers: custom Dropdown, Combobox, and DatePicker behavior should consider existing Radix/shadcn primitives before adding more hand-rolled interaction code.
+
 ## 09 Form Layout Helpers
 
 ### Evidence
