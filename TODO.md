@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `08 combobox-number-input`：Combobox 和 NumberInput 闭环
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`
-    - 范围对象：`src/components/form/combobox.tsx`、`src/components/form/number-input.tsx`、`src/components/form/combobox.test.tsx`、`src/components/form/number-input.test.tsx`、`src/components/form/index.ts`
-    - 处理动作：实现 `SconeCombobox` 搜索选择和 `SconeNumberInput` 数字输入、清空、stepper、min/max。
-    - 验收点：open/search/select/clear、loading/empty、数字输入、undefined 空值和边界测试通过。
-    - 重要度：9/10
-
 - [ ] `09 date-picker`：DatePicker 控件闭环
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`

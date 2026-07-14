@@ -4,8 +4,14 @@ export type { SconeButtonProps } from "./button";
 export { SconeCheckbox } from "./checkbox";
 export type { SconeCheckboxProps } from "./checkbox";
 
+export { SconeCombobox } from "./combobox";
+export type { SconeComboboxProps } from "./combobox";
+
 export { SconeInput } from "./input";
 export type { SconeInputProps } from "./input";
+
+export { SconeNumberInput } from "./number-input";
+export type { SconeNumberInputProps } from "./number-input";
 
 export { SconePasswordInput } from "./password-input";
 export type { SconePasswordInputProps } from "./password-input";
