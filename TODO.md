@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `1-tooltip-id`：1. 修复 Tooltip 实例 id 唯一性
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-NAV-MEDIA-STATE-EDGES.md`
-    - 范围对象：`src/components/navigation/tooltip.tsx`、`src/components/navigation/tooltip.test.tsx`
-    - 处理动作：将 `SconeTooltip` 的固定 tooltip DOM id 改为 `React.useId()` 派生的实例级 id。
-    - 验收点：多个 `SconeTooltip` 同屏打开时 `role="tooltip"` 的 `id` 不重复，且每个触发控件的 `aria-describedby` 指向对应 tooltip 内容。
-    - 重要度：9/10
-
 - [ ] `2-pagination-range`：2. 修复 Pagination 越界 range 文案
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-NAV-MEDIA-STATE-EDGES.md`
