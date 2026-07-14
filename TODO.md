@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `1. src/components/layout/split-pane.tsx`：实现 SplitPane resize preset 边界和 drag cleanup
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SPLIT-PANE-BOUNDS-CLEANUP.md`
-    - 范围对象：`src/components/layout/split-pane.tsx`
-    - 处理动作：兑现 `minSizePreset` / `maxSizePreset` 对 pointer resize 与 keyboard resize 的 clamp，并补齐 active drag unmount listener cleanup。
-    - 验收点：pointer、keyboard、受控 size 回调和 `aria-valuetext` 均使用 clamp 后的 size，active drag unmount 后不再保留 window pointer listener。
-    - 重要度：9/10
-
 - [ ] `2. src/components/layout/split-pane.test.tsx`：补齐 SplitPane 边界和卸载交互测试
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SPLIT-PANE-BOUNDS-CLEANUP.md`
