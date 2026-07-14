@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `3. src/components/form/date-picker.tsx`：收口 DatePicker calendar overlay 语义
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FORM-INTERACTION-HARDENING.md`
-    - 范围对象：`src/components/form/date-picker.tsx`、`src/components/form/date-picker.test.tsx`、`src/components/ui/popover.tsx`、`src/components/ui/dialog.tsx`
-    - 处理动作：优先复用 Popover，补齐 date trigger、calendar overlay、date cell button、clear button 的关闭、焦点、禁用日期和清除语义。
-    - 验收点：trigger 点击和 Enter/Space、Escape、outside click、日期选择、disabled date、clear button、受控 open/value 均有测试覆盖。
-    - 重要度：9/10
-
 - [ ] `4. src/components/form/input.tsx`：评估 text input value plumbing 是否需要同步
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FORM-INTERACTION-HARDENING.md`

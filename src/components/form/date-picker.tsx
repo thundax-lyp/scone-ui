@@ -1,6 +1,7 @@
 import { Calendar, X } from "lucide-react";
 import * as React from "react";
 
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/cn";
 import { useControllableState } from "@/lib/use-controllable-state";
 import type { SconeControlSize } from "@/types/foundation";
@@ -114,78 +115,78 @@ export const SconeDatePicker = React.forwardRef<HTMLButtonElement, SconeDatePick
         };
 
         return (
-            <div data-scone-date-picker="" className="relative">
-                <button
-                    ref={ref}
-                    type="button"
-                    aria-haspopup="dialog"
-                    aria-expanded={currentOpen}
-                    className={cn(
-                        "flex w-full min-w-40 items-center justify-between gap-sm rounded-lg border border-input bg-transparent px-2.5 py-1 text-left outline-none transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20",
-                        triggerSizeClassNames[size],
-                        className,
-                    )}
-                    onClick={() => updateOpen(!currentOpen)}
-                    onKeyDown={(event) => {
-                        if (event.key === "Enter" || event.key === " ") {
-                            event.preventDefault();
-                            updateOpen(true);
-                        }
-                    }}
-                    {...datePickerControlProps}
-                    disabled={isDisabled}
-                >
-                    <span className={cn(!currentValue && "text-muted-foreground")}>
-                        {currentValue ? formatLabel(currentValue) : placeholder}
-                    </span>
-                    <span className="ml-auto flex items-center gap-xs">
-                        {currentValue && !isDisabled ? (
-                            <span
-                                role="button"
-                                tabIndex={-1}
-                                aria-label="Clear date"
-                                className="inline-flex size-4 items-center justify-center"
-                                onClick={(event) => {
-                                    event.stopPropagation();
-                                    selectDate(undefined);
-                                }}
-                            >
-                                <X aria-hidden="true" className="size-3.5" />
+            <Popover open={currentOpen} onOpenChange={updateOpen}>
+                <div data-scone-date-picker="" className="relative">
+                    <PopoverTrigger asChild>
+                        <button
+                            ref={ref}
+                            type="button"
+                            aria-haspopup="dialog"
+                            aria-expanded={currentOpen}
+                            className={cn(
+                                "flex w-full min-w-40 items-center justify-between gap-sm rounded-lg border border-input bg-transparent px-2.5 py-1 text-left outline-none transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20",
+                                currentValue && !isDisabled && "pr-12",
+                                triggerSizeClassNames[size],
+                                className,
+                            )}
+                            onKeyDown={(event) => {
+                                if (event.key === "Enter" || event.key === " ") {
+                                    event.preventDefault();
+                                    updateOpen(true);
+                                }
+                            }}
+                            {...datePickerControlProps}
+                            disabled={isDisabled}
+                        >
+                            <span className={cn(!currentValue && "text-muted-foreground")}>
+                                {currentValue ? formatLabel(currentValue) : placeholder}
                             </span>
-                        ) : null}
-                        <Calendar aria-hidden="true" className="size-4 opacity-50" />
-                    </span>
-                </button>
-                {currentOpen ? (
-                    <div
-                        role="dialog"
-                        aria-label="Choose date"
-                        className="absolute z-50 mt-1 grid w-72 grid-cols-7 gap-1 rounded-lg bg-popover p-2 text-popover-foreground shadow-md ring-1 ring-foreground/10"
-                    >
-                        {monthDays.map((date) => {
-                            const blocked = disabledDate?.(date) ?? false;
-                            const selected = isSameDay(currentValue, date);
+                            <Calendar aria-hidden="true" className="ml-auto size-4 opacity-50" />
+                        </button>
+                    </PopoverTrigger>
+                    {currentValue && !isDisabled ? (
+                        <button
+                            type="button"
+                            aria-label="Clear date"
+                            className="absolute top-1/2 right-7 inline-flex size-4 -translate-y-1/2 items-center justify-center rounded-sm text-muted-foreground hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                            onClick={(event) => {
+                                event.stopPropagation();
+                                selectDate(undefined);
+                            }}
+                        >
+                            <X aria-hidden="true" className="size-3.5" />
+                        </button>
+                    ) : null}
+                </div>
+                <PopoverContent
+                    align="start"
+                    role="dialog"
+                    aria-label="Choose date"
+                    className="grid w-72 grid-cols-7 gap-1 p-2"
+                >
+                    {monthDays.map((date) => {
+                        const blocked = disabledDate?.(date) ?? false;
+                        const selected = isSameDay(currentValue, date);
 
-                            return (
-                                <button
-                                    key={date.toISOString()}
-                                    type="button"
-                                    aria-label={formatLabel(date)}
-                                    aria-pressed={selected}
-                                    disabled={blocked}
-                                    className={cn(
-                                        "inline-flex h-8 items-center justify-center rounded-md text-sm hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-40",
-                                        selected && "bg-primary text-primary-foreground",
-                                    )}
-                                    onClick={() => selectDate(date)}
-                                >
-                                    {date.getDate()}
-                                </button>
-                            );
-                        })}
-                    </div>
-                ) : null}
-            </div>
+                        return (
+                            <button
+                                key={date.toISOString()}
+                                type="button"
+                                aria-label={formatLabel(date)}
+                                aria-pressed={selected}
+                                disabled={blocked}
+                                className={cn(
+                                    "inline-flex h-8 items-center justify-center rounded-md text-sm hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none disabled:pointer-events-none disabled:opacity-40",
+                                    selected && "bg-primary text-primary-foreground",
+                                )}
+                                onClick={() => selectDate(date)}
+                            >
+                                {date.getDate()}
+                            </button>
+                        );
+                    })}
+                </PopoverContent>
+            </Popover>
         );
     },
 );
