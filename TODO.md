@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `09 docs/40-readiness/IMPLEMENTATION-COVERAGE.md`：更新实现覆盖证据
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DATA-DISPLAY-CLOSURE.md`
-    - 范围对象：`docs/40-readiness/IMPLEMENTATION-COVERAGE.md`
-    - 处理动作：记录 Data Display 已实现文件、测试文件、验证命令结果和剩余延期项。
-    - 验收点：Implementation Coverage 明确区分 Data Display 的已实现、已测试、未覆盖和延期内容。
-    - 重要度：9/10
-
 - [ ] `10 docs/30-designs/RUNBOOK-DATA-DISPLAY-CLOSURE.md`：清理临时 RUNBOOK
     - 任务类型：执行任务
     - 依据文档：`docs/00-governance/DOCUMENT-RULES.md`
