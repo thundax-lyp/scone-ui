@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `07 data-display verification`：运行 Data Display 闭环验证
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DATA-DISPLAY-CLOSURE.md`
-    - 范围对象：`package.json`、`src/components/data-display/*`、`src/index.ts`、`src/index.test.ts`
-    - 处理动作：运行 `pnpm test`、`pnpm typecheck`、`pnpm lint`、`pnpm build` 并修复本闭环引入的问题。
-    - 验收点：四条命令通过，失败时仅保留有明确原因和后续任务的延期项。
-    - 重要度：10/10
-
 - [ ] `08 feat/data-display-closure`：同步 main 分支代码
     - 任务类型：执行任务
     - 依据文档：`docs/00-governance/TODO-RULES.md`

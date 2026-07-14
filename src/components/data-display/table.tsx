@@ -82,7 +82,7 @@ function getValue<T>(record: T, dataIndex: SconeTableColumn<T>["dataIndex"]): un
         }, record);
     }
 
-    return record[dataIndex];
+    return record[dataIndex as keyof T];
 }
 
 function getScrollStyle(scroll: SconeTableScroll | undefined): React.CSSProperties | undefined {
@@ -97,125 +97,127 @@ function getScrollStyle(scroll: SconeTableScroll | undefined): React.CSSProperti
     return { minWidth: scroll.x };
 }
 
-export const SconeTable = React.forwardRef(
-    <T,>(
-        {
-            ariaLabel,
-            columns,
-            dataSource,
-            rowKey,
-            renderEmpty = "No data",
-            renderError,
-            loading = false,
-            density = "default",
-            scroll,
-            onRow,
-            onCell,
-            className,
-            ...props
-        }: SconeTableProps<T>,
-        ref: React.ForwardedRef<HTMLDivElement>,
-    ) => {
-        const stateColSpan = Math.max(columns.length, 1);
+function SconeTableInner<T>(
+    {
+        ariaLabel,
+        columns,
+        dataSource,
+        rowKey,
+        renderEmpty = "No data",
+        renderError,
+        loading = false,
+        density = "default",
+        scroll,
+        onRow,
+        onCell,
+        className,
+        ...props
+    }: SconeTableProps<T>,
+    ref: React.ForwardedRef<HTMLDivElement>,
+) {
+    const stateColSpan = Math.max(columns.length, 1);
 
-        let body: React.ReactNode;
+    let body: React.ReactNode;
 
-        if (loading) {
-            body = (
-                <TableRow>
-                    <TableCell
-                        colSpan={stateColSpan}
-                        className="py-8 text-center text-muted-foreground"
-                    >
-                        <span role="status">Loading</span>
-                    </TableCell>
-                </TableRow>
-            );
-        } else if (renderError !== undefined) {
-            body = (
-                <TableRow>
-                    <TableCell colSpan={stateColSpan} className="py-8 text-center text-destructive">
-                        <span role="alert">{renderStateNode(renderError)}</span>
-                    </TableCell>
-                </TableRow>
-            );
-        } else if (dataSource.length === 0) {
-            body = (
-                <TableRow>
-                    <TableCell
-                        colSpan={stateColSpan}
-                        className="py-8 text-center text-muted-foreground"
-                    >
-                        {renderStateNode(renderEmpty)}
-                    </TableCell>
-                </TableRow>
-            );
-        } else {
-            body = dataSource.map((record) => {
-                const rowProps = onRow?.(record) ?? {};
-
-                return (
-                    <TableRow key={getRecordKey(record, rowKey)} {...rowProps}>
-                        {columns.map((column, index) => {
-                            const value = getValue(record, column.dataIndex);
-                            const cellProps = onCell?.(record, column) ?? {};
-
-                            return (
-                                <TableCell
-                                    key={column.key}
-                                    {...cellProps}
-                                    style={{
-                                        width: column.width,
-                                        minWidth: column.minWidth,
-                                        ...cellProps.style,
-                                    }}
-                                    className={cn(
-                                        column.align && alignClassNames[column.align],
-                                        column.className,
-                                        cellProps.className,
-                                    )}
-                                >
-                                    {column.render
-                                        ? column.render(value, record, index)
-                                        : (value as React.ReactNode)}
-                                </TableCell>
-                            );
-                        })}
-                    </TableRow>
-                );
-            });
-        }
-
-        return (
-            <div ref={ref} className={cn("min-w-0 overflow-x-auto", className)} {...props}>
-                <Table
-                    aria-label={ariaLabel}
-                    style={getScrollStyle(scroll)}
-                    className={cn("min-w-full", tableDensityClassNames[density])}
+    if (loading) {
+        body = (
+            <TableRow>
+                <TableCell
+                    colSpan={stateColSpan}
+                    className="py-8 text-center text-muted-foreground"
                 >
-                    <TableHeader>
-                        <TableRow>
-                            {columns.map((column) => (
-                                <TableHead
-                                    key={column.key}
-                                    style={{ width: column.width, minWidth: column.minWidth }}
-                                    className={cn(
-                                        column.align && alignClassNames[column.align],
-                                        column.headerClassName,
-                                    )}
-                                >
-                                    <span className="inline-flex items-center gap-1">
-                                        {column.title}
-                                        {column.sortable ? <span aria-hidden="true">↕</span> : null}
-                                    </span>
-                                </TableHead>
-                            ))}
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>{body}</TableBody>
-                </Table>
-            </div>
+                    <span role="status">Loading</span>
+                </TableCell>
+            </TableRow>
         );
-    },
-);
-SconeTable.displayName = "SconeTable";
+    } else if (renderError !== undefined) {
+        body = (
+            <TableRow>
+                <TableCell colSpan={stateColSpan} className="py-8 text-center text-destructive">
+                    <span role="alert">{renderStateNode(renderError)}</span>
+                </TableCell>
+            </TableRow>
+        );
+    } else if (dataSource.length === 0) {
+        body = (
+            <TableRow>
+                <TableCell
+                    colSpan={stateColSpan}
+                    className="py-8 text-center text-muted-foreground"
+                >
+                    {renderStateNode(renderEmpty)}
+                </TableCell>
+            </TableRow>
+        );
+    } else {
+        body = dataSource.map((record) => {
+            const rowProps = onRow?.(record) ?? {};
+
+            return (
+                <TableRow key={getRecordKey(record, rowKey)} {...rowProps}>
+                    {columns.map((column, index) => {
+                        const value = getValue(record, column.dataIndex);
+                        const cellProps = onCell?.(record, column) ?? {};
+
+                        return (
+                            <TableCell
+                                key={column.key}
+                                {...cellProps}
+                                style={{
+                                    width: column.width,
+                                    minWidth: column.minWidth,
+                                    ...cellProps.style,
+                                }}
+                                className={cn(
+                                    column.align && alignClassNames[column.align],
+                                    column.className,
+                                    cellProps.className,
+                                )}
+                            >
+                                {column.render
+                                    ? column.render(value, record, index)
+                                    : (value as React.ReactNode)}
+                            </TableCell>
+                        );
+                    })}
+                </TableRow>
+            );
+        });
+    }
+
+    return (
+        <div ref={ref} className={cn("min-w-0 overflow-x-auto", className)} {...props}>
+            <Table
+                aria-label={ariaLabel}
+                style={getScrollStyle(scroll)}
+                className={cn("min-w-full", tableDensityClassNames[density])}
+            >
+                <TableHeader>
+                    <TableRow>
+                        {columns.map((column) => (
+                            <TableHead
+                                key={column.key}
+                                style={{ width: column.width, minWidth: column.minWidth }}
+                                className={cn(
+                                    column.align && alignClassNames[column.align],
+                                    column.headerClassName,
+                                )}
+                            >
+                                <span className="inline-flex items-center gap-1">
+                                    {column.title}
+                                    {column.sortable ? <span aria-hidden="true">↕</span> : null}
+                                </span>
+                            </TableHead>
+                        ))}
+                    </TableRow>
+                </TableHeader>
+                <TableBody>{body}</TableBody>
+            </Table>
+        </div>
+    );
+}
+
+export const SconeTable = React.forwardRef(SconeTableInner) as <T>(
+    props: SconeTableProps<T> & React.RefAttributes<HTMLDivElement>,
+) => React.ReactElement | null;
+(SconeTable as { displayName?: string }).displayName = "SconeTable";

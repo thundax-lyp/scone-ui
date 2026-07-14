@@ -5,7 +5,7 @@ import type { SconeTone } from "@/types/foundation";
 
 export interface SconeStatisticProps extends Omit<
     React.HTMLAttributes<HTMLDivElement>,
-    "title" | "children"
+    "title" | "children" | "prefix"
 > {
     title?: React.ReactNode;
     value: React.ReactNode;
