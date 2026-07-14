@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `02-descriptions-root-contract`：收口 Descriptions root/internal 属性归属
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-COMPONENT-CONTRACTS.md`
-    - 范围对象：`src/components/data-display/descriptions.tsx`、`src/components/data-display/descriptions.test.tsx`
-    - 处理动作：让 `SconeDescriptions` 的 `style`、`className`、root HTML attrs 和 ref 归属 outer root `<div>`，让 internal `<dl>` 只承载 columns CSS variables。
-    - 验收点：测试覆盖 root `style` / `className` / attrs / ref passthrough，并区分 internal `<dl>` 的 `--dd-columns*` 样式。
-    - 重要度：8/10
-
 - [ ] `03-badge-root-contract`：对齐 Badge root props 与 ref
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-COMPONENT-CONTRACTS.md`
