@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `4.13 src/lib/utils.ts`：删除 `cn` re-export 文件
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
-    - 范围对象：`src/lib/utils.ts`
-    - 处理动作：在所有调用方改到 `@/lib/cn` 后删除 `src/lib/utils.ts`。
-    - 验收点：`rg "lib/utils|@/lib/utils|\\.\\./\\.\\./lib/utils" src` 没有结果，且 `test ! -f src/lib/utils.ts` 通过。
-    - 重要度：8/10
-
 - [ ] `5.1 data-display verification`：运行 Data Display 契约验证
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
