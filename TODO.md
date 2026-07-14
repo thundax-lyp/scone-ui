@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `12. runbook-cleanup`：清理 RUNBOOK 和已完成 TODO
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`、`docs/00-governance/TODO-RULES.md`
-    - 范围对象：`main`、`feat/foundation-public-api`、`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`、`TODO.md`
-    - 处理动作：任务完成后删除 RUNBOOK，并从 `TODO.md` 删除已完成任务。
-    - 验收点：RUNBOOK 已删除或其长期证据已迁移到 `docs/40-readiness/`，已完成 TODO 不保留在 `TODO.md`。
-    - 重要度：10/10
-
 ## 待审阅任务项
 
 ## 待讨论项
