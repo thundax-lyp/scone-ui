@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `11-final-main-sync`：11 同步 main 分支代码
-    - 任务类型：执行任务
-    - 依据文档：`docs/00-governance/TODO-RULES.md`
-    - 范围对象：当前工作分支 `feat/navigation-media-closure`、上游 `main`
-    - 处理动作：在实现任务完成后同步最新 `main` 分支代码并处理由同步引入的冲突。
-    - 验收点：当前分支包含最新 `main`，无未解决冲突，Navigation + Media 相关改动未被同步过程回退。
-    - 重要度：8/10
-
 - [ ] `12-final-verification`：12 运行最终验证
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
