@@ -7,6 +7,9 @@ export type { SconeCheckboxProps } from "./checkbox";
 export { SconeCombobox } from "./combobox";
 export type { SconeComboboxProps } from "./combobox";
 
+export { SconeDatePicker } from "./date-picker";
+export type { SconeDatePickerProps } from "./date-picker";
+
 export { SconeInput } from "./input";
 export type { SconeInputProps } from "./input";
 

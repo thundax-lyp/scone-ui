@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `09 date-picker`：DatePicker 控件闭环
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`
-    - 范围对象：`src/components/form/date-picker.tsx`、`src/components/form/date-picker.test.tsx`、`src/components/form/index.ts`
-    - 处理动作：实现 `SconeDatePicker` 的 Date 值、open 状态、disabledDate、placeholder、formatLabel 和 Field invalid。
-    - 验收点：键盘打开、选择日期、禁用日期、清空、受控 open 和 ARIA 状态测试通过。
-    - 重要度：9/10
-
 - [ ] `10 upload`：Upload 控件闭环
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`
