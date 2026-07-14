@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `4 src/components/feedback-overlay/progress.tsx`：实现 Progress 进度组件
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-OVERLAY.md`
-    - 范围对象：`src/components/feedback-overlay/progress.tsx`、`src/components/feedback-overlay/progress.test.tsx`
-    - 处理动作：实现 `SconeProgress` 和 `SconeProgressProps`，覆盖 value、max、status、showLabel、label 字段。
-    - 验收点：Progress 测试验证可量化进度语义、状态文案和百分比展示。
-    - 重要度：8/10
-
 - [ ] `5 src/components/feedback-overlay/drawer.tsx`：实现 Drawer 侧向浮层组件
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-OVERLAY.md`
