@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `4.11 feedback-overlay cn check batch 1`：确认 feedback-overlay 第一批 `cn` 导入状态
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
-    - 范围对象：`src/components/feedback-overlay/alert.tsx`、`src/components/feedback-overlay/confirm.tsx`、`src/components/feedback-overlay/dialog.tsx`、`src/components/feedback-overlay/drawer.tsx`、`src/components/feedback-overlay/empty.tsx`
-    - 处理动作：确认本批 feedback-overlay 文件没有剩余 `lib/utils` 导入。
-    - 验收点：本批文件不引用 `lib/utils`、`@/lib/utils` 或 `../../lib/utils`，alert、confirm、dialog、drawer 和 empty 行为不变。
-    - 重要度：7/10
-
 - [ ] `4.12 feedback-overlay cn check batch 2`：确认 feedback-overlay 第二批 `cn` 导入状态
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
