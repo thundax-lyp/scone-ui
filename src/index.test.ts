@@ -1,3 +1,5 @@
+import { existsSync } from "node:fs";
+
 import { describe, expect, expectTypeOf, it } from "vitest";
 
 import {
@@ -520,6 +522,20 @@ describe("public index exports", () => {
                 "useSconeFormContext",
             ].sort(),
         );
+
+        expect(publicExports).toHaveProperty("AppShell");
+        expect(publicExports).toHaveProperty("Page");
+        expect(publicExports).toHaveProperty("Section");
+        expect(publicExports).toHaveProperty("FilterBar");
+        expect(publicExports).toHaveProperty("DataTable");
+        expect(publicExports).not.toHaveProperty("SconeDrawerForm");
+        expect(publicExports).not.toHaveProperty("SconeConfirmationFlow");
+        expect(publicExports).not.toHaveProperty("SconePopover");
+        expect(publicExports).not.toHaveProperty("SconeLogo");
+        expect(publicExports).not.toHaveProperty("SconeResult");
+        expect(publicExports).not.toHaveProperty("SconeDashboardMetric");
+        expect(publicExports).not.toHaveProperty("SconeGrid");
+        expect(existsSync(new URL("./recipes", import.meta.url))).toBe(false);
     });
 
     it("exports data display components from the public entry", () => {
