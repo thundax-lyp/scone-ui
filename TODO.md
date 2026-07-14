@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `5-runbook-cleanup`：清理临时 RUNBOOK
-    - 任务类型：执行任务
-    - 依据文档：`docs/00-governance/DOCUMENT-RULES.md`、`docs/30-designs/RUNBOOK-TEST-DOC-MAINTENANCE.md`
-    - 范围对象：`docs/30-designs/RUNBOOK-TEST-DOC-MAINTENANCE.md`
-    - 处理动作：在测试、系统性审核和 Implementation Coverage 收口完成后删除临时 RUNBOOK。
-    - 验收点：任务关闭时 `docs/30-designs/RUNBOOK-TEST-DOC-MAINTENANCE.md` 不再存在，长期证据只保留在 readiness 文档。
-    - 重要度：7/10
-
 ## 待审阅任务项
 
 ## 待讨论项
