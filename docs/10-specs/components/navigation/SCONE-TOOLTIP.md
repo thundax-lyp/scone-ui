@@ -2,25 +2,25 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready |
-| Layer | Component |
+| Field     | Value                                                    |
+| --------- | -------------------------------------------------------- |
+| Status    | Ready                                                    |
+| Layer     | Component                                                |
 | Authority | [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) |
 
 源策略、导出状态和跨组件词汇以 [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) 与 [`FOUNDATIONS-SPEC.md`](../../FOUNDATIONS-SPEC.md) 为准。
 
 短提示，用于解释图标按钮、缩写或轻量辅助信息。
 
-| Prop        | 类型                                     | 说明         |
-| ----------- | ---------------------------------------- | ------------ |
-| `content`   | `ReactNode`                              | 短提示内容。 |
-| `children`  | `ReactNode`                              | 触发元素。   |
-| `open` / `defaultOpen` | `boolean`                      | 打开状态。   |
-| `onOpenChange` | `(open: boolean) => void`             | 打开状态变化。 |
-| `side`      | `"top" \| "right" \| "bottom" \| "left"` | 出现方向。   |
-| `delay`     | `number`                                 | 出现延迟。   |
-| `className` | `string`                                 | 样式。       |
+| Prop                   | 类型                                     | 说明           |
+| ---------------------- | ---------------------------------------- | -------------- |
+| `content`              | `ReactNode`                              | 短提示内容。   |
+| `children`             | `ReactNode`                              | 触发元素。     |
+| `open` / `defaultOpen` | `boolean`                                | 打开状态。     |
+| `onOpenChange`         | `(open: boolean) => void`                | 打开状态变化。 |
+| `side`                 | `"top" \| "right" \| "bottom" \| "left"` | 出现方向。     |
+| `delay`                | `number`                                 | 出现延迟。     |
+| `className`            | `string`                                 | 样式。         |
 
 ## Usage
 

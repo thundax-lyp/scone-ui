@@ -2,30 +2,30 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready |
-| Layer | Component |
+| Field     | Value                                                    |
+| --------- | -------------------------------------------------------- |
+| Status    | Ready                                                    |
+| Layer     | Component                                                |
 | Authority | [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) |
 
 源策略、导出状态和跨组件词汇以 [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) 与 [`FOUNDATIONS-SPEC.md`](../../FOUNDATIONS-SPEC.md) 为准。
 
 单行文本输入。
 
-| Prop                     | 类型                      | 说明                  |
-| ------------------------ | ------------------------- | --------------------- |
-| `value` / `defaultValue` | `string`                  | 受控或非受控值。      |
-| `onValueChange`          | `(value: string) => void` | 值变化。              |
-| `onChange`               | React.ChangeEventHandler<HTMLInputElement>        | 可选原生事件透传。    |
-| `placeholder`            | `string`                  | 占位说明。            |
-| `allowClear`             | `boolean`                 | 清空按钮。            |
-| `onClear`                | `() => void`              | 用户点击清空按钮。    |
-| `disabled`               | `boolean`                 | 禁用。                |
-| `readOnly`               | `boolean`                 | 只读。                |
-| `prefix` / `suffix`      | `ReactNode`               | 装饰或辅助元素。      |
-| `size`                   | `"sm" \| "md" \| "lg"`    | 控件尺寸。            |
-| `ariaLabel`              | `string`                  | 无可见 label 时必填。 |
-| `className`              | `string`                  | 样式。                |
+| Prop                     | 类型                                       | 说明                  |
+| ------------------------ | ------------------------------------------ | --------------------- |
+| `value` / `defaultValue` | `string`                                   | 受控或非受控值。      |
+| `onValueChange`          | `(value: string) => void`                  | 值变化。              |
+| `onChange`               | React.ChangeEventHandler<HTMLInputElement> | 可选原生事件透传。    |
+| `placeholder`            | `string`                                   | 占位说明。            |
+| `allowClear`             | `boolean`                                  | 清空按钮。            |
+| `onClear`                | `() => void`                               | 用户点击清空按钮。    |
+| `disabled`               | `boolean`                                  | 禁用。                |
+| `readOnly`               | `boolean`                                  | 只读。                |
+| `prefix` / `suffix`      | `ReactNode`                                | 装饰或辅助元素。      |
+| `size`                   | `"sm" \| "md" \| "lg"`                     | 控件尺寸。            |
+| `ariaLabel`              | `string`                                   | 无可见 label 时必填。 |
+| `className`              | `string`                                   | 样式。                |
 
 ## Usage
 

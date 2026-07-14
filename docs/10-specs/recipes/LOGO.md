@@ -2,10 +2,10 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready Boundary |
-| Layer | Recipe |
+| Field     | Value                       |
+| --------- | --------------------------- |
+| Status    | Ready Boundary              |
+| Layer     | Recipe                      |
 | Authority | [`README.md`](../README.md) |
 
 Recipe 不导出独立 `Scone*` 组件；按本文档组合底层组件并验证边界。

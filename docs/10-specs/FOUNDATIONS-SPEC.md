@@ -139,14 +139,14 @@ Theme 必须提供以下 token 族：
 
 布局尺寸使用 preset 和 CSS 长度边界，不把无单位 `number` 作为公共 API。组件可以通过 `className` 做局部覆盖，但 SPEC 和默认实现必须先提供稳定 preset。
 
-| 语义             | token / preset                                      | 使用对象                         |
-| ---------------- | --------------------------------------------------- | -------------------------------- |
-| page width       | `page-width-narrow/content/wide/full`               | `Page.Root`。                    |
-| drawer width     | `drawer-width-sm/md/lg/full`                        | `SconeDrawer`。                  |
-| split pane size  | `split-pane-size-narrow/medium/wide/fill`           | `SconeSplitPane`。               |
-| table region     | `table-region-height-sm/md/lg/full`                 | `DataTable.TableRegion`。        |
-| scroll viewport  | `scroll-viewport-height-sm/md/lg`                   | `SconeScrollArea` 局部滚动区域。 |
-| sticky offset    | `sticky-offset-header/footer`                       | Page、DataTable 和 FormActions。 |
+| 语义             | token / preset                                        | 使用对象                         |
+| ---------------- | ----------------------------------------------------- | -------------------------------- |
+| page width       | `page-width-narrow/content/wide/full`                 | `Page.Root`。                    |
+| drawer width     | `drawer-width-sm/md/lg/full`                          | `SconeDrawer`。                  |
+| split pane size  | `split-pane-size-narrow/medium/wide/fill`             | `SconeSplitPane`。               |
+| table region     | `table-region-height-sm/md/lg/full`                   | `DataTable.TableRegion`。        |
+| scroll viewport  | `scroll-viewport-height-sm/md/lg`                     | `SconeScrollArea` 局部滚动区域。 |
+| sticky offset    | `sticky-offset-header/footer`                         | Page、DataTable 和 FormActions。 |
 | responsive width | `ResponsiveValue<widthPreset>` 或 Tailwind class 覆盖 | Page、Drawer、SplitPane。        |
 
 **Rules:**
@@ -330,10 +330,10 @@ type SconeDensity = "compact" | "default" | "comfortable";
 
 DataTable 排序状态桥接。
 
-| 字段        | 类型                  | 说明         |
-| ----------- | --------------------- | ------------ |
-| `columnKey` | `string`              | 排序列 key。 |
-| `direction` | `"asc" \| "desc"`     | 排序方向。   |
+| 字段        | 类型              | 说明         |
+| ----------- | ----------------- | ------------ |
+| `columnKey` | `string`          | 排序列 key。 |
+| `direction` | `"asc" \| "desc"` | 排序方向。   |
 
 **Rules:**
 
@@ -508,14 +508,14 @@ DataTable selection UI 的状态桥接。
 
 用于 Timeline 的通用事件项。
 
-| 字段          | 类型            | 说明             |
-| ------------- | --------------- | ---------------- |
-| `key`         | `Key`           | 稳定项 key。     |
-| `time`        | `ReactNode`     | 时间或时间摘要。 |
-| `title`       | `ReactNode`     | 事件标题。       |
-| `description` | `ReactNode`     | 事件说明。       |
-| `icon`        | `ReactNode`     | 可选图标。       |
-| `tone`        | SconeTone | 语义色。         |
+| 字段          | 类型        | 说明             |
+| ------------- | ----------- | ---------------- |
+| `key`         | `Key`       | 稳定项 key。     |
+| `time`        | `ReactNode` | 时间或时间摘要。 |
+| `title`       | `ReactNode` | 事件标题。       |
+| `description` | `ReactNode` | 事件说明。       |
+| `icon`        | `ReactNode` | 可选图标。       |
+| `tone`        | SconeTone   | 语义色。         |
 
 **Rules:**
 
@@ -549,13 +549,13 @@ Toast 展示位置。
 
 Toast 队列中的展示项。
 
-| 字段          | 类型            | 说明           |
-| ------------- | --------------- | -------------- |
-| `id`          | `string`        | 稳定 toast id。 |
-| `title`       | `ReactNode`     | 标题。         |
-| `description` | `ReactNode`     | 说明。         |
-| `tone`        | SconeTone | 语义色。       |
-| `action`      | `ReactNode`     | 可选单个动作。 |
+| 字段          | 类型        | 说明            |
+| ------------- | ----------- | --------------- |
+| `id`          | `string`    | 稳定 toast id。 |
+| `title`       | `ReactNode` | 标题。          |
+| `description` | `ReactNode` | 说明。          |
+| `tone`        | SconeTone   | 语义色。        |
+| `action`      | `ReactNode` | 可选单个动作。  |
 
 **Rules:**
 
@@ -575,15 +575,15 @@ Notification 展示位置。
 
 Notification 队列中的展示项。
 
-| 字段          | 类型            | 说明               |
-| ------------- | --------------- | ------------------ |
-| `id`          | `string`        | 稳定 notification id。 |
-| `title`       | `ReactNode`     | 标题。             |
-| `description` | `ReactNode`     | 说明。             |
-| `tone`        | SconeTone | 语义色。           |
-| `time`        | `ReactNode`     | 时间或状态摘要。   |
-| `action`      | `ReactNode`     | 可选单个动作。     |
-| `persistent`  | `boolean`       | 是否持久展示。     |
+| 字段          | 类型        | 说明                   |
+| ------------- | ----------- | ---------------------- |
+| `id`          | `string`    | 稳定 notification id。 |
+| `title`       | `ReactNode` | 标题。                 |
+| `description` | `ReactNode` | 说明。                 |
+| `tone`        | SconeTone   | 语义色。               |
+| `time`        | `ReactNode` | 时间或状态摘要。       |
+| `action`      | `ReactNode` | 可选单个动作。         |
+| `persistent`  | `boolean`   | 是否持久展示。         |
 
 **Rules:**
 

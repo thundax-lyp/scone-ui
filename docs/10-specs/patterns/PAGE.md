@@ -2,10 +2,10 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready |
-| Layer | Admin Pattern |
+| Field     | Value                                                 |
+| --------- | ----------------------------------------------------- |
+| Status    | Ready                                                 |
+| Layer     | Admin Pattern                                         |
 | Authority | [`ADMIN-PATTERNS-SPEC.md`](../ADMIN-PATTERNS-SPEC.md) |
 
 Pattern 的层级、导出和组合边界以 [`ADMIN-UI-SPEC.md`](../ADMIN-UI-SPEC.md) 与 [`COMPONENT-SELECTION.md`](../COMPONENT-SELECTION.md) 为准。

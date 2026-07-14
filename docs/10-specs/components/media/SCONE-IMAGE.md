@@ -2,30 +2,30 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready |
-| Layer | Component |
+| Field     | Value                                                    |
+| --------- | -------------------------------------------------------- |
+| Status    | Ready                                                    |
+| Layer     | Component                                                |
 | Authority | [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) |
 
 源策略、导出状态和跨组件词汇以 [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) 与 [`FOUNDATIONS-SPEC.md`](../../FOUNDATIONS-SPEC.md) 为准。
 
 图片展示组件，用于对象图片、缩略图和可选预览。
 
-| Prop                  | 类型                                          | 说明                     |
-| --------------------- | --------------------------------------------- | ------------------------ |
-| `src`                 | `string`                                      | 图片地址。               |
-| `alt`                 | `string`                                      | 图片替代文本。           |
-| `fallback`            | `ReactNode`                                   | 加载失败或缺失时的展示。 |
-| `preview`             | `boolean`                                     | 是否启用预览。           |
-| `previewOpen`         | `boolean`                                     | 受控预览打开状态。       |
-| `defaultPreviewOpen`  | `boolean`                                     | 非受控预览初始状态。     |
-| `onPreviewOpenChange` | `(open: boolean) => void`                     | 预览打开状态变化。       |
-| `width` / `height`    | `number \| string`                            | 稳定图片尺寸。           |
-| `objectFit`           | `"cover" \| "contain"`                        | 图片填充方式。           |
-| `onLoad`              | `React.ReactEventHandler<HTMLImageElement>`   | 图片加载成功事件。       |
-| `onError`             | `React.ReactEventHandler<HTMLImageElement>`   | 图片加载失败事件。       |
-| `className`           | `string`                                      | 样式。                   |
+| Prop                  | 类型                                        | 说明                     |
+| --------------------- | ------------------------------------------- | ------------------------ |
+| `src`                 | `string`                                    | 图片地址。               |
+| `alt`                 | `string`                                    | 图片替代文本。           |
+| `fallback`            | `ReactNode`                                 | 加载失败或缺失时的展示。 |
+| `preview`             | `boolean`                                   | 是否启用预览。           |
+| `previewOpen`         | `boolean`                                   | 受控预览打开状态。       |
+| `defaultPreviewOpen`  | `boolean`                                   | 非受控预览初始状态。     |
+| `onPreviewOpenChange` | `(open: boolean) => void`                   | 预览打开状态变化。       |
+| `width` / `height`    | `number \| string`                          | 稳定图片尺寸。           |
+| `objectFit`           | `"cover" \| "contain"`                      | 图片填充方式。           |
+| `onLoad`              | `React.ReactEventHandler<HTMLImageElement>` | 图片加载成功事件。       |
+| `onError`             | `React.ReactEventHandler<HTMLImageElement>` | 图片加载失败事件。       |
+| `className`           | `string`                                    | 样式。                   |
 
 ## Usage
 

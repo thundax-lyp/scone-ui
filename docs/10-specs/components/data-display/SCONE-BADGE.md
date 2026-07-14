@@ -2,10 +2,10 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready |
-| Layer | Component |
+| Field     | Value                                                    |
+| --------- | -------------------------------------------------------- |
+| Status    | Ready                                                    |
+| Layer     | Component                                                |
 | Authority | [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) |
 
 源策略、导出状态和跨组件词汇以 [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) 与 [`FOUNDATIONS-SPEC.md`](../../FOUNDATIONS-SPEC.md) 为准。
@@ -16,7 +16,7 @@
 | ----------- | ------------------ | ------------------------------ |
 | `count`     | `number \| string` | 计数。                         |
 | `dot`       | `boolean`          | 点状状态。                     |
-| `tone`      | SconeTone    | 语义色。                       |
+| `tone`      | SconeTone          | 语义色。                       |
 | `overflow`  | `number`           | 数字溢出阈值，默认由实现定义。 |
 | `ariaLabel` | `string`           | 无可读文本或 dot 状态时必填。  |
 | `children`  | `ReactNode`        | 被标记对象。                   |

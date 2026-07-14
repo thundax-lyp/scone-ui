@@ -2,10 +2,10 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready |
-| Layer | Admin Pattern |
+| Field     | Value                                                 |
+| --------- | ----------------------------------------------------- |
+| Status    | Ready                                                 |
+| Layer     | Admin Pattern                                         |
 | Authority | [`ADMIN-PATTERNS-SPEC.md`](../ADMIN-PATTERNS-SPEC.md) |
 
 Pattern 的层级、导出和组合边界以 [`ADMIN-UI-SPEC.md`](../ADMIN-UI-SPEC.md) 与 [`COMPONENT-SELECTION.md`](../COMPONENT-SELECTION.md) 为准。
@@ -25,18 +25,18 @@ FilterBar 是列表页筛选 Pattern，不是字段状态库。
 
 ## Props And Events
 
-| Prop / event | 类型 | 说明 |
-| ------------ | ---- | ---- |
-| `searchValue` / `defaultSearchValue` | `string` | 主搜索文本。 |
-| `onSearchChange` | `(value: string) => void` | 搜索文本变化。 |
-| `filters` / `defaultFilters` | `Record<string, unknown>` | 筛选值集合。 |
-| `onFiltersChange` | `(filters: Record<string, unknown>) => void` | 任一筛选值变化。 |
-| `onApply` | `(state: { searchValue: string; filters: Record<string, unknown> }) => void` | 用户提交筛选。 |
-| `onReset` | `() => void` | 用户重置筛选。 |
-| `expanded` / `defaultExpanded` | `boolean` | 更多筛选展开状态。 |
-| `onExpandedChange` | `(expanded: boolean) => void` | 展开状态变化。 |
-| `children` | `ReactNode` | 自定义筛选字段。 |
-| `className` | `string` | 样式。 |
+| Prop / event                         | 类型                                                                         | 说明               |
+| ------------------------------------ | ---------------------------------------------------------------------------- | ------------------ |
+| `searchValue` / `defaultSearchValue` | `string`                                                                     | 主搜索文本。       |
+| `onSearchChange`                     | `(value: string) => void`                                                    | 搜索文本变化。     |
+| `filters` / `defaultFilters`         | `Record<string, unknown>`                                                    | 筛选值集合。       |
+| `onFiltersChange`                    | `(filters: Record<string, unknown>) => void`                                 | 任一筛选值变化。   |
+| `onApply`                            | `(state: { searchValue: string; filters: Record<string, unknown> }) => void` | 用户提交筛选。     |
+| `onReset`                            | `() => void`                                                                 | 用户重置筛选。     |
+| `expanded` / `defaultExpanded`       | `boolean`                                                                    | 更多筛选展开状态。 |
+| `onExpandedChange`                   | `(expanded: boolean) => void`                                                | 展开状态变化。     |
+| `children`                           | `ReactNode`                                                                  | 自定义筛选字段。   |
+| `className`                          | `string`                                                                     | 样式。             |
 
 ## Rules
 

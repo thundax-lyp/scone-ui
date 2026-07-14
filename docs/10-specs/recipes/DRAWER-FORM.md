@@ -2,10 +2,10 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready Boundary |
-| Layer | Recipe |
+| Field     | Value                       |
+| --------- | --------------------------- |
+| Status    | Ready Boundary              |
+| Layer     | Recipe                      |
 | Authority | [`README.md`](../README.md) |
 
 Recipe 不定义万能组件 API；按本文档组合基础组件、Layout 和 Pattern。

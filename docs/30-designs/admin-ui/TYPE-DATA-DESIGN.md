@@ -9,59 +9,59 @@
 
 类型文件归属：
 
-| 文件 | 类型范围 | 导出边界 |
-| --- | --- | --- |
-| `src/types/foundation.ts` | Foundation shared types、词表类型、跨组件基础状态桥接类型。 | 从 `src/index.ts` 公开导出。 |
-| `src/components/*/*.tsx` | 与单组件紧耦合的 props、item、state 和 event payload 类型。 | 本族公共类型从对应 `src/components/*/index.ts` 汇总，再由 `src/index.ts` 汇总导出；内部 helper 类型不导出。 |
-| `src/components/*/index.ts` | 组件族公共组件和本族公共类型汇总入口。 | 只导出本组件族 API，不导出其他组件族类型。 |
-| `src/patterns/*.tsx` | Pattern compound parts props、slot props 和 Pattern 状态桥接。 | Pattern 公共 props 可从 `src/patterns/index.ts` 和 `src/index.ts` 导出。 |
-| `src/components/feedback-overlay/toast.tsx` | Toast provider props、service options、queue item、返回 id 和关闭原因。 | Provider、service function 和公共 option 类型公开导出。 |
-| `src/components/feedback-overlay/notification.tsx` | Notification provider props、service options、queue item、返回 id 和关闭原因。 | Provider、service function 和公共 option 类型公开导出。 |
+| 文件                                               | 类型范围                                                                       | 导出边界                                                                                                    |
+| -------------------------------------------------- | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| `src/types/foundation.ts`                          | Foundation shared types、词表类型、跨组件基础状态桥接类型。                    | 从 `src/index.ts` 公开导出。                                                                                |
+| `src/components/*/*.tsx`                           | 与单组件紧耦合的 props、item、state 和 event payload 类型。                    | 本族公共类型从对应 `src/components/*/index.ts` 汇总，再由 `src/index.ts` 汇总导出；内部 helper 类型不导出。 |
+| `src/components/*/index.ts`                        | 组件族公共组件和本族公共类型汇总入口。                                         | 只导出本组件族 API，不导出其他组件族类型。                                                                  |
+| `src/patterns/*.tsx`                               | Pattern compound parts props、slot props 和 Pattern 状态桥接。                 | Pattern 公共 props 可从 `src/patterns/index.ts` 和 `src/index.ts` 导出。                                    |
+| `src/components/feedback-overlay/toast.tsx`        | Toast provider props、service options、queue item、返回 id 和关闭原因。        | Provider、service function 和公共 option 类型公开导出。                                                     |
+| `src/components/feedback-overlay/notification.tsx` | Notification provider props、service options、queue item、返回 id 和关闭原因。 | Provider、service function 和公共 option 类型公开导出。                                                     |
 
 公共 Foundation 类型：
 
-| 类型 | 定义位置 | 导出 | 适用组件 | 非目标 |
-| --- | --- | --- | --- | --- |
-| `Breakpoint` | `src/types/foundation.ts` | 是 | `ResponsiveValue<T>` | 不定义 `mobile/tablet/desktop` 第二套断点。 |
-| `ResponsiveValue<T>` | `src/types/foundation.ts` | 是 | Page、Drawer、SplitPane、Descriptions、Toolbar | 不使用数组形态。 |
-| `Key` | `src/types/foundation.ts` | 是 | Tree、Table、Timeline、Descriptions、selection | 不默认表达 URL 或网络 id 规范化。 |
-| `SconeTone` | `src/types/foundation.ts` | 是 | Alert、Tag、Badge、Progress、Toast、Notification、Timeline | 不表达业务枚举、后端状态或流程阶段。 |
-| `SconeSpacingToken` | `src/types/foundation.ts` | 是 | Layout、section spacing、局部间距 API | 不接受任意 number 作为默认公共 API。 |
-| `SconeControlSize` | `src/types/foundation.ts` | 是 | 控件型组件 | 不表达容器宽度。 |
-| `SconeDensity` | `src/types/foundation.ts` | 是 | Table、List、Descriptions、Toolbar、DataTable | 不替代控件高度。 |
-| `SconeOption<Value = string>` | `src/types/foundation.ts` | 是 | Select、Segmented、Combobox、RadioGroup | 不把整条业务对象作为默认 value。 |
-| `OverlayCloseReason` | `src/types/foundation.ts` | 是 | Drawer、Dialog、Confirm | 不表达业务取消原因。 |
+| 类型                          | 定义位置                  | 导出 | 适用组件                                                   | 非目标                                      |
+| ----------------------------- | ------------------------- | ---- | ---------------------------------------------------------- | ------------------------------------------- |
+| `Breakpoint`                  | `src/types/foundation.ts` | 是   | `ResponsiveValue<T>`                                       | 不定义 `mobile/tablet/desktop` 第二套断点。 |
+| `ResponsiveValue<T>`          | `src/types/foundation.ts` | 是   | Page、Drawer、SplitPane、Descriptions、Toolbar             | 不使用数组形态。                            |
+| `Key`                         | `src/types/foundation.ts` | 是   | Tree、Table、Timeline、Descriptions、selection             | 不默认表达 URL 或网络 id 规范化。           |
+| `SconeTone`                   | `src/types/foundation.ts` | 是   | Alert、Tag、Badge、Progress、Toast、Notification、Timeline | 不表达业务枚举、后端状态或流程阶段。        |
+| `SconeSpacingToken`           | `src/types/foundation.ts` | 是   | Layout、section spacing、局部间距 API                      | 不接受任意 number 作为默认公共 API。        |
+| `SconeControlSize`            | `src/types/foundation.ts` | 是   | 控件型组件                                                 | 不表达容器宽度。                            |
+| `SconeDensity`                | `src/types/foundation.ts` | 是   | Table、List、Descriptions、Toolbar、DataTable              | 不替代控件高度。                            |
+| `SconeOption<Value = string>` | `src/types/foundation.ts` | 是   | Select、Segmented、Combobox、RadioGroup                    | 不把整条业务对象作为默认 value。            |
+| `OverlayCloseReason`          | `src/types/foundation.ts` | 是   | Drawer、Dialog、Confirm                                    | 不表达业务取消原因。                        |
 
 词表类型：
 
-| 类型 | 值 |
-| --- | --- |
-| `SconeOrientation` | `horizontal`、`vertical` |
-| `SconeAlign` | `start`、`center`、`end` |
-| `SconeSide` | `top`、`right`、`bottom`、`left` |
-| `SconeStatus` | `idle`、`active`、`success`、`error` |
+| 类型               | 值                                   |
+| ------------------ | ------------------------------------ |
+| `SconeOrientation` | `horizontal`、`vertical`             |
+| `SconeAlign`       | `start`、`center`、`end`             |
+| `SconeSide`        | `top`、`right`、`bottom`、`left`     |
+| `SconeStatus`      | `idle`、`active`、`success`、`error` |
 
 数据结构类型：
 
-| 类型 | 定义位置 | 用途 | 设计边界 |
-| --- | --- | --- | --- |
-| `SconeDescriptionItem` | `src/components/data-display/descriptions.tsx` | Descriptions 键值展示项。 | 不直接使用后端字段名；空值 fallback 由调用方或 recipe 处理。 |
-| `SconePaginationState` | `src/components/navigation/pagination.tsx` | Pagination、Table、DataTable 分页桥接。 | 只表达 UI 和查询意图，不发起请求。 |
-| `SconePaginationChangeReason` | `src/components/navigation/pagination.tsx` | 分页变化原因。 | 值限定为 `page`、`pageSize`。 |
-| `SconeTableSorting` | `src/patterns/data-table.tsx` | DataTable 排序状态桥接。 | 不在组件内发起请求。 |
-| `SconeTableColumn<T>` | `src/components/data-display/table.tsx` | 基础表格列定义。 | 不承载请求、权限、字典加载或业务动作执行。 |
-| `SconeTableScroll` | `src/components/data-display/table.tsx` | 基础表格横向滚动配置。 | 不沿用 AntD `{ x, y }` 完整语义；垂直滚动由 TableRegion 管理。 |
-| `SconeRowSelection<T>` | `src/patterns/data-table.tsx` | DataTable selection UI 状态桥接。 | 不属于基础 `SconeTable` prop，不定义批量动作。 |
-| `SconeBaseItem` | `src/types/foundation.ts` | 动作、导航、路径和命令项共享最小字段。 | 各组件必须扩展自己的 item 类型，不复用万能 schema。 |
-| `SconeActionItem` | `src/components/navigation/dropdown.tsx` | Dropdown 和行操作菜单。 | `destructive` 不自动打开确认；权限过滤由调用方完成。 |
-| `SconeNavigationItem` | `src/components/navigation/menu.tsx` | Menu、Sidebar 和导航集合。 | 不把 router API 写入 item schema；AppShell 复用该类型但不定义路由。 |
-| `SconeBreadcrumbItem` | `src/components/navigation/breadcrumb.tsx` | Breadcrumb 路径。 | 不支持 destructive 或动作回调。 |
-| `SconeCommandItem` | `src/components/navigation/command.tsx` | Command 搜索项。 | 不表达表单值；表单选择由 Combobox 增加语义。 |
-| `SconeTreeNode` | `src/components/navigation/tree.tsx` | Tree 和层级选择能力。 | 异步加载、虚拟滚动和拖拽单独扩展。 |
-| `SconeAccordionItem` | `src/components/navigation/accordion.tsx` | Accordion 简化配置。 | 复杂内容优先使用 compound children。 |
-| `SconeTimelineItem` | `src/components/data-display/timeline.tsx` | Timeline 通用事件项。 | 不承载审批、权限或流程状态机。 |
-| `SconeToastItem` | `src/components/feedback-overlay/toast.tsx` | Toast 队列展示项。 | 不承载业务来源、持久化或通知订阅状态。 |
-| `SconeNotificationItem` | `src/components/feedback-overlay/notification.tsx` | Notification 队列展示项。 | 已读、订阅来源和持久化由产品侧处理。 |
+| 类型                          | 定义位置                                           | 用途                                    | 设计边界                                                            |
+| ----------------------------- | -------------------------------------------------- | --------------------------------------- | ------------------------------------------------------------------- |
+| `SconeDescriptionItem`        | `src/components/data-display/descriptions.tsx`     | Descriptions 键值展示项。               | 不直接使用后端字段名；空值 fallback 由调用方或 recipe 处理。        |
+| `SconePaginationState`        | `src/components/navigation/pagination.tsx`         | Pagination、Table、DataTable 分页桥接。 | 只表达 UI 和查询意图，不发起请求。                                  |
+| `SconePaginationChangeReason` | `src/components/navigation/pagination.tsx`         | 分页变化原因。                          | 值限定为 `page`、`pageSize`。                                       |
+| `SconeTableSorting`           | `src/patterns/data-table.tsx`                      | DataTable 排序状态桥接。                | 不在组件内发起请求。                                                |
+| `SconeTableColumn<T>`         | `src/components/data-display/table.tsx`            | 基础表格列定义。                        | 不承载请求、权限、字典加载或业务动作执行。                          |
+| `SconeTableScroll`            | `src/components/data-display/table.tsx`            | 基础表格横向滚动配置。                  | 不沿用 AntD `{ x, y }` 完整语义；垂直滚动由 TableRegion 管理。      |
+| `SconeRowSelection<T>`        | `src/patterns/data-table.tsx`                      | DataTable selection UI 状态桥接。       | 不属于基础 `SconeTable` prop，不定义批量动作。                      |
+| `SconeBaseItem`               | `src/types/foundation.ts`                          | 动作、导航、路径和命令项共享最小字段。  | 各组件必须扩展自己的 item 类型，不复用万能 schema。                 |
+| `SconeActionItem`             | `src/components/navigation/dropdown.tsx`           | Dropdown 和行操作菜单。                 | `destructive` 不自动打开确认；权限过滤由调用方完成。                |
+| `SconeNavigationItem`         | `src/components/navigation/menu.tsx`               | Menu、Sidebar 和导航集合。              | 不把 router API 写入 item schema；AppShell 复用该类型但不定义路由。 |
+| `SconeBreadcrumbItem`         | `src/components/navigation/breadcrumb.tsx`         | Breadcrumb 路径。                       | 不支持 destructive 或动作回调。                                     |
+| `SconeCommandItem`            | `src/components/navigation/command.tsx`            | Command 搜索项。                        | 不表达表单值；表单选择由 Combobox 增加语义。                        |
+| `SconeTreeNode`               | `src/components/navigation/tree.tsx`               | Tree 和层级选择能力。                   | 异步加载、虚拟滚动和拖拽单独扩展。                                  |
+| `SconeAccordionItem`          | `src/components/navigation/accordion.tsx`          | Accordion 简化配置。                    | 复杂内容优先使用 compound children。                                |
+| `SconeTimelineItem`           | `src/components/data-display/timeline.tsx`         | Timeline 通用事件项。                   | 不承载审批、权限或流程状态机。                                      |
+| `SconeToastItem`              | `src/components/feedback-overlay/toast.tsx`        | Toast 队列展示项。                      | 不承载业务来源、持久化或通知订阅状态。                              |
+| `SconeNotificationItem`       | `src/components/feedback-overlay/notification.tsx` | Notification 队列展示项。               | 已读、订阅来源和持久化由产品侧处理。                                |
 
 ## Concrete Data Structure Definitions
 
@@ -76,24 +76,11 @@ export type Key = string | number;
 
 export type Breakpoint = "sm" | "md" | "lg" | "xl";
 
-export type ResponsiveValue<T> =
-  | T
-  | Partial<Record<Breakpoint, T>>;
+export type ResponsiveValue<T> = T | Partial<Record<Breakpoint, T>>;
 
-export type SconeTone =
-  | "neutral"
-  | "info"
-  | "success"
-  | "warning"
-  | "danger";
+export type SconeTone = "neutral" | "info" | "success" | "warning" | "danger";
 
-export type SconeSpacingToken =
-  | "none"
-  | "xs"
-  | "sm"
-  | "md"
-  | "lg"
-  | "xl";
+export type SconeSpacingToken = "none" | "xs" | "sm" | "md" | "lg" | "xl";
 
 export type SconeControlSize = "sm" | "md" | "lg";
 
@@ -108,25 +95,21 @@ export type SconeSide = "top" | "right" | "bottom" | "left";
 export type SconeStatus = "idle" | "active" | "success" | "error";
 
 export type OverlayCloseReason =
-  | "escape"
-  | "outside"
-  | "closeButton"
-  | "footerAction"
-  | "programmatic";
+    "escape" | "outside" | "closeButton" | "footerAction" | "programmatic";
 
 export interface SconeOption<Value = string> {
-  value: Value;
-  label: React.ReactNode;
-  disabled?: boolean;
-  description?: React.ReactNode;
+    value: Value;
+    label: React.ReactNode;
+    disabled?: boolean;
+    description?: React.ReactNode;
 }
 
 export interface SconeBaseItem {
-  key: Key;
-  label: React.ReactNode;
-  disabled?: boolean;
-  icon?: React.ReactNode;
-  description?: React.ReactNode;
+    key: Key;
+    label: React.ReactNode;
+    disabled?: boolean;
+    icon?: React.ReactNode;
+    description?: React.ReactNode;
 }
 ```
 
@@ -136,11 +119,11 @@ export interface SconeBaseItem {
 
 ```ts
 export interface SconeDescriptionItem {
-  key: Key;
-  label: React.ReactNode;
-  value: React.ReactNode;
-  span?: 1 | 2 | 3 | 4;
-  emptyFallback?: React.ReactNode;
+    key: Key;
+    label: React.ReactNode;
+    value: React.ReactNode;
+    span?: 1 | 2 | 3 | 4;
+    emptyFallback?: React.ReactNode;
 }
 ```
 
@@ -148,20 +131,20 @@ export interface SconeDescriptionItem {
 
 ```ts
 export interface SconeTableColumn<T> {
-  key: Key;
-  title: React.ReactNode;
-  dataIndex?: keyof T | readonly (string | number)[];
-  width?: number | string;
-  minWidth?: number;
-  align?: SconeAlign;
-  sortable?: boolean;
-  render?: (value: unknown, record: T, index: number) => React.ReactNode;
-  className?: string;
-  headerClassName?: string;
+    key: Key;
+    title: React.ReactNode;
+    dataIndex?: keyof T | readonly (string | number)[];
+    width?: number | string;
+    minWidth?: number;
+    align?: SconeAlign;
+    sortable?: boolean;
+    render?: (value: unknown, record: T, index: number) => React.ReactNode;
+    className?: string;
+    headerClassName?: string;
 }
 
 export interface SconeTableScroll {
-  x?: number | string | true;
+    x?: number | string | true;
 }
 ```
 
@@ -169,12 +152,12 @@ export interface SconeTableScroll {
 
 ```ts
 export interface SconeTimelineItem {
-  key: Key;
-  title: React.ReactNode;
-  description?: React.ReactNode;
-  time?: React.ReactNode;
-  tone?: SconeTone;
-  icon?: React.ReactNode;
+    key: Key;
+    title: React.ReactNode;
+    description?: React.ReactNode;
+    time?: React.ReactNode;
+    tone?: SconeTone;
+    icon?: React.ReactNode;
 }
 ```
 
@@ -184,9 +167,9 @@ export interface SconeTimelineItem {
 
 ```ts
 export interface SconePaginationState {
-  page: number;
-  pageSize: number;
-  total?: number;
+    page: number;
+    pageSize: number;
+    total?: number;
 }
 
 export type SconePaginationChangeReason = "page" | "pageSize";
@@ -196,9 +179,9 @@ export type SconePaginationChangeReason = "page" | "pageSize";
 
 ```ts
 export interface SconeActionItem extends SconeBaseItem {
-  onSelect?: () => void;
-  destructive?: boolean;
-  shortcut?: React.ReactNode;
+    onSelect?: () => void;
+    destructive?: boolean;
+    shortcut?: React.ReactNode;
 }
 ```
 
@@ -206,9 +189,9 @@ export interface SconeActionItem extends SconeBaseItem {
 
 ```ts
 export interface SconeNavigationItem extends SconeBaseItem {
-  href?: string;
-  active?: boolean;
-  children?: SconeNavigationItem[];
+    href?: string;
+    active?: boolean;
+    children?: SconeNavigationItem[];
 }
 ```
 
@@ -216,10 +199,10 @@ export interface SconeNavigationItem extends SconeBaseItem {
 
 ```ts
 export interface SconeBreadcrumbItem {
-  key: Key;
-  label: React.ReactNode;
-  href?: string;
-  current?: boolean;
+    key: Key;
+    label: React.ReactNode;
+    href?: string;
+    current?: boolean;
 }
 ```
 
@@ -227,10 +210,10 @@ export interface SconeBreadcrumbItem {
 
 ```ts
 export interface SconeCommandItem extends SconeBaseItem {
-  value: string;
-  group?: string;
-  keywords?: string[];
-  onSelect?: (value: string) => void;
+    value: string;
+    group?: string;
+    keywords?: string[];
+    onSelect?: (value: string) => void;
 }
 ```
 
@@ -238,11 +221,11 @@ export interface SconeCommandItem extends SconeBaseItem {
 
 ```ts
 export interface SconeTreeNode {
-  key: Key;
-  label: React.ReactNode;
-  disabled?: boolean;
-  icon?: React.ReactNode;
-  children?: SconeTreeNode[];
+    key: Key;
+    label: React.ReactNode;
+    disabled?: boolean;
+    icon?: React.ReactNode;
+    children?: SconeTreeNode[];
 }
 ```
 
@@ -250,10 +233,10 @@ export interface SconeTreeNode {
 
 ```ts
 export interface SconeAccordionItem {
-  value: string;
-  trigger: React.ReactNode;
-  content: React.ReactNode;
-  disabled?: boolean;
+    value: string;
+    trigger: React.ReactNode;
+    content: React.ReactNode;
+    disabled?: boolean;
 }
 ```
 
@@ -262,91 +245,78 @@ export interface SconeAccordionItem {
 文件落点：`src/components/feedback-overlay/toast.tsx`。
 
 ```ts
-export type ToastPosition =
-  | "top-left"
-  | "top-right"
-  | "bottom-left"
-  | "bottom-right";
+export type ToastPosition = "top-left" | "top-right" | "bottom-left" | "bottom-right";
 
-export type ToastCloseReason =
-  | "timeout"
-  | "closeButton"
-  | "programmatic";
+export type ToastCloseReason = "timeout" | "closeButton" | "programmatic";
 
 export interface ToastOptions {
-  id?: string;
-  title?: React.ReactNode;
-  description?: React.ReactNode;
-  tone?: SconeTone;
-  duration?: number;
-  action?: React.ReactNode;
-  onAction?: (id: string) => void;
-  onDismiss?: (id: string, reason: ToastCloseReason) => void;
+    id?: string;
+    title?: React.ReactNode;
+    description?: React.ReactNode;
+    tone?: SconeTone;
+    duration?: number;
+    action?: React.ReactNode;
+    onAction?: (id: string) => void;
+    onDismiss?: (id: string, reason: ToastCloseReason) => void;
 }
 
 export interface SconeToastItem extends ToastOptions {
-  id: string;
+    id: string;
 }
 
 export interface SconeToastProviderProps {
-  children: React.ReactNode;
-  position?: ToastPosition;
-  duration?: number;
-  maxVisible?: number;
-  onOpenChange?: (items: SconeToastItem[]) => void;
+    children: React.ReactNode;
+    position?: ToastPosition;
+    duration?: number;
+    maxVisible?: number;
+    onOpenChange?: (items: SconeToastItem[]) => void;
 }
 
 export interface ToastService {
-  show: (options: ToastOptions) => string;
-  success: (options: ToastOptions) => string;
-  error: (options: ToastOptions) => string;
-  update: (id: string, options: Partial<ToastOptions>) => void;
-  dismiss: (id: string, reason?: ToastCloseReason) => void;
-  clear: () => void;
+    show: (options: ToastOptions) => string;
+    success: (options: ToastOptions) => string;
+    error: (options: ToastOptions) => string;
+    update: (id: string, options: Partial<ToastOptions>) => void;
+    dismiss: (id: string, reason?: ToastCloseReason) => void;
+    clear: () => void;
 }
 ```
 
 文件落点：`src/components/feedback-overlay/notification.tsx`。
 
 ```ts
-export type NotificationPlacement =
-  | "top-left"
-  | "top-right"
-  | "bottom-left"
-  | "bottom-right";
+export type NotificationPlacement = "top-left" | "top-right" | "bottom-left" | "bottom-right";
 
-export type NotificationCloseReason =
-  | "closeButton"
-  | "programmatic";
+export type NotificationCloseReason = "closeButton" | "programmatic";
 
 export interface NotificationOptions {
-  id?: string;
-  title: React.ReactNode;
-  description?: React.ReactNode;
-  tone?: SconeTone;
-  time?: React.ReactNode;
-  persistent?: boolean;
-  action?: React.ReactNode;
-  onAction?: (id: string) => void;
-  onClose?: (id: string, reason: NotificationCloseReason) => void;
+    id?: string;
+    title: React.ReactNode;
+    description?: React.ReactNode;
+    tone?: SconeTone;
+    time?: React.ReactNode;
+    persistent?: boolean;
+    action?: React.ReactNode;
+    onAction?: (id: string) => void;
+    onClose?: (id: string, reason: NotificationCloseReason) => void;
 }
 
 export interface SconeNotificationItem extends NotificationOptions {
-  id: string;
+    id: string;
 }
 
 export interface SconeNotificationProviderProps {
-  children: React.ReactNode;
-  placement?: NotificationPlacement;
-  maxVisible?: number;
-  onOpenChange?: (items: SconeNotificationItem[]) => void;
+    children: React.ReactNode;
+    placement?: NotificationPlacement;
+    maxVisible?: number;
+    onOpenChange?: (items: SconeNotificationItem[]) => void;
 }
 
 export interface NotificationService {
-  open: (options: NotificationOptions) => string;
-  update: (id: string, options: Partial<NotificationOptions>) => void;
-  close: (id: string, reason?: NotificationCloseReason) => void;
-  clear: () => void;
+    open: (options: NotificationOptions) => string;
+    update: (id: string, options: Partial<NotificationOptions>) => void;
+    close: (id: string, reason?: NotificationCloseReason) => void;
+    clear: () => void;
 }
 ```
 
@@ -356,18 +326,13 @@ export interface NotificationService {
 
 ```ts
 export type FilterValue =
-  | string
-  | number
-  | boolean
-  | null
-  | undefined
-  | readonly (string | number | boolean)[];
+    string | number | boolean | null | undefined | readonly (string | number | boolean)[];
 
 export type FilterBarFilters = Record<string, FilterValue>;
 
 export interface FilterBarState {
-  searchValue: string;
-  filters: FilterBarFilters;
+    searchValue: string;
+    filters: FilterBarFilters;
 }
 ```
 
@@ -375,22 +340,22 @@ export interface FilterBarState {
 
 ```ts
 export interface SconeTableSorting {
-  key: Key;
-  direction: "asc" | "desc";
+    key: Key;
+    direction: "asc" | "desc";
 }
 
 export interface SconeRowSelection<T> {
-  selectedRowKeys: Key[];
-  selectedRows?: T[];
-  onChange?: (selectedRowKeys: Key[], selectedRows: T[]) => void;
+    selectedRowKeys: Key[];
+    selectedRows?: T[];
+    onChange?: (selectedRowKeys: Key[], selectedRows: T[]) => void;
 }
 
 export interface DataTableState<T> {
-  sorting?: SconeTableSorting;
-  filters?: FilterBarFilters;
-  pagination?: SconePaginationState;
-  selection?: SconeRowSelection<T>;
-  columnVisibility?: Record<Key, boolean>;
+    sorting?: SconeTableSorting;
+    filters?: FilterBarFilters;
+    pagination?: SconePaginationState;
+    selection?: SconeRowSelection<T>;
+    columnVisibility?: Record<Key, boolean>;
 }
 ```
 
@@ -410,46 +375,46 @@ export interface DataTableState<T> {
 
 ```ts
 export interface SconeCommonProps {
-  className?: string;
-  children?: React.ReactNode;
+    className?: string;
+    children?: React.ReactNode;
 }
 
 export interface SconeAriaLabelProps {
-  ariaLabel?: string;
+    ariaLabel?: string;
 }
 
 export interface SconeLoadingStateProps {
-  loading?: boolean;
+    loading?: boolean;
 }
 
 export interface SconeDisabledProps {
-  disabled?: boolean;
+    disabled?: boolean;
 }
 
 export interface SconeReadonlyProps {
-  readOnly?: boolean;
+    readOnly?: boolean;
 }
 
 export interface SconeInvalidProps {
-  invalid?: boolean;
+    invalid?: boolean;
 }
 
 export interface SconeOpenStateProps {
-  open?: boolean;
-  defaultOpen?: boolean;
-  onOpenChange?: (open: boolean) => void;
+    open?: boolean;
+    defaultOpen?: boolean;
+    onOpenChange?: (open: boolean) => void;
 }
 
 export interface SconeValueStateProps<Value> {
-  value?: Value;
-  defaultValue?: Value;
-  onValueChange?: (value: Value) => void;
+    value?: Value;
+    defaultValue?: Value;
+    onValueChange?: (value: Value) => void;
 }
 
 export interface SconeCheckedStateProps {
-  checked?: boolean;
-  defaultChecked?: boolean;
-  onCheckedChange?: (checked: boolean) => void;
+    checked?: boolean;
+    defaultChecked?: boolean;
+    onCheckedChange?: (checked: boolean) => void;
 }
 ```
 
@@ -459,186 +424,174 @@ export interface SconeCheckedStateProps {
 
 ```ts
 export interface SconeButtonProps
-  extends SconeCommonProps,
-    SconeAriaLabelProps,
-    SconeLoadingStateProps,
-    SconeDisabledProps {
-  variant?: "primary" | "secondary" | "ghost" | "destructive";
-  size?: SconeControlSize;
-  icon?: React.ReactNode;
-  iconPosition?: "start" | "end";
-  asChild?: boolean;
+    extends SconeCommonProps, SconeAriaLabelProps, SconeLoadingStateProps, SconeDisabledProps {
+    variant?: "primary" | "secondary" | "ghost" | "destructive";
+    size?: SconeControlSize;
+    icon?: React.ReactNode;
+    iconPosition?: "start" | "end";
+    asChild?: boolean;
 }
 
 export interface SconeInputProps
-  extends SconeCommonProps,
-    SconeAriaLabelProps,
-    SconeDisabledProps,
-    SconeReadonlyProps,
-    SconeInvalidProps,
-    SconeValueStateProps<string> {
-  placeholder?: string;
-  size?: SconeControlSize;
+    extends
+        SconeCommonProps,
+        SconeAriaLabelProps,
+        SconeDisabledProps,
+        SconeReadonlyProps,
+        SconeInvalidProps,
+        SconeValueStateProps<string> {
+    placeholder?: string;
+    size?: SconeControlSize;
 }
 
 export interface SconeSearchInputProps extends SconeInputProps, SconeLoadingStateProps {
-  clearable?: boolean;
-  onClear?: () => void;
+    clearable?: boolean;
+    onClear?: () => void;
 }
 
 export interface SconePasswordInputProps extends SconeInputProps {
-  visibilityLabel?: string;
-  defaultVisible?: boolean;
+    visibilityLabel?: string;
+    defaultVisible?: boolean;
 }
 
 export interface SconeTextAreaProps extends SconeInputProps {
-  rows?: number;
-  autoSize?: boolean;
-  maxLength?: number;
-  showCount?: boolean;
+    rows?: number;
+    autoSize?: boolean;
+    maxLength?: number;
+    showCount?: boolean;
 }
 
 export interface SconeSelectProps<Value = string>
-  extends SconeCommonProps,
-    SconeAriaLabelProps,
-    SconeDisabledProps,
-    SconeReadonlyProps,
-    SconeInvalidProps,
-    SconeOpenStateProps,
-    SconeValueStateProps<Value> {
-  options?: SconeOption<Value>[];
-  placeholder?: string;
-  size?: SconeControlSize;
+    extends
+        SconeCommonProps,
+        SconeAriaLabelProps,
+        SconeDisabledProps,
+        SconeReadonlyProps,
+        SconeInvalidProps,
+        SconeOpenStateProps,
+        SconeValueStateProps<Value> {
+    options?: SconeOption<Value>[];
+    placeholder?: string;
+    size?: SconeControlSize;
 }
 
 export interface SconeFormProps extends SconeCommonProps {
-  disabled?: boolean;
-  readOnly?: boolean;
-  requiredMark?: boolean | "optional";
+    disabled?: boolean;
+    readOnly?: boolean;
+    requiredMark?: boolean | "optional";
 }
 
 export interface SconeFieldProps
-  extends SconeCommonProps,
-    SconeDisabledProps,
-    SconeReadonlyProps,
-    SconeInvalidProps {
-  id?: string;
-  label?: React.ReactNode;
-  description?: React.ReactNode;
-  message?: React.ReactNode;
-  required?: boolean;
+    extends SconeCommonProps, SconeDisabledProps, SconeReadonlyProps, SconeInvalidProps {
+    id?: string;
+    label?: React.ReactNode;
+    description?: React.ReactNode;
+    message?: React.ReactNode;
+    required?: boolean;
 }
 
 export interface SconeFieldGroupProps extends SconeCommonProps {
-  legend?: React.ReactNode;
-  description?: React.ReactNode;
-  orientation?: SconeOrientation;
+    legend?: React.ReactNode;
+    description?: React.ReactNode;
+    orientation?: SconeOrientation;
 }
 
 export interface SconeFormSectionProps extends SconeCommonProps {
-  title?: React.ReactNode;
-  description?: React.ReactNode;
-  actions?: React.ReactNode;
+    title?: React.ReactNode;
+    description?: React.ReactNode;
+    actions?: React.ReactNode;
 }
 
 export interface SconeFormActionsProps extends SconeCommonProps {
-  align?: "start" | "end" | "between";
-  sticky?: boolean;
+    align?: "start" | "end" | "between";
+    sticky?: boolean;
 }
 
 export interface SconeComboboxProps<Value = string>
-  extends SconeSelectProps<Value>,
-    SconeLoadingStateProps {
-  empty?: React.ReactNode;
-  searchValue?: string;
-  defaultSearchValue?: string;
-  onSearchChange?: (value: string) => void;
+    extends SconeSelectProps<Value>, SconeLoadingStateProps {
+    empty?: React.ReactNode;
+    searchValue?: string;
+    defaultSearchValue?: string;
+    onSearchChange?: (value: string) => void;
 }
 
 export interface SconeSwitchProps
-  extends SconeCommonProps,
-    SconeDisabledProps,
-    SconeInvalidProps,
-    SconeCheckedStateProps {}
+    extends SconeCommonProps, SconeDisabledProps, SconeInvalidProps, SconeCheckedStateProps {}
 
 export interface SconeCheckboxProps
-  extends SconeCommonProps,
-    SconeDisabledProps,
-    SconeInvalidProps {
-  checked?: boolean | "indeterminate";
-  defaultChecked?: boolean;
-  onCheckedChange?: (checked: boolean | "indeterminate") => void;
+    extends SconeCommonProps, SconeDisabledProps, SconeInvalidProps {
+    checked?: boolean | "indeterminate";
+    defaultChecked?: boolean;
+    onCheckedChange?: (checked: boolean | "indeterminate") => void;
 }
 
 export interface SconeRadioGroupProps<Value = string>
-  extends SconeCommonProps,
-    SconeDisabledProps,
-    SconeInvalidProps,
-    SconeValueStateProps<Value> {
-  options?: SconeOption<Value>[];
-  orientation?: SconeOrientation;
+    extends SconeCommonProps, SconeDisabledProps, SconeInvalidProps, SconeValueStateProps<Value> {
+    options?: SconeOption<Value>[];
+    orientation?: SconeOrientation;
 }
 
 export interface SconeNumberInputProps
-  extends SconeCommonProps,
-    SconeAriaLabelProps,
-    SconeDisabledProps,
-    SconeReadonlyProps,
-    SconeInvalidProps,
-    SconeValueStateProps<number | null> {
-  min?: number;
-  max?: number;
-  step?: number;
-  placeholder?: string;
+    extends
+        SconeCommonProps,
+        SconeAriaLabelProps,
+        SconeDisabledProps,
+        SconeReadonlyProps,
+        SconeInvalidProps,
+        SconeValueStateProps<number | null> {
+    min?: number;
+    max?: number;
+    step?: number;
+    placeholder?: string;
 }
 
 export interface SconeSliderProps
-  extends SconeCommonProps,
-    SconeDisabledProps,
-    SconeInvalidProps,
-    SconeValueStateProps<number[]> {
-  min?: number;
-  max?: number;
-  step?: number;
+    extends
+        SconeCommonProps,
+        SconeDisabledProps,
+        SconeInvalidProps,
+        SconeValueStateProps<number[]> {
+    min?: number;
+    max?: number;
+    step?: number;
 }
 
 export interface SconeDatePickerProps
-  extends SconeCommonProps,
-    SconeAriaLabelProps,
-    SconeDisabledProps,
-    SconeReadonlyProps,
-    SconeInvalidProps,
-    SconeOpenStateProps,
-    SconeValueStateProps<Date | null> {
-  placeholder?: string;
-  disabledDate?: (date: Date) => boolean;
+    extends
+        SconeCommonProps,
+        SconeAriaLabelProps,
+        SconeDisabledProps,
+        SconeReadonlyProps,
+        SconeInvalidProps,
+        SconeOpenStateProps,
+        SconeValueStateProps<Date | null> {
+    placeholder?: string;
+    disabledDate?: (date: Date) => boolean;
 }
 
 export interface SconeUploadFile {
-  id: string;
-  file: File;
-  status?: "ready" | "uploading" | "success" | "error";
-  error?: React.ReactNode;
+    id: string;
+    file: File;
+    status?: "ready" | "uploading" | "success" | "error";
+    error?: React.ReactNode;
 }
 
 export interface SconeUploadReject {
-  file: File;
-  reason: "type" | "size" | "count" | "custom";
-  message?: React.ReactNode;
+    file: File;
+    reason: "type" | "size" | "count" | "custom";
+    message?: React.ReactNode;
 }
 
-export interface SconeUploadProps
-  extends SconeCommonProps,
-    SconeDisabledProps {
-  files?: SconeUploadFile[];
-  defaultFiles?: SconeUploadFile[];
-  onFilesChange?: (files: SconeUploadFile[]) => void;
-  accept?: string;
-  multiple?: boolean;
-  maxFiles?: number;
-  maxSize?: number;
-  beforeAdd?: (file: File) => boolean | Promise<boolean>;
-  onReject?: (reject: SconeUploadReject) => void;
+export interface SconeUploadProps extends SconeCommonProps, SconeDisabledProps {
+    files?: SconeUploadFile[];
+    defaultFiles?: SconeUploadFile[];
+    onFilesChange?: (files: SconeUploadFile[]) => void;
+    accept?: string;
+    multiple?: boolean;
+    maxFiles?: number;
+    maxSize?: number;
+    beforeAdd?: (file: File) => boolean | Promise<boolean>;
+    onReject?: (reject: SconeUploadReject) => void;
 }
 ```
 
@@ -648,80 +601,80 @@ export interface SconeUploadProps
 
 ```ts
 export interface SconeDescriptionsProps extends SconeCommonProps {
-  items: SconeDescriptionItem[];
-  columns?: ResponsiveValue<1 | 2 | 3 | 4>;
-  density?: SconeDensity;
-  bordered?: boolean;
+    items: SconeDescriptionItem[];
+    columns?: ResponsiveValue<1 | 2 | 3 | 4>;
+    density?: SconeDensity;
+    bordered?: boolean;
 }
 
 export interface SconeTableProps<T> extends SconeCommonProps, SconeAriaLabelProps {
-  columns: SconeTableColumn<T>[];
-  dataSource: T[];
-  rowKey: keyof T | ((record: T) => Key);
-  density?: SconeDensity;
-  loading?: boolean;
-  empty?: React.ReactNode;
-  error?: React.ReactNode;
-  scroll?: SconeTableScroll;
-  onRow?: (record: T, index: number) => React.HTMLAttributes<HTMLTableRowElement>;
+    columns: SconeTableColumn<T>[];
+    dataSource: T[];
+    rowKey: keyof T | ((record: T) => Key);
+    density?: SconeDensity;
+    loading?: boolean;
+    empty?: React.ReactNode;
+    error?: React.ReactNode;
+    scroll?: SconeTableScroll;
+    onRow?: (record: T, index: number) => React.HTMLAttributes<HTMLTableRowElement>;
 }
 
 export interface SconeCardProps extends SconeCommonProps, SconeLoadingStateProps {
-  title?: React.ReactNode;
-  description?: React.ReactNode;
-  actions?: React.ReactNode;
-  footer?: React.ReactNode;
+    title?: React.ReactNode;
+    description?: React.ReactNode;
+    actions?: React.ReactNode;
+    footer?: React.ReactNode;
 }
 
 export interface SconeTagProps extends SconeCommonProps {
-  tone?: SconeTone;
-  closable?: boolean;
-  onClose?: () => void;
+    tone?: SconeTone;
+    closable?: boolean;
+    onClose?: () => void;
 }
 
 export interface SconeBadgeProps extends SconeCommonProps, SconeAriaLabelProps {
-  count?: number;
-  dot?: boolean;
-  tone?: SconeTone;
-  overflowCount?: number;
+    count?: number;
+    dot?: boolean;
+    tone?: SconeTone;
+    overflowCount?: number;
 }
 
 export interface SconeListProps<T> extends SconeCommonProps {
-  items: T[];
-  renderItem: (item: T, index: number) => React.ReactNode;
-  rowKey?: keyof T | ((item: T) => Key);
-  density?: SconeDensity;
-  loading?: boolean;
-  empty?: React.ReactNode;
-  error?: React.ReactNode;
+    items: T[];
+    renderItem: (item: T, index: number) => React.ReactNode;
+    rowKey?: keyof T | ((item: T) => Key);
+    density?: SconeDensity;
+    loading?: boolean;
+    empty?: React.ReactNode;
+    error?: React.ReactNode;
 }
 
 export interface SconeTypographyProps extends SconeCommonProps {
-  as?: "span" | "p" | "div";
-  tone?: SconeTone;
-  truncate?: boolean;
+    as?: "span" | "p" | "div";
+    tone?: SconeTone;
+    truncate?: boolean;
 }
 
 export interface SconeTextProps extends SconeTypographyProps {}
 
 export interface SconeTitleProps extends SconeCommonProps {
-  level?: 1 | 2 | 3 | 4;
+    level?: 1 | 2 | 3 | 4;
 }
 
 export interface SconeParagraphProps extends SconeTypographyProps {}
 
 export interface SconeStatisticProps extends SconeCommonProps {
-  label: React.ReactNode;
-  value: React.ReactNode;
-  tone?: SconeTone;
-  suffix?: React.ReactNode;
+    label: React.ReactNode;
+    value: React.ReactNode;
+    tone?: SconeTone;
+    suffix?: React.ReactNode;
 }
 
 export interface SconeTimelineProps extends SconeCommonProps {
-  items: SconeTimelineItem[];
-  pending?: React.ReactNode;
-  reverse?: boolean;
-  onItemClick?: (key: Key) => void;
+    items: SconeTimelineItem[];
+    pending?: React.ReactNode;
+    reverse?: boolean;
+    onItemClick?: (key: Key) => void;
 }
 ```
 
@@ -731,47 +684,47 @@ export interface SconeTimelineProps extends SconeCommonProps {
 
 ```ts
 export interface SconeStackProps extends SconeCommonProps {
-  gap?: SconeSpacingToken;
-  align?: SconeAlign;
+    gap?: SconeSpacingToken;
+    align?: SconeAlign;
 }
 
 export interface SconeInlineProps extends SconeCommonProps {
-  gap?: SconeSpacingToken;
-  align?: SconeAlign;
-  wrap?: boolean;
+    gap?: SconeSpacingToken;
+    align?: SconeAlign;
+    wrap?: boolean;
 }
 
 export interface SconeCompactProps extends SconeCommonProps {
-  orientation?: SconeOrientation;
+    orientation?: SconeOrientation;
 }
 
 export interface SconeToolbarProps extends SconeCommonProps {
-  start?: React.ReactNode;
-  end?: React.ReactNode;
-  actions?: React.ReactNode;
-  density?: SconeDensity;
-  wrap?: boolean;
+    start?: React.ReactNode;
+    end?: React.ReactNode;
+    actions?: React.ReactNode;
+    density?: SconeDensity;
+    wrap?: boolean;
 }
 
 export interface SconeSplitPaneProps extends SconeCommonProps {
-  leading: React.ReactNode;
-  trailing: React.ReactNode;
-  orientation?: SconeOrientation;
-  size?: string;
-  defaultSize?: string;
-  onSizeChange?: (size: string) => void;
-  minSize?: string;
-  maxSize?: string;
+    leading: React.ReactNode;
+    trailing: React.ReactNode;
+    orientation?: SconeOrientation;
+    size?: string;
+    defaultSize?: string;
+    onSizeChange?: (size: string) => void;
+    minSize?: string;
+    maxSize?: string;
 }
 
 export interface SconeSeparatorProps extends SconeCommonProps {
-  orientation?: SconeOrientation;
-  decorative?: boolean;
+    orientation?: SconeOrientation;
+    decorative?: boolean;
 }
 
 export interface SconeScrollAreaProps extends SconeCommonProps {
-  viewportClassName?: string;
-  onScroll?: React.UIEventHandler<HTMLDivElement>;
+    viewportClassName?: string;
+    onScroll?: React.UIEventHandler<HTMLDivElement>;
 }
 ```
 
@@ -781,63 +734,56 @@ export interface SconeScrollAreaProps extends SconeCommonProps {
 
 ```ts
 export interface SconeDrawerProps
-  extends SconeCommonProps,
-    SconeOpenStateProps,
-    SconeLoadingStateProps,
-    SconeAriaLabelProps {
-  title?: React.ReactNode;
-  description?: React.ReactNode;
-  footer?: React.ReactNode;
-  widthPreset?: "sm" | "md" | "lg" | "full";
-  onRequestClose?: (reason: OverlayCloseReason) => void;
+    extends SconeCommonProps, SconeOpenStateProps, SconeLoadingStateProps, SconeAriaLabelProps {
+    title?: React.ReactNode;
+    description?: React.ReactNode;
+    footer?: React.ReactNode;
+    widthPreset?: "sm" | "md" | "lg" | "full";
+    onRequestClose?: (reason: OverlayCloseReason) => void;
 }
 
 export interface SconeDialogProps
-  extends SconeCommonProps,
-    SconeOpenStateProps,
-    SconeAriaLabelProps {
-  title?: React.ReactNode;
-  description?: React.ReactNode;
-  footer?: React.ReactNode;
-  onRequestClose?: (reason: OverlayCloseReason) => void;
+    extends SconeCommonProps, SconeOpenStateProps, SconeAriaLabelProps {
+    title?: React.ReactNode;
+    description?: React.ReactNode;
+    footer?: React.ReactNode;
+    onRequestClose?: (reason: OverlayCloseReason) => void;
 }
 
 export interface SconeConfirmProps
-  extends SconeCommonProps,
-    SconeOpenStateProps,
-    SconeLoadingStateProps {
-  title: React.ReactNode;
-  description?: React.ReactNode;
-  destructive?: boolean;
-  confirmText?: React.ReactNode;
-  cancelText?: React.ReactNode;
-  onConfirm?: () => void | Promise<void>;
-  onCancel?: () => void;
+    extends SconeCommonProps, SconeOpenStateProps, SconeLoadingStateProps {
+    title: React.ReactNode;
+    description?: React.ReactNode;
+    destructive?: boolean;
+    confirmText?: React.ReactNode;
+    cancelText?: React.ReactNode;
+    onConfirm?: () => void | Promise<void>;
+    onCancel?: () => void;
 }
 
 export interface SconeAlertProps extends SconeCommonProps {
-  tone?: SconeTone;
-  title?: React.ReactNode;
-  description?: React.ReactNode;
-  action?: React.ReactNode;
+    tone?: SconeTone;
+    title?: React.ReactNode;
+    description?: React.ReactNode;
+    action?: React.ReactNode;
 }
 
 export interface SconeEmptyProps extends SconeCommonProps {
-  title?: React.ReactNode;
-  description?: React.ReactNode;
-  action?: React.ReactNode;
+    title?: React.ReactNode;
+    description?: React.ReactNode;
+    action?: React.ReactNode;
 }
 
 export interface SconeLoadingProps extends SconeCommonProps {
-  label?: React.ReactNode;
-  size?: SconeControlSize;
+    label?: React.ReactNode;
+    size?: SconeControlSize;
 }
 
 export interface SconeProgressProps extends SconeCommonProps {
-  value?: number;
-  max?: number;
-  status?: SconeStatus;
-  label?: React.ReactNode;
+    value?: number;
+    max?: number;
+    status?: SconeStatus;
+    label?: React.ReactNode;
 }
 ```
 
@@ -847,102 +793,88 @@ export interface SconeProgressProps extends SconeCommonProps {
 
 ```ts
 export interface SconeBreadcrumbProps extends SconeCommonProps {
-  items: SconeBreadcrumbItem[];
+    items: SconeBreadcrumbItem[];
 }
 
-export interface SconePaginationProps
-  extends SconeCommonProps,
-    SconeDisabledProps {
-  state: SconePaginationState;
-  pageSizeOptions?: number[];
-  onChange?: (
-    nextState: SconePaginationState,
-    reason: SconePaginationChangeReason
-  ) => void;
+export interface SconePaginationProps extends SconeCommonProps, SconeDisabledProps {
+    state: SconePaginationState;
+    pageSizeOptions?: number[];
+    onChange?: (nextState: SconePaginationState, reason: SconePaginationChangeReason) => void;
 }
 
 export interface SconeTabsProps<Value = string>
-  extends SconeCommonProps,
-    SconeValueStateProps<Value> {
-  orientation?: SconeOrientation;
-  activationMode?: "automatic" | "manual";
+    extends SconeCommonProps, SconeValueStateProps<Value> {
+    orientation?: SconeOrientation;
+    activationMode?: "automatic" | "manual";
 }
 
 export interface SconeSegmentedProps<Value = string>
-  extends SconeCommonProps,
-    SconeValueStateProps<Value> {
-  options: SconeOption<Value>[];
+    extends SconeCommonProps, SconeValueStateProps<Value> {
+    options: SconeOption<Value>[];
 }
 
 export interface SconeTreeProps extends SconeCommonProps {
-  nodes: SconeTreeNode[];
-  selectedKeys?: Key[];
-  checkedKeys?: Key[];
-  expandedKeys?: Key[];
-  onSelectedKeysChange?: (keys: Key[]) => void;
-  onCheckedKeysChange?: (keys: Key[]) => void;
-  onExpandedKeysChange?: (keys: Key[]) => void;
+    nodes: SconeTreeNode[];
+    selectedKeys?: Key[];
+    checkedKeys?: Key[];
+    expandedKeys?: Key[];
+    onSelectedKeysChange?: (keys: Key[]) => void;
+    onCheckedKeysChange?: (keys: Key[]) => void;
+    onExpandedKeysChange?: (keys: Key[]) => void;
 }
 
-export interface SconeDropdownProps
-  extends SconeCommonProps,
-    SconeOpenStateProps {
-  trigger: React.ReactNode;
-  items?: SconeActionItem[];
-  onSelect?: (key: Key) => void;
+export interface SconeDropdownProps extends SconeCommonProps, SconeOpenStateProps {
+    trigger: React.ReactNode;
+    items?: SconeActionItem[];
+    onSelect?: (key: Key) => void;
 }
 
 export interface SconeMenuProps extends SconeCommonProps {
-  items: SconeNavigationItem[];
-  selectedKey?: Key;
-  expandedKeys?: Key[];
-  collapsed?: boolean;
-  onSelect?: (key: Key) => void;
-  onExpandedKeysChange?: (keys: Key[]) => void;
+    items: SconeNavigationItem[];
+    selectedKey?: Key;
+    expandedKeys?: Key[];
+    collapsed?: boolean;
+    onSelect?: (key: Key) => void;
+    onExpandedKeysChange?: (keys: Key[]) => void;
 }
 
 export interface SconeTooltipProps extends SconeCommonProps, SconeOpenStateProps {
-  content: React.ReactNode;
+    content: React.ReactNode;
 }
 
 export interface SconeCommandProps extends SconeCommonProps {
-  items?: SconeCommandItem[];
-  value?: string;
-  defaultValue?: string;
-  onValueChange?: (value: string) => void;
-  onSelect?: (value: string) => void;
-  loading?: boolean;
-  empty?: React.ReactNode;
+    items?: SconeCommandItem[];
+    value?: string;
+    defaultValue?: string;
+    onValueChange?: (value: string) => void;
+    onSelect?: (value: string) => void;
+    loading?: boolean;
+    empty?: React.ReactNode;
 }
 
 export interface SconeAccordionProps
-  extends SconeCommonProps,
-    SconeValueStateProps<string | string[]> {
-  items?: SconeAccordionItem[];
-  type?: "single" | "multiple";
+    extends SconeCommonProps, SconeValueStateProps<string | string[]> {
+    items?: SconeAccordionItem[];
+    type?: "single" | "multiple";
 }
 
-export interface SconeCollapsibleProps
-  extends SconeCommonProps,
-    SconeOpenStateProps {}
+export interface SconeCollapsibleProps extends SconeCommonProps, SconeOpenStateProps {}
 
-export interface SconeImageProps
-  extends SconeCommonProps,
-    SconeAriaLabelProps {
-  src: string;
-  alt: string;
-  width?: number | string;
-  height?: number | string;
-  fallback?: React.ReactNode;
-  previewOpen?: boolean;
-  defaultPreviewOpen?: boolean;
-  onPreviewOpenChange?: (open: boolean) => void;
+export interface SconeImageProps extends SconeCommonProps, SconeAriaLabelProps {
+    src: string;
+    alt: string;
+    width?: number | string;
+    height?: number | string;
+    fallback?: React.ReactNode;
+    previewOpen?: boolean;
+    defaultPreviewOpen?: boolean;
+    onPreviewOpenChange?: (open: boolean) => void;
 }
 
 export interface SconeAvatarProps extends SconeCommonProps {
-  src?: string;
-  alt: string;
-  fallback: React.ReactNode;
+    src?: string;
+    alt: string;
+    fallback: React.ReactNode;
 }
 ```
 
@@ -963,18 +895,18 @@ Props 类型命名：
 
 事件 payload：
 
-| 回调 | 参数设计 | DOM event | 业务对象 |
-| --- | --- | --- | --- |
-| `onValueChange` | `(value: Value) => void` | 否 | 否 |
-| `onOpenChange` | `(open: boolean) => void` | 否 | 否 |
-| `onCheckedChange` | `(checked: boolean) => void` | 否 | 否 |
-| `onSelect` | Dropdown：`(key: Key) => void`；Command：`(value: string) => void`；Tree：`(keys: Key[]) => void`。 | 否 | 否 |
-| `onConfirm` | `() => void \| Promise<void>`。 | 否 | 否 |
-| `onCancel` | `() => void`。 | 否 | 否 |
-| `onClear` | `() => void` | 否 | 否 |
-| `onApply` | `(state: FilterBarState) => void`，用于 FilterBar/DataTable 筛选提交。 | 否 | 否 |
-| `onReset` | `() => void` | 否 | 否 |
-| `onDismiss` / `onClose` | Toast：`(id: string, reason: ToastCloseReason) => void`；Notification：`(id: string, reason: NotificationCloseReason) => void`。 | 否 | 否 |
+| 回调                    | 参数设计                                                                                                                         | DOM event | 业务对象 |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------------- | --------- | -------- |
+| `onValueChange`         | `(value: Value) => void`                                                                                                         | 否        | 否       |
+| `onOpenChange`          | `(open: boolean) => void`                                                                                                        | 否        | 否       |
+| `onCheckedChange`       | `(checked: boolean) => void`                                                                                                     | 否        | 否       |
+| `onSelect`              | Dropdown：`(key: Key) => void`；Command：`(value: string) => void`；Tree：`(keys: Key[]) => void`。                              | 否        | 否       |
+| `onConfirm`             | `() => void \| Promise<void>`。                                                                                                  | 否        | 否       |
+| `onCancel`              | `() => void`。                                                                                                                   | 否        | 否       |
+| `onClear`               | `() => void`                                                                                                                     | 否        | 否       |
+| `onApply`               | `(state: FilterBarState) => void`，用于 FilterBar/DataTable 筛选提交。                                                           | 否        | 否       |
+| `onReset`               | `() => void`                                                                                                                     | 否        | 否       |
+| `onDismiss` / `onClose` | Toast：`(id: string, reason: ToastCloseReason) => void`；Notification：`(id: string, reason: NotificationCloseReason) => void`。 | 否        | 否       |
 
 状态结构边界：
 
@@ -991,9 +923,9 @@ DOM/ref 类型：
 
 Provider/service 类型：
 
-| 服务 | 公共导出 | 类型边界 |
-| --- | --- | --- |
-| Toast | `SconeToastProvider`、`toast`、`ToastOptions`、`SconeToastItem`、`ToastPosition` | service 生成或接收 id，返回稳定 id；不承载业务来源或持久化。 |
+| 服务         | 公共导出                                                                                                             | 类型边界                                                                                          |
+| ------------ | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Toast        | `SconeToastProvider`、`toast`、`ToastOptions`、`SconeToastItem`、`ToastPosition`                                     | service 生成或接收 id，返回稳定 id；不承载业务来源或持久化。                                      |
 | Notification | `SconeNotificationProvider`、`notification`、`NotificationOptions`、`SconeNotificationItem`、`NotificationPlacement` | service 生成或接收 id，返回稳定 id；支持 persistent UI 语义；已读、订阅来源和持久化由产品侧处理。 |
 
 类型验证入口：

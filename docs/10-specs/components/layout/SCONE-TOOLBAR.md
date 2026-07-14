@@ -2,10 +2,10 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready |
-| Layer | Layout |
+| Field     | Value                                                    |
+| --------- | -------------------------------------------------------- |
+| Status    | Ready                                                    |
+| Layer     | Layout                                                   |
 | Authority | [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) |
 
 源策略、导出状态和跨组件词汇以 [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) 与 [`FOUNDATIONS-SPEC.md`](../../FOUNDATIONS-SPEC.md) 为准。

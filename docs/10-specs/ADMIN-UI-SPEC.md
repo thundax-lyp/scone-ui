@@ -30,11 +30,11 @@
 
 | 信息类型                                        | 权威文件                                                       |
 | ----------------------------------------------- | -------------------------------------------------------------- |
-| SPEC 入口、读取顺序和文件定位                  | [`README.md`](./README.md)                                    |
+| SPEC 入口、读取顺序和文件定位                   | [`README.md`](./README.md)                                     |
 | Layer、API 词汇、Shared Types、响应式和状态语义 | [`FOUNDATIONS-SPEC.md`](./FOUNDATIONS-SPEC.md)                 |
-| 当前实现范围、导出清单和能力矩阵                       | [`COMPONENT-SELECTION.md`](./COMPONENT-SELECTION.md)           |
+| 当前实现范围、导出清单和能力矩阵                | [`COMPONENT-SELECTION.md`](./COMPONENT-SELECTION.md)           |
 | Page、Section、DataTable、DrawerForm 等组合模式 | [`ADMIN-PATTERNS-SPEC.md`](./ADMIN-PATTERNS-SPEC.md)           |
-| 单组件 API、状态和 shadcn/Radix 映射            | [`README.md`](./README.md) 索引的 `components/**/*.md`          |
+| 单组件 API、状态和 shadcn/Radix 映射            | [`README.md`](./README.md) 索引的 `components/**/*.md`         |
 | 覆盖审计和不纳入依据                            | [`COMPONENT-COVERAGE-AUDIT.md`](./COMPONENT-COVERAGE-AUDIT.md) |
 
 ## Layer Model

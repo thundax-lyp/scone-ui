@@ -2,22 +2,22 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready |
-| Layer | Layout |
+| Field     | Value                                                    |
+| --------- | -------------------------------------------------------- |
+| Status    | Ready                                                    |
+| Layer     | Layout                                                   |
 | Authority | [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) |
 
 源策略、导出状态和跨组件词汇以 [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) 与 [`FOUNDATIONS-SPEC.md`](../../FOUNDATIONS-SPEC.md) 为准。
 
 明确的局部滚动容器，用于侧栏列表、Drawer 内容、表格外层和长菜单。
 
-| Prop                | 类型        | 说明                 |
-| ------------------- | ----------- | -------------------- |
-| `children`          | `ReactNode` | 内容。               |
-| `onScroll`          | React.UIEventHandler<HTMLDivElement> | viewport 滚动事件。 |
-| `className`         | `string`    | 样式。               |
-| `viewportClassName` | `string`    | viewport slot 样式。 |
+| Prop                | 类型                                 | 说明                 |
+| ------------------- | ------------------------------------ | -------------------- |
+| `children`          | `ReactNode`                          | 内容。               |
+| `onScroll`          | React.UIEventHandler<HTMLDivElement> | viewport 滚动事件。  |
+| `className`         | `string`                             | 样式。               |
+| `viewportClassName` | `string`                             | viewport slot 样式。 |
 
 ## Usage
 
