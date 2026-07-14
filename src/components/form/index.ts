@@ -37,6 +37,9 @@ export type { SconeSwitchProps } from "./switch";
 export { SconeTextArea } from "./textarea";
 export type { SconeTextAreaProps } from "./textarea";
 
+export { SconeUpload } from "./upload";
+export type { SconeUploadProps, SconeUploadRejection } from "./upload";
+
 export { SconeForm, useSconeFormContext } from "./form";
 export type { SconeFormContextValue, SconeFormProps } from "./form";
 
