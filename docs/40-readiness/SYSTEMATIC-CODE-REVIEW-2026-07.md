@@ -266,6 +266,35 @@ Recent evidence before this review branch:
 * **功能风险**：中；calendar interaction is user-facing and should be refactored behind behavior-preserving tests.
 * **置信度**：高
 
+## 10 Data Display Core
+
+### Evidence
+
+- `SconeTable` owns base table rendering, density, empty/loading/error rows, scroll width, row/cell DOM hooks, and cell rendering.
+- `SconeList` owns repeated item rendering plus loading/error/empty state priority.
+- `SconeDescriptions` owns description-list rendering, responsive columns, item span, density, bordered items, and nullish fallback.
+- `DataTable.TableRegion` composes `SconeTable` for pattern-level selection and data-table states, so base `SconeTable` does not own pagination, request, or selection state.
+- Tests cover state priority, row/cell passthrough, density, scroll, responsive columns, and nullish value fallback.
+
+### Assessment
+
+- Data display core components avoid product-specific behavior and keep request/pagination ownership outside the component layer.
+- State priority is consistent: loading before error before empty.
+- The boundary between `SconeTable` and `DataTable` Pattern is mostly clear.
+
+### Candidate Finding
+
+### [P2] Descriptions `style` prop is applied to an internal `dl`, not the root
+
+* **位置**：`src/components/data-display/descriptions.tsx`
+* **类别**：API / 封装
+* **问题**：`SconeDescriptionsProps` inherits `style` from root div attributes, but the component destructures `style` and passes it to the internal `<dl>` through `getColumnsStyle`.
+* **影响**：Consumers expecting `style` to apply to the ref/className root will be surprised. It also mixes public root styling with internal CSS variable plumbing.
+* **证据**：`className` and `ref` are applied to the outer `<div>`, while `style={getColumnsStyle(columns, style)}` is applied to `<dl>`.
+* **建议**：Split internal column style from root style, for example with a private `columnsStyle` object and pass caller `style` to the root.
+* **功能风险**：低；existing tests assert CSS variables on `<dl>`, so tests need a small update if this is fixed.
+* **置信度**：高
+
 ## 09 Form Layout Helpers
 
 ### Evidence

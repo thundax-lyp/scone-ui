@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `10-data-display-core`：10 审核数据展示核心组件
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`src/components/data-display/table.tsx`、`src/components/data-display/list.tsx`、`src/components/data-display/descriptions.tsx`、`src/components/data-display/index.ts`
-    - 处理动作：检查数据状态优先级、列和 item 类型、基础组件与 DataTable Pattern 的边界。
-    - 验收点：输出数据展示核心是否存在职责重叠、API 过宽或状态语义不清的结论。
-    - 重要度：9/10
-
 - [ ] `11-data-display-atoms`：11 审核数据展示原子组件
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
