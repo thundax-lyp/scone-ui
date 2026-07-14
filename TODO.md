@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `4.6 ui cn imports batch 5`：统一 ui 第五批 `cn` 导入
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
-    - 范围对象：`src/components/ui/separator.tsx`、`src/components/ui/sheet.tsx`、`src/components/ui/slider.tsx`、`src/components/ui/switch.tsx`
-    - 处理动作：将本批 ui 文件中的 `@/lib/utils` 导入改为 `@/lib/cn`。
-    - 验收点：本批文件不再引用 `@/lib/utils`，DOM 结构、className 内容和 export 不变。
-    - 重要度：7/10
-
 - [ ] `4.7 ui cn imports batch 6`：统一 ui 第六批 `cn` 导入
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
