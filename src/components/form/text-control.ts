@@ -10,10 +10,13 @@ import {
 import { useSconeFieldContext } from "./field";
 
 type SconeTextControlElement = HTMLInputElement | HTMLTextAreaElement;
+type SconeTextControlProps = Omit<SconeControlStateProps, "aria-invalid"> & {
+    "aria-invalid"?: React.AriaAttributes["aria-invalid"];
+};
 
 interface UseSconeTextControlOptions<
     TElement extends SconeTextControlElement,
-    TControlProps extends SconeControlStateProps,
+    TControlProps extends SconeTextControlProps,
 > {
     value?: string;
     defaultValue?: string;
@@ -26,7 +29,7 @@ interface UseSconeTextControlOptions<
 
 export function useSconeTextControl<
     TElement extends SconeTextControlElement,
-    TControlProps extends SconeControlStateProps,
+    TControlProps extends SconeTextControlProps,
 >({
     value,
     defaultValue,
@@ -46,7 +49,7 @@ export function useSconeTextControl<
         ...controlProps,
         "aria-label": ariaLabel ?? controlProps["aria-label"],
         "aria-invalid": normalizeSconeAriaInvalid(invalid ?? controlProps["aria-invalid"]),
-    }) as TControlProps & SconeControlStateProps;
+    } as SconeControlStateProps) as TControlProps & SconeControlStateProps;
 
     const handleChange = React.useCallback<React.ChangeEventHandler<TElement>>(
         (event) => {
