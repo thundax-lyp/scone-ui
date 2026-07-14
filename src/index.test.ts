@@ -8,6 +8,13 @@ import {
     hasAriaValue,
     mergeAriaDescribedBy,
     mergeIds,
+    SconeCompact,
+    SconeInline,
+    SconeScrollArea,
+    SconeSeparator,
+    SconeSplitPane,
+    SconeStack,
+    SconeToolbar,
     useControllableState,
 } from "./index";
 import type {
@@ -19,9 +26,13 @@ import type {
     SconeBaseItem,
     SconeControlSize,
     SconeDensity,
+    SconeInlineProps,
     SconeOption,
     SconeOrientation,
     SconeSide,
+    SconeSplitPaneProps,
+    SconeSplitPaneSizePreset,
+    SconeStackProps,
     SconeSpacingToken,
     SconeStatus,
     SconeTone,
@@ -51,12 +62,27 @@ describe("public index exports", () => {
         >();
         expectTypeOf<SconeOption["value"]>().toEqualTypeOf<string>();
         expectTypeOf<SconeBaseItem["key"]>().toEqualTypeOf<Key>();
+        expectTypeOf<SconeStackProps["gap"]>().toEqualTypeOf<SconeSpacingToken | undefined>();
+        expectTypeOf<SconeInlineProps["wrap"]>().toEqualTypeOf<boolean | undefined>();
+        expectTypeOf<SconeSplitPaneSizePreset>().toEqualTypeOf<
+            "narrow" | "medium" | "wide" | "fill"
+        >();
+        expectTypeOf<SconeSplitPaneProps["onSizeCommit"]>().toEqualTypeOf<
+            ((size: string) => void) | undefined
+        >();
     });
 
     it("exports public utilities from the public entry", async () => {
         expect(cn("px-2", "px-4")).toBe("px-4");
         expect(typeof composeRefs).toBe("function");
         expect(typeof useControllableState).toBe("function");
+        expect(typeof SconeStack).toBe("object");
+        expect(typeof SconeInline).toBe("object");
+        expect(typeof SconeCompact).toBe("object");
+        expect(typeof SconeToolbar).toBe("object");
+        expect(typeof SconeSeparator).toBe("object");
+        expect(typeof SconeScrollArea).toBe("object");
+        expect(typeof SconeSplitPane).toBe("object");
         expect(mergeIds("label", "description")).toBe("label description");
         expect(mergeAriaDescribedBy("description", "error")).toBe("description error");
         expect(ariaBoolean(false)).toBeUndefined();
@@ -66,6 +92,13 @@ describe("public index exports", () => {
         const publicExports = await import("./index");
 
         expect(Object.keys(publicExports).sort()).toEqual([
+            "SconeCompact",
+            "SconeInline",
+            "SconeScrollArea",
+            "SconeSeparator",
+            "SconeSplitPane",
+            "SconeStack",
+            "SconeToolbar",
             "ariaBoolean",
             "ariaValue",
             "cn",
