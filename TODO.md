@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `01 form-field-foundation`：Form 和 Field 基础闭环
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`
-    - 范围对象：`src/components/form/form.tsx`、`src/components/form/field.tsx`、`src/components/form/form.test.tsx`、`src/components/form/index.ts`
-    - 处理动作：实现 `SconeForm` context 和 `SconeField` compound API。
-    - 验收点：`disabled/readOnly/requiredMark` context、Field 状态覆盖、label/description/message ARIA 关联和测试通过。
-    - 重要度：10/10
-
 - [ ] `02 button`：Button 控件闭环
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`

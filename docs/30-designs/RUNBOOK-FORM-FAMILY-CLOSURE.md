@@ -85,76 +85,76 @@
 
 所有可交互 Form 控件共享以下字段：
 
-| 字段 | 类型 | 说明 |
-| --- | --- | --- |
-| `id` | `string \| undefined` | 控件 id；被 `SconeField.Control` 注入时优先使用 Field id。 |
-| `ariaLabel` | `string \| undefined` | 无可见 label 时必填，写入 `aria-label`。 |
-| `disabled` | `boolean \| undefined` | 控件禁用；字段级值覆盖 Form context。 |
-| `readOnly` | `boolean \| undefined` | 控件只读；字段级值覆盖 Form context。 |
-| `invalid` | `boolean \| undefined` | 控件错误态；写入 `aria-invalid=true`。 |
-| `required` | `boolean \| undefined` | 控件必填态；写入 `required` 或 `aria-required`。 |
-| `size` | `SconeControlSize \| undefined` | 控件尺寸，来自 `src/types/foundation.ts`。 |
-| `className` | `string \| undefined` | 透传到稳定根节点或交互节点。 |
+| 字段        | 类型                            | 说明                                                       |
+| ----------- | ------------------------------- | ---------------------------------------------------------- |
+| `id`        | `string \| undefined`           | 控件 id；被 `SconeField.Control` 注入时优先使用 Field id。 |
+| `ariaLabel` | `string \| undefined`           | 无可见 label 时必填，写入 `aria-label`。                   |
+| `disabled`  | `boolean \| undefined`          | 控件禁用；字段级值覆盖 Form context。                      |
+| `readOnly`  | `boolean \| undefined`          | 控件只读；字段级值覆盖 Form context。                      |
+| `invalid`   | `boolean \| undefined`          | 控件错误态；写入 `aria-invalid=true`。                     |
+| `required`  | `boolean \| undefined`          | 控件必填态；写入 `required` 或 `aria-required`。           |
+| `size`      | `SconeControlSize \| undefined` | 控件尺寸，来自 `src/types/foundation.ts`。                 |
+| `className` | `string \| undefined`           | 透传到稳定根节点或交互节点。                               |
 
 ### Value Models
 
-| 模型 | 字段 | 适用组件 |
-| --- | --- | --- |
-| Text value | `value?: string`、`defaultValue?: string`、`onValueChange?: (value: string) => void` | Input、SearchInput、PasswordInput、TextArea |
-| Number value | `value?: number`、`defaultValue?: number`、`onValueChange?: (value: number \| undefined) => void` | NumberInput |
-| Select value | `value?: Value`、`defaultValue?: Value`、`onValueChange?: (value: Value) => void` | Select、RadioGroup |
-| Optional select value | `value?: Value`、`defaultValue?: Value`、`onValueChange?: (value: Value \| undefined) => void` | Combobox |
-| Boolean checked | `checked?: boolean`、`defaultChecked?: boolean`、`onCheckedChange?: (checked: boolean) => void` | Switch、Checkbox |
-| Slider value | `value?: number[]`、`defaultValue?: number[]`、`onValueChange?: (value: number[]) => void` | Slider |
-| Date value | `value?: Date`、`defaultValue?: Date`、`onValueChange?: (value: Date \| undefined) => void` | DatePicker |
-| Upload files | `value?: File[]`、`defaultValue?: File[]`、`onValueChange?: (files: File[]) => void` | Upload |
+| 模型                  | 字段                                                                                              | 适用组件                                    |
+| --------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| Text value            | `value?: string`、`defaultValue?: string`、`onValueChange?: (value: string) => void`              | Input、SearchInput、PasswordInput、TextArea |
+| Number value          | `value?: number`、`defaultValue?: number`、`onValueChange?: (value: number \| undefined) => void` | NumberInput                                 |
+| Select value          | `value?: Value`、`defaultValue?: Value`、`onValueChange?: (value: Value) => void`                 | Select、RadioGroup                          |
+| Optional select value | `value?: Value`、`defaultValue?: Value`、`onValueChange?: (value: Value \| undefined) => void`    | Combobox                                    |
+| Boolean checked       | `checked?: boolean`、`defaultChecked?: boolean`、`onCheckedChange?: (checked: boolean) => void`   | Switch、Checkbox                            |
+| Slider value          | `value?: number[]`、`defaultValue?: number[]`、`onValueChange?: (value: number[]) => void`        | Slider                                      |
+| Date value            | `value?: Date`、`defaultValue?: Date`、`onValueChange?: (value: Date \| undefined) => void`       | DatePicker                                  |
+| Upload files          | `value?: File[]`、`defaultValue?: File[]`、`onValueChange?: (files: File[]) => void`              | Upload                                      |
 
 原生 `onChange` 仅作为 DOM event handler 透传，不作为主状态 API。
 
 ### Open Models
 
-| 字段 | 类型 | 适用组件 |
-| --- | --- | --- |
-| `open` | `boolean \| undefined` | Select、Combobox、DatePicker |
-| `defaultOpen` | `boolean \| undefined` | Select、Combobox、DatePicker |
+| 字段           | 类型                      | 适用组件                     |
+| -------------- | ------------------------- | ---------------------------- |
+| `open`         | `boolean \| undefined`    | Select、Combobox、DatePicker |
+| `defaultOpen`  | `boolean \| undefined`    | Select、Combobox、DatePicker |
 | `onOpenChange` | `(open: boolean) => void` | Select、Combobox、DatePicker |
 
 ### Option Fields
 
 Select、Combobox、RadioGroup 使用 `SconeOption<Value>`，字段来自 `src/types/foundation.ts`：
 
-| 字段 | 类型 | 说明 |
-| --- | --- | --- |
-| `value` | `Value` | 选项值，Select 和 RadioGroup 必须可序列化到稳定 key。 |
-| `label` | `React.ReactNode` | 可见选项文本或节点。 |
-| `disabled` | `boolean \| undefined` | 禁用该选项。 |
+| 字段       | 类型                   | 说明                                                  |
+| ---------- | ---------------------- | ----------------------------------------------------- |
+| `value`    | `Value`                | 选项值，Select 和 RadioGroup 必须可序列化到稳定 key。 |
+| `label`    | `React.ReactNode`      | 可见选项文本或节点。                                  |
+| `disabled` | `boolean \| undefined` | 禁用该选项。                                          |
 
 ### Form Fields
 
 `SconeFormProps` 字段：
 
-| 字段 | 类型 | 说明 |
-| --- | --- | --- |
-| `disabled` | `boolean \| undefined` | 表单级禁用 context。 |
-| `readOnly` | `boolean \| undefined` | 表单级只读 context。 |
+| 字段           | 类型                                 | 说明                       |
+| -------------- | ------------------------------------ | -------------------------- |
+| `disabled`     | `boolean \| undefined`               | 表单级禁用 context。       |
+| `readOnly`     | `boolean \| undefined`               | 表单级只读 context。       |
 | `requiredMark` | `boolean \| "optional" \| undefined` | label 必填或可选标记策略。 |
-| `className` | `string \| undefined` | 表单根节点样式。 |
-| `children` | `React.ReactNode` | 表单内容。 |
+| `className`    | `string \| undefined`                | 表单根节点样式。           |
+| `children`     | `React.ReactNode`                    | 表单内容。                 |
 
 `SconeField.Root` 字段：
 
-| 字段 | 类型 | 说明 |
-| --- | --- | --- |
-| `id` | `string \| undefined` | 字段 id；未传时内部生成稳定 id。 |
-| `name` | `string \| undefined` | 字段名，只作为 DOM/语义辅助，不创建 store。 |
-| `label` | `React.ReactNode \| undefined` | 可选快捷 label；compound 用法优先使用 `SconeField.Label`。 |
+| 字段          | 类型                           | 说明                                                                   |
+| ------------- | ------------------------------ | ---------------------------------------------------------------------- |
+| `id`          | `string \| undefined`          | 字段 id；未传时内部生成稳定 id。                                       |
+| `name`        | `string \| undefined`          | 字段名，只作为 DOM/语义辅助，不创建 store。                            |
+| `label`       | `React.ReactNode \| undefined` | 可选快捷 label；compound 用法优先使用 `SconeField.Label`。             |
 | `description` | `React.ReactNode \| undefined` | 可选快捷 description；compound 用法优先使用 `SconeField.Description`。 |
-| `message` | `React.ReactNode \| undefined` | 可选快捷 message；compound 用法优先使用 `SconeField.Message`。 |
-| `invalid` | `boolean \| undefined` | 字段错误态。 |
-| `required` | `boolean \| undefined` | 字段必填态。 |
-| `disabled` | `boolean \| undefined` | 字段禁用态，覆盖 Form context。 |
-| `readOnly` | `boolean \| undefined` | 字段只读态，覆盖 Form context。 |
-| `className` | `string \| undefined` | 字段根节点样式。 |
+| `message`     | `React.ReactNode \| undefined` | 可选快捷 message；compound 用法优先使用 `SconeField.Message`。         |
+| `invalid`     | `boolean \| undefined`         | 字段错误态。                                                           |
+| `required`    | `boolean \| undefined`         | 字段必填态。                                                           |
+| `disabled`    | `boolean \| undefined`         | 字段禁用态，覆盖 Form context。                                        |
+| `readOnly`    | `boolean \| undefined`         | 字段只读态，覆盖 Form context。                                        |
+| `className`   | `string \| undefined`          | 字段根节点样式。                                                       |
 
 `SconeField` compound 必须导出：
 
@@ -168,38 +168,38 @@ Select、Combobox、RadioGroup 使用 `SconeOption<Value>`，字段来自 `src/t
 
 `SconeUploadProps` 字段：
 
-| 字段 | 类型 | 说明 |
-| --- | --- | --- |
-| `value` | `File[] \| undefined` | 受控文件列表。 |
-| `defaultValue` | `File[] \| undefined` | 非受控初始文件列表。 |
-| `onValueChange` | `(files: File[]) => void` | 文件列表变化回调。 |
-| `accept` | `string \| undefined` | 允许的文件类型，透传到 input。 |
-| `multiple` | `boolean \| undefined` | 是否允许多选。 |
-| `maxFiles` | `number \| undefined` | 最大文件数量。 |
-| `maxSize` | `number \| undefined` | 单文件最大字节数。 |
-| `beforeAdd` | `(file: File, currentFiles: File[]) => boolean \| Promise<boolean>` | 添加前校验。 |
-| `onReject` | `(rejection: SconeUploadRejection) => void` | 拒绝回调。 |
+| 字段            | 类型                                                                | 说明                           |
+| --------------- | ------------------------------------------------------------------- | ------------------------------ |
+| `value`         | `File[] \| undefined`                                               | 受控文件列表。                 |
+| `defaultValue`  | `File[] \| undefined`                                               | 非受控初始文件列表。           |
+| `onValueChange` | `(files: File[]) => void`                                           | 文件列表变化回调。             |
+| `accept`        | `string \| undefined`                                               | 允许的文件类型，透传到 input。 |
+| `multiple`      | `boolean \| undefined`                                              | 是否允许多选。                 |
+| `maxFiles`      | `number \| undefined`                                               | 最大文件数量。                 |
+| `maxSize`       | `number \| undefined`                                               | 单文件最大字节数。             |
+| `beforeAdd`     | `(file: File, currentFiles: File[]) => boolean \| Promise<boolean>` | 添加前校验。                   |
+| `onReject`      | `(rejection: SconeUploadRejection) => void`                         | 拒绝回调。                     |
 
 `SconeUploadRejection` 字段：
 
-| 字段 | 类型 | 说明 |
-| --- | --- | --- |
-| `file` | `File` | 被拒绝的文件。 |
-| `reason` | `"accept" \| "maxFiles" \| "maxSize" \| "beforeAdd"` | 拒绝原因。 |
-| `message` | `string` | 面向开发者的拒绝说明，不内置业务文案。 |
+| 字段      | 类型                                                 | 说明                                   |
+| --------- | ---------------------------------------------------- | -------------------------------------- |
+| `file`    | `File`                                               | 被拒绝的文件。                         |
+| `reason`  | `"accept" \| "maxFiles" \| "maxSize" \| "beforeAdd"` | 拒绝原因。                             |
+| `message` | `string`                                             | 面向开发者的拒绝说明，不内置业务文案。 |
 
 ### DatePicker Fields
 
 `SconeDatePickerProps` 使用 `Date \| undefined` 作为值，不使用格式化字符串。
 
-| 字段 | 类型 | 说明 |
-| --- | --- | --- |
-| `value` | `Date \| undefined` | 受控日期。 |
-| `defaultValue` | `Date \| undefined` | 非受控初始日期。 |
-| `onValueChange` | `(value: Date \| undefined) => void` | 日期变化回调。 |
-| `disabledDate` | `(date: Date) => boolean` | 禁用不可选日期。 |
-| `placeholder` | `string \| undefined` | 空值提示，不替代 label。 |
-| `formatLabel` | `(date: Date) => string` | trigger 可读文本格式化。 |
+| 字段            | 类型                                 | 说明                     |
+| --------------- | ------------------------------------ | ------------------------ |
+| `value`         | `Date \| undefined`                  | 受控日期。               |
+| `defaultValue`  | `Date \| undefined`                  | 非受控初始日期。         |
+| `onValueChange` | `(value: Date \| undefined) => void` | 日期变化回调。           |
+| `disabledDate`  | `(date: Date) => boolean`            | 禁用不可选日期。         |
+| `placeholder`   | `string \| undefined`                | 空值提示，不替代 label。 |
+| `formatLabel`   | `(date: Date) => string`             | trigger 可读文本格式化。 |
 
 ## Task Breakdown
 
