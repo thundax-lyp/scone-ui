@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `5 docs/40-readiness/IMPLEMENTATION-COVERAGE.md docs/30-designs/RUNBOOK-PATTERN-PAGE-SECTION-FILTER-BAR.md TODO.md`：更新实现覆盖证据并清理临时任务文档
-    - 任务类型：执行任务
-    - 依据文档：`docs/00-governance/TODO-RULES.md`、`docs/30-designs/RUNBOOK-PATTERN-PAGE-SECTION-FILTER-BAR.md`
-    - 范围对象：`docs/40-readiness/IMPLEMENTATION-COVERAGE.md`、`docs/30-designs/RUNBOOK-PATTERN-PAGE-SECTION-FILTER-BAR.md`、`TODO.md`
-    - 处理动作：在实现和验证完成后更新 Implementation Coverage，删除 RUNBOOK，并从 TODO 中删除已完成任务。
-    - 验收点：Implementation Coverage 记录 Page、Section、FilterBar、DataTable.FilterBar 的源码、测试和验证命令，RUNBOOK 已删除，TODO 仅保留未完成项。
-    - 重要度：9/10
-
 ## 待审阅任务项
 
 ## 待讨论项

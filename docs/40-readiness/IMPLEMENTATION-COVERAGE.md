@@ -58,7 +58,7 @@
 - Data display：已实现并测试 `SconeDescriptions`、`SconeTable`、`SconeCard`、`SconeTag`、`SconeBadge`、`SconeList`、`SconeStatistic`、`SconeTimeline`。
 - Navigation and media：已实现并测试 `SconeBreadcrumb`、`SconeTabs`、`SconeSegmented`、`SconeTree`、`SconeDropdown`、`SconeMenu`、`SconeTooltip`、`SconeCommand`、`SconeAccordion`、`SconeCollapsible`、`SconePagination`、`SconeImage`、`SconeAvatar`。
 - Feedback：已实现并测试 `SconeDrawer`、`SconeDialog`、`SconeConfirm`、`SconeAlert`、`SconeEmpty`、`SconeLoading`、`SconeProgress`、`SconeToastProvider`、`toast`、`SconeNotificationProvider`、`notification`。
-- Admin Pattern exports：已实现并测试 `DataTable` compound parts；`AppShell`、`Page`、`Section`、`FilterBar`。
+- Admin Pattern exports：已实现并测试 `AppShell`、`Page`、`Section`、`FilterBar`、`DataTable` compound parts。
 - Recipes：DrawerForm、ConfirmationFlow、Popover、Logo、Result、Dashboard Metric、Grid。
 
 ## Implementation Coverage Evidence
@@ -372,7 +372,7 @@
 - Pagination 只表达受控分页状态和交互，不发起请求、不读取 URL、不持久化分页状态。
 - 服务端分页、游标分页和 URL 同步仍由调用方或后续 recipe 处理。
 
-### Admin Pattern / DataTable
+### Admin Pattern / AppShell、Page、Section、FilterBar、DataTable
 
 实现状态：已完成。
 
@@ -380,16 +380,26 @@
 
 源码文件：
 
+- `src/patterns/page.tsx`
+- `src/patterns/section.tsx`
+- `src/patterns/filter-bar.tsx`
+- `src/patterns/app-shell.tsx`
 - `src/patterns/data-table.tsx`
 - `src/patterns/index.ts`
 - `src/components/navigation/pagination.tsx`
 - `src/components/data-display/table.tsx`
 - `src/components/layout/toolbar.tsx`
+- `src/components/form/search-input.tsx`
+- `src/components/form/button.tsx`
 - `src/types/foundation.ts`
 - `src/index.ts`
 
 测试文件：
 
+- `src/patterns/page.test.tsx`
+- `src/patterns/section.test.tsx`
+- `src/patterns/filter-bar.test.tsx`
+- `src/patterns/app-shell.test.tsx`
 - `src/patterns/data-table.test.tsx`
 - `src/components/navigation/pagination.test.tsx`
 - `src/components/data-display/table.test.tsx`
@@ -399,29 +409,37 @@
 
 覆盖能力：
 
+- `AppShell.Root/Sidebar/Header/Main/Aside`：后台应用全局空间、侧栏 collapsed 展示状态、辅助区 open 展示状态、Header actions slot、Main 可收缩 Page host。
+- `Page.Root`：页面 pattern 边界、density、显式 `hasStickyActions` 状态。
+- `Page.Main`：主滚动区域、`StickyActions` 存在时的底部 padding 状态。
+- `Page.Header/Content`：页面级 header actions、`Page.Content` 主滚动容器。
+- `Page.StickyActions`：底部固定操作区、`align="start" | "center" | "end" | "between"`。
+- `Section.Root`：非 Card 分节边界、density。
+- `Section.Header` / `Section.Title` / `Section.Description` / `Section.Actions` / `Section.Content` / `Section.Footer`：标题、说明、操作区、内容区和 footer 层级闭环。
+- `FilterBar.Root/Search/Fields/Actions/Summary`：搜索输入、筛选控件 slot、调用方 action 按钮、apply/reset/toggle action 边界、摘要 slot、窄屏换行语义。
+- `FilterBar.Root` 内置布局：搜索插槽、内置受控搜索输入、常驻 filters、受控/非受控 expanded、高级筛选区、Apply、Reset、禁用态。
 - `DataTable.Root`：density、rowSelection、pagination、onPaginationChange context。
-- `DataTable.FilterBar`：slot 边界，不定义筛选 schema。
+- `DataTable.FilterBar`：复用独立 `FilterBar.Root`，保留 DataTable 槽位标识和 children-only 兼容。
 - `DataTable.Toolbar`：复用 `SconeToolbar`，展示 title、start、end、actions 和 selected count。
 - `DataTable.BulkActions`：根据 selected count 展示 action，支持清空选择。
 - `DataTable.TableRegion`：`loading > error > empty` 状态优先级、局部 viewport、数据模式组合 `SconeTable`、selection column 注入、children escape hatch。
 - `DataTable.Pagination`：唯一 DataTable 分页入口，组合 `SconePagination` 并透传 props/context 状态。
-- Public exports：Pattern 局部入口和库级入口。
+- Public exports：Pattern 局部入口和库级入口导出 `AppShell`、`Page`、`Section`、`FilterBar`、`DataTable` 及 props/state 类型。
 
 验证结果：
 
 - `pnpm format`：通过。
-- `pnpm lint`：通过；`src/patterns/data-table.tsx` 保留 compound parts 触发的 `react-refresh/only-export-components` warning，退出码为 0。
+- `pnpm lint`：通过；compound pattern 文件保留 `react-refresh/only-export-components` warning，退出码为 0。
 - `pnpm build`：通过。
-- `pnpm test`：通过，35 个 test files、128 个 tests。
-- `pnpm test -- src/types/foundation.test.ts`：通过，35 个 test files、128 个 tests。
-- `pnpm test -- src/components/navigation/pagination.test.tsx src/patterns/data-table.test.tsx`：通过，35 个 test files、128 个 tests。
-- `pnpm test -- src/index.test.ts`：通过，35 个 test files、128 个 tests。
+- `pnpm test`：通过，68 个 test files、241 个 tests。
 - `pnpm typecheck`：通过。
 
 说明：
 
 - `SconeTable` 公共 API 未加入 `pagination` 或 `rowSelection`；selection column 只由 `DataTable.TableRegion` 在数据模式下注入。
-- `DataTable.FilterBar` 保持既有 slot 边界；本轮未修改 DataTable 内部来复用独立 `src/patterns/filter-bar.tsx`。
+- `FilterBar` 与 `DataTable.FilterBar` 只表达组件库筛选栏布局和命令出口，不定义筛选 schema、不发起请求、不重置分页。
+- `Page` 和 `Section` 只提供页面滚动、固定操作区和分节层级边界，不沉淀产品应用级 UI 规则。
+- `AppShell` 不内置菜单、路由、权限、产品 logo 或切换按钮；调用方通过 props 和自有控件管理展示状态。
 - `DataTable` 不发起请求、不判断权限、不读取业务 store，不引入 TanStack Table 默认依赖。
 
 ### Admin Shell Patterns
