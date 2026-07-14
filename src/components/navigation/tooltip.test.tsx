@@ -14,6 +14,32 @@ describe("SconeTooltip", () => {
         expect(screen.getByRole("tooltip")).toHaveTextContent("Refresh data");
     });
 
+    it("uses unique tooltip ids for multiple open instances", () => {
+        render(
+            <>
+                <SconeTooltip content="Refresh data" open>
+                    <button type="button">Refresh</button>
+                </SconeTooltip>
+                <SconeTooltip content="Export report" open>
+                    <button type="button">Export</button>
+                </SconeTooltip>
+            </>,
+        );
+
+        const tooltips = screen.getAllByRole("tooltip");
+        const tooltipIds = tooltips.map((tooltip) => tooltip.id);
+
+        expect(new Set(tooltipIds).size).toBe(tooltips.length);
+        expect(screen.getByRole("button", { name: "Refresh" })).toHaveAttribute(
+            "aria-describedby",
+            tooltips[0].id,
+        );
+        expect(screen.getByRole("button", { name: "Export" })).toHaveAttribute(
+            "aria-describedby",
+            tooltips[1].id,
+        );
+    });
+
     it("opens from focus and closes from blur", () => {
         const onOpenChange = vi.fn();
 

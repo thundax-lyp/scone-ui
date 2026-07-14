@@ -24,6 +24,7 @@ export function SconeTooltip({
     delay = 0,
     className,
 }: SconeTooltipProps) {
+    const tooltipId = React.useId();
     const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
     const [currentOpen, setOpen] = useControllableState({
         value: open,
@@ -77,7 +78,7 @@ export function SconeTooltip({
 
     const trigger = React.isValidElement<React.HTMLAttributes<HTMLElement>>(children)
         ? React.cloneElement(children, {
-              "aria-describedby": isOpen ? "scone-tooltip" : children.props["aria-describedby"],
+              "aria-describedby": isOpen ? tooltipId : children.props["aria-describedby"],
               onFocus: (event: React.FocusEvent<HTMLElement>) => {
                   children.props.onFocus?.(event);
                   openTooltip();
@@ -116,7 +117,7 @@ export function SconeTooltip({
             {trigger}
             {isOpen ? (
                 <span
-                    id="scone-tooltip"
+                    id={tooltipId}
                     role="tooltip"
                     data-scone-navigation="tooltip"
                     data-side={side}

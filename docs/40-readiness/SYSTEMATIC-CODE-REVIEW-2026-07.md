@@ -23,7 +23,7 @@
 - 一部分复杂交互被手写在上层组件中，尤其是 Combobox、DatePicker、Dropdown；这些组件承担 overlay、focus、keyboard、selection 等多类职责。
 - readiness 和部分 Pattern SPEC/DESIGN 对实现状态描述偏乐观，容易把“覆盖完成”误读成“无已知实现问题”。
 - 若干公共 API 暴露了未兑现或过宽的行为，例如 AppShell change callbacks、Section Root shorthand、Form context internals。
-- 少数边界状态没有被明确建模，例如 invalid number/progress input、media `src` 变化后的失败状态、Tooltip id 唯一性。
+- 少数边界状态没有被明确建模，例如 invalid number/progress input。
 
 是否存在明显的过度设计：
 
@@ -37,7 +37,7 @@
 
 建议优先处理的三个方向：
 
-1. 修复明确 P1 行为问题：Tailwind stale token config、NumberInput/Progress invalid numeric edge cases、Tooltip duplicate id、Image/Avatar `src` reset、Pagination clamping、Confirm async rejection。
+1. 修复明确 P1 行为问题：Tailwind stale token config、NumberInput/Progress invalid numeric edge cases、Confirm async rejection。
 2. 收口 Pattern API 与文档：AppShell callbacks、Section Root shorthand、FilterBar hidden search state，逐项决定实现还是修正文档。
 3. 降低复杂交互维护成本：优先用现有 primitives 重构或约束 Combobox、DatePicker、Dropdown 的 overlay/focus/keyboard 行为。
 
@@ -55,10 +55,7 @@ P1：
 - DatePicker hand-rolls dialog calendar behavior.
 - Progress can render `NaN%` when `max` is invalid.
 - Confirm can create unhandled promise rejections.
-- Pagination range text can use an out-of-range page.
 - Dropdown hand-rolls menu popover behavior without outside-click close.
-- Tooltip uses a fixed DOM id.
-- Image and Avatar do not reset failure state when `src` changes.
 - AppShell exposes change callbacks that are never called.
 - Section Root shorthand is specified but not implemented.
 - Readiness says there is no pending implementation work despite verified audit findings.
@@ -108,7 +105,7 @@ src/lib/cn.ts
 
 ### 建议执行顺序
 
-1. 低风险、高收益修改：修复 stale Tailwind token config、Tooltip unique id、Image/Avatar `src` reset、Progress/NumberInput invalid numeric handling、Pagination range clamp、Confirm async rejection。
+1. 低风险、高收益修改：修复 stale Tailwind token config、Progress/NumberInput invalid numeric handling、Confirm async rejection。
 2. 模块边界和 API 调整：收口 AppShell callbacks、Section Root shorthand、FilterBar hidden search；决定 Form context internals 是否继续公开；统一 `cn` import path。
 3. 状态与副作用重构：落实 Toast timer stability、Command filtered active state、Alert role/tone semantics。
 4. 需要人工确认的修改：Combobox/DatePicker/Dropdown 是否迁移到现有 primitives；Section Root shorthand 是实现还是从 SPEC 移除；AppShell callbacks 是移除还是补交互触发；Form context 公共导出是否允许未来 breaking change。
@@ -579,17 +576,6 @@ Recent evidence before this review branch:
 
 ### Candidate Finding
 
-### [P1] Pagination range text can use an out-of-range page
-
-- **位置**：`src/components/navigation/pagination.tsx`
-- **类别**：状态 / 错误处理
-- **问题**：The component clamps `currentPage` for controls, but `getPageRange(state)` uses the original `state.page`.
-- **影响**：If a caller passes a page beyond `pageCount`, controls behave as if clamped while the visible range can show impossible values such as a start greater than total.
-- **证据**：`currentPage = Math.min(Math.max(state.page, 1), pageCount)` is used for buttons; `<span>{getPageRange(state)}</span>` passes unclamped state.
-- **建议**：Compute range from the same normalized page state used by controls.
-- **功能风险**：低；only affects invalid external state display and should add a regression test.
-- **置信度**：高
-
 ### [P2] Tabs and Segmented expose weaker root passthrough than peer components
 
 - **位置**：`src/components/navigation/tabs.tsx`、`src/components/navigation/segmented.tsx`
@@ -645,38 +631,14 @@ Recent evidence before this review branch:
 ### Evidence
 
 - `SconeAccordion` and `SconeCollapsible` delegate disclosure behavior to Radix primitives.
-- `SconeTooltip` manually controls open state, delay, trigger cloning, Escape close, positioning, and `aria-describedby`.
+- `SconeTooltip` manually controls open state, delay, trigger cloning, Escape close, positioning, and instance-scoped `aria-describedby`.
 - `SconeImage` and `SconeAvatar` store image failure state and render fallback on missing/error source.
-- Tests cover accordion single/multiple, collapsible controlled state, tooltip focus/hover/Escape, image fallback/preview, and avatar fallback.
+- Tests cover accordion single/multiple, collapsible controlled state, tooltip focus/hover/Escape and unique ids, image fallback/preview/source reset, and avatar fallback/source reset.
 
 ### Assessment
 
 - Accordion and Collapsible are clear primitive wrappers.
-- Tooltip and media fallback state need hardening for multiple instances and source changes.
-
-### Candidate Findings
-
-### [P1] Tooltip uses a fixed DOM id
-
-- **位置**：`src/components/navigation/tooltip.tsx`
-- **类别**：可访问性 / 状态
-- **问题**：Every tooltip uses `id="scone-tooltip"` and sets the trigger `aria-describedby` to that same fixed id.
-- **影响**：Multiple tooltip instances produce duplicate DOM ids and ambiguous `aria-describedby` references.
-- **证据**：The cloned trigger receives `"aria-describedby": isOpen ? "scone-tooltip" : ...`; the tooltip content renders `<span id="scone-tooltip" role="tooltip">`.
-- **建议**：Generate a stable id per instance with `React.useId()` and merge with existing `aria-describedby` when open.
-- **功能风险**：低；localized accessibility fix with multi-tooltip test.
-- **置信度**：高
-
-### [P1] Image and Avatar do not reset failure state when `src` changes
-
-- **位置**：`src/components/media/image.tsx`、`src/components/media/avatar.tsx`
-- **类别**：状态 / 错误处理
-- **问题**：Both components initialize `failed` from `!src` and set it to true on image error, but neither resets it when `src` changes.
-- **影响**：A component that receives a new image URL after a missing or failed URL can remain stuck on fallback.
-- **证据**：`const [failed, setFailed] = React.useState(!src)` appears in both files; no effect watches `src`.
-- **建议**：Reset `failed` whenever `src` changes, typically with `React.useEffect(() => setFailed(!src), [src])`.
-- **功能风险**：低；behavior becomes more correct for dynamic media.
-- **置信度**：高
+- Tooltip and media fallback state now cover multiple instances and source changes.
 
 ## 19 AppShell, Page, And Section Patterns
 
@@ -842,9 +804,9 @@ Recent evidence before this review branch:
 
 - **位置**：`docs/40-readiness/IMPLEMENTATION-COVERAGE.md`
 - **类别**：文档对齐 / 错误处理
-- **问题**：The readiness document concludes the covered Admin UI scope is complete and says "当前无未完成实现项", but this audit found multiple source-backed P1/P2 issues, including stale Tailwind token config, ignored AppShell callbacks, unimplemented Section Root shorthand, invalid Progress/NumberInput edge cases, duplicate Tooltip ids, and media fallback reset gaps.
+- **问题**：The readiness document concludes the covered Admin UI scope is complete and says "当前无未完成实现项", but this audit found multiple source-backed P1/P2 issues, including stale Tailwind token config, ignored AppShell callbacks, unimplemented Section Root shorthand, and invalid Progress/NumberInput edge cases.
 - **影响**：Readers can mistake "coverage complete" for "no known implementation work", which hides the actual remediation backlog and makes planning less accurate.
-- **证据**：`IMPLEMENTATION-COVERAGE.md` marks all rows as complete and has no pending work list; this audit report contains source-backed findings across sections 04, 08, 13, 14, 18, 19, and 20.
+- **证据**：`IMPLEMENTATION-COVERAGE.md` marks all rows as complete; this audit report contains source-backed findings across sections 04, 08, 13, 14, 19, and 20.
 - **建议**：In the closure task, keep coverage status as complete where accurate, but add a concise pending implementation work summary that points to this audit report.
 - **功能风险**：低；docs-only correction.
 - **置信度**：高
