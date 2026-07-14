@@ -62,9 +62,6 @@ P2：
 - Controlled state helper cannot represent `undefined` as a controlled value.
 - Form context internals are part of the public package surface.
 - Text input value plumbing is duplicated across sibling components.
-- Descriptions `style` prop is applied to an internal `dl`, not the root.
-- Badge root props do not target the same element as the forwarded ref.
-- Layout primitive props are narrower than neighboring root components.
 - Alert always announces as urgent.
 - Toast timers reset on unrelated provider rerenders.
 - Tabs and Segmented expose weaker root passthrough than peer components.
@@ -357,19 +354,6 @@ Recent evidence before this review branch:
 - State priority is consistent: loading before error before empty.
 - The boundary between `SconeTable` and `DataTable` Pattern is mostly clear.
 
-### Candidate Finding
-
-### [P2] Descriptions `style` prop is applied to an internal `dl`, not the root
-
-- **位置**：`src/components/data-display/descriptions.tsx`
-- **类别**：API / 封装
-- **问题**：`SconeDescriptionsProps` inherits `style` from root div attributes, but the component destructures `style` and passes it to the internal `<dl>` through `getColumnsStyle`.
-- **影响**：Consumers expecting `style` to apply to the ref/className root will be surprised. It also mixes public root styling with internal CSS variable plumbing.
-- **证据**：`className` and `ref` are applied to the outer `<div>`, while `style={getColumnsStyle(columns, style)}` is applied to `<dl>`.
-- **建议**：Split internal column style from root style, for example with a private `columnsStyle` object and pass caller `style` to the root.
-- **功能风险**：低；existing tests assert CSS variables on `<dl>`, so tests need a small update if this is fixed.
-- **置信度**：高
-
 ## 11 Data Display Atoms
 
 ### Evidence
@@ -384,19 +368,6 @@ Recent evidence before this review branch:
 - Tone/status naming is consistent with Foundation vocabulary.
 - No unnecessary product workflows, request assumptions, or global state were found.
 
-### Candidate Finding
-
-### [P2] Badge root props do not target the same element as the forwarded ref
-
-- **位置**：`src/components/data-display/badge.tsx`
-- **类别**：API / 封装
-- **问题**：When `children` is present, the forwarded `ref` points to the outer wrapper span, but `className` and remaining span props are applied to the inner indicator span.
-- **影响**：Consumers cannot reliably style or annotate the root element through normal `className` / HTML prop passthrough. This differs from neighboring atom components where ref, className, and props target the same root.
-- **证据**：The children branch returns `<span ref={ref} className="relative ...">` and nests `{indicator}`; `indicator` applies `className` and `{...props}`.
-- **建议**：Separate wrapper props from indicator props or introduce an explicit `indicatorClassName`; keep root `className` and HTML props aligned with `ref`.
-- **功能风险**：低；visual positioning may change if className targeting is corrected, so update badge tests with both root and indicator assertions.
-- **置信度**：高
-
 ## 12 Typography And Layout Primitives
 
 ### Evidence
@@ -404,7 +375,7 @@ Recent evidence before this review branch:
 - Typography primitives share `SconeTypographyProps` and use `as`, size, weight, tone, and truncate.
 - `SconeStack`, `SconeInline`, `SconeCompact`, and `SconeToolbar` encode token-based spacing, alignment, compact grouping, and toolbar slots.
 - Layout tests cover token gaps, wrap, split, density, orientation, ref, className, and style where exposed.
-- Layout files import `cn` through `../../lib/utils`, while many other families import `@/lib/cn` directly.
+- Some remaining non-target layout files and several other component wrappers still import `cn` through `src/lib/utils`, while newer component files import `@/lib/cn` directly.
 
 ### Assessment
 
@@ -412,27 +383,16 @@ Recent evidence before this review branch:
 - `SconeInline` split is decorative and hidden from assistive technology, which matches its separator intent.
 - `SconeToolbar` stays primitive: selected count and permission/action semantics remain in Pattern/caller code.
 
-### Candidate Findings
-
-### [P2] Layout primitive props are narrower than neighboring root components
-
-- **位置**：`src/components/layout/stack.tsx`、`inline.tsx`、`compact.tsx`、`toolbar.tsx`
-- **类别**：API / 一致性
-- **问题**：These primitives define bespoke props with only `className` and sometimes `style`, instead of extending `React.HTMLAttributes<HTMLDivElement>`.
-- **影响**：Consumers cannot pass normal root attributes such as `id`, `role`, `aria-*`, or `data-*` consistently, even though these are root layout containers with forwarded refs.
-- **证据**：`SconeStackProps`, `SconeInlineProps`, `SconeCompactProps`, and `SconeToolbarProps` are plain interfaces and the render functions do not spread remaining root props.
-- **建议**：Extend `React.HTMLAttributes<HTMLDivElement>` while omitting conflicting names if needed, and spread remaining props onto the root div.
-- **功能风险**：低；this is additive if implemented carefully.
-- **置信度**：高
+### Candidate Finding
 
 ### [P3] `cn` import path is inconsistent
 
-- **位置**：`src/lib/utils.ts`、`src/components/layout/*.tsx`、`src/components/feedback-overlay/*.tsx`
+- **位置**：`src/lib/utils.ts`、`src/components/ui/*.tsx`、`src/components/feedback-overlay/*.tsx`、`src/components/layout/scroll-area.tsx`、`separator.tsx`、`split-pane.tsx`、部分 `navigation` 和 `media` 文件
 - **类别**：命名 / 依赖
 - **问题**：Some files import `cn` from `../../lib/utils`, while most newer component and Pattern files import `@/lib/cn`.
 - **影响**：`utils.ts` is only a one-line re-export, so it adds a second name/path for the same helper and makes dependency scanning noisier.
-- **证据**：`src/lib/utils.ts` only exports `{ cn }`; `rg` shows layout and feedback-overlay files using `../../lib/utils`, while form/data-display/pattern files mostly use `@/lib/cn`.
-- **建议**：When touching these files, standardize imports on `@/lib/cn` and remove `src/lib/utils.ts` if no callers remain.
+- **证据**：`src/lib/utils.ts` only exports `{ cn }`; `rg "lib/utils|@/lib/utils|\\.\\./\\.\\./lib/utils" src` still finds callers outside the completed `SconeStack`、`SconeInline`、`SconeCompact`、`SconeToolbar` cleanup.
+- **建议**：When touching remaining files, standardize imports on `@/lib/cn` and remove `src/lib/utils.ts` only after no callers remain.
 - **功能风险**：低；pure import cleanup.
 - **置信度**：高
 

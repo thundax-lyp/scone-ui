@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `06-review-and-runbook-closure`：验证并收口 review 文档和 RUNBOOK
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-COMPONENT-CONTRACTS.md`、`docs/00-governance/TODO-RULES.md`
-    - 范围对象：`docs/40-readiness/SYSTEMATIC-CODE-REVIEW-2026-07.md`、`docs/30-designs/RUNBOOK-FOUNDATION-COMPONENT-CONTRACTS.md`、`docs/30-designs/README.md`、`TODO.md`
-    - 处理动作：运行 RUNBOOK 要求的测试和静态检查后，删除已完全处理的 review finding 章节和索引条目，清理 RUNBOOK 及 Active Runbooks 引用，并删除已完成 TODO。
-    - 验收点：`pnpm test -- src/styles/theme.test.ts src/components/data-display/descriptions.test.tsx src/components/data-display/badge.test.tsx src/components/layout/stack.test.tsx src/components/layout/inline.test.tsx src/components/layout/compact.test.tsx src/components/layout/toolbar.test.tsx src/lib/cn.test.ts`、`pnpm typecheck`、`pnpm lint`、`pnpm format:check` 通过，review 文档不保留已完全处理问题，RUNBOOK 文件和索引引用已清理。
-    - 重要度：9/10
-
 ## 待审阅任务项
 
 ## 待讨论项
