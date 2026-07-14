@@ -2,10 +2,10 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready |
-| Layer | Component |
+| Field     | Value                                                    |
+| --------- | -------------------------------------------------------- |
+| Status    | Ready                                                    |
+| Layer     | Component                                                |
 | Authority | [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) |
 
 源策略、导出状态和跨组件词汇以 [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) 与 [`FOUNDATIONS-SPEC.md`](../../FOUNDATIONS-SPEC.md) 为准。
@@ -15,12 +15,12 @@
 | Prop          | 类型                                            | 说明                         |
 | ------------- | ----------------------------------------------- | ---------------------------- |
 | `variant`     | `"primary" \| "secondary" \| "ghost" \| "link"` | 视觉层级。                   |
-| `tone`        | SconeTone                                 | 语义色，默认 `default`。     |
+| `tone`        | SconeTone                                       | 语义色，默认 `default`。     |
 | `destructive` | `boolean`                                       | 危险动作语义。               |
 | `size`        | `"sm" \| "md" \| "lg"`                          | 控件尺寸。                   |
 | `block`       | `boolean`                                       | 是否占满可用宽度。           |
 | `type`        | `"button" \| "submit" \| "reset"`               | 原生按钮类型。               |
-| `onClick`     | React.MouseEventHandler<HTMLButtonElement>                               | 点击事件。                   |
+| `onClick`     | React.MouseEventHandler<HTMLButtonElement>      | 点击事件。                   |
 | `asChild`     | `boolean`                                       | 保留 shadcn/Radix 组合能力。 |
 | `icon`        | `ReactNode`                                     | 图标。                       |
 | `loading`     | `boolean`                                       | 加载。                       |

@@ -2,26 +2,26 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready |
-| Layer | Component |
+| Field     | Value                                                    |
+| --------- | -------------------------------------------------------- |
+| Status    | Ready                                                    |
+| Layer     | Component                                                |
 | Authority | [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) |
 
 源策略、导出状态和跨组件词汇以 [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) 与 [`FOUNDATIONS-SPEC.md`](../../FOUNDATIONS-SPEC.md) 为准。
 
 菜单结构，用于侧边栏、上下文导航或动作集合。
 
-| Prop           | 类型                         | 说明         |
-| -------------- | ---------------------------- | ------------ |
-| `items`        | `SconeNavigationItem[]`      | 菜单项。     |
-| `selectedKeys` / `defaultSelectedKeys` | `string[]` | 当前选中项。 |
-| `openKeys` / `defaultOpenKeys` | `string[]` | 展开分组。   |
-| `onSelect`     | `(key: string, item: SconeNavigationItem) => void` | 选择回调。 |
-| `onOpenChange` | `(keys: string[]) => void`   | 展开变化。   |
-| `orientation`  | `"vertical" \| "horizontal"` | 方向。       |
-| `collapsed`    | `boolean`                    | 折叠展示。   |
-| `className`    | `string`                     | 样式。       |
+| Prop                                   | 类型                                               | 说明         |
+| -------------------------------------- | -------------------------------------------------- | ------------ |
+| `items`                                | `SconeNavigationItem[]`                            | 菜单项。     |
+| `selectedKeys` / `defaultSelectedKeys` | `string[]`                                         | 当前选中项。 |
+| `openKeys` / `defaultOpenKeys`         | `string[]`                                         | 展开分组。   |
+| `onSelect`                             | `(key: string, item: SconeNavigationItem) => void` | 选择回调。   |
+| `onOpenChange`                         | `(keys: string[]) => void`                         | 展开变化。   |
+| `orientation`                          | `"vertical" \| "horizontal"`                       | 方向。       |
+| `collapsed`                            | `boolean`                                          | 折叠展示。   |
+| `className`                            | `string`                                           | 样式。       |
 
 ## Usage
 

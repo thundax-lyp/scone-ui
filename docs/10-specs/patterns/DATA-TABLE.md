@@ -2,10 +2,10 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready |
-| Layer | Admin Pattern |
+| Field     | Value                                                 |
+| --------- | ----------------------------------------------------- |
+| Status    | Ready                                                 |
+| Layer     | Admin Pattern                                         |
 | Authority | [`ADMIN-PATTERNS-SPEC.md`](../ADMIN-PATTERNS-SPEC.md) |
 
 Pattern 的层级、导出和组合边界以 [`ADMIN-UI-SPEC.md`](../ADMIN-UI-SPEC.md) 与 [`COMPONENT-SELECTION.md`](../COMPONENT-SELECTION.md) 为准。
@@ -42,16 +42,16 @@ DataTable 是数据管理 Pattern，由 `SconeTable`、`SconeToolbar`、FilterBa
 
 ## Props And Events
 
-| Part / prop | 类型 | 说明 |
-| ----------- | ---- | ---- |
-| `DataTable.Root` | `children`、`density`、`className` | 布局和上下文边界。 |
-| `sorting` / `onSortingChange` | `SconeTableSorting[]` / `(sorting) => void` | 排序状态桥接；不在 Table 内聚合请求。 |
-| `filters` / `onFiltersChange` | `Record<string, unknown>` / `(filters) => void` | 筛选状态桥接。 |
-| `columnVisibility` / `onColumnVisibilityChange` | `Record<string, boolean>` / `(state) => void` | 列显隐状态桥接。 |
-| `rowSelection` | `SconeRowSelection<T>` | 行选择状态桥接；变化事件只使用 `rowSelection.onChange`。 |
-| `pagination` / `onPaginationChange` | `SconePaginationState` / `(nextState, reason) => void` | 分页状态桥接。 |
-| `DataTable.Toolbar` | `title`、`start`、`end`、`actions`、`selectedCount` | 工具栏 slot，不拥有状态。 |
-| `DataTable.BulkActions` | `selectedKeys`、`selectedRows`、`actions`、`onClearSelection()` | 批量操作区；清空选择时调用方应更新 `rowSelection.selectedRowKeys`。 |
+| Part / prop                                     | 类型                                                            | 说明                                                                |
+| ----------------------------------------------- | --------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `DataTable.Root`                                | `children`、`density`、`className`                              | 布局和上下文边界。                                                  |
+| `sorting` / `onSortingChange`                   | `SconeTableSorting[]` / `(sorting) => void`                     | 排序状态桥接；不在 Table 内聚合请求。                               |
+| `filters` / `onFiltersChange`                   | `Record<string, unknown>` / `(filters) => void`                 | 筛选状态桥接。                                                      |
+| `columnVisibility` / `onColumnVisibilityChange` | `Record<string, boolean>` / `(state) => void`                   | 列显隐状态桥接。                                                    |
+| `rowSelection`                                  | `SconeRowSelection<T>`                                          | 行选择状态桥接；变化事件只使用 `rowSelection.onChange`。            |
+| `pagination` / `onPaginationChange`             | `SconePaginationState` / `(nextState, reason) => void`          | 分页状态桥接。                                                      |
+| `DataTable.Toolbar`                             | `title`、`start`、`end`、`actions`、`selectedCount`             | 工具栏 slot，不拥有状态。                                           |
+| `DataTable.BulkActions`                         | `selectedKeys`、`selectedRows`、`actions`、`onClearSelection()` | 批量操作区；清空选择时调用方应更新 `rowSelection.selectedRowKeys`。 |
 
 ## TableRegion Contract
 
@@ -66,16 +66,16 @@ DataTable 是数据管理 Pattern，由 `SconeTable`、`SconeToolbar`、FilterBa
 
 ## TableRegion Props
 
-| Part / prop          | 说明                                                                 |
-| -------------------- | -------------------------------------------------------------------- |
-| `children`           | 通常是 `SconeTable`，也可以是 TanStack recipe 产出的 table 组合。     |
-| `loading`            | 数据加载状态；优先级高于 error 和 empty。                            |
-| `error`              | 可读错误区块；优先级高于 empty。                                     |
-| `empty`              | 空数据区块；仅在非 loading、非 error 且无数据时显示。                |
-| `rowSelection`       | 不作为 `TableRegion` prop；由 `DataTable.Root.rowSelection` 提供，Region 只消费并注入选择列。 |
-| `heightPreset`       | `sm`、`md`、`lg`、`full`；引用 Foundation layout size contract。      |
-| `viewportClassName`  | 传给局部 scroll viewport；用于特殊页面覆盖，不改变主滚动所有权。     |
-| `stickyHeader`       | `boolean`；只在 TableRegion viewport 内固定表头，不支持 fixed column。 |
+| Part / prop         | 说明                                                                                          |
+| ------------------- | --------------------------------------------------------------------------------------------- |
+| `children`          | 通常是 `SconeTable`，也可以是 TanStack recipe 产出的 table 组合。                             |
+| `loading`           | 数据加载状态；优先级高于 error 和 empty。                                                     |
+| `error`             | 可读错误区块；优先级高于 empty。                                                              |
+| `empty`             | 空数据区块；仅在非 loading、非 error 且无数据时显示。                                         |
+| `rowSelection`      | 不作为 `TableRegion` prop；由 `DataTable.Root.rowSelection` 提供，Region 只消费并注入选择列。 |
+| `heightPreset`      | `sm`、`md`、`lg`、`full`；引用 Foundation layout size contract。                              |
+| `viewportClassName` | 传给局部 scroll viewport；用于特殊页面覆盖，不改变主滚动所有权。                              |
+| `stickyHeader`      | `boolean`；只在 TableRegion viewport 内固定表头，不支持 fixed column。                        |
 
 ## TableRegion Scroll Rules
 

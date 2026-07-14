@@ -22,17 +22,17 @@ Pattern 总规则：
 - Pattern parts 从 `src/patterns/index.ts` 和 `src/index.ts` 导出；内部 helper 不导出。
 - Page 和 Section Pattern 固定使用 `Page`、`Section` 命名空间导出，不使用 `SconePage`、`SconeSection` 命名。
 
-| Pattern | 目标文件 | Compound parts | 状态归属 | 验证点 |
-| --- | --- | --- | --- | --- |
-| AppShell | `src/patterns/app-shell.tsx` | `AppShell.Root/Sidebar/Header/Main/Aside` | Sidebar collapsed、Aside open 只管理展示状态 | 全局空间、Main 收缩、唯一 Page 入口 |
-| Page | `src/patterns/page.tsx` | `Page.Root/Header/Content/StickyActions` | Page density/maxWidth/sticky padding；不拥有数据 | 主滚动唯一、actions 分层、StickyActions 不遮挡 |
-| Section | `src/patterns/section.tsx` | `Section.Root/Header/Content/Footer` | Section density；不拥有数据 | 语义 section、Header actions 分区级、非视觉 Card |
-| FilterBar | `src/patterns/filter-bar.tsx` | `FilterBar.Root/Search/Fields/Actions/Summary` | searchValue、filters、expanded 由调用方管理 | onApply/onReset、窄屏换行、展开区 |
-| DataTable | `src/patterns/data-table.tsx` | `DataTable.Root/FilterBar/Toolbar/BulkActions/TableRegion/Pagination` | sorting/filtering/pagination/selection/columnVisibility 由调用方拥有；DataTable 只留出 props/callback 边界 | TableRegion、loading/error/empty、pagination 唯一入口 |
-| FormPage | 文档组合边界 | Page + `SconeForm` + `SconeFormSection` + `SconeFormActions` | 表单状态库由调用方拥有 | 长表单页面滚动、FormActions sticky |
-| DetailPage | 文档组合边界 | Page + Section + Descriptions/List/Card | 详情数据由调用方拥有 | Descriptions/List/Card 组合，不用 disabled input |
-| SettingsPage | 文档组合边界 | Page + Section/Card + Field/Form controls | 设置项状态由调用方拥有 | Section/Card 分组、危险区 Alert/Confirm |
-| MasterDetail | 文档组合边界 | Page + `SconeSplitPane` 或响应式单列组合 | selected item 由调用方拥有 | SplitPane、窄屏单列降级 |
+| Pattern      | 目标文件                      | Compound parts                                                        | 状态归属                                                                                                   | 验证点                                                |
+| ------------ | ----------------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| AppShell     | `src/patterns/app-shell.tsx`  | `AppShell.Root/Sidebar/Header/Main/Aside`                             | Sidebar collapsed、Aside open 只管理展示状态                                                               | 全局空间、Main 收缩、唯一 Page 入口                   |
+| Page         | `src/patterns/page.tsx`       | `Page.Root/Header/Content/StickyActions`                              | Page density/maxWidth/sticky padding；不拥有数据                                                           | 主滚动唯一、actions 分层、StickyActions 不遮挡        |
+| Section      | `src/patterns/section.tsx`    | `Section.Root/Header/Content/Footer`                                  | Section density；不拥有数据                                                                                | 语义 section、Header actions 分区级、非视觉 Card      |
+| FilterBar    | `src/patterns/filter-bar.tsx` | `FilterBar.Root/Search/Fields/Actions/Summary`                        | searchValue、filters、expanded 由调用方管理                                                                | onApply/onReset、窄屏换行、展开区                     |
+| DataTable    | `src/patterns/data-table.tsx` | `DataTable.Root/FilterBar/Toolbar/BulkActions/TableRegion/Pagination` | sorting/filtering/pagination/selection/columnVisibility 由调用方拥有；DataTable 只留出 props/callback 边界 | TableRegion、loading/error/empty、pagination 唯一入口 |
+| FormPage     | 文档组合边界                  | Page + `SconeForm` + `SconeFormSection` + `SconeFormActions`          | 表单状态库由调用方拥有                                                                                     | 长表单页面滚动、FormActions sticky                    |
+| DetailPage   | 文档组合边界                  | Page + Section + Descriptions/List/Card                               | 详情数据由调用方拥有                                                                                       | Descriptions/List/Card 组合，不用 disabled input      |
+| SettingsPage | 文档组合边界                  | Page + Section/Card + Field/Form controls                             | 设置项状态由调用方拥有                                                                                     | Section/Card 分组、危险区 Alert/Confirm               |
+| MasterDetail | 文档组合边界                  | Page + `SconeSplitPane` 或响应式单列组合                              | selected item 由调用方拥有                                                                                 | SplitPane、窄屏单列降级                               |
 
 ## Pattern Part Props Contracts
 
@@ -44,35 +44,35 @@ Pattern 总规则：
 
 ```ts
 export interface AppShellRootProps {
-  children: React.ReactNode;
-  className?: string;
+    children: React.ReactNode;
+    className?: string;
 }
 
 export interface AppShellSidebarProps {
-  children?: React.ReactNode;
-  className?: string;
-  collapsed?: boolean;
-  defaultCollapsed?: boolean;
-  onCollapsedChange?: (collapsed: boolean) => void;
+    children?: React.ReactNode;
+    className?: string;
+    collapsed?: boolean;
+    defaultCollapsed?: boolean;
+    onCollapsedChange?: (collapsed: boolean) => void;
 }
 
 export interface AppShellHeaderProps {
-  children?: React.ReactNode;
-  className?: string;
-  actions?: React.ReactNode;
+    children?: React.ReactNode;
+    className?: string;
+    actions?: React.ReactNode;
 }
 
 export interface AppShellMainProps {
-  children: React.ReactNode;
-  className?: string;
+    children: React.ReactNode;
+    className?: string;
 }
 
 export interface AppShellAsideProps {
-  children?: React.ReactNode;
-  className?: string;
-  open?: boolean;
-  defaultOpen?: boolean;
-  onOpenChange?: (open: boolean) => void;
+    children?: React.ReactNode;
+    className?: string;
+    open?: boolean;
+    defaultOpen?: boolean;
+    onOpenChange?: (open: boolean) => void;
 }
 ```
 
@@ -82,29 +82,29 @@ export interface AppShellAsideProps {
 
 ```ts
 export interface PageRootProps {
-  children: React.ReactNode;
-  className?: string;
-  maxWidth?: "narrow" | "content" | "wide" | "full";
-  density?: SconeDensity;
+    children: React.ReactNode;
+    className?: string;
+    maxWidth?: "narrow" | "content" | "wide" | "full";
+    density?: SconeDensity;
 }
 
 export interface PageHeaderProps {
-  children?: React.ReactNode;
-  className?: string;
-  title?: React.ReactNode;
-  description?: React.ReactNode;
-  actions?: React.ReactNode;
+    children?: React.ReactNode;
+    className?: string;
+    title?: React.ReactNode;
+    description?: React.ReactNode;
+    actions?: React.ReactNode;
 }
 
 export interface PageContentProps {
-  children: React.ReactNode;
-  className?: string;
+    children: React.ReactNode;
+    className?: string;
 }
 
 export interface PageStickyActionsProps {
-  children: React.ReactNode;
-  className?: string;
-  align?: "start" | "end" | "between";
+    children: React.ReactNode;
+    className?: string;
+    align?: "start" | "end" | "between";
 }
 ```
 
@@ -114,27 +114,27 @@ export interface PageStickyActionsProps {
 
 ```ts
 export interface SectionRootProps {
-  children: React.ReactNode;
-  className?: string;
-  density?: SconeDensity;
+    children: React.ReactNode;
+    className?: string;
+    density?: SconeDensity;
 }
 
 export interface SectionHeaderProps {
-  children?: React.ReactNode;
-  className?: string;
-  title?: React.ReactNode;
-  description?: React.ReactNode;
-  actions?: React.ReactNode;
+    children?: React.ReactNode;
+    className?: string;
+    title?: React.ReactNode;
+    description?: React.ReactNode;
+    actions?: React.ReactNode;
 }
 
 export interface SectionContentProps {
-  children: React.ReactNode;
-  className?: string;
+    children: React.ReactNode;
+    className?: string;
 }
 
 export interface SectionFooterProps {
-  children: React.ReactNode;
-  className?: string;
+    children: React.ReactNode;
+    className?: string;
 }
 ```
 
@@ -144,40 +144,40 @@ export interface SectionFooterProps {
 
 ```ts
 export interface FilterBarRootProps {
-  children: React.ReactNode;
-  className?: string;
-  searchValue?: string;
-  defaultSearchValue?: string;
-  onSearchChange?: (value: string) => void;
-  filters?: FilterBarFilters;
-  defaultFilters?: FilterBarFilters;
-  onFiltersChange?: (filters: FilterBarFilters) => void;
-  expanded?: boolean;
-  defaultExpanded?: boolean;
-  onExpandedChange?: (expanded: boolean) => void;
-  onApply?: (state: FilterBarState) => void;
-  onReset?: () => void;
+    children: React.ReactNode;
+    className?: string;
+    searchValue?: string;
+    defaultSearchValue?: string;
+    onSearchChange?: (value: string) => void;
+    filters?: FilterBarFilters;
+    defaultFilters?: FilterBarFilters;
+    onFiltersChange?: (filters: FilterBarFilters) => void;
+    expanded?: boolean;
+    defaultExpanded?: boolean;
+    onExpandedChange?: (expanded: boolean) => void;
+    onApply?: (state: FilterBarState) => void;
+    onReset?: () => void;
 }
 
 export interface FilterBarSearchProps {
-  className?: string;
-  placeholder?: string;
-  ariaLabel?: string;
+    className?: string;
+    placeholder?: string;
+    ariaLabel?: string;
 }
 
 export interface FilterBarFieldsProps {
-  children: React.ReactNode;
-  className?: string;
+    children: React.ReactNode;
+    className?: string;
 }
 
 export interface FilterBarActionsProps {
-  children: React.ReactNode;
-  className?: string;
+    children: React.ReactNode;
+    className?: string;
 }
 
 export interface FilterBarSummaryProps {
-  children?: React.ReactNode;
-  className?: string;
+    children?: React.ReactNode;
+    className?: string;
 }
 ```
 
@@ -187,50 +187,47 @@ export interface FilterBarSummaryProps {
 
 ```ts
 export interface DataTableRootProps<T> {
-  children: React.ReactNode;
-  className?: string;
-  state?: DataTableState<T>;
+    children: React.ReactNode;
+    className?: string;
+    state?: DataTableState<T>;
 }
 
 export type DataTableFilterBarProps = FilterBarRootProps;
 
 export interface DataTableToolbarProps {
-  children?: React.ReactNode;
-  className?: string;
-  start?: React.ReactNode;
-  end?: React.ReactNode;
-  actions?: React.ReactNode;
+    children?: React.ReactNode;
+    className?: string;
+    start?: React.ReactNode;
+    end?: React.ReactNode;
+    actions?: React.ReactNode;
 }
 
 export interface DataTableBulkActionsProps<T> {
-  children?: React.ReactNode;
-  className?: string;
-  selectedRowKeys: Key[];
-  selectedRows?: T[];
+    children?: React.ReactNode;
+    className?: string;
+    selectedRowKeys: Key[];
+    selectedRows?: T[];
 }
 
 export interface DataTableTableRegionProps<T> {
-  className?: string;
-  columns: SconeTableColumn<T>[];
-  dataSource: T[];
-  rowKey: keyof T | ((record: T) => Key);
-  density?: SconeDensity;
-  loading?: boolean;
-  empty?: React.ReactNode;
-  error?: React.ReactNode;
-  scroll?: SconeTableScroll;
-  heightPreset?: "sm" | "md" | "lg" | "full";
-  selection?: SconeRowSelection<T>;
+    className?: string;
+    columns: SconeTableColumn<T>[];
+    dataSource: T[];
+    rowKey: keyof T | ((record: T) => Key);
+    density?: SconeDensity;
+    loading?: boolean;
+    empty?: React.ReactNode;
+    error?: React.ReactNode;
+    scroll?: SconeTableScroll;
+    heightPreset?: "sm" | "md" | "lg" | "full";
+    selection?: SconeRowSelection<T>;
 }
 
 export interface DataTablePaginationProps {
-  className?: string;
-  state: SconePaginationState;
-  pageSizeOptions?: number[];
-  onChange?: (
-    nextState: SconePaginationState,
-    reason: SconePaginationChangeReason
-  ) => void;
+    className?: string;
+    state: SconePaginationState;
+    pageSizeOptions?: number[];
+    onChange?: (nextState: SconePaginationState, reason: SconePaginationChangeReason) => void;
 }
 ```
 

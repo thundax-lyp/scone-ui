@@ -2,10 +2,10 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready |
-| Layer | Layout |
+| Field     | Value                                                    |
+| --------- | -------------------------------------------------------- |
+| Status    | Ready                                                    |
+| Layer     | Layout                                                   |
 | Authority | [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) |
 
 源策略、导出状态和跨组件词汇以 [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) 与 [`FOUNDATIONS-SPEC.md`](../../FOUNDATIONS-SPEC.md) 为准。
@@ -14,7 +14,7 @@
 
 | Prop                  | 类型                                        | 说明                  |
 | --------------------- | ------------------------------------------- | --------------------- |
-| `gap`                 | SconeSpacingToken                               | 子项间距，默认 `md`。 |
+| `gap`                 | SconeSpacingToken                           | 子项间距，默认 `md`。 |
 | `align`               | `"start" \| "center" \| "end" \| "stretch"` | 交叉轴对齐。          |
 | `children`            | `ReactNode`                                 | 子项。                |
 | `className` / `style` | 通用                                        | 局部样式覆盖。        |

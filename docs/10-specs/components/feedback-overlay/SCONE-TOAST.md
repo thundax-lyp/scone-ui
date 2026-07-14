@@ -2,10 +2,10 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready |
-| Layer | Component |
+| Field     | Value                                                    |
+| --------- | -------------------------------------------------------- |
+| Status    | Ready                                                    |
+| Layer     | Component                                                |
 | Authority | [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) |
 
 源策略、导出状态和跨组件词汇以 [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) 与 [`FOUNDATIONS-SPEC.md`](../../FOUNDATIONS-SPEC.md) 为准。
@@ -14,23 +14,23 @@
 
 组件 API：
 
-| Prop         | 类型          | 说明         |
-| ------------ | ------------- | ------------ |
-| `children`   | `ReactNode`   | provider。   |
-| `position`   | ToastPosition | 默认位置。   |
-| `duration`   | `number`      | 默认时长。   |
-| `maxVisible` | `number`      | 最大可见数。 |
+| Prop           | 类型                                | 说明           |
+| -------------- | ----------------------------------- | -------------- |
+| `children`     | `ReactNode`                         | provider。     |
+| `position`     | ToastPosition                       | 默认位置。     |
+| `duration`     | `number`                            | 默认时长。     |
+| `maxVisible`   | `number`                            | 最大可见数。   |
 | `onOpenChange` | `(items: SconeToastItem[]) => void` | 当前队列变化。 |
 
 Service API：
 
-| 方法                                        | 说明                       |
-| ------------------------------------------- | -------------------------- |
+| 方法                                        | 说明                        |
+| ------------------------------------------- | --------------------------- |
 | `toast.show(opts)`                          | 显示通用 toast，返回 `id`。 |
 | `toast.success(opts)` / `toast.error(opts)` | 语义快捷方法，返回 `id`。   |
-| `toast.update(id, opts)`                    | 更新指定 toast。           |
-| `toast.dismiss(id, reason?)`                | 关闭指定 toast。           |
-| `toast.clear()`                             | 清空队列，测试中必须可用。 |
+| `toast.update(id, opts)`                    | 更新指定 toast。            |
+| `toast.dismiss(id, reason?)`                | 关闭指定 toast。            |
+| `toast.clear()`                             | 清空队列，测试中必须可用。  |
 
 `opts` 至少包含 `title`、`description`、`tone`、`action`、`duration`、`id`、`onAction`、`onDismiss`。`onDismiss(reason)` 的 reason 为 `"timeout" | "closeButton" | "programmatic"`。
 

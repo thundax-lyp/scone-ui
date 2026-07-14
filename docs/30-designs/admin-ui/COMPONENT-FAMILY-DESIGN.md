@@ -29,27 +29,27 @@
 
 导出清单和目标文件：
 
-| 导出 | Source strategy | Compound | 目标文件 | 状态能力 | 类型位置 |
-| --- | --- | --- | --- | --- | --- |
-| `SconeButton` | `scone-wrapper` | 支持 `asChild` | `src/components/form/button.tsx` | loading / disabled | `src/components/form/button.tsx` |
-| `SconeInput` | `scone-wrapper` | 否 | `src/components/form/input.tsx` | disabled / readOnly / invalid via Field | `src/components/form/input.tsx` |
-| `SconeSearchInput` | `scone-wrapper` | 否 | `src/components/form/search-input.tsx` | disabled / readOnly / loading / clearable | `src/components/form/search-input.tsx` |
-| `SconePasswordInput` | `scone-wrapper` | 否 | `src/components/form/password-input.tsx` | disabled / readOnly / visibility toggle | `src/components/form/password-input.tsx` |
-| `SconeTextArea` | `scone-wrapper` | 否 | `src/components/form/textarea.tsx` | disabled / readOnly / autoSize / count | `src/components/form/textarea.tsx` |
-| `SconeSelect` | `scone-wrapper` | 支持 | `src/components/form/select.tsx` | disabled / readOnly / invalid / open / selected | `src/components/form/select.tsx`、`src/types/foundation.ts` |
-| `SconeForm` | `custom` | 支持 | `src/components/form/form.tsx` | disabled / readOnly / requiredMark | `src/components/form/form.tsx` |
-| `SconeField` | `custom` | 支持 | `src/components/form/field.tsx` | invalid / disabled / readOnly / required | `src/components/form/field.tsx` |
-| `SconeFieldGroup` | `pattern-only` | 否 | `src/components/form/field-group.tsx` | semantic grouping | `src/components/form/field-group.tsx` |
-| `SconeFormSection` | `pattern-only` | 部分 | `src/components/form/form-section.tsx` | section grouping | `src/components/form/form-section.tsx` |
-| `SconeFormActions` | `pattern-only` | 部分 | `src/components/form/form-actions.tsx` | sticky / align | `src/components/form/form-actions.tsx` |
-| `SconeCombobox` | `scone-wrapper` | 支持 | `src/components/form/combobox.tsx` | loading / empty / selected / expanded | `src/components/form/combobox.tsx`、`src/types/foundation.ts` |
-| `SconeSwitch` | `vendored-shadcn` | 否 | `src/components/form/switch.tsx` | checked / disabled / invalid via Field | `src/components/form/switch.tsx` |
-| `SconeCheckbox` | `vendored-shadcn` | 否 | `src/components/form/checkbox.tsx` | checked / indeterminate / disabled / invalid via Field | `src/components/form/checkbox.tsx` |
-| `SconeRadioGroup` | `vendored-shadcn` | 支持 | `src/components/form/radio-group.tsx` | selected / disabled / invalid via Field | `src/components/form/radio-group.tsx`、`src/types/foundation.ts` |
-| `SconeNumberInput` | `custom` | 否 | `src/components/form/number-input.tsx` | disabled / readOnly / invalid | `src/components/form/number-input.tsx` |
-| `SconeSlider` | `vendored-shadcn` | 支持 | `src/components/form/slider.tsx` | selected range / disabled / invalid via Field | `src/components/form/slider.tsx` |
-| `SconeDatePicker` | `custom` | 否 | `src/components/form/date-picker.tsx` | open / disabled / readOnly / invalid | `src/components/form/date-picker.tsx` |
-| `SconeUpload` | `custom` | 否 | `src/components/form/upload.tsx` | files / disabled / reject | `src/components/form/upload.tsx` |
+| 导出                 | Source strategy   | Compound       | 目标文件                                 | 状态能力                                               | 类型位置                                                         |
+| -------------------- | ----------------- | -------------- | ---------------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------------- |
+| `SconeButton`        | `scone-wrapper`   | 支持 `asChild` | `src/components/form/button.tsx`         | loading / disabled                                     | `src/components/form/button.tsx`                                 |
+| `SconeInput`         | `scone-wrapper`   | 否             | `src/components/form/input.tsx`          | disabled / readOnly / invalid via Field                | `src/components/form/input.tsx`                                  |
+| `SconeSearchInput`   | `scone-wrapper`   | 否             | `src/components/form/search-input.tsx`   | disabled / readOnly / loading / clearable              | `src/components/form/search-input.tsx`                           |
+| `SconePasswordInput` | `scone-wrapper`   | 否             | `src/components/form/password-input.tsx` | disabled / readOnly / visibility toggle                | `src/components/form/password-input.tsx`                         |
+| `SconeTextArea`      | `scone-wrapper`   | 否             | `src/components/form/textarea.tsx`       | disabled / readOnly / autoSize / count                 | `src/components/form/textarea.tsx`                               |
+| `SconeSelect`        | `scone-wrapper`   | 支持           | `src/components/form/select.tsx`         | disabled / readOnly / invalid / open / selected        | `src/components/form/select.tsx`、`src/types/foundation.ts`      |
+| `SconeForm`          | `custom`          | 支持           | `src/components/form/form.tsx`           | disabled / readOnly / requiredMark                     | `src/components/form/form.tsx`                                   |
+| `SconeField`         | `custom`          | 支持           | `src/components/form/field.tsx`          | invalid / disabled / readOnly / required               | `src/components/form/field.tsx`                                  |
+| `SconeFieldGroup`    | `pattern-only`    | 否             | `src/components/form/field-group.tsx`    | semantic grouping                                      | `src/components/form/field-group.tsx`                            |
+| `SconeFormSection`   | `pattern-only`    | 部分           | `src/components/form/form-section.tsx`   | section grouping                                       | `src/components/form/form-section.tsx`                           |
+| `SconeFormActions`   | `pattern-only`    | 部分           | `src/components/form/form-actions.tsx`   | sticky / align                                         | `src/components/form/form-actions.tsx`                           |
+| `SconeCombobox`      | `scone-wrapper`   | 支持           | `src/components/form/combobox.tsx`       | loading / empty / selected / expanded                  | `src/components/form/combobox.tsx`、`src/types/foundation.ts`    |
+| `SconeSwitch`        | `vendored-shadcn` | 否             | `src/components/form/switch.tsx`         | checked / disabled / invalid via Field                 | `src/components/form/switch.tsx`                                 |
+| `SconeCheckbox`      | `vendored-shadcn` | 否             | `src/components/form/checkbox.tsx`       | checked / indeterminate / disabled / invalid via Field | `src/components/form/checkbox.tsx`                               |
+| `SconeRadioGroup`    | `vendored-shadcn` | 支持           | `src/components/form/radio-group.tsx`    | selected / disabled / invalid via Field                | `src/components/form/radio-group.tsx`、`src/types/foundation.ts` |
+| `SconeNumberInput`   | `custom`          | 否             | `src/components/form/number-input.tsx`   | disabled / readOnly / invalid                          | `src/components/form/number-input.tsx`                           |
+| `SconeSlider`        | `vendored-shadcn` | 支持           | `src/components/form/slider.tsx`         | selected range / disabled / invalid via Field          | `src/components/form/slider.tsx`                                 |
+| `SconeDatePicker`    | `custom`          | 否             | `src/components/form/date-picker.tsx`    | open / disabled / readOnly / invalid                   | `src/components/form/date-picker.tsx`                            |
+| `SconeUpload`        | `custom`          | 否             | `src/components/form/upload.tsx`         | files / disabled / reject                              | `src/components/form/upload.tsx`                                 |
 
 状态模型：
 
@@ -115,17 +115,17 @@ Source strategy 处理：
 
 导出清单和目标文件：
 
-| 导出 | Source strategy | Compound | 目标文件 | 状态能力 | 类型位置 |
-| --- | --- | --- | --- | --- | --- |
-| `SconeDescriptions` | `custom` | 否 | `src/components/data-display/descriptions.tsx` | density / bordered | 组件文件；共享词表来自 `src/types/foundation.ts` |
-| `SconeTable` | `scone-wrapper` | 否 | `src/components/data-display/table.tsx` | loading / empty / error | 组件文件；共享词表来自 `src/types/foundation.ts` |
-| `SconeCard` | `scone-wrapper` | 否 | `src/components/data-display/card.tsx` | loading | `src/components/data-display/card.tsx` |
-| `SconeTag` | `custom` | 否 | `src/components/data-display/tag.tsx` | tone / closable | `src/components/data-display/tag.tsx` |
-| `SconeBadge` | `custom` | 否 | `src/components/data-display/badge.tsx` | count / dot / tone | `src/components/data-display/badge.tsx` |
-| `SconeList` | `custom` | 否 | `src/components/data-display/list.tsx` | loading / empty / error | 组件文件；共享词表来自 `src/types/foundation.ts` |
-| `SconeTypography`、`SconeText`、`SconeTitle`、`SconeParagraph` | `custom` | 否 | `src/components/data-display/typography.tsx` | tone / truncate | `src/components/data-display/typography.tsx` |
-| `SconeStatistic` | `custom` | 否 | `src/components/data-display/statistic.tsx` | tone | `src/components/data-display/statistic.tsx` |
-| `SconeTimeline` | `custom` | 否 | `src/components/data-display/timeline.tsx` | event sequence | 组件文件；`Key`/`SconeTone` 来自 `src/types/foundation.ts` |
+| 导出                                                           | Source strategy | Compound | 目标文件                                       | 状态能力                | 类型位置                                                   |
+| -------------------------------------------------------------- | --------------- | -------- | ---------------------------------------------- | ----------------------- | ---------------------------------------------------------- |
+| `SconeDescriptions`                                            | `custom`        | 否       | `src/components/data-display/descriptions.tsx` | density / bordered      | 组件文件；共享词表来自 `src/types/foundation.ts`           |
+| `SconeTable`                                                   | `scone-wrapper` | 否       | `src/components/data-display/table.tsx`        | loading / empty / error | 组件文件；共享词表来自 `src/types/foundation.ts`           |
+| `SconeCard`                                                    | `scone-wrapper` | 否       | `src/components/data-display/card.tsx`         | loading                 | `src/components/data-display/card.tsx`                     |
+| `SconeTag`                                                     | `custom`        | 否       | `src/components/data-display/tag.tsx`          | tone / closable         | `src/components/data-display/tag.tsx`                      |
+| `SconeBadge`                                                   | `custom`        | 否       | `src/components/data-display/badge.tsx`        | count / dot / tone      | `src/components/data-display/badge.tsx`                    |
+| `SconeList`                                                    | `custom`        | 否       | `src/components/data-display/list.tsx`         | loading / empty / error | 组件文件；共享词表来自 `src/types/foundation.ts`           |
+| `SconeTypography`、`SconeText`、`SconeTitle`、`SconeParagraph` | `custom`        | 否       | `src/components/data-display/typography.tsx`   | tone / truncate         | `src/components/data-display/typography.tsx`               |
+| `SconeStatistic`                                               | `custom`        | 否       | `src/components/data-display/statistic.tsx`    | tone                    | `src/components/data-display/statistic.tsx`                |
+| `SconeTimeline`                                                | `custom`        | 否       | `src/components/data-display/timeline.tsx`     | event sequence          | 组件文件；`Key`/`SconeTone` 来自 `src/types/foundation.ts` |
 
 状态模型：
 
@@ -187,15 +187,15 @@ Source strategy 处理：
 
 导出清单和目标文件：
 
-| 导出 | Source strategy | Compound | 目标文件 | 状态能力 | 类型位置 |
-| --- | --- | --- | --- | --- | --- |
-| `SconeStack` | `custom` | 否 | `src/components/layout/stack.tsx` | 不承载业务状态 | `src/components/layout/stack.tsx`、`src/types/foundation.ts` |
-| `SconeInline` | `custom` | 否 | `src/components/layout/inline.tsx` | 不承载业务状态 | `src/components/layout/inline.tsx`、`src/types/foundation.ts` |
-| `SconeCompact` | `custom` | 否 | `src/components/layout/compact.tsx` | 不承载业务状态 | `src/components/layout/compact.tsx` |
-| `SconeToolbar` | `custom` | 否 | `src/components/layout/toolbar.tsx` | density | `src/components/layout/toolbar.tsx`、`src/types/foundation.ts` |
-| `SconeSplitPane` | `custom` | 否 | `src/components/layout/split-pane.tsx` | size preset / resize | `src/components/layout/split-pane.tsx` |
-| `SconeSeparator` | `vendored-shadcn` | 否 | `src/components/layout/separator.tsx` | decorative / orientation | `src/components/layout/separator.tsx` |
-| `SconeScrollArea` | `vendored-shadcn` | 支持 viewport slot | `src/components/layout/scroll-area.tsx` | 局部滚动 | `src/components/layout/scroll-area.tsx` |
+| 导出              | Source strategy   | Compound           | 目标文件                                | 状态能力                 | 类型位置                                                       |
+| ----------------- | ----------------- | ------------------ | --------------------------------------- | ------------------------ | -------------------------------------------------------------- |
+| `SconeStack`      | `custom`          | 否                 | `src/components/layout/stack.tsx`       | 不承载业务状态           | `src/components/layout/stack.tsx`、`src/types/foundation.ts`   |
+| `SconeInline`     | `custom`          | 否                 | `src/components/layout/inline.tsx`      | 不承载业务状态           | `src/components/layout/inline.tsx`、`src/types/foundation.ts`  |
+| `SconeCompact`    | `custom`          | 否                 | `src/components/layout/compact.tsx`     | 不承载业务状态           | `src/components/layout/compact.tsx`                            |
+| `SconeToolbar`    | `custom`          | 否                 | `src/components/layout/toolbar.tsx`     | density                  | `src/components/layout/toolbar.tsx`、`src/types/foundation.ts` |
+| `SconeSplitPane`  | `custom`          | 否                 | `src/components/layout/split-pane.tsx`  | size preset / resize     | `src/components/layout/split-pane.tsx`                         |
+| `SconeSeparator`  | `vendored-shadcn` | 否                 | `src/components/layout/separator.tsx`   | decorative / orientation | `src/components/layout/separator.tsx`                          |
+| `SconeScrollArea` | `vendored-shadcn` | 支持 viewport slot | `src/components/layout/scroll-area.tsx` | 局部滚动                 | `src/components/layout/scroll-area.tsx`                        |
 
 状态和职责边界：
 
@@ -248,17 +248,17 @@ DOM/ref/className 边界：
 
 导出清单和目标文件：
 
-| 导出 | Source strategy | Compound | 目标文件 | 状态能力 | 类型位置 |
-| --- | --- | --- | --- | --- | --- |
-| `SconeDrawer` | `scone-wrapper` | 支持 | `src/components/feedback-overlay/drawer.tsx` | open / loading / close reason | 组件文件、`src/types/foundation.ts` |
-| `SconeDialog` | `scone-wrapper` | 支持 | `src/components/feedback-overlay/dialog.tsx` | open / close reason | 组件文件、`src/types/foundation.ts` |
-| `SconeConfirm` | `scone-wrapper` | 支持 | `src/components/feedback-overlay/confirm.tsx` | open / loading / destructive | 组件文件 |
-| `SconeAlert` | `scone-wrapper` | 否 | `src/components/feedback-overlay/alert.tsx` | tone / action | 组件文件、`src/types/foundation.ts` |
-| `SconeEmpty` | `scone-wrapper` | 否 | `src/components/feedback-overlay/empty.tsx` | empty / action | 组件文件 |
-| `SconeLoading` | `scone-wrapper` | 否 | `src/components/feedback-overlay/loading.tsx` | loading | 组件文件 |
-| `SconeProgress` | `scone-wrapper` | 否 | `src/components/feedback-overlay/progress.tsx` | status / percent | 组件文件、`src/types/foundation.ts` |
-| `SconeToastProvider`、`toast` | `scone-wrapper` | Provider | `src/components/feedback-overlay/toast.tsx` | queued feedback | 组件文件 |
-| `SconeNotificationProvider`、`notification` | `scone-wrapper` | Provider | `src/components/feedback-overlay/notification.tsx` | persistent notice | 组件文件 |
+| 导出                                        | Source strategy | Compound | 目标文件                                           | 状态能力                      | 类型位置                            |
+| ------------------------------------------- | --------------- | -------- | -------------------------------------------------- | ----------------------------- | ----------------------------------- |
+| `SconeDrawer`                               | `scone-wrapper` | 支持     | `src/components/feedback-overlay/drawer.tsx`       | open / loading / close reason | 组件文件、`src/types/foundation.ts` |
+| `SconeDialog`                               | `scone-wrapper` | 支持     | `src/components/feedback-overlay/dialog.tsx`       | open / close reason           | 组件文件、`src/types/foundation.ts` |
+| `SconeConfirm`                              | `scone-wrapper` | 支持     | `src/components/feedback-overlay/confirm.tsx`      | open / loading / destructive  | 组件文件                            |
+| `SconeAlert`                                | `scone-wrapper` | 否       | `src/components/feedback-overlay/alert.tsx`        | tone / action                 | 组件文件、`src/types/foundation.ts` |
+| `SconeEmpty`                                | `scone-wrapper` | 否       | `src/components/feedback-overlay/empty.tsx`        | empty / action                | 组件文件                            |
+| `SconeLoading`                              | `scone-wrapper` | 否       | `src/components/feedback-overlay/loading.tsx`      | loading                       | 组件文件                            |
+| `SconeProgress`                             | `scone-wrapper` | 否       | `src/components/feedback-overlay/progress.tsx`     | status / percent              | 组件文件、`src/types/foundation.ts` |
+| `SconeToastProvider`、`toast`               | `scone-wrapper` | Provider | `src/components/feedback-overlay/toast.tsx`        | queued feedback               | 组件文件                            |
+| `SconeNotificationProvider`、`notification` | `scone-wrapper` | Provider | `src/components/feedback-overlay/notification.tsx` | persistent notice             | 组件文件                            |
 
 状态模型：
 
@@ -315,19 +315,19 @@ DOM/ref/className 边界：
 
 导出清单和目标文件：
 
-| 导出 | Source strategy | Compound | 目标文件 | 状态能力 | 类型位置 |
-| --- | --- | --- | --- | --- | --- |
-| `SconeBreadcrumb` | `vendored-shadcn` | 支持 | `src/components/navigation/breadcrumb.tsx` | current | 组件文件；`SconeBaseItem` 来自 `src/types/foundation.ts` |
-| `SconePagination` | `custom` | 否 | `src/components/navigation/pagination.tsx` | disabled / page state | 组件文件 |
-| `SconeTabs` | `vendored-shadcn` | 支持 | `src/components/navigation/tabs.tsx` | selected | 组件文件；共享词表来自 `src/types/foundation.ts` |
-| `SconeSegmented` | `vendored-shadcn` | 支持 | `src/components/navigation/segmented.tsx` | selected / disabled | 组件文件；`SconeOption` 来自 `src/types/foundation.ts` |
-| `SconeTree` | `custom` | 否 | `src/components/navigation/tree.tsx` | selected / checked / expanded | 组件文件；`Key` 来自 `src/types/foundation.ts` |
-| `SconeDropdown` | `vendored-shadcn` | 支持 | `src/components/navigation/dropdown.tsx` | open / action select | 组件文件；`SconeBaseItem` 来自 `src/types/foundation.ts` |
-| `SconeMenu` | `vendored-shadcn` | 支持 | `src/components/navigation/menu.tsx` | selected / expanded / collapsed | 组件文件；`SconeNavigationItem` 来自 `src/components/navigation/menu.tsx` |
-| `SconeTooltip` | `vendored-shadcn` | 支持 | `src/components/navigation/tooltip.tsx` | hover / focus | 组件文件 |
-| `SconeCommand` | `scone-wrapper` | 支持 | `src/components/navigation/command.tsx` | loading / empty / selected | 组件文件；`SconeBaseItem` 来自 `src/types/foundation.ts` |
-| `SconeAccordion` | `vendored-shadcn` | 支持 | `src/components/navigation/accordion.tsx` | expanded | 组件文件 |
-| `SconeCollapsible` | `vendored-shadcn` | 支持 | `src/components/navigation/collapsible.tsx` | expanded | 组件文件 |
+| 导出               | Source strategy   | Compound | 目标文件                                    | 状态能力                        | 类型位置                                                                  |
+| ------------------ | ----------------- | -------- | ------------------------------------------- | ------------------------------- | ------------------------------------------------------------------------- |
+| `SconeBreadcrumb`  | `vendored-shadcn` | 支持     | `src/components/navigation/breadcrumb.tsx`  | current                         | 组件文件；`SconeBaseItem` 来自 `src/types/foundation.ts`                  |
+| `SconePagination`  | `custom`          | 否       | `src/components/navigation/pagination.tsx`  | disabled / page state           | 组件文件                                                                  |
+| `SconeTabs`        | `vendored-shadcn` | 支持     | `src/components/navigation/tabs.tsx`        | selected                        | 组件文件；共享词表来自 `src/types/foundation.ts`                          |
+| `SconeSegmented`   | `vendored-shadcn` | 支持     | `src/components/navigation/segmented.tsx`   | selected / disabled             | 组件文件；`SconeOption` 来自 `src/types/foundation.ts`                    |
+| `SconeTree`        | `custom`          | 否       | `src/components/navigation/tree.tsx`        | selected / checked / expanded   | 组件文件；`Key` 来自 `src/types/foundation.ts`                            |
+| `SconeDropdown`    | `vendored-shadcn` | 支持     | `src/components/navigation/dropdown.tsx`    | open / action select            | 组件文件；`SconeBaseItem` 来自 `src/types/foundation.ts`                  |
+| `SconeMenu`        | `vendored-shadcn` | 支持     | `src/components/navigation/menu.tsx`        | selected / expanded / collapsed | 组件文件；`SconeNavigationItem` 来自 `src/components/navigation/menu.tsx` |
+| `SconeTooltip`     | `vendored-shadcn` | 支持     | `src/components/navigation/tooltip.tsx`     | hover / focus                   | 组件文件                                                                  |
+| `SconeCommand`     | `scone-wrapper`   | 支持     | `src/components/navigation/command.tsx`     | loading / empty / selected      | 组件文件；`SconeBaseItem` 来自 `src/types/foundation.ts`                  |
+| `SconeAccordion`   | `vendored-shadcn` | 支持     | `src/components/navigation/accordion.tsx`   | expanded                        | 组件文件                                                                  |
+| `SconeCollapsible` | `vendored-shadcn` | 支持     | `src/components/navigation/collapsible.tsx` | expanded                        | 组件文件                                                                  |
 
 状态模型：
 
@@ -377,10 +377,10 @@ DOM/ref/className 边界：
 
 导出清单和目标文件：
 
-| 导出 | Source strategy | Compound | 目标文件 | 状态能力 | 类型位置 |
-| --- | --- | --- | --- | --- | --- |
-| `SconeImage` | `vendored-shadcn` | 否 | `src/components/media/image.tsx` | fallback / preview open | `src/components/media/image.tsx` |
-| `SconeAvatar` | `vendored-shadcn` | 否 | `src/components/media/avatar.tsx` | fallback | `src/components/media/avatar.tsx` |
+| 导出          | Source strategy   | Compound | 目标文件                          | 状态能力                | 类型位置                          |
+| ------------- | ----------------- | -------- | --------------------------------- | ----------------------- | --------------------------------- |
+| `SconeImage`  | `vendored-shadcn` | 否       | `src/components/media/image.tsx`  | fallback / preview open | `src/components/media/image.tsx`  |
+| `SconeAvatar` | `vendored-shadcn` | 否       | `src/components/media/avatar.tsx` | fallback                | `src/components/media/avatar.tsx` |
 
 状态模型：
 

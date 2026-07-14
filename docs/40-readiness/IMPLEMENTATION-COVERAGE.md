@@ -4,10 +4,11 @@
 
 本文档记录 `docs/30-designs/DESIGN-ADMIN-UI.md` 及 `docs/30-designs/admin-ui/` 下拆分设计文档对 admin-ui SPEC 的设计覆盖状态，并记录已经完成实现闭环的组件族证据。
 
-除本文明确列出的实现证据外，其他能力仍只表示设计覆盖，不代表源码、测试或发布准备已经完成：
+当前状态同时记录设计覆盖和已完成的实现覆盖证据：
 
-- 未列入实现证据的组件、Pattern、Recipe 或测试不声明已经实现。
-- 本文不替代发布说明；只记录实现覆盖、验证命令和剩余延期项。
+- 未列入实现覆盖证据的组件、Pattern、Recipe 仍只表示已完成设计落点。
+- 已列入实现覆盖证据的范围必须同时记录源码、测试和验证命令。
+- 不替代发布准备记录。
 
 ## Source Documents
 
@@ -47,20 +48,20 @@
 
 ## Capability Coverage
 
-以下能力已在 DESIGN 中完成设计落点和验证规划。Data Display 已在本文件的实现证据中标记完成；未标记的组件族仍需实现代码与测试：
+以下能力已在 DESIGN 中完成设计落点和验证规划。已实现条目在本节明确标注；未标注实现状态的能力仍需后续实现代码与测试：
 
-- Typography：`SconeTypography`、`SconeText`、`SconeTitle`、`SconeParagraph`。
+- Typography：已实现并测试 `SconeTypography`、`SconeText`、`SconeTitle`、`SconeParagraph`。
 - Form components：`SconeButton`、`SconeInput`、`SconeSearchInput`、`SconePasswordInput`、`SconeTextArea`、`SconeSelect`、`SconeForm`、`SconeField`。
 - Form helpers：`SconeFieldGroup`、`SconeFormSection`、`SconeFormActions`。
 - Additional form inputs：`SconeCombobox`、`SconeSwitch`、`SconeCheckbox`、`SconeRadioGroup`、`SconeNumberInput`、`SconeSlider`、`SconeDatePicker`、`SconeUpload`。
-- Layout primitives：`SconeStack`、`SconeInline`、`SconeCompact`、`SconeToolbar`、`SconeSplitPane`、`SconeSeparator`、`SconeScrollArea`。
-- Data display：`SconeDescriptions`、`SconeTable`、`SconeCard`、`SconeTag`、`SconeBadge`、`SconeList`、`SconeStatistic`、`SconeTimeline`。
+- Layout primitives：已实现并测试 `SconeStack`、`SconeInline`、`SconeCompact`、`SconeToolbar`、`SconeSplitPane`、`SconeSeparator`、`SconeScrollArea`。
+- Data display：已实现并测试 `SconeDescriptions`、`SconeTable`、`SconeCard`、`SconeTag`、`SconeBadge`、`SconeList`、`SconeStatistic`、`SconeTimeline`。
 - Navigation and media：`SconeBreadcrumb`、`SconePagination`、`SconeTabs`、`SconeSegmented`、`SconeTree`、`SconeDropdown`、`SconeMenu`、`SconeTooltip`、`SconeCommand`、`SconeAccordion`、`SconeCollapsible`、`SconeImage`、`SconeAvatar`。
-- Feedback：`SconeDrawer`、`SconeDialog`、`SconeConfirm`、`SconeAlert`、`SconeEmpty`、`SconeLoading`、`SconeProgress`、`SconeToastProvider`、`toast`、`SconeNotificationProvider`、`notification`。
+- Feedback：已实现并测试 `SconeDrawer`、`SconeDialog`、`SconeConfirm`、`SconeAlert`、`SconeEmpty`、`SconeLoading`、`SconeProgress`、`SconeToastProvider`、`toast`、`SconeNotificationProvider`、`notification`。
 - Admin Pattern exports：`AppShell`、`Page`、`Section`、`FilterBar`、`DataTable` compound parts。
 - Recipes：DrawerForm、ConfirmationFlow、Popover、Logo、Result、Dashboard Metric、Grid。
 
-## Implementation Evidence
+## Implementation Coverage Evidence
 
 ### Data Display
 
@@ -68,12 +69,7 @@
 
 测试状态：已完成。
 
-公共导出：
-
-- `src/components/data-display/index.ts`
-- `src/index.ts`
-
-已实现文件：
+源码文件：
 
 - `src/components/data-display/typography.tsx`
 - `src/components/data-display/tag.tsx`
@@ -84,8 +80,10 @@
 - `src/components/data-display/list.tsx`
 - `src/components/data-display/table.tsx`
 - `src/components/data-display/timeline.tsx`
+- `src/components/data-display/index.ts`
+- `src/index.ts`
 
-已测试文件：
+测试文件：
 
 - `src/components/data-display/typography.test.tsx`
 - `src/components/data-display/tag.test.tsx`
@@ -98,7 +96,7 @@
 - `src/components/data-display/timeline.test.tsx`
 - `src/index.test.ts`
 
-已覆盖能力：
+覆盖能力：
 
 - Typography：`SconeTypography`、`SconeText`、`SconeTitle`、`SconeParagraph`。
 - Display labels：`SconeTag`、`SconeBadge`。
@@ -114,22 +112,120 @@
 - `pnpm lint`：通过。
 - `pnpm build`：通过。
 
-未覆盖或延期项：
+说明：
 
 - 基础 `SconeTable` 不包含 `DataTable` Pattern 的筛选、分页、selection、bulk actions、fixed column、sticky header、虚拟滚动或 DataGrid 键盘模型。
 - `SconeStatistic` 不包含趋势计算、同比语义、业务口径格式化或 `trend`/`delta`/`precision` 字段。
 - Tag/Badge 的业务枚举到 `SconeTone` 映射由调用方处理。
 
+### Layout Primitives
+
+实现状态：已完成。
+
+源码文件：
+
+- `src/components/layout/stack.tsx`
+- `src/components/layout/inline.tsx`
+- `src/components/layout/compact.tsx`
+- `src/components/layout/toolbar.tsx`
+- `src/components/layout/separator.tsx`
+- `src/components/layout/scroll-area.tsx`
+- `src/components/layout/split-pane.tsx`
+- `src/index.ts`
+
+测试文件：
+
+- `src/components/layout/stack.test.tsx`
+- `src/components/layout/inline.test.tsx`
+- `src/components/layout/compact.test.tsx`
+- `src/components/layout/toolbar.test.tsx`
+- `src/components/layout/separator.test.tsx`
+- `src/components/layout/scroll-area.test.tsx`
+- `src/components/layout/split-pane.test.tsx`
+- `src/index.test.ts`
+
+覆盖能力：
+
+- `SconeStack`：token gap、垂直排列、align、ref、`className`、`style`。
+- `SconeInline`：token gap、水平排列、align、wrap、decorative `split`、ref、`className`、`style`。
+- `SconeCompact`：horizontal/vertical、`size="sm" | "md"`、根 class 协调紧凑边界、不 clone 子项。
+- `SconeToolbar`：`start` / `end` 布局、`children` 自定义内容优先、`density="compact" | "default"`、窄屏换行 class、ref。
+- `SconeSeparator`：horizontal/vertical、decorative、semantic separator、Radix/shadcn ref 语义。
+- `SconeScrollArea`：根 class、viewport class、viewport `onScroll`、根 ref、局部滚动边界。
+- `SconeSplitPane`：两个面板、resize handle、preset、受控 CSS 长度、鼠标拖拽、键盘调整、`onSizeChange`、`onSizeCommit`、ARIA separator 语义、CSS 长度单位校验。
+- Public exports：Layout 组件和 public props type 已从 `src/index.ts` 导出。
+
+验证结果：
+
+- `pnpm format`：通过。
+- `pnpm lint`：通过。
+- `pnpm build`：通过。
+- `pnpm test -- src/components/layout`：通过，15 个测试文件、45 个测试。
+- `pnpm test -- src/index.test.ts src/components/layout`：通过，15 个测试文件、45 个测试。
+- `pnpm typecheck`：通过。
+
+说明：
+
+- `pnpm typecheck` 首次运行时因本地 `node_modules` 缺少已声明的 `@types/node` 失败；执行 `pnpm install --frozen-lockfile` 补齐依赖后通过，未改变 `package.json` 或 `pnpm-lock.yaml`。
+
+### Feedback / Overlay
+
+实现状态：已完成。
+
+源码文件：
+
+- `src/components/feedback-overlay/alert.tsx`
+- `src/components/feedback-overlay/empty.tsx`
+- `src/components/feedback-overlay/loading.tsx`
+- `src/components/feedback-overlay/progress.tsx`
+- `src/components/feedback-overlay/drawer.tsx`
+- `src/components/feedback-overlay/dialog.tsx`
+- `src/components/feedback-overlay/confirm.tsx`
+- `src/components/feedback-overlay/toast.tsx`
+- `src/components/feedback-overlay/notification.tsx`
+- `src/index.ts`
+
+测试文件：
+
+- `src/components/feedback-overlay/alert.test.tsx`
+- `src/components/feedback-overlay/empty.test.tsx`
+- `src/components/feedback-overlay/loading.test.tsx`
+- `src/components/feedback-overlay/progress.test.tsx`
+- `src/components/feedback-overlay/drawer.test.tsx`
+- `src/components/feedback-overlay/dialog.test.tsx`
+- `src/components/feedback-overlay/confirm.test.tsx`
+- `src/components/feedback-overlay/toast.test.tsx`
+- `src/components/feedback-overlay/notification.test.tsx`
+- `src/index.test.ts`
+
+覆盖能力：
+
+- `SconeAlert`、`SconeEmpty`、`SconeLoading`、`SconeProgress` 状态反馈组件。
+- `SconeDrawer`、`SconeDialog`、`SconeConfirm` 阻断浮层组件。
+- `SconeToastProvider` / `toast` 与 `SconeNotificationProvider` / `notification` 队列反馈 service。
+- Public exports：Feedback / Overlay 组件、Provider、service 和 public props type 已从 `src/index.ts` 导出。
+
+验证结果：
+
+- `pnpm lint`：通过。
+- `pnpm build`：通过。
+- `pnpm test`：通过，17 个测试文件、51 个测试。
+- `pnpm typecheck`：通过。
+
+说明：
+
+- 其他组件族、Pattern 和 Recipe 仍未进入实现覆盖。
+
 ## Pending Implementation Work
 
 后续实现阶段至少需要完成：
 
-1. 继续创建 DESIGN 指定的剩余 `src/` 目录结构、公共入口和组件族类型入口。
+1. 创建 DESIGN 指定的其余 `src/` 目录结构、公共入口和组件族类型入口。
 2. 按 `docs/10-specs/COMPONENT-SELECTION.md` 的 source strategy 实现 wrapper、vendored primitive、custom component、pattern-only 和 docs-only 边界。
 3. 继续维护 `src/styles/theme.css` 作为 CSS variables 唯一数值源，并维护默认 `tailwind.config.ts` 到 CSS variables 的映射。
-4. 实现剩余组件族和 Pattern；Recipe 全部保持文档和示例边界，不创建 `src/recipes/` 源码入口。
+4. 实现 Data Display、Layout primitives 和 Feedback / Overlay 以外的组件族和 Pattern；Recipe 全部保持文档和示例边界，不创建 `src/recipes/` 源码入口。
 5. 按 DESIGN 的 Verification Design 在被测文件同目录创建 `*.test.ts` 或 `*.test.tsx`，并生成真正的实现覆盖证据。
-6. 在实现后更新本 readiness 文档，区分已实现、已测试、未覆盖和延期项。
+6. 在后续实现后更新本 readiness 文档，区分已实现、已测试、未覆盖和延期项。
 
 ## Verification Plan
 
@@ -151,6 +247,6 @@
 
 设计覆盖：完成。
 
-实现覆盖：Data Display 已完成；其余组件族和 Pattern 未开始。
+实现覆盖：部分完成。Data Display、Layout primitives 与 Feedback / Overlay 已实现；其余组件族、Pattern 和 Recipe 未完成。
 
-测试覆盖：Data Display 已完成；其余组件族和 Pattern 未开始。
+测试覆盖：部分完成。Data Display、Layout primitives 与 Feedback / Overlay 已测试；其余组件族、Pattern 和 Recipe 未完成。

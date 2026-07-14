@@ -2,30 +2,30 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready |
-| Layer | Component |
+| Field     | Value                                                    |
+| --------- | -------------------------------------------------------- |
+| Status    | Ready                                                    |
+| Layer     | Component                                                |
 | Authority | [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) |
 
 源策略、导出状态和跨组件词汇以 [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) 与 [`FOUNDATIONS-SPEC.md`](../../FOUNDATIONS-SPEC.md) 为准。
 
 基础数据表格，只负责稳定行列表达。列表页完整能力由 DataTable Pattern 组合。
 
-| Prop          | 类型                                                 | 说明                               |
-| ------------- | ---------------------------------------------------- | ---------------------------------- |
-| `ariaLabel`   | `string`                                             | 表格可访问名称；无外部标题时必填。 |
-| `columns`     | `SconeTableColumn<T>[]`                              | 列定义。                           |
-| `dataSource`  | `T[]`                                                | 当前页或当前视图数据。             |
-| `rowKey`      | `string \| ((record: T) => Key)`                     | 稳定行 key。                       |
-| `renderEmpty` | `ReactNode \| (() => ReactNode)`                     | 单独使用 Table 时的空状态。        |
-| `renderError` | `ReactNode \| (() => ReactNode)`                     | 单独使用 Table 时的错误状态。      |
-| `loading`     | `boolean`                                            | 单独使用 Table 时的加载状态。      |
-| `density`     | `"compact" \| "default" \| "comfortable"`            | 行高和内容密度。                   |
-| `scroll`      | `SconeTableScroll`                                   | 明确的横向或局部滚动配置。         |
-| `onRow`       | `(record: T) => HTMLAttributes<HTMLTableRowElement>` | 行级 DOM 行为。                    |
-| `onCell`      | `(record: T, column: SconeTableColumn<T>) => HTMLAttributes<HTMLTableCellElement>` | 单元格级 DOM 行为。 |
-| `className`   | `string`                                             | 样式。                             |
+| Prop          | 类型                                                                               | 说明                               |
+| ------------- | ---------------------------------------------------------------------------------- | ---------------------------------- |
+| `ariaLabel`   | `string`                                                                           | 表格可访问名称；无外部标题时必填。 |
+| `columns`     | `SconeTableColumn<T>[]`                                                            | 列定义。                           |
+| `dataSource`  | `T[]`                                                                              | 当前页或当前视图数据。             |
+| `rowKey`      | `string \| ((record: T) => Key)`                                                   | 稳定行 key。                       |
+| `renderEmpty` | `ReactNode \| (() => ReactNode)`                                                   | 单独使用 Table 时的空状态。        |
+| `renderError` | `ReactNode \| (() => ReactNode)`                                                   | 单独使用 Table 时的错误状态。      |
+| `loading`     | `boolean`                                                                          | 单独使用 Table 时的加载状态。      |
+| `density`     | `"compact" \| "default" \| "comfortable"`                                          | 行高和内容密度。                   |
+| `scroll`      | `SconeTableScroll`                                                                 | 明确的横向或局部滚动配置。         |
+| `onRow`       | `(record: T) => HTMLAttributes<HTMLTableRowElement>`                               | 行级 DOM 行为。                    |
+| `onCell`      | `(record: T, column: SconeTableColumn<T>) => HTMLAttributes<HTMLTableCellElement>` | 单元格级 DOM 行为。                |
+| `className`   | `string`                                                                           | 样式。                             |
 
 ## Usage
 
