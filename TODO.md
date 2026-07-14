@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `3. docs/40-readiness/SYSTEMATIC-CODE-REVIEW-2026-07.md`：删除已处理 SplitPane 审核章节
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SPLIT-PANE-BOUNDS-CLEANUP.md`
-    - 范围对象：`docs/40-readiness/SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 处理动作：在实现和测试完全覆盖后，删除已关闭的 `SplitPane min/max presets are not enforced` 与 `SplitPane pointer listeners lack unmount cleanup` 章节。
-    - 验收点：Systematic Code Review 2026-07 不再保留已完全处理的 SplitPane P1/P2 问题章节。
-    - 重要度：8/10
-
 - [ ] `4. docs/40-readiness/IMPLEMENTATION-COVERAGE.md`：同步 SplitPane 修复覆盖状态
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SPLIT-PANE-BOUNDS-CLEANUP.md`
