@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `2.1 SconeDescriptions`：收口 Descriptions root 契约
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
-    - 范围对象：`src/components/data-display/descriptions.tsx`、`src/components/data-display/descriptions.test.tsx`
-    - 处理动作：锁定 `SconeDescriptionsProps` 中 `title`、`items`、`columns`、`bordered`、`density`、`className`、`style` 和 root HTML attributes 的归属。
-    - 验收点：root `div` 接收 `ref`、`className`、`style`、`id`、`data-*`、`aria-*`、`role`，内部 `dl` 只接收 columns grid style。
-    - 重要度：9/10
-
 - [ ] `2.2 SconeBadge`：收口 Badge root 契约
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
