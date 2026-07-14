@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `1-pattern-container-tests`：清理 Pattern 容器类测试断言
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-TEST-DOC-MAINTENANCE.md`
-    - 范围对象：`src/patterns/app-shell.test.tsx`、`src/patterns/page.test.tsx`、`src/patterns/section.test.tsx`
-    - 处理动作：将非契约用途的 `closest()`、`querySelector()`、`toHaveClass()` 改为 role、text、button 操作或公开 layout contract 断言。
-    - 验收点：sidebar collapse button、page actions button、sticky actions button、section actions button 的测试不再依赖非契约内部 DOM traversal。
-    - 重要度：8/10
-
 - [ ] `2-pattern-filter-table-app-tests`：清理筛选表格和 demo 测试断言
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-TEST-DOC-MAINTENANCE.md`

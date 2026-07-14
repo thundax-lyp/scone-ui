@@ -7,7 +7,7 @@ describe("AppShell", () => {
     it("renders shell slots and header actions", () => {
         render(
             <AppShell.Root>
-                <AppShell.Sidebar>Navigation</AppShell.Sidebar>
+                <AppShell.Sidebar aria-label="Navigation">Navigation</AppShell.Sidebar>
                 <AppShell.Main>
                     <AppShell.Header actions={<button type="button">Profile</button>}>
                         Workspace
@@ -18,48 +18,55 @@ describe("AppShell", () => {
             </AppShell.Root>,
         );
 
-        expect(
-            screen.getByText("Navigation").closest("[data-scone-pattern='app-shell']"),
-        ).toBeInTheDocument();
-        expect(
-            screen.getByText("Workspace").closest("[data-scone-app-shell-part='header']"),
-        ).toBeInTheDocument();
+        expect(screen.getByRole("complementary", { name: "Navigation" })).toHaveAttribute(
+            "data-scone-app-shell-part",
+            "sidebar",
+        );
+        expect(screen.getByRole("banner")).toHaveAttribute("data-scone-app-shell-part", "header");
+        expect(screen.getByText("Workspace")).toBeInTheDocument();
         expect(screen.getByRole("button", { name: "Profile" })).toBeInTheDocument();
-        expect(
-            screen.getByText("Page region").closest("[data-scone-app-shell-part='main']"),
-        ).toBeInTheDocument();
-        expect(
-            screen.getByText("Inspector").closest("[data-scone-app-shell-part='aside']"),
-        ).toHaveAttribute("data-open", "true");
+        expect(screen.getByRole("main")).toHaveTextContent("Page region");
+        expect(screen.getByText("Inspector")).toHaveAttribute("data-open", "true");
     });
 
     it("supports controlled and default sidebar collapsed state", () => {
         const { rerender } = render(
-            <AppShell.Sidebar collapsed={false}>Navigation</AppShell.Sidebar>,
+            <AppShell.Sidebar aria-label="Navigation" collapsed={false}>
+                Navigation
+            </AppShell.Sidebar>,
         );
 
-        expect(
-            screen.getByText("Navigation").closest("[data-scone-app-shell-part='sidebar']"),
-        ).not.toHaveAttribute("data-collapsed");
+        expect(screen.getByRole("complementary", { name: "Navigation" })).not.toHaveAttribute(
+            "data-collapsed",
+        );
 
-        rerender(<AppShell.Sidebar defaultCollapsed>Navigation</AppShell.Sidebar>);
+        rerender(
+            <AppShell.Sidebar aria-label="Navigation" defaultCollapsed>
+                Navigation
+            </AppShell.Sidebar>,
+        );
 
-        const sidebar = screen
-            .getByText("Navigation")
-            .closest("[data-scone-app-shell-part='sidebar']");
-        expect(sidebar).toHaveAttribute("data-collapsed", "true");
+        expect(screen.getByRole("complementary", { name: "Navigation" })).toHaveAttribute(
+            "data-collapsed",
+            "true",
+        );
     });
 
     it("supports controlled and default aside open state", () => {
-        const { rerender } = render(<AppShell.Aside open>Details</AppShell.Aside>);
+        const { rerender } = render(
+            <AppShell.Aside aria-label="Inspector" open>
+                Details
+            </AppShell.Aside>,
+        );
 
-        expect(
-            screen.getByText("Details").closest("[data-scone-app-shell-part='aside']"),
-        ).toHaveAttribute("data-open", "true");
+        expect(screen.getByRole("complementary", { name: "Inspector" })).toHaveAttribute(
+            "data-open",
+            "true",
+        );
 
-        rerender(<AppShell.Aside>Details</AppShell.Aside>);
+        rerender(<AppShell.Aside aria-label="Inspector">Details</AppShell.Aside>);
 
-        const aside = screen.getByText("Details").closest("[data-scone-app-shell-part='aside']");
+        const aside = screen.getByText("Details");
         expect(aside).not.toHaveAttribute("data-open");
         expect(aside).toHaveAttribute("hidden");
     });
@@ -71,10 +78,6 @@ describe("AppShell", () => {
             </AppShell.Main>,
         );
 
-        expect(screen.getByText("Page").closest("[data-scone-app-shell-part='main']")).toHaveClass(
-            "min-h-0",
-            "min-w-0",
-            "overflow-hidden",
-        );
+        expect(screen.getByRole("main")).toHaveClass("min-h-0", "min-w-0", "overflow-hidden");
     });
 });
