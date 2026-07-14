@@ -1,15 +1,15 @@
 import * as React from "react";
 
-import { cn } from "@/lib/utils";
-import type { SconeSpacingToken } from "@/types/foundation";
+import { cn } from "../../lib/utils";
+import type { SconeSpacingToken } from "../../types/foundation";
 
 const stackGapClass: Record<SconeSpacingToken, string> = {
     none: "gap-0",
-    xs: "gap-[var(--scone-spacing-xs)]",
-    sm: "gap-[var(--scone-spacing-sm)]",
-    md: "gap-[var(--scone-spacing-md)]",
-    lg: "gap-[var(--scone-spacing-lg)]",
-    xl: "gap-[var(--scone-spacing-xl)]",
+    xs: "gap-xs",
+    sm: "gap-sm",
+    md: "gap-md",
+    lg: "gap-lg",
+    xl: "gap-xl",
 };
 
 const stackAlignClass = {

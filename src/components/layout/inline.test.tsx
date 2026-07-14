@@ -19,13 +19,7 @@ describe("SconeInline", () => {
         expect(inline).toHaveAttribute("data-gap", "md");
         expect(inline).toHaveAttribute("data-align", "baseline");
         expect(inline).toHaveAttribute("data-wrap", "");
-        expect(inline).toHaveClass(
-            "flex",
-            "flex-row",
-            "flex-wrap",
-            "gap-[var(--scone-spacing-md)]",
-            "items-baseline",
-        );
+        expect(inline).toHaveClass("flex", "flex-row", "flex-wrap", "gap-md", "items-baseline");
     });
 
     it("inserts decorative split content between adjacent children", () => {
@@ -55,11 +49,7 @@ describe("SconeInline", () => {
         );
 
         expect(ref.current).toBe(screen.getByText("Inline content").parentElement);
-        expect(ref.current).toHaveClass(
-            "custom-inline",
-            "gap-[var(--scone-spacing-sm)]",
-            "items-center",
-        );
+        expect(ref.current).toHaveClass("custom-inline", "gap-sm", "items-center");
         expect(ref.current).toHaveStyle({ maxWidth: "320px" });
     });
 });

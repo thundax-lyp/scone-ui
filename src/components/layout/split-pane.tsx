@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export type SconeSplitPaneSizePreset = "narrow" | "medium" | "wide" | "fill";
 
@@ -20,9 +20,9 @@ export interface SconeSplitPaneProps {
 }
 
 const presetSize: Record<SconeSplitPaneSizePreset, string> = {
-    narrow: "var(--scone-split-pane-size-narrow)",
-    medium: "var(--scone-split-pane-size-medium)",
-    wide: "var(--scone-split-pane-size-wide)",
+    narrow: "16rem",
+    medium: "24rem",
+    wide: "32rem",
     fill: "minmax(0,1fr)",
 };
 

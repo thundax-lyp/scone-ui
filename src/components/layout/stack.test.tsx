@@ -18,12 +18,7 @@ describe("SconeStack", () => {
         expect(stack).toHaveAttribute("data-scone-layout", "stack");
         expect(stack).toHaveAttribute("data-gap", "md");
         expect(stack).toHaveAttribute("data-align", "stretch");
-        expect(stack).toHaveClass(
-            "flex",
-            "flex-col",
-            "gap-[var(--scone-spacing-md)]",
-            "items-stretch",
-        );
+        expect(stack).toHaveClass("flex", "flex-col", "gap-md", "items-stretch");
     });
 
     it("passes className, style, and ref to the root container", () => {
@@ -42,11 +37,7 @@ describe("SconeStack", () => {
         );
 
         expect(ref.current).toBe(screen.getByText("Content").parentElement);
-        expect(ref.current).toHaveClass(
-            "custom-stack",
-            "gap-[var(--scone-spacing-lg)]",
-            "items-center",
-        );
+        expect(ref.current).toHaveClass("custom-stack", "gap-lg", "items-center");
         expect(ref.current).toHaveStyle({ width: "240px" });
     });
 });

@@ -23,8 +23,8 @@ describe("SconeToolbar", () => {
             "flex-wrap",
             "items-center",
             "justify-between",
-            "min-h-[var(--scone-toolbar-height-default)]",
-            "gap-[var(--scone-spacing-sm)]",
+            "min-h-control-md",
+            "gap-sm",
         );
         expect(toolbar?.querySelector("[data-scone-toolbar-start]")).toHaveTextContent("Filters");
         expect(toolbar?.querySelector("[data-scone-toolbar-end]")).toHaveTextContent("Create");
@@ -57,11 +57,9 @@ describe("SconeToolbar", () => {
             />,
         );
 
-        expect(ref.current).toBe(screen.getByText("Summary").parentElement?.parentElement);
-        expect(ref.current).toHaveClass(
-            "custom-toolbar",
-            "min-h-[var(--scone-toolbar-height-compact)]",
-            "gap-[var(--scone-spacing-xs)]",
+        expect(ref.current).toBe(
+            screen.getByText("Summary").closest("[data-scone-layout='toolbar']"),
         );
+        expect(ref.current).toHaveClass("custom-toolbar", "min-h-control-sm", "gap-xs");
     });
 });

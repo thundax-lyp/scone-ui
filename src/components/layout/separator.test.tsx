@@ -12,7 +12,7 @@ describe("SconeSeparator", () => {
 
         expect(separator).toHaveAttribute("data-scone-layout", "separator");
         expect(separator).toHaveAttribute("data-orientation", "horizontal");
-        expect(separator).not.toHaveAttribute("role");
+        expect(separator).toHaveAttribute("role", "none");
         expect(separator).toHaveClass("shrink-0", "bg-border", "data-horizontal:h-px");
     });
 

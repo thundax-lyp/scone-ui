@@ -1,12 +1,10 @@
 import * as React from "react";
 
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 const toolbarDensityClass = {
-    compact:
-        "min-h-[var(--scone-toolbar-height-compact)] gap-[var(--scone-spacing-xs)] py-[var(--scone-spacing-xs)]",
-    default:
-        "min-h-[var(--scone-toolbar-height-default)] gap-[var(--scone-spacing-sm)] py-[var(--scone-spacing-sm)]",
+    compact: "min-h-control-sm gap-xs py-xs",
+    default: "min-h-control-md gap-sm py-sm",
 };
 
 export interface SconeToolbarProps {
@@ -40,7 +38,7 @@ export const SconeToolbar = React.forwardRef<HTMLDivElement, SconeToolbarProps>(
                         </div>
                         <div
                             data-scone-toolbar-end=""
-                            className="flex shrink-0 items-center justify-end gap-[var(--scone-spacing-sm)]"
+                            className="flex shrink-0 items-center justify-end gap-sm"
                         >
                             {end}
                         </div>

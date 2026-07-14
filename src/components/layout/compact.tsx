@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 const compactOrientationClass = {
     horizontal:
@@ -10,8 +10,8 @@ const compactOrientationClass = {
 };
 
 const compactSizeClass = {
-    sm: "[&>*]:min-h-[var(--scone-control-height-sm)]",
-    md: "[&>*]:min-h-[var(--scone-control-height-md)]",
+    sm: "[&>*]:min-h-control-sm",
+    md: "[&>*]:min-h-control-md",
 };
 
 export interface SconeCompactProps {

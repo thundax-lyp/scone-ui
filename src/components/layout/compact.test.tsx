@@ -18,12 +18,7 @@ describe("SconeCompact", () => {
         expect(compact).toHaveAttribute("data-scone-layout", "compact");
         expect(compact).toHaveAttribute("data-orientation", "horizontal");
         expect(compact).toHaveAttribute("data-size", "md");
-        expect(compact).toHaveClass(
-            "inline-flex",
-            "isolate",
-            "flex-row",
-            "[&>*]:min-h-[var(--scone-control-height-md)]",
-        );
+        expect(compact).toHaveClass("inline-flex", "isolate", "flex-row", "[&>*]:min-h-control-md");
     });
 
     it("supports vertical orientation, sm sizing, className, and ref without cloning children", () => {
@@ -41,11 +36,7 @@ describe("SconeCompact", () => {
         );
 
         expect(ref.current).toBe(screen.getByText("Save").parentElement);
-        expect(ref.current).toHaveClass(
-            "custom-compact",
-            "flex-col",
-            "[&>*]:min-h-[var(--scone-control-height-sm)]",
-        );
+        expect(ref.current).toHaveClass("custom-compact", "flex-col", "[&>*]:min-h-control-sm");
         expect(screen.getByText("Save")).toHaveAttribute("data-state", "loading");
         expect(screen.getByText("Cancel")).toBeDisabled();
     });
