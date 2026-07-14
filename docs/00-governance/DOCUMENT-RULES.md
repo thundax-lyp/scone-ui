@@ -20,6 +20,7 @@
 - Commit 标题、type/scope 白名单和提交粒度：根 [`AGENTS.md`](../../AGENTS.md)。
 - TODO 协作、任务项格式、删除和收窄：[`TODO-RULES.md`](./TODO-RULES.md)。
 - PR 描述、阶段性交付和验证证据：[`PR-RULES.md`](./PR-RULES.md)。
+- 系统性代码审核流程：[`HOW-TO-SYSTEMATIC-CODE-REVIEW.md`](./HOW-TO-SYSTEMATIC-CODE-REVIEW.md)。
 
 ## Language Rules
 

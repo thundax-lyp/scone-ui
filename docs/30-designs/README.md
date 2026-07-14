@@ -15,3 +15,7 @@
 - [Recipe Design](./admin-ui/RECIPE-DESIGN.md)：docs-only Recipe 组合边界。
 - [Verification Design](./admin-ui/VERIFICATION-DESIGN.md)：实现验证策略。
 - [Review And Traceability](./admin-ui/REVIEW-TRACEABILITY.md)：自审结果、决策追溯和审核状态。
+
+## Active Runbooks
+
+- [Systematic Code Review 2026-07](./RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md)：本次全项目系统性代码审核执行手册；审核完成后删除。
