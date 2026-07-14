@@ -23,3 +23,10 @@ export type {
     PageRootProps,
     PageStickyActionsProps,
 } from "./page";
+export { Section } from "./section";
+export type {
+    SectionContentProps,
+    SectionFooterProps,
+    SectionHeaderProps,
+    SectionRootProps,
+} from "./section";

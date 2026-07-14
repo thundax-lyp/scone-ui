@@ -10,14 +10,6 @@
 
 ## 当前任务项
 
-- [ ] `03 Section`：实现 Section 结构分区边界
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-ADMIN-SHELL-PATTERNS.md`
-    - 范围对象：`src/patterns/section.tsx`、`src/patterns/section.test.tsx`、`src/patterns/index.ts`
-    - 处理动作：实现 `Section.Root/Header/Content/Footer`、`density` 和分区级 actions slot。
-    - 验收点：Section 测试覆盖语义 `section`、Header actions、Content、Footer、`density` 和非 Card 视觉边界。
-    - 重要度：8/10
-
 - [ ] `04 FilterBar`：实现 FilterBar 交互边界
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-ADMIN-SHELL-PATTERNS.md`
