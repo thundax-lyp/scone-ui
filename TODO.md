@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `1.1 src/lib/cn.ts src/lib/cn.test.ts src/lib/utils.ts`：确认 `cn` helper 删除基线
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
-    - 范围对象：`src/lib/cn.ts`、`src/lib/cn.test.ts`、`src/lib/utils.ts`
-    - 处理动作：确认 `src/lib/utils.ts` 只承担 `cn` re-export 并记录现有 `lib/utils` import 调用方。
-    - 验收点：`src/lib/utils.ts` 不包含除 `cn` re-export 外的字段、函数或类型。
-    - 重要度：8/10
-
 - [ ] `2.1 SconeDescriptions`：收口 Descriptions root 契约
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
