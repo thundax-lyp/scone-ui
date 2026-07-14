@@ -20,12 +20,15 @@ Keep repository content focused on reusable UI components, component usage inven
 - `docs/00-governance/`: stable collaboration and documentation rules.
 - `docs/30-designs/`: temporary runbooks or focused design notes when needed.
 - `docs/40-readiness/`: implementation coverage, verification evidence, and release readiness notes when needed.
+- `README.md`: root-level package README shipped with the published npm package for package consumers.
 - `PACKAGE-AI-GUIDE.md`: root-level package document shipped with the published npm package for AI and consumer guidance.
 - `.github/`: PR templates and repository automation when introduced.
 
 ## Documentation Governance
 
 Stable rules belong in `docs/00-governance/`. Temporary execution plans belong in `docs/30-designs/RUNBOOK-*.md` and should be removed after the task closes. Evidence that remains useful after closure belongs in `docs/40-readiness/`.
+
+`README.md` lives at the repository root because it is the published package README. Write it for npm package consumers first: installation, imports, styles, public API boundaries, package docs, and license. Do not use it as an internal implementation authority.
 
 `PACKAGE-AI-GUIDE.md` lives at the repository root because it is a package-published standalone document, not an internal design note. Keep it understandable from the installed package alone; do not make it depend on unpublished design docs, RUNBOOKs, TODOs, PR notes, or source paths.
 
