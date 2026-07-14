@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `06 src/components/feedback-overlay/overlay imports`：统一 overlay/service feedback 文件的 `cn` import
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`
-    - 范围对象：`src/components/feedback-overlay/confirm.tsx`、`src/components/feedback-overlay/dialog.tsx`、`src/components/feedback-overlay/drawer.tsx`、`src/components/feedback-overlay/toast.tsx`、`src/components/feedback-overlay/notification.tsx`
-    - 处理动作：把 `cn` import 从 `../../lib/utils` 统一为 `@/lib/cn`。
-    - 验收点：范围文件不再出现 `from "../../lib/utils"`。
-    - 重要度：5/10
-
 - [ ] `07 src/components/navigation/dropdown`：补齐 Dropdown outside close 和 keyboard initial focus
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`

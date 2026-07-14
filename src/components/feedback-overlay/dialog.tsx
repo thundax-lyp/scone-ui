@@ -2,7 +2,7 @@ import * as React from "react";
 import { Dialog as DialogPrimitive } from "radix-ui";
 import { XIcon } from "lucide-react";
 
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/cn";
 import type { OverlayCloseReason } from "../../types/foundation";
 
 export interface SconeDialogProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
