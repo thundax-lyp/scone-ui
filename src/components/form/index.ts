@@ -10,6 +10,9 @@ export type { SconePasswordInputProps } from "./password-input";
 export { SconeSearchInput } from "./search-input";
 export type { SconeSearchInputProps } from "./search-input";
 
+export { SconeSelect } from "./select";
+export type { SconeSelectProps } from "./select";
+
 export { SconeTextArea } from "./textarea";
 export type { SconeTextAreaProps } from "./textarea";
 

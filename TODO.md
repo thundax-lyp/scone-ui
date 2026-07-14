@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `05 select`：Select 控件闭环
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`
-    - 范围对象：`src/components/form/select.tsx`、`src/components/form/select.test.tsx`、`src/components/form/index.ts`
-    - 处理动作：实现 `SconeSelect` 的 options、value/defaultValue/onValueChange、open/defaultOpen/onOpenChange 和 Field invalid。
-    - 验收点：打开、键盘移动、选择、disabled option、受控 open 和 ARIA 状态测试通过。
-    - 重要度：9/10
-
 - [ ] `06 switch-checkbox`：Switch 和 Checkbox 闭环
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`
