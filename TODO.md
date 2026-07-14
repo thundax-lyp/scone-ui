@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `2 src/components/feedback-overlay/empty.tsx`：实现 Empty 空态组件
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-OVERLAY.md`
-    - 范围对象：`src/components/feedback-overlay/empty.tsx`、`src/components/feedback-overlay/empty.test.tsx`
-    - 处理动作：实现 `SconeEmpty` 和 `SconeEmptyProps`，覆盖 image、title、description、action 的空态结构。
-    - 验收点：Empty 测试验证空态说明、恢复操作入口和 action 点击行为。
-    - 重要度：8/10
-
 - [ ] `3 src/components/feedback-overlay/loading.tsx`：实现 Loading 加载组件
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-OVERLAY.md`
