@@ -14,6 +14,7 @@ export function useControllableState<T>({
     onValueChange,
 }: UseControllableStateOptions<T>): [value: T | undefined, setValue: ControllableStateSetter<T>] {
     const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
+    // `undefined` is the uncontrolled sentinel for the current public contract.
     const isControlled = value !== undefined;
     const currentValue = isControlled ? value : uncontrolledValue;
 

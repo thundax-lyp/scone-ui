@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `1-use-controllable-state-contract`：1. 锁定 controlled `undefined` 契约
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FORM-PUBLIC-API-CONTRACT.md`
-    - 范围对象：`src/lib/use-controllable-state.ts`、`src/lib/use-controllable-state.test.tsx`
-    - 处理动作：为 `value !== undefined` 受控判定补充契约注释，并新增 `value={undefined}` 走 uncontrolled mode 的测试。
-    - 验收点：测试覆盖 `defaultValue` 初始值、setter 本地更新和 `onValueChange` 通知，且不新增受控判定字段。
-    - 重要度：9/10
-
 - [ ] `2-form-context-public-contract`：2. 锁定 Form context 公共导出字段
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FORM-PUBLIC-API-CONTRACT.md`

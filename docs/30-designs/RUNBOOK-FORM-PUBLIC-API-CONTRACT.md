@@ -112,15 +112,15 @@
 控件和操作：
 
 - `SconeInput`：
-  - 用户在 textbox 输入文本时，继续更新显示值。
-  - 输入操作必须先触发 `onValueChange(nextValue)`，再触发原生 `onChange(event)`。
-  - `ariaLabel` 继续映射到输入框 `aria-label`，且不覆盖显式 `aria-label` 的最终语义。
-  - Field 包裹下继续注入 `id`、`name`、`aria-labelledby`、`aria-describedby`、`aria-invalid`、`aria-required`、`disabled`、`readOnly` 和状态 data attributes。
+    - 用户在 textbox 输入文本时，继续更新显示值。
+    - 输入操作必须先触发 `onValueChange(nextValue)`，再触发原生 `onChange(event)`。
+    - `ariaLabel` 继续映射到输入框 `aria-label`，且不覆盖显式 `aria-label` 的最终语义。
+    - Field 包裹下继续注入 `id`、`name`、`aria-labelledby`、`aria-describedby`、`aria-invalid`、`aria-required`、`disabled`、`readOnly` 和状态 data attributes。
 - `SconeSearchInput`：
-  - 用户在 searchbox 输入文本时，继续更新显示值。
-  - clear button 点击时继续调用同一 setter，把值置为 `""` 并触发 `onValueChange("")`。
-  - `loading` 为 true 时显示 loading 图标，不显示 clear button。
-  - `readOnly` 或 `disabled` 时不显示 clear button。
+    - 用户在 searchbox 输入文本时，继续更新显示值。
+    - clear button 点击时继续调用同一 setter，把值置为 `""` 并触发 `onValueChange("")`。
+    - `loading` 为 true 时显示 loading 图标，不显示 clear button。
+    - `readOnly` 或 `disabled` 时不显示 clear button。
 
 执行要求：
 
@@ -145,17 +145,17 @@
 控件和操作：
 
 - `SconePasswordInput`：
-  - 用户在 password textbox 输入文本时，继续更新显示值。
-  - 输入操作必须先触发 `onValueChange(nextValue)`，再触发原生 `onChange(event)`。
-  - visibility button 点击后继续在 `type="password"` 与 `type="text"` 间切换。
-  - `disabled` 或 `readOnly` 时 visibility button 继续不可交互。
-  - button 文案继续在 `visibilityLabel` 与 `hideVisibilityLabel` 之间切换。
+    - 用户在 password textbox 输入文本时，继续更新显示值。
+    - 输入操作必须先触发 `onValueChange(nextValue)`，再触发原生 `onChange(event)`。
+    - visibility button 点击后继续在 `type="password"` 与 `type="text"` 间切换。
+    - `disabled` 或 `readOnly` 时 visibility button 继续不可交互。
+    - button 文案继续在 `visibilityLabel` 与 `hideVisibilityLabel` 之间切换。
 - `SconeTextArea`：
-  - 用户在 textarea 输入多行文本时，继续更新显示值。
-  - 输入操作必须先触发 `onValueChange(nextValue)`，再触发原生 `onChange(event)`。
-  - `showCount` 为 true 时继续显示字符数。
-  - 有 `maxLength` 时 count 继续显示为 `${count}/${maxLength}`；无 `maxLength` 时显示 `count`。
-  - `autoSize` 为 true 时继续向 textarea 写入 `data-autosize` 和 `field-sizing-content` class。
+    - 用户在 textarea 输入多行文本时，继续更新显示值。
+    - 输入操作必须先触发 `onValueChange(nextValue)`，再触发原生 `onChange(event)`。
+    - `showCount` 为 true 时继续显示字符数。
+    - 有 `maxLength` 时 count 继续显示为 `${count}/${maxLength}`；无 `maxLength` 时显示 `count`。
+    - `autoSize` 为 true 时继续向 textarea 写入 `data-autosize` 和 `field-sizing-content` class。
 
 执行要求：
 
@@ -175,9 +175,9 @@
 执行要求：
 
 - 完全处理后，从 `docs/40-readiness/SYSTEMATIC-CODE-REVIEW-2026-07.md` 删除以下已关闭章节：
-  - `[P2] Controlled state helper cannot represent undefined as a controlled value`
-  - `[P2] Form context internals are part of the public package surface`
-  - `[P2] Text input value plumbing is duplicated across sibling components`
+    - `[P2] Controlled state helper cannot represent undefined as a controlled value`
+    - `[P2] Form context internals are part of the public package surface`
+    - `[P2] Text input value plumbing is duplicated across sibling components`
 - 如其中任何一项没有完全处理，不删除对应章节，只把建议收窄为剩余风险。
 - 任务关闭前删除 `docs/30-designs/RUNBOOK-FORM-PUBLIC-API-CONTRACT.md`。
 

@@ -62,6 +62,26 @@ describe("useControllableState", () => {
         expect(result.current[0]).toBe("open");
     });
 
+    it("treats an explicit undefined value as uncontrolled", () => {
+        const onValueChange = vi.fn();
+        const { result } = renderHook(() =>
+            useControllableState({
+                value: undefined,
+                defaultValue: "idle",
+                onValueChange,
+            }),
+        );
+
+        expect(result.current[0]).toBe("idle");
+
+        act(() => {
+            result.current[1]("active");
+        });
+
+        expect(result.current[0]).toBe("active");
+        expect(onValueChange).toHaveBeenCalledWith("active");
+    });
+
     it("supports functional updates and skips duplicate notifications", () => {
         const onValueChange = vi.fn();
         const { result } = renderHook(() =>
