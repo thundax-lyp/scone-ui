@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `03 src/components/data-display/card.tsx`：实现 Card 和 Statistic
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DATA-DISPLAY-CLOSURE.md`
-    - 范围对象：`src/components/data-display/card.tsx`、`src/components/data-display/statistic.tsx`、`src/components/data-display/card.test.tsx`、`src/components/data-display/statistic.test.tsx`
-    - 处理动作：基于 shadcn Card 基座实现 `SconeCard`，并实现只展示字段的 `SconeStatistic`。
-    - 验收点：Card 覆盖 title/description/actions/content/footer/loading/aria-busy，Statistic 不新增 trend/delta/precision。
-    - 重要度：9/10
-
 - [ ] `04 src/components/data-display/descriptions.tsx`：实现 Descriptions 和 List
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DATA-DISPLAY-CLOSURE.md`
