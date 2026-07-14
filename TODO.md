@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `2-form-context-public-contract`：2. 锁定 Form context 公共导出字段
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FORM-PUBLIC-API-CONTRACT.md`
-    - 范围对象：`src/components/form/form.tsx`、`src/components/form/field.tsx`、`src/components/form/index.ts`、`src/index.ts`、`src/index.test.ts`
-    - 处理动作：保留 Form context hooks 和 context value 类型公共导出，并补齐 generated id 字段的公共类型断言。
-    - 验收点：`useSconeFormContext`、`useSconeFieldContext` 仍是 runtime public exports，`SconeFieldContextValue.fieldId`、`labelId`、`descriptionId`、`messageId` 均被断言为 `string`。
-    - 重要度：9/10
-
 - [ ] `3-input-search-text-control`：3. 收敛 Input 和 SearchInput 文本值 plumbing
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FORM-PUBLIC-API-CONTRACT.md`
