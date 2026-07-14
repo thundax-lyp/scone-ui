@@ -95,8 +95,164 @@ describe("SconeSplitPane", () => {
         fireEvent.pointerMove(window, { clientX: 220 });
         fireEvent.pointerUp(window, { clientX: 260 });
 
-        expect(handleSizeChange).toHaveBeenCalledWith("200px");
+        expect(handleSizeChange).toHaveBeenCalledWith("240px");
         expect(handleSizeCommit).toHaveBeenCalledWith("240px");
+    });
+
+    it("clamps pointer drag to the min size preset", () => {
+        const handleSizeChange = vi.fn();
+        const handleSizeCommit = vi.fn();
+
+        render(
+            <SconeSplitPane
+                minSizePreset="medium"
+                onSizeChange={handleSizeChange}
+                onSizeCommit={handleSizeCommit}
+            >
+                <div>Primary</div>
+                <div>Secondary</div>
+            </SconeSplitPane>,
+        );
+
+        const root = screen.getByText("Primary").closest("[data-scone-layout='split-pane']");
+        const handle = screen.getByRole("separator");
+
+        vi.spyOn(root as HTMLElement, "getBoundingClientRect").mockReturnValue({
+            bottom: 200,
+            height: 200,
+            left: 20,
+            right: 520,
+            top: 0,
+            width: 500,
+            x: 20,
+            y: 0,
+            toJSON: () => undefined,
+        });
+
+        fireEvent.pointerDown(handle, { clientX: 120 });
+        fireEvent.pointerMove(window, { clientX: 80 });
+        fireEvent.pointerUp(window, { clientX: 100 });
+
+        expect(handleSizeChange).toHaveBeenCalledWith("320px");
+        expect(handleSizeCommit).toHaveBeenCalledWith("320px");
+    });
+
+    it("clamps pointer drag to the max size preset", () => {
+        const handleSizeChange = vi.fn();
+        const handleSizeCommit = vi.fn();
+
+        render(
+            <SconeSplitPane
+                maxSizePreset="medium"
+                onSizeChange={handleSizeChange}
+                onSizeCommit={handleSizeCommit}
+            >
+                <div>Primary</div>
+                <div>Secondary</div>
+            </SconeSplitPane>,
+        );
+
+        const root = screen.getByText("Primary").closest("[data-scone-layout='split-pane']");
+        const handle = screen.getByRole("separator");
+
+        vi.spyOn(root as HTMLElement, "getBoundingClientRect").mockReturnValue({
+            bottom: 200,
+            height: 200,
+            left: 20,
+            right: 520,
+            top: 0,
+            width: 500,
+            x: 20,
+            y: 0,
+            toJSON: () => undefined,
+        });
+
+        fireEvent.pointerDown(handle, { clientX: 120 });
+        fireEvent.pointerMove(window, { clientX: 520 });
+        fireEvent.pointerUp(window, { clientX: 620 });
+
+        expect(handleSizeChange).toHaveBeenCalledWith("320px");
+        expect(handleSizeCommit).toHaveBeenCalledWith("320px");
+    });
+
+    it("clamps keyboard resize to the min size preset", () => {
+        const handleSizeChange = vi.fn();
+        const handleSizeCommit = vi.fn();
+
+        render(
+            <SconeSplitPane
+                defaultSize="248px"
+                minSizePreset="narrow"
+                onSizeChange={handleSizeChange}
+                onSizeCommit={handleSizeCommit}
+            >
+                <div>Primary</div>
+                <div>Secondary</div>
+            </SconeSplitPane>,
+        );
+
+        fireEvent.keyDown(screen.getByRole("separator"), { key: "ArrowLeft" });
+
+        expect(handleSizeChange).toHaveBeenCalledWith("240px");
+        expect(handleSizeCommit).toHaveBeenCalledWith("240px");
+        expect(screen.getByRole("separator")).toHaveAttribute("aria-valuetext", "240px");
+    });
+
+    it("clamps keyboard resize to the max size preset", () => {
+        const handleSizeChange = vi.fn();
+        const handleSizeCommit = vi.fn();
+
+        render(
+            <SconeSplitPane
+                defaultSize="632px"
+                maxSizePreset="fill"
+                onSizeChange={handleSizeChange}
+                onSizeCommit={handleSizeCommit}
+            >
+                <div>Primary</div>
+                <div>Secondary</div>
+            </SconeSplitPane>,
+        );
+
+        fireEvent.keyDown(screen.getByRole("separator"), { key: "ArrowRight" });
+
+        expect(handleSizeChange).toHaveBeenCalledWith("640px");
+        expect(handleSizeCommit).toHaveBeenCalledWith("640px");
+        expect(screen.getByRole("separator")).toHaveAttribute("aria-valuetext", "640px");
+    });
+
+    it("cleans up pointer listeners when unmounted during drag", () => {
+        const handleSizeChange = vi.fn();
+        const handleSizeCommit = vi.fn();
+        const { unmount } = render(
+            <SconeSplitPane onSizeChange={handleSizeChange} onSizeCommit={handleSizeCommit}>
+                <div>Primary</div>
+                <div>Secondary</div>
+            </SconeSplitPane>,
+        );
+
+        const root = screen.getByText("Primary").closest("[data-scone-layout='split-pane']");
+        const handle = screen.getByRole("separator");
+
+        vi.spyOn(root as HTMLElement, "getBoundingClientRect").mockReturnValue({
+            bottom: 200,
+            height: 200,
+            left: 20,
+            right: 520,
+            top: 0,
+            width: 500,
+            x: 20,
+            y: 0,
+            toJSON: () => undefined,
+        });
+
+        fireEvent.pointerDown(handle, { clientX: 120 });
+        unmount();
+        fireEvent.pointerMove(window, { clientX: 320 });
+        fireEvent.pointerUp(window, { clientX: 360 });
+
+        expect(handleSizeChange).not.toHaveBeenCalled();
+        expect(handleSizeCommit).not.toHaveBeenCalled();
     });
 
     it("rejects CSS length overrides without a unit", () => {

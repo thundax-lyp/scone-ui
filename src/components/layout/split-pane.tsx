@@ -19,6 +19,11 @@ export interface SconeSplitPaneProps {
     className?: string;
 }
 
+interface SconeSplitPaneSizeBounds {
+    minPixels: number;
+    maxPixels: number;
+}
+
 const presetSize: Record<SconeSplitPaneSizePreset, string> = {
     narrow: "16rem",
     medium: "24rem",
@@ -65,11 +70,33 @@ function nextKeyboardSize(
     currentSize: string,
     fallbackPreset: SconeSplitPaneSizePreset,
     delta: number,
+    bounds: SconeSplitPaneSizeBounds,
 ): string {
     const pxMatch = /^(-?\d*\.?\d+)px$/.exec(currentSize);
     const currentPixels = pxMatch ? Number(pxMatch[1]) : presetPixels[fallbackPreset];
 
-    return `${Math.max(0, Math.round(currentPixels + delta))}px`;
+    return formatPixelSize(clampSizePixels(currentPixels + delta, bounds));
+}
+
+function resolveSizeBounds(
+    minSizePreset: SconeSplitPaneSizePreset,
+    maxSizePreset: SconeSplitPaneSizePreset,
+): SconeSplitPaneSizeBounds {
+    const minPixels = presetPixels[minSizePreset];
+    const maxPixels = presetPixels[maxSizePreset];
+
+    return {
+        minPixels: Math.min(minPixels, maxPixels),
+        maxPixels: Math.max(minPixels, maxPixels),
+    };
+}
+
+function clampSizePixels(value: number, bounds: SconeSplitPaneSizeBounds): number {
+    return Math.min(bounds.maxPixels, Math.max(bounds.minPixels, Math.round(value)));
+}
+
+function formatPixelSize(value: number): string {
+    return `${value}px`;
 }
 
 export const SconeSplitPane = React.forwardRef<HTMLDivElement, SconeSplitPaneProps>(
@@ -94,11 +121,16 @@ export const SconeSplitPane = React.forwardRef<HTMLDivElement, SconeSplitPanePro
         assertCssLength(size, "size");
 
         const rootRef = React.useRef<HTMLDivElement | null>(null);
+        const activeDragCleanupRef = React.useRef<(() => void) | null>(null);
         const [internalSize, setInternalSize] = React.useState(() =>
             resolveInitialSize({ defaultSize, defaultSizePreset }),
         );
         const resolvedSize = resolveSize({ size, sizePreset, internalSize });
         const resolvedPreset = sizePreset ?? defaultSizePreset;
+        const sizeBounds = React.useMemo(
+            () => resolveSizeBounds(minSizePreset, maxSizePreset),
+            [maxSizePreset, minSizePreset],
+        );
         const childItems = React.Children.toArray(children);
         const isHorizontal = orientation === "horizontal";
 
@@ -117,6 +149,13 @@ export const SconeSplitPane = React.forwardRef<HTMLDivElement, SconeSplitPanePro
             [onSizeChange, onSizeCommit, size, sizePreset],
         );
 
+        const cleanupActiveDrag = React.useCallback(() => {
+            activeDragCleanupRef.current?.();
+            activeDragCleanupRef.current = null;
+        }, []);
+
+        React.useEffect(() => cleanupActiveDrag, [cleanupActiveDrag]);
+
         const handlePointerDown = React.useCallback(
             (event: React.PointerEvent<HTMLButtonElement>) => {
                 event.preventDefault();
@@ -125,12 +164,14 @@ export const SconeSplitPane = React.forwardRef<HTMLDivElement, SconeSplitPanePro
                     return;
                 }
 
+                cleanupActiveDrag();
+
                 const updateFromPointer = (pointerEvent: PointerEvent, commit: boolean) => {
                     const rect = root.getBoundingClientRect();
                     const nextValue = isHorizontal
                         ? pointerEvent.clientX - rect.left
                         : pointerEvent.clientY - rect.top;
-                    const nextSize = `${Math.max(0, Math.round(nextValue))}px`;
+                    const nextSize = formatPixelSize(clampSizePixels(nextValue, sizeBounds));
 
                     updateSize(nextSize, commit);
                 };
@@ -141,14 +182,17 @@ export const SconeSplitPane = React.forwardRef<HTMLDivElement, SconeSplitPanePro
 
                 const handlePointerUp = (pointerEvent: PointerEvent) => {
                     updateFromPointer(pointerEvent, true);
+                    cleanupActiveDrag();
+                };
+
+                activeDragCleanupRef.current = () => {
                     window.removeEventListener("pointermove", handlePointerMove);
                     window.removeEventListener("pointerup", handlePointerUp);
                 };
-
                 window.addEventListener("pointermove", handlePointerMove);
                 window.addEventListener("pointerup", handlePointerUp);
             },
-            [isHorizontal, updateSize],
+            [cleanupActiveDrag, isHorizontal, sizeBounds, updateSize],
         );
 
         const handleKeyDown = React.useCallback(
@@ -163,11 +207,18 @@ export const SconeSplitPane = React.forwardRef<HTMLDivElement, SconeSplitPanePro
                 }
 
                 event.preventDefault();
-                const nextSize = nextKeyboardSize(resolvedSize, resolvedPreset, delta);
+                const nextSize = nextKeyboardSize(resolvedSize, resolvedPreset, delta, sizeBounds);
                 updateSize(nextSize, true);
                 onSizePresetChange?.("fill");
             },
-            [isHorizontal, onSizePresetChange, resolvedPreset, resolvedSize, updateSize],
+            [
+                isHorizontal,
+                onSizePresetChange,
+                resolvedPreset,
+                resolvedSize,
+                sizeBounds,
+                updateSize,
+            ],
         );
 
         return (

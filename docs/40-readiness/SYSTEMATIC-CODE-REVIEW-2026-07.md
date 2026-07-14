@@ -53,7 +53,6 @@ P1：
 - Combobox hand-rolls complex overlay and listbox behavior.
 - NumberInput can commit `NaN` into component state.
 - DatePicker hand-rolls dialog calendar behavior.
-- SplitPane min/max presets are not enforced.
 - Progress can render `NaN%` when `max` is invalid.
 - Confirm can create unhandled promise rejections.
 - Pagination range text can use an out-of-range page.
@@ -73,7 +72,6 @@ P2：
 - Descriptions `style` prop is applied to an internal `dl`, not the root.
 - Badge root props do not target the same element as the forwarded ref.
 - Layout primitive props are narrower than neighboring root components.
-- SplitPane pointer listeners lack unmount cleanup.
 - Alert always announces as urgent.
 - Toast timers reset on unrelated provider rerenders.
 - Tabs and Segmented expose weaker root passthrough than peer components.
@@ -112,7 +110,7 @@ src/lib/cn.ts
 
 1. 低风险、高收益修改：修复 stale Tailwind token config、Tooltip unique id、Image/Avatar `src` reset、Progress/NumberInput invalid numeric handling、Pagination range clamp、Confirm async rejection。
 2. 模块边界和 API 调整：收口 AppShell callbacks、Section Root shorthand、FilterBar hidden search；决定 Form context internals 是否继续公开；统一 `cn` import path。
-3. 状态与副作用重构：落实 SplitPane min/max 和 listener cleanup、Toast timer stability、Command filtered active state、Alert role/tone semantics。
+3. 状态与副作用重构：落实 Toast timer stability、Command filtered active state、Alert role/tone semantics。
 4. 需要人工确认的修改：Combobox/DatePicker/Dropdown 是否迁移到现有 primitives；Section Root shorthand 是实现还是从 SPEC 移除；AppShell callbacks 是移除还是补交互触发；Form context 公共导出是否允许未来 breaking change。
 
 ## 01 Baseline
@@ -476,36 +474,14 @@ Recent evidence before this review branch:
 - `SconeScrollArea` delegates viewport and scrollbar behavior to Radix ScrollArea and keeps `onScroll` on the viewport.
 - `SconeSeparator` delegates role/orientation semantics to Radix Separator.
 - `SconeSplitPane` implements size presets, CSS length validation, pointer drag, keyboard resize, and size commit callbacks itself.
-- Tests cover ScrollArea viewport class/onScroll, Separator decorative/semantic modes, SplitPane orientation, controlled size, keyboard resize, pointer resize, and invalid CSS length.
+- Tests cover ScrollArea viewport class/onScroll, Separator decorative/semantic modes, SplitPane orientation, controlled size, keyboard resize, pointer resize, min/max bounds, active drag cleanup, and invalid CSS length.
 
 ### Assessment
 
 - ScrollArea and Separator are thin, understandable primitive wrappers.
-- SplitPane is the only stateful interaction component in this group and deserves tighter contract enforcement.
+- SplitPane is the only stateful interaction component in this group and now has explicit bounds and active drag cleanup coverage.
 
 ### Candidate Findings
-
-### [P1] SplitPane min/max presets are not enforced
-
-- **位置**：`src/components/layout/split-pane.tsx`
-- **类别**：API / 状态
-- **问题**：`minSizePreset` and `maxSizePreset` are exposed and rendered as data attributes, but pointer and keyboard resizing do not clamp `resolvedSize` to those bounds.
-- **影响**：The API suggests bounded resizing, but consumers can receive sizes outside the declared min/max range. This creates a misleading contract.
-- **证据**：`minSizePreset` and `maxSizePreset` are only used in `data-min-size-preset` and `data-max-size-preset`; `updateFromPointer` and `nextKeyboardSize` clamp only to zero.
-- **建议**：Either enforce min/max during pointer and keyboard updates or remove these props until bounds are implemented.
-- **功能风险**：中；enforcing bounds changes resize behavior and should update pointer/keyboard tests.
-- **置信度**：高
-
-### [P2] SplitPane pointer listeners lack unmount cleanup
-
-- **位置**：`src/components/layout/split-pane.tsx`
-- **类别**：副作用
-- **问题**：Pointer listeners are registered on `window` during drag and removed only on `pointerup`.
-- **影响**：If the component unmounts during an active drag, listeners can remain attached and call stale closures.
-- **证据**：`handlePointerDown` calls `window.addEventListener("pointermove", ...)` and `window.addEventListener("pointerup", ...)`; there is no effect cleanup or pointer capture fallback.
-- **建议**：Track active listeners in refs and clean them in a `useEffect` return callback, or use pointer capture on the handle.
-- **功能风险**：低；cleanup is internal but should preserve pointer resize tests.
-- **置信度**：中
 
 ## 14 Feedback Status Components
 
