@@ -11,4 +11,116 @@
 
 ## 待审阅任务项
 
+- [ ] `01-navigation-breadcrumb-segmented`：01 实现 Breadcrumb 和 Segmented
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
+    - 范围对象：`src/components/navigation/breadcrumb.tsx`、`src/components/navigation/breadcrumb.test.tsx`、`src/components/navigation/segmented.tsx`、`src/components/navigation/segmented.test.tsx`
+    - 处理动作：实现 Breadcrumb 路径导航和 Segmented 单选切换并补齐同目录测试。
+    - 验收点：Breadcrumb current、链接点击、折叠展开、disabled item 和 Segmented 受控/非受控、键盘切换、disabled 行为均有测试覆盖。
+    - 重要度：9/10
+
+- [ ] `02-navigation-tabs`：02 实现 Tabs
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
+    - 范围对象：`src/components/navigation/tabs.tsx`、`src/components/navigation/tabs.test.tsx`
+    - 处理动作：实现 Tabs tablist、tab、tabpanel、items helper 和 compound children 能力。
+    - 验收点：value/defaultValue、manual/automatic activation、horizontal/vertical keyboard、disabled item 和 ARIA 关联均有测试覆盖。
+    - 重要度：9/10
+
+- [ ] `03-navigation-accordion-collapsible`：03 实现 Accordion 和 Collapsible
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
+    - 范围对象：`src/components/navigation/accordion.tsx`、`src/components/navigation/accordion.test.tsx`、`src/components/navigation/collapsible.tsx`、`src/components/navigation/collapsible.test.tsx`
+    - 处理动作：实现多区域 Accordion 和单区域 Collapsible 的展开收起能力。
+    - 验收点：single、multiple、collapsible、受控/非受控 open/value、aria-expanded、content 关联和键盘切换均有测试覆盖。
+    - 重要度：8/10
+
+- [ ] `04-navigation-tooltip`：04 实现 Tooltip
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
+    - 范围对象：`src/components/navigation/tooltip.tsx`、`src/components/navigation/tooltip.test.tsx`
+    - 处理动作：实现短提示 Tooltip 的 hover、focus、delay、side 和关闭交互。
+    - 验收点：hover、focus、blur、Escape、受控 open、defaultOpen 和短内容展示均有测试覆盖，content 不承载可交互控件。
+    - 重要度：8/10
+
+- [ ] `05-navigation-dropdown`：05 实现 Dropdown
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
+    - 范围对象：`src/components/navigation/dropdown.tsx`、`src/components/navigation/dropdown.test.tsx`
+    - 处理动作：实现动作菜单 Dropdown 的 trigger、items helper、compound children、选择和关闭交互。
+    - 验收点：open/select、disabled、destructive、Escape close、focus restore、controlled open 均有测试覆盖，Dropdown 不作为表单选值控件。
+    - 重要度：9/10
+
+- [ ] `06-navigation-menu`：06 实现 Menu
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
+    - 范围对象：`src/components/navigation/menu.tsx`、`src/components/navigation/menu.test.tsx`
+    - 处理动作：实现按 spec API 行为定义的 menu/list navigation 菜单。
+    - 验收点：selectedKeys、openKeys、collapsed 可访问名称、disabled item、vertical/horizontal 键盘导航均有测试覆盖，且不内置路由、权限、URL 解析或数据加载。
+    - 重要度：9/10
+
+- [ ] `07-navigation-command`：07 实现 Command
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
+    - 范围对象：`src/components/navigation/command.tsx`、`src/components/navigation/command.test.tsx`
+    - 处理动作：实现命令搜索输入、过滤结果、分组、loading、empty 和键盘选择。
+    - 验收点：搜索过滤、受控 value、selectedKey、group、loading、empty、disabled item、ArrowUp/ArrowDown 和 Enter 选择均有测试覆盖，Command 不写入表单值。
+    - 重要度：9/10
+
+- [ ] `08-navigation-tree`：08 实现 Tree
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
+    - 范围对象：`src/components/navigation/tree.tsx`、`src/components/navigation/tree.test.tsx`
+    - 处理动作：实现自研 ARIA tree 的 selected、checked、expanded、roving focus 和键盘模型。
+    - 验收点：受控/非受控 selectedKeys、checkedKeys、expandedKeys、嵌套节点、disabled 节点、multiple selection、checkable、Arrow/Home/End 键盘行为均有测试覆盖。
+    - 重要度：10/10
+
+- [ ] `09-media-image-avatar`：09 实现 Image 和 Avatar
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
+    - 范围对象：`src/components/media/image.tsx`、`src/components/media/image.test.tsx`、`src/components/media/avatar.tsx`、`src/components/media/avatar.test.tsx`
+    - 处理动作：实现 Image fallback/preview/尺寸稳定和 Avatar fallback/icon/size/shape。
+    - 验收点：Image alt、fallback、load/error、preview open、width/height/objectFit 和 Avatar fallback、icon、load/error、size、shape 均有测试覆盖。
+    - 重要度：8/10
+
+- [ ] `10-public-export`：10 接入 Navigation 和 Media public export
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
+    - 范围对象：`src/components/navigation/index.ts`、`src/components/media/index.ts`、`src/index.ts`、`src/index.test.ts`
+    - 处理动作：从组件族入口和库入口导出本次 Navigation + Media 组件和 public props type。
+    - 验收点：消费者可从 `src/index.ts` 导入本次全部组件和类型，且 `SconePagination` 不从任何入口导出。
+    - 重要度：9/10
+
+- [ ] `11-final-main-sync`：11 同步 main 分支代码
+    - 任务类型：执行任务
+    - 依据文档：`docs/00-governance/TODO-RULES.md`
+    - 范围对象：当前工作分支 `feat/navigation-media-closure`、上游 `main`
+    - 处理动作：在实现任务完成后同步最新 `main` 分支代码并处理由同步引入的冲突。
+    - 验收点：当前分支包含最新 `main`，无未解决冲突，Navigation + Media 相关改动未被同步过程回退。
+    - 重要度：8/10
+
+- [ ] `12-final-verification`：12 运行最终验证
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
+    - 范围对象：`src/components/navigation/*`、`src/components/media/*`、`src/index.ts`、`src/index.test.ts`
+    - 处理动作：在同步 main 后运行 Navigation + Media 闭环要求的最终验证命令。
+    - 验收点：`pnpm format`、`pnpm lint`、`pnpm typecheck`、`pnpm test -- src/components/navigation src/components/media src/index.test.ts`、`pnpm build` 均通过或失败原因已明确记录。
+    - 重要度：10/10
+
+- [ ] `13-implementation-coverage`：13 更新 Implementation Coverage
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
+    - 范围对象：`docs/40-readiness/IMPLEMENTATION-COVERAGE.md`
+    - 处理动作：补充 Navigation + Media 实现覆盖证据。
+    - 验收点：coverage 记录包含源码文件、测试文件、覆盖能力、最终验证命令结果，并明确 `SconePagination` 延后到 DataTable worktree。
+    - 重要度：10/10
+
+- [ ] `14-runbook-cleanup`：14 清理 RUNBOOK
+    - 任务类型：执行任务
+    - 依据文档：`docs/00-governance/DOCUMENT-RULES.md`
+    - 范围对象：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
+    - 处理动作：在实现、验证和 Implementation Coverage 收口后删除临时 RUNBOOK。
+    - 验收点：RUNBOOK 文件已删除，长期证据已保留在 `docs/40-readiness/IMPLEMENTATION-COVERAGE.md`。
+    - 重要度：10/10
+
 ## 待讨论项
