@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `3 src/components/feedback-overlay/loading.tsx`：实现 Loading 加载组件
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-OVERLAY.md`
-    - 范围对象：`src/components/feedback-overlay/loading.tsx`、`src/components/feedback-overlay/loading.test.tsx`
-    - 处理动作：实现 `SconeLoading` 和 `SconeLoadingProps`，覆盖 loading、type、size、children、className 字段。
-    - 验收点：Loading 测试验证 `aria-busy`、spinner、skeleton 和内容保留行为。
-    - 重要度：8/10
-
 - [ ] `4 src/components/feedback-overlay/progress.tsx`：实现 Progress 进度组件
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-OVERLAY.md`
