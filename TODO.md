@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `18-navigation-disclosure-media`：18 审核 disclosure 和媒体组件
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`src/components/navigation/accordion.tsx`、`src/components/navigation/collapsible.tsx`、`src/components/navigation/tooltip.tsx`、`src/components/media/image.tsx`、`src/components/media/avatar.tsx`
-    - 处理动作：检查展开状态、短提示边界、图片 fallback、头像 fallback 和媒体业务中性边界。
-    - 验收点：输出 disclosure/media 是否存在必读信息误放、fallback 不清或产品语义泄漏的结论。
-    - 重要度：7/10
-
 - [ ] `19-pattern-shell-page-section`：19 审核 AppShell、Page 和 Section Pattern
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`

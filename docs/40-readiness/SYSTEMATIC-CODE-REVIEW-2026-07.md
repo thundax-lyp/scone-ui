@@ -556,6 +556,44 @@ Recent evidence before this review branch:
 * **功能风险**：低；behavior becomes more predictable but should be covered with a filter-then-enter test.
 * **置信度**：高
 
+## 18 Disclosure And Media Components
+
+### Evidence
+
+- `SconeAccordion` and `SconeCollapsible` delegate disclosure behavior to Radix primitives.
+- `SconeTooltip` manually controls open state, delay, trigger cloning, Escape close, positioning, and `aria-describedby`.
+- `SconeImage` and `SconeAvatar` store image failure state and render fallback on missing/error source.
+- Tests cover accordion single/multiple, collapsible controlled state, tooltip focus/hover/Escape, image fallback/preview, and avatar fallback.
+
+### Assessment
+
+- Accordion and Collapsible are clear primitive wrappers.
+- Tooltip and media fallback state need hardening for multiple instances and source changes.
+
+### Candidate Findings
+
+### [P1] Tooltip uses a fixed DOM id
+
+* **位置**：`src/components/navigation/tooltip.tsx`
+* **类别**：可访问性 / 状态
+* **问题**：Every tooltip uses `id="scone-tooltip"` and sets the trigger `aria-describedby` to that same fixed id.
+* **影响**：Multiple tooltip instances produce duplicate DOM ids and ambiguous `aria-describedby` references.
+* **证据**：The cloned trigger receives `"aria-describedby": isOpen ? "scone-tooltip" : ...`; the tooltip content renders `<span id="scone-tooltip" role="tooltip">`.
+* **建议**：Generate a stable id per instance with `React.useId()` and merge with existing `aria-describedby` when open.
+* **功能风险**：低；localized accessibility fix with multi-tooltip test.
+* **置信度**：高
+
+### [P1] Image and Avatar do not reset failure state when `src` changes
+
+* **位置**：`src/components/media/image.tsx`、`src/components/media/avatar.tsx`
+* **类别**：状态 / 错误处理
+* **问题**：Both components initialize `failed` from `!src` and set it to true on image error, but neither resets it when `src` changes.
+* **影响**：A component that receives a new image URL after a missing or failed URL can remain stuck on fallback.
+* **证据**：`const [failed, setFailed] = React.useState(!src)` appears in both files; no effect watches `src`.
+* **建议**：Reset `failed` whenever `src` changes, typically with `React.useEffect(() => setFailed(!src), [src])`.
+* **功能风险**：低；behavior becomes more correct for dynamic media.
+* **置信度**：高
+
 ## 09 Form Layout Helpers
 
 ### Evidence
