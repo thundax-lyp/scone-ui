@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/cn";
 import type { SconeTone } from "../../types/foundation";
 
 export interface SconeAlertProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
