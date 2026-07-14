@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `4. compose-refs`：实现 ref 合并工具
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`
-    - 范围对象：`src/lib/compose-refs.ts`、`src/lib/compose-refs.test.tsx`
-    - 处理动作：实现 `composeRefs` 并验证 callback ref、object ref、空 ref 和 `null` 清理。
-    - 验收点：`composeRefs<T>(...refs)` 能同步写入多个 ref，并在节点清理时向 callback ref 和 object ref 传播 `null`。
-    - 重要度：8/10
-
 - [ ] `5. controllable-state`：实现受控状态桥接
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`
