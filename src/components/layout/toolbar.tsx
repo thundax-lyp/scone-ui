@@ -1,25 +1,24 @@
 import * as React from "react";
 
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/cn";
 
 const toolbarDensityClass = {
     compact: "min-h-control-sm gap-xs py-xs",
     default: "min-h-control-md gap-sm py-sm",
 };
 
-export interface SconeToolbarProps {
+export interface SconeToolbarProps extends React.HTMLAttributes<HTMLDivElement> {
     start?: React.ReactNode;
     end?: React.ReactNode;
-    children?: React.ReactNode;
     density?: "compact" | "default";
-    className?: string;
 }
 
 export const SconeToolbar = React.forwardRef<HTMLDivElement, SconeToolbarProps>(
-    ({ start, end, children, density = "default", className }, ref) => {
+    ({ start, end, children, density = "default", className, style, ...props }, ref) => {
         return (
             <div
                 ref={ref}
+                {...props}
                 data-scone-layout="toolbar"
                 data-density={density}
                 className={cn(
@@ -27,6 +26,7 @@ export const SconeToolbar = React.forwardRef<HTMLDivElement, SconeToolbarProps>(
                     toolbarDensityClass[density],
                     className,
                 )}
+                style={style}
             >
                 {children ?? (
                     <>

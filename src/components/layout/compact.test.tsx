@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import * as React from "react";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { SconeCompact } from "./compact";
 
@@ -21,11 +21,24 @@ describe("SconeCompact", () => {
         expect(compact).toHaveClass("inline-flex", "isolate", "flex-row", "[&>*]:min-h-control-md");
     });
 
-    it("supports vertical orientation, sm sizing, className, and ref without cloning children", () => {
+    it("supports root attributes, vertical orientation, sm sizing, className, and ref without cloning children", () => {
         const ref = React.createRef<HTMLDivElement>();
+        const onClick = vi.fn();
 
         render(
-            <SconeCompact ref={ref} orientation="vertical" size="sm" className="custom-compact">
+            <SconeCompact
+                ref={ref}
+                id="compact-group"
+                role="group"
+                aria-label="Compact actions"
+                data-testid="compact-root"
+                data-scone-layout="caller"
+                onClick={onClick}
+                orientation="vertical"
+                size="sm"
+                className="custom-compact"
+                style={{ width: 180 }}
+            >
                 <button type="button" data-state="loading">
                     Save
                 </button>
@@ -35,8 +48,18 @@ describe("SconeCompact", () => {
             </SconeCompact>,
         );
 
-        expect(ref.current).toBe(screen.getByText("Save").parentElement);
+        const compact = screen.getByTestId("compact-root");
+
+        compact.click();
+
+        expect(ref.current).toBe(compact);
         expect(ref.current).toHaveClass("custom-compact", "flex-col", "[&>*]:min-h-control-sm");
+        expect(ref.current).toHaveAttribute("id", "compact-group");
+        expect(ref.current).toHaveAttribute("role", "group");
+        expect(ref.current).toHaveAttribute("aria-label", "Compact actions");
+        expect(ref.current).toHaveAttribute("data-scone-layout", "compact");
+        expect(ref.current).toHaveStyle({ width: "180px" });
+        expect(onClick).toHaveBeenCalledTimes(1);
         expect(screen.getByText("Save")).toHaveAttribute("data-state", "loading");
         expect(screen.getByText("Cancel")).toBeDisabled();
     });

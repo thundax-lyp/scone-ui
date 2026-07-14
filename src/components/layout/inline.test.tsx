@@ -1,6 +1,6 @@
 import { render, screen, within } from "@testing-library/react";
 import * as React from "react";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { SconeInline } from "./inline";
 
@@ -39,17 +39,37 @@ describe("SconeInline", () => {
         expect(within(inline as HTMLElement).getAllByText("/")).toHaveLength(2);
     });
 
-    it("passes className, style, and ref to the root container", () => {
+    it("passes root attributes, className, style, event handlers, and ref to the root container", () => {
         const ref = React.createRef<HTMLDivElement>();
+        const onClick = vi.fn();
 
         render(
-            <SconeInline ref={ref} className="custom-inline" style={{ maxWidth: 320 }}>
+            <SconeInline
+                ref={ref}
+                id="inline-actions"
+                role="group"
+                aria-label="Inline actions"
+                data-testid="inline-root"
+                data-scone-layout="caller"
+                onClick={onClick}
+                className="custom-inline"
+                style={{ maxWidth: 320 }}
+            >
                 <span>Inline content</span>
             </SconeInline>,
         );
 
-        expect(ref.current).toBe(screen.getByText("Inline content").parentElement);
+        const inline = screen.getByTestId("inline-root");
+
+        inline.click();
+
+        expect(ref.current).toBe(inline);
         expect(ref.current).toHaveClass("custom-inline", "gap-sm", "items-center");
+        expect(ref.current).toHaveAttribute("id", "inline-actions");
+        expect(ref.current).toHaveAttribute("role", "group");
+        expect(ref.current).toHaveAttribute("aria-label", "Inline actions");
+        expect(ref.current).toHaveAttribute("data-scone-layout", "inline");
         expect(ref.current).toHaveStyle({ maxWidth: "320px" });
+        expect(onClick).toHaveBeenCalledTimes(1);
     });
 });

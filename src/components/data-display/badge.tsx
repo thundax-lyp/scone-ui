@@ -57,9 +57,7 @@ export const SconeBadge = React.forwardRef<HTMLSpanElement, SconeBadgeProps>(
                     "inline-flex shrink-0 items-center justify-center rounded-full text-[10px] leading-none font-medium ring-2 ring-background",
                     dot ? "size-2.5" : "min-w-5 px-1.5 py-0.5",
                     badgeToneClassNames[tone],
-                    className,
                 )}
-                {...props}
             >
                 {dot ? null : displayCount}
             </span>
@@ -67,7 +65,11 @@ export const SconeBadge = React.forwardRef<HTMLSpanElement, SconeBadgeProps>(
 
         if (children) {
             return (
-                <span ref={ref} className="relative inline-flex w-fit max-w-full align-middle">
+                <span
+                    ref={ref}
+                    className={cn("relative inline-flex w-fit max-w-full align-middle", className)}
+                    {...props}
+                >
                     {children}
                     {indicator ? (
                         <span className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2">
@@ -79,7 +81,7 @@ export const SconeBadge = React.forwardRef<HTMLSpanElement, SconeBadgeProps>(
         }
 
         return (
-            <span ref={ref} className="inline-flex w-fit align-middle">
+            <span ref={ref} className={cn("inline-flex w-fit align-middle", className)} {...props}>
                 {indicator}
             </span>
         );

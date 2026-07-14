@@ -58,11 +58,47 @@ describe("SconeDescriptions", () => {
         expect(screen.getByText("Unassigned")).toBeInTheDocument();
     });
 
-    it("forwards refs and className to the root", () => {
+    it("forwards root attributes, style, className, and ref to the root", () => {
         const ref = createRef<HTMLDivElement>();
 
-        render(<SconeDescriptions ref={ref} className="custom-descriptions" items={items} />);
+        render(
+            <SconeDescriptions
+                ref={ref}
+                id="project-descriptions"
+                role="group"
+                aria-label="Project descriptions"
+                data-testid="descriptions-root"
+                className="custom-descriptions"
+                style={{ marginTop: "12px" }}
+                items={items}
+            />,
+        );
 
+        expect(screen.getByTestId("descriptions-root")).toBe(ref.current);
         expect(ref.current).toHaveClass("custom-descriptions");
+        expect(ref.current).toHaveAttribute("id", "project-descriptions");
+        expect(ref.current).toHaveAttribute("role", "group");
+        expect(ref.current).toHaveAttribute("aria-label", "Project descriptions");
+        expect(ref.current).toHaveStyle({ marginTop: "12px" });
+    });
+
+    it("keeps caller root style separate from internal column style", () => {
+        const { container } = render(
+            <SconeDescriptions
+                items={items}
+                columns={2}
+                style={{ marginTop: "12px", color: "red" }}
+                data-testid="descriptions-root"
+            />,
+        );
+
+        const root = screen.getByTestId("descriptions-root");
+        const list = container.querySelector("dl");
+
+        expect(root).toHaveStyle({ marginTop: "12px" });
+        expect(root).toHaveStyle({ color: "rgb(255, 0, 0)" });
+        expect(root).not.toHaveStyle({ "--dd-columns": "2" });
+        expect(list).toHaveStyle({ "--dd-columns": "2" });
+        expect(list).not.toHaveStyle({ marginTop: "12px" });
     });
 });

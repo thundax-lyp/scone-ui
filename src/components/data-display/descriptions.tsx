@@ -39,11 +39,9 @@ type DescriptionsStyle = React.CSSProperties & Record<`--dd-columns${string}`, n
 
 function getColumnsStyle(
     columns: number | ResponsiveValue<number> | undefined,
-    style: React.CSSProperties | undefined,
 ): React.CSSProperties {
     const resolved = columns ?? 3;
     const nextStyle: DescriptionsStyle = {
-        ...style,
         "--dd-columns": typeof resolved === "number" ? resolved : (resolved.sm ?? 1),
     };
 
@@ -71,12 +69,12 @@ export const SconeDescriptions = React.forwardRef<HTMLDivElement, SconeDescripti
         },
         ref,
     ) => (
-        <div ref={ref} className={cn("min-w-0 space-y-3", className)} {...props}>
+        <div ref={ref} className={cn("min-w-0 space-y-3", className)} style={style} {...props}>
             {title !== undefined ? (
                 <div className="text-sm font-semibold text-foreground">{title}</div>
             ) : null}
             <dl
-                style={getColumnsStyle(columns, style)}
+                style={getColumnsStyle(columns)}
                 className={cn(
                     "grid min-w-0 [grid-template-columns:repeat(var(--dd-columns),minmax(0,1fr))] sm:[grid-template-columns:repeat(var(--dd-columns-sm,var(--dd-columns)),minmax(0,1fr))] md:[grid-template-columns:repeat(var(--dd-columns-md,var(--dd-columns)),minmax(0,1fr))] lg:[grid-template-columns:repeat(var(--dd-columns-lg,var(--dd-columns)),minmax(0,1fr))] xl:[grid-template-columns:repeat(var(--dd-columns-xl,var(--dd-columns)),minmax(0,1fr))]",
                     descriptionsDensityClassNames[density],
