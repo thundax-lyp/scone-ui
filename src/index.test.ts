@@ -11,33 +11,45 @@ import {
     mergeIds,
     notification,
     SconeAlert,
+    SconeAccordion,
+    SconeAvatar,
     SconeBadge,
+    SconeBreadcrumb,
     SconeCard,
     SconeCompact,
     SconeConfirm,
+    SconeCollapsible,
+    SconeCommand,
     SconeDescriptions,
     SconeDialog,
+    SconeDropdown,
     SconeDrawer,
     SconeEmpty,
+    SconeImage,
     SconeInline,
     SconeList,
     SconeLoading,
+    SconeMenu,
     SconeNotificationProvider,
     SconeParagraph,
     SconePagination,
     SconeProgress,
     SconeScrollArea,
     SconeSeparator,
+    SconeSegmented,
     SconeSplitPane,
     SconeStack,
     SconeStatistic,
     SconeTable,
+    SconeTabs,
     SconeTag,
     SconeText,
+    SconeTooltip,
     SconeTimeline,
     SconeTitle,
     SconeToastProvider,
     SconeToolbar,
+    SconeTree,
     SconeTypography,
     toast,
     useControllableState,
@@ -57,15 +69,23 @@ import type {
     ResponsiveValue,
     SconeAlertProps,
     SconeAlign,
+    SconeAvatarProps,
     SconeBaseItem,
+    SconeBreadcrumbProps,
+    SconeCommandItem,
+    SconeCommandProps,
     SconeConfirmProps,
     SconeControlSize,
     SconeDensity,
     SconeDialogProps,
     SconeDrawerProps,
+    SconeDropdownProps,
     SconeEmptyProps,
+    SconeImageProps,
     SconeInlineProps,
     SconeLoadingProps,
+    SconeMenuProps,
+    SconeNavigationItem,
     SconeNotificationItem,
     SconeNotificationProviderProps,
     SconeOption,
@@ -74,6 +94,7 @@ import type {
     SconePaginationProps,
     SconePaginationState,
     SconeProgressProps,
+    SconeSegmentedProps,
     SconeRowSelection,
     SconeSide,
     SconeSplitPaneProps,
@@ -82,6 +103,10 @@ import type {
     SconeSpacingToken,
     SconeStatus,
     SconeTableColumn,
+    SconeTabsItem,
+    SconeTabsProps,
+    SconeTreeNode,
+    SconeTreeProps,
     SconeTimelineItem,
     SconeTone,
     SconeToastItem,
@@ -231,35 +256,50 @@ describe("public index exports", () => {
 
         expect(Object.keys(publicExports).sort()).toEqual(
             [
+                "SconeAccordion",
                 "SconeAlert",
+                "SconeAvatar",
                 "SconeBadge",
+                "SconeBreadcrumb",
                 "SconeCard",
+                "SconeCollapsible",
+                "SconeCommand",
                 "SconeCompact",
                 "SconeConfirm",
                 "DataTable",
                 "SconeDescriptions",
                 "SconeDialog",
                 "SconeDrawer",
+                "SconeDropdown",
+                "SconeDropdownItem",
+                "SconeDropdownLabel",
+                "SconeDropdownSeparator",
                 "SconeEmpty",
+                "SconeImage",
                 "SconeInline",
                 "SconeList",
                 "SconeLoading",
+                "SconeMenu",
                 "SconeNotificationProvider",
                 "SconeParagraph",
                 "SconePagination",
                 "SconeProgress",
                 "SconeScrollArea",
+                "SconeSegmented",
                 "SconeSeparator",
                 "SconeSplitPane",
                 "SconeStack",
                 "SconeStatistic",
                 "SconeTable",
+                "SconeTabs",
                 "SconeTag",
                 "SconeText",
                 "SconeTimeline",
                 "SconeTitle",
                 "SconeToastProvider",
                 "SconeToolbar",
+                "SconeTooltip",
+                "SconeTree",
                 "SconeTypography",
                 "ariaBoolean",
                 "ariaValue",
@@ -288,5 +328,46 @@ describe("public index exports", () => {
         expect(typeof SconeBadge).toBe("object");
         expect(typeof SconeStatistic).toBe("object");
         expect(typeof SconeTimeline).toBe("object");
+    });
+
+    it("exports navigation and media component APIs", async () => {
+        expect(SconeAccordion).toBeDefined();
+        expect(SconeBreadcrumb).toBeDefined();
+        expect(SconeCollapsible).toBeDefined();
+        expect(SconeCommand).toBeDefined();
+        expect(SconeDropdown).toBeDefined();
+        expect(SconeMenu).toBeDefined();
+        expect(SconeSegmented).toBeDefined();
+        expect(SconeTabs).toBeDefined();
+        expect(SconeTooltip).toBeDefined();
+        expect(SconeTree).toBeDefined();
+        expect(SconeImage).toBeDefined();
+        expect(SconeAvatar).toBeDefined();
+
+        expectTypeOf<SconeBreadcrumbProps["items"][number]["key"]>().toEqualTypeOf<Key>();
+        expectTypeOf<SconeSegmentedProps["options"]>().toEqualTypeOf<SconeOption<string>[]>();
+        expectTypeOf<SconeTabsItem["value"]>().toEqualTypeOf<string>();
+        expectTypeOf<SconeTabsProps["activationMode"]>().toEqualTypeOf<
+            "automatic" | "manual" | undefined
+        >();
+        expectTypeOf<SconeNavigationItem["key"]>().toEqualTypeOf<string>();
+        expectTypeOf<SconeMenuProps["onSelect"]>().toEqualTypeOf<
+            ((key: string, item: SconeNavigationItem) => void) | undefined
+        >();
+        expectTypeOf<SconeCommandItem["keywords"]>().toEqualTypeOf<string[] | undefined>();
+        expectTypeOf<SconeCommandProps["onSelect"]>().toEqualTypeOf<
+            ((key: string, item: SconeCommandItem) => void) | undefined
+        >();
+        expectTypeOf<SconeDropdownProps["align"]>().toEqualTypeOf<
+            "start" | "center" | "end" | undefined
+        >();
+        expectTypeOf<SconeTreeNode["key"]>().toEqualTypeOf<Key>();
+        expectTypeOf<SconeTreeProps["onExpand"]>().toEqualTypeOf<
+            ((keys: Key[], info: { node: SconeTreeNode; expanded: boolean }) => void) | undefined
+        >();
+        expectTypeOf<SconeImageProps["objectFit"]>().toEqualTypeOf<
+            "cover" | "contain" | undefined
+        >();
+        expectTypeOf<SconeAvatarProps["shape"]>().toEqualTypeOf<"circle" | "square" | undefined>();
     });
 });

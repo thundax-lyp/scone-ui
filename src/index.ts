@@ -34,6 +34,48 @@ export type {
     SconeTypographyTone,
     SconeTypographyWeight,
 } from "./components/data-display";
+export {
+    SconeAccordion,
+    SconeBreadcrumb,
+    SconeCollapsible,
+    SconeCommand,
+    SconeDropdown,
+    SconeDropdownItem,
+    SconeDropdownLabel,
+    SconeDropdownSeparator,
+    SconeMenu,
+    SconeSegmented,
+    SconeTabs,
+    SconeTooltip,
+    SconeTree,
+} from "./components/navigation";
+export type {
+    SconeAccordionItem,
+    SconeAccordionProps,
+    SconeActionItem,
+    SconeBreadcrumbItem,
+    SconeBreadcrumbProps,
+    SconeCollapsibleProps,
+    SconeCommandItem,
+    SconeCommandProps,
+    SconeDropdownProps,
+    SconeMenuProps,
+    SconeNavigationItem,
+    SconeSegmentedProps,
+    SconeTabsContentProps,
+    SconeTabsItem,
+    SconeTabsListProps,
+    SconeTabsProps,
+    SconeTabsTriggerProps,
+    SconeTooltipProps,
+    SconeTreeCheckInfo,
+    SconeTreeExpandInfo,
+    SconeTreeNode,
+    SconeTreeProps,
+    SconeTreeSelectInfo,
+} from "./components/navigation";
+export { SconeAvatar, SconeImage } from "./components/media";
+export type { SconeAvatarProps, SconeImageProps } from "./components/media";
 
 export { ariaBoolean, ariaValue, hasAriaValue, mergeAriaDescribedBy, mergeIds } from "./lib/aria";
 export { SconePagination } from "./components/navigation";
