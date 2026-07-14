@@ -10,21 +10,33 @@ import {
     mergeIds,
     notification,
     SconeAlert,
+    SconeBadge,
+    SconeCard,
     SconeCompact,
     SconeConfirm,
+    SconeDescriptions,
     SconeDialog,
     SconeDrawer,
     SconeEmpty,
     SconeInline,
+    SconeList,
     SconeLoading,
     SconeNotificationProvider,
+    SconeParagraph,
     SconeProgress,
     SconeScrollArea,
     SconeSeparator,
     SconeSplitPane,
     SconeStack,
+    SconeStatistic,
+    SconeTable,
+    SconeTag,
+    SconeText,
+    SconeTimeline,
+    SconeTitle,
     SconeToastProvider,
     SconeToolbar,
+    SconeTypography,
     toast,
     useControllableState,
 } from "./index";
@@ -59,6 +71,8 @@ import type {
     SconeStackProps,
     SconeSpacingToken,
     SconeStatus,
+    SconeTableColumn,
+    SconeTimelineItem,
     SconeTone,
     SconeToastItem,
     SconeToastProviderProps,
@@ -92,6 +106,8 @@ describe("public index exports", () => {
         >();
         expectTypeOf<SconeOption["value"]>().toEqualTypeOf<string>();
         expectTypeOf<SconeBaseItem["key"]>().toEqualTypeOf<Key>();
+        expectTypeOf<SconeTableColumn<{ id: string }>["key"]>().toEqualTypeOf<Key>();
+        expectTypeOf<SconeTimelineItem["key"]>().toEqualTypeOf<Key>();
     });
 
     it("exports layout component APIs", () => {
@@ -178,21 +194,33 @@ describe("public index exports", () => {
         expect(Object.keys(publicExports).sort()).toEqual(
             [
                 "SconeAlert",
+                "SconeBadge",
+                "SconeCard",
                 "SconeCompact",
                 "SconeConfirm",
+                "SconeDescriptions",
                 "SconeDialog",
                 "SconeDrawer",
                 "SconeEmpty",
                 "SconeInline",
+                "SconeList",
                 "SconeLoading",
                 "SconeNotificationProvider",
+                "SconeParagraph",
                 "SconeProgress",
                 "SconeScrollArea",
                 "SconeSeparator",
                 "SconeSplitPane",
                 "SconeStack",
+                "SconeStatistic",
+                "SconeTable",
+                "SconeTag",
+                "SconeText",
+                "SconeTimeline",
+                "SconeTitle",
                 "SconeToastProvider",
                 "SconeToolbar",
+                "SconeTypography",
                 "ariaBoolean",
                 "ariaValue",
                 "cn",
@@ -205,5 +233,20 @@ describe("public index exports", () => {
                 "useControllableState",
             ].sort(),
         );
+    });
+
+    it("exports data display components from the public entry", () => {
+        expect(typeof SconeTypography).toBe("object");
+        expect(typeof SconeText).toBe("object");
+        expect(typeof SconeTitle).toBe("object");
+        expect(typeof SconeParagraph).toBe("object");
+        expect(typeof SconeCard).toBe("object");
+        expect(typeof SconeTable).toBe("object");
+        expect(typeof SconeDescriptions).toBe("object");
+        expect(typeof SconeList).toBe("object");
+        expect(typeof SconeTag).toBe("object");
+        expect(typeof SconeBadge).toBe("object");
+        expect(typeof SconeStatistic).toBe("object");
+        expect(typeof SconeTimeline).toBe("object");
     });
 });

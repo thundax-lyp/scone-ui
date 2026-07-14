@@ -2,7 +2,7 @@
 
 ## Purpose
 
-本文档记录 `docs/30-designs/DESIGN-ADMIN-UI.md` 及 `docs/30-designs/admin-ui/` 下拆分设计文档对 admin-ui SPEC 的设计覆盖状态。
+本文档记录 `docs/30-designs/DESIGN-ADMIN-UI.md` 及 `docs/30-designs/admin-ui/` 下拆分设计文档对 admin-ui SPEC 的设计覆盖状态，并记录已经完成实现闭环的组件族证据。
 
 当前状态同时记录设计覆盖和已完成的实现覆盖证据：
 
@@ -50,29 +50,73 @@
 
 以下能力已在 DESIGN 中完成设计落点和验证规划。已实现条目在本节明确标注；未标注实现状态的能力仍需后续实现代码与测试：
 
-- Typography：`SconeTypography`、`SconeText`、`SconeTitle`、`SconeParagraph`。
+- Typography：已实现并测试 `SconeTypography`、`SconeText`、`SconeTitle`、`SconeParagraph`。
 - Form components：`SconeButton`、`SconeInput`、`SconeSearchInput`、`SconePasswordInput`、`SconeTextArea`、`SconeSelect`、`SconeForm`、`SconeField`。
 - Form helpers：`SconeFieldGroup`、`SconeFormSection`、`SconeFormActions`。
 - Additional form inputs：`SconeCombobox`、`SconeSwitch`、`SconeCheckbox`、`SconeRadioGroup`、`SconeNumberInput`、`SconeSlider`、`SconeDatePicker`、`SconeUpload`。
 - Layout primitives：已实现并测试 `SconeStack`、`SconeInline`、`SconeCompact`、`SconeToolbar`、`SconeSplitPane`、`SconeSeparator`、`SconeScrollArea`。
-- Data display：`SconeDescriptions`、`SconeTable`、`SconeCard`、`SconeTag`、`SconeBadge`、`SconeList`、`SconeStatistic`、`SconeTimeline`。
+- Data display：已实现并测试 `SconeDescriptions`、`SconeTable`、`SconeCard`、`SconeTag`、`SconeBadge`、`SconeList`、`SconeStatistic`、`SconeTimeline`。
 - Navigation and media：`SconeBreadcrumb`、`SconePagination`、`SconeTabs`、`SconeSegmented`、`SconeTree`、`SconeDropdown`、`SconeMenu`、`SconeTooltip`、`SconeCommand`、`SconeAccordion`、`SconeCollapsible`、`SconeImage`、`SconeAvatar`。
 - Feedback：已实现并测试 `SconeDrawer`、`SconeDialog`、`SconeConfirm`、`SconeAlert`、`SconeEmpty`、`SconeLoading`、`SconeProgress`、`SconeToastProvider`、`toast`、`SconeNotificationProvider`、`notification`。
 - Admin Pattern exports：`AppShell`、`Page`、`Section`、`FilterBar`、`DataTable` compound parts。
 - Recipes：DrawerForm、ConfirmationFlow、Popover、Logo、Result、Dashboard Metric、Grid。
 
-## Pending Implementation Work
-
-后续实现阶段至少需要完成：
-
-1. 创建 DESIGN 指定的其余 `src/` 目录结构、公共入口和组件族类型入口。
-2. 按 `docs/10-specs/COMPONENT-SELECTION.md` 的 source strategy 实现 wrapper、vendored primitive、custom component、pattern-only 和 docs-only 边界。
-3. 创建 `src/styles/theme.css`，并维护默认 `tailwind.config.ts` 到 CSS variables 的映射。
-4. 实现 Layout primitives 和 Feedback / Overlay 以外的组件族和 Pattern；Recipe 全部保持文档和示例边界，不创建 `src/recipes/` 源码入口。
-5. 按 DESIGN 的 Verification Design 在被测文件同目录创建 `*.test.ts` 或 `*.test.tsx`，并生成真正的实现覆盖证据。
-6. 在后续实现后更新本 readiness 文档，区分已实现、已测试、未覆盖和延期项。
-
 ## Implementation Coverage Evidence
+
+### Data Display
+
+实现状态：已完成。
+
+测试状态：已完成。
+
+源码文件：
+
+- `src/components/data-display/typography.tsx`
+- `src/components/data-display/tag.tsx`
+- `src/components/data-display/badge.tsx`
+- `src/components/data-display/card.tsx`
+- `src/components/data-display/statistic.tsx`
+- `src/components/data-display/descriptions.tsx`
+- `src/components/data-display/list.tsx`
+- `src/components/data-display/table.tsx`
+- `src/components/data-display/timeline.tsx`
+- `src/components/data-display/index.ts`
+- `src/index.ts`
+
+测试文件：
+
+- `src/components/data-display/typography.test.tsx`
+- `src/components/data-display/tag.test.tsx`
+- `src/components/data-display/badge.test.tsx`
+- `src/components/data-display/card.test.tsx`
+- `src/components/data-display/statistic.test.tsx`
+- `src/components/data-display/descriptions.test.tsx`
+- `src/components/data-display/list.test.tsx`
+- `src/components/data-display/table.test.tsx`
+- `src/components/data-display/timeline.test.tsx`
+- `src/index.test.ts`
+
+覆盖能力：
+
+- Typography：`SconeTypography`、`SconeText`、`SconeTitle`、`SconeParagraph`。
+- Display labels：`SconeTag`、`SconeBadge`。
+- Containers and metrics：`SconeCard`、`SconeStatistic`。
+- Structured data：`SconeDescriptions`、`SconeList`、`SconeTable`。
+- Event sequence：`SconeTimeline`。
+- Public exports：Data Display 组件族入口和库级入口。
+
+验证结果：
+
+- `pnpm test`：通过，17 个 test files、64 个 tests。
+- `pnpm typecheck`：通过。
+- `pnpm lint`：通过。
+- `pnpm build`：通过。
+
+说明：
+
+- 基础 `SconeTable` 不包含 `DataTable` Pattern 的筛选、分页、selection、bulk actions、fixed column、sticky header、虚拟滚动或 DataGrid 键盘模型。
+- `SconeStatistic` 不包含趋势计算、同比语义、业务口径格式化或 `trend`/`delta`/`precision` 字段。
+- Tag/Badge 的业务枚举到 `SconeTone` 映射由调用方处理。
 
 ### Layout Primitives
 
@@ -172,6 +216,17 @@
 
 - 其他组件族、Pattern 和 Recipe 仍未进入实现覆盖。
 
+## Pending Implementation Work
+
+后续实现阶段至少需要完成：
+
+1. 创建 DESIGN 指定的其余 `src/` 目录结构、公共入口和组件族类型入口。
+2. 按 `docs/10-specs/COMPONENT-SELECTION.md` 的 source strategy 实现 wrapper、vendored primitive、custom component、pattern-only 和 docs-only 边界。
+3. 继续维护 `src/styles/theme.css` 作为 CSS variables 唯一数值源，并维护默认 `tailwind.config.ts` 到 CSS variables 的映射。
+4. 实现 Data Display、Layout primitives 和 Feedback / Overlay 以外的组件族和 Pattern；Recipe 全部保持文档和示例边界，不创建 `src/recipes/` 源码入口。
+5. 按 DESIGN 的 Verification Design 在被测文件同目录创建 `*.test.ts` 或 `*.test.tsx`，并生成真正的实现覆盖证据。
+6. 在后续实现后更新本 readiness 文档，区分已实现、已测试、未覆盖和延期项。
+
 ## Verification Plan
 
 后续验证应至少覆盖：
@@ -192,6 +247,6 @@
 
 设计覆盖：完成。
 
-实现覆盖：部分完成。Layout primitives 与 Feedback / Overlay 已实现；其余组件族、Pattern 和 Recipe 未完成。
+实现覆盖：部分完成。Data Display、Layout primitives 与 Feedback / Overlay 已实现；其余组件族、Pattern 和 Recipe 未完成。
 
-测试覆盖：部分完成。Layout primitives 与 Feedback / Overlay 已测试；其余组件族、Pattern 和 Recipe 未完成。
+测试覆盖：部分完成。Data Display、Layout primitives 与 Feedback / Overlay 已测试；其余组件族、Pattern 和 Recipe 未完成。
