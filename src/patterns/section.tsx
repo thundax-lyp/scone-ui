@@ -15,6 +15,14 @@ export interface SectionHeaderProps extends Omit<React.HTMLAttributes<HTMLDivEle
     actions?: React.ReactNode;
 }
 
+export interface SectionTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+    level?: 2 | 3 | 4;
+}
+
+export type SectionDescriptionProps = React.HTMLAttributes<HTMLParagraphElement>;
+
+export type SectionActionsProps = React.HTMLAttributes<HTMLDivElement>;
+
 export interface SectionContentProps extends React.HTMLAttributes<HTMLDivElement> {
     children: React.ReactNode;
 }
@@ -23,7 +31,7 @@ export interface SectionFooterProps extends React.HTMLAttributes<HTMLDivElement>
     children: React.ReactNode;
 }
 
-const sectionDensityClassNames = {
+const sectionDensityClassNames: Record<SconeDensity, string> = {
     compact: "gap-xs",
     default: "gap-sm",
     comfortable: "gap-md",
@@ -57,20 +65,53 @@ function SectionHeader({
             {...props}
         >
             <div data-scone-section-header-content="" className="min-w-0 flex-1">
-                {title ? <h2 className="text-lg font-semibold text-foreground">{title}</h2> : null}
-                {description ? (
-                    <p className="mt-xs text-sm text-muted-foreground">{description}</p>
-                ) : null}
+                {title ? <SectionTitle>{title}</SectionTitle> : null}
+                {description ? <SectionDescription>{description}</SectionDescription> : null}
                 {children}
             </div>
             {actions ? (
-                <div
-                    data-scone-section-header-actions=""
-                    className="flex shrink-0 flex-wrap items-center justify-end gap-sm"
-                >
+                <SectionActions data-scone-section-header-actions="">
                     {actions}
-                </div>
+                </SectionActions>
             ) : null}
+        </div>
+    );
+}
+
+function SectionTitle({ level = 2, className, children, ...props }: SectionTitleProps) {
+    const Heading = `h${level}` as "h2" | "h3" | "h4";
+
+    return (
+        <Heading
+            data-scone-section-part="title"
+            className={cn("min-w-0 text-base font-semibold text-foreground", className)}
+            {...props}
+        >
+            {children}
+        </Heading>
+    );
+}
+
+function SectionDescription({ className, children, ...props }: SectionDescriptionProps) {
+    return (
+        <p
+            data-scone-section-part="description"
+            className={cn("mt-xs min-w-0 text-sm text-muted-foreground", className)}
+            {...props}
+        >
+            {children}
+        </p>
+    );
+}
+
+function SectionActions({ className, children, ...props }: SectionActionsProps) {
+    return (
+        <div
+            data-scone-section-part="actions"
+            className={cn("flex shrink-0 flex-wrap items-center justify-end gap-sm", className)}
+            {...props}
+        >
+            {children}
         </div>
     );
 }
@@ -98,6 +139,9 @@ function SectionFooter({ className, children, ...props }: SectionFooterProps) {
 export const Section = {
     Root: SectionRoot,
     Header: SectionHeader,
+    Title: SectionTitle,
+    Description: SectionDescription,
+    Actions: SectionActions,
     Content: SectionContent,
     Footer: SectionFooter,
 };

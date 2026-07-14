@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `2 src/patterns/section.tsx src/patterns/section.test.tsx`：实现非 Card Section pattern
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-PATTERN-PAGE-SECTION-FILTER-BAR.md`
-    - 范围对象：`src/patterns/section.tsx`、`src/patterns/section.test.tsx`
-    - 处理动作：新增 `Section.Root`、`Section.Header`、`Section.Title`、`Section.Description`、`Section.Actions`、`Section.Content` 及对应测试。
-    - 验收点：Section 不使用 Card 边界，actions 位于 header 内，标题、描述、操作区和内容区组合均有测试覆盖。
-    - 重要度：9/10
-
 - [ ] `3 src/patterns/filter-bar.tsx src/patterns/filter-bar.test.tsx`：实现独立 FilterBar pattern 受控组合
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-PATTERN-PAGE-SECTION-FILTER-BAR.md`
