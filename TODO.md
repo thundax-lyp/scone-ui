@@ -10,14 +10,6 @@
 
 ## 当前任务项
 
-- [ ] `16 implementation-coverage`：更新 Form Implementation Coverage
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`
-    - 范围对象：`docs/40-readiness/IMPLEMENTATION-COVERAGE.md`
-    - 处理动作：记录 Form 组件族源码、测试、覆盖能力和验证结果。
-    - 验收点：Implementation Coverage 明确标注 Form components、Form helpers、Additional form inputs 已实现并测试。
-    - 重要度：9/10
-
 - [ ] `17 cleanup-runbook-todo`：清理 RUNBOOK 和收窄 TODO
     - 任务类型：执行任务
     - 依据文档：`docs/00-governance/TODO-RULES.md`、`docs/00-governance/DOCUMENT-RULES.md`

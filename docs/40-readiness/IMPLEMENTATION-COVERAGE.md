@@ -51,9 +51,9 @@
 以下能力已在 DESIGN 中完成设计落点和验证规划。已实现条目在本节明确标注；未标注实现状态的能力仍需后续实现代码与测试：
 
 - Typography：已实现并测试 `SconeTypography`、`SconeText`、`SconeTitle`、`SconeParagraph`。
-- Form components：`SconeButton`、`SconeInput`、`SconeSearchInput`、`SconePasswordInput`、`SconeTextArea`、`SconeSelect`、`SconeForm`、`SconeField`。
-- Form helpers：`SconeFieldGroup`、`SconeFormSection`、`SconeFormActions`。
-- Additional form inputs：`SconeCombobox`、`SconeSwitch`、`SconeCheckbox`、`SconeRadioGroup`、`SconeNumberInput`、`SconeSlider`、`SconeDatePicker`、`SconeUpload`。
+- Form components：已实现并测试 `SconeButton`、`SconeInput`、`SconeSearchInput`、`SconePasswordInput`、`SconeTextArea`、`SconeSelect`、`SconeForm`、`SconeField`。
+- Form helpers：已实现并测试 `SconeFieldGroup`、`SconeFormSection`、`SconeFormActions`。
+- Additional form inputs：已实现并测试 `SconeCombobox`、`SconeSwitch`、`SconeCheckbox`、`SconeRadioGroup`、`SconeNumberInput`、`SconeSlider`、`SconeDatePicker`、`SconeUpload`。
 - Layout primitives：已实现并测试 `SconeStack`、`SconeInline`、`SconeCompact`、`SconeToolbar`、`SconeSplitPane`、`SconeSeparator`、`SconeScrollArea`。
 - Data display：已实现并测试 `SconeDescriptions`、`SconeTable`、`SconeCard`、`SconeTag`、`SconeBadge`、`SconeList`、`SconeStatistic`、`SconeTimeline`。
 - Navigation and media：已实现并测试 `SconePagination`；`SconeBreadcrumb`、`SconeTabs`、`SconeSegmented`、`SconeTree`、`SconeDropdown`、`SconeMenu`、`SconeTooltip`、`SconeCommand`、`SconeAccordion`、`SconeCollapsible`、`SconeImage`、`SconeAvatar`。
@@ -62,6 +62,82 @@
 - Recipes：DrawerForm、ConfirmationFlow、Popover、Logo、Result、Dashboard Metric、Grid。
 
 ## Implementation Coverage Evidence
+
+### Form
+
+实现状态：已完成。
+
+测试状态：已完成。
+
+源码文件：
+
+- `src/components/form/form.tsx`
+- `src/components/form/field.tsx`
+- `src/components/form/control.ts`
+- `src/components/form/button.tsx`
+- `src/components/form/input.tsx`
+- `src/components/form/search-input.tsx`
+- `src/components/form/password-input.tsx`
+- `src/components/form/textarea.tsx`
+- `src/components/form/select.tsx`
+- `src/components/form/combobox.tsx`
+- `src/components/form/switch.tsx`
+- `src/components/form/checkbox.tsx`
+- `src/components/form/radio-group.tsx`
+- `src/components/form/number-input.tsx`
+- `src/components/form/slider.tsx`
+- `src/components/form/date-picker.tsx`
+- `src/components/form/upload.tsx`
+- `src/components/form/field-group.tsx`
+- `src/components/form/form-section.tsx`
+- `src/components/form/form-actions.tsx`
+- `src/components/form/index.ts`
+- `src/index.ts`
+
+测试文件：
+
+- `src/components/form/form.test.tsx`
+- `src/components/form/button.test.tsx`
+- `src/components/form/input.test.tsx`
+- `src/components/form/search-input.test.tsx`
+- `src/components/form/password-input.test.tsx`
+- `src/components/form/textarea.test.tsx`
+- `src/components/form/select.test.tsx`
+- `src/components/form/combobox.test.tsx`
+- `src/components/form/switch.test.tsx`
+- `src/components/form/checkbox.test.tsx`
+- `src/components/form/radio-group.test.tsx`
+- `src/components/form/number-input.test.tsx`
+- `src/components/form/slider.test.tsx`
+- `src/components/form/date-picker.test.tsx`
+- `src/components/form/upload.test.tsx`
+- `src/components/form/field-group.test.tsx`
+- `src/components/form/form-section.test.tsx`
+- `src/components/form/form-actions.test.tsx`
+- `src/index.test.ts`
+
+覆盖能力：
+
+- Form shell：`SconeForm` 提供 disabled、readOnly、requiredMark 上下文；`SconeField` 提供 Root、Label、Control、Description、Message 组合和 label/description/message ARIA 关联。
+- Basic controls：`SconeButton`、`SconeInput`、`SconeSearchInput`、`SconePasswordInput`、`SconeTextArea`、`SconeSelect` 支持受控/非受控值、size、invalid、disabled/readOnly、Field 上下文和公共 props type。
+- Additional inputs：`SconeCombobox`、`SconeSwitch`、`SconeCheckbox`、`SconeRadioGroup`、`SconeNumberInput`、`SconeSlider`、`SconeDatePicker`、`SconeUpload` 支持核心交互、受控状态、Field 上下文和公共 props type。
+- Form helpers：`SconeFieldGroup`、`SconeFormSection`、`SconeFormActions` 支持分组、分区、动作区布局和 ref/className 透传。
+- Public exports：Form 组件族入口和库级入口导出所有组件、hooks、props 类型和 `SconeUploadRejection`。
+
+验证结果：
+
+- `pnpm format`：通过。
+- `pnpm lint`：通过，0 errors，12 warnings；warning 为 `react-refresh/only-export-components`，其中 Form 相关 warning 来自 `src/components/form/field.tsx`、`src/components/form/form.tsx`。
+- `pnpm build`：通过。
+- `pnpm test`：通过，53 个 test files、172 个 tests。
+- `pnpm typecheck`：通过。
+- `pnpm format:check`：通过。
+
+说明：
+
+- Form 组件族只提供组件库层表单控件和组合语义，不内置表单校验 schema、提交状态机、后端请求、业务字段规则或产品工作流。
+- `SconeCombobox`、`SconeDatePicker` 为组件库基础交互实现；复杂异步数据源、时区策略、范围选择和业务日期禁用规则由调用方组合。
+- `SconeUpload` 只处理文件选择、accept/maxSize/maxFiles/beforeAdd 基础约束和 rejection 回调，不执行上传请求或持久化。
 
 ### Data Display
 
