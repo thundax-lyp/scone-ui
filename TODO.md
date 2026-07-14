@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `4.8 navigation cn imports batch 1`：统一 navigation 第一批 `cn` 导入
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
-    - 范围对象：`src/components/navigation/accordion.tsx`、`src/components/navigation/breadcrumb.tsx`、`src/components/navigation/collapsible.tsx`、`src/components/navigation/command.tsx`、`src/components/navigation/dropdown.tsx`
-    - 处理动作：将本批 navigation 文件中的 `@/lib/utils` 导入改为 `@/lib/cn`。
-    - 验收点：本批文件不再引用 `@/lib/utils`，菜单、面包屑、折叠、命令和下拉交互不变。
-    - 重要度：7/10
-
 - [ ] `4.9 navigation cn imports batch 2`：统一 navigation 第二批 `cn` 导入
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`

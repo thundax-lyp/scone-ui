@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Collapsible as CollapsiblePrimitive } from "radix-ui";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 
 export interface SconeCollapsibleProps {
     open?: boolean;
