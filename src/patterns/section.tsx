@@ -70,9 +70,7 @@ function SectionHeader({
                 {children}
             </div>
             {actions ? (
-                <SectionActions data-scone-section-header-actions="">
-                    {actions}
-                </SectionActions>
+                <SectionActions data-scone-section-header-actions="">{actions}</SectionActions>
             ) : null}
         </div>
     );

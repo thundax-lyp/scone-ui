@@ -33,6 +33,41 @@ describe("DataTable", () => {
         expect(
             screen.getByLabelText("Query").closest("[data-scone-data-table-part='filter-bar']"),
         ).toBeInTheDocument();
+        expect(
+            screen.getByLabelText("Query").closest("[data-scone-pattern='filter-bar']"),
+        ).toBeInTheDocument();
+    });
+
+    it("uses the shared FilterBar behavior for DataTable.FilterBar controls", () => {
+        const onSearchChange = vi.fn();
+        const onApply = vi.fn();
+        const onReset = vi.fn();
+
+        render(
+            <DataTable.Root>
+                <DataTable.FilterBar
+                    searchValue=""
+                    onSearchChange={onSearchChange}
+                    filters={<button type="button">Status</button>}
+                    expandedContent={<div>Advanced filters</div>}
+                    expanded
+                    onApply={onApply}
+                    onReset={onReset}
+                />
+            </DataTable.Root>,
+        );
+
+        fireEvent.change(screen.getByRole("searchbox", { name: "Search" }), {
+            target: { value: "abc" },
+        });
+        fireEvent.click(screen.getByRole("button", { name: "Apply" }));
+        fireEvent.click(screen.getByRole("button", { name: "Reset" }));
+
+        expect(screen.getByRole("button", { name: "Status" })).toBeInTheDocument();
+        expect(screen.getByText("Advanced filters")).toBeInTheDocument();
+        expect(onSearchChange).toHaveBeenCalledWith("abc");
+        expect(onApply).toHaveBeenCalledTimes(1);
+        expect(onReset).toHaveBeenCalledTimes(1);
     });
 
     it("reuses SconeToolbar and derives selected count from Root selection", () => {

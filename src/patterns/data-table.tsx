@@ -16,6 +16,8 @@ import type {
     SconeRowSelection,
 } from "@/types/foundation";
 
+import { FilterBar, type FilterBarRootProps } from "./filter-bar";
+
 export interface DataTableRootProps<T> extends React.HTMLAttributes<HTMLDivElement> {
     density?: SconeDensity;
     rowSelection?: SconeRowSelection<T>;
@@ -26,7 +28,7 @@ export interface DataTableRootProps<T> extends React.HTMLAttributes<HTMLDivEleme
     ) => void;
 }
 
-export interface DataTableFilterBarProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DataTableFilterBarProps extends FilterBarRootProps {
     children?: React.ReactNode;
 }
 
@@ -161,13 +163,13 @@ function DataTableRoot<T>({
 
 function DataTableFilterBar({ className, children, ...props }: DataTableFilterBarProps) {
     return (
-        <div
+        <FilterBar.Root
             data-scone-data-table-part="filter-bar"
             className={cn("min-w-0", className)}
             {...props}
         >
             {children}
-        </div>
+        </FilterBar.Root>
     );
 }
 

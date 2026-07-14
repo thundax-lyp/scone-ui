@@ -208,12 +208,16 @@ export type {
     FilterBarSummaryProps,
     PageContentProps,
     PageHeaderProps,
+    PageMainProps,
     PageRootProps,
     PageStickyActionsProps,
+    SectionActionsProps,
     SectionContentProps,
+    SectionDescriptionProps,
     SectionFooterProps,
     SectionHeaderProps,
     SectionRootProps,
+    SectionTitleProps,
 } from "./patterns";
 
 export type {

@@ -37,8 +37,10 @@ export interface FilterBarRootProps extends Omit<React.HTMLAttributes<HTMLDivEle
     resetDisabled?: boolean;
 }
 
-export interface FilterBarSearchProps
-    extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "value" | "defaultValue"> {
+export interface FilterBarSearchProps extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    "value" | "defaultValue"
+> {
     placeholder?: string;
     ariaLabel?: string;
 }

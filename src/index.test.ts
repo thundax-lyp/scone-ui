@@ -84,6 +84,7 @@ import type {
     AppShellSidebarProps,
     Breakpoint,
     DataTableAction,
+    DataTableFilterBarProps,
     DataTablePaginationProps,
     DataTableRootProps,
     DataTableTableRegionProps,
@@ -167,10 +168,14 @@ import type {
     ToastOptions,
     ToastPosition,
     ToastService,
+    PageMainProps,
     PageRootProps,
     PageStickyActionsProps,
+    SectionActionsProps,
+    SectionDescriptionProps,
     SectionHeaderProps,
     SectionRootProps,
+    SectionTitleProps,
 } from "./index";
 
 describe("public index exports", () => {
@@ -233,13 +238,17 @@ describe("public index exports", () => {
         expect(typeof AppShell.Root).toBe("function");
         expect(typeof AppShell.Main).toBe("function");
         expect(typeof Page).toBe("object");
+        expect(typeof Page.Main).toBe("function");
         expect(typeof Page.Content).toBe("function");
         expect(typeof Section).toBe("object");
         expect(typeof Section.Header).toBe("function");
+        expect(typeof Section.Title).toBe("function");
         expect(typeof FilterBar).toBe("object");
+        expect(typeof FilterBar.Root).toBe("function");
         expect(typeof FilterBar.Search).toBe("function");
         expect(typeof DataTable).toBe("object");
         expect(typeof DataTable.Root).toBe("function");
+        expect(typeof DataTable.FilterBar).toBe("function");
         expect(typeof DataTable.TableRegion).toBe("function");
         expect(typeof DataTable.Pagination).toBe("function");
 
@@ -253,11 +262,20 @@ describe("public index exports", () => {
         expectTypeOf<PageRootProps["maxWidth"]>().toEqualTypeOf<
             "narrow" | "content" | "wide" | "full" | undefined
         >();
+        expectTypeOf<PageRootProps["hasStickyActions"]>().toEqualTypeOf<boolean | undefined>();
+        expectTypeOf<PageMainProps["asChild"]>().toEqualTypeOf<false | undefined>();
         expectTypeOf<PageStickyActionsProps["align"]>().toEqualTypeOf<
-            "start" | "end" | "between" | undefined
+            "start" | "center" | "end" | "between" | undefined
         >();
         expectTypeOf<SectionRootProps["density"]>().toEqualTypeOf<SconeDensity | undefined>();
         expectTypeOf<SectionHeaderProps["actions"]>().toEqualTypeOf<React.ReactNode>();
+        expectTypeOf<SectionTitleProps["level"]>().toEqualTypeOf<2 | 3 | 4 | undefined>();
+        expectTypeOf<SectionDescriptionProps["children"]>().toEqualTypeOf<
+            React.ReactNode | undefined
+        >();
+        expectTypeOf<SectionActionsProps["children"]>().toEqualTypeOf<
+            React.ReactNode | undefined
+        >();
         expectTypeOf<FilterBarFilters>().toEqualTypeOf<Record<string, unknown>>();
         expectTypeOf<FilterBarState>().toEqualTypeOf<{
             searchValue: string;
@@ -266,7 +284,13 @@ describe("public index exports", () => {
         expectTypeOf<FilterBarRootProps["onApply"]>().toEqualTypeOf<
             ((state: FilterBarState) => void) | undefined
         >();
+        expectTypeOf<FilterBarRootProps["onExpandedChange"]>().toEqualTypeOf<
+            ((expanded: boolean) => void) | undefined
+        >();
         expectTypeOf<DataTableAction["key"]>().toEqualTypeOf<Key>();
+        expectTypeOf<DataTableFilterBarProps["onApply"]>().toEqualTypeOf<
+            ((state: FilterBarState) => void) | undefined
+        >();
         expectTypeOf<DataTableRootProps<{ id: string }>["rowSelection"]>().toEqualTypeOf<
             SconeRowSelection<{ id: string }> | undefined
         >();
