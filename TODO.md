@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `02 src/components/data-display/tag.tsx`：实现 Tag 和 Badge primitives
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DATA-DISPLAY-CLOSURE.md`
-    - 范围对象：`src/components/data-display/tag.tsx`、`src/components/data-display/badge.tsx`、`src/components/data-display/tag.test.tsx`、`src/components/data-display/badge.test.tsx`
-    - 处理动作：实现并测试 `SconeTag` 的 tone/closable/onClose 和 `SconeBadge` 的 count/dot/tone/overflow/ariaLabel。
-    - 验收点：关闭按钮可访问且只触发 `onClose`，Badge dot 有可读语义，overflow 展示稳定。
-    - 重要度：9/10
-
 - [ ] `03 src/components/data-display/card.tsx`：实现 Card 和 Statistic
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DATA-DISPLAY-CLOSURE.md`
