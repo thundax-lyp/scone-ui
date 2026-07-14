@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `5 src/components/feedback-overlay/drawer.tsx`：实现 Drawer 侧向浮层组件
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-OVERLAY.md`
-    - 范围对象：`src/components/feedback-overlay/drawer.tsx`、`src/components/feedback-overlay/drawer.test.tsx`
-    - 处理动作：实现 `SconeDrawer` 和 `SconeDrawerProps`，覆盖 open、onRequestClose、title、description、side、widthPreset、actions、footer、loading、destroyOnClose、ariaLabel。
-    - 验收点：Drawer 测试验证 Escape、outside、closeButton、footerAction、focus restore、滚动内容区和固定 footer。
-    - 重要度：10/10
-
 - [ ] `6 src/components/feedback-overlay/dialog.tsx`：实现 Dialog 居中浮层组件
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-OVERLAY.md`
