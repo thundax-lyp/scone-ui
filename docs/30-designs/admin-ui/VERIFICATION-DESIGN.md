@@ -31,3 +31,38 @@
 - Media：Image/Avatar fallback、alt、preview open。
 - Pattern：DataTable.TableRegion、Page.Content 主滚动、Section 非 Card、FilterBar submit intent。
 - Recipe：DrawerForm dirty close、ConfirmationFlow destructive description、Popover/Logo/Result docs-only。
+
+## File-Level Acceptance Matrix
+
+以下矩阵是实现阶段的最小验收入口。每个目标源码文件必须有同目录同名测试，除非该项明确为 docs-only。
+
+| 目标源码文件 | 目标测试文件 | 必验收点 |
+| --- | --- | --- |
+| `src/types/foundation.ts` | `src/types/foundation.test.ts` | `OverlayCloseReason` 与 `FOUNDATIONS-SPEC.md` 一致；`SconeOption<Value = string>` 默认泛型；`ResponsiveValue<T>` 不接受数组形态。 |
+| `src/index.ts` | `src/index.test.ts` | 公共导出与 `COMPONENT-SELECTION.md` Export Groups 一致；Recipe 不导出；私有 helper 不泄漏。 |
+| `src/components/form/button.tsx` | `src/components/form/button.test.tsx` | `SconeButtonProps`、loading 禁止重复触发、disabled、`ariaLabel`、`asChild` ref/className。 |
+| `src/components/form/input.tsx`、`search-input.tsx`、`password-input.tsx`、`textarea.tsx` | 同目录同名 `*.test.tsx` | `value/defaultValue/onValueChange`、disabled/readOnly/invalid、Field ARIA 关联、clear/password toggle/count。 |
+| `src/components/form/select.tsx`、`combobox.tsx` | 同目录同名 `*.test.tsx` | `SconeOption<Value>`、open/value 受控组合、keyboard、loading/empty、Field invalid。 |
+| `src/components/form/form.tsx`、`field.tsx` | 同目录同名 `*.test.tsx` | Form context 传播；Field label/description/message/id/required/invalid 关联。 |
+| `src/components/form/field-group.tsx`、`form-section.tsx`、`form-actions.tsx` | 同目录同名 `*.test.tsx` | 语义 grouping、section actions、sticky actions 不遮挡字段；不内置保存/请求。 |
+| `src/components/form/switch.tsx`、`checkbox.tsx`、`radio-group.tsx`、`slider.tsx` | 同目录同名 `*.test.tsx` | checked/value 受控组合、Radix keyboard、invalid via Field、disabled。 |
+| `src/components/form/number-input.tsx`、`date-picker.tsx`、`upload.tsx` | 同目录同名 `*.test.tsx` | custom keyboard/ARIA、边界值、`disabledDate`、文件 reject reason、disabled/readOnly/invalid。 |
+| `src/components/data-display/descriptions.tsx`、`list.tsx`、`timeline.tsx` | 同目录同名 `*.test.tsx` | item 数据结构、density、loading/error/empty、timeline sequence、无业务状态机。 |
+| `src/components/data-display/table.tsx` | `src/components/data-display/table.test.tsx` | `SconeTableColumn<T>`、`rowKey`、cell render、scroll.x、loading/error/empty；不内置 pagination/selection/request。 |
+| `src/components/data-display/card.tsx`、`tag.tsx`、`badge.tsx`、`typography.tsx`、`statistic.tsx` | 同目录同名 `*.test.tsx` | tone/status 映射、loading region、closable、dot aria、语义 HTML、truncate。 |
+| `src/components/layout/stack.tsx`、`inline.tsx`、`compact.tsx`、`toolbar.tsx` | 同目录同名 `*.test.tsx` | token gap、wrap、density、ref/className；不承载业务状态。 |
+| `src/components/layout/split-pane.tsx` | `src/components/layout/split-pane.test.tsx` | min/max/size 带单位、keyboard resize、ARIA orientation、onSizeChange。 |
+| `src/components/layout/separator.tsx`、`scroll-area.tsx` | 同目录同名 `*.test.tsx` | Radix semantics、viewport slot、onScroll 来源、不得形成第二主滚动。 |
+| `src/components/feedback-overlay/drawer.tsx`、`dialog.tsx`、`confirm.tsx` | 同目录同名 `*.test.tsx` | `OverlayCloseReason`、focus trap/restore、Escape/outside/close/footerAction、destructive confirm、loading 防重复。 |
+| `src/components/feedback-overlay/alert.tsx`、`empty.tsx`、`loading.tsx`、`progress.tsx` | 同目录同名 `*.test.tsx` | 可读状态、action、`aria-busy`、progress 可量化语义。 |
+| `src/components/feedback-overlay/toast.tsx`、`notification.tsx` | 同目录同名 `*.test.tsx` | Provider props、service 返回稳定 id、update/dismiss/clear、queue、placement、close reason。 |
+| `src/components/navigation/breadcrumb.tsx`、`tabs.tsx`、`segmented.tsx` | 同目录同名 `*.test.tsx` | `aria-current`、Tabs ARIA 关联、activation mode、value 受控。 |
+| `src/components/navigation/dropdown.tsx`、`menu.tsx`、`command.tsx` | 同目录同名 `*.test.tsx` | action/item 数据结构、roving focus、typeahead、Escape、onSelect payload。 |
+| `src/components/navigation/pagination.tsx`、`tree.tsx` | 同目录同名 `*.test.tsx` | pagination reason；Tree selected/checked/expanded、disabled node、Home/End 和方向键。 |
+| `src/components/navigation/accordion.tsx`、`collapsible.tsx`、`tooltip.tsx` | 同目录同名 `*.test.tsx` | open/value 受控、keyboard、Tooltip 只承载短说明。 |
+| `src/components/media/image.tsx`、`avatar.tsx` | 同目录同名 `*.test.tsx` | alt、fallback、preview open、失败状态和尺寸稳定。 |
+| `src/patterns/app-shell.tsx` | `src/patterns/app-shell.test.tsx` | `AppShell.Main` 只承载 Page 入口、Sidebar/Aside 展示状态、Main 可收缩。 |
+| `src/patterns/page.tsx`、`section.tsx` | 同目录同名 `*.test.tsx` | Page 主滚动唯一、StickyActions padding、Section 非 Card、actions 层级。 |
+| `src/patterns/filter-bar.tsx` | `src/patterns/filter-bar.test.tsx` | `FilterBarState`、search/filters/expanded 受控组合、onApply/onReset、窄屏换行。 |
+| `src/patterns/data-table.tsx` | `src/patterns/data-table.test.tsx` | TableRegion loading/error/empty、selection 注入、Pagination 唯一入口、外部状态库只通过 props/callback 接入。 |
+| Recipe 文档 | 文档和示例验证 | DrawerForm、ConfirmationFlow、Popover、Logo、Result、Dashboard Metric、Grid 均保持 docs-only，不创建 `src/recipes/`。 |

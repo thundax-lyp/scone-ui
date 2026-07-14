@@ -264,7 +264,7 @@ DOM/ref/className 边界：
 
 - Drawer/Dialog 使用 `open/defaultOpen/onOpenChange` 桥接 Radix 状态。
 - Drawer/Dialog 额外提供 `onRequestClose(reason)` 表达用户请求关闭，不自动改变 `open`。
-- `OverlayCloseReason` 使用 Foundation 中的 `escape`、`outside`、`closeButton`、`footerAction`、`programmatic`。
+- `OverlayCloseReason` 使用 Foundation 中的 `escape`、`outside`、`closeButton`、`footerAction`、`programmatic`；不得使用 Radix 内部事件名作为公共 API。
 - Confirm 的 `onConfirm` 不执行业务删除、权限判断或请求；异步期间外部 `loading` 防止重复提交。
 - Toast/Notification service 只管理 UI 队列和关闭，不承载持久化、订阅来源或已读状态。
 

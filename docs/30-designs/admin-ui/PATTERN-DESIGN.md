@@ -34,6 +34,206 @@ Pattern 总规则：
 | SettingsPage | 文档组合边界 | Page + Section/Card + Field/Form controls | 设置项状态由调用方拥有 | Section/Card 分组、危险区 Alert/Confirm |
 | MasterDetail | 文档组合边界 | Page + `SconeSplitPane` 或响应式单列组合 | selected item 由调用方拥有 | SplitPane、窄屏单列降级 |
 
+## Pattern Part Props Contracts
+
+以下 props contract 定义在各 Pattern 目标文件中，并从 `src/patterns/index.ts` 与 `src/index.ts` 公开导出。Pattern props 只表达布局、slot、UI 状态和调用方意图，不接收请求函数、权限表达式、router 对象或业务 schema。
+
+### AppShell Props
+
+文件落点：`src/patterns/app-shell.tsx`。
+
+```ts
+export interface AppShellRootProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export interface AppShellSidebarProps {
+  children?: React.ReactNode;
+  className?: string;
+  collapsed?: boolean;
+  defaultCollapsed?: boolean;
+  onCollapsedChange?: (collapsed: boolean) => void;
+}
+
+export interface AppShellHeaderProps {
+  children?: React.ReactNode;
+  className?: string;
+  actions?: React.ReactNode;
+}
+
+export interface AppShellMainProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export interface AppShellAsideProps {
+  children?: React.ReactNode;
+  className?: string;
+  open?: boolean;
+  defaultOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}
+```
+
+### Page Props
+
+文件落点：`src/patterns/page.tsx`。
+
+```ts
+export interface PageRootProps {
+  children: React.ReactNode;
+  className?: string;
+  maxWidth?: "narrow" | "content" | "wide" | "full";
+  density?: SconeDensity;
+}
+
+export interface PageHeaderProps {
+  children?: React.ReactNode;
+  className?: string;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  actions?: React.ReactNode;
+}
+
+export interface PageContentProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export interface PageStickyActionsProps {
+  children: React.ReactNode;
+  className?: string;
+  align?: "start" | "end" | "between";
+}
+```
+
+### Section Props
+
+文件落点：`src/patterns/section.tsx`。
+
+```ts
+export interface SectionRootProps {
+  children: React.ReactNode;
+  className?: string;
+  density?: SconeDensity;
+}
+
+export interface SectionHeaderProps {
+  children?: React.ReactNode;
+  className?: string;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  actions?: React.ReactNode;
+}
+
+export interface SectionContentProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export interface SectionFooterProps {
+  children: React.ReactNode;
+  className?: string;
+}
+```
+
+### FilterBar Props
+
+文件落点：`src/patterns/filter-bar.tsx`。
+
+```ts
+export interface FilterBarRootProps {
+  children: React.ReactNode;
+  className?: string;
+  searchValue?: string;
+  defaultSearchValue?: string;
+  onSearchChange?: (value: string) => void;
+  filters?: FilterBarFilters;
+  defaultFilters?: FilterBarFilters;
+  onFiltersChange?: (filters: FilterBarFilters) => void;
+  expanded?: boolean;
+  defaultExpanded?: boolean;
+  onExpandedChange?: (expanded: boolean) => void;
+  onApply?: (state: FilterBarState) => void;
+  onReset?: () => void;
+}
+
+export interface FilterBarSearchProps {
+  className?: string;
+  placeholder?: string;
+  ariaLabel?: string;
+}
+
+export interface FilterBarFieldsProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export interface FilterBarActionsProps {
+  children: React.ReactNode;
+  className?: string;
+}
+
+export interface FilterBarSummaryProps {
+  children?: React.ReactNode;
+  className?: string;
+}
+```
+
+### DataTable Props
+
+文件落点：`src/patterns/data-table.tsx`。`DataTable.FilterBar` 复用或包装 `src/patterns/filter-bar.tsx` 的 props，不重复定义筛选 schema。
+
+```ts
+export interface DataTableRootProps<T> {
+  children: React.ReactNode;
+  className?: string;
+  state?: DataTableState<T>;
+}
+
+export type DataTableFilterBarProps = FilterBarRootProps;
+
+export interface DataTableToolbarProps {
+  children?: React.ReactNode;
+  className?: string;
+  start?: React.ReactNode;
+  end?: React.ReactNode;
+  actions?: React.ReactNode;
+}
+
+export interface DataTableBulkActionsProps<T> {
+  children?: React.ReactNode;
+  className?: string;
+  selectedRowKeys: Key[];
+  selectedRows?: T[];
+}
+
+export interface DataTableTableRegionProps<T> {
+  className?: string;
+  columns: SconeTableColumn<T>[];
+  dataSource: T[];
+  rowKey: keyof T | ((record: T) => Key);
+  density?: SconeDensity;
+  loading?: boolean;
+  empty?: React.ReactNode;
+  error?: React.ReactNode;
+  scroll?: SconeTableScroll;
+  heightPreset?: "sm" | "md" | "lg" | "full";
+  selection?: SconeRowSelection<T>;
+}
+
+export interface DataTablePaginationProps {
+  className?: string;
+  state: SconePaginationState;
+  pageSizeOptions?: number[];
+  onChange?: (
+    nextState: SconePaginationState,
+    reason: SconePaginationChangeReason
+  ) => void;
+}
+```
+
 ### AppShell
 
 `AppShell.Root/Sidebar/Header/Main/Aside` 定义后台应用全局空间。`Sidebar` 管理 collapsed 展示状态，`Aside` 管理 open 展示状态；菜单数据、路由、权限和产品 logo 均由产品侧提供。

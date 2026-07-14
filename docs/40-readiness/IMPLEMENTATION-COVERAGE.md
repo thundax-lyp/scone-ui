@@ -86,7 +86,7 @@
 
 ## Design Review Status
 
-当前无未决审核问题。`AppShell.*` 和独立 `FilterBar.*` 已按用户审核结论补入 DESIGN 公共 Pattern 导出面；关键公共数据结构已补齐字段级 TypeScript shape 和定义文件落点。
+当前无未决审核问题。`AppShell.*` 和独立 `FilterBar.*` 已按用户审核结论补入 DESIGN 公共 Pattern 导出面；关键公共数据结构、公共组件 props、Pattern part props 和 service API 已补齐字段级 TypeScript shape 和定义文件落点。
 
 ## Current Status
 

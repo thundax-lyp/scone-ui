@@ -15,11 +15,11 @@
 | Input Files 是否全部被覆盖，且引用精确到文件名。 | 已覆盖核心 SPEC、分组 SPEC、组件 SPEC、Pattern SPEC 和 Recipe SPEC。 | `Source Files` 已列出精确路径。 |
 | File Placement Design 是否精确到目标文件名，且每个文件都有职责说明。 | 已覆盖 designs 索引、Admin UI 总入口、拆分设计文档、样式、类型、组件族入口、组件、Pattern、Recipe、测试和公共入口。 | `File Placement Design` 与 `Source Layout Design` 已补齐。 |
 | Coverage Matrix 是否覆盖全部能力矩阵和 Export Groups。 | 已覆盖 `COMPONENT-SELECTION.md` 的能力矩阵和 Export Groups。 | `Coverage Matrix` 已补齐目标源码文件、类型位置和验证策略。 |
-| Type And Data Structure Design 是否说明公共类型、私有类型、props、事件 payload、状态结构、compound part 类型、ref 类型、provider/service 类型。 | 已覆盖。 | `Type And Data Structure Design` 已补齐类型归属、命名、泛型、事件、service 类型和关键公共数据结构的字段级 TypeScript shape。 |
+| Type And Data Structure Design 是否说明公共类型、私有类型、props、事件 payload、状态结构、compound part 类型、ref 类型、provider/service 类型。 | 已覆盖。 | `Type And Data Structure Design` 已补齐类型归属、命名、泛型、事件、service 类型、公共 props、关键公共数据结构的字段级 TypeScript shape。 |
 | Component Family Designs 是否覆盖全部 `Scone*` export 和 service export。 | 已覆盖 Form、Data Display、Layout、Feedback And Overlay、Navigation、Media。 | 已补齐各组件族导出、状态、DOM/ref/className、可访问性和验证点。 |
-| Admin Pattern Designs 是否覆盖全部 Pattern，并明确状态归属和业务边界。 | 已覆盖。 | 已补齐 AppShell、Page、Section、FilterBar、DataTable、FormPage、DetailPage、SettingsPage、MasterDetail。 |
+| Admin Pattern Designs 是否覆盖全部 Pattern，并明确状态归属和业务边界。 | 已覆盖。 | 已补齐 AppShell、Page、Section、FilterBar、DataTable、FormPage、DetailPage、SettingsPage、MasterDetail，并补齐 Pattern part props contract。 |
 | Recipe Designs 是否覆盖全部 Recipe，并明确不新增正式 `Scone*` export 的原因。 | 已覆盖。 | 已补齐 DrawerForm、ConfirmationFlow、Popover、Logo、Result、Dashboard Metric、Grid。 |
-| Verification Design 是否对每类能力给出可执行验证入口。 | 已覆盖。 | 已按能力类型和最小验证清单列出目标入口。 |
+| Verification Design 是否对每类能力给出可执行验证入口。 | 已覆盖。 | 已按能力类型、最小验证清单和文件级验收矩阵列出目标入口。 |
 | Decision Traceability 是否能把关键决策追溯到精确 SPEC 文件。 | 已覆盖。 | 见 `Decision Traceability`。 |
 | Review Questions 是否只保留影响实现结构或 API 的问题。 | 已收窄。 | 见 `Review Questions`。 |
 
@@ -50,6 +50,8 @@
 | 全部 Recipe 保持文档和示例边界，不创建 `src/recipes/` 源码入口。 | 用户审核结论、`docs/10-specs/recipes/*.md` | `Recipe Designs` |
 | `AppShell.*` 和独立 `FilterBar.*` 补入公共 Pattern 导出面，且保留状态和业务边界。 | 用户审核结论、`docs/10-specs/patterns/APP-SHELL.md`、`docs/10-specs/patterns/FILTER-BAR.md` | `Export Surface Design`、`Admin Pattern Designs` |
 | DESIGN 需给出关键公共数据结构的具体 TypeScript shape，并精确到定义文件名。 | 用户审核结论 | `Type And Data Structure Design` |
+| DESIGN 需给出公共 props、Pattern part props 和 service API 的字段级 shape。 | 设计复审结论 | `Type And Data Structure Design`、`Admin Pattern Designs` |
+| `OverlayCloseReason` 必须与 Foundation SPEC 的关闭原因词表一致。 | `docs/10-specs/FOUNDATIONS-SPEC.md`、`docs/10-specs/COMPONENT-SPEC-FEEDBACK-OVERLAY.md` | `Type And Data Structure Design`、`Component Family Designs` |
 | Custom 能力必须单独定义键盘、ARIA、状态和验证策略。 | `docs/10-specs/ADMIN-UI-SPEC.md`、单组件 SPEC | `Coverage Matrix`、`Component Family Designs`、`Verification Design` |
 
 ## Review Questions
