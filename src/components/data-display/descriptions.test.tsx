@@ -95,7 +95,8 @@ describe("SconeDescriptions", () => {
         const root = screen.getByTestId("descriptions-root");
         const list = container.querySelector("dl");
 
-        expect(root).toHaveStyle({ marginTop: "12px", color: "red" });
+        expect(root).toHaveStyle({ marginTop: "12px" });
+        expect(root).toHaveStyle({ color: "rgb(255, 0, 0)" });
         expect(root).not.toHaveStyle({ "--dd-columns": "2" });
         expect(list).toHaveStyle({ "--dd-columns": "2" });
         expect(list).not.toHaveStyle({ marginTop: "12px" });
