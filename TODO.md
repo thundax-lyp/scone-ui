@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `11 field-group`：FieldGroup 布局闭环
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`
-    - 范围对象：`src/components/form/field-group.tsx`、`src/components/form/field-group.test.tsx`、`src/components/form/index.ts`
-    - 处理动作：实现 `SconeFieldGroup` 的 title、description、columns、children、className 和语义容器。
-    - 验收点：分组标题、说明、tab 顺序、columns 布局和 ref 测试通过。
-    - 重要度：7/10
-
 - [ ] `12 form-section-actions`：FormSection 和 FormActions 闭环
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`

@@ -10,6 +10,9 @@ export type { SconeComboboxProps } from "./combobox";
 export { SconeDatePicker } from "./date-picker";
 export type { SconeDatePickerProps } from "./date-picker";
 
+export { SconeFieldGroup } from "./field-group";
+export type { SconeFieldGroupProps } from "./field-group";
+
 export { SconeInput } from "./input";
 export type { SconeInputProps } from "./input";
 
