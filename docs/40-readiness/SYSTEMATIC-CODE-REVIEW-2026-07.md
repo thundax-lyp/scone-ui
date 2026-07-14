@@ -322,6 +322,45 @@ Recent evidence before this review branch:
 * **功能风险**：低；visual positioning may change if className targeting is corrected, so update badge tests with both root and indicator assertions.
 * **置信度**：高
 
+## 12 Typography And Layout Primitives
+
+### Evidence
+
+- Typography primitives share `SconeTypographyProps` and use `as`, size, weight, tone, and truncate.
+- `SconeStack`, `SconeInline`, `SconeCompact`, and `SconeToolbar` encode token-based spacing, alignment, compact grouping, and toolbar slots.
+- Layout tests cover token gaps, wrap, split, density, orientation, ref, className, and style where exposed.
+- Layout files import `cn` through `../../lib/utils`, while many other families import `@/lib/cn` directly.
+
+### Assessment
+
+- Typography and layout components do not own business state or product workflow.
+- `SconeInline` split is decorative and hidden from assistive technology, which matches its separator intent.
+- `SconeToolbar` stays primitive: selected count and permission/action semantics remain in Pattern/caller code.
+
+### Candidate Findings
+
+### [P2] Layout primitive props are narrower than neighboring root components
+
+* **位置**：`src/components/layout/stack.tsx`、`inline.tsx`、`compact.tsx`、`toolbar.tsx`
+* **类别**：API / 一致性
+* **问题**：These primitives define bespoke props with only `className` and sometimes `style`, instead of extending `React.HTMLAttributes<HTMLDivElement>`.
+* **影响**：Consumers cannot pass normal root attributes such as `id`, `role`, `aria-*`, or `data-*` consistently, even though these are root layout containers with forwarded refs.
+* **证据**：`SconeStackProps`, `SconeInlineProps`, `SconeCompactProps`, and `SconeToolbarProps` are plain interfaces and the render functions do not spread remaining root props.
+* **建议**：Extend `React.HTMLAttributes<HTMLDivElement>` while omitting conflicting names if needed, and spread remaining props onto the root div.
+* **功能风险**：低；this is additive if implemented carefully.
+* **置信度**：高
+
+### [P3] `cn` import path is inconsistent
+
+* **位置**：`src/lib/utils.ts`、`src/components/layout/*.tsx`、`src/components/feedback-overlay/*.tsx`
+* **类别**：命名 / 依赖
+* **问题**：Some files import `cn` from `../../lib/utils`, while most newer component and Pattern files import `@/lib/cn`.
+* **影响**：`utils.ts` is only a one-line re-export, so it adds a second name/path for the same helper and makes dependency scanning noisier.
+* **证据**：`src/lib/utils.ts` only exports `{ cn }`; `rg` shows layout and feedback-overlay files using `../../lib/utils`, while form/data-display/pattern files mostly use `@/lib/cn`.
+* **建议**：When touching these files, standardize imports on `@/lib/cn` and remove `src/lib/utils.ts` if no callers remain.
+* **功能风险**：低；pure import cleanup.
+* **置信度**：高
+
 ## 09 Form Layout Helpers
 
 ### Evidence

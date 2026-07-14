@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `12-typography-layout`：12 审核 Typography 和 Layout primitives
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`src/components/data-display/typography.tsx`、`src/components/layout/stack.tsx`、`src/components/layout/inline.tsx`、`src/components/layout/compact.tsx`、`src/components/layout/toolbar.tsx`
-    - 处理动作：检查排版、间距、排列、紧凑布局和工具栏是否只承载基础结构语义。
-    - 验收点：输出 Typography/Layout 是否存在重叠职责、无意义 wrapper 或 Props 命名不一致的结论。
-    - 重要度：8/10
-
 - [ ] `13-layout-scroll-resize`：13 审核滚动、分隔和可调整布局
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
