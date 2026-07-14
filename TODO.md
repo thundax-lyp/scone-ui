@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `17-navigation-menu-command`：17 审核菜单、命令和树组件
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`src/components/navigation/dropdown.tsx`、`src/components/navigation/menu.tsx`、`src/components/navigation/command.tsx`、`src/components/navigation/tree.tsx`
-    - 处理动作：检查动作项、导航项、命令项和树节点的数据结构、键盘模型和业务边界。
-    - 验收点：输出复杂导航组件是否存在万能 schema、职责重叠或认知复杂度问题的结论。
-    - 重要度：9/10
-
 - [ ] `18-navigation-disclosure-media`：18 审核 disclosure 和媒体组件
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`

@@ -517,6 +517,45 @@ Recent evidence before this review branch:
 * **功能风险**：低 to 中；Tabs ref passthrough is additive, Segmented focus changes affect keyboard users.
 * **置信度**：中
 
+## 17 Menu, Command, And Tree Navigation
+
+### Evidence
+
+- `SconeDropdown` implements trigger cloning, open state, absolute menu rendering, keyboard navigation, item selection, and focus restoration.
+- `SconeMenu` owns selected/open key arrays and nested menu rendering without route assumptions.
+- `SconeCommand` owns search input, filtering, grouping, active item, loading, empty state, and selection.
+- `SconeTree` owns expanded/selected/checked key arrays, flattening, keyboard navigation, treeitem rendering, and checkbox state.
+- Tests cover item selection, disabled states, keyboard movement, tree expand/check/select, command filtering, and service-free navigation behavior.
+
+### Assessment
+
+- Menu and Tree have larger state surfaces but remain UI-level, not product workflow-level.
+- Dropdown and Command hand-roll interaction behavior that is usually delegated to Radix/cmdk primitives.
+
+### Candidate Findings
+
+### [P1] Dropdown hand-rolls menu popover behavior without outside-click close
+
+* **位置**：`src/components/navigation/dropdown.tsx`
+* **类别**：复杂度 / 可访问性
+* **问题**：Dropdown manually renders an absolute menu and keyboard loop, but does not close on outside pointer/focus and does not focus the first item when opened by keyboard.
+* **影响**：Open menus can remain visible after unrelated interactions, and keyboard users need extra navigation before reaching menu items.
+* **证据**：The component conditionally renders `<div role="menu">` and handles Escape/Arrow keys internally; no document listener, Popover/Menu primitive, or focus-first effect exists.
+* **建议**：Use existing Radix dropdown primitive or add outside interaction and initial focus behavior with tests.
+* **功能风险**：中；menu interaction behavior is user-facing.
+* **置信度**：高
+
+### [P2] Command active item can become stale after filtering
+
+* **位置**：`src/components/navigation/command.tsx`
+* **类别**：状态 / 可访问性
+* **问题**：`activeKey` is initialized from `selectedKey` and updated by keyboard/mouse, but filtering does not move it to the first enabled filtered item.
+* **影响**：After typing a search query, pressing Enter may do nothing until the user presses ArrowDown, even when results are visible.
+* **证据**：`filteredItems` and `enabledItems` are derived each render; `selectActive` only selects an item matching `activeKey`; no effect resets `activeKey` when `normalizedQuery` or `enabledItems` changes.
+* **建议**：When filtered enabled items change, set activeKey to the first enabled item unless `selectedKey` is externally controlling it.
+* **功能风险**：低；behavior becomes more predictable but should be covered with a filter-then-enter test.
+* **置信度**：高
+
 ## 09 Form Layout Helpers
 
 ### Evidence
