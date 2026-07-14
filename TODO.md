@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `4.10 media cn imports`：统一 media `cn` 导入
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
-    - 范围对象：`src/components/media/avatar.tsx`、`src/components/media/image.tsx`
-    - 处理动作：将 media 文件中的 `@/lib/utils` 导入改为 `@/lib/cn`。
-    - 验收点：两个文件不再引用 `@/lib/utils`，image loading、fallback、avatar group 和 avatar fallback 行为不变。
-    - 重要度：7/10
-
 - [ ] `4.11 feedback-overlay cn check batch 1`：确认 feedback-overlay 第一批 `cn` 导入状态
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
