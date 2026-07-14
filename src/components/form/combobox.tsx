@@ -1,6 +1,14 @@
 import { Check, ChevronsUpDown, Loader2, X } from "lucide-react";
 import * as React from "react";
 
+import {
+    Command,
+    CommandEmpty,
+    CommandInput,
+    CommandItem,
+    CommandList,
+} from "@/components/ui/command";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/cn";
 import { useControllableState } from "@/lib/use-controllable-state";
 import type { SconeControlSize, SconeOption } from "@/types/foundation";
@@ -93,8 +101,12 @@ export const SconeCombobox = React.forwardRef<HTMLButtonElement, SconeComboboxPr
         const filteredOptions = options.filter((option) =>
             optionLabelToText(option.label).toLowerCase().includes(currentSearch.toLowerCase()),
         );
+        const listboxId = `${controlProps.id ?? "scone-combobox"}-listbox`;
 
         const updateSearch = (nextValue: string) => {
+            if (isDisabled) {
+                return;
+            }
             if (searchValue === undefined) {
                 setInternalSearch(nextValue);
             }
@@ -108,118 +120,110 @@ export const SconeCombobox = React.forwardRef<HTMLButtonElement, SconeComboboxPr
         };
 
         const selectOption = (nextValue: string | undefined) => {
+            if (isDisabled) {
+                return;
+            }
             setCurrentValue(nextValue);
             updateSearch("");
             updateOpen(false);
         };
 
         return (
-            <div data-scone-combobox="" className="relative">
-                <button
-                    ref={ref}
-                    type="button"
-                    role="combobox"
-                    aria-expanded={currentOpen}
-                    aria-controls={`${controlProps.id ?? "scone-combobox"}-listbox`}
-                    className={cn(
-                        "flex w-full min-w-40 items-center justify-between gap-sm rounded-lg border border-input bg-transparent px-2.5 py-1 text-left outline-none transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20",
-                        comboboxSizeClassNames[size],
-                        className,
-                    )}
-                    onClick={() => updateOpen(!currentOpen)}
-                    onKeyDown={(event) => {
-                        if (
-                            event.key === "ArrowDown" ||
-                            event.key === "Enter" ||
-                            event.key === " "
-                        ) {
-                            event.preventDefault();
-                            updateOpen(true);
-                        }
-                    }}
-                    {...comboboxControlProps}
-                    disabled={isDisabled}
-                >
-                    <span className={cn(!selectedOption && "text-muted-foreground")}>
-                        {selectedOption?.label ?? placeholder}
-                    </span>
-                    <span className="ml-auto flex items-center gap-xs">
-                        {loading ? (
-                            <Loader2 aria-hidden="true" className="size-4 animate-spin" />
-                        ) : null}
-                        {currentValue !== undefined && !isDisabled ? (
-                            <span
-                                role="button"
-                                tabIndex={-1}
-                                aria-label="Clear selection"
-                                className="inline-flex size-4 items-center justify-center"
-                                onClick={(event) => {
-                                    event.stopPropagation();
-                                    selectOption(undefined);
-                                }}
-                            >
-                                <X aria-hidden="true" className="size-3.5" />
-                            </span>
-                        ) : null}
-                        <ChevronsUpDown aria-hidden="true" className="size-4 opacity-50" />
-                    </span>
-                </button>
-                {currentOpen ? (
-                    <div className="absolute z-50 mt-1 w-full rounded-lg bg-popover p-1 text-popover-foreground shadow-md ring-1 ring-foreground/10">
-                        <input
-                            aria-label={searchPlaceholder}
-                            className="mb-1 h-8 w-full rounded-md bg-input/30 px-2 text-sm outline-none"
-                            value={currentSearch}
-                            placeholder={searchPlaceholder}
-                            onChange={(event) => updateSearch(event.currentTarget.value)}
+            <Popover open={currentOpen} onOpenChange={updateOpen}>
+                <div data-scone-combobox="" className="relative">
+                    <PopoverTrigger asChild>
+                        <button
+                            ref={ref}
+                            type="button"
+                            role="combobox"
+                            aria-expanded={currentOpen}
+                            aria-controls={listboxId}
+                            className={cn(
+                                "flex w-full min-w-40 items-center justify-between gap-sm rounded-lg border border-input bg-transparent px-2.5 py-1 text-left outline-none transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20",
+                                currentValue !== undefined && !isDisabled && "pr-12",
+                                comboboxSizeClassNames[size],
+                                className,
+                            )}
                             onKeyDown={(event) => {
-                                if (event.key === "Escape") {
-                                    updateOpen(false);
-                                }
                                 if (
-                                    event.key === "Enter" &&
-                                    filteredOptions[0] &&
-                                    !filteredOptions[0].disabled
+                                    event.key === "ArrowDown" ||
+                                    event.key === "Enter" ||
+                                    event.key === " "
                                 ) {
-                                    selectOption(filteredOptions[0].value);
+                                    event.preventDefault();
+                                    updateOpen(true);
                                 }
                             }}
-                        />
-                        <div
-                            id={`${controlProps.id ?? "scone-combobox"}-listbox`}
-                            role="listbox"
-                            className="max-h-60 overflow-y-auto"
+                            {...comboboxControlProps}
+                            disabled={isDisabled}
                         >
+                            <span className={cn(!selectedOption && "text-muted-foreground")}>
+                                {selectedOption?.label ?? placeholder}
+                            </span>
+                            <span className="ml-auto flex items-center gap-xs">
+                                {loading ? (
+                                    <Loader2 aria-hidden="true" className="size-4 animate-spin" />
+                                ) : null}
+                                <ChevronsUpDown aria-hidden="true" className="size-4 opacity-50" />
+                            </span>
+                        </button>
+                    </PopoverTrigger>
+                    {currentValue !== undefined && !isDisabled ? (
+                        <button
+                            type="button"
+                            aria-label="Clear selection"
+                            className="absolute top-1/2 right-7 inline-flex size-4 -translate-y-1/2 items-center justify-center rounded-sm text-muted-foreground hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+                            onClick={(event) => {
+                                event.stopPropagation();
+                                selectOption(undefined);
+                            }}
+                        >
+                            <X aria-hidden="true" className="size-3.5" />
+                        </button>
+                    ) : null}
+                </div>
+                <PopoverContent
+                    align="start"
+                    className="w-(--radix-popover-trigger-width) p-1"
+                    onOpenAutoFocus={(event) => {
+                        event.preventDefault();
+                    }}
+                >
+                    <Command shouldFilter={false}>
+                        <CommandInput
+                            aria-label={searchPlaceholder}
+                            placeholder={searchPlaceholder}
+                            value={currentSearch}
+                            onValueChange={updateSearch}
+                        />
+                        <CommandList id={listboxId} role="listbox">
                             {loading ? (
                                 <div className="px-2 py-2 text-sm text-muted-foreground">
                                     Loading
                                 </div>
                             ) : filteredOptions.length === 0 ? (
-                                <div className="px-2 py-2 text-sm text-muted-foreground">
-                                    {emptyText}
-                                </div>
+                                <CommandEmpty>{emptyText}</CommandEmpty>
                             ) : (
                                 filteredOptions.map((option) => (
-                                    <button
+                                    <CommandItem
                                         key={option.value}
-                                        type="button"
+                                        value={option.value}
                                         role="option"
                                         aria-selected={option.value === currentValue}
                                         disabled={option.disabled}
-                                        className="flex w-full items-center gap-sm rounded-md px-2 py-1.5 text-left text-sm outline-none hover:bg-muted disabled:pointer-events-none disabled:opacity-50"
-                                        onClick={() => selectOption(option.value)}
+                                        onSelect={() => selectOption(option.value)}
                                     >
                                         <span>{option.label}</span>
                                         {option.value === currentValue ? (
                                             <Check aria-hidden="true" className="ml-auto size-4" />
                                         ) : null}
-                                    </button>
+                                    </CommandItem>
                                 ))
                             )}
-                        </div>
-                    </div>
-                ) : null}
-            </div>
+                        </CommandList>
+                    </Command>
+                </PopoverContent>
+            </Popover>
         );
     },
 );

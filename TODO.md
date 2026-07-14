@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `2. src/components/form/combobox.tsx`：收口 Combobox overlay 和 listbox 交互
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FORM-INTERACTION-HARDENING.md`
-    - 范围对象：`src/components/form/combobox.tsx`、`src/components/form/combobox.test.tsx`、`src/components/ui/popover.tsx`、`src/components/ui/command.tsx`
-    - 处理动作：优先复用 Popover + Command，补齐 trigger、search input、option item、clear button 的关闭、焦点、active option 和键盘选择语义。
-    - 验收点：trigger、Escape、outside click、ArrowDown/ArrowUp、Enter、disabled option、clear button、受控 open/search/value 均有测试覆盖。
-    - 重要度：9/10
-
 - [ ] `3. src/components/form/date-picker.tsx`：收口 DatePicker calendar overlay 语义
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FORM-INTERACTION-HARDENING.md`
