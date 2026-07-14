@@ -11,34 +11,55 @@ import {
     notification,
     SconeAlert,
     SconeBadge,
+    SconeButton,
     SconeCard,
+    SconeCheckbox,
     SconeCompact,
+    SconeCombobox,
     SconeConfirm,
+    SconeDatePicker,
     SconeDescriptions,
     SconeDialog,
     SconeDrawer,
     SconeEmpty,
+    SconeField,
+    SconeFieldGroup,
+    SconeForm,
+    SconeFormActions,
+    SconeFormSection,
     SconeInline,
+    SconeInput,
     SconeList,
     SconeLoading,
     SconeNotificationProvider,
+    SconeNumberInput,
     SconeParagraph,
+    SconePasswordInput,
     SconeProgress,
+    SconeRadioGroup,
     SconeScrollArea,
+    SconeSearchInput,
     SconeSeparator,
+    SconeSelect,
+    SconeSlider,
     SconeSplitPane,
     SconeStack,
     SconeStatistic,
+    SconeSwitch,
     SconeTable,
     SconeTag,
     SconeText,
+    SconeTextArea,
     SconeTimeline,
     SconeTitle,
     SconeToastProvider,
     SconeToolbar,
     SconeTypography,
+    SconeUpload,
     toast,
     useControllableState,
+    useSconeFieldContext,
+    useSconeFormContext,
 } from "./index";
 import type {
     Breakpoint,
@@ -52,30 +73,52 @@ import type {
     SconeAlertProps,
     SconeAlign,
     SconeBaseItem,
+    SconeButtonProps,
+    SconeCheckboxProps,
+    SconeComboboxProps,
     SconeConfirmProps,
     SconeControlSize,
+    SconeDatePickerProps,
     SconeDensity,
     SconeDialogProps,
     SconeDrawerProps,
     SconeEmptyProps,
+    SconeFieldContextValue,
+    SconeFieldGroupProps,
+    SconeFieldRootProps,
+    SconeFormActionsProps,
+    SconeFormContextValue,
+    SconeFormProps,
+    SconeFormSectionProps,
+    SconeInputProps,
     SconeInlineProps,
     SconeLoadingProps,
     SconeNotificationItem,
     SconeNotificationProviderProps,
+    SconeNumberInputProps,
     SconeOption,
     SconeOrientation,
+    SconePasswordInputProps,
     SconeProgressProps,
+    SconeRadioGroupProps,
+    SconeSearchInputProps,
+    SconeSelectProps,
     SconeSide,
+    SconeSliderProps,
     SconeSplitPaneProps,
     SconeSplitPaneSizePreset,
     SconeStackProps,
     SconeSpacingToken,
     SconeStatus,
+    SconeSwitchProps,
     SconeTableColumn,
+    SconeTextAreaProps,
     SconeTimelineItem,
     SconeTone,
     SconeToastItem,
     SconeToastProviderProps,
+    SconeUploadProps,
+    SconeUploadRejection,
     ToastCloseReason,
     ToastOptions,
     ToastPosition,
@@ -179,6 +222,68 @@ describe("public index exports", () => {
         >();
     });
 
+    it("exports form component APIs", () => {
+        expect(typeof SconeForm).toBe("object");
+        expect(typeof SconeField).toBe("object");
+        expect(typeof SconeFieldGroup).toBe("object");
+        expect(typeof SconeFormSection).toBe("object");
+        expect(typeof SconeFormActions).toBe("object");
+        expect(typeof SconeButton).toBe("object");
+        expect(typeof SconeInput).toBe("object");
+        expect(typeof SconeSearchInput).toBe("object");
+        expect(typeof SconePasswordInput).toBe("object");
+        expect(typeof SconeTextArea).toBe("object");
+        expect(typeof SconeSelect).toBe("object");
+        expect(typeof SconeCombobox).toBe("object");
+        expect(typeof SconeSwitch).toBe("object");
+        expect(typeof SconeCheckbox).toBe("object");
+        expect(typeof SconeRadioGroup).toBe("object");
+        expect(typeof SconeNumberInput).toBe("object");
+        expect(typeof SconeSlider).toBe("object");
+        expect(typeof SconeDatePicker).toBe("object");
+        expect(typeof SconeUpload).toBe("object");
+        expect(typeof useSconeFormContext).toBe("function");
+        expect(typeof useSconeFieldContext).toBe("function");
+
+        expectTypeOf<SconeFormProps["density"]>().toEqualTypeOf<SconeDensity | undefined>();
+        expectTypeOf<SconeFormContextValue["density"]>().toEqualTypeOf<SconeDensity>();
+        expectTypeOf<SconeFieldRootProps["invalid"]>().toEqualTypeOf<boolean | undefined>();
+        expectTypeOf<SconeFieldContextValue["controlId"]>().toEqualTypeOf<string>();
+        expectTypeOf<SconeFieldGroupProps["columns"]>().toEqualTypeOf<1 | 2 | 3 | undefined>();
+        expectTypeOf<SconeFormSectionProps["title"]>().toEqualTypeOf<React.ReactNode>();
+        expectTypeOf<SconeFormActionsProps["align"]>().toEqualTypeOf<
+            "start" | "end" | "between" | undefined
+        >();
+        expectTypeOf<SconeButtonProps["variant"]>().toEqualTypeOf<
+            "primary" | "secondary" | "danger" | "ghost" | undefined
+        >();
+        expectTypeOf<SconeInputProps["size"]>().toEqualTypeOf<SconeControlSize | undefined>();
+        expectTypeOf<SconeSearchInputProps["onClear"]>().toEqualTypeOf<(() => void) | undefined>();
+        expectTypeOf<SconePasswordInputProps["visibilityLabel"]>().toEqualTypeOf<
+            string | undefined
+        >();
+        expectTypeOf<SconeTextAreaProps["autoResize"]>().toEqualTypeOf<boolean | undefined>();
+        expectTypeOf<SconeSelectProps["options"]>().toEqualTypeOf<SconeOption[]>();
+        expectTypeOf<SconeComboboxProps["options"]>().toEqualTypeOf<SconeOption[]>();
+        expectTypeOf<SconeSwitchProps["onCheckedChange"]>().toEqualTypeOf<
+            ((checked: boolean) => void) | undefined
+        >();
+        expectTypeOf<SconeCheckboxProps["onCheckedChange"]>().toEqualTypeOf<
+            ((checked: boolean) => void) | undefined
+        >();
+        expectTypeOf<SconeRadioGroupProps["options"]>().toEqualTypeOf<SconeOption[]>();
+        expectTypeOf<SconeNumberInputProps["onValueChange"]>().toEqualTypeOf<
+            ((value: number | undefined) => void) | undefined
+        >();
+        expectTypeOf<SconeSliderProps["value"]>().toEqualTypeOf<number[] | undefined>();
+        expectTypeOf<SconeDatePickerProps["onValueChange"]>().toEqualTypeOf<
+            ((value: Date | undefined) => void) | undefined
+        >();
+        expectTypeOf<SconeUploadProps["onRejected"]>().toEqualTypeOf<
+            ((rejections: SconeUploadRejection[]) => void) | undefined
+        >();
+    });
+
     it("exports public utilities from the public entry", async () => {
         expect(cn("px-2", "px-4")).toBe("px-4");
         expect(typeof composeRefs).toBe("function");
@@ -195,32 +300,51 @@ describe("public index exports", () => {
             [
                 "SconeAlert",
                 "SconeBadge",
+                "SconeButton",
                 "SconeCard",
+                "SconeCheckbox",
                 "SconeCompact",
+                "SconeCombobox",
                 "SconeConfirm",
+                "SconeDatePicker",
                 "SconeDescriptions",
                 "SconeDialog",
                 "SconeDrawer",
                 "SconeEmpty",
+                "SconeField",
+                "SconeFieldGroup",
+                "SconeForm",
+                "SconeFormActions",
+                "SconeFormSection",
                 "SconeInline",
+                "SconeInput",
                 "SconeList",
                 "SconeLoading",
                 "SconeNotificationProvider",
+                "SconeNumberInput",
                 "SconeParagraph",
+                "SconePasswordInput",
                 "SconeProgress",
+                "SconeRadioGroup",
                 "SconeScrollArea",
+                "SconeSearchInput",
                 "SconeSeparator",
+                "SconeSelect",
+                "SconeSlider",
                 "SconeSplitPane",
                 "SconeStack",
                 "SconeStatistic",
+                "SconeSwitch",
                 "SconeTable",
                 "SconeTag",
                 "SconeText",
+                "SconeTextArea",
                 "SconeTimeline",
                 "SconeTitle",
                 "SconeToastProvider",
                 "SconeToolbar",
                 "SconeTypography",
+                "SconeUpload",
                 "ariaBoolean",
                 "ariaValue",
                 "cn",
@@ -231,6 +355,8 @@ describe("public index exports", () => {
                 "notification",
                 "toast",
                 "useControllableState",
+                "useSconeFieldContext",
+                "useSconeFormContext",
             ].sort(),
         );
     });

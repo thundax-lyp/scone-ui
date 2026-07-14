@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `13 public-export`：Form 公共导出闭环
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`
-    - 范围对象：`src/components/form/index.ts`、`src/index.ts`、`src/index.test.ts`
-    - 处理动作：汇总导出所有 Form 组件、props 类型和根入口 public exports。
-    - 验收点：族入口和根入口 runtime export keys、public type assertions 测试通过。
-    - 重要度：10/10
-
 - [ ] `14 sync-main`：同步 main 分支代码
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`
