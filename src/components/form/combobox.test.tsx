@@ -3,6 +3,8 @@ import { describe, expect, it, vi } from "vitest";
 
 import { SconeCombobox } from "./combobox";
 
+Element.prototype.scrollIntoView = vi.fn();
+
 const options = [
     { value: "admin", label: "Admin" },
     { value: "editor", label: "Editor" },

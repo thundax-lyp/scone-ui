@@ -92,6 +92,8 @@ export const SconeDatePicker = React.forwardRef<HTMLButtonElement, SconeDatePick
             defaultValue: defaultOpen ?? false,
             onValueChange: onOpenChange,
         });
+        const rootRef = React.useRef<HTMLDivElement>(null);
+        const contentRef = React.useRef<HTMLDivElement>(null);
         const controlProps = getSconeControlStateProps(field, {
             ...props,
             disabled,
@@ -103,20 +105,43 @@ export const SconeDatePicker = React.forwardRef<HTMLButtonElement, SconeDatePick
         const isDisabled = controlProps.disabled || controlReadOnly;
         const monthDays = getMonthDays(currentValue ?? new Date());
 
-        const updateOpen = (nextOpen: boolean) => {
-            if (!isDisabled) {
-                setCurrentOpen(nextOpen);
-            }
-        };
+        const updateOpen = React.useCallback(
+            (nextOpen: boolean) => {
+                if (!isDisabled) {
+                    setCurrentOpen(nextOpen);
+                }
+            },
+            [isDisabled, setCurrentOpen],
+        );
 
         const selectDate = (date: Date | undefined) => {
             setCurrentValue(date);
             updateOpen(false);
         };
 
+        React.useEffect(() => {
+            if (!currentOpen) {
+                return;
+            }
+
+            const handlePointerDown = (event: PointerEvent) => {
+                const target = event.target;
+                if (!(target instanceof Node)) {
+                    return;
+                }
+                if (rootRef.current?.contains(target) || contentRef.current?.contains(target)) {
+                    return;
+                }
+                updateOpen(false);
+            };
+
+            document.addEventListener("pointerdown", handlePointerDown);
+            return () => document.removeEventListener("pointerdown", handlePointerDown);
+        }, [currentOpen, updateOpen]);
+
         return (
             <Popover open={currentOpen} onOpenChange={updateOpen}>
-                <div data-scone-date-picker="" className="relative">
+                <div ref={rootRef} data-scone-date-picker="" className="relative">
                     <PopoverTrigger asChild>
                         <button
                             ref={ref}
@@ -159,6 +184,7 @@ export const SconeDatePicker = React.forwardRef<HTMLButtonElement, SconeDatePick
                     ) : null}
                 </div>
                 <PopoverContent
+                    ref={contentRef}
                     align="start"
                     role="dialog"
                     aria-label="Choose date"

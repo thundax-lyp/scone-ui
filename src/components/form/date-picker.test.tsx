@@ -54,7 +54,8 @@ describe("SconeDatePicker", () => {
         expect(handleOpenChange).toHaveBeenLastCalledWith(false);
 
         fireEvent.click(screen.getByRole("button", { name: "Due date" }));
-        fireEvent.pointerDown(document.body);
+        fireEvent.pointerDown(document.body, { button: 0 });
+        fireEvent.mouseDown(document.body);
         expect(handleOpenChange).toHaveBeenLastCalledWith(false);
     });
 

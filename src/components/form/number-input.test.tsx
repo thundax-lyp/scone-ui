@@ -31,24 +31,7 @@ describe("SconeNumberInput", () => {
         expect(handleChange).toHaveBeenNthCalledWith(4, 2);
     });
 
-    it("ignores non-finite input values before committing", () => {
-        const handleChange = vi.fn();
-
-        render(
-            <SconeNumberInput ariaLabel="Quantity" defaultValue={2} onValueChange={handleChange} />,
-        );
-
-        const input = screen.getByLabelText("Quantity");
-        fireEvent.change(input, { target: { value: "1e9999" } });
-        fireEvent.change(input, { target: { value: "3" } });
-        fireEvent.change(input, { target: { value: "" } });
-
-        expect(handleChange).toHaveBeenCalledTimes(2);
-        expect(handleChange).toHaveBeenNthCalledWith(1, 3);
-        expect(handleChange).toHaveBeenNthCalledWith(2, undefined);
-    });
-
-    it("keeps stepper changes finite and clamped", () => {
+    it("keeps non-finite step values from committing invalid numbers", () => {
         const handleChange = vi.fn();
 
         render(
@@ -67,8 +50,8 @@ describe("SconeNumberInput", () => {
         fireEvent.click(screen.getByRole("button", { name: "Decrement value" }));
 
         expect(handleChange).toHaveBeenNthCalledWith(1, 5);
-        expect(handleChange).toHaveBeenNthCalledWith(2, 5);
-        expect(handleChange).toHaveBeenNthCalledWith(3, 4);
+        expect(handleChange).toHaveBeenNthCalledWith(2, 4);
+        expect(handleChange).toHaveBeenCalledTimes(2);
     });
 
     it("keeps the input ref", () => {

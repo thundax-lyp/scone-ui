@@ -87,6 +87,8 @@ export const SconeCombobox = React.forwardRef<HTMLButtonElement, SconeComboboxPr
             onValueChange: onOpenChange,
         });
         const [internalSearch, setInternalSearch] = React.useState("");
+        const rootRef = React.useRef<HTMLDivElement>(null);
+        const contentRef = React.useRef<HTMLDivElement>(null);
         const currentSearch = searchValue ?? internalSearch;
         const selectedOption = options.find((option) => option.value === currentValue);
         const controlProps = getSconeControlStateProps(field, {
@@ -113,24 +115,46 @@ export const SconeCombobox = React.forwardRef<HTMLButtonElement, SconeComboboxPr
             onSearchValueChange?.(nextValue);
         };
 
-        const updateOpen = (nextOpen: boolean) => {
+        const updateOpen = React.useCallback(
+            (nextOpen: boolean) => {
+                if (!isDisabled) {
+                    setCurrentOpen(nextOpen);
+                }
+            },
+            [isDisabled, setCurrentOpen],
+        );
+
+        const selectOption = (nextValue: string | undefined) => {
             if (!isDisabled) {
-                setCurrentOpen(nextOpen);
+                setCurrentValue(nextValue);
+                updateSearch("");
+                updateOpen(false);
             }
         };
 
-        const selectOption = (nextValue: string | undefined) => {
-            if (isDisabled) {
+        React.useEffect(() => {
+            if (!currentOpen) {
                 return;
             }
-            setCurrentValue(nextValue);
-            updateSearch("");
-            updateOpen(false);
-        };
+
+            const handlePointerDown = (event: PointerEvent) => {
+                const target = event.target;
+                if (!(target instanceof Node)) {
+                    return;
+                }
+                if (rootRef.current?.contains(target) || contentRef.current?.contains(target)) {
+                    return;
+                }
+                updateOpen(false);
+            };
+
+            document.addEventListener("pointerdown", handlePointerDown);
+            return () => document.removeEventListener("pointerdown", handlePointerDown);
+        }, [currentOpen, updateOpen]);
 
         return (
             <Popover open={currentOpen} onOpenChange={updateOpen}>
-                <div data-scone-combobox="" className="relative">
+                <div ref={rootRef} data-scone-combobox="" className="relative">
                     <PopoverTrigger asChild>
                         <button
                             ref={ref}
@@ -183,6 +207,7 @@ export const SconeCombobox = React.forwardRef<HTMLButtonElement, SconeComboboxPr
                     ) : null}
                 </div>
                 <PopoverContent
+                    ref={contentRef}
                     align="start"
                     className="w-(--radix-popover-trigger-width) p-1"
                     onOpenAutoFocus={(event) => {
