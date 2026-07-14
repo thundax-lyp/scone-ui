@@ -88,7 +88,7 @@ Recipe 守护：
 - SplitPane resize preset 边界和 active drag listener cleanup 已由 `src/components/layout/split-pane.test.tsx` 覆盖。
 - 审核结论按 P0/P1/P2/P3 汇总在 [`SYSTEMATIC-CODE-REVIEW-2026-07.md`](./SYSTEMATIC-CODE-REVIEW-2026-07.md)。
 - P0：未发现。
-- P1：主要集中在 stale token config、复杂 overlay/focus 交互、数值边界、Tooltip id、media fallback reset、Pattern API/docs 对齐。
+- P1：主要集中在 stale token config、复杂 overlay/focus 交互、数值边界、Pattern API/docs 对齐。
 
 ## Boundaries
 
@@ -103,7 +103,7 @@ Recipe 守护：
 
 本节只记录从本次系统性审核沉淀出的待修复方向；详细证据和风险见系统性审核报告。
 
-1. 修复 P1 行为问题：Tailwind stale token config、NumberInput/Progress invalid numeric handling、Tooltip unique id、Image/Avatar `src` reset、Pagination range clamp、Confirm async rejection。
+1. 修复 P1 行为问题：Tailwind stale token config、NumberInput/Progress invalid numeric handling、Confirm async rejection。
 2. 收口 Pattern API 与文档：AppShell callbacks、Section Root shorthand、FilterBar hidden search state，逐项决定实现还是修正文档。
 3. 降低复杂交互维护成本：优先处理 Combobox、DatePicker、Dropdown 的 overlay、focus、keyboard 和 outside interaction 行为。
 4. 处理 P2 维护项：Toast timer stability、Command filtered active state、Alert role/tone semantics、Form context public surface、测试内部标记耦合。
