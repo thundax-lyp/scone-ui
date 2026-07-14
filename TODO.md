@@ -9,6 +9,46 @@
 
 ## 当前任务项
 
+- [ ] `1. src/components/form/number-input.tsx`：治理 NumberInput 非有限值提交
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-FORM-INTERACTION-HARDENING.md`
+    - 范围对象：`src/components/form/number-input.tsx`、`src/components/form/number-input.test.tsx`
+    - 处理动作：收口 NumberInput 输入提交路径，只允许提交 `undefined` 或 finite number。
+    - 验收点：非有限输入不更新值且不触发 `onValueChange`，空值、min/max clamp 和 step button 行为有测试覆盖。
+    - 重要度：9/10
+
+- [ ] `2. src/components/form/combobox.tsx`：收口 Combobox overlay 和 listbox 交互
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-FORM-INTERACTION-HARDENING.md`
+    - 范围对象：`src/components/form/combobox.tsx`、`src/components/form/combobox.test.tsx`、`src/components/ui/popover.tsx`、`src/components/ui/command.tsx`
+    - 处理动作：优先复用 Popover + Command，补齐 trigger、search input、option item、clear button 的关闭、焦点、active option 和键盘选择语义。
+    - 验收点：trigger、Escape、outside click、ArrowDown/ArrowUp、Enter、disabled option、clear button、受控 open/search/value 均有测试覆盖。
+    - 重要度：9/10
+
+- [ ] `3. src/components/form/date-picker.tsx`：收口 DatePicker calendar overlay 语义
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-FORM-INTERACTION-HARDENING.md`
+    - 范围对象：`src/components/form/date-picker.tsx`、`src/components/form/date-picker.test.tsx`、`src/components/ui/popover.tsx`、`src/components/ui/dialog.tsx`
+    - 处理动作：优先复用 Popover，补齐 date trigger、calendar overlay、date cell button、clear button 的关闭、焦点、禁用日期和清除语义。
+    - 验收点：trigger 点击和 Enter/Space、Escape、outside click、日期选择、disabled date、clear button、受控 open/value 均有测试覆盖。
+    - 重要度：9/10
+
+- [ ] `4. src/components/form/input.tsx`：评估 text input value plumbing 是否需要同步
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-FORM-INTERACTION-HARDENING.md`
+    - 范围对象：`src/components/form/input.tsx`、`src/components/form/search-input.tsx`、`src/components/form/password-input.tsx`、`src/components/form/textarea.tsx`
+    - 处理动作：检查 text input、search input、password input、textarea 是否因本轮 value、Field 或 ARIA 语义变化需要同步修正。
+    - 验收点：若无直接修复收益则不改代码；若必须修改，现有 `value`、`defaultValue`、`onValueChange`、`onChange` 语义和对应测试保持一致。
+    - 重要度：6/10
+
+- [ ] `5. docs/40-readiness/SYSTEMATIC-CODE-REVIEW-2026-07.md`：收口审核报告和 RUNBOOK
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-FORM-INTERACTION-HARDENING.md`
+    - 范围对象：`docs/40-readiness/SYSTEMATIC-CODE-REVIEW-2026-07.md`、`docs/30-designs/RUNBOOK-FORM-INTERACTION-HARDENING.md`
+    - 处理动作：在实现和验证完成后删除已完全处理的 Systematic Code Review finding，并清理临时 RUNBOOK。
+    - 验收点：NumberInput、Combobox、DatePicker 已处理章节从审核报告删除；未处理的 text input finding 保留；RUNBOOK 被删除且无残留引用。
+    - 重要度：8/10
+
 ## 待审阅任务项
 
 ## 待讨论项

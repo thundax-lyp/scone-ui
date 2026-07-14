@@ -6,6 +6,7 @@
 - Mode: docs-only audit; no source behavior changes in review tasks.
 - Source of execution order: `TODO.md`.
 - Temporary runbook: removed during readiness closure; long-lived evidence remains in this report.
+- Active remediation runbook: [`RUNBOOK-FORM-INTERACTION-HARDENING.md`](../30-designs/RUNBOOK-FORM-INTERACTION-HARDENING.md).
 
 ## Final Review Summary
 
