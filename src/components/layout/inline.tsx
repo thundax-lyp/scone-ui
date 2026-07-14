@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/cn";
 import type { SconeSpacingToken } from "../../types/foundation";
 
 const inlineGapClass: Record<SconeSpacingToken, string> = {

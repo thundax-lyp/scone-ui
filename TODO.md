@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `05-cn-import-cleanup`：统一触及文件的 `cn` import
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-COMPONENT-CONTRACTS.md`
-    - 范围对象：`src/components/layout/stack.tsx`、`src/components/layout/inline.tsx`、`src/components/layout/compact.tsx`、`src/components/layout/toolbar.tsx`、`src/lib/utils.ts`、`src/lib/cn.test.ts`
-    - 处理动作：将本次触及 layout 文件的 `cn` import 统一到 `@/lib/cn`，并仅在全仓库无剩余 `lib/utils` 调用时删除 `src/lib/utils.ts` 及对应 legacy 兼容测试。
-    - 验收点：本次触及源码不再从 `../../lib/utils` 导入 `cn`；若 `rg "lib/utils|@/lib/utils|\\.\\./\\.\\./lib/utils" src` 仍有非本次范围命中，则保留 `src/lib/utils.ts` 和 legacy 测试。
-    - 重要度：6/10
-
 - [ ] `06-review-and-runbook-closure`：验证并收口 review 文档和 RUNBOOK
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-COMPONENT-CONTRACTS.md`、`docs/00-governance/TODO-RULES.md`

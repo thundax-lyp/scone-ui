@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/cn";
 
 const toolbarDensityClass = {
     compact: "min-h-control-sm gap-xs py-xs",
