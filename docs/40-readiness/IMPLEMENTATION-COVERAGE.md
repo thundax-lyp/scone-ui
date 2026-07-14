@@ -30,25 +30,25 @@
 
 ## Design Coverage Summary
 
-| 覆盖对象 | 设计状态 | 依据 |
-| --- | --- | --- |
-| Foundation/theme | 已完成设计 | `docs/30-designs/admin-ui/FOUNDATION-DESIGN.md` |
-| Type/data structure | 已完成设计 | `docs/30-designs/admin-ui/TYPE-DATA-DESIGN.md` |
-| Public export surface | 已完成设计 | `docs/30-designs/admin-ui/EXPORT-SURFACE-DESIGN.md` |
-| Form components | 已完成设计 | `docs/30-designs/admin-ui/COMPONENT-FAMILY-DESIGN.md` |
-| Data display components | 已完成设计 | `docs/30-designs/admin-ui/COMPONENT-FAMILY-DESIGN.md` |
-| Layout primitives | 已完成设计 | `docs/30-designs/admin-ui/COMPONENT-FAMILY-DESIGN.md` |
-| Feedback and overlay components | 已完成设计 | `docs/30-designs/admin-ui/COMPONENT-FAMILY-DESIGN.md` |
-| Navigation components | 已完成设计 | `docs/30-designs/admin-ui/COMPONENT-FAMILY-DESIGN.md` |
-| Media components | 已完成设计 | `docs/30-designs/admin-ui/COMPONENT-FAMILY-DESIGN.md` |
-| Admin patterns | 已完成设计 | `docs/30-designs/admin-ui/PATTERN-DESIGN.md` |
-| Recipes | 已完成设计 | `docs/30-designs/admin-ui/RECIPE-DESIGN.md` |
-| Verification strategy | 已完成设计 | `docs/30-designs/admin-ui/VERIFICATION-DESIGN.md` |
-| Design self review and traceability | 已完成设计 | `docs/30-designs/admin-ui/REVIEW-TRACEABILITY.md` |
+| 覆盖对象                            | 设计状态   | 依据                                                  |
+| ----------------------------------- | ---------- | ----------------------------------------------------- |
+| Foundation/theme                    | 已完成设计 | `docs/30-designs/admin-ui/FOUNDATION-DESIGN.md`       |
+| Type/data structure                 | 已完成设计 | `docs/30-designs/admin-ui/TYPE-DATA-DESIGN.md`        |
+| Public export surface               | 已完成设计 | `docs/30-designs/admin-ui/EXPORT-SURFACE-DESIGN.md`   |
+| Form components                     | 已完成设计 | `docs/30-designs/admin-ui/COMPONENT-FAMILY-DESIGN.md` |
+| Data display components             | 已完成设计 | `docs/30-designs/admin-ui/COMPONENT-FAMILY-DESIGN.md` |
+| Layout primitives                   | 已完成设计 | `docs/30-designs/admin-ui/COMPONENT-FAMILY-DESIGN.md` |
+| Feedback and overlay components     | 已完成设计 | `docs/30-designs/admin-ui/COMPONENT-FAMILY-DESIGN.md` |
+| Navigation components               | 已完成设计 | `docs/30-designs/admin-ui/COMPONENT-FAMILY-DESIGN.md` |
+| Media components                    | 已完成设计 | `docs/30-designs/admin-ui/COMPONENT-FAMILY-DESIGN.md` |
+| Admin patterns                      | 已完成设计 | `docs/30-designs/admin-ui/PATTERN-DESIGN.md`          |
+| Recipes                             | 已完成设计 | `docs/30-designs/admin-ui/RECIPE-DESIGN.md`           |
+| Verification strategy               | 已完成设计 | `docs/30-designs/admin-ui/VERIFICATION-DESIGN.md`     |
+| Design self review and traceability | 已完成设计 | `docs/30-designs/admin-ui/REVIEW-TRACEABILITY.md`     |
 
 ## Capability Coverage
 
-以下能力已在 DESIGN 中完成设计落点和验证规划，后续仍需实现代码与测试：
+以下能力已在 DESIGN 中完成设计落点和验证规划。已实现条目在本节明确标注；未标注实现状态的能力仍需后续实现代码与测试：
 
 - Typography：`SconeTypography`、`SconeText`、`SconeTitle`、`SconeParagraph`。
 - Form components：`SconeButton`、`SconeInput`、`SconeSearchInput`、`SconePasswordInput`、`SconeTextArea`、`SconeSelect`、`SconeForm`、`SconeField`。
@@ -57,7 +57,7 @@
 - Layout primitives：`SconeStack`、`SconeInline`、`SconeCompact`、`SconeToolbar`、`SconeSplitPane`、`SconeSeparator`、`SconeScrollArea`。
 - Data display：`SconeDescriptions`、`SconeTable`、`SconeCard`、`SconeTag`、`SconeBadge`、`SconeList`、`SconeStatistic`、`SconeTimeline`。
 - Navigation and media：`SconeBreadcrumb`、`SconePagination`、`SconeTabs`、`SconeSegmented`、`SconeTree`、`SconeDropdown`、`SconeMenu`、`SconeTooltip`、`SconeCommand`、`SconeAccordion`、`SconeCollapsible`、`SconeImage`、`SconeAvatar`。
-- Feedback：`SconeDrawer`、`SconeDialog`、`SconeConfirm`、`SconeAlert`、`SconeEmpty`、`SconeLoading`、`SconeProgress`、`SconeToastProvider`、`toast`、`SconeNotificationProvider`、`notification`。
+- Feedback：已实现并测试 `SconeDrawer`、`SconeDialog`、`SconeConfirm`、`SconeAlert`、`SconeEmpty`、`SconeLoading`、`SconeProgress`、`SconeToastProvider`、`toast`、`SconeNotificationProvider`、`notification`。
 - Admin Pattern exports：`AppShell`、`Page`、`Section`、`FilterBar`、`DataTable` compound parts。
 - Recipes：DrawerForm、ConfirmationFlow、Popover、Logo、Result、Dashboard Metric、Grid。
 
@@ -68,9 +68,52 @@
 1. 创建 DESIGN 指定的 `src/` 目录结构、公共入口和组件族类型入口。
 2. 按 `docs/10-specs/COMPONENT-SELECTION.md` 的 source strategy 实现 wrapper、vendored primitive、custom component、pattern-only 和 docs-only 边界。
 3. 创建 `src/styles/theme.css`，并维护默认 `tailwind.config.ts` 到 CSS variables 的映射。
-4. 实现组件族和 Pattern；Recipe 全部保持文档和示例边界，不创建 `src/recipes/` 源码入口。
+4. 实现除 Feedback / Overlay 外的组件族和 Pattern；Recipe 全部保持文档和示例边界，不创建 `src/recipes/` 源码入口。
 5. 按 DESIGN 的 Verification Design 在被测文件同目录创建 `*.test.ts` 或 `*.test.tsx`，并生成真正的实现覆盖证据。
-6. 在实现后更新本 readiness 文档，区分已实现、已测试、未覆盖和延期项。
+6. 在后续实现后更新本 readiness 文档，区分已实现、已测试、未覆盖和延期项。
+
+## Implementation Evidence
+
+### Feedback / Overlay
+
+实现文件：
+
+- `src/components/feedback-overlay/alert.tsx`
+- `src/components/feedback-overlay/empty.tsx`
+- `src/components/feedback-overlay/loading.tsx`
+- `src/components/feedback-overlay/progress.tsx`
+- `src/components/feedback-overlay/drawer.tsx`
+- `src/components/feedback-overlay/dialog.tsx`
+- `src/components/feedback-overlay/confirm.tsx`
+- `src/components/feedback-overlay/toast.tsx`
+- `src/components/feedback-overlay/notification.tsx`
+- `src/index.ts`
+
+测试文件：
+
+- `src/components/feedback-overlay/alert.test.tsx`
+- `src/components/feedback-overlay/empty.test.tsx`
+- `src/components/feedback-overlay/loading.test.tsx`
+- `src/components/feedback-overlay/progress.test.tsx`
+- `src/components/feedback-overlay/drawer.test.tsx`
+- `src/components/feedback-overlay/dialog.test.tsx`
+- `src/components/feedback-overlay/confirm.test.tsx`
+- `src/components/feedback-overlay/toast.test.tsx`
+- `src/components/feedback-overlay/notification.test.tsx`
+- `src/index.test.ts`
+
+验证结果：
+
+- `pnpm lint` 通过。
+- `pnpm build` 通过。
+- `pnpm test` 通过：17 个测试文件、51 个测试。
+
+覆盖边界：
+
+- 已覆盖状态组件：Alert、Empty、Loading、Progress。
+- 已覆盖阻断浮层：Drawer、Dialog、Confirm。
+- 已覆盖队列反馈：Toast Provider/service、Notification Provider/service。
+- 未纳入本闭环：其它组件族、Pattern、Recipe 源码入口。
 
 ## Verification Plan
 
@@ -92,6 +135,6 @@
 
 设计覆盖：完成。
 
-实现覆盖：未开始。
+实现覆盖：部分完成。Feedback / Overlay 已实现；其它组件族和 Pattern 未完成。
 
-测试覆盖：未开始。
+测试覆盖：部分完成。Feedback / Overlay 已测试；其它组件族和 Pattern 未完成。

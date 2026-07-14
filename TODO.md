@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `12 docs/40-readiness/IMPLEMENTATION-COVERAGE.md`：更新实现覆盖记录
-    - 任务类型：执行任务
-    - 依据文档：`docs/00-governance/TODO-RULES.md`
-    - 范围对象：`docs/40-readiness/IMPLEMENTATION-COVERAGE.md`
-    - 处理动作：同步 Feedback / Overlay 的实现、测试和剩余覆盖状态。
-    - 验收点：readiness 文档区分已实现、已测试、未覆盖或延期项，且不再把本闭环描述为未开始。
-    - 重要度：8/10
-
 - [ ] `13 docs/30-designs/RUNBOOK-FEEDBACK-OVERLAY.md`：清理临时 RUNBOOK
     - 任务类型：执行任务
     - 依据文档：`docs/00-governance/DOCUMENT-RULES.md`
