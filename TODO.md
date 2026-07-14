@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `1. theme-source`：建立 Foundation theme 变量源
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`
-    - 范围对象：`src/styles/theme.css`、`src/styles.css`、`src/styles/theme.test.ts`
-    - 处理动作：新增 theme 变量源并让全局样式入口消费它。
-    - 验收点：`--scone-*` CSS variables 覆盖 RUNBOOK 指定 token family，且测试能检查变量前缀、family 覆盖和无第二套 token 数值源。
-    - 重要度：10/10
-
 - [ ] `2. foundation-types`：落实 Foundation 公共类型
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`
