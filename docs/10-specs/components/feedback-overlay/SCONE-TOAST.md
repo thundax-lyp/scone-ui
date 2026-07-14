@@ -44,6 +44,7 @@ Service API：
 - Toast 只承载短反馈；必须阅读的错误、复杂说明或多个操作使用 Alert/Dialog。
 - 默认位置由 provider 控制，单次调用可覆盖。
 - 队列必须限制最大可见数，超出项排队或替换旧项，策略必须稳定。
+- provider 或父组件发生无关 rerender 时，已显示 toast 的 timeout 不得被重置或延长。
 - shadcn mapping：可基于 Sonner，但不得把 Sonner API 直接暴露为稳定 API。
 
 测试：

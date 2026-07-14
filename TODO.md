@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `03 src/components/feedback-overlay/toast`：稳定 Toast timer rerender 行为
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`
-    - 范围对象：`src/components/feedback-overlay/toast.tsx`、`src/components/feedback-overlay/toast.test.tsx`、`docs/10-specs/components/feedback-overlay/SCONE-TOAST.md`
-    - 处理动作：让 `SconeToastProvider` 的自动关闭 timer 不因无关 rerender 重置。
-    - 验收点：fake timers 覆盖 rerender 前后同一 toast 按原到期时间关闭，dismiss button close reason 保持不变。
-    - 重要度：8/10
-
 - [ ] `04 src/components/feedback-overlay/alert`：调整 Alert urgent 与 non-urgent role 语义
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`

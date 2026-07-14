@@ -132,7 +132,7 @@ export function SconeToastProvider({
     onOpenChange,
 }: SconeToastProviderProps) {
     const items = React.useSyncExternalStore(subscribeToasts, getToastSnapshot, getToastSnapshot);
-    const visibleItems = items.slice(-maxVisible);
+    const visibleItems = React.useMemo(() => items.slice(-maxVisible), [items, maxVisible]);
 
     React.useEffect(() => {
         onOpenChange?.(items);
