@@ -56,7 +56,7 @@
 - Additional form inputs：`SconeCombobox`、`SconeSwitch`、`SconeCheckbox`、`SconeRadioGroup`、`SconeNumberInput`、`SconeSlider`、`SconeDatePicker`、`SconeUpload`。
 - Layout primitives：已实现并测试 `SconeStack`、`SconeInline`、`SconeCompact`、`SconeToolbar`、`SconeSplitPane`、`SconeSeparator`、`SconeScrollArea`。
 - Data display：已实现并测试 `SconeDescriptions`、`SconeTable`、`SconeCard`、`SconeTag`、`SconeBadge`、`SconeList`、`SconeStatistic`、`SconeTimeline`。
-- Navigation and media：`SconeBreadcrumb`、`SconePagination`、`SconeTabs`、`SconeSegmented`、`SconeTree`、`SconeDropdown`、`SconeMenu`、`SconeTooltip`、`SconeCommand`、`SconeAccordion`、`SconeCollapsible`、`SconeImage`、`SconeAvatar`。
+- Navigation and media：已实现并测试 `SconeBreadcrumb`、`SconeTabs`、`SconeSegmented`、`SconeTree`、`SconeDropdown`、`SconeMenu`、`SconeTooltip`、`SconeCommand`、`SconeAccordion`、`SconeCollapsible`、`SconeImage`、`SconeAvatar`；`SconePagination` 延后到 DataTable worktree。
 - Feedback：已实现并测试 `SconeDrawer`、`SconeDialog`、`SconeConfirm`、`SconeAlert`、`SconeEmpty`、`SconeLoading`、`SconeProgress`、`SconeToastProvider`、`toast`、`SconeNotificationProvider`、`notification`。
 - Admin Pattern exports：`AppShell`、`Page`、`Section`、`FilterBar`、`DataTable` compound parts。
 - Recipes：DrawerForm、ConfirmationFlow、Popover、Logo、Result、Dashboard Metric、Grid。
@@ -216,6 +216,77 @@
 
 - 其他组件族、Pattern 和 Recipe 仍未进入实现覆盖。
 
+### Navigation / Media
+
+实现状态：已完成，`SconePagination` 除外。
+
+测试状态：已完成，`SconePagination` 除外。
+
+源码文件：
+
+- `src/components/navigation/breadcrumb.tsx`
+- `src/components/navigation/tabs.tsx`
+- `src/components/navigation/segmented.tsx`
+- `src/components/navigation/tree.tsx`
+- `src/components/navigation/dropdown.tsx`
+- `src/components/navigation/menu.tsx`
+- `src/components/navigation/tooltip.tsx`
+- `src/components/navigation/command.tsx`
+- `src/components/navigation/accordion.tsx`
+- `src/components/navigation/collapsible.tsx`
+- `src/components/navigation/index.ts`
+- `src/components/media/image.tsx`
+- `src/components/media/avatar.tsx`
+- `src/components/media/index.ts`
+- `src/index.ts`
+
+测试文件：
+
+- `src/components/navigation/breadcrumb.test.tsx`
+- `src/components/navigation/tabs.test.tsx`
+- `src/components/navigation/segmented.test.tsx`
+- `src/components/navigation/tree.test.tsx`
+- `src/components/navigation/dropdown.test.tsx`
+- `src/components/navigation/menu.test.tsx`
+- `src/components/navigation/tooltip.test.tsx`
+- `src/components/navigation/command.test.tsx`
+- `src/components/navigation/accordion.test.tsx`
+- `src/components/navigation/collapsible.test.tsx`
+- `src/components/media/image.test.tsx`
+- `src/components/media/avatar.test.tsx`
+- `src/index.test.ts`
+
+覆盖能力：
+
+- Breadcrumb：路径项渲染、分隔符、`maxItems` 折叠、disabled 项、`onItemClick`。
+- Tabs：受控和非受控选中、水平和垂直方向、自动和手动激活、键盘切换、禁用项。
+- Segmented：受控和非受控选择、禁用控件和禁用选项、`sm` / `md` 尺寸。
+- Tree：选中、展开、勾选、多选、禁用节点、键盘导航、父子层级可见性。
+- Dropdown：trigger 开合、动作项选择、禁用项、destructive 样式、separator、键盘关闭和移动焦点。
+- Menu：选中项、展开项、嵌套菜单、水平和垂直键盘移动、collapsed 标题提示、禁用项。
+- Tooltip：hover、focus、受控和非受控 open、延迟显示、Escape 关闭、方向 class。
+- Command：搜索过滤、分组、空态、loading、键盘选择、禁用项、`onSelect`。
+- Accordion：single / multiple 展开、受控和非受控值、禁用项、`collapsible`。
+- Collapsible：受控和非受控展开、禁用 trigger、`onOpenChange`。
+- Image：加载、错误回退、比例、object-fit、caption、懒加载。
+- Avatar：图片、fallback、尺寸、形状、状态点、图片错误回退。
+- Public exports：Navigation 和 Media 组件族入口、库级入口及 public props type。
+
+验证结果：
+
+- `pnpm format`：通过。
+- `pnpm lint`：通过。
+- `pnpm typecheck`：通过。
+- `pnpm test -- src/components/navigation src/components/media src/index.test.ts`：通过，45 个 test files、166 个 tests。
+- `pnpm build`：通过。
+
+说明：
+
+- `SconePagination` 未实现、未导出、未测试，按本次 RUNBOOK 明确延后到 DataTable worktree。
+- Navigation / Media 不引入路由、权限过滤、菜单数据加载、图片鉴权、下载服务或产品级导航策略。
+- `SconeDropdown` 保持动作菜单边界，不作为表单值选择控件；表单值选择仍归属 Select / Combobox。
+- `SconeTooltip` 仅覆盖短提示，不承载错误说明、必读说明或可点击内容。
+
 ## Pending Implementation Work
 
 后续实现阶段至少需要完成：
@@ -223,7 +294,7 @@
 1. 创建 DESIGN 指定的其余 `src/` 目录结构、公共入口和组件族类型入口。
 2. 按 `docs/10-specs/COMPONENT-SELECTION.md` 的 source strategy 实现 wrapper、vendored primitive、custom component、pattern-only 和 docs-only 边界。
 3. 继续维护 `src/styles/theme.css` 作为 CSS variables 唯一数值源，并维护默认 `tailwind.config.ts` 到 CSS variables 的映射。
-4. 实现 Data Display、Layout primitives 和 Feedback / Overlay 以外的组件族和 Pattern；Recipe 全部保持文档和示例边界，不创建 `src/recipes/` 源码入口。
+4. 实现 Form components、Admin Patterns 和 Recipe 边界外的后续组件；Recipe 全部保持文档和示例边界，不创建 `src/recipes/` 源码入口。
 5. 按 DESIGN 的 Verification Design 在被测文件同目录创建 `*.test.ts` 或 `*.test.tsx`，并生成真正的实现覆盖证据。
 6. 在后续实现后更新本 readiness 文档，区分已实现、已测试、未覆盖和延期项。
 
@@ -247,6 +318,6 @@
 
 设计覆盖：完成。
 
-实现覆盖：部分完成。Data Display、Layout primitives 与 Feedback / Overlay 已实现；其余组件族、Pattern 和 Recipe 未完成。
+实现覆盖：部分完成。Data Display、Layout primitives、Feedback / Overlay、Navigation / Media 已实现；`SconePagination`、其余组件族、Pattern 和 Recipe 未完成。
 
-测试覆盖：部分完成。Data Display、Layout primitives 与 Feedback / Overlay 已测试；其余组件族、Pattern 和 Recipe 未完成。
+测试覆盖：部分完成。Data Display、Layout primitives、Feedback / Overlay、Navigation / Media 已测试；`SconePagination`、其余组件族、Pattern 和 Recipe 未完成。

@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `13-implementation-coverage`：13 更新 Implementation Coverage
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
-    - 范围对象：`docs/40-readiness/IMPLEMENTATION-COVERAGE.md`
-    - 处理动作：补充 Navigation + Media 实现覆盖证据。
-    - 验收点：coverage 记录包含源码文件、测试文件、覆盖能力、最终验证命令结果，并明确 `SconePagination` 延后到 DataTable worktree。
-    - 重要度：10/10
-
 - [ ] `14-runbook-cleanup`：14 清理 RUNBOOK
     - 任务类型：执行任务
     - 依据文档：`docs/00-governance/DOCUMENT-RULES.md`
