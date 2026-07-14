@@ -8,6 +8,17 @@ import {
     hasAriaValue,
     mergeAriaDescribedBy,
     mergeIds,
+    notification,
+    SconeAlert,
+    SconeConfirm,
+    SconeDialog,
+    SconeDrawer,
+    SconeEmpty,
+    SconeLoading,
+    SconeNotificationProvider,
+    SconeProgress,
+    SconeToastProvider,
+    toast,
     useControllableState,
 } from "./index";
 import type {
@@ -25,6 +36,27 @@ import type {
     SconeSpacingToken,
     SconeStatus,
     SconeTone,
+} from "./index";
+import type {
+    NotificationCloseReason,
+    NotificationOptions,
+    NotificationPlacement,
+    NotificationService,
+    SconeAlertProps,
+    SconeConfirmProps,
+    SconeDialogProps,
+    SconeDrawerProps,
+    SconeEmptyProps,
+    SconeLoadingProps,
+    SconeNotificationItem,
+    SconeNotificationProviderProps,
+    SconeProgressProps,
+    SconeToastItem,
+    SconeToastProviderProps,
+    ToastCloseReason,
+    ToastOptions,
+    ToastPosition,
+    ToastService,
 } from "./index";
 
 describe("public index exports", () => {
@@ -65,15 +97,78 @@ describe("public index exports", () => {
 
         const publicExports = await import("./index");
 
-        expect(Object.keys(publicExports).sort()).toEqual([
-            "ariaBoolean",
-            "ariaValue",
-            "cn",
-            "composeRefs",
-            "hasAriaValue",
-            "mergeAriaDescribedBy",
-            "mergeIds",
-            "useControllableState",
-        ]);
+        expect(Object.keys(publicExports).sort()).toEqual(
+            [
+                "ariaBoolean",
+                "ariaValue",
+                "cn",
+                "composeRefs",
+                "hasAriaValue",
+                "mergeAriaDescribedBy",
+                "mergeIds",
+                "notification",
+                "SconeAlert",
+                "SconeConfirm",
+                "SconeDialog",
+                "SconeDrawer",
+                "SconeEmpty",
+                "SconeLoading",
+                "SconeNotificationProvider",
+                "SconeProgress",
+                "SconeToastProvider",
+                "toast",
+                "useControllableState",
+            ].sort(),
+        );
+    });
+
+    it("exports feedback and overlay component APIs", () => {
+        expect(typeof SconeAlert).toBe("object");
+        expect(typeof SconeEmpty).toBe("object");
+        expect(typeof SconeLoading).toBe("object");
+        expect(typeof SconeProgress).toBe("object");
+        expect(typeof SconeDrawer).toBe("object");
+        expect(typeof SconeDialog).toBe("object");
+        expect(typeof SconeConfirm).toBe("object");
+        expect(typeof SconeToastProvider).toBe("function");
+        expect(typeof SconeNotificationProvider).toBe("function");
+        expect(typeof toast.show).toBe("function");
+        expect(typeof notification.open).toBe("function");
+
+        expectTypeOf<SconeAlertProps["tone"]>().toEqualTypeOf<SconeTone | undefined>();
+        expectTypeOf<SconeEmptyProps["action"]>().toEqualTypeOf<React.ReactNode>();
+        expectTypeOf<SconeLoadingProps["size"]>().toEqualTypeOf<SconeControlSize | undefined>();
+        expectTypeOf<SconeProgressProps["status"]>().toEqualTypeOf<SconeStatus | undefined>();
+        expectTypeOf<SconeDrawerProps["onRequestClose"]>().toEqualTypeOf<
+            ((reason: OverlayCloseReason) => void) | undefined
+        >();
+        expectTypeOf<SconeDialogProps["onRequestClose"]>().toEqualTypeOf<
+            ((reason: OverlayCloseReason) => void) | undefined
+        >();
+        expectTypeOf<SconeConfirmProps["onConfirm"]>().toEqualTypeOf<
+            (() => void | Promise<void>) | undefined
+        >();
+        expectTypeOf<ToastPosition>().toEqualTypeOf<
+            "top-left" | "top-right" | "bottom-left" | "bottom-right"
+        >();
+        expectTypeOf<ToastCloseReason>().toEqualTypeOf<
+            "timeout" | "closeButton" | "programmatic"
+        >();
+        expectTypeOf<ToastOptions["tone"]>().toEqualTypeOf<SconeTone | undefined>();
+        expectTypeOf<SconeToastItem["id"]>().toEqualTypeOf<string>();
+        expectTypeOf<SconeToastProviderProps["maxVisible"]>().toEqualTypeOf<number | undefined>();
+        expectTypeOf<ToastService["show"]>().toEqualTypeOf<(options: ToastOptions) => string>();
+        expectTypeOf<NotificationPlacement>().toEqualTypeOf<
+            "top-left" | "top-right" | "bottom-left" | "bottom-right"
+        >();
+        expectTypeOf<NotificationCloseReason>().toEqualTypeOf<"closeButton" | "programmatic">();
+        expectTypeOf<NotificationOptions["title"]>().toEqualTypeOf<React.ReactNode>();
+        expectTypeOf<SconeNotificationItem["id"]>().toEqualTypeOf<string>();
+        expectTypeOf<SconeNotificationProviderProps["maxVisible"]>().toEqualTypeOf<
+            number | undefined
+        >();
+        expectTypeOf<NotificationService["open"]>().toEqualTypeOf<
+            (options: NotificationOptions) => string
+        >();
     });
 });

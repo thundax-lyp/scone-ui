@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `10 src/index.ts`：导出 Feedback / Overlay 公共 API
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-OVERLAY.md`
-    - 范围对象：`src/index.ts`、`src/index.test.ts`
-    - 处理动作：导出 9 个组件、2 个 Provider、2 个 service 和 RUNBOOK 指定公共类型。
-    - 验收点：导出测试通过，且不导出内部 helper、内部 store 或内部 id 生成器。
-    - 重要度：9/10
-
 - [ ] `11 feat/feedback-overlay-loop`：同步 main 分支代码
     - 任务类型：执行任务
     - 依据文档：`docs/00-governance/TODO-RULES.md`
