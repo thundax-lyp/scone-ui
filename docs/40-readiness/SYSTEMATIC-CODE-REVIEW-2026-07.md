@@ -361,6 +361,44 @@ Recent evidence before this review branch:
 * **功能风险**：低；pure import cleanup.
 * **置信度**：高
 
+## 13 Scroll, Separator, And Resizable Layout
+
+### Evidence
+
+- `SconeScrollArea` delegates viewport and scrollbar behavior to Radix ScrollArea and keeps `onScroll` on the viewport.
+- `SconeSeparator` delegates role/orientation semantics to Radix Separator.
+- `SconeSplitPane` implements size presets, CSS length validation, pointer drag, keyboard resize, and size commit callbacks itself.
+- Tests cover ScrollArea viewport class/onScroll, Separator decorative/semantic modes, SplitPane orientation, controlled size, keyboard resize, pointer resize, and invalid CSS length.
+
+### Assessment
+
+- ScrollArea and Separator are thin, understandable primitive wrappers.
+- SplitPane is the only stateful interaction component in this group and deserves tighter contract enforcement.
+
+### Candidate Findings
+
+### [P1] SplitPane min/max presets are not enforced
+
+* **位置**：`src/components/layout/split-pane.tsx`
+* **类别**：API / 状态
+* **问题**：`minSizePreset` and `maxSizePreset` are exposed and rendered as data attributes, but pointer and keyboard resizing do not clamp `resolvedSize` to those bounds.
+* **影响**：The API suggests bounded resizing, but consumers can receive sizes outside the declared min/max range. This creates a misleading contract.
+* **证据**：`minSizePreset` and `maxSizePreset` are only used in `data-min-size-preset` and `data-max-size-preset`; `updateFromPointer` and `nextKeyboardSize` clamp only to zero.
+* **建议**：Either enforce min/max during pointer and keyboard updates or remove these props until bounds are implemented.
+* **功能风险**：中；enforcing bounds changes resize behavior and should update pointer/keyboard tests.
+* **置信度**：高
+
+### [P2] SplitPane pointer listeners lack unmount cleanup
+
+* **位置**：`src/components/layout/split-pane.tsx`
+* **类别**：副作用
+* **问题**：Pointer listeners are registered on `window` during drag and removed only on `pointerup`.
+* **影响**：If the component unmounts during an active drag, listeners can remain attached and call stale closures.
+* **证据**：`handlePointerDown` calls `window.addEventListener("pointermove", ...)` and `window.addEventListener("pointerup", ...)`; there is no effect cleanup or pointer capture fallback.
+* **建议**：Track active listeners in refs and clean them in a `useEffect` return callback, or use pointer capture on the handle.
+* **功能风险**：低；cleanup is internal but should preserve pointer resize tests.
+* **置信度**：中
+
 ## 09 Form Layout Helpers
 
 ### Evidence

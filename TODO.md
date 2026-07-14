@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `13-layout-scroll-resize`：13 审核滚动、分隔和可调整布局
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`src/components/layout/scroll-area.tsx`、`src/components/layout/separator.tsx`、`src/components/layout/split-pane.tsx`、`src/components/layout/scroll-area.test.tsx`、`src/components/layout/split-pane.test.tsx`
-    - 处理动作：检查滚动边界、ARIA separator、键盘 resize、CSS 长度校验和测试可读性。
-    - 验收点：输出布局交互是否存在隐式状态、副作用清理或复杂控制流问题的结论。
-    - 重要度：8/10
-
 - [ ] `14-feedback-status`：14 审核反馈状态组件
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
