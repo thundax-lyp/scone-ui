@@ -6,6 +6,7 @@ import { describe, expect, it } from "vitest";
 
 const srcDir = dirname(dirname(fileURLToPath(import.meta.url)));
 const themePath = join(srcDir, "styles", "theme.css");
+const tailwindConfigPath = join(srcDir, "..", "tailwind.config.ts");
 
 const requiredVariables = [
     "--scone-color-background",
@@ -97,5 +98,37 @@ describe("theme variables", () => {
             .map((file) => relative(srcDir, file));
 
         expect(tokenSourceFiles).toEqual(["styles.css"]);
+    });
+
+    it("keeps Tailwind config mapped to current token names", () => {
+        const config = readFileSync(tailwindConfigPath, "utf8");
+        const staleVariables = [
+            "--scone-font-family-",
+            "--scone-font-size-",
+            "--scone-motion-",
+            "--scone-z-index-",
+        ];
+        const currentVariables = [
+            "--scone-font-body",
+            "--scone-font-label",
+            "--scone-font-title",
+            "--scone-font-mono",
+            "--scone-duration-fast",
+            "--scone-duration-default",
+            "--scone-easing-standard",
+            "--scone-z-sticky",
+            "--scone-z-dropdown",
+            "--scone-z-popover",
+            "--scone-z-drawer",
+            "--scone-z-modal",
+            "--scone-z-toast",
+        ];
+
+        for (const variable of staleVariables) {
+            expect(config).not.toContain(variable);
+        }
+        for (const variable of currentVariables) {
+            expect(config).toContain(variable);
+        }
     });
 });
