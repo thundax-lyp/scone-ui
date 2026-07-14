@@ -59,9 +59,9 @@ export function SconeDropdown({
         onValueChange: onOpenChange,
     });
     const isOpen = Boolean(currentOpen);
-    const triggerElement = React.isValidElement<React.ButtonHTMLAttributes<HTMLButtonElement>>(
-        trigger,
-    )
+    const triggerElement = React.isValidElement<
+        React.ButtonHTMLAttributes<HTMLButtonElement> & React.RefAttributes<HTMLButtonElement>
+    >(trigger)
         ? React.cloneElement(trigger, {
               ref: triggerRef,
               "aria-haspopup": "menu",

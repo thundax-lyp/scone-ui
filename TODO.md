@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `12-final-verification`：12 运行最终验证
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
-    - 范围对象：`src/components/navigation/*`、`src/components/media/*`、`src/index.ts`、`src/index.test.ts`
-    - 处理动作：在同步 main 后运行 Navigation + Media 闭环要求的最终验证命令。
-    - 验收点：`pnpm format`、`pnpm lint`、`pnpm typecheck`、`pnpm test -- src/components/navigation src/components/media src/index.test.ts`、`pnpm build` 均通过或失败原因已明确记录。
-    - 重要度：10/10
-
 - [ ] `13-implementation-coverage`：13 更新 Implementation Coverage
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`

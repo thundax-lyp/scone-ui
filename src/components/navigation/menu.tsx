@@ -14,7 +14,7 @@ export interface SconeNavigationItem {
     className?: string;
 }
 
-export interface SconeMenuProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SconeMenuProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect"> {
     items: SconeNavigationItem[];
     selectedKeys?: string[];
     defaultSelectedKeys?: string[];

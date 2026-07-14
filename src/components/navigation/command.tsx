@@ -15,7 +15,7 @@ export interface SconeCommandItem {
     className?: string;
 }
 
-export interface SconeCommandProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SconeCommandProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect"> {
     items: SconeCommandItem[];
     value?: string;
     defaultValue?: string;

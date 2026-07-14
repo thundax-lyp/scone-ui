@@ -29,7 +29,7 @@ export interface SconeTreeExpandInfo {
     expanded: boolean;
 }
 
-export interface SconeTreeProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface SconeTreeProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect"> {
     treeData: SconeTreeNode[];
     selectedKeys?: Key[];
     defaultSelectedKeys?: Key[];
