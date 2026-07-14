@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `14-feedback-status`：14 审核反馈状态组件
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`src/components/feedback-overlay/alert.tsx`、`src/components/feedback-overlay/empty.tsx`、`src/components/feedback-overlay/loading.tsx`、`src/components/feedback-overlay/progress.tsx`
-    - 处理动作：检查状态语义、action slot、ARIA、loading / progress 边界和错误展示职责。
-    - 验收点：输出反馈状态组件是否存在重复语义、错误处理混淆或可访问性缺口的结论。
-    - 重要度：8/10
-
 - [ ] `15-feedback-overlays`：15 审核浮层组件
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`

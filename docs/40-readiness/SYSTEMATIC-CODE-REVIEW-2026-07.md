@@ -399,6 +399,45 @@ Recent evidence before this review branch:
 * **功能风险**：低；cleanup is internal but should preserve pointer resize tests.
 * **置信度**：中
 
+## 14 Feedback Status Components
+
+### Evidence
+
+- `SconeAlert` uses Foundation tone, title/description/icon/action slots, and currently always renders `role="alert"`.
+- `SconeEmpty` renders title, description, image, action, and children without owning recovery logic.
+- `SconeLoading` marks busy regions and provides spinner/skeleton status content.
+- `SconeProgress` wraps Radix Progress and clamps value range before passing it to the primitive.
+- Tests cover alert tone text, actions, empty actions, loading busy state, skeleton, not-loading state, progress ARIA values, status text, and clamping.
+
+### Assessment
+
+- Empty and Loading responsibilities are clear and business-neutral.
+- Alert and Progress need small semantic hardening around urgency and invalid max values.
+
+### Candidate Findings
+
+### [P1] Progress can render `NaN%` when `max` is invalid
+
+* **位置**：`src/components/feedback-overlay/progress.tsx`
+* **类别**：错误处理 / 可访问性
+* **问题**：`normalizeProgress` returns `0` for invalid or non-positive `max`, but `percent` is still calculated as `Math.round((normalizedValue / max) * 100)`.
+* **影响**：`max={0}` or non-finite `max` can produce `NaN%` in `aria-valuetext`, visible labels, and transform styles.
+* **证据**：`normalizeProgress(value, max)` guards `max <= 0`; `percent` divides by the original `max` afterward.
+* **建议**：Normalize `max` before percent calculation, or return both normalized value and normalized max from one helper.
+* **功能风险**：低；fix is localized and should add an invalid-max test.
+* **置信度**：高
+
+### [P2] Alert always announces as urgent
+
+* **位置**：`src/components/feedback-overlay/alert.tsx`
+* **类别**：可访问性 / API
+* **问题**：All tones render `role="alert"`, including neutral and info notices.
+* **影响**：Non-urgent informational content may be announced with assertive urgency by assistive technologies, increasing noise.
+* **证据**：The root div has a fixed `role="alert"`; tone labels include neutral `Notice` and info `Information`.
+* **建议**：Map severe tones to `alert` and non-severe tones to `status` or allow an explicit `role` override without forcing alert.
+* **功能风险**：低；semantics change may affect tests that currently assume alert role for all tones.
+* **置信度**：中
+
 ## 09 Form Layout Helpers
 
 ### Evidence
