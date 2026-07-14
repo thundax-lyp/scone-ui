@@ -49,6 +49,33 @@ describe("SconeDropdown", () => {
         expect(trigger).toHaveFocus();
     });
 
+    it("closes when pointer or focus moves outside", () => {
+        render(
+            <>
+                <SconeDropdown trigger={<button type="button">Actions</button>} items={items} />
+                <button type="button">Outside</button>
+            </>,
+        );
+
+        fireEvent.click(screen.getByRole("button", { name: "Actions" }));
+        fireEvent.pointerDown(screen.getByRole("button", { name: "Outside" }));
+
+        expect(screen.queryByRole("menu")).not.toBeInTheDocument();
+
+        fireEvent.click(screen.getByRole("button", { name: "Actions" }));
+        fireEvent.focusIn(screen.getByRole("button", { name: "Outside" }));
+
+        expect(screen.queryByRole("menu")).not.toBeInTheDocument();
+    });
+
+    it("focuses the first enabled item when opened from the keyboard", () => {
+        render(<SconeDropdown trigger={<button type="button">Actions</button>} items={items} />);
+
+        fireEvent.keyDown(screen.getByRole("button", { name: "Actions" }), { key: "ArrowDown" });
+
+        expect(screen.getByRole("menuitem", { name: "Edit" })).toHaveFocus();
+    });
+
     it("supports controlled open state", () => {
         const onOpenChange = vi.fn();
 

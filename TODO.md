@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `07 src/components/navigation/dropdown`：补齐 Dropdown outside close 和 keyboard initial focus
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`
-    - 范围对象：`src/components/navigation/dropdown.tsx`、`src/components/navigation/dropdown.test.tsx`、`docs/10-specs/components/navigation/SCONE-DROPDOWN.md`
-    - 处理动作：让 dropdown trigger 打开后的外部点击、外部 focus、Escape 和 keyboard open initial focus 行为符合 SPEC。
-    - 验收点：菜单外交互关闭 menu，Escape 关闭并恢复 trigger focus，keyboard open 聚焦首个 enabled menu item。
-    - 重要度：10/10
-
 - [ ] `08 src/components/navigation/command`：修复 Command filter 后 active item
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`

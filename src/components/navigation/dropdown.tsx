@@ -52,7 +52,10 @@ export function SconeDropdown({
     ariaLabel,
     className,
 }: SconeDropdownProps) {
+    const rootRef = React.useRef<HTMLDivElement | null>(null);
+    const menuRef = React.useRef<HTMLDivElement | null>(null);
     const triggerRef = React.useRef<HTMLButtonElement | null>(null);
+    const openedByKeyboardRef = React.useRef(false);
     const [currentOpen, setOpen] = useControllableState({
         value: open,
         defaultValue: defaultOpen ?? false,
@@ -70,6 +73,7 @@ export function SconeDropdown({
               onClick: (event: React.MouseEvent<HTMLButtonElement>) => {
                   trigger.props.onClick?.(event);
                   if (!event.defaultPrevented) {
+                      openedByKeyboardRef.current = false;
                       setOpen(!isOpen);
                   }
               },
@@ -80,10 +84,12 @@ export function SconeDropdown({
                   }
                   if (event.key === "Enter" || event.key === " ") {
                       event.preventDefault();
+                      openedByKeyboardRef.current = true;
                       setOpen(!isOpen);
                   }
                   if (event.key === "ArrowDown") {
                       event.preventDefault();
+                      openedByKeyboardRef.current = true;
                       setOpen(true);
                   }
               },
@@ -95,12 +101,56 @@ export function SconeDropdown({
         setOpen(false);
     }, [setOpen]);
 
+    React.useEffect(() => {
+        if (!isOpen) {
+            return;
+        }
+
+        const handlePointerDown = (event: PointerEvent) => {
+            const target = event.target;
+
+            if (target instanceof Node && !rootRef.current?.contains(target)) {
+                setOpen(false);
+            }
+        };
+
+        const handleFocusIn = (event: FocusEvent) => {
+            const target = event.target;
+
+            if (target instanceof Node && !rootRef.current?.contains(target)) {
+                setOpen(false);
+            }
+        };
+
+        document.addEventListener("pointerdown", handlePointerDown);
+        document.addEventListener("focusin", handleFocusIn);
+
+        return () => {
+            document.removeEventListener("pointerdown", handlePointerDown);
+            document.removeEventListener("focusin", handleFocusIn);
+        };
+    }, [isOpen, setOpen]);
+
+    React.useEffect(() => {
+        if (!isOpen || !openedByKeyboardRef.current) {
+            return;
+        }
+
+        const firstEnabledItem = menuRef.current?.querySelector<HTMLElement>(
+            "[role='menuitem']:not([aria-disabled='true'])",
+        );
+
+        firstEnabledItem?.focus();
+        openedByKeyboardRef.current = false;
+    }, [isOpen]);
+
     return (
         <SconeDropdownContext.Provider value={{ close }}>
-            <div className="relative inline-flex">
+            <div ref={rootRef} className="relative inline-flex">
                 {triggerElement}
                 {isOpen ? (
                     <div
+                        ref={menuRef}
                         role="menu"
                         data-scone-navigation="dropdown"
                         data-align={align}

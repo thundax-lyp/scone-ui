@@ -36,6 +36,8 @@
 - 入口必须有可见文本或 `ariaLabel`。
 - 危险操作使用 `destructive`，确认流程由 Confirm recipe 组合。
 - `items` 不得阻断 compound parts。
+- 打开后 pointer 或 focus 移到菜单和 trigger 外部时关闭。
+- 通过 Enter、Space 或 ArrowDown 从 trigger 打开时，初始焦点落到首个 enabled menu item。
 - shadcn mapping：基于 DropdownMenu，保留 roving focus、typeahead 和关闭行为。
 
 测试：
