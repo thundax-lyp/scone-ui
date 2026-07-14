@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `6.1 readiness docs`：同步 readiness 文档
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
-    - 范围对象：`docs/40-readiness/SYSTEMATIC-CODE-REVIEW-2026-07.md`、`docs/40-readiness/IMPLEMENTATION-COVERAGE.md`
-    - 处理动作：删除系统性审核报告中已完全处理的问题章节，并补充 Implementation Coverage 的最终验证状态。
-    - 验收点：审核报告不再保留已完全处理的问题章节，Implementation Coverage 记录本任务实际修改范围、验证命令和剩余风险。
-    - 重要度：9/10
-
 - [ ] `6.2 runbook cleanup`：清理临时 RUNBOOK
     - 任务类型：执行任务
     - 依据文档：`docs/00-governance/DOCUMENT-RULES.md`

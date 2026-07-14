@@ -20,7 +20,8 @@
 
 最影响清晰度和简洁度的问题：
 
-- 部分组件 root props、测试断言和导入路径仍有低风险一致性维护空间。
+- 部分 layout / feedback-overlay 测试断言仍有低风险一致性维护空间。
+- 公共入口分组仍可在后续触及时整理，降低人工扫描成本。
 
 是否存在明显的过度设计：
 
@@ -30,12 +31,12 @@
 是否存在模块边界问题：
 
 - 组件、Pattern、Foundation 的依赖方向整体合理。
-- 剩余边界问题主要集中在部分 root props 目标元素和测试内部标记耦合。
+- 剩余边界问题主要集中在测试内部标记耦合；组件 root props 和 `cn` helper 入口已完成收口。
 
 建议优先处理的方向：
 
-1. 持续清理组件 root props 和剩余 `cn` import path 的一致性维护项。
-2. 继续清理 layout / feedback-overlay 测试中对内部 slot 标记的非必要耦合。
+1. 减少 layout / feedback-overlay 测试对内部 slot 标记的非必要耦合。
+2. 后续触及 `src/index.ts` 时整理公共入口分组。
 
 ### 问题清单索引
 
@@ -47,30 +48,21 @@ P1：未发现未关闭项。
 
 P2：
 
-- Descriptions `style` prop is applied to an internal `dl`, not the root.
-- Badge root props do not target the same element as the forwarded ref.
-- Layout primitive props are narrower than neighboring root components.
-- Layout / feedback-overlay tests still contain internal slot markup coupling.
+- Some tests are tightly coupled to internal slot markup.
 
 P3：
 
 - Public entry grouping is harder to scan than family barrels.
-- `cn` import path is inconsistent.
 
 ### 推荐的目录结构调整
 
-当前没有必须立即执行的目录搬迁。后续可以在触及相关代码时做一项低风险整理：
+当前没有必须立即执行的目录搬迁。`component-contracts-cn-cleanup` 已完成 `cn` helper 入口收口：
 
 ```text
-调整前：
-src/lib/cn.ts
-src/lib/utils.ts  # one-line re-export
-
-调整后：
 src/lib/cn.ts
 ```
 
-理由：`src/lib/utils.ts` 只重新导出 `cn`，导致 `../../lib/utils` 与 `@/lib/cn` 两种导入路径并存。删除前需要统一所有调用方 import，并确认公共入口仍从 `src/lib/cn.ts` 导出 `cn`。
+`src/lib/utils.ts` 已删除，源码中不再存在 `lib/utils`、`@/lib/utils` 或 `../../lib/utils` 调用方。
 
 ### 推荐的重命名清单
 
@@ -80,8 +72,8 @@ src/lib/cn.ts
 
 ### 建议执行顺序
 
-1. 模块边界和 API 调整：统一剩余 `cn` import path，收口 Data Display / Layout root props 边界。
-2. 测试维护：继续清理 layout / feedback-overlay 中非布局契约测试对内部 slot 标记的耦合。
+1. 测试维护：减少 layout / feedback-overlay 中非布局契约测试对内部 slot 标记的耦合。
+2. 公共入口维护：后续触及 `src/index.ts` 时按 Export Groups 整理分组。
 
 ## 01 Baseline
 
@@ -290,26 +282,13 @@ Recent evidence before this review branch:
 - Typography primitives share `SconeTypographyProps` and use `as`, size, weight, tone, and truncate.
 - `SconeStack`, `SconeInline`, `SconeCompact`, and `SconeToolbar` encode token-based spacing, alignment, compact grouping, and toolbar slots.
 - Layout tests cover token gaps, wrap, split, density, orientation, ref, className, and style where exposed.
-- Some remaining non-target layout files and several other component wrappers still import `cn` through `src/lib/utils`, while newer component files import `@/lib/cn` directly.
+- Component wrappers import `cn` through `@/lib/cn`; the former `src/lib/utils.ts` re-export has been removed.
 
 ### Assessment
 
 - Typography and layout components do not own business state or product workflow.
 - `SconeInline` split is decorative and hidden from assistive technology, which matches its separator intent.
 - `SconeToolbar` stays primitive: selected count and permission/action semantics remain in Pattern/caller code.
-
-### Candidate Finding
-
-### [P3] `cn` import path is inconsistent
-
-- **位置**：`src/lib/utils.ts`、`src/components/ui/*.tsx`、`src/components/feedback-overlay/*.tsx`、`src/components/layout/scroll-area.tsx`、`separator.tsx`、`split-pane.tsx`、部分 `navigation` 和 `media` 文件
-- **类别**：命名 / 依赖
-- **问题**：Some files import `cn` from `../../lib/utils`, while most newer component and Pattern files import `@/lib/cn`.
-- **影响**：`utils.ts` is only a one-line re-export, so it adds a second name/path for the same helper and makes dependency scanning noisier.
-- **证据**：`src/lib/utils.ts` only exports `{ cn }`; `rg "lib/utils|@/lib/utils|\\.\\./\\.\\./lib/utils" src` still finds callers outside the completed `SconeStack`、`SconeInline`、`SconeCompact`、`SconeToolbar` cleanup.
-- **建议**：When touching remaining files, standardize imports on `@/lib/cn` and remove `src/lib/utils.ts` only after no callers remain.
-- **功能风险**：低；pure import cleanup.
-- **置信度**：高
 
 ## 13 Scroll, Separator, And Resizable Layout
 

@@ -107,6 +107,10 @@ Recipe 守护：
 - `src/lib/use-controllable-state.test.tsx` 覆盖 `value={undefined}` 继续按 uncontrolled sentinel 处理，并保留 setter 本地更新和 `onValueChange` 通知。
 - `src/index.test.ts` 覆盖 `SconeFieldContextValue.fieldId`、`labelId`、`descriptionId`、`messageId` 作为当前公共类型契约。
 - `src/components/form/input.test.tsx`、`search-input.test.tsx`、`password-input.test.tsx`、`textarea.test.tsx` 覆盖 text controls 继续先触发 `onValueChange`，再触发原生 `onChange`。
+- `src/components/data-display/descriptions.test.tsx` 覆盖 Descriptions root `style` / `className` / HTML attributes / ref 与内部 `dl` columns style 的职责分离。
+- `src/components/data-display/badge.test.tsx` 覆盖 Badge children path 和 standalone path 的 root props / ref / style / className 与 indicator 可访问标签分离。
+- `src/components/layout/scroll-area.test.tsx`、`separator.test.tsx`、`split-pane.test.tsx` 覆盖 Layout root HTML attributes passthrough、ScrollArea viewport `onScroll` 归属和 SplitPane caller style 不覆盖组件 grid template。
+- `src/lib/cn.ts` 是 `cn` 唯一源码入口；`src/lib/utils.ts` 已删除，`rg "lib/utils|@/lib/utils|\\.\\./\\.\\./lib/utils" src` 无结果。
 
 测试维护证据：
 
@@ -128,8 +132,8 @@ Recipe 守护：
 
 本节只记录从本次系统性审核沉淀出的待修复方向；详细证据和风险见系统性审核报告。
 
-1. 降低复杂交互维护成本：持续关注 Combobox、DatePicker 的 overlay、focus 和 keyboard 行为。
-2. 处理剩余 P2/P3 维护项：Data Display / Layout root props 边界、剩余 `cn` import path、layout / feedback-overlay 测试内部标记耦合。
+1. 处理剩余测试维护项：减少 layout / feedback-overlay 测试中非布局契约断言对内部 slot 标记的耦合。
+2. 处理剩余公共入口维护项：后续触及 `src/index.ts` 时按 Export Groups 整理分组。
 
 后续维护要求：
 
