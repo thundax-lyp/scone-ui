@@ -9,8 +9,8 @@ import { getSconeControlStateProps, normalizeSconeAriaInvalid } from "./control"
 import { useSconeFieldContext } from "./field";
 
 export interface SconeRadioGroupProps<Value extends string = string> extends Omit<
-    React.ComponentPropsWithoutRef<typeof RadioGroup>,
-    "value" | "defaultValue" | "onValueChange" | "orientation"
+    React.HTMLAttributes<HTMLDivElement>,
+    "defaultValue" | "onChange"
 > {
     options: Array<SconeOption<Value>>;
     value?: Value;
@@ -20,6 +20,9 @@ export interface SconeRadioGroupProps<Value extends string = string> extends Omi
     ariaLabel?: string;
     invalid?: boolean;
     readOnly?: boolean;
+    disabled?: boolean;
+    name?: string;
+    required?: boolean;
 }
 
 export const SconeRadioGroup = React.forwardRef<HTMLDivElement, SconeRadioGroupProps>(

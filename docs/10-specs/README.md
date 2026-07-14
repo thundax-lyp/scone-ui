@@ -9,7 +9,7 @@ AI 或实现者按以下顺序读取：
 1. 读取本 README，确认目标能力所属层级和文件位置。
 2. 读取 [`ADMIN-UI-SPEC.md`](./ADMIN-UI-SPEC.md) 和 [`FOUNDATIONS-SPEC.md`](./FOUNDATIONS-SPEC.md)，获得全局 API、状态、token、可访问性和 source strategy 规则。
 3. 读取 [`COMPONENT-SELECTION.md`](./COMPONENT-SELECTION.md)，确认目标能力是否导出、属于 Component/Layout/Pattern/Recipe，以及 source strategy。
-4. 包使用、AI 生成代码或快速查公共 props 类型时，读取 [`PACKAGE-AI-GUIDE.md`](./PACKAGE-AI-GUIDE.md)。
+4. 包使用、AI 生成代码或快速查公共 props 类型时，读取根目录 [`PACKAGE-AI-GUIDE.md`](../../PACKAGE-AI-GUIDE.md)。
 5. 只读取目标组件、Pattern 或 Recipe 的单独 SPEC 文件。
 6. 只有涉及范围争议、Not In Scope 或新增组件时，才读取 [`COMPONENT-COVERAGE-AUDIT.md`](./COMPONENT-COVERAGE-AUDIT.md)。
 
@@ -18,7 +18,7 @@ AI 或实现者按以下顺序读取：
 - `ADMIN-UI-SPEC.md` 是总纲，不承载单组件 API 细节。
 - `FOUNDATIONS-SPEC.md` 是跨组件共享类型、token、状态和可访问性权威。
 - `COMPONENT-SELECTION.md` 是导出范围、source strategy 和组件选择权威。
-- `PACKAGE-AI-GUIDE.md` 是发布包后面向 AI 和调用方的公共 API、props 类型、导入规则和禁止导入边界索引。
+- 根目录 `PACKAGE-AI-GUIDE.md` 是发布包后面向 AI 和调用方的独立公共 API、props 类型、导入规则和禁止导入边界文档。
 - `components/**/*.md` 是单组件 props、events、state、usage 和 out-of-scope 权威。
 - `patterns/**/*.md` 是 Admin Pattern anatomy、slot、状态归属和组合边界权威。
 - `recipes/**/*.md` 是可复制组合方式，不产生新的 `Scone*` 组件 API。
@@ -39,7 +39,7 @@ AI 或实现者按以下顺序读取：
 - [`ADMIN-UI-SPEC.md`](./ADMIN-UI-SPEC.md)：组件库定位、层级模型、API 原则、source strategy 和验证基线。
 - [`FOUNDATIONS-SPEC.md`](./FOUNDATIONS-SPEC.md)：跨组件词汇、tokens、shared types、状态语义、响应式和可访问性规则。
 - [`COMPONENT-SELECTION.md`](./COMPONENT-SELECTION.md)：组件选择规则、能力矩阵、导出分组和状态矩阵。
-- [`PACKAGE-AI-GUIDE.md`](./PACKAGE-AI-GUIDE.md)：包发布后的 AI 使用入口、公共导入规则、组件 registry、props 类型和 SPEC 路由。
+- [`PACKAGE-AI-GUIDE.md`](../../PACKAGE-AI-GUIDE.md)：包发布后的独立 AI 使用入口、公共导入规则、组件 registry、props 类型和 SPEC 路由。
 - [`COMPONENT-COVERAGE-AUDIT.md`](./COMPONENT-COVERAGE-AUDIT.md)：覆盖审计、Not In Scope 和 Recipe 边界。
 - [`ADMIN-PATTERNS-SPEC.md`](./ADMIN-PATTERNS-SPEC.md)：Page、Section、FilterBar、DataTable、FormPage、DetailPage 等 Admin Pattern。
 

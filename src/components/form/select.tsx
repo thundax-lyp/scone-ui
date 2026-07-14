@@ -14,9 +14,11 @@ import type { SconeControlSize, SconeOption } from "@/types/foundation";
 import { getSconeControlStateProps, normalizeSconeAriaInvalid } from "./control";
 import { useSconeFieldContext } from "./field";
 
+type SconeSelectTriggerSize = "sm" | "default";
+
 export interface SconeSelectProps<Value extends string = string> extends Omit<
-    React.ComponentPropsWithoutRef<typeof SelectTrigger>,
-    "value" | "defaultValue" | "readOnly" | "size"
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    "defaultValue" | "onChange" | "readOnly" | "size" | "value"
 > {
     options: Array<SconeOption<Value>>;
     value?: Value;
@@ -33,12 +35,11 @@ export interface SconeSelectProps<Value extends string = string> extends Omit<
     contentClassName?: string;
 }
 
-const selectSizeMap: Record<SconeControlSize, React.ComponentProps<typeof SelectTrigger>["size"]> =
-    {
-        sm: "sm",
-        md: "default",
-        lg: "default",
-    };
+const selectSizeMap: Record<SconeControlSize, SconeSelectTriggerSize> = {
+    sm: "sm",
+    md: "default",
+    lg: "default",
+};
 
 const selectSizeClassNames: Record<SconeControlSize, string> = {
     sm: "min-w-36",

@@ -9,8 +9,8 @@ import { getSconeControlStateProps, normalizeSconeAriaInvalid } from "./control"
 import { useSconeFieldContext } from "./field";
 
 export interface SconeSliderProps extends Omit<
-    React.ComponentPropsWithoutRef<typeof Slider>,
-    "value" | "defaultValue" | "onValueChange" | "orientation"
+    React.HTMLAttributes<HTMLSpanElement>,
+    "defaultValue" | "onChange"
 > {
     value?: number[];
     defaultValue?: number[];
@@ -19,9 +19,14 @@ export interface SconeSliderProps extends Omit<
     ariaLabel?: string;
     invalid?: boolean;
     readOnly?: boolean;
+    disabled?: boolean;
+    min?: number;
+    max?: number;
+    step?: number;
+    name?: string;
 }
 
-export const SconeSlider = React.forwardRef<React.ElementRef<typeof Slider>, SconeSliderProps>(
+export const SconeSlider = React.forwardRef<HTMLSpanElement, SconeSliderProps>(
     (
         {
             value,
