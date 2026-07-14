@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `01-tailwind-token-config`：修正 Tailwind stale token 配置
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-COMPONENT-CONTRACTS.md`
-    - 范围对象：`tailwind.config.ts`、`src/styles/theme.test.ts`
-    - 处理动作：对齐或删除 `fontFamily`、`fontSize`、`transitionDuration`、`transitionTimingFunction`、`zIndex` 中的 stale `--scone-*` token 引用。
-    - 验收点：`rg "scone-font-family|scone-font-size|scone-motion|scone-z-index" tailwind.config.ts src` 无命中，且 `pnpm test -- src/styles/theme.test.ts` 通过。
-    - 重要度：9/10
-
 - [ ] `02-descriptions-root-contract`：收口 Descriptions root/internal 属性归属
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-COMPONENT-CONTRACTS.md`

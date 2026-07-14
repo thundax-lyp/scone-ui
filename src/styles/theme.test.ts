@@ -102,12 +102,7 @@ describe("theme variables", () => {
 
     it("keeps Tailwind config mapped to current token names", () => {
         const config = readFileSync(tailwindConfigPath, "utf8");
-        const staleVariables = [
-            "--scone-font-family-",
-            "--scone-font-size-",
-            "--scone-motion-",
-            "--scone-z-index-",
-        ];
+        const staleVariableSuffixes = ["font-family-", "font-size-", "motion-", "z-index-"];
         const currentVariables = [
             "--scone-font-body",
             "--scone-font-label",
@@ -124,8 +119,8 @@ describe("theme variables", () => {
             "--scone-z-toast",
         ];
 
-        for (const variable of staleVariables) {
-            expect(config).not.toContain(variable);
+        for (const suffix of staleVariableSuffixes) {
+            expect(config).not.toContain(`--scone-${suffix}`);
         }
         for (const variable of currentVariables) {
             expect(config).toContain(variable);
