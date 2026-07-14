@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `5. controllable-state`：实现受控状态桥接
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`
-    - 范围对象：`src/lib/use-controllable-state.ts`、`src/lib/use-controllable-state.test.tsx`
-    - 处理动作：实现 `value`、`defaultValue`、`onValueChange` 的受控/非受控状态桥接。
-    - 验收点：点击、键盘切换、打开/关闭和值变化等后续控件操作可通过同一 setter 上报，且不在 render 阶段触发副作用或重复通知。
-    - 重要度：9/10
-
 - [ ] `6. aria-helpers`：实现基础 ARIA helper
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`
