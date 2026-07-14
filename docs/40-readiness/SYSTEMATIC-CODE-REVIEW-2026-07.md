@@ -138,3 +138,33 @@ Recent evidence before this review branch:
 * **建议**：Either update `tailwind.config.ts` to the current `theme.css` variable names or remove stale config extensions that are superseded by Tailwind v4 `@theme inline`.
 * **功能风险**：中；changing token names can affect generated utilities, but the fix is localized to build/style config.
 * **置信度**：高
+
+## 05 Form Structure And Field Context
+
+### Evidence
+
+- `SconeForm` provides only `disabled`, `readOnly`, and `requiredMark` through context.
+- `SconeField.Root` resolves form-level state, owns generated ids, and provides label/description/message/control metadata.
+- `SconeField.Control` uses Radix `Slot.Root` for as-child composition and injects ids, name, ARIA, disabled, readOnly, and data-state attributes.
+- `src/components/form/control.ts` centralizes Field-to-control prop injection and is used by all standalone form controls.
+- Tests cover label/description/message linkage, invalid/required ARIA, form state override, and stable refs.
+
+### Assessment
+
+- Form and Field responsibilities are separated clearly: form-level defaults, field-level semantic grouping, and control-level ARIA injection.
+- Context scope is local and does not introduce global state or product-specific form behavior.
+- `control.ts` is a real shared helper, not a one-off abstraction.
+- Fast Refresh warning exceptions for `form.tsx` and `field.tsx` match the compound/context export pattern.
+
+### Candidate Finding
+
+### [P2] Form context internals are part of the public package surface
+
+* **位置**：`src/components/form/form.tsx`、`src/components/form/field.tsx`、`src/components/form/index.ts`、`src/index.ts`
+* **类别**：API / 封装
+* **问题**：`useSconeFormContext`, `useSconeFieldContext`, `SconeFormContextValue`, and `SconeFieldContextValue` are exported from the public package entry. `SconeFieldContextValue` includes internal id fields such as `fieldId`, `labelId`, `descriptionId`, and `messageId`.
+* **影响**：Consumers can couple to internal Field wiring. Future changes to id generation, description/message semantics, or context shape become public compatibility concerns.
+* **证据**：`src/index.ts` exports both hooks and context value types; `src/index.test.ts` asserts these exports; internal callers are form controls plus `src/components/form/control.ts`.
+* **建议**：Keep current exports for compatibility. For a future breaking or migration release, consider keeping hooks internal or exporting a smaller read-only field-state type that excludes generated ids.
+* **功能风险**：中；removing or narrowing these exports would affect consumers and public export tests.
+* **置信度**：高

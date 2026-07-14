@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `05-form-structure`：05 审核 Form 结构和字段上下文
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`src/components/form/form.tsx`、`src/components/form/field.tsx`、`src/components/form/control.ts`、`src/components/form/index.ts`
-    - 处理动作：检查 Form / Field / Control 的职责、Context 范围、ARIA 注入和导出边界。
-    - 验收点：输出 Form 基础结构是否存在状态同步、上下文过宽或内部类型泄漏的结论。
-    - 重要度：10/10
-
 - [ ] `06-form-text-actions`：06 审核 Form 文本输入和按钮控件
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
