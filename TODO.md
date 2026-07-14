@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `2.2 SconeBadge`：收口 Badge root 契约
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
-    - 范围对象：`src/components/data-display/badge.tsx`、`src/components/data-display/badge.test.tsx`
-    - 处理动作：锁定 `SconeBadgeProps` 中 `count`、`dot`、`tone`、`overflow`、`ariaLabel`、`children`、`className` 和 root HTML attributes 的归属。
-    - 验收点：children path 和 standalone path 的 root `span` 都接收 `ref`、`className`、`style`、`id`、`data-*`、`aria-*`、`role`，indicator 只接收展示和 `ariaLabel`。
-    - 重要度：9/10
-
 - [ ] `3.1 Stack Inline`：补齐基础 layout root attrs
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
