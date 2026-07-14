@@ -16,3 +16,10 @@ export type {
     DataTableTableRegionProps,
     DataTableToolbarProps,
 } from "./data-table";
+export { Page } from "./page";
+export type {
+    PageContentProps,
+    PageHeaderProps,
+    PageRootProps,
+    PageStickyActionsProps,
+} from "./page";

@@ -10,14 +10,6 @@
 
 ## 当前任务项
 
-- [ ] `02 Page`：实现 Page 主滚动边界
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-ADMIN-SHELL-PATTERNS.md`
-    - 范围对象：`src/patterns/page.tsx`、`src/patterns/page.test.tsx`、`src/patterns/index.ts`
-    - 处理动作：实现 `Page.Root/Header/Content/StickyActions`、`maxWidth`、`density` 和 sticky actions 对齐行为。
-    - 验收点：Page 测试覆盖 `Page.Content` 主滚动、`Page.StickyActions` 底部避让、Header actions、`maxWidth` 和 `density`。
-    - 重要度：9/10
-
 - [ ] `03 Section`：实现 Section 结构分区边界
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-ADMIN-SHELL-PATTERNS.md`
