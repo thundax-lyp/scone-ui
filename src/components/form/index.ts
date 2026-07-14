@@ -4,6 +4,12 @@ export type { SconeButtonProps } from "./button";
 export { SconeInput } from "./input";
 export type { SconeInputProps } from "./input";
 
+export { SconePasswordInput } from "./password-input";
+export type { SconePasswordInputProps } from "./password-input";
+
+export { SconeSearchInput } from "./search-input";
+export type { SconeSearchInputProps } from "./search-input";
+
 export { SconeTextArea } from "./textarea";
 export type { SconeTextAreaProps } from "./textarea";
 
