@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `5.3 layout verification batch 2`：运行 Radix 和 SplitPane layout 契约验证
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
-    - 范围对象：`src/components/layout/scroll-area.test.tsx`、`src/components/layout/separator.test.tsx`、`src/components/layout/split-pane.test.tsx`
-    - 处理动作：运行 ScrollArea、Separator 和 SplitPane 的 focused test。
-    - 验收点：三个 focused test 文件全部通过，失败项必须修复或记录明确剩余风险。
-    - 重要度：9/10
-
 - [ ] `5.4 full verification`：运行全量验证
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
