@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `1. src/components/form/number-input.tsx`：治理 NumberInput 非有限值提交
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FORM-INTERACTION-HARDENING.md`
-    - 范围对象：`src/components/form/number-input.tsx`、`src/components/form/number-input.test.tsx`
-    - 处理动作：收口 NumberInput 输入提交路径，只允许提交 `undefined` 或 finite number。
-    - 验收点：非有限输入不更新值且不触发 `onValueChange`，空值、min/max clamp 和 step button 行为有测试覆盖。
-    - 重要度：9/10
-
 - [ ] `2. src/components/form/combobox.tsx`：收口 Combobox overlay 和 listbox 交互
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FORM-INTERACTION-HARDENING.md`
