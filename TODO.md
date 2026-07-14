@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `04 src/components/data-display/descriptions.tsx`：实现 Descriptions 和 List
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DATA-DISPLAY-CLOSURE.md`
-    - 范围对象：`src/components/data-display/descriptions.tsx`、`src/components/data-display/list.tsx`、`src/components/data-display/descriptions.test.tsx`、`src/components/data-display/list.test.tsx`
-    - 处理动作：实现并测试只读键值详情 `SconeDescriptions` 和重复项展示 `SconeList`。
-    - 验收点：Descriptions 覆盖 `SconeDescriptionItem`、responsive columns、density、bordered 和长文本换行，List 状态优先级为 `loading > error > empty`。
-    - 重要度：9/10
-
 - [ ] `05 src/components/data-display/table.tsx`：实现基础 Table region
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DATA-DISPLAY-CLOSURE.md`
