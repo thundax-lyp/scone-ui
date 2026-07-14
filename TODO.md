@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `4.2 ui cn imports batch 1`：统一 ui 第一批 `cn` 导入
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
-    - 范围对象：`src/components/ui/accordion.tsx`、`src/components/ui/alert-dialog.tsx`、`src/components/ui/alert.tsx`、`src/components/ui/avatar.tsx`、`src/components/ui/breadcrumb.tsx`
-    - 处理动作：将本批 ui 文件中的 `@/lib/utils` 导入改为 `@/lib/cn`。
-    - 验收点：本批文件不再引用 `@/lib/utils`，DOM 结构、className 内容和 export 不变。
-    - 重要度：7/10
-
 - [ ] `4.3 ui cn imports batch 2`：统一 ui 第二批 `cn` 导入
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
