@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `7 src/components/feedback-overlay/confirm.tsx`：实现 Confirm 确认组件
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-OVERLAY.md`
-    - 范围对象：`src/components/feedback-overlay/confirm.tsx`、`src/components/feedback-overlay/confirm.test.tsx`
-    - 处理动作：实现 `SconeConfirm` 和 `SconeConfirmProps`，覆盖 title、description、onConfirm、onCancel、cancelText、confirmText、destructive、disabled、loading。
-    - 验收点：Confirm 测试验证默认焦点、危险说明、取消操作、异步确认 loading 和防重复提交。
-    - 重要度：10/10
-
 - [ ] `8 src/components/feedback-overlay/toast.tsx`：实现 Toast Provider 和 service
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-OVERLAY.md`
