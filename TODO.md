@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `08-navigation-tree`：08 实现 Tree
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
-    - 范围对象：`src/components/navigation/tree.tsx`、`src/components/navigation/tree.test.tsx`
-    - 处理动作：实现自研 ARIA tree 的 selected、checked、expanded、roving focus 和键盘模型。
-    - 验收点：受控/非受控 selectedKeys、checkedKeys、expandedKeys、嵌套节点、disabled 节点、multiple selection、checkable、Arrow/Home/End 键盘行为均有测试覆盖。
-    - 重要度：10/10
-
 - [ ] `09-media-image-avatar`：09 实现 Image 和 Avatar
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
