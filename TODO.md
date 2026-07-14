@@ -10,14 +10,6 @@
 
 ## 当前任务项
 
-- [ ] `4. src/patterns/data-table.tsx`：实现 TableRegion 和 DataTable.Pagination
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DATA-TABLE-PAGINATION-PATTERN.md`
-    - 范围对象：`src/patterns/data-table.tsx`、`src/patterns/data-table.test.tsx`、`src/components/navigation/pagination.tsx`
-    - 处理动作：实现 `DataTable.TableRegion` 状态容器、selection column 注入、children escape hatch 和 `DataTable.Pagination`。
-    - 验收点：`loading > error > empty`、表头 checkbox、行 checkbox、disabled row、全选、children 模式、props/context pagination 透传均有测试覆盖。
-    - 重要度：10/10
-
 - [ ] `5. src/index.ts`：完成公共导出和集成测试
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DATA-TABLE-PAGINATION-PATTERN.md`

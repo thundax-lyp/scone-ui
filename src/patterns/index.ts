@@ -3,6 +3,8 @@ export type {
     DataTableAction,
     DataTableBulkActionsProps,
     DataTableFilterBarProps,
+    DataTablePaginationProps,
     DataTableRootProps,
+    DataTableTableRegionProps,
     DataTableToolbarProps,
 } from "./data-table";

@@ -1,6 +1,12 @@
 import * as React from "react";
 
+import {
+    SconeTable,
+    type SconeTableColumn,
+    type SconeTableScroll,
+} from "@/components/data-display";
 import { SconeToolbar } from "@/components/layout/toolbar";
+import { SconePagination } from "@/components/navigation";
 import { cn } from "@/lib/cn";
 import type {
     Key,
@@ -46,6 +52,33 @@ export interface DataTableBulkActionsProps extends React.HTMLAttributes<HTMLDivE
     onClearSelection?: () => void;
 }
 
+export interface DataTableTableRegionProps<T> extends Omit<
+    React.HTMLAttributes<HTMLDivElement>,
+    "children"
+> {
+    ariaLabel?: string;
+    columns?: SconeTableColumn<T>[];
+    dataSource?: T[];
+    rowKey?: string | ((record: T) => Key);
+    children?: React.ReactNode;
+    loading?: boolean;
+    error?: React.ReactNode | (() => React.ReactNode);
+    empty?: React.ReactNode | (() => React.ReactNode);
+    heightPreset?: "sm" | "md" | "lg" | "full";
+    viewportClassName?: string;
+    stickyHeader?: boolean;
+    scroll?: SconeTableScroll;
+}
+
+export interface DataTablePaginationProps extends Omit<
+    React.HTMLAttributes<HTMLDivElement>,
+    "onChange"
+> {
+    state?: SconePaginationState;
+    onChange?: (nextState: SconePaginationState, reason: SconePaginationChangeReason) => void;
+    pageSizeOptions?: number[];
+}
+
 interface DataTableContextValue {
     density: SconeDensity;
     rowSelection?: SconeRowSelection<unknown>;
@@ -57,6 +90,15 @@ interface DataTableContextValue {
 }
 
 const DataTableContext = React.createContext<DataTableContextValue | null>(null);
+
+const tableRegionHeightClassNames = {
+    sm: "min-h-[16rem]",
+    md: "min-h-[24rem]",
+    lg: "min-h-[32rem]",
+    full: "min-h-full",
+};
+
+const selectionColumnKey = "__scone_selection__";
 
 function useDataTableContext(): DataTableContextValue {
     return (
@@ -222,9 +264,230 @@ function DataTableBulkActions({
     );
 }
 
+function renderStateNode(node: React.ReactNode | (() => React.ReactNode)): React.ReactNode {
+    return typeof node === "function" ? node() : node;
+}
+
+function getRecordKey<T>(record: T, rowKey: string | ((record: T) => Key)): Key {
+    if (typeof rowKey === "function") {
+        return rowKey(record);
+    }
+
+    return (record as Record<string, Key>)[rowKey];
+}
+
+function getSelectedRows<T>(
+    dataSource: T[],
+    rowKey: string | ((record: T) => Key),
+    selectedRowKeys: Key[],
+): T[] {
+    const selectedKeySet = new Set(selectedRowKeys);
+
+    return dataSource.filter((record) => selectedKeySet.has(getRecordKey(record, rowKey)));
+}
+
+function withSelectionColumn<T>(
+    columns: SconeTableColumn<T>[],
+    dataSource: T[],
+    rowKey: string | ((record: T) => Key),
+    rowSelection: SconeRowSelection<unknown>,
+): SconeTableColumn<T>[] {
+    const typedRowSelection = rowSelection as SconeRowSelection<T>;
+    const selectedKeySet = new Set(typedRowSelection.selectedRowKeys);
+    const selectableRows = dataSource.filter(
+        (record) => !typedRowSelection.getCheckboxProps?.(record)?.disabled,
+    );
+    const selectableKeys = selectableRows.map((record) => getRecordKey(record, rowKey));
+    const selectedSelectableKeys = selectableKeys.filter((key) => selectedKeySet.has(key));
+    const allSelected =
+        selectableKeys.length > 0 && selectedSelectableKeys.length === selectableKeys.length;
+    const someSelected = selectedSelectableKeys.length > 0 && !allSelected;
+
+    const updateSelection = (nextKeys: Key[]) => {
+        typedRowSelection.onChange?.(nextKeys, getSelectedRows(dataSource, rowKey, nextKeys));
+    };
+
+    const selectionColumn: SconeTableColumn<T> = {
+        key: selectionColumnKey,
+        title: (
+            <input
+                aria-label="Select all rows"
+                aria-checked={someSelected ? "mixed" : allSelected}
+                type="checkbox"
+                checked={allSelected}
+                disabled={selectableKeys.length === 0}
+                onChange={() => {
+                    if (allSelected) {
+                        updateSelection(
+                            typedRowSelection.selectedRowKeys.filter(
+                                (key) => !selectableKeys.includes(key),
+                            ),
+                        );
+                        return;
+                    }
+
+                    updateSelection(
+                        Array.from(
+                            new Set([...typedRowSelection.selectedRowKeys, ...selectableKeys]),
+                        ),
+                    );
+                }}
+            />
+        ),
+        width: 44,
+        render: (_value, record) => {
+            const key = getRecordKey(record, rowKey);
+            const checkboxProps = typedRowSelection.getCheckboxProps?.(record);
+            const disabled = checkboxProps?.disabled ?? false;
+
+            return (
+                <input
+                    aria-label={checkboxProps?.ariaLabel ?? `Select row ${String(key)}`}
+                    type="checkbox"
+                    checked={selectedKeySet.has(key)}
+                    disabled={disabled}
+                    onChange={() => {
+                        if (disabled) {
+                            return;
+                        }
+
+                        const nextKeys = selectedKeySet.has(key)
+                            ? typedRowSelection.selectedRowKeys.filter(
+                                  (selectedKey) => selectedKey !== key,
+                              )
+                            : [...typedRowSelection.selectedRowKeys, key];
+
+                        updateSelection(nextKeys);
+                    }}
+                    onClick={(event) => event.stopPropagation()}
+                />
+            );
+        },
+    };
+
+    return [selectionColumn, ...columns];
+}
+
+function DataTableTableRegion<T>({
+    ariaLabel,
+    columns,
+    dataSource,
+    rowKey,
+    children,
+    loading = false,
+    error,
+    empty = "No data",
+    heightPreset,
+    viewportClassName,
+    stickyHeader = false,
+    scroll,
+    className,
+    ...props
+}: DataTableTableRegionProps<T>) {
+    const { density, rowSelection } = useDataTableContext();
+    const hasDataMode = columns !== undefined && dataSource !== undefined && rowKey !== undefined;
+    const isEmpty = hasDataMode
+        ? dataSource.length === 0
+        : children === undefined || children === null;
+
+    let content: React.ReactNode;
+
+    if (loading) {
+        content = (
+            <div className="flex min-h-24 items-center justify-center text-sm text-muted-foreground">
+                <span role="status">Loading</span>
+            </div>
+        );
+    } else if (error !== undefined) {
+        content = (
+            <div className="flex min-h-24 items-center justify-center text-sm text-destructive">
+                <span role="alert">{renderStateNode(error)}</span>
+            </div>
+        );
+    } else if (isEmpty) {
+        content = (
+            <div className="flex min-h-24 items-center justify-center text-sm text-muted-foreground">
+                {renderStateNode(empty)}
+            </div>
+        );
+    } else if (hasDataMode) {
+        content = (
+            <SconeTable
+                ariaLabel={ariaLabel}
+                columns={
+                    rowSelection
+                        ? withSelectionColumn(columns, dataSource, rowKey, rowSelection)
+                        : columns
+                }
+                dataSource={dataSource}
+                rowKey={rowKey}
+                density={density}
+                scroll={scroll}
+                renderEmpty={null}
+            />
+        );
+    } else {
+        content = children;
+    }
+
+    return (
+        <div
+            data-scone-data-table-part="table-region"
+            data-sticky-header={stickyHeader || undefined}
+            className={cn("min-w-0", className)}
+            {...props}
+        >
+            <div
+                data-scone-data-table-viewport=""
+                className={cn(
+                    "min-w-0 overflow-auto",
+                    heightPreset && tableRegionHeightClassNames[heightPreset],
+                    stickyHeader && "[&_thead]:sticky [&_thead]:top-0 [&_thead]:z-10",
+                    viewportClassName,
+                )}
+            >
+                {content}
+            </div>
+        </div>
+    );
+}
+
+function DataTablePagination({
+    state,
+    onChange,
+    pageSizeOptions,
+    className,
+    ...props
+}: DataTablePaginationProps) {
+    const { density, pagination, onPaginationChange } = useDataTableContext();
+    const effectiveState = state ?? pagination;
+    const effectiveOnChange = onChange ?? onPaginationChange;
+
+    if (!effectiveState) {
+        return null;
+    }
+
+    return (
+        <div
+            data-scone-data-table-part="pagination"
+            className={cn("flex justify-end", className)}
+            {...props}
+        >
+            <SconePagination
+                state={effectiveState}
+                onChange={effectiveOnChange}
+                pageSizeOptions={pageSizeOptions}
+                density={density === "compact" ? "compact" : "default"}
+            />
+        </div>
+    );
+}
+
 export const DataTable = {
     Root: DataTableRoot,
     FilterBar: DataTableFilterBar,
     Toolbar: DataTableToolbar,
     BulkActions: DataTableBulkActions,
+    TableRegion: DataTableTableRegion,
+    Pagination: DataTablePagination,
 };
