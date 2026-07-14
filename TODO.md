@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `3. cn-utility`：收敛 className 合并工具
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`
-    - 范围对象：`src/lib/cn.ts`、`src/lib/utils.ts`、`src/lib/cn.test.ts`
-    - 处理动作：将 `cn` 放入独立文件，并让旧 `utils.ts` 只保留兼容转发。
-    - 验收点：`cn(...inputs: ClassValue[]): string` 支持条件 class、数组对象输入和 Tailwind 冲突 class 合并，现有 `utils.ts` 导入路径不被破坏。
-    - 重要度：9/10
-
 - [ ] `4. compose-refs`：实现 ref 合并工具
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`
