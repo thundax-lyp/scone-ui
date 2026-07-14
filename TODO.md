@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `04-theme-app-entry`：04 审核样式入口和演示入口边界
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`src/styles.css`、`src/styles/theme.css`、`tailwind.config.ts`、`src/app.tsx`、`src/main.tsx`
-    - 处理动作：检查 theme 数值源、全局样式职责、演示入口是否混入组件库公共语义。
-    - 验收点：输出样式和入口层是否符合 Foundation 设计与组件库边界的结论。
-    - 重要度：8/10
-
 - [ ] `05-form-structure`：05 审核 Form 结构和字段上下文
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`

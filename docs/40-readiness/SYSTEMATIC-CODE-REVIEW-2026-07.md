@@ -109,3 +109,32 @@ Recent evidence before this review branch:
 * **建议**：Do not change the helper globally during this audit. When fixing related components, either document this contract explicitly or introduce a controlled sentinel only where `undefined` must be a valid controlled value.
 * **功能风险**：中；changing this helper would affect many controls and could alter controlled/uncontrolled behavior.
 * **置信度**：高
+
+## 04 Styles, Theme, And Demo Entry
+
+### Evidence
+
+- `src/styles.css` imports Tailwind, shadcn CSS, Geist font, and `src/styles/theme.css`.
+- `src/styles/theme.css` is the actual token source for color, spacing, radius, shadow, font, motion, z-index, control, page, and drawer variables.
+- `src/styles/theme.test.ts` asserts required token variables and ensures only `styles.css` references `--scone-*` outside `theme.css`.
+- `src/app.tsx` and `src/main.tsx` are demo/runtime entry files; they do not import public package APIs, routers, request clients, stores, or product contracts.
+- `rg` found no router, network, or state library usage in `src/app.tsx`, `src/main.tsx`, or style files.
+
+### Assessment
+
+- The demo entry is isolated from the library public API and does not create product runtime assumptions.
+- Theme value ownership is clear in `src/styles/theme.css`.
+- `src/styles.css` correctly maps Tailwind v4 `@theme inline` names to current `--scone-*` variables.
+
+### Candidate Finding
+
+### [P1] Tailwind config references stale token variable names
+
+* **位置**：`tailwind.config.ts`
+* **类别**：结构 / 配置
+* **问题**：`tailwind.config.ts` maps font, fontSize, motion, and zIndex extensions to variables such as `--scone-font-family-body`, `--scone-motion-duration-fast`, and `--scone-z-index-sticky`, while `theme.css` defines `--scone-font-body`, `--scone-duration-fast`, and `--scone-z-sticky`.
+* **影响**：The CSS-first path still works through `src/styles.css`, but maintainers reading or reusing `tailwind.config.ts` get a stale token contract. If any utility is generated from these config keys, it will reference undefined variables.
+* **证据**：`rg "scone-font-family|scone-font-size|scone-motion|scone-z-index"` only returns `tailwind.config.ts`; `src/styles/theme.css` defines the shorter current names and no matching old names.
+* **建议**：Either update `tailwind.config.ts` to the current `theme.css` variable names or remove stale config extensions that are superseded by Tailwind v4 `@theme inline`.
+* **功能风险**：中；changing token names can affect generated utilities, but the fix is localized to build/style config.
+* **置信度**：高
