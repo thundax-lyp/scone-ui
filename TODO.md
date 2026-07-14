@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `01-baseline`：01 建立系统性代码审核基线
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`package.json`、`eslint.config.mjs`、`tsconfig.json`、`vite.config.ts`、`vitest.config.ts`
-    - 处理动作：确认框架、构建、测试、lint、TypeScript 和主要依赖的当前事实。
-    - 验收点：形成项目技术栈、验证命令和配置边界的审核基线记录。
-    - 重要度：10/10
-
 - [ ] `02-public-entry`：02 审核公共入口和导出守护
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
