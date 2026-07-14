@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `07 radio-slider`：RadioGroup 和 Slider 闭环
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`
-    - 范围对象：`src/components/form/radio-group.tsx`、`src/components/form/slider.tsx`、`src/components/form/radio-group.test.tsx`、`src/components/form/slider.test.tsx`、`src/components/form/index.ts`
-    - 处理动作：实现 `SconeRadioGroup` 和 `SconeSlider` 的选项、数值数组、方向、min/max/step、键盘和 Field invalid。
-    - 验收点：点击、方向键、拖动、键盘调整、disabled 和 ARIA 状态测试通过。
-    - 重要度：8/10
-
 - [ ] `08 combobox-number-input`：Combobox 和 NumberInput 闭环
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`
