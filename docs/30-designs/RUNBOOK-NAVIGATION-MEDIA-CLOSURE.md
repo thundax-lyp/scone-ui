@@ -83,226 +83,226 @@
 `src/components/navigation/breadcrumb.tsx`：
 
 - `SconeBreadcrumbItem`
-  - `key: Key`
-  - `label: ReactNode`
-  - `href?: string`
-  - `disabled?: boolean`
-  - `asChild?: boolean`
-  - `className?: string`
+    - `key: Key`
+    - `label: ReactNode`
+    - `href?: string`
+    - `disabled?: boolean`
+    - `asChild?: boolean`
+    - `className?: string`
 - `SconeBreadcrumbProps`
-  - `items: SconeBreadcrumbItem[]`
-  - `separator?: ReactNode`
-  - `maxItems?: number`
-  - `onItemClick?: (item: SconeBreadcrumbItem) => void`
-  - `ariaLabel?: string`
-  - `className?: string`
+    - `items: SconeBreadcrumbItem[]`
+    - `separator?: ReactNode`
+    - `maxItems?: number`
+    - `onItemClick?: (item: SconeBreadcrumbItem) => void`
+    - `ariaLabel?: string`
+    - `className?: string`
 
 `src/components/navigation/tabs.tsx`：
 
 - `SconeTabsItem`
-  - `value: string`
-  - `label: ReactNode`
-  - `content?: ReactNode`
-  - `disabled?: boolean`
+    - `value: string`
+    - `label: ReactNode`
+    - `content?: ReactNode`
+    - `disabled?: boolean`
 - `SconeTabsProps`
-  - `value?: string`
-  - `defaultValue?: string`
-  - `onValueChange?: (value: string) => void`
-  - `orientation?: "horizontal" | "vertical"`
-  - `activationMode?: "automatic" | "manual"`
-  - `items?: SconeTabsItem[]`
-  - `ariaLabel?: string`
-  - `children?: ReactNode`
-  - `className?: string`
+    - `value?: string`
+    - `defaultValue?: string`
+    - `onValueChange?: (value: string) => void`
+    - `orientation?: "horizontal" | "vertical"`
+    - `activationMode?: "automatic" | "manual"`
+    - `items?: SconeTabsItem[]`
+    - `ariaLabel?: string`
+    - `children?: ReactNode`
+    - `className?: string`
 
 `src/components/navigation/segmented.tsx`：
 
 - `SconeSegmentedProps`
-  - `options: SconeOption<string>[]`
-  - `value?: string`
-  - `defaultValue?: string`
-  - `onValueChange?: (value: string) => void`
-  - `size?: "sm" | "md"`
-  - `disabled?: boolean`
-  - `ariaLabel?: string`
-  - `className?: string`
+    - `options: SconeOption<string>[]`
+    - `value?: string`
+    - `defaultValue?: string`
+    - `onValueChange?: (value: string) => void`
+    - `size?: "sm" | "md"`
+    - `disabled?: boolean`
+    - `ariaLabel?: string`
+    - `className?: string`
 
 `src/components/navigation/tree.tsx`：
 
 - `SconeTreeNode`
-  - `key: Key`
-  - `title: ReactNode`
-  - `children?: SconeTreeNode[]`
-  - `disabled?: boolean`
-  - `disableCheckbox?: boolean`
-  - `className?: string`
+    - `key: Key`
+    - `title: ReactNode`
+    - `children?: SconeTreeNode[]`
+    - `disabled?: boolean`
+    - `disableCheckbox?: boolean`
+    - `className?: string`
 - `SconeTreeSelectInfo`
-  - `node: SconeTreeNode`
-  - `selected: boolean`
+    - `node: SconeTreeNode`
+    - `selected: boolean`
 - `SconeTreeCheckInfo`
-  - `node: SconeTreeNode`
-  - `checked: boolean`
+    - `node: SconeTreeNode`
+    - `checked: boolean`
 - `SconeTreeExpandInfo`
-  - `node: SconeTreeNode`
-  - `expanded: boolean`
+    - `node: SconeTreeNode`
+    - `expanded: boolean`
 - `SconeTreeProps`
-  - `treeData: SconeTreeNode[]`
-  - `selectedKeys?: Key[]`
-  - `defaultSelectedKeys?: Key[]`
-  - `checkedKeys?: Key[]`
-  - `defaultCheckedKeys?: Key[]`
-  - `expandedKeys?: Key[]`
-  - `defaultExpandedKeys?: Key[]`
-  - `checkable?: boolean`
-  - `selectable?: boolean`
-  - `multiple?: boolean`
-  - `onSelect?: (keys: Key[], info: SconeTreeSelectInfo) => void`
-  - `onCheck?: (keys: Key[], info: SconeTreeCheckInfo) => void`
-  - `onExpand?: (keys: Key[], info: SconeTreeExpandInfo) => void`
-  - `ariaLabel?: string`
-  - `className?: string`
+    - `treeData: SconeTreeNode[]`
+    - `selectedKeys?: Key[]`
+    - `defaultSelectedKeys?: Key[]`
+    - `checkedKeys?: Key[]`
+    - `defaultCheckedKeys?: Key[]`
+    - `expandedKeys?: Key[]`
+    - `defaultExpandedKeys?: Key[]`
+    - `checkable?: boolean`
+    - `selectable?: boolean`
+    - `multiple?: boolean`
+    - `onSelect?: (keys: Key[], info: SconeTreeSelectInfo) => void`
+    - `onCheck?: (keys: Key[], info: SconeTreeCheckInfo) => void`
+    - `onExpand?: (keys: Key[], info: SconeTreeExpandInfo) => void`
+    - `ariaLabel?: string`
+    - `className?: string`
 
 `src/components/navigation/dropdown.tsx`：
 
 - `SconeActionItem`
-  - `key: Key`
-  - `label: ReactNode`
-  - `icon?: ReactNode`
-  - `disabled?: boolean`
-  - `destructive?: boolean`
-  - `separatorBefore?: boolean`
-  - `className?: string`
+    - `key: Key`
+    - `label: ReactNode`
+    - `icon?: ReactNode`
+    - `disabled?: boolean`
+    - `destructive?: boolean`
+    - `separatorBefore?: boolean`
+    - `className?: string`
 - `SconeDropdownProps`
-  - `trigger: ReactNode`
-  - `items?: SconeActionItem[]`
-  - `children?: ReactNode`
-  - `open?: boolean`
-  - `defaultOpen?: boolean`
-  - `onOpenChange?: (open: boolean) => void`
-  - `onSelect?: (item: SconeActionItem) => void`
-  - `align?: "start" | "center" | "end"`
-  - `side?: "top" | "right" | "bottom" | "left"`
-  - `modal?: boolean`
-  - `ariaLabel?: string`
-  - `className?: string`
+    - `trigger: ReactNode`
+    - `items?: SconeActionItem[]`
+    - `children?: ReactNode`
+    - `open?: boolean`
+    - `defaultOpen?: boolean`
+    - `onOpenChange?: (open: boolean) => void`
+    - `onSelect?: (item: SconeActionItem) => void`
+    - `align?: "start" | "center" | "end"`
+    - `side?: "top" | "right" | "bottom" | "left"`
+    - `modal?: boolean`
+    - `ariaLabel?: string`
+    - `className?: string`
 
 `src/components/navigation/menu.tsx`：
 
 - `SconeNavigationItem`
-  - `key: string`
-  - `label: ReactNode`
-  - `icon?: ReactNode`
-  - `children?: SconeNavigationItem[]`
-  - `disabled?: boolean`
-  - `asChild?: boolean`
-  - `className?: string`
+    - `key: string`
+    - `label: ReactNode`
+    - `icon?: ReactNode`
+    - `children?: SconeNavigationItem[]`
+    - `disabled?: boolean`
+    - `asChild?: boolean`
+    - `className?: string`
 - `SconeMenuProps`
-  - `items: SconeNavigationItem[]`
-  - `selectedKeys?: string[]`
-  - `defaultSelectedKeys?: string[]`
-  - `openKeys?: string[]`
-  - `defaultOpenKeys?: string[]`
-  - `onSelect?: (key: string, item: SconeNavigationItem) => void`
-  - `onOpenChange?: (keys: string[]) => void`
-  - `orientation?: "vertical" | "horizontal"`
-  - `collapsed?: boolean`
-  - `ariaLabel?: string`
-  - `className?: string`
+    - `items: SconeNavigationItem[]`
+    - `selectedKeys?: string[]`
+    - `defaultSelectedKeys?: string[]`
+    - `openKeys?: string[]`
+    - `defaultOpenKeys?: string[]`
+    - `onSelect?: (key: string, item: SconeNavigationItem) => void`
+    - `onOpenChange?: (keys: string[]) => void`
+    - `orientation?: "vertical" | "horizontal"`
+    - `collapsed?: boolean`
+    - `ariaLabel?: string`
+    - `className?: string`
 
 `src/components/navigation/tooltip.tsx`：
 
 - `SconeTooltipProps`
-  - `content: ReactNode`
-  - `children: ReactNode`
-  - `open?: boolean`
-  - `defaultOpen?: boolean`
-  - `onOpenChange?: (open: boolean) => void`
-  - `side?: "top" | "right" | "bottom" | "left"`
-  - `delay?: number`
-  - `className?: string`
+    - `content: ReactNode`
+    - `children: ReactNode`
+    - `open?: boolean`
+    - `defaultOpen?: boolean`
+    - `onOpenChange?: (open: boolean) => void`
+    - `side?: "top" | "right" | "bottom" | "left"`
+    - `delay?: number`
+    - `className?: string`
 
 `src/components/navigation/command.tsx`：
 
 - `SconeCommandItem`
-  - `key: string`
-  - `label: ReactNode`
-  - `value?: string`
-  - `description?: ReactNode`
-  - `group?: string`
-  - `icon?: ReactNode`
-  - `disabled?: boolean`
-  - `keywords?: string[]`
-  - `className?: string`
+    - `key: string`
+    - `label: ReactNode`
+    - `value?: string`
+    - `description?: ReactNode`
+    - `group?: string`
+    - `icon?: ReactNode`
+    - `disabled?: boolean`
+    - `keywords?: string[]`
+    - `className?: string`
 - `SconeCommandProps`
-  - `items: SconeCommandItem[]`
-  - `value?: string`
-  - `defaultValue?: string`
-  - `onValueChange?: (value: string) => void`
-  - `selectedKey?: string`
-  - `onSelect?: (key: string, item: SconeCommandItem) => void`
-  - `loading?: boolean`
-  - `renderEmpty?: ReactNode | (() => ReactNode)`
-  - `placeholder?: string`
-  - `ariaLabel?: string`
-  - `className?: string`
+    - `items: SconeCommandItem[]`
+    - `value?: string`
+    - `defaultValue?: string`
+    - `onValueChange?: (value: string) => void`
+    - `selectedKey?: string`
+    - `onSelect?: (key: string, item: SconeCommandItem) => void`
+    - `loading?: boolean`
+    - `renderEmpty?: ReactNode | (() => ReactNode)`
+    - `placeholder?: string`
+    - `ariaLabel?: string`
+    - `className?: string`
 
 `src/components/navigation/accordion.tsx`：
 
 - `SconeAccordionItem`
-  - `value: string`
-  - `trigger: ReactNode`
-  - `content: ReactNode`
-  - `disabled?: boolean`
-  - `className?: string`
+    - `value: string`
+    - `trigger: ReactNode`
+    - `content: ReactNode`
+    - `disabled?: boolean`
+    - `className?: string`
 - `SconeAccordionProps`
-  - `type: "single" | "multiple"`
-  - `value?: string | string[]`
-  - `defaultValue?: string | string[]`
-  - `onValueChange?: (value: string | string[]) => void`
-  - `collapsible?: boolean`
-  - `items?: SconeAccordionItem[]`
-  - `children?: ReactNode`
-  - `className?: string`
+    - `type: "single" | "multiple"`
+    - `value?: string | string[]`
+    - `defaultValue?: string | string[]`
+    - `onValueChange?: (value: string | string[]) => void`
+    - `collapsible?: boolean`
+    - `items?: SconeAccordionItem[]`
+    - `children?: ReactNode`
+    - `className?: string`
 
 `src/components/navigation/collapsible.tsx`：
 
 - `SconeCollapsibleProps`
-  - `open?: boolean`
-  - `defaultOpen?: boolean`
-  - `onOpenChange?: (open: boolean) => void`
-  - `trigger: ReactNode`
-  - `children: ReactNode`
-  - `className?: string`
+    - `open?: boolean`
+    - `defaultOpen?: boolean`
+    - `onOpenChange?: (open: boolean) => void`
+    - `trigger: ReactNode`
+    - `children: ReactNode`
+    - `className?: string`
 
 `src/components/media/image.tsx`：
 
 - `SconeImageProps`
-  - `src?: string`
-  - `alt: string`
-  - `fallback?: ReactNode`
-  - `preview?: boolean`
-  - `previewOpen?: boolean`
-  - `defaultPreviewOpen?: boolean`
-  - `onPreviewOpenChange?: (open: boolean) => void`
-  - `width?: number | string`
-  - `height?: number | string`
-  - `objectFit?: "cover" | "contain"`
-  - `onLoad?: React.ReactEventHandler<HTMLImageElement>`
-  - `onError?: React.ReactEventHandler<HTMLImageElement>`
-  - `className?: string`
+    - `src?: string`
+    - `alt: string`
+    - `fallback?: ReactNode`
+    - `preview?: boolean`
+    - `previewOpen?: boolean`
+    - `defaultPreviewOpen?: boolean`
+    - `onPreviewOpenChange?: (open: boolean) => void`
+    - `width?: number | string`
+    - `height?: number | string`
+    - `objectFit?: "cover" | "contain"`
+    - `onLoad?: React.ReactEventHandler<HTMLImageElement>`
+    - `onError?: React.ReactEventHandler<HTMLImageElement>`
+    - `className?: string`
 
 `src/components/media/avatar.tsx`：
 
 - `SconeAvatarProps`
-  - `src?: string`
-  - `alt?: string`
-  - `fallback?: ReactNode`
-  - `icon?: ReactNode`
-  - `size?: "sm" | "md" | "lg"`
-  - `shape?: "circle" | "square"`
-  - `onLoad?: React.ReactEventHandler<HTMLImageElement>`
-  - `onError?: React.ReactEventHandler<HTMLImageElement>`
-  - `className?: string`
+    - `src?: string`
+    - `alt?: string`
+    - `fallback?: ReactNode`
+    - `icon?: ReactNode`
+    - `size?: "sm" | "md" | "lg"`
+    - `shape?: "circle" | "square"`
+    - `onLoad?: React.ReactEventHandler<HTMLImageElement>`
+    - `onError?: React.ReactEventHandler<HTMLImageElement>`
+    - `className?: string`
 
 ## Plan
 

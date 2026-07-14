@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `01-navigation-breadcrumb-segmented`：01 实现 Breadcrumb 和 Segmented
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
-    - 范围对象：`src/components/navigation/breadcrumb.tsx`、`src/components/navigation/breadcrumb.test.tsx`、`src/components/navigation/segmented.tsx`、`src/components/navigation/segmented.test.tsx`
-    - 处理动作：实现 Breadcrumb 路径导航和 Segmented 单选切换并补齐同目录测试。
-    - 验收点：Breadcrumb current、链接点击、折叠展开、disabled item 和 Segmented 受控/非受控、键盘切换、disabled 行为均有测试覆盖。
-    - 重要度：9/10
-
 - [ ] `02-navigation-tabs`：02 实现 Tabs
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
