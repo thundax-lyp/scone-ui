@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `05-navigation-dropdown`：05 实现 Dropdown
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
-    - 范围对象：`src/components/navigation/dropdown.tsx`、`src/components/navigation/dropdown.test.tsx`
-    - 处理动作：实现动作菜单 Dropdown 的 trigger、items helper、compound children、选择和关闭交互。
-    - 验收点：open/select、disabled、destructive、Escape close、focus restore、controlled open 均有测试覆盖，Dropdown 不作为表单选值控件。
-    - 重要度：9/10
-
 - [ ] `06-navigation-menu`：06 实现 Menu
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
