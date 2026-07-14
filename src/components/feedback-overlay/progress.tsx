@@ -19,12 +19,23 @@ const statusClasses: Record<SconeStatus, string> = {
     error: "[&_[data-slot=progress-indicator]]:bg-destructive",
 };
 
-function normalizeProgress(value: number, max: number): number {
-    if (!Number.isFinite(value) || !Number.isFinite(max) || max <= 0) {
-        return 0;
-    }
+function normalizeProgress(
+    value: number,
+    max: number,
+): {
+    value: number;
+    max: number;
+    percent: number;
+} {
+    const normalizedMax = Number.isFinite(max) && max > 0 ? max : 100;
+    const finiteValue = Number.isFinite(value) ? value : 0;
+    const normalizedValue = Math.min(Math.max(finiteValue, 0), normalizedMax);
 
-    return Math.min(Math.max(value, 0), max);
+    return {
+        value: normalizedValue,
+        max: normalizedMax,
+        percent: Math.round((normalizedValue / normalizedMax) * 100),
+    };
 }
 
 export const SconeProgress = React.forwardRef<HTMLDivElement, SconeProgressProps>(
@@ -32,8 +43,7 @@ export const SconeProgress = React.forwardRef<HTMLDivElement, SconeProgressProps
         { value = 0, max = 100, status = "active", showLabel = false, label, className, ...props },
         ref,
     ) => {
-        const normalizedValue = normalizeProgress(value, max);
-        const percent = Math.round((normalizedValue / max) * 100);
+        const normalizedProgress = normalizeProgress(value, max);
 
         return (
             <div
@@ -51,14 +61,16 @@ export const SconeProgress = React.forwardRef<HTMLDivElement, SconeProgressProps
                             <span />
                         )}
                         {showLabel ? (
-                            <div className="shrink-0 font-medium text-foreground">{percent}%</div>
+                            <div className="shrink-0 font-medium text-foreground">
+                                {normalizedProgress.percent}%
+                            </div>
                         ) : null}
                     </div>
                 ) : null}
                 <ProgressPrimitive.Root
-                    value={normalizedValue}
-                    max={max}
-                    aria-valuetext={`${percent}%`}
+                    value={normalizedProgress.value}
+                    max={normalizedProgress.max}
+                    aria-valuetext={`${normalizedProgress.percent}%`}
                     className={cn(
                         "relative flex h-1 w-full items-center overflow-x-hidden rounded-full bg-muted",
                         statusClasses[status],
@@ -68,7 +80,7 @@ export const SconeProgress = React.forwardRef<HTMLDivElement, SconeProgressProps
                     <ProgressPrimitive.Indicator
                         className="size-full flex-1 bg-primary transition-all"
                         data-slot="progress-indicator"
-                        style={{ transform: `translateX(-${100 - percent}%)` }}
+                        style={{ transform: `translateX(-${100 - normalizedProgress.percent}%)` }}
                     />
                 </ProgressPrimitive.Root>
             </div>

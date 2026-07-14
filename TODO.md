@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `02-progress-invalid-max`：2. 修复 `SconeProgress` invalid `max` 百分比
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-TOKEN-NUMBER-PROGRESS-EDGES.md`
-    - 范围对象：`src/components/feedback-overlay/progress.tsx`、`src/components/feedback-overlay/progress.test.tsx`
-    - 处理动作：统一归一化 `value`、`max`、`percent`，避免 progressbar、可见百分比和 indicator transform 使用原始 invalid `max`。
-    - 验收点：`max={0}` 和 `max={Number.NaN}` 渲染时 `aria-valuetext`、可见 label、indicator transform 和 `aria-valuemax` 均不包含非有限结果。
-    - 重要度：9/10
-
 - [ ] `03-number-input-non-finite`：3. 修复 `SconeNumberInput` 非有限数字提交
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-TOKEN-NUMBER-PROGRESS-EDGES.md`

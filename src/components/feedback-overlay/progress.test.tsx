@@ -30,4 +30,25 @@ describe("SconeProgress", () => {
         expect(screen.getByRole("progressbar")).toHaveAttribute("aria-valuenow", "100");
         expect(screen.getByText("100%")).toBeInTheDocument();
     });
+
+    it("normalizes invalid max values before calculating percent output", () => {
+        const { rerender } = render(<SconeProgress value={50} max={0} showLabel />);
+
+        let progress = screen.getByRole("progressbar");
+        let indicator = progress.querySelector("[data-slot='progress-indicator']");
+
+        expect(progress).toHaveAttribute("aria-valuemax", "100");
+        expect(progress).toHaveAttribute("aria-valuetext", "50%");
+        expect(screen.getByText("50%")).toBeInTheDocument();
+        expect(indicator).toHaveStyle({ transform: "translateX(-50%)" });
+
+        rerender(<SconeProgress value={50} max={Number.NaN} showLabel />);
+        progress = screen.getByRole("progressbar");
+        indicator = progress.querySelector("[data-slot='progress-indicator']");
+
+        expect(progress).toHaveAttribute("aria-valuemax", "100");
+        expect(progress).toHaveAttribute("aria-valuetext", "50%");
+        expect(screen.getByText("50%")).toBeInTheDocument();
+        expect(indicator).toHaveStyle({ transform: "translateX(-50%)" });
+    });
 });
