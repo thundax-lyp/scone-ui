@@ -690,3 +690,46 @@ Recent evidence before this review branch:
 - Naming and file placement match responsibilities.
 - The helpers are small but not arbitrary wrappers: they preserve fieldset and section semantics and encode documented form layout choices.
 - The overlap with `Section` Pattern is documented and intentionally scoped to form pages.
+
+## 22 Tests And Public Behavior
+
+### Evidence
+
+- `src/index.test.ts` checks the complete runtime public export key set, representative exported types, Pattern compound objects, and no-recipe-source/no-recipe-export boundaries.
+- The public export guard explicitly asserts `AppShell`, `Page`, `Section`, `FilterBar`, and `DataTable` are exported, and `SconeDrawerForm`, `SconeConfirmationFlow`, `SconePopover`, `SconeLogo`, `SconeResult`, `SconeDashboardMetric`, and `SconeGrid` are not exported.
+- `vitest.config.ts` uses jsdom, a single `@` alias, and one setup file.
+- `src/test/setup.ts` only installs jest-dom and a minimal `ResizeObserver` mock.
+- The repository currently has 69 test files.
+- A search for `data-scone`, `data-slot`, `closest(`, `querySelector`, `toHaveClass`, and `toHaveAttribute` found 220 matching test lines. Many of these are valid layout-slot assertions, but they also make some tests sensitive to internal markup.
+- `src/app.test.tsx` only asserts the demo heading text in `src/app.tsx`.
+
+### Assessment
+
+- The package-level export guard is strong and aligned with the docs-only Recipe boundary.
+- Test setup is intentionally small and does not hide behavior behind heavy mocks.
+- Component tests generally exercise public DOM behavior through Testing Library, with some justified use of documented `data-scone-*` slot attributes for layout Patterns.
+- The main test maintenance risk is not coverage absence; it is over-reliance on internal slot/class details in areas where user-observable roles, labels, values, and callbacks would be more stable.
+
+### Candidate Findings
+
+### [P2] Some tests are tightly coupled to internal slot markup
+
+* **位置**：`src/patterns/*.test.tsx`、`src/components/layout/*.test.tsx`、`src/components/feedback-overlay/*.test.tsx`
+* **类别**：测试 / 封装
+* **问题**：A meaningful share of tests locate elements through `closest("[data-scone-*]")`, `querySelector("[data-scone-*]")`, `data-slot`, or class assertions. This is useful when the slot attribute is a documented layout contract, but it becomes brittle when the test intent is user-facing behavior.
+* **影响**：Markup-only refactors can fail tests even when public behavior is unchanged, which raises maintenance cost and makes future simplification feel riskier.
+* **证据**：`rg "data-scone|data-slot|closest\\(|querySelector|toHaveClass|toHaveAttribute" src -g "*.test.*"` returns 220 lines across Pattern, layout, feedback, and data-display tests.
+* **建议**：Keep data attribute assertions only for documented slot/layout contracts. When touching a test, prefer roles, labels, text, ARIA state, values, callbacks, and public props for behavior assertions.
+* **功能风险**：低；this is a testing strategy cleanup and should not change runtime behavior.
+* **置信度**：中
+
+### [P3] Demo App test validates copy instead of library behavior
+
+* **位置**：`src/app.test.tsx`
+* **类别**：测试 / 无效代码
+* **问题**：The test asserts the demo heading text `"React + TailwindCSS frontend project"` rather than a component-library behavior or public package contract.
+* **影响**：This is low-cost but low-value coverage. Demo copy edits can fail CI without indicating a library regression.
+* **证据**：`src/app.test.tsx` renders `App` and only checks one heading name.
+* **建议**：Either treat it explicitly as a demo smoke test, or remove it once the package-level and component-level tests cover the intended library behavior.
+* **功能风险**：低；removing or weakening the test does not change runtime code.
+* **置信度**：高

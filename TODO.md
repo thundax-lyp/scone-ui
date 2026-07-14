@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `22-tests-public-behavior`：22 审核测试策略和公共行为覆盖
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`src/index.test.ts`、`src/test/setup.ts`、`vitest.config.ts`、`src/app.test.tsx`
-    - 处理动作：检查测试是否验证公共行为、导出守护、环境设置和示例入口，而非脆弱内部实现。
-    - 验收点：输出测试结构是否存在维护成本高、Mock 过重或覆盖目标不清的问题。
-    - 重要度：8/10
-
 - [ ] `23-docs-spec-design-alignment`：23 审核 SPEC、DESIGN 和 readiness 对齐
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
