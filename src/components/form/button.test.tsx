@@ -38,7 +38,7 @@ describe("SconeButton", () => {
     });
 
     it("passes ref and className through asChild", () => {
-        const ref = React.createRef<HTMLAnchorElement>();
+        const ref = React.createRef<HTMLButtonElement>();
 
         render(
             <SconeButton ref={ref} asChild className="custom-button">

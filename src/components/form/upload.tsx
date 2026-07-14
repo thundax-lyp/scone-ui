@@ -4,7 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/cn";
 import { useControllableState } from "@/lib/use-controllable-state";
 
-import { getSconeControlStateProps } from "./control";
+import { getSconeControlStateProps, normalizeSconeAriaInvalid } from "./control";
 import { useSconeFieldContext } from "./field";
 
 export interface SconeUploadRejection {
@@ -87,9 +87,10 @@ export const SconeUpload = React.forwardRef<HTMLInputElement, SconeUploadProps>(
             disabled,
             readOnly,
             "aria-label": ariaLabel,
-            "aria-invalid": invalid ?? props["aria-invalid"],
+            "aria-invalid": normalizeSconeAriaInvalid(invalid ?? props["aria-invalid"]),
         });
-        const isDisabled = controlProps.disabled || controlProps.readOnly;
+        const { readOnly: controlReadOnly, ...uploadInputControlProps } = controlProps;
+        const isDisabled = controlProps.disabled || controlReadOnly;
         const currentFiles = files ?? [];
 
         const reject = (file: File, reason: SconeUploadRejection["reason"], message: string) => {
@@ -158,9 +159,8 @@ export const SconeUpload = React.forwardRef<HTMLInputElement, SconeUploadProps>(
                     onChange={(event) => {
                         void handleFiles(event.currentTarget.files);
                     }}
-                    {...controlProps}
+                    {...uploadInputControlProps}
                     disabled={isDisabled}
-                    readOnly={undefined}
                 />
                 <button
                     type="button"

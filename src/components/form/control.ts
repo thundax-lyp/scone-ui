@@ -1,6 +1,10 @@
+import type * as React from "react";
+
 import { mergeAriaDescribedBy, mergeIds } from "@/lib/aria";
 
 import type { SconeFieldContextValue } from "./field";
+
+export type SconeAriaInvalid = boolean | "true" | "false";
 
 export interface SconeControlStateProps {
     id?: string;
@@ -8,11 +12,25 @@ export interface SconeControlStateProps {
     "aria-label"?: string;
     "aria-labelledby"?: string;
     "aria-describedby"?: string;
-    "aria-invalid"?: boolean | "true" | "false";
+    "aria-invalid"?: SconeAriaInvalid;
     "aria-required"?: boolean | "true" | "false";
     disabled?: boolean;
     readOnly?: boolean;
     required?: boolean;
+}
+
+export function normalizeSconeAriaInvalid(
+    value: React.AriaAttributes["aria-invalid"] | undefined,
+): SconeAriaInvalid | undefined {
+    if (value === true || value === "true") {
+        return true;
+    }
+
+    if (value === false || value === "false") {
+        return undefined;
+    }
+
+    return undefined;
 }
 
 export function getSconeControlStateProps(

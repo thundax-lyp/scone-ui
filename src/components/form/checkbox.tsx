@@ -5,7 +5,7 @@ import { cn } from "@/lib/cn";
 import { useControllableState } from "@/lib/use-controllable-state";
 import type { SconeControlSize } from "@/types/foundation";
 
-import { getSconeControlStateProps } from "./control";
+import { getSconeControlStateProps, normalizeSconeAriaInvalid } from "./control";
 import { useSconeFieldContext } from "./field";
 
 export interface SconeCheckboxProps extends Omit<
@@ -59,9 +59,10 @@ export const SconeCheckbox = React.forwardRef<
             disabled,
             readOnly,
             "aria-label": ariaLabel ?? props["aria-label"],
-            "aria-invalid": invalid ?? props["aria-invalid"],
+            "aria-invalid": normalizeSconeAriaInvalid(invalid ?? props["aria-invalid"]),
         });
-        const isDisabled = controlProps.disabled || controlProps.readOnly;
+        const { readOnly: controlReadOnly, ...checkboxControlProps } = controlProps;
+        const isDisabled = controlProps.disabled || controlReadOnly;
         const renderedChecked =
             indeterminate && currentChecked === undefined ? "indeterminate" : currentChecked;
 
@@ -76,8 +77,7 @@ export const SconeCheckbox = React.forwardRef<
                         setCurrentChecked(nextChecked);
                     }
                 }}
-                {...controlProps}
-                readOnly={undefined}
+                {...checkboxControlProps}
             />
         );
     },

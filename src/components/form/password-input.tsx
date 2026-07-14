@@ -6,7 +6,7 @@ import { cn } from "@/lib/cn";
 import { useControllableState } from "@/lib/use-controllable-state";
 import type { SconeControlSize } from "@/types/foundation";
 
-import { getSconeControlStateProps } from "./control";
+import { getSconeControlStateProps, normalizeSconeAriaInvalid } from "./control";
 import { useSconeFieldContext } from "./field";
 
 export interface SconePasswordInputProps extends Omit<
@@ -61,7 +61,7 @@ export const SconePasswordInput = React.forwardRef<HTMLInputElement, SconePasswo
             disabled,
             readOnly,
             "aria-label": ariaLabel ?? props["aria-label"],
-            "aria-invalid": invalid ?? props["aria-invalid"],
+            "aria-invalid": normalizeSconeAriaInvalid(invalid ?? props["aria-invalid"]),
         });
         const canToggle = !controlProps.disabled && !controlProps.readOnly;
 

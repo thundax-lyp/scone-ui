@@ -11,12 +11,12 @@ import { cn } from "@/lib/cn";
 import { useControllableState } from "@/lib/use-controllable-state";
 import type { SconeControlSize, SconeOption } from "@/types/foundation";
 
-import { getSconeControlStateProps } from "./control";
+import { getSconeControlStateProps, normalizeSconeAriaInvalid } from "./control";
 import { useSconeFieldContext } from "./field";
 
 export interface SconeSelectProps<Value extends string = string> extends Omit<
     React.ComponentPropsWithoutRef<typeof SelectTrigger>,
-    "value" | "defaultValue"
+    "value" | "defaultValue" | "readOnly" | "size"
 > {
     options: Array<SconeOption<Value>>;
     value?: Value;
@@ -84,9 +84,10 @@ export const SconeSelect = React.forwardRef<HTMLButtonElement, SconeSelectProps>
             disabled,
             readOnly,
             "aria-label": ariaLabel ?? props["aria-label"],
-            "aria-invalid": invalid ?? props["aria-invalid"],
+            "aria-invalid": normalizeSconeAriaInvalid(invalid ?? props["aria-invalid"]),
         });
-        const isDisabled = controlProps.disabled || controlProps.readOnly;
+        const { readOnly: controlReadOnly, ...selectTriggerControlProps } = controlProps;
+        const isDisabled = controlProps.disabled || controlReadOnly;
 
         return (
             <Select
@@ -104,9 +105,8 @@ export const SconeSelect = React.forwardRef<HTMLButtonElement, SconeSelectProps>
                     ref={ref}
                     size={selectSizeMap[size]}
                     className={cn(selectSizeClassNames[size], className)}
-                    {...controlProps}
+                    {...selectTriggerControlProps}
                     disabled={isDisabled}
-                    readOnly={undefined}
                 >
                     <SelectValue placeholder={placeholder} />
                 </SelectTrigger>

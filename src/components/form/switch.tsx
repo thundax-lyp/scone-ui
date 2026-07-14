@@ -5,7 +5,7 @@ import { cn } from "@/lib/cn";
 import { useControllableState } from "@/lib/use-controllable-state";
 import type { SconeControlSize } from "@/types/foundation";
 
-import { getSconeControlStateProps } from "./control";
+import { getSconeControlStateProps, normalizeSconeAriaInvalid } from "./control";
 import { useSconeFieldContext } from "./field";
 
 export interface SconeSwitchProps extends Omit<
@@ -54,9 +54,10 @@ export const SconeSwitch = React.forwardRef<React.ElementRef<typeof Switch>, Sco
             disabled,
             readOnly,
             "aria-label": ariaLabel ?? props["aria-label"],
-            "aria-invalid": invalid ?? props["aria-invalid"],
+            "aria-invalid": normalizeSconeAriaInvalid(invalid ?? props["aria-invalid"]),
         });
-        const isDisabled = controlProps.disabled || controlProps.readOnly;
+        const { readOnly: controlReadOnly, ...switchControlProps } = controlProps;
+        const isDisabled = controlProps.disabled || controlReadOnly;
 
         return (
             <Switch
@@ -70,8 +71,7 @@ export const SconeSwitch = React.forwardRef<React.ElementRef<typeof Switch>, Sco
                         setCurrentChecked(nextChecked);
                     }
                 }}
-                {...controlProps}
-                readOnly={undefined}
+                {...switchControlProps}
             />
         );
     },

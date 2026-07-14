@@ -10,14 +10,6 @@
 
 ## 当前任务项
 
-- [ ] `15 final-verification`：运行 Form 闭环验证
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`
-    - 范围对象：`pnpm test`、`pnpm typecheck`、`pnpm lint`、`pnpm format:check`
-    - 处理动作：在同步 main 后运行 Form 组件族闭环所需验证命令并修复本范围内失败。
-    - 验收点：四个验证命令通过，或失败项被收窄为明确阻塞原因。
-    - 重要度：10/10
-
 - [ ] `16 implementation-coverage`：更新 Form Implementation Coverage
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`

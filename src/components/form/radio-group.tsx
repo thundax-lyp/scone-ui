@@ -5,7 +5,7 @@ import { cn } from "@/lib/cn";
 import { useControllableState } from "@/lib/use-controllable-state";
 import type { SconeOption, SconeOrientation } from "@/types/foundation";
 
-import { getSconeControlStateProps } from "./control";
+import { getSconeControlStateProps, normalizeSconeAriaInvalid } from "./control";
 import { useSconeFieldContext } from "./field";
 
 export interface SconeRadioGroupProps<Value extends string = string> extends Omit<
@@ -50,9 +50,10 @@ export const SconeRadioGroup = React.forwardRef<HTMLDivElement, SconeRadioGroupP
             disabled,
             readOnly,
             "aria-label": ariaLabel ?? props["aria-label"],
-            "aria-invalid": invalid ?? props["aria-invalid"],
+            "aria-invalid": normalizeSconeAriaInvalid(invalid ?? props["aria-invalid"]),
         });
-        const isDisabled = controlProps.disabled || controlProps.readOnly;
+        const { readOnly: controlReadOnly, ...radioGroupControlProps } = controlProps;
+        const isDisabled = controlProps.disabled || controlReadOnly;
 
         return (
             <RadioGroup
@@ -66,8 +67,7 @@ export const SconeRadioGroup = React.forwardRef<HTMLDivElement, SconeRadioGroupP
                         setCurrentValue(nextValue);
                     }
                 }}
-                {...controlProps}
-                readOnly={undefined}
+                {...radioGroupControlProps}
             >
                 {options.map((option) => {
                     const itemId = `${controlProps.id ?? "scone-radio"}-${option.value}`;

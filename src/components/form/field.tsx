@@ -164,32 +164,39 @@ export interface SconeFieldControlProps extends React.HTMLAttributes<HTMLElement
 const SconeFieldControl = React.forwardRef<HTMLElement, SconeFieldControlProps>(
     ({ asChild = true, children, className, id, ...props }, ref) => {
         const context = useRequiredSconeFieldContext("SconeField.Control");
-        const Comp = asChild ? Slot.Root : "div";
         const describedBy = mergeAriaDescribedBy(
             props["aria-describedby"],
             context.descriptionId,
             context.messageId,
         );
+        const controlProps = {
+            id: id ?? context.fieldId,
+            name: context.name,
+            "aria-labelledby": mergeIds(props["aria-labelledby"], context.labelId),
+            "aria-describedby": describedBy,
+            "aria-invalid": context.invalid || undefined,
+            "aria-required": context.required || undefined,
+            disabled: context.disabled || undefined,
+            readOnly: context.readOnly || undefined,
+            "data-invalid": context.invalid || undefined,
+            "data-disabled": context.disabled || undefined,
+            "data-readonly": context.readOnly || undefined,
+            className,
+            ...props,
+        };
+
+        if (asChild) {
+            return (
+                <Slot.Root ref={ref} {...controlProps}>
+                    {children}
+                </Slot.Root>
+            );
+        }
 
         return (
-            <Comp
-                ref={ref}
-                id={id ?? context.fieldId}
-                name={context.name}
-                aria-labelledby={mergeIds(props["aria-labelledby"], context.labelId)}
-                aria-describedby={describedBy}
-                aria-invalid={context.invalid || undefined}
-                aria-required={context.required || undefined}
-                disabled={context.disabled || undefined}
-                readOnly={context.readOnly || undefined}
-                data-invalid={context.invalid || undefined}
-                data-disabled={context.disabled || undefined}
-                data-readonly={context.readOnly || undefined}
-                className={className}
-                {...props}
-            >
+            <div ref={ref as React.Ref<HTMLDivElement>} {...controlProps}>
                 {children}
-            </Comp>
+            </div>
         );
     },
 );

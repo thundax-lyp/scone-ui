@@ -5,7 +5,7 @@ import { cn } from "@/lib/cn";
 import { useControllableState } from "@/lib/use-controllable-state";
 import type { SconeControlSize } from "@/types/foundation";
 
-import { getSconeControlStateProps } from "./control";
+import { getSconeControlStateProps, normalizeSconeAriaInvalid } from "./control";
 import { useSconeFieldContext } from "./field";
 
 export interface SconeDatePickerProps extends Omit<
@@ -96,9 +96,10 @@ export const SconeDatePicker = React.forwardRef<HTMLButtonElement, SconeDatePick
             disabled,
             readOnly,
             "aria-label": ariaLabel ?? props["aria-label"],
-            "aria-invalid": invalid ?? props["aria-invalid"],
+            "aria-invalid": normalizeSconeAriaInvalid(invalid ?? props["aria-invalid"]),
         });
-        const isDisabled = controlProps.disabled || controlProps.readOnly;
+        const { readOnly: controlReadOnly, ...datePickerControlProps } = controlProps;
+        const isDisabled = controlProps.disabled || controlReadOnly;
         const monthDays = getMonthDays(currentValue ?? new Date());
 
         const updateOpen = (nextOpen: boolean) => {
@@ -131,9 +132,8 @@ export const SconeDatePicker = React.forwardRef<HTMLButtonElement, SconeDatePick
                             updateOpen(true);
                         }
                     }}
-                    {...controlProps}
+                    {...datePickerControlProps}
                     disabled={isDisabled}
-                    readOnly={undefined}
                 >
                     <span className={cn(!currentValue && "text-muted-foreground")}>
                         {currentValue ? formatLabel(currentValue) : placeholder}

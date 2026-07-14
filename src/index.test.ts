@@ -283,24 +283,33 @@ describe("public index exports", () => {
         expect(typeof useSconeFormContext).toBe("function");
         expect(typeof useSconeFieldContext).toBe("function");
 
-        expectTypeOf<SconeFormProps["density"]>().toEqualTypeOf<SconeDensity | undefined>();
-        expectTypeOf<SconeFormContextValue["density"]>().toEqualTypeOf<SconeDensity>();
+        expectTypeOf<SconeFormProps["requiredMark"]>().toEqualTypeOf<
+            boolean | "optional" | undefined
+        >();
+        expectTypeOf<SconeFormContextValue["requiredMark"]>().toEqualTypeOf<
+            boolean | "optional" | undefined
+        >();
         expectTypeOf<SconeFieldRootProps["invalid"]>().toEqualTypeOf<boolean | undefined>();
-        expectTypeOf<SconeFieldContextValue["controlId"]>().toEqualTypeOf<string>();
+        expectTypeOf<SconeFieldContextValue["fieldId"]>().toEqualTypeOf<string>();
         expectTypeOf<SconeFieldGroupProps["columns"]>().toEqualTypeOf<1 | 2 | 3 | undefined>();
         expectTypeOf<SconeFormSectionProps["title"]>().toEqualTypeOf<React.ReactNode>();
-        expectTypeOf<SconeFormActionsProps["align"]>().toEqualTypeOf<
-            "start" | "end" | "between" | undefined
-        >();
+        expectTypeOf<SconeFormActionsProps["align"]>().toEqualTypeOf<SconeAlign | undefined>();
         expectTypeOf<SconeButtonProps["variant"]>().toEqualTypeOf<
-            "primary" | "secondary" | "danger" | "ghost" | undefined
+            | "default"
+            | "outline"
+            | "secondary"
+            | "ghost"
+            | "destructive"
+            | "link"
+            | null
+            | undefined
         >();
         expectTypeOf<SconeInputProps["size"]>().toEqualTypeOf<SconeControlSize | undefined>();
-        expectTypeOf<SconeSearchInputProps["onClear"]>().toEqualTypeOf<(() => void) | undefined>();
+        expectTypeOf<SconeSearchInputProps["clearable"]>().toEqualTypeOf<boolean | undefined>();
         expectTypeOf<SconePasswordInputProps["visibilityLabel"]>().toEqualTypeOf<
             string | undefined
         >();
-        expectTypeOf<SconeTextAreaProps["autoResize"]>().toEqualTypeOf<boolean | undefined>();
+        expectTypeOf<SconeTextAreaProps["autoSize"]>().toEqualTypeOf<boolean | undefined>();
         expectTypeOf<SconeSelectProps["options"]>().toEqualTypeOf<SconeOption[]>();
         expectTypeOf<SconeComboboxProps["options"]>().toEqualTypeOf<SconeOption[]>();
         expectTypeOf<SconeSwitchProps["onCheckedChange"]>().toEqualTypeOf<
@@ -317,8 +326,8 @@ describe("public index exports", () => {
         expectTypeOf<SconeDatePickerProps["onValueChange"]>().toEqualTypeOf<
             ((value: Date | undefined) => void) | undefined
         >();
-        expectTypeOf<SconeUploadProps["onRejected"]>().toEqualTypeOf<
-            ((rejections: SconeUploadRejection[]) => void) | undefined
+        expectTypeOf<SconeUploadProps["onReject"]>().toEqualTypeOf<
+            ((rejection: SconeUploadRejection) => void) | undefined
         >();
     });
 

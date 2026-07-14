@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/cn";
 
-export interface SconeFormSectionProps extends React.HTMLAttributes<HTMLElement> {
+export interface SconeFormSectionProps extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
     title?: React.ReactNode;
     description?: React.ReactNode;
     actions?: React.ReactNode;

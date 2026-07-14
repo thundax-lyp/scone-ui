@@ -6,7 +6,7 @@ import { cn } from "@/lib/cn";
 import { useControllableState } from "@/lib/use-controllable-state";
 import type { SconeControlSize } from "@/types/foundation";
 
-import { getSconeControlStateProps } from "./control";
+import { getSconeControlStateProps, normalizeSconeAriaInvalid } from "./control";
 import { useSconeFieldContext } from "./field";
 
 export interface SconeNumberInputProps extends Omit<
@@ -33,10 +33,10 @@ function clampNumber(value: number, min?: number | string, max?: number | string
     const numericMax = max === undefined ? undefined : Number(max);
     let nextValue = value;
 
-    if (Number.isFinite(numericMin)) {
+    if (numericMin !== undefined && Number.isFinite(numericMin)) {
         nextValue = Math.max(nextValue, numericMin);
     }
-    if (Number.isFinite(numericMax)) {
+    if (numericMax !== undefined && Number.isFinite(numericMax)) {
         nextValue = Math.min(nextValue, numericMax);
     }
 
@@ -74,7 +74,7 @@ export const SconeNumberInput = React.forwardRef<HTMLInputElement, SconeNumberIn
             disabled,
             readOnly,
             "aria-label": ariaLabel ?? props["aria-label"],
-            "aria-invalid": invalid ?? props["aria-invalid"],
+            "aria-invalid": normalizeSconeAriaInvalid(invalid ?? props["aria-invalid"]),
         });
         const isDisabled = controlProps.disabled || controlProps.readOnly;
         const stepValue = Number(step) || 1;

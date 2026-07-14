@@ -2,7 +2,10 @@ import * as React from "react";
 
 import { cn } from "@/lib/cn";
 
-export interface SconeFieldGroupProps extends React.HTMLAttributes<HTMLFieldSetElement> {
+export interface SconeFieldGroupProps extends Omit<
+    React.HTMLAttributes<HTMLFieldSetElement>,
+    "title"
+> {
     title?: React.ReactNode;
     description?: React.ReactNode;
     columns?: 1 | 2 | 3;

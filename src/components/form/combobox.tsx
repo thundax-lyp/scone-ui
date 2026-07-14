@@ -5,7 +5,7 @@ import { cn } from "@/lib/cn";
 import { useControllableState } from "@/lib/use-controllable-state";
 import type { SconeControlSize, SconeOption } from "@/types/foundation";
 
-import { getSconeControlStateProps } from "./control";
+import { getSconeControlStateProps, normalizeSconeAriaInvalid } from "./control";
 import { useSconeFieldContext } from "./field";
 
 export interface SconeComboboxProps<Value extends string = string> extends Omit<
@@ -86,9 +86,10 @@ export const SconeCombobox = React.forwardRef<HTMLButtonElement, SconeComboboxPr
             disabled,
             readOnly,
             "aria-label": ariaLabel ?? props["aria-label"],
-            "aria-invalid": invalid ?? props["aria-invalid"],
+            "aria-invalid": normalizeSconeAriaInvalid(invalid ?? props["aria-invalid"]),
         });
-        const isDisabled = controlProps.disabled || controlProps.readOnly;
+        const { readOnly: controlReadOnly, ...comboboxControlProps } = controlProps;
+        const isDisabled = controlProps.disabled || controlReadOnly;
         const filteredOptions = options.filter((option) =>
             optionLabelToText(option.label).toLowerCase().includes(currentSearch.toLowerCase()),
         );
@@ -136,9 +137,8 @@ export const SconeCombobox = React.forwardRef<HTMLButtonElement, SconeComboboxPr
                             updateOpen(true);
                         }
                     }}
-                    {...controlProps}
+                    {...comboboxControlProps}
                     disabled={isDisabled}
-                    readOnly={undefined}
                 >
                     <span className={cn(!selectedOption && "text-muted-foreground")}>
                         {selectedOption?.label ?? placeholder}
