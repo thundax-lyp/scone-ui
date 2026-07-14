@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `5. docs/40-readiness/SYSTEMATIC-CODE-REVIEW-2026-07.md`：收口审核报告和 RUNBOOK
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FORM-INTERACTION-HARDENING.md`
-    - 范围对象：`docs/40-readiness/SYSTEMATIC-CODE-REVIEW-2026-07.md`、`docs/30-designs/RUNBOOK-FORM-INTERACTION-HARDENING.md`
-    - 处理动作：在实现和验证完成后删除已完全处理的 Systematic Code Review finding，并清理临时 RUNBOOK。
-    - 验收点：NumberInput、Combobox、DatePicker 已处理章节从审核报告删除；未处理的 text input finding 保留；RUNBOOK 被删除且无残留引用。
-    - 重要度：8/10
-
 ## 待审阅任务项
 
 ## 待讨论项
