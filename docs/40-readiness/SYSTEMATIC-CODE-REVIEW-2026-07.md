@@ -23,7 +23,6 @@
 - 一部分复杂交互被手写在上层组件中，尤其是 Combobox、DatePicker、Dropdown；这些组件承担 overlay、focus、keyboard、selection 等多类职责。
 - readiness 和部分 Pattern SPEC/DESIGN 对实现状态描述偏乐观，容易把“覆盖完成”误读成“无已知实现问题”。
 - 若干公共 API 暴露了未兑现或过宽的行为，例如 AppShell change callbacks、Section Root shorthand、Form context internals。
-- 少数边界状态没有被明确建模，例如 invalid number/progress input。
 
 是否存在明显的过度设计：
 
@@ -37,7 +36,7 @@
 
 建议优先处理的三个方向：
 
-1. 修复明确 P1 行为问题：Tailwind stale token config、NumberInput/Progress invalid numeric edge cases、Confirm async rejection。
+1. 修复明确 P1 行为问题：Confirm async rejection。
 2. 收口 Pattern API 与文档：AppShell callbacks、Section Root shorthand、FilterBar hidden search state，逐项决定实现还是修正文档。
 3. 降低复杂交互维护成本：优先用现有 primitives 重构或约束 Combobox、DatePicker、Dropdown 的 overlay/focus/keyboard 行为。
 
@@ -49,11 +48,8 @@ P0：未发现。
 
 P1：
 
-- Tailwind config references stale token variable names.
 - Combobox hand-rolls complex overlay and listbox behavior.
-- NumberInput can commit `NaN` into component state.
 - DatePicker hand-rolls dialog calendar behavior.
-- Progress can render `NaN%` when `max` is invalid.
 - Confirm can create unhandled promise rejections.
 - Dropdown hand-rolls menu popover behavior without outside-click close.
 - AppShell exposes change callbacks that are never called.
@@ -105,7 +101,7 @@ src/lib/cn.ts
 
 ### 建议执行顺序
 
-1. 低风险、高收益修改：修复 stale Tailwind token config、Progress/NumberInput invalid numeric handling、Confirm async rejection。
+1. 低风险、高收益修改：修复 Confirm async rejection。
 2. 模块边界和 API 调整：收口 AppShell callbacks、Section Root shorthand、FilterBar hidden search；决定 Form context internals 是否继续公开；统一 `cn` import path。
 3. 状态与副作用重构：落实 Toast timer stability、Command filtered active state、Alert role/tone semantics。
 4. 需要人工确认的修改：Combobox/DatePicker/Dropdown 是否迁移到现有 primitives；Section Root shorthand 是实现还是从 SPEC 移除；AppShell callbacks 是移除还是补交互触发；Form context 公共导出是否允许未来 breaking change。
@@ -229,19 +225,6 @@ Recent evidence before this review branch:
 - Theme value ownership is clear in `src/styles/theme.css`.
 - `src/styles.css` correctly maps Tailwind v4 `@theme inline` names to current `--scone-*` variables.
 
-### Candidate Finding
-
-### [P1] Tailwind config references stale token variable names
-
-- **位置**：`tailwind.config.ts`
-- **类别**：结构 / 配置
-- **问题**：`tailwind.config.ts` maps font, fontSize, motion, and zIndex extensions to variables such as `--scone-font-family-body`, `--scone-motion-duration-fast`, and `--scone-z-index-sticky`, while `theme.css` defines `--scone-font-body`, `--scone-duration-fast`, and `--scone-z-sticky`.
-- **影响**：The CSS-first path still works through `src/styles.css`, but maintainers reading or reusing `tailwind.config.ts` get a stale token contract. If any utility is generated from these config keys, it will reference undefined variables.
-- **证据**：`rg "scone-font-family|scone-font-size|scone-motion|scone-z-index"` only returns `tailwind.config.ts`; `src/styles/theme.css` defines the shorter current names and no matching old names.
-- **建议**：Either update `tailwind.config.ts` to the current `theme.css` variable names or remove stale config extensions that are superseded by Tailwind v4 `@theme inline`.
-- **功能风险**：中；changing token names can affect generated utilities, but the fix is localized to build/style config.
-- **置信度**：高
-
 ## 05 Form Structure And Field Context
 
 ### Evidence
@@ -346,17 +329,6 @@ Recent evidence before this review branch:
 - DatePicker carries the same hand-rolled overlay risk as Combobox.
 
 ### Candidate Findings
-
-### [P1] NumberInput can commit `NaN` into component state
-
-- **位置**：`src/components/form/number-input.tsx`
-- **类别**：状态 / 错误处理
-- **问题**：`onChange` converts non-empty input text with `Number(rawValue)` and commits the result without checking `Number.isFinite`.
-- **影响**：Native number inputs can transiently contain invalid text such as exponent fragments. Committing `NaN` can produce React value warnings and unstable `onValueChange` payloads.
-- **证据**：`commitNumber(rawValue === "" ? undefined : Number(rawValue))` passes `NaN` through `clampNumber`; `clampNumber` only validates min/max, not the candidate value.
-- **建议**：Treat non-finite parsed values as an uncommitted display state or reject them before calling `setCurrentValue` / `onValueChange`.
-- **功能风险**：中；fixing this changes edge-case typing behavior and should preserve empty-value handling.
-- **置信度**：高
 
 ### [P1] DatePicker hand-rolls dialog calendar behavior
 
@@ -496,17 +468,6 @@ Recent evidence before this review branch:
 - Alert and Progress need small semantic hardening around urgency and invalid max values.
 
 ### Candidate Findings
-
-### [P1] Progress can render `NaN%` when `max` is invalid
-
-- **位置**：`src/components/feedback-overlay/progress.tsx`
-- **类别**：错误处理 / 可访问性
-- **问题**：`normalizeProgress` returns `0` for invalid or non-positive `max`, but `percent` is still calculated as `Math.round((normalizedValue / max) * 100)`.
-- **影响**：`max={0}` or non-finite `max` can produce `NaN%` in `aria-valuetext`, visible labels, and transform styles.
-- **证据**：`normalizeProgress(value, max)` guards `max <= 0`; `percent` divides by the original `max` afterward.
-- **建议**：Normalize `max` before percent calculation, or return both normalized value and normalized max from one helper.
-- **功能风险**：低；fix is localized and should add an invalid-max test.
-- **置信度**：高
 
 ### [P2] Alert always announces as urgent
 
@@ -804,7 +765,7 @@ Recent evidence before this review branch:
 
 - **位置**：`docs/40-readiness/IMPLEMENTATION-COVERAGE.md`
 - **类别**：文档对齐 / 错误处理
-- **问题**：The readiness document concludes the covered Admin UI scope is complete and says "当前无未完成实现项", but this audit found multiple source-backed P1/P2 issues, including stale Tailwind token config, ignored AppShell callbacks, unimplemented Section Root shorthand, and invalid Progress/NumberInput edge cases.
+- **问题**：The readiness document concludes the covered Admin UI scope is complete and says "当前无未完成实现项", but this audit found multiple source-backed P1/P2 issues, including ignored AppShell callbacks, unimplemented Section Root shorthand, and Confirm async rejection handling.
 - **影响**：Readers can mistake "coverage complete" for "no known implementation work", which hides the actual remediation backlog and makes planning less accurate.
 - **证据**：`IMPLEMENTATION-COVERAGE.md` marks all rows as complete; this audit report contains source-backed findings across sections 04, 08, 13, 14, 19, and 20.
 - **建议**：In the closure task, keep coverage status as complete where accurate, but add a concise pending implementation work summary that points to this audit report.
