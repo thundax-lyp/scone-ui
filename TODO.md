@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `2. src/components/layout/split-pane.test.tsx`：补齐 SplitPane 边界和卸载交互测试
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SPLIT-PANE-BOUNDS-CLEANUP.md`
-    - 范围对象：`src/components/layout/split-pane.test.tsx`
-    - 处理动作：新增 pointer min/max、keyboard min/max 和 active drag unmount 后续 pointer event 不触发 callback 的测试。
-    - 验收点：`pnpm test src/components/layout/split-pane.test.tsx` 通过，且测试覆盖 resize handle 的 pointer drag 与 Arrow 键操作边界。
-    - 重要度：9/10
-
 - [ ] `3. docs/40-readiness/SYSTEMATIC-CODE-REVIEW-2026-07.md`：删除已处理 SplitPane 审核章节
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SPLIT-PANE-BOUNDS-CLEANUP.md`
