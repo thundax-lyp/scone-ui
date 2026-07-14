@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `04-layout-root-passthrough`：补齐 Layout primitives root attrs/ref passthrough
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-COMPONENT-CONTRACTS.md`
-    - 范围对象：`src/components/layout/stack.tsx`、`src/components/layout/inline.tsx`、`src/components/layout/compact.tsx`、`src/components/layout/toolbar.tsx` 及对应测试文件
-    - 处理动作：让 `SconeStackProps`、`SconeInlineProps`、`SconeCompactProps`、`SconeToolbarProps` 扩展 root `React.HTMLAttributes<HTMLDivElement>`，并将 rest attrs、`style`、`className` 和 ref 透传到 root `<div>`。
-    - 验收点：每个组件测试覆盖 `id`、`role`、`aria-*` 或 `data-*` passthrough，且 `data-scone-layout`、`data-gap`、`data-align`、`data-wrap`、`data-orientation`、`data-size`、`data-density` 不被 caller 覆盖。
-    - 重要度：8/10
-
 - [ ] `05-cn-import-cleanup`：统一触及文件的 `cn` import
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-COMPONENT-CONTRACTS.md`

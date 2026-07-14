@@ -19,14 +19,11 @@ const inlineAlignClass = {
     baseline: "items-baseline",
 };
 
-export interface SconeInlineProps {
+export interface SconeInlineProps extends React.HTMLAttributes<HTMLDivElement> {
     gap?: SconeSpacingToken;
     align?: "start" | "center" | "end" | "baseline";
     wrap?: boolean;
     split?: React.ReactNode;
-    children?: React.ReactNode;
-    className?: string;
-    style?: React.CSSProperties;
 }
 
 function renderInlineChildren(children: React.ReactNode, split: React.ReactNode): React.ReactNode {
@@ -51,10 +48,14 @@ function renderInlineChildren(children: React.ReactNode, split: React.ReactNode)
 }
 
 export const SconeInline = React.forwardRef<HTMLDivElement, SconeInlineProps>(
-    ({ gap = "sm", align = "center", wrap = false, split, children, className, style }, ref) => {
+    (
+        { gap = "sm", align = "center", wrap = false, split, children, className, style, ...props },
+        ref,
+    ) => {
         return (
             <div
                 ref={ref}
+                {...props}
                 data-scone-layout="inline"
                 data-gap={gap}
                 data-align={align}

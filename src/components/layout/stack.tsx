@@ -19,19 +19,17 @@ const stackAlignClass = {
     stretch: "items-stretch",
 };
 
-export interface SconeStackProps {
+export interface SconeStackProps extends React.HTMLAttributes<HTMLDivElement> {
     gap?: SconeSpacingToken;
     align?: "start" | "center" | "end" | "stretch";
-    children?: React.ReactNode;
-    className?: string;
-    style?: React.CSSProperties;
 }
 
 export const SconeStack = React.forwardRef<HTMLDivElement, SconeStackProps>(
-    ({ gap = "md", align = "stretch", children, className, style }, ref) => {
+    ({ gap = "md", align = "stretch", children, className, style, ...props }, ref) => {
         return (
             <div
                 ref={ref}
+                {...props}
                 data-scone-layout="stack"
                 data-gap={gap}
                 data-align={align}

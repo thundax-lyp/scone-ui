@@ -14,18 +14,17 @@ const compactSizeClass = {
     md: "[&>*]:min-h-control-md",
 };
 
-export interface SconeCompactProps {
+export interface SconeCompactProps extends React.HTMLAttributes<HTMLDivElement> {
     orientation?: "horizontal" | "vertical";
     size?: "sm" | "md";
-    children?: React.ReactNode;
-    className?: string;
 }
 
 export const SconeCompact = React.forwardRef<HTMLDivElement, SconeCompactProps>(
-    ({ orientation = "horizontal", size = "md", children, className }, ref) => {
+    ({ orientation = "horizontal", size = "md", children, className, style, ...props }, ref) => {
         return (
             <div
                 ref={ref}
+                {...props}
                 data-scone-layout="compact"
                 data-orientation={orientation}
                 data-size={size}
@@ -35,6 +34,7 @@ export const SconeCompact = React.forwardRef<HTMLDivElement, SconeCompactProps>(
                     compactSizeClass[size],
                     className,
                 )}
+                style={style}
             >
                 {children}
             </div>

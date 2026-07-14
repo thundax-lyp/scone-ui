@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import * as React from "react";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { SconeToolbar } from "./toolbar";
 
@@ -44,22 +44,38 @@ describe("SconeToolbar", () => {
         expect(screen.queryByText("Ignored")).not.toBeInTheDocument();
     });
 
-    it("supports compact density, className, and ref", () => {
+    it("supports root attributes, compact density, className, event handlers, style, and ref", () => {
         const ref = React.createRef<HTMLDivElement>();
+        const onClick = vi.fn();
 
         render(
             <SconeToolbar
                 ref={ref}
+                id="table-toolbar"
+                role="toolbar"
+                aria-label="Table toolbar"
+                data-testid="toolbar-root"
+                data-scone-layout="caller"
+                onClick={onClick}
                 density="compact"
                 className="custom-toolbar"
+                style={{ minWidth: 360 }}
                 start="Summary"
                 end="Actions"
             />,
         );
 
-        expect(ref.current).toBe(
-            screen.getByText("Summary").closest("[data-scone-layout='toolbar']"),
-        );
+        const toolbar = screen.getByTestId("toolbar-root");
+
+        toolbar.click();
+
+        expect(ref.current).toBe(toolbar);
         expect(ref.current).toHaveClass("custom-toolbar", "min-h-control-sm", "gap-xs");
+        expect(ref.current).toHaveAttribute("id", "table-toolbar");
+        expect(ref.current).toHaveAttribute("role", "toolbar");
+        expect(ref.current).toHaveAttribute("aria-label", "Table toolbar");
+        expect(ref.current).toHaveAttribute("data-scone-layout", "toolbar");
+        expect(ref.current).toHaveStyle({ minWidth: "360px" });
+        expect(onClick).toHaveBeenCalledTimes(1);
     });
 });
