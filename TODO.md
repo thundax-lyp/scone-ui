@@ -10,14 +10,6 @@
 
 ## 当前任务项
 
-- [ ] `01 AppShell`：实现 AppShell 布局边界
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-ADMIN-SHELL-PATTERNS.md`
-    - 范围对象：`src/patterns/app-shell.tsx`、`src/patterns/app-shell.test.tsx`、`src/patterns/index.ts`
-    - 处理动作：实现 `AppShell.Root/Sidebar/Header/Main/Aside`、controlled/uncontrolled collapsed/open 状态和公开导出。
-    - 验收点：AppShell 测试覆盖 slot 渲染、Header actions、Sidebar collapsed、Aside open 和 Main 可收缩语义。
-    - 重要度：9/10
-
 - [ ] `02 Page`：实现 Page 主滚动边界
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-ADMIN-SHELL-PATTERNS.md`
