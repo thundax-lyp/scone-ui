@@ -29,3 +29,4 @@
 
 - 长任务进度必须配合状态文案。
 - 未知时长等待使用 Loading。
+- `max` 非有限或小于等于 `0` 时按默认上限 `100` 计算，ARIA、文本和 indicator transform 不得输出 `NaN` 或 `Infinity`。

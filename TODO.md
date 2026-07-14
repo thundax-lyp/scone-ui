@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `01 src/components/feedback-overlay/progress`：修复 Progress invalid max
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`
-    - 范围对象：`src/components/feedback-overlay/progress.tsx`、`src/components/feedback-overlay/progress.test.tsx`、`docs/10-specs/components/feedback-overlay/SCONE-PROGRESS.md`
-    - 处理动作：让 `max?: number` 的非有限值和小于等于 `0` 值归一为有限有效上限。
-    - 验收点：invalid `max` 不产生非有限 ARIA、status text 或 indicator transform。
-    - 重要度：9/10
-
 - [ ] `02 src/components/feedback-overlay/confirm`：补齐 Confirm async rejection 语义
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`
