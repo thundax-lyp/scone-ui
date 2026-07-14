@@ -8,9 +8,11 @@ import type { SconeControlSize } from "@/types/foundation";
 import { getSconeControlStateProps, normalizeSconeAriaInvalid } from "./control";
 import { useSconeFieldContext } from "./field";
 
+type SconeSwitchPrimitiveSize = "sm" | "default";
+
 export interface SconeSwitchProps extends Omit<
-    React.ComponentPropsWithoutRef<typeof Switch>,
-    "size" | "checked" | "defaultChecked" | "onCheckedChange"
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    "checked" | "defaultChecked" | "onChange" | "size"
 > {
     checked?: boolean;
     defaultChecked?: boolean;
@@ -21,13 +23,13 @@ export interface SconeSwitchProps extends Omit<
     size?: SconeControlSize;
 }
 
-const switchSizeMap: Record<SconeControlSize, React.ComponentProps<typeof Switch>["size"]> = {
+const switchSizeMap: Record<SconeControlSize, SconeSwitchPrimitiveSize> = {
     sm: "sm",
     md: "default",
     lg: "default",
 };
 
-export const SconeSwitch = React.forwardRef<React.ElementRef<typeof Switch>, SconeSwitchProps>(
+export const SconeSwitch = React.forwardRef<HTMLButtonElement, SconeSwitchProps>(
     (
         {
             checked,

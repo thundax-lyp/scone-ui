@@ -4,25 +4,28 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
 import type { SconeControlSize } from "@/types/foundation";
 
+type SconeButtonVariant = "default" | "outline" | "secondary" | "ghost" | "destructive" | "link";
+type SconeButtonPrimitiveSize =
+    "default" | "xs" | "sm" | "lg" | "icon" | "icon-xs" | "icon-sm" | "icon-lg";
+
 export interface SconeButtonProps extends Omit<
-    React.ComponentPropsWithoutRef<typeof Button>,
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
     "size" | "aria-label"
 > {
     size?: SconeControlSize;
+    variant?: SconeButtonVariant | null;
+    asChild?: boolean;
     loading?: boolean;
     ariaLabel?: string;
 }
 
-const buttonSizeMap: Record<
-    SconeControlSize,
-    React.ComponentPropsWithoutRef<typeof Button>["size"]
-> = {
+const buttonSizeMap: Record<SconeControlSize, SconeButtonPrimitiveSize> = {
     sm: "sm",
     md: "default",
     lg: "lg",
 };
 
-export const SconeButton = React.forwardRef<React.ElementRef<typeof Button>, SconeButtonProps>(
+export const SconeButton = React.forwardRef<HTMLButtonElement, SconeButtonProps>(
     (
         {
             size = "md",

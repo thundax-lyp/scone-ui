@@ -9,8 +9,8 @@ import { getSconeControlStateProps, normalizeSconeAriaInvalid } from "./control"
 import { useSconeFieldContext } from "./field";
 
 export interface SconeCheckboxProps extends Omit<
-    React.ComponentPropsWithoutRef<typeof Checkbox>,
-    "checked" | "defaultChecked" | "onCheckedChange"
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    "checked" | "defaultChecked" | "onChange"
 > {
     checked?: boolean;
     defaultChecked?: boolean;
@@ -28,10 +28,7 @@ const checkboxSizeClassNames: Record<SconeControlSize, string> = {
     lg: "size-5",
 };
 
-export const SconeCheckbox = React.forwardRef<
-    React.ElementRef<typeof Checkbox>,
-    SconeCheckboxProps
->(
+export const SconeCheckbox = React.forwardRef<HTMLButtonElement, SconeCheckboxProps>(
     (
         {
             checked,
