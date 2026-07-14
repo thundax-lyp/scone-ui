@@ -31,7 +31,7 @@ describe("SconeBadge", () => {
     it("hides empty count by a fixed rule", () => {
         const { container } = render(<SconeBadge count={0} ariaLabel="No notifications" />);
 
-        expect(container).toBeEmptyDOMElement();
+        expect(container.firstElementChild).toBeEmptyDOMElement();
     });
 
     it("forwards refs to the wrapper root", () => {

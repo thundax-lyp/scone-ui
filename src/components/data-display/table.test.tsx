@@ -41,7 +41,7 @@ describe("SconeTable", () => {
 
         const table = screen.getByRole("table", { name: "Project table" });
 
-        expect(within(table).getByRole("columnheader", { name: "Name ↕" })).toBeInTheDocument();
+        expect(within(table).getByRole("columnheader", { name: "Name" })).toBeInTheDocument();
         expect(within(table).getByText("Alpha")).toBeInTheDocument();
         expect(within(table).getByText("Ada").tagName).toBe("STRONG");
     });

@@ -26,7 +26,7 @@ describe("SconeStatistic", () => {
     it("maps tone without calculating trend semantics", () => {
         render(<SconeStatistic title="Failure rate" value="2%" tone="danger" />);
 
-        expect(screen.getByText("2%")).toHaveClass("text-destructive");
+        expect(screen.getByText("2%").parentElement).toHaveClass("text-destructive");
     });
 
     it("forwards refs and className to the root", () => {

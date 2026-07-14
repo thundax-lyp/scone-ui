@@ -8,7 +8,7 @@ describe("SconeTag", () => {
     it("renders short text with a neutral tone by default", () => {
         render(<SconeTag>Draft</SconeTag>);
 
-        const tag = screen.getByText("Draft").closest("span");
+        const tag = screen.getByText("Draft").parentElement;
 
         expect(tag).toHaveClass("border-border", "bg-muted", "text-muted-foreground");
     });
@@ -16,7 +16,7 @@ describe("SconeTag", () => {
     it("maps semantic tone without embedding business vocabulary", () => {
         render(<SconeTag tone="success">Ready</SconeTag>);
 
-        expect(screen.getByText("Ready").closest("span")).toHaveClass("text-emerald-700");
+        expect(screen.getByText("Ready").parentElement).toHaveClass("text-emerald-700");
     });
 
     it("calls onClose from an accessible close button", () => {

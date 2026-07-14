@@ -35,7 +35,7 @@ const itemDensityClassNames: Record<SconeDensity, string> = {
     comfortable: "gap-2 p-4",
 };
 
-type DescriptionsStyle = React.CSSProperties & Record<`--scone-columns${string}`, number>;
+type DescriptionsStyle = React.CSSProperties & Record<`--dd-columns${string}`, number>;
 
 function getColumnsStyle(
     columns: number | ResponsiveValue<number> | undefined,
@@ -44,14 +44,14 @@ function getColumnsStyle(
     const resolved = columns ?? 3;
     const nextStyle: DescriptionsStyle = {
         ...style,
-        "--scone-columns": typeof resolved === "number" ? resolved : (resolved.sm ?? 1),
+        "--dd-columns": typeof resolved === "number" ? resolved : (resolved.sm ?? 1),
     };
 
     if (typeof resolved !== "number") {
-        nextStyle["--scone-columns-sm"] = resolved.sm ?? nextStyle["--scone-columns"];
-        nextStyle["--scone-columns-md"] = resolved.md ?? nextStyle["--scone-columns-sm"];
-        nextStyle["--scone-columns-lg"] = resolved.lg ?? nextStyle["--scone-columns-md"];
-        nextStyle["--scone-columns-xl"] = resolved.xl ?? nextStyle["--scone-columns-lg"];
+        nextStyle["--dd-columns-sm"] = resolved.sm ?? nextStyle["--dd-columns"];
+        nextStyle["--dd-columns-md"] = resolved.md ?? nextStyle["--dd-columns-sm"];
+        nextStyle["--dd-columns-lg"] = resolved.lg ?? nextStyle["--dd-columns-md"];
+        nextStyle["--dd-columns-xl"] = resolved.xl ?? nextStyle["--dd-columns-lg"];
     }
 
     return nextStyle;
@@ -78,7 +78,7 @@ export const SconeDescriptions = React.forwardRef<HTMLDivElement, SconeDescripti
             <dl
                 style={getColumnsStyle(columns, style)}
                 className={cn(
-                    "grid min-w-0 [grid-template-columns:repeat(var(--scone-columns),minmax(0,1fr))] sm:[grid-template-columns:repeat(var(--scone-columns-sm,var(--scone-columns)),minmax(0,1fr))] md:[grid-template-columns:repeat(var(--scone-columns-md,var(--scone-columns)),minmax(0,1fr))] lg:[grid-template-columns:repeat(var(--scone-columns-lg,var(--scone-columns)),minmax(0,1fr))] xl:[grid-template-columns:repeat(var(--scone-columns-xl,var(--scone-columns)),minmax(0,1fr))]",
+                    "grid min-w-0 [grid-template-columns:repeat(var(--dd-columns),minmax(0,1fr))] sm:[grid-template-columns:repeat(var(--dd-columns-sm,var(--dd-columns)),minmax(0,1fr))] md:[grid-template-columns:repeat(var(--dd-columns-md,var(--dd-columns)),minmax(0,1fr))] lg:[grid-template-columns:repeat(var(--dd-columns-lg,var(--dd-columns)),minmax(0,1fr))] xl:[grid-template-columns:repeat(var(--dd-columns-xl,var(--dd-columns)),minmax(0,1fr))]",
                     descriptionsDensityClassNames[density],
                 )}
             >

@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `06 src/components/data-display/timeline.tsx`：实现 Timeline 和公共导出
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DATA-DISPLAY-CLOSURE.md`
-    - 范围对象：`src/components/data-display/timeline.tsx`、`src/components/data-display/index.ts`、`src/index.ts`、`src/components/data-display/timeline.test.tsx`、`src/index.test.ts`
-    - 处理动作：实现 `SconeTimeline` 并汇总 Data Display 组件族和库级公共导出。
-    - 验收点：Timeline 覆盖 items/pending/reverse/onItemClick，导出测试证明只公开 Data Display 公共组件和公共类型。
-    - 重要度：10/10
-
 - [ ] `07 data-display verification`：运行 Data Display 闭环验证
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DATA-DISPLAY-CLOSURE.md`

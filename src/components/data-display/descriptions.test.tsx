@@ -30,9 +30,9 @@ describe("SconeDescriptions", () => {
 
         const list = container.querySelector("dl");
 
-        expect(list).toHaveStyle({ "--scone-columns-sm": "1" });
-        expect(list).toHaveStyle({ "--scone-columns-md": "2" });
-        expect(list).toHaveStyle({ "--scone-columns-lg": "3" });
+        expect(list).toHaveStyle({ "--dd-columns-sm": "1" });
+        expect(list).toHaveStyle({ "--dd-columns-md": "2" });
+        expect(list).toHaveStyle({ "--dd-columns-lg": "3" });
     });
 
     it("applies density, bordered item styling, span, and long text wrapping", () => {
