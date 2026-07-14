@@ -1,3 +1,4 @@
+export { ariaBoolean, ariaValue, hasAriaValue, mergeAriaDescribedBy, mergeIds } from "./lib/aria";
 export { cn } from "./lib/cn";
 export { composeRefs } from "./lib/compose-refs";
 export { useControllableState } from "./lib/use-controllable-state";

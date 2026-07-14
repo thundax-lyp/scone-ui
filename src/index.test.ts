@@ -1,6 +1,15 @@
 import { describe, expect, expectTypeOf, it } from "vitest";
 
-import { cn, composeRefs, useControllableState } from "./index";
+import {
+    ariaBoolean,
+    ariaValue,
+    cn,
+    composeRefs,
+    hasAriaValue,
+    mergeAriaDescribedBy,
+    mergeIds,
+    useControllableState,
+} from "./index";
 import type {
     Breakpoint,
     Key,
@@ -48,12 +57,22 @@ describe("public index exports", () => {
         expect(cn("px-2", "px-4")).toBe("px-4");
         expect(typeof composeRefs).toBe("function");
         expect(typeof useControllableState).toBe("function");
+        expect(mergeIds("label", "description")).toBe("label description");
+        expect(mergeAriaDescribedBy("description", "error")).toBe("description error");
+        expect(ariaBoolean(false)).toBeUndefined();
+        expect(hasAriaValue(0)).toBe(true);
+        expect(ariaValue("polite")).toBe("polite");
 
         const publicExports = await import("./index");
 
         expect(Object.keys(publicExports).sort()).toEqual([
+            "ariaBoolean",
+            "ariaValue",
             "cn",
             "composeRefs",
+            "hasAriaValue",
+            "mergeAriaDescribedBy",
+            "mergeIds",
             "useControllableState",
         ]);
     });

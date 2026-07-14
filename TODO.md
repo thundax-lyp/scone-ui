@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `9. aria-exports`：导出公共 ARIA helper
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`
-    - 范围对象：`src/index.ts`、`src/index.test.ts`、`src/lib/aria.ts`、`src/lib/aria.test.ts`
-    - 处理动作：从库级入口导出已经测试锁定的 ARIA helper。
-    - 验收点：`src/index.test.ts` 精确断言 ARIA helper 导出清单，且未导出 Field/Form 专属逻辑或私有 helper。
-    - 重要度：9/10
-
 - [ ] `10. verification`：运行 Foundation + Public API 最小验证
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`
