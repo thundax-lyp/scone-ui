@@ -32,7 +32,7 @@
 
 - 文档必须清晰、明确、可执行。
 - `docs/00-governance/` 只沉淀稳定规则，不记录任务执行过程。
-- 根目录 `README.md` 是随发布包分发的包首页；它必须按 npm 包消费者视角编写，优先说明安装、样式导入、公共 API 边界、包内文档和 license，不作为内部实现权威。
+- 根目录 `README.md` 是随发布包分发的独立 AI 入口文档；它必须按 AI、IDE Agent 和代码生成器视角编写，优先说明安装、样式导入、公共 API 边界、组件选择、AI Guide 和 license，不作为内部实现权威。
 - 根目录 `PACKAGE-AI-GUIDE.md` 是随发布包分发的独立 AI 使用入口；它必须与设计文档分开，并能脱离未发布的设计文档、RUNBOOK、TODO、PR 记录和源码路径被 AI 理解。
 - `docs/30-designs/` 承载专项设计和临时 RUNBOOK。
 - `docs/40-readiness/` 承载验证证据、覆盖度和收口状态。

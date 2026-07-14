@@ -37,7 +37,6 @@
         "dist/styles",
         "dist/types",
         "PACKAGE-AI-GUIDE.md",
-        "docs/10-specs",
         "README.md"
     ],
     "publishConfig": {
