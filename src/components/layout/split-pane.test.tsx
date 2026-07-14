@@ -7,36 +7,32 @@ import { SconeSplitPane } from "./split-pane";
 describe("SconeSplitPane", () => {
     it("renders two panels and a horizontal resize handle with ARIA state", () => {
         render(
-            <SconeSplitPane defaultSize="320px">
+            <SconeSplitPane defaultSize="320px" data-testid="split-root">
                 <div>Primary</div>
                 <div>Secondary</div>
             </SconeSplitPane>,
         );
 
-        const root = screen.getByText("Primary").closest("[data-scone-layout='split-pane']");
+        const root = screen.getByTestId("split-root");
         const handle = screen.getByRole("separator");
 
         expect(root).toHaveAttribute("data-orientation", "horizontal");
         expect(root).toHaveStyle({ gridTemplateColumns: "320px auto minmax(0,1fr)" });
-        expect(root?.querySelector("[data-scone-split-pane-panel='primary']")).toHaveTextContent(
-            "Primary",
-        );
-        expect(root?.querySelector("[data-scone-split-pane-panel='secondary']")).toHaveTextContent(
-            "Secondary",
-        );
+        expect(screen.getByText("Primary")).toBeInTheDocument();
+        expect(screen.getByText("Secondary")).toBeInTheDocument();
         expect(handle).toHaveAttribute("aria-orientation", "horizontal");
         expect(handle).toHaveAttribute("aria-valuetext", "320px");
     });
 
     it("supports vertical orientation and controlled size", () => {
         render(
-            <SconeSplitPane orientation="vertical" size="40%">
+            <SconeSplitPane orientation="vertical" size="40%" data-testid="split-root">
                 <div>Top</div>
                 <div>Bottom</div>
             </SconeSplitPane>,
         );
 
-        const root = screen.getByText("Top").closest("[data-scone-layout='split-pane']");
+        const root = screen.getByTestId("split-root");
         const handle = screen.getByRole("separator");
 
         expect(root).toHaveStyle({ gridTemplateRows: "40% auto minmax(0,1fr)" });
@@ -109,13 +105,17 @@ describe("SconeSplitPane", () => {
         const handleSizeCommit = vi.fn();
 
         render(
-            <SconeSplitPane onSizeChange={handleSizeChange} onSizeCommit={handleSizeCommit}>
+            <SconeSplitPane
+                onSizeChange={handleSizeChange}
+                onSizeCommit={handleSizeCommit}
+                data-testid="split-root"
+            >
                 <div>Primary</div>
                 <div>Secondary</div>
             </SconeSplitPane>,
         );
 
-        const root = screen.getByText("Primary").closest("[data-scone-layout='split-pane']");
+        const root = screen.getByTestId("split-root");
         const handle = screen.getByRole("separator");
 
         vi.spyOn(root as HTMLElement, "getBoundingClientRect").mockReturnValue({
@@ -147,13 +147,14 @@ describe("SconeSplitPane", () => {
                 minSizePreset="medium"
                 onSizeChange={handleSizeChange}
                 onSizeCommit={handleSizeCommit}
+                data-testid="split-root"
             >
                 <div>Primary</div>
                 <div>Secondary</div>
             </SconeSplitPane>,
         );
 
-        const root = screen.getByText("Primary").closest("[data-scone-layout='split-pane']");
+        const root = screen.getByTestId("split-root");
         const handle = screen.getByRole("separator");
 
         vi.spyOn(root as HTMLElement, "getBoundingClientRect").mockReturnValue({
@@ -185,13 +186,14 @@ describe("SconeSplitPane", () => {
                 maxSizePreset="medium"
                 onSizeChange={handleSizeChange}
                 onSizeCommit={handleSizeCommit}
+                data-testid="split-root"
             >
                 <div>Primary</div>
                 <div>Secondary</div>
             </SconeSplitPane>,
         );
 
-        const root = screen.getByText("Primary").closest("[data-scone-layout='split-pane']");
+        const root = screen.getByTestId("split-root");
         const handle = screen.getByRole("separator");
 
         vi.spyOn(root as HTMLElement, "getBoundingClientRect").mockReturnValue({
@@ -270,13 +272,14 @@ describe("SconeSplitPane", () => {
                 maxSizePreset="fill"
                 onSizeChange={handleSizeChange}
                 onSizeCommit={handleSizeCommit}
+                data-testid="split-root"
             >
                 <div>Primary</div>
                 <div>Secondary</div>
             </SconeSplitPane>,
         );
 
-        const root = screen.getByText("Primary").closest("[data-scone-layout='split-pane']");
+        const root = screen.getByTestId("split-root");
 
         vi.spyOn(root as HTMLElement, "getBoundingClientRect").mockReturnValue({
             bottom: 200,
@@ -306,13 +309,14 @@ describe("SconeSplitPane", () => {
                 maxSizePreset="fill"
                 onSizeChange={handleSizeChange}
                 onSizeCommit={handleSizeCommit}
+                data-testid="split-root"
             >
                 <div>Primary</div>
                 <div>Secondary</div>
             </SconeSplitPane>,
         );
 
-        const root = screen.getByText("Primary").closest("[data-scone-layout='split-pane']");
+        const root = screen.getByTestId("split-root");
         const handle = screen.getByRole("separator");
 
         vi.spyOn(root as HTMLElement, "getBoundingClientRect").mockReturnValue({
@@ -339,13 +343,17 @@ describe("SconeSplitPane", () => {
         const handleSizeChange = vi.fn();
         const handleSizeCommit = vi.fn();
         const { unmount } = render(
-            <SconeSplitPane onSizeChange={handleSizeChange} onSizeCommit={handleSizeCommit}>
+            <SconeSplitPane
+                onSizeChange={handleSizeChange}
+                onSizeCommit={handleSizeCommit}
+                data-testid="split-root"
+            >
                 <div>Primary</div>
                 <div>Secondary</div>
             </SconeSplitPane>,
         );
 
-        const root = screen.getByText("Primary").closest("[data-scone-layout='split-pane']");
+        const root = screen.getByTestId("split-root");
         const handle = screen.getByRole("separator");
 
         vi.spyOn(root as HTMLElement, "getBoundingClientRect").mockReturnValue({

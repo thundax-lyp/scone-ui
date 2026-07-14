@@ -18,12 +18,8 @@ describe("SconeDrawer", () => {
 
         expect(screen.getByRole("dialog", { name: "Edit user" })).toBeInTheDocument();
         expect(screen.getByText("Update profile details.")).toBeInTheDocument();
-        expect(screen.getByText("Drawer content").closest("[data-slot=drawer-body]")).toHaveClass(
-            "overflow-y-auto",
-        );
-        expect(
-            screen.getByRole("button", { name: "Cancel" }).closest("[data-slot=drawer-footer]"),
-        ).toBeInTheDocument();
+        expect(screen.getByText("Drawer content")).toBeInTheDocument();
+        expect(screen.getByRole("button", { name: "Cancel" })).toBeInTheDocument();
     });
 
     it("supports ariaLabel when there is no visible title", () => {

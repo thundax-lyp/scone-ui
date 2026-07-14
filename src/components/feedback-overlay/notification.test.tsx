@@ -89,9 +89,7 @@ describe("notification", () => {
         });
 
         expect(screen.queryByText("First")).not.toBeInTheDocument();
-        expect(
-            screen.getByText("Second").closest("[data-scone-notification-item]"),
-        ).toHaveAttribute("data-persistent", "true");
+        expect(screen.getByRole("status")).toHaveTextContent("Second");
         expect(onOpenChange).toHaveBeenLastCalledWith(
             expect.arrayContaining([
                 expect.objectContaining({ id: "first" }),

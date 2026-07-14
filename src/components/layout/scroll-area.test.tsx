@@ -7,14 +7,16 @@ import { SconeScrollArea } from "./scroll-area";
 describe("SconeScrollArea", () => {
     it("passes className to the root and viewportClassName to the viewport", () => {
         render(
-            <SconeScrollArea className="h-48 root-class" viewportClassName="viewport-class">
+            <SconeScrollArea
+                className="h-48 root-class"
+                viewportClassName="viewport-class"
+                data-testid="scroll-root"
+            >
                 <div>Scrollable content</div>
             </SconeScrollArea>,
         );
 
-        const root = screen
-            .getByText("Scrollable content")
-            .closest("[data-scone-layout='scroll-area']");
+        const root = screen.getByTestId("scroll-root");
         const viewport = root?.querySelector("[data-scone-scroll-area-viewport]");
 
         expect(root).toHaveClass("relative", "h-48", "root-class");
@@ -56,14 +58,12 @@ describe("SconeScrollArea", () => {
 
     it("keeps scroll behavior local to the component root", () => {
         render(
-            <SconeScrollArea className="h-32">
+            <SconeScrollArea className="h-32" data-testid="scroll-root">
                 <div>Local list</div>
             </SconeScrollArea>,
         );
 
-        expect(
-            screen.getByText("Local list").closest("[data-scone-layout='scroll-area']"),
-        ).toHaveClass("h-32");
+        expect(screen.getByTestId("scroll-root")).toHaveClass("h-32");
         expect(document.body).not.toHaveAttribute("data-scone-layout", "scroll-area");
     });
 });
