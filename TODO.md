@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `3-systematic-review-test-status`：收窄系统性审核测试维护状态
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-TEST-DOC-MAINTENANCE.md`
-    - 范围对象：`docs/40-readiness/SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 处理动作：删除已完全关闭的 demo copy 测试问题，并将测试内部标记耦合问题收窄到 layout / feedback-overlay 剩余范围。
-    - 验收点：问题清单索引、建议执行顺序、最终总结、`[P2] Some tests are tightly coupled to internal slot markup` 和 `[P3] Demo App test validates copy instead of library behavior` 只保留真实未关闭内容。
-    - 重要度：9/10
-
 - [ ] `4-implementation-coverage-test-evidence`：同步 Implementation Coverage 测试维护证据
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-TEST-DOC-MAINTENANCE.md`
