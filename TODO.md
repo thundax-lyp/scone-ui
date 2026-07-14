@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `20-pattern-filter-data-table`：20 审核 FilterBar 和 DataTable Pattern
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`src/patterns/filter-bar.tsx`、`src/patterns/data-table.tsx`、`src/patterns/filter-bar.test.tsx`、`src/patterns/data-table.test.tsx`
-    - 处理动作：检查筛选状态、表格状态归属、selection 注入、分页入口和复杂度。
-    - 验收点：输出 FilterBar/DataTable 是否存在状态事实源冲突、API 过宽或复杂控制流的结论。
-    - 重要度：10/10
-
 - [ ] `21-ui-vendored-boundary`：21 审核 shadcn/Radix vendored 边界
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`

@@ -633,6 +633,34 @@ Recent evidence before this review branch:
 * **功能风险**：低 to 中；doc-only correction is low risk, implementation adds API surface.
 * **置信度**：高
 
+## 20 FilterBar And DataTable Patterns
+
+### Evidence
+
+- `FilterBar.Root` owns search/filter/expanded state boundaries and provides compound parts through context.
+- `DataTable.Root` provides density, selection, and pagination context; `TableRegion` composes `SconeTable`; `Pagination` composes `SconePagination`.
+- `DataTable` keeps sorting/filtering request logic out of the pattern and does not import route/request/store code.
+- Tests cover FilterBar controlled/uncontrolled search and expanded state, built-in and compound actions, DataTable selection injection, bulk actions, state priority, children escape hatch, and pagination context/prop override.
+
+### Assessment
+
+- DataTable is not a monolithic request table; state ownership remains mostly with callers.
+- Selection injection is isolated to `DataTable.TableRegion`, leaving base `SconeTable` simpler.
+- FilterBar has an overloaded `filters` prop and one hidden-state edge case.
+
+### Candidate Finding
+
+### [P2] FilterBar can keep hidden search state
+
+* **位置**：`src/patterns/filter-bar.tsx`
+* **类别**：状态 / API
+* **问题**：The built-in search input renders only when `search`, `searchValue`, or `onSearchChange` is provided. `defaultSearchValue` alone initializes state but does not render the search control.
+* **影响**：A default search value can be included in `onApply` while no search UI is visible, which makes the active state hard to understand.
+* **证据**：`shouldRenderSearch` ignores `defaultSearchValue`; `useControllableState` still initializes `effectiveSearchValue` from `defaultSearchValue`; `onApply` always includes `searchValue`.
+* **建议**：Include `defaultSearchValue` in `shouldRenderSearch`, or avoid initializing search state when no search UI is rendered.
+* **功能风险**：低；could add a visible search input in a currently hidden edge case.
+* **置信度**：高
+
 ## 09 Form Layout Helpers
 
 ### Evidence
