@@ -255,12 +255,8 @@ describe("public index exports", () => {
         expect(typeof DataTable.Pagination).toBe("function");
 
         expectTypeOf<SconePaginationProps["state"]>().toEqualTypeOf<SconePaginationState>();
-        expectTypeOf<AppShellSidebarProps["onCollapsedChange"]>().toEqualTypeOf<
-            ((collapsed: boolean) => void) | undefined
-        >();
-        expectTypeOf<AppShellAsideProps["onOpenChange"]>().toEqualTypeOf<
-            ((open: boolean) => void) | undefined
-        >();
+        expectTypeOf<AppShellSidebarProps["collapsed"]>().toEqualTypeOf<boolean | undefined>();
+        expectTypeOf<AppShellAsideProps["open"]>().toEqualTypeOf<boolean | undefined>();
         expectTypeOf<PageRootProps["maxWidth"]>().toEqualTypeOf<
             "narrow" | "content" | "wide" | "full" | undefined
         >();
@@ -270,6 +266,7 @@ describe("public index exports", () => {
             "start" | "center" | "end" | "between" | undefined
         >();
         expectTypeOf<SectionRootProps["density"]>().toEqualTypeOf<SconeDensity | undefined>();
+        expectTypeOf<SectionRootProps["title"]>().toEqualTypeOf<React.ReactNode>();
         expectTypeOf<SectionHeaderProps["actions"]>().toEqualTypeOf<React.ReactNode>();
         expectTypeOf<SectionTitleProps["level"]>().toEqualTypeOf<2 | 3 | 4 | undefined>();
         expectTypeOf<SectionDescriptionProps["children"]>().toEqualTypeOf<

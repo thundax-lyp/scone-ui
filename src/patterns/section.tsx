@@ -3,7 +3,7 @@ import * as React from "react";
 import { cn } from "@/lib/cn";
 import type { SconeDensity } from "@/types/foundation";
 
-export interface SectionRootProps extends React.HTMLAttributes<HTMLElement> {
+export interface SectionRootProps extends Omit<React.HTMLAttributes<HTMLElement>, "title"> {
     children: React.ReactNode;
     density?: SconeDensity;
     title?: React.ReactNode;
