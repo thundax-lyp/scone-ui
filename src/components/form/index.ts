@@ -1,3 +1,6 @@
+export { SconeButton } from "./button";
+export type { SconeButtonProps } from "./button";
+
 export { SconeForm, useSconeFormContext } from "./form";
 export type { SconeFormContextValue, SconeFormProps } from "./form";
 

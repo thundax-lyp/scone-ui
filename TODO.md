@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `02 button`：Button 控件闭环
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`
-    - 范围对象：`src/components/form/button.tsx`、`src/components/form/button.test.tsx`、`src/components/form/index.ts`
-    - 处理动作：实现 `SconeButton` 的 loading、disabled、ariaLabel、asChild、ref 和 className 行为。
-    - 验收点：点击、loading 阻止重复触发、asChild 透传和可访问名称测试通过。
-    - 重要度：9/10
-
 - [ ] `03 text-inputs`：基础文本输入闭环
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FORM-FAMILY-CLOSURE.md`
