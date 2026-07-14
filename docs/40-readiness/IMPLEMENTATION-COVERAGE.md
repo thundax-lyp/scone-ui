@@ -431,7 +431,7 @@
 - `pnpm format`：通过。
 - `pnpm lint`：通过；compound pattern 文件保留 `react-refresh/only-export-components` warning，退出码为 0。
 - `pnpm build`：通过。
-- `pnpm test`：通过，68 个 test files、241 个 tests。
+- `pnpm test`：通过，69 个 test files、253 个 tests。
 - `pnpm typecheck`：通过。
 
 说明：

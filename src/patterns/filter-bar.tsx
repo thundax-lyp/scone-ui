@@ -168,8 +168,12 @@ function FilterBarRoot({
                 onApply?.({ searchValue: effectiveSearchValue, filters: effectiveFilters });
                 break;
             case "reset":
-                setSearchValue("");
-                setFilters({});
+                if (searchValue === undefined) {
+                    setSearchValue("");
+                }
+                if (controlledFilters === undefined) {
+                    setFilters({});
+                }
                 onReset?.();
                 break;
             case "toggle":
