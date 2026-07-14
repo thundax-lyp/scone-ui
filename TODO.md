@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `3.2 Compact Toolbar`：补齐组合 layout root attrs
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
-    - 范围对象：`src/components/layout/compact.tsx`、`src/components/layout/compact.test.tsx`、`src/components/layout/toolbar.tsx`、`src/components/layout/toolbar.test.tsx`
-    - 处理动作：确认并测试 `SconeCompactProps` 和 `SconeToolbarProps` 的 root HTML attributes passthrough。
-    - 验收点：Compact 和 Toolbar 的 root `div` 接收 `ref`、`style`、`id`、`data-*`、`aria-*`、`role`，Toolbar `start`、`end`、`children` 不吞 root attrs。
-    - 重要度：8/10
-
 - [ ] `3.3 ScrollArea Separator`：补齐 Radix layout root attrs
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
