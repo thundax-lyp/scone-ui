@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `11 feat/feedback-overlay-loop`：同步 main 分支代码
-    - 任务类型：执行任务
-    - 依据文档：`docs/00-governance/TODO-RULES.md`
-    - 范围对象：`feat/feedback-overlay-loop`、`main`
-    - 处理动作：在实现与导出完成后同步 `main` 最新代码并处理冲突。
-    - 验收点：当前分支包含 `main` 最新提交，Feedback / Overlay 相关测试仍通过。
-    - 重要度：9/10
-
 - [ ] `12 docs/40-readiness/IMPLEMENTATION-COVERAGE.md`：更新实现覆盖记录
     - 任务类型：执行任务
     - 依据文档：`docs/00-governance/TODO-RULES.md`
