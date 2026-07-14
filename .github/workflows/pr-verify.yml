@@ -1,0 +1,88 @@
+name: PR Verify
+
+on:
+    pull_request:
+        branches:
+            - main
+    workflow_dispatch:
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+    cancel-in-progress: true
+
+permissions:
+    contents: read
+
+jobs:
+    verify-governance:
+        name: Verify Governance
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Verify governance files
+              run: |
+                  test -f AGENTS.md
+                  test -f docs/AGENTS.md
+                  test -f docs/00-governance/DOCUMENT-RULES.md
+                  test -f docs/00-governance/TODO-RULES.md
+                  test -f docs/00-governance/PR-RULES.md
+                  test -f .github/pull_request_template.md
+                  test -f .github/workflows/pr-verify.yml
+
+                  if find docs -name '*.md' -print | grep -q ' '; then
+                    echo "Document filenames must not contain spaces" >&2
+                    exit 1
+                  fi
+
+    verify-frontend:
+        name: Verify Frontend
+        runs-on: ubuntu-latest
+        timeout-minutes: 20
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "22"
+
+            - name: Enable Corepack
+              run: corepack enable
+
+            - name: Resolve pnpm store path
+              id: pnpm-store
+              run: echo "path=$(pnpm store path --silent)" >> "$GITHUB_OUTPUT"
+
+            - name: Cache pnpm store
+              uses: actions/cache@v4
+              with:
+                  path: ${{ steps.pnpm-store.outputs.path }}
+                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pnpm-store-
+
+            - name: Verify package manifests
+              run: |
+                  node -e "JSON.parse(require('fs').readFileSync('package.json', 'utf8'))"
+                  node -e "JSON.parse(require('fs').readFileSync('tsconfig.json', 'utf8'))"
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Verify lint
+              run: pnpm run lint
+
+            - name: Verify types
+              run: pnpm run typecheck
+
+            - name: Verify tests
+              run: pnpm run test
+
+            - name: Verify build
+              run: pnpm run build
