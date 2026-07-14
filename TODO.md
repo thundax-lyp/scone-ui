@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `4.9 navigation cn imports batch 2`：统一 navigation 第二批 `cn` 导入
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
-    - 范围对象：`src/components/navigation/menu.tsx`、`src/components/navigation/segmented.tsx`、`src/components/navigation/tabs.tsx`、`src/components/navigation/tooltip.tsx`、`src/components/navigation/tree.tsx`
-    - 处理动作：将本批 navigation 文件中的 `@/lib/utils` 导入改为 `@/lib/cn`。
-    - 验收点：本批文件不再引用 `@/lib/utils`，menu、segmented、tabs、tooltip 和 tree 交互不变。
-    - 重要度：7/10
-
 - [ ] `4.10 media cn imports`：统一 media `cn` 导入
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`

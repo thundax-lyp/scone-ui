@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ChevronRightIcon } from "lucide-react";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 import { useControllableState } from "@/lib/use-controllable-state";
 import type { Key } from "@/types/foundation";
 
