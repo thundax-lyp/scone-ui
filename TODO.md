@@ -10,14 +10,6 @@
 
 ## 当前任务项
 
-- [ ] `3. src/patterns/data-table.tsx`：实现 DataTable Root、FilterBar slot、Toolbar 和 BulkActions
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DATA-TABLE-PAGINATION-PATTERN.md`
-    - 范围对象：`src/patterns/data-table.tsx`、`src/patterns/data-table.test.tsx`、`src/patterns/index.ts`
-    - 处理动作：实现 `DataTable.Root/FilterBar/Toolbar/BulkActions` 和 `DataTableAction`。
-    - 验收点：FilterBar 只渲染 slot，Toolbar 复用 `SconeToolbar`，action 按钮可点击/禁用，BulkActions 根据 selected count 展示并可清空选择。
-    - 重要度：10/10
-
 - [ ] `4. src/patterns/data-table.tsx`：实现 TableRegion 和 DataTable.Pagination
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DATA-TABLE-PAGINATION-PATTERN.md`
