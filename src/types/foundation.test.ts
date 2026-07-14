@@ -11,6 +11,9 @@ import type {
     SconeDensity,
     SconeOption,
     SconeOrientation,
+    SconePaginationChangeReason,
+    SconePaginationState,
+    SconeRowSelection,
     SconeSide,
     SconeSpacingToken,
     SconeStatus,
@@ -36,6 +39,7 @@ describe("foundation types", () => {
         expectTypeOf<OverlayCloseReason>().toEqualTypeOf<
             "escape" | "outside" | "closeButton" | "footerAction" | "programmatic"
         >();
+        expectTypeOf<SconePaginationChangeReason>().toEqualTypeOf<"page" | "pageSize">();
     });
 
     it("keeps ResponsiveValue object-only for breakpoints", () => {
@@ -65,6 +69,24 @@ describe("foundation types", () => {
             disabled?: boolean;
             icon?: React.ReactNode;
             description?: React.ReactNode;
+        }>();
+    });
+
+    it("keeps pagination and row selection bridge fields stable", () => {
+        expectTypeOf<SconePaginationState>().toEqualTypeOf<{
+            page: number;
+            pageSize: number;
+            total: number;
+        }>();
+        expectTypeOf<SconeRowSelection<{ id: string }>>().toEqualTypeOf<{
+            selectedRowKeys: Key[];
+            onChange?: ((keys: Key[], rows: { id: string }[]) => void) | undefined;
+            getCheckboxProps?:
+                | ((record: { id: string }) => {
+                      disabled?: boolean;
+                      ariaLabel?: string;
+                  })
+                | undefined;
         }>();
     });
 });

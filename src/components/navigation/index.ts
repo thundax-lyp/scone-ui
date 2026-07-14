@@ -35,3 +35,5 @@ export type {
     SconeTreeProps,
     SconeTreeSelectInfo,
 } from "./tree";
+export { SconePagination } from "./pagination";
+export type { SconePaginationProps } from "./pagination";
