@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `4-implementation-coverage-test-evidence`：同步 Implementation Coverage 测试维护证据
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-TEST-DOC-MAINTENANCE.md`
-    - 范围对象：`docs/40-readiness/IMPLEMENTATION-COVERAGE.md`
-    - 处理动作：记录本批次 Pattern / App 测试维护验证证据，并保留 layout / feedback-overlay 测试耦合剩余项。
-    - 验收点：`Verification Evidence Summary` 包含实际运行命令和结果，`Pending Implementation Work` 不再把 Pattern / App 写成未关闭范围。
-    - 重要度：9/10
-
 - [ ] `5-runbook-cleanup`：清理临时 RUNBOOK
     - 任务类型：执行任务
     - 依据文档：`docs/00-governance/DOCUMENT-RULES.md`、`docs/30-designs/RUNBOOK-TEST-DOC-MAINTENANCE.md`
