@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `14 docs/40-readiness`：更新 Implementation Coverage 和系统评审
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`
-    - 范围对象：`docs/40-readiness/IMPLEMENTATION-COVERAGE.md`、`docs/40-readiness/SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 处理动作：同步 readiness 的 remediation 口径，并删除或收窄已经完全处理的系统评审 finding。
-    - 验收点：`IMPLEMENTATION-COVERAGE.md` 明确覆盖完成不等于无 remediation，系统评审不保留已完全处理章节。
-    - 重要度：10/10
-
 - [ ] `15 docs/30-designs/runbook cleanup`：完成收口验证并清理 RUNBOOK
     - 任务类型：执行任务
     - 依据文档：`docs/00-governance/TODO-RULES.md`、`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`
