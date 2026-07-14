@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `2. foundation-types`：落实 Foundation 公共类型
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`
-    - 范围对象：`src/types/foundation.ts`、`src/types/foundation.test.ts`
-    - 处理动作：定义 RUNBOOK 指定的 Foundation 类型和接口字段。
-    - 验收点：`Key`、`Breakpoint`、`ResponsiveValue<T>`、`SconeTone`、`SconeSpacingToken`、`SconeControlSize`、`SconeDensity`、`SconeOrientation`、`SconeAlign`、`SconeSide`、`SconeStatus`、`OverlayCloseReason`、`SconeOption<Value = string>`、`SconeBaseItem` 字段和值域与 RUNBOOK 一致。
-    - 重要度：10/10
-
 - [ ] `3. cn-utility`：收敛 className 合并工具
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`
