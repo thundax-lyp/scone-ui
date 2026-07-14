@@ -42,5 +42,6 @@ FilterBar 是列表页筛选 Pattern，不是字段状态库。
 
 - 简单筛选优先横向排布，窄屏允许换行。
 - 超过 3-5 个筛选项时使用展开区或 Drawer recipe。
+- `defaultSearchValue` 会渲染内置 search input；提交的 `searchValue` 必须来自可见 search input，不保留不可见 search state。
 - `onApply` 和 `onReset` 属于 Pattern 回调，不进入基础 input/select。
 - 筛选表单不使用完整编辑表单的提交区样式。

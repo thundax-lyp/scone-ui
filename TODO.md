@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `13 src/patterns/filter-bar`：修复 FilterBar hidden search state
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`
-    - 范围对象：`src/patterns/filter-bar.tsx`、`src/patterns/filter-bar.test.tsx`、`docs/10-specs/patterns/FILTER-BAR.md`
-    - 处理动作：让 `defaultSearchValue` 触发 built-in search input 渲染并参与可见输入提交。
-    - 验收点：只传 `defaultSearchValue` 时 search input 可见，用户修改后点击 apply 会提交可见 search value。
-    - 重要度：8/10
-
 - [ ] `14 docs/40-readiness`：更新 Implementation Coverage 和系统评审
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FEEDBACK-NAVIGATION-HARDENING.md`

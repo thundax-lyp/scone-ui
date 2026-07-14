@@ -91,15 +91,21 @@ function isFilterState(filters: FilterBarRootProps["filters"]): filters is Filte
 function shouldRenderSearch({
     search,
     searchValue,
+    defaultSearchValue,
     onSearchChange,
-}: Pick<FilterBarRootProps, "search" | "searchValue" | "onSearchChange">) {
-    return search !== undefined || searchValue !== undefined || onSearchChange !== undefined;
+}: Pick<FilterBarRootProps, "search" | "searchValue" | "defaultSearchValue" | "onSearchChange">) {
+    return (
+        search !== undefined ||
+        searchValue !== undefined ||
+        defaultSearchValue !== undefined ||
+        onSearchChange !== undefined
+    );
 }
 
 function FilterBarRoot({
     search,
     searchValue,
-    defaultSearchValue = "",
+    defaultSearchValue,
     onSearchChange,
     searchPlaceholder = "Search",
     filters,
@@ -126,7 +132,7 @@ function FilterBarRoot({
     const controlledFilters = isFilterState(filters) ? filters : undefined;
     const [effectiveSearchValue = "", setSearchValue] = useControllableState({
         value: searchValue,
-        defaultValue: defaultSearchValue,
+        defaultValue: defaultSearchValue ?? "",
         onValueChange: onSearchChange,
     });
     const [effectiveFilters = {}, setFilters] = useControllableState<FilterBarFilters>({
@@ -141,7 +147,12 @@ function FilterBarRoot({
     });
     const hasExpandedContent = expandedContent !== undefined && expandedContent !== null;
     const hasActions = onApply !== undefined || onReset !== undefined;
-    const rendersSearch = shouldRenderSearch({ search, searchValue, onSearchChange });
+    const rendersSearch = shouldRenderSearch({
+        search,
+        searchValue,
+        defaultSearchValue,
+        onSearchChange,
+    });
 
     const contextValue = React.useMemo<FilterBarContextValue>(
         () => ({
