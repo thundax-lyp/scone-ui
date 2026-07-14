@@ -2,30 +2,30 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready |
-| Layer | Component |
+| Field     | Value                                                    |
+| --------- | -------------------------------------------------------- |
+| Status    | Ready                                                    |
+| Layer     | Component                                                |
 | Authority | [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) |
 
 源策略、导出状态和跨组件词汇以 [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) 与 [`FOUNDATIONS-SPEC.md`](../../FOUNDATIONS-SPEC.md) 为准。
 
 密码输入。
 
-| Prop                     | 类型                      | 说明                  |
-| ------------------------ | ------------------------- | --------------------- |
-| `value` / `defaultValue` | `string`                  | 密码值。              |
-| `onValueChange`          | `(value: string) => void` | 值变化。              |
-| `visible` / `defaultVisible` | `boolean`             | 密码是否可见。        |
-| `onVisibleChange`        | `(visible: boolean) => void` | 可见状态变化。    |
-| `placeholder`            | `string`                  | 占位说明。            |
-| `autoComplete`           | `string`                  | 原生自动完成策略。    |
-| `visibilityToggle`       | `boolean`                 | 是否允许显示/隐藏。   |
-| `disabled`               | `boolean`                 | 禁用。                |
-| `readOnly`               | `boolean`                 | 只读。                |
-| `size`                   | `"sm" \| "md" \| "lg"`    | 控件尺寸。            |
-| `ariaLabel`              | `string`                  | 无可见 label 时必填。 |
-| `className`              | `string`                  | 样式。                |
+| Prop                         | 类型                         | 说明                  |
+| ---------------------------- | ---------------------------- | --------------------- |
+| `value` / `defaultValue`     | `string`                     | 密码值。              |
+| `onValueChange`              | `(value: string) => void`    | 值变化。              |
+| `visible` / `defaultVisible` | `boolean`                    | 密码是否可见。        |
+| `onVisibleChange`            | `(visible: boolean) => void` | 可见状态变化。        |
+| `placeholder`                | `string`                     | 占位说明。            |
+| `autoComplete`               | `string`                     | 原生自动完成策略。    |
+| `visibilityToggle`           | `boolean`                    | 是否允许显示/隐藏。   |
+| `disabled`                   | `boolean`                    | 禁用。                |
+| `readOnly`                   | `boolean`                    | 只读。                |
+| `size`                       | `"sm" \| "md" \| "lg"`       | 控件尺寸。            |
+| `ariaLabel`                  | `string`                     | 无可见 label 时必填。 |
+| `className`                  | `string`                     | 样式。                |
 
 ## Usage
 

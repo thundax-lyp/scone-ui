@@ -2,10 +2,10 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready Boundary |
-| Layer | Recipe |
+| Field     | Value                       |
+| --------- | --------------------------- |
+| Status    | Ready Boundary              |
+| Layer     | Recipe                      |
 | Authority | [`README.md`](../README.md) |
 
 Recipe 不导出独立 `Scone*` 组件；按本文档组合底层组件并验证边界。
@@ -14,14 +14,14 @@ Recipe 不导出独立 `Scone*` 组件；按本文档组合底层组件并验证
 
 Recipe API：
 
-| 字段          | 类型            | 说明       |
-| ------------- | --------------- | ---------- |
-| `tone`        | SconeTone | 结果语义。 |
-| `title`       | `ReactNode`     | 结果标题。 |
-| `description` | `ReactNode`     | 结果说明。 |
-| `icon`        | `ReactNode`     | 可选图标。 |
-| `actions`     | `ReactNode`     | 操作区。   |
-| `className`   | `string`        | 样式。     |
+| 字段          | 类型        | 说明       |
+| ------------- | ----------- | ---------- |
+| `tone`        | SconeTone   | 结果语义。 |
+| `title`       | `ReactNode` | 结果标题。 |
+| `description` | `ReactNode` | 结果说明。 |
+| `icon`        | `ReactNode` | 可选图标。 |
+| `actions`     | `ReactNode` | 操作区。   |
+| `className`   | `string`    | 样式。     |
 
 ## Usage
 

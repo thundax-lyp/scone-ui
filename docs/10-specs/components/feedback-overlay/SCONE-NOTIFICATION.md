@@ -2,10 +2,10 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready |
-| Layer | Component |
+| Field     | Value                                                    |
+| --------- | -------------------------------------------------------- |
+| Status    | Ready                                                    |
+| Layer     | Component                                                |
 | Authority | [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) |
 
 源策略、导出状态和跨组件词汇以 [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) 与 [`FOUNDATIONS-SPEC.md`](../../FOUNDATIONS-SPEC.md) 为准。
@@ -14,11 +14,11 @@
 
 组件 API：
 
-| Prop         | 类型                  | 说明         |
-| ------------ | --------------------- | ------------ |
-| `children`   | `ReactNode`           | provider。   |
-| `placement`  | NotificationPlacement | 展示位置。   |
-| `maxVisible` | `number`              | 最大可见数。 |
+| Prop           | 类型                                       | 说明               |
+| -------------- | ------------------------------------------ | ------------------ |
+| `children`     | `ReactNode`                                | provider。         |
+| `placement`    | NotificationPlacement                      | 展示位置。         |
+| `maxVisible`   | `number`                                   | 最大可见数。       |
 | `onOpenChange` | `(items: SconeNotificationItem[]) => void` | 当前通知队列变化。 |
 
 Service API：

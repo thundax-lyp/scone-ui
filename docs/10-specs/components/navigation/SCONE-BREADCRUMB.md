@@ -2,24 +2,24 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready |
-| Layer | Component |
+| Field     | Value                                                    |
+| --------- | -------------------------------------------------------- |
+| Status    | Ready                                                    |
+| Layer     | Component                                                |
 | Authority | [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) |
 
 源策略、导出状态和跨组件词汇以 [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) 与 [`FOUNDATIONS-SPEC.md`](../../FOUNDATIONS-SPEC.md) 为准。
 
 层级位置导航，用于 PageHeader 或详情页上方。
 
-| Prop        | 类型                    | 说明         |
-| ----------- | ----------------------- | ------------ |
-| `items`     | `SconeBreadcrumbItem[]` | 路径项。     |
-| `separator` | `ReactNode`             | 分隔符。     |
-| `maxItems`  | `number`                | 折叠阈值。   |
+| Prop          | 类型                                  | 说明         |
+| ------------- | ------------------------------------- | ------------ |
+| `items`       | `SconeBreadcrumbItem[]`               | 路径项。     |
+| `separator`   | `ReactNode`                           | 分隔符。     |
+| `maxItems`    | `number`                              | 折叠阈值。   |
 | `onItemClick` | `(item: SconeBreadcrumbItem) => void` | 点击路径项。 |
-| `ariaLabel` | `string`                | 可访问名称。 |
-| `className` | `string`                | 样式。       |
+| `ariaLabel`   | `string`                              | 可访问名称。 |
+| `className`   | `string`                              | 样式。       |
 
 ## Usage
 

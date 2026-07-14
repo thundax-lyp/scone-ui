@@ -2,30 +2,30 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready |
-| Layer | Component |
+| Field     | Value                                                    |
+| --------- | -------------------------------------------------------- |
+| Status    | Ready                                                    |
+| Layer     | Component                                                |
 | Authority | [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) |
 
 源策略、导出状态和跨组件词汇以 [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) 与 [`FOUNDATIONS-SPEC.md`](../../FOUNDATIONS-SPEC.md) 为准。
 
 层级数据展示和选择，用于权限树、分类树、目录树和可展开层级列表。
 
-| Prop                  | 类型                                                               | 说明         |
-| --------------------- | ------------------------------------------------------------------ | ------------ |
-| `treeData`            | `SconeTreeNode[]`                                                  | 节点数据。   |
-| `selectedKeys` / `defaultSelectedKeys` | `Key[]`                                            | 选中节点。   |
-| `checkedKeys` / `defaultCheckedKeys`   | `Key[]`                                            | 勾选节点。   |
-| `expandedKeys` / `defaultExpandedKeys` | `Key[]`                                            | 展开节点。   |
-| `checkable`           | `boolean`                                                          | 是否可勾选。 |
-| `selectable`          | `boolean`                                                          | 是否可选择。 |
-| `multiple`            | `boolean`                                                          | 是否允许多选。 |
-| `onSelect`            | `(keys: Key[], info: { node: SconeTreeNode; selected: boolean }) => void` | 选择变化。 |
-| `onCheck`             | `(keys: Key[], info: { node: SconeTreeNode; checked: boolean }) => void` | 勾选变化。 |
-| `onExpand`            | `(keys: Key[], info: { node: SconeTreeNode; expanded: boolean }) => void` | 展开变化。 |
-| `ariaLabel`           | `string`                                                           | 可访问名称。 |
-| `className`           | `string`                                                           | 样式。       |
+| Prop                                   | 类型                                                                      | 说明           |
+| -------------------------------------- | ------------------------------------------------------------------------- | -------------- |
+| `treeData`                             | `SconeTreeNode[]`                                                         | 节点数据。     |
+| `selectedKeys` / `defaultSelectedKeys` | `Key[]`                                                                   | 选中节点。     |
+| `checkedKeys` / `defaultCheckedKeys`   | `Key[]`                                                                   | 勾选节点。     |
+| `expandedKeys` / `defaultExpandedKeys` | `Key[]`                                                                   | 展开节点。     |
+| `checkable`                            | `boolean`                                                                 | 是否可勾选。   |
+| `selectable`                           | `boolean`                                                                 | 是否可选择。   |
+| `multiple`                             | `boolean`                                                                 | 是否允许多选。 |
+| `onSelect`                             | `(keys: Key[], info: { node: SconeTreeNode; selected: boolean }) => void` | 选择变化。     |
+| `onCheck`                              | `(keys: Key[], info: { node: SconeTreeNode; checked: boolean }) => void`  | 勾选变化。     |
+| `onExpand`                             | `(keys: Key[], info: { node: SconeTreeNode; expanded: boolean }) => void` | 展开变化。     |
+| `ariaLabel`                            | `string`                                                                  | 可访问名称。   |
+| `className`                            | `string`                                                                  | 样式。         |
 
 ## Usage
 

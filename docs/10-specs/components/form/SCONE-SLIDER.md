@@ -2,26 +2,26 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready |
-| Layer | Component |
+| Field     | Value                                                    |
+| --------- | -------------------------------------------------------- |
+| Status    | Ready                                                    |
+| Layer     | Component                                                |
 | Authority | [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) |
 
 源策略、导出状态和跨组件词汇以 [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) 与 [`FOUNDATIONS-SPEC.md`](../../FOUNDATIONS-SPEC.md) 为准。
 
 范围或数值滑杆，用于可视化调节低风险数值。
 
-| Prop                     | 类型                        | 说明         |
-| ------------------------ | --------------------------- | ------------ |
-| `value` / `defaultValue` | `number[]`                  | 当前值。     |
-| `onValueChange`          | `(value: number[]) => void` | 拖动变化。   |
+| Prop                     | 类型                        | 说明                     |
+| ------------------------ | --------------------------- | ------------------------ |
+| `value` / `defaultValue` | `number[]`                  | 当前值。                 |
+| `onValueChange`          | `(value: number[]) => void` | 拖动变化。               |
 | `onValueCommit`          | `(value: number[]) => void` | 拖动结束或键盘调整完成。 |
-| `min` / `max`            | `number`                    | 范围。       |
-| `step`                   | `number`                    | 步进。       |
-| `disabled`               | `boolean`                   | 禁用。       |
-| `ariaLabel`              | `string`                    | 可访问名称。 |
-| `className`              | `string`                    | 样式。       |
+| `min` / `max`            | `number`                    | 范围。                   |
+| `step`                   | `number`                    | 步进。                   |
+| `disabled`               | `boolean`                   | 禁用。                   |
+| `ariaLabel`              | `string`                    | 可访问名称。             |
+| `className`              | `string`                    | 样式。                   |
 
 ## Usage
 

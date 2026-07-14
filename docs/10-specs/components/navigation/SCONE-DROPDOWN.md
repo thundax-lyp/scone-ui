@@ -2,28 +2,28 @@
 
 ## Metadata
 
-| Field | Value |
-| ----- | ----- |
-| Status | Ready |
-| Layer | Component |
+| Field     | Value                                                    |
+| --------- | -------------------------------------------------------- |
+| Status    | Ready                                                    |
+| Layer     | Component                                                |
 | Authority | [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) |
 
 源策略、导出状态和跨组件词汇以 [`COMPONENT-SELECTION.md`](../../COMPONENT-SELECTION.md) 与 [`FOUNDATIONS-SPEC.md`](../../FOUNDATIONS-SPEC.md) 为准。
 
 动作菜单和更多操作入口。Dropdown 执行动作，不表达表单值。
 
-| Prop        | 类型                                     | 说明                         |
-| ----------- | ---------------------------------------- | ---------------------------- |
-| `trigger`   | `ReactNode`                              | 触发器。                     |
-| `items`     | `SconeActionItem[]`                      | 简单动作项 helper。          |
-| `children`  | `ReactNode`                              | DropdownMenu compound 内容。 |
-| `open` / `defaultOpen` | `boolean`                      | 打开状态。                   |
-| `onOpenChange` | `(open: boolean) => void`             | 打开状态变化。               |
-| `onSelect`  | `(item: SconeActionItem) => void`        | 选择 helper item。           |
-| `align`     | `"start" \| "center" \| "end"`           | 对齐。                       |
-| `side`      | `"top" \| "right" \| "bottom" \| "left"` | 出现方向。                   |
-| `modal`     | `boolean`                                | 是否 modal 行为。            |
-| `className` | `string`                                 | 样式。                       |
+| Prop                   | 类型                                     | 说明                         |
+| ---------------------- | ---------------------------------------- | ---------------------------- |
+| `trigger`              | `ReactNode`                              | 触发器。                     |
+| `items`                | `SconeActionItem[]`                      | 简单动作项 helper。          |
+| `children`             | `ReactNode`                              | DropdownMenu compound 内容。 |
+| `open` / `defaultOpen` | `boolean`                                | 打开状态。                   |
+| `onOpenChange`         | `(open: boolean) => void`                | 打开状态变化。               |
+| `onSelect`             | `(item: SconeActionItem) => void`        | 选择 helper item。           |
+| `align`                | `"start" \| "center" \| "end"`           | 对齐。                       |
+| `side`                 | `"top" \| "right" \| "bottom" \| "left"` | 出现方向。                   |
+| `modal`                | `boolean`                                | 是否 modal 行为。            |
+| `className`            | `string`                                 | 样式。                       |
 
 ## Usage
 
