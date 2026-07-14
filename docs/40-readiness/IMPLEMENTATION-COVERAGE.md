@@ -108,7 +108,7 @@ Recipe 守护：
 - `src/components/data-display/descriptions.test.tsx` 覆盖 Descriptions root `style` / `className` / HTML attributes / ref 与内部 `dl` columns style 的职责分离。
 - `src/components/data-display/badge.test.tsx` 覆盖 Badge children path 和 standalone path 的 root props / ref / style / className 与 indicator 可访问标签分离。
 - `src/components/layout/scroll-area.test.tsx`、`separator.test.tsx`、`split-pane.test.tsx` 覆盖 Layout root HTML attributes passthrough、ScrollArea viewport `onScroll` 归属和 SplitPane caller style 不覆盖组件 grid template。
-- `src/lib/cn.ts` 是 `cn` 唯一源码入口；`src/lib/utils.ts` 已删除，`rg "lib/utils|@/lib/utils|\\.\\./\\.\\./lib/utils" src` 无结果。
+- `src/lib/cn.ts` 是 `cn` 唯一源码入口；`src/lib/utils.ts` 已删除，`components.json` 的 `aliases.utils` 已同步到 `@/lib/cn`，`rg "lib/utils|@/lib/utils|\\.\\./\\.\\./lib/utils" src components.json` 无结果。
 - `src/components/feedback-overlay/dialog.test.tsx`、`drawer.test.tsx`、`loading.test.tsx`、`notification.test.tsx`、`progress.test.tsx` 已将非契约用途的内部 slot / item selector 断言改为 role、text、ARIA、callback payload 或 caller-provided test id 断言。
 - `src/components/layout/scroll-area.test.tsx`、`split-pane.test.tsx` 已将非契约用途的 DOM traversal 定位改为 caller-provided test id；保留的 `data-scone-*` / class 断言仅用于明确 layout contract。
 - `src/index.ts` 已按 Data Display、Form、Layout、Feedback / Overlay、Media、Navigation、Patterns、Utils、Foundation 分组导出；`SconePagination` 和 navigation types 已回到 navigation barrel 分组。
