@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `03-badge-root-contract`：对齐 Badge root props 与 ref
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-COMPONENT-CONTRACTS.md`
-    - 范围对象：`src/components/data-display/badge.tsx`、`src/components/data-display/badge.test.tsx`
-    - 处理动作：让 `SconeBadge` 的 root `className`、root HTML attrs、event handlers、`style` 和 ref 指向同一个 root `<span>`，indicator 只保留 count/dot/tone/overflow/`ariaLabel` 视觉与可访问性职责。
-    - 验收点：测试覆盖 no-children、children、dot、count overflow 路径下 root passthrough 和 indicator `aria-label` / `aria-hidden` / formatted count。
-    - 重要度：8/10
-
 - [ ] `04-layout-root-passthrough`：补齐 Layout primitives root attrs/ref passthrough
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-COMPONENT-CONTRACTS.md`

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { createRef } from "react";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { SconeBadge } from "./badge";
 
@@ -34,16 +34,63 @@ describe("SconeBadge", () => {
         expect(container.firstElementChild).toBeEmptyDOMElement();
     });
 
-    it("forwards refs to the wrapper root", () => {
+    it("forwards children-mode root attributes, event handlers, className, style, and ref", () => {
         const ref = createRef<HTMLSpanElement>();
+        const onClick = vi.fn();
 
         render(
-            <SconeBadge ref={ref} count="new" className="custom-badge">
+            <SconeBadge
+                ref={ref}
+                count="new"
+                ariaLabel="New inbox items"
+                id="inbox-badge"
+                role="status"
+                data-testid="badge-root"
+                onClick={onClick}
+                className="custom-badge"
+                style={{ marginTop: "4px" }}
+            >
                 <span>Inbox</span>
             </SconeBadge>,
         );
 
-        expect(ref.current).toHaveClass("relative", "inline-flex");
-        expect(screen.getByText("new")).toHaveClass("custom-badge");
+        const root = screen.getByTestId("badge-root");
+        const indicator = screen.getByText("new");
+
+        root.click();
+
+        expect(root).toBe(ref.current);
+        expect(root).toHaveClass("relative", "inline-flex", "custom-badge");
+        expect(root).toHaveAttribute("id", "inbox-badge");
+        expect(root).toHaveAttribute("role", "status");
+        expect(root).toHaveStyle({ marginTop: "4px" });
+        expect(onClick).toHaveBeenCalledTimes(1);
+        expect(indicator).not.toHaveClass("custom-badge");
+        expect(indicator).toHaveAccessibleName("New inbox items");
+    });
+
+    it("forwards no-children root attributes while keeping indicator state", () => {
+        const ref = createRef<HTMLSpanElement>();
+
+        render(
+            <SconeBadge
+                ref={ref}
+                count={128}
+                overflow={99}
+                tone="warning"
+                ariaLabel="Unread messages"
+                data-testid="badge-root"
+                className="custom-badge"
+            />,
+        );
+
+        const root = screen.getByTestId("badge-root");
+        const indicator = screen.getByText("99+");
+
+        expect(root).toBe(ref.current);
+        expect(root).toHaveClass("inline-flex", "custom-badge");
+        expect(indicator).not.toHaveClass("custom-badge");
+        expect(indicator).toHaveClass("bg-amber-500", "min-w-5");
+        expect(indicator).toHaveAccessibleName("Unread messages");
     });
 });
