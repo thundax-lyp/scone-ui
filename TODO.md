@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `2-pagination-range`：2. 修复 Pagination 越界 range 文案
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-NAV-MEDIA-STATE-EDGES.md`
-    - 范围对象：`src/components/navigation/pagination.tsx`、`src/components/navigation/pagination.test.tsx`
-    - 处理动作：让 range 文案使用 clamp 后的 `SconePaginationState.page` 计算 start/end。
-    - 验收点：`state.page < 1` 时 range 等同第 1 页，`state.page > pageCount` 时 range 等同最后一页，`Previous`、`Next`、页码按钮和 `Rows per page` select 既有交互不被扩大修改。
-    - 重要度：9/10
-
 - [ ] `3-image-src-reset`：3. 修复 Image 动态 src 失败状态重置
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-NAV-MEDIA-STATE-EDGES.md`

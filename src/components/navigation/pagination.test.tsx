@@ -54,6 +54,18 @@ describe("SconePagination", () => {
         expect(screen.getByRole("button", { name: "Next" })).toBeDisabled();
     });
 
+    it("uses the clamped page for out-of-range range text", () => {
+        const { rerender } = render(
+            <SconePagination state={{ page: 0, pageSize: 10, total: 95 }} />,
+        );
+
+        expect(screen.getByText("1-10 / 95")).toBeInTheDocument();
+
+        rerender(<SconePagination state={{ page: 99, pageSize: 10, total: 95 }} />);
+
+        expect(screen.getByText("91-95 / 95")).toBeInTheDocument();
+    });
+
     it("resets to the first page when page size changes", () => {
         const onChange = vi.fn();
 

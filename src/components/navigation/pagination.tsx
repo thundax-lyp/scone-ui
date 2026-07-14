@@ -41,13 +41,13 @@ function getVisiblePages(currentPage: number, pageCount: number): number[] {
     return Array.from({ length: end - start + 1 }, (_, index) => start + index);
 }
 
-function getPageRange(state: SconePaginationState): string {
+function getPageRange(state: SconePaginationState, currentPage: number): string {
     if (state.total <= 0 || state.pageSize <= 0) {
         return `0-0 / ${state.total}`;
     }
 
-    const start = (state.page - 1) * state.pageSize + 1;
-    const end = Math.min(state.page * state.pageSize, state.total);
+    const start = (currentPage - 1) * state.pageSize + 1;
+    const end = Math.min(currentPage * state.pageSize, state.total);
 
     return `${start}-${end} / ${state.total}`;
 }
@@ -90,7 +90,9 @@ export const SconePagination = React.forwardRef<HTMLElement, SconePaginationProp
                 className={cn("flex flex-wrap items-center justify-end", classes.root, className)}
                 {...props}
             >
-                <span className="shrink-0 text-muted-foreground">{getPageRange(state)}</span>
+                <span className="shrink-0 text-muted-foreground">
+                    {getPageRange(state, currentPage)}
+                </span>
                 <div className="flex items-center gap-xs">
                     <button
                         type="button"
