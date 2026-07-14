@@ -34,6 +34,9 @@ coverage/
 .env.*
 !.env.example
 
+# Local notes
+docs/shortcuts.md
+
 # Logs
 pnpm-debug.log*
 npm-debug.log*
