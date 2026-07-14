@@ -13,16 +13,17 @@
 
 ## Current Status
 
-| 覆盖对象           | 状态 | 说明                                                                               |
-| ------------------ | ---- | ---------------------------------------------------------------------------------- |
-| SPEC 覆盖          | 完成 | 当前能力矩阵、组件选择、Pattern 和 Recipe 均已定义。                               |
-| DESIGN 覆盖        | 完成 | 架构、文件落点、类型、导出面、组件族、Pattern、Recipe 和验证策略均已定义。         |
-| 组件族实现         | 完成 | Form、Data Display、Layout、Feedback / Overlay、Navigation、Media 均已实现并测试。 |
-| Admin Pattern 实现 | 完成 | `AppShell`、`Page`、`Section`、`FilterBar`、`DataTable` 均已实现并测试。           |
-| Recipe 收口        | 完成 | Recipe 全部保持 docs-only，不创建 `src/recipes/`，不导出 recipe `Scone*` API。     |
-| 公共导出守护       | 完成 | `src/index.test.ts` 验证公共导出和 no-recipe-source 边界。                         |
+| 覆盖对象           | 状态     | 说明                                                                                         |
+| ------------------ | -------- | -------------------------------------------------------------------------------------------- |
+| SPEC 覆盖          | 完成     | 当前能力矩阵、组件选择、Pattern 和 Recipe 均已定义。                                         |
+| DESIGN 覆盖        | 完成     | 架构、文件落点、类型、导出面、组件族、Pattern、Recipe 和验证策略均已定义。                   |
+| 组件族实现         | 完成覆盖 | Form、Data Display、Layout、Feedback / Overlay、Navigation、Media 均有源码、公共导出和测试。 |
+| Admin Pattern 实现 | 完成覆盖 | `AppShell`、`Page`、`Section`、`FilterBar`、`DataTable` 均有源码、公共导出和测试。           |
+| Recipe 收口        | 完成     | Recipe 全部保持 docs-only，不创建 `src/recipes/`，不导出 recipe `Scone*` API。               |
+| 公共导出守护       | 完成     | `src/index.test.ts` 验证公共导出和 no-recipe-source 边界。                                   |
+| 系统性代码审核     | 完成     | 审核报告见 [`SYSTEMATIC-CODE-REVIEW-2026-07.md`](./SYSTEMATIC-CODE-REVIEW-2026-07.md)。      |
 
-结论：当前 `docs/10-specs/` 与 `docs/30-designs/` 覆盖的 Admin UI 范围已完成实现或 docs-only 验证闭环。
+结论：当前 `docs/10-specs/` 与 `docs/30-designs/` 覆盖的 Admin UI 范围已完成实现或 docs-only 覆盖闭环；系统性审核已识别待修复项，不能再表述为“无未完成实现项”。
 
 ## Coverage Matrix
 
@@ -69,9 +70,9 @@ Recipe 守护：
 - `src/index.ts` 不导出 `SconeDrawerForm`、`SconeConfirmationFlow`、`SconePopover`、`SconeLogo`、`SconeResult`、`SconeDashboardMetric`、`SconeGrid`。
 - `src/index.test.ts` 显式验证以上边界。
 
-## Verification Evidence
+## Verification Evidence Summary
 
-当前验证命令：
+最近完整验证证据：
 
 | 命令                | 状态 | 说明                                                              |
 | ------------------- | ---- | ----------------------------------------------------------------- |
@@ -80,6 +81,13 @@ Recipe 守护：
 | `pnpm typecheck`    | 通过 | TypeScript 无类型错误。                                           |
 | `pnpm lint`         | 通过 | compound component / Pattern 文件已在 ESLint 配置中设置明确例外。 |
 | `pnpm build`        | 通过 | Vite production build 成功。                                      |
+
+审核证据：
+
+- 系统性审核覆盖 `src/`、`docs/10-specs/`、`docs/30-designs/`、readiness、测试和构建配置。
+- 审核结论按 P0/P1/P2/P3 汇总在 [`SYSTEMATIC-CODE-REVIEW-2026-07.md`](./SYSTEMATIC-CODE-REVIEW-2026-07.md)。
+- P0：未发现。
+- P1：主要集中在 stale token config、复杂 overlay/focus 交互、数值边界、Tooltip id、media fallback reset、Pattern API/docs 对齐。
 
 ## Boundaries
 
@@ -90,9 +98,16 @@ Recipe 守护：
 - `AppShell` 不内置菜单、路由、权限、产品 logo 或切换按钮。
 - Recipe 继续保持 docs-only；新增源码 API 前必须先更新 SPEC、DESIGN 和公共导出测试。
 
-## Maintenance Work
+## Pending Implementation Work
 
-当前无未完成实现项。后续维护要求：
+本节只记录从本次系统性审核沉淀出的待修复方向；详细证据和风险见系统性审核报告。
+
+1. 修复 P1 行为问题：Tailwind stale token config、NumberInput/Progress invalid numeric handling、Tooltip unique id、Image/Avatar `src` reset、Pagination range clamp、Confirm async rejection。
+2. 收口 Pattern API 与文档：AppShell callbacks、Section Root shorthand、FilterBar hidden search state，逐项决定实现还是修正文档。
+3. 降低复杂交互维护成本：优先处理 Combobox、DatePicker、Dropdown 的 overlay、focus、keyboard 和 outside interaction 行为。
+4. 处理 P2 维护项：SplitPane listener cleanup、Toast timer stability、Command filtered active state、Alert role/tone semantics、Form context public surface、测试内部标记耦合。
+
+后续维护要求：
 
 1. SPEC 新增、排除或改名能力时，同步更新 `COMPONENT-SELECTION.md`、DESIGN 覆盖矩阵、源码导出和本文档。
 2. 新增源码组件或 Pattern 时，继续保持同目录测试和 `src/index.test.ts` 公共导出守护。
