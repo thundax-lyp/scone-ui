@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `3.1 Stack Inline`：补齐基础 layout root attrs
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
-    - 范围对象：`src/components/layout/stack.tsx`、`src/components/layout/stack.test.tsx`、`src/components/layout/inline.tsx`、`src/components/layout/inline.test.tsx`
-    - 处理动作：确认并测试 `SconeStackProps` 和 `SconeInlineProps` 的 root HTML attributes passthrough。
-    - 验收点：Stack 和 Inline 的 root `div` 接收 `ref`、`style`、`id`、`data-*`、`aria-*`、`role`，Inline `split` 只插入 child 之间的隐藏 separator。
-    - 重要度：8/10
-
 - [ ] `3.2 Compact Toolbar`：补齐组合 layout root attrs
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-COMPONENT-CONTRACTS-CN-CLEANUP.md`
