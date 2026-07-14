@@ -27,6 +27,20 @@ describe("SconeImage", () => {
         expect(screen.getByText("No image")).toBeInTheDocument();
     });
 
+    it("resets failed state when src changes", () => {
+        const { rerender } = render(
+            <SconeImage src="/missing.png" alt="Record" fallback="No image" />,
+        );
+
+        fireEvent.error(screen.getByRole("img", { name: "Record" }));
+        expect(screen.getByText("No image")).toBeInTheDocument();
+
+        rerender(<SconeImage src="/record.png" alt="Record" fallback="No image" />);
+
+        expect(screen.queryByText("No image")).not.toBeInTheDocument();
+        expect(screen.getByRole("img", { name: "Record" })).toHaveAttribute("src", "/record.png");
+    });
+
     it("opens preview in uncontrolled mode", () => {
         render(<SconeImage src="/record.png" alt="Record" preview />);
 

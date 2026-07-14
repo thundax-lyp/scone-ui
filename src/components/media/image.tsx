@@ -49,6 +49,11 @@ export const SconeImage = React.forwardRef<HTMLDivElement, SconeImageProps>(
             defaultValue: defaultPreviewOpen,
             onValueChange: onPreviewOpenChange,
         });
+
+        React.useEffect(() => {
+            setFailed(!src);
+        }, [src]);
+
         const showFallback = failed || !src;
         const image = !showFallback ? (
             <img

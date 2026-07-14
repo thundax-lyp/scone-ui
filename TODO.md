@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `3-image-src-reset`：3. 修复 Image 动态 src 失败状态重置
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-NAV-MEDIA-STATE-EDGES.md`
-    - 范围对象：`src/components/media/image.tsx`、`src/components/media/image.test.tsx`
-    - 处理动作：在 `SconeImage` 的 `src` 变化时重置内部 `failed` 状态为 `!src`。
-    - 验收点：当前 `src` 触发 error 后 rerender 为新的非空 `src` 时，fallback 被 `<img>` 或 preview button 内的 `<img>` 替换，且新 `<img>` 使用新 `src`。
-    - 重要度：9/10
-
 - [ ] `4-avatar-src-reset`：4. 修复 Avatar 动态 src 失败状态重置
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-NAV-MEDIA-STATE-EDGES.md`
