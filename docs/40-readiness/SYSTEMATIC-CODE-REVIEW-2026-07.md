@@ -79,3 +79,33 @@ Recent evidence before this review branch:
 * **建议**：后续触及导出入口时，按 Export Groups 分块，并优先复用组件族 barrel；保持 `src/index.test.ts` 的完整导出列表作为守护。
 * **功能风险**：低；只要导出名和类型保持不变，消费者不受影响。
 * **置信度**：高
+
+## 03 Foundation, Utilities, And Theme-Independent Primitives
+
+### Evidence
+
+- `src/types/foundation.ts` contains only shared vocabulary and generic item/state types.
+- `src/lib/aria.ts`, `src/lib/cn.ts`, `src/lib/compose-refs.ts`, and `src/lib/use-controllable-state.ts` are small leaf utilities.
+- `rg` confirms `src/types` and `src/lib` do not import from `components` or `patterns`.
+- `cn`, ARIA helpers, and `useControllableState` have multiple real callers across component families.
+- `any` is not present in the reviewed files; assertions are limited to React ref assignment and callable setter narrowing.
+
+### Assessment
+
+- Foundation and utility dependency direction is correct.
+- Shared types are broad but still library-level vocabulary, not product-specific domain models.
+- Utility functions have real cross-family reuse and are not premature global abstractions.
+- No duplicated className, ARIA id, ref composition, or controlled/uncontrolled helper was found in this layer.
+
+### Candidate Finding
+
+### [P2] Controlled state helper cannot represent `undefined` as a controlled value
+
+* **位置**：`src/lib/use-controllable-state.ts`
+* **类别**：状态 / API / 类型
+* **问题**：`isControlled` is derived from `value !== undefined`; components using this helper cannot distinguish omitted `value` from an intentionally controlled `undefined` value.
+* **影响**：For components where `undefined` is the documented empty value, controlled clearing must usually be represented by omitting `value` or using a different sentinel. This is easy to miss when reviewing custom inputs.
+* **证据**：`UseControllableStateOptions<T>` declares `value?: T`, `defaultValue?: T | (() => T)`, and the hook returns `T | undefined`; callers include `SconeNumberInput`, `SconeDatePicker`, `SconeUpload`, `SconeImage`, `FilterBar`, and multiple navigation/form controls.
+* **建议**：Do not change the helper globally during this audit. When fixing related components, either document this contract explicitly or introduce a controlled sentinel only where `undefined` must be a valid controlled value.
+* **功能风险**：中；changing this helper would affect many controls and could alter controlled/uncontrolled behavior.
+* **置信度**：高

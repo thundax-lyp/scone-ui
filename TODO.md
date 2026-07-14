@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `03-foundation-utils`：03 审核 Foundation、工具和主题边界
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`src/types/foundation.ts`、`src/lib/aria.ts`、`src/lib/cn.ts`、`src/lib/compose-refs.ts`、`src/lib/use-controllable-state.ts`
-    - 处理动作：检查基础类型、工具函数命名、复用价值、类型范围和依赖方向。
-    - 验收点：输出 Foundation 和工具层是否存在过宽导出、重复工具或错误抽象的结论。
-    - 重要度：9/10
-
 - [ ] `04-theme-app-entry`：04 审核样式入口和演示入口边界
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
