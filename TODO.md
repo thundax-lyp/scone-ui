@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `02-navigation-tabs`：02 实现 Tabs
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
-    - 范围对象：`src/components/navigation/tabs.tsx`、`src/components/navigation/tabs.test.tsx`
-    - 处理动作：实现 Tabs tablist、tab、tabpanel、items helper 和 compound children 能力。
-    - 验收点：value/defaultValue、manual/automatic activation、horizontal/vertical keyboard、disabled item 和 ARIA 关联均有测试覆盖。
-    - 重要度：9/10
-
 - [ ] `03-navigation-accordion-collapsible`：03 实现 Accordion 和 Collapsible
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
