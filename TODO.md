@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `06-form-text-actions`：06 审核 Form 文本输入和按钮控件
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`src/components/form/button.tsx`、`src/components/form/input.tsx`、`src/components/form/search-input.tsx`、`src/components/form/password-input.tsx`、`src/components/form/textarea.tsx`
-    - 处理动作：检查受控值、原生事件透传、loading / disabled / readOnly / invalid 语义和 Props 命名。
-    - 验收点：输出文本输入和按钮 API 是否清晰、重复或存在过度扩展点的结论。
-    - 重要度：9/10
-
 - [ ] `07-form-choice-controls`：07 审核 Form 选择和开关控件
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`

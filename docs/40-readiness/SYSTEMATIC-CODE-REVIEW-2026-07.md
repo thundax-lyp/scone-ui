@@ -168,3 +168,32 @@ Recent evidence before this review branch:
 * **建议**：Keep current exports for compatibility. For a future breaking or migration release, consider keeping hooks internal or exporting a smaller read-only field-state type that excludes generated ids.
 * **功能风险**：中；removing or narrowing these exports would affect consumers and public export tests.
 * **置信度**：高
+
+## 06 Form Text Inputs And Button Controls
+
+### Evidence
+
+- `SconeButton` wraps the shadcn button, maps Scone size tokens, blocks click handling while loading, and exposes `ariaLabel` for icon-only cases.
+- `SconeInput`, `SconeSearchInput`, `SconePasswordInput`, and `SconeTextArea` all use `useControllableState` and `getSconeControlStateProps`.
+- Text controls omit native `value`, `defaultValue`, and `onChange` from inherited props, then reintroduce explicit value APIs plus native `onChange`.
+- Tests cover uncontrolled changes, clear action, password visibility, loading-disabled button behavior, Field state, refs, and count display.
+
+### Assessment
+
+- API naming is consistent across text controls.
+- Field integration is centralized enough to avoid divergent ARIA behavior.
+- `loading`, `disabled`, `readOnly`, and `invalid` semantics are explicit and covered by focused tests.
+- No immediate functionality bug found in this task scope.
+
+### Candidate Finding
+
+### [P2] Text input value plumbing is duplicated across sibling components
+
+* **位置**：`src/components/form/input.tsx`、`src/components/form/search-input.tsx`、`src/components/form/password-input.tsx`、`src/components/form/textarea.tsx`
+* **类别**：重复代码 / 状态
+* **问题**：Each text control repeats the same controlled/uncontrolled setup, Field prop injection, `ariaLabel` merge, invalid normalization, and `onChange` ordering.
+* **影响**：The code is still readable, but fixes to value semantics or Field injection must be manually mirrored across four files. This raises maintenance risk for future behavior changes.
+* **证据**：All four components call `useControllableState<string>`, `useSconeFieldContext`, `getSconeControlStateProps`, and `normalizeSconeAriaInvalid`, then call `setCurrentValue` before user `onChange`.
+* **建议**：Do not introduce a broad abstraction now. If a second behavior fix touches these files, extract a small internal hook local to `components/form` for text control state and field props.
+* **功能风险**：中；an extraction would affect all text controls, so it should be paired with existing focused tests.
+* **置信度**：高
