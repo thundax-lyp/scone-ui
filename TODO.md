@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `01-tailwind-token-config`：1. 修复 Tailwind stale token 配置
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-TOKEN-NUMBER-PROGRESS-EDGES.md`
-    - 范围对象：`tailwind.config.ts`、`src/styles/theme.test.ts`
-    - 处理动作：将 Tailwind config 中 stale token 引用替换为当前 `theme.css` 变量名，并删除无对应当前 token 的 `fontSize` stale extension。
-    - 验收点：`theme.test.ts` 覆盖旧变量名不存在和当前变量名存在，且目标测试通过。
-    - 重要度：9/10
-
 - [ ] `02-progress-invalid-max`：2. 修复 `SconeProgress` invalid `max` 百分比
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-TOKEN-NUMBER-PROGRESS-EDGES.md`
