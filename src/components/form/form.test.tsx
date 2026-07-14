@@ -25,7 +25,7 @@ describe("SconeForm and SconeField", () => {
             </SconeForm>,
         );
 
-        const input = screen.getByLabelText("Email *");
+        const input = screen.getByRole("textbox", { name: "Email" });
         const description = screen.getByText("Use a work email.");
         const message = screen.getByRole("alert");
 

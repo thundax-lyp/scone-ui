@@ -4,6 +4,8 @@ import { describe, expect, it, vi } from "vitest";
 import { SconeField } from "./field";
 import { SconeSelect } from "./select";
 
+Element.prototype.scrollIntoView = vi.fn();
+
 const options = [
     { value: "draft", label: "Draft" },
     { value: "published", label: "Published" },

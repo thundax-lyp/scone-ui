@@ -29,7 +29,7 @@ describe("SconeInput", () => {
             </SconeField.Root>,
         );
 
-        const input = screen.getByLabelText("Email");
+        const input = screen.getByRole("textbox", { name: "Email" });
 
         expect(ref.current).toBe(input);
         expect(input).toHaveAttribute("aria-invalid", "true");

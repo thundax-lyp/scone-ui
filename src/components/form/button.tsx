@@ -37,6 +37,7 @@ export const SconeButton = React.forwardRef<React.ElementRef<typeof Button>, Sco
         ref,
     ) => {
         const isDisabled = disabled || loading;
+        const asChild = props.asChild;
 
         const handleClick = React.useCallback<React.MouseEventHandler<HTMLButtonElement>>(
             (event) => {
@@ -50,6 +51,25 @@ export const SconeButton = React.forwardRef<React.ElementRef<typeof Button>, Sco
             },
             [isDisabled, onClick],
         );
+
+        if (asChild) {
+            return (
+                <Button
+                    ref={ref}
+                    size={buttonSizeMap[size]}
+                    disabled={isDisabled}
+                    aria-disabled={isDisabled || undefined}
+                    aria-busy={loading || undefined}
+                    aria-label={ariaLabel}
+                    data-loading={loading || undefined}
+                    className={cn(loading && "cursor-wait", className)}
+                    onClick={handleClick}
+                    {...props}
+                >
+                    {children}
+                </Button>
+            );
+        }
 
         return (
             <Button

@@ -36,7 +36,7 @@ describe("SconeTextArea", () => {
             </SconeField.Root>,
         );
 
-        const textarea = screen.getByLabelText("Summary");
+        const textarea = screen.getByRole("textbox", { name: "Summary" });
 
         expect(ref.current).toBe(textarea);
         expect(textarea).toHaveAttribute("aria-invalid", "true");

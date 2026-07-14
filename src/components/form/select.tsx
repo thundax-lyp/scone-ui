@@ -76,7 +76,7 @@ export const SconeSelect = React.forwardRef<HTMLButtonElement, SconeSelectProps>
         });
         const [currentOpen, setCurrentOpen] = useControllableState<boolean>({
             value: open,
-            defaultValue: defaultOpen,
+            defaultValue: defaultOpen ?? false,
             onValueChange: onOpenChange,
         });
         const controlProps = getSconeControlStateProps(field, {
