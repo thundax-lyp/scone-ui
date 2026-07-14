@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `09-media-image-avatar`：09 实现 Image 和 Avatar
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
-    - 范围对象：`src/components/media/image.tsx`、`src/components/media/image.test.tsx`、`src/components/media/avatar.tsx`、`src/components/media/avatar.test.tsx`
-    - 处理动作：实现 Image fallback/preview/尺寸稳定和 Avatar fallback/icon/size/shape。
-    - 验收点：Image alt、fallback、load/error、preview open、width/height/objectFit 和 Avatar fallback、icon、load/error、size、shape 均有测试覆盖。
-    - 重要度：8/10
-
 - [ ] `10-public-export`：10 接入 Navigation 和 Media public export
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-NAVIGATION-MEDIA-CLOSURE.md`
