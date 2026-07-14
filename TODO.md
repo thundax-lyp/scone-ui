@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `7. foundation-type-exports`：导出 Foundation 公共类型
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`
-    - 范围对象：`src/index.ts`、`src/index.test.ts`、`src/types/foundation.ts`
-    - 处理动作：从库级入口导出本阶段已实现的 Foundation 公共类型。
-    - 验收点：`src/index.test.ts` 精确断言 Foundation 类型导出清单，且不预导出任何未实现组件、Pattern、Provider、service 或 docs-only Recipe。
-    - 重要度：10/10
-
 - [ ] `8. utility-exports`：导出公共工具函数
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-FOUNDATION-PUBLIC-API.md`
