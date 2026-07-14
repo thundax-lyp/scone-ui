@@ -22,9 +22,13 @@ describe("SconeSeparator", () => {
         render(
             <SconeSeparator
                 ref={ref}
+                id="details-separator"
                 decorative={false}
                 orientation="vertical"
+                aria-label="Details separator"
+                data-owner="layout"
                 className="custom-separator"
+                style={{ marginInline: "8px" }}
                 data-testid="separator"
             />,
         );
@@ -32,9 +36,13 @@ describe("SconeSeparator", () => {
         const separator = screen.getByTestId("separator");
 
         expect(ref.current).toBe(separator);
+        expect(separator).toHaveAttribute("id", "details-separator");
         expect(separator).toHaveAttribute("role", "separator");
+        expect(separator).toHaveAttribute("aria-label", "Details separator");
         expect(separator).toHaveAttribute("aria-orientation", "vertical");
+        expect(separator).toHaveAttribute("data-owner", "layout");
         expect(separator).toHaveAttribute("data-orientation", "vertical");
         expect(separator).toHaveClass("custom-separator", "data-vertical:w-px");
+        expect(separator).toHaveStyle({ marginInline: "8px" });
     });
 });

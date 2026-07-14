@@ -79,8 +79,11 @@ describe("SconeBadge", () => {
                 overflow={99}
                 tone="warning"
                 ariaLabel="Unread messages"
+                id="unread-badge"
+                role="status"
                 data-testid="badge-root"
                 className="custom-badge"
+                style={{ marginTop: "4px" }}
             />,
         );
 
@@ -89,6 +92,9 @@ describe("SconeBadge", () => {
 
         expect(root).toBe(ref.current);
         expect(root).toHaveClass("inline-flex", "custom-badge");
+        expect(root).toHaveAttribute("id", "unread-badge");
+        expect(root).toHaveAttribute("role", "status");
+        expect(root).toHaveStyle({ marginTop: "4px" });
         expect(indicator).not.toHaveClass("custom-badge");
         expect(indicator).toHaveClass("bg-amber-500", "min-w-5");
         expect(indicator).toHaveAccessibleName("Unread messages");

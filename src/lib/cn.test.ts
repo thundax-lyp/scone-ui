@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 
 import { cn } from "./cn";
-import { cn as compatCn } from "./utils";
 
 describe("cn", () => {
     it("merges conditional class inputs", () => {
@@ -16,9 +15,5 @@ describe("cn", () => {
 
     it("resolves Tailwind class conflicts", () => {
         expect(cn("px-2 py-1", "px-4", "text-sm", "text-base")).toBe("py-1 px-4 text-base");
-    });
-
-    it("keeps the legacy utils entry compatible", () => {
-        expect(compatCn("px-2", "px-4")).toBe("px-4");
     });
 });

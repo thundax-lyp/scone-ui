@@ -1,7 +1,7 @@
 import * as React from "react";
 import { UserIcon } from "lucide-react";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 
 export interface SconeAvatarProps extends React.HTMLAttributes<HTMLDivElement> {
     src?: string;

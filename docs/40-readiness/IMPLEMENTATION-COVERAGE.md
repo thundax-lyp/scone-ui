@@ -21,9 +21,9 @@
 | Admin Pattern 实现 | 完成覆盖 | `AppShell`、`Page`、`Section`、`FilterBar`、`DataTable` 均有源码、公共导出和测试。           |
 | Recipe 收口        | 完成     | Recipe 全部保持 docs-only，不创建 `src/recipes/`，不导出 recipe `Scone*` API。               |
 | 公共导出守护       | 完成     | `src/index.test.ts` 验证公共导出和 no-recipe-source 边界。                                   |
-| 系统性代码审核     | 完成     | 审核报告见 [`SYSTEMATIC-CODE-REVIEW-2026-07.md`](./SYSTEMATIC-CODE-REVIEW-2026-07.md)。      |
+| 系统性代码审核     | 完成     | 2026-07 系统性审核 remediation 已收口，临时审核报告已关闭删除。                              |
 
-结论：当前 `docs/10-specs/` 与 `docs/30-designs/` 覆盖的 Admin UI 范围已完成实现或 docs-only 覆盖闭环；系统性审核已识别待修复项，不能再表述为“无未完成实现项”。
+结论：当前 `docs/10-specs/` 与 `docs/30-designs/` 覆盖的 Admin UI 范围已完成实现或 docs-only 覆盖闭环；2026-07 系统性审核沉淀的问题已完成处理，长期证据保留在本文档和提交历史中。
 
 ## Coverage Matrix
 
@@ -86,9 +86,7 @@ Recipe 守护：
 
 - 系统性审核覆盖 `src/`、`docs/10-specs/`、`docs/30-designs/`、readiness、测试和构建配置。
 - SplitPane resize preset 边界和 active drag listener cleanup 已由 `src/components/layout/split-pane.test.tsx` 覆盖。
-- 审核结论按 P0/P1/P2/P3 汇总在 [`SYSTEMATIC-CODE-REVIEW-2026-07.md`](./SYSTEMATIC-CODE-REVIEW-2026-07.md)。
-- P0：未发现。
-- P1：主要集中在复杂 overlay/focus 交互和 Pattern API/docs 对齐。
+- 2026-07 系统性审核已按 P0/P1/P2/P3 逐项收口；P0 未发现，P1/P2/P3 remediation 已完成。
 
 本分支新增回归覆盖：
 
@@ -107,12 +105,20 @@ Recipe 守护：
 - `src/lib/use-controllable-state.test.tsx` 覆盖 `value={undefined}` 继续按 uncontrolled sentinel 处理，并保留 setter 本地更新和 `onValueChange` 通知。
 - `src/index.test.ts` 覆盖 `SconeFieldContextValue.fieldId`、`labelId`、`descriptionId`、`messageId` 作为当前公共类型契约。
 - `src/components/form/input.test.tsx`、`search-input.test.tsx`、`password-input.test.tsx`、`textarea.test.tsx` 覆盖 text controls 继续先触发 `onValueChange`，再触发原生 `onChange`。
+- `src/components/data-display/descriptions.test.tsx` 覆盖 Descriptions root `style` / `className` / HTML attributes / ref 与内部 `dl` columns style 的职责分离。
+- `src/components/data-display/badge.test.tsx` 覆盖 Badge children path 和 standalone path 的 root props / ref / style / className 与 indicator 可访问标签分离。
+- `src/components/layout/scroll-area.test.tsx`、`separator.test.tsx`、`split-pane.test.tsx` 覆盖 Layout root HTML attributes passthrough、ScrollArea viewport `onScroll` 归属和 SplitPane caller style 不覆盖组件 grid template。
+- `src/lib/cn.ts` 是 `cn` 唯一源码入口；`src/lib/utils.ts` 已删除，`components.json` 的 `aliases.utils` 已同步到 `@/lib/cn`，`rg "lib/utils|@/lib/utils|\\.\\./\\.\\./lib/utils" src components.json` 无结果。
+- `src/components/feedback-overlay/dialog.test.tsx`、`drawer.test.tsx`、`loading.test.tsx`、`notification.test.tsx`、`progress.test.tsx` 已将非契约用途的内部 slot / item selector 断言改为 role、text、ARIA、callback payload 或 caller-provided test id 断言。
+- `src/components/layout/scroll-area.test.tsx`、`split-pane.test.tsx` 已将非契约用途的 DOM traversal 定位改为 caller-provided test id；保留的 `data-scone-*` / class 断言仅用于明确 layout contract。
+- `src/index.ts` 已按 Data Display、Form、Layout、Feedback / Overlay、Media、Navigation、Patterns、Utils、Foundation 分组导出；`SconePagination` 和 navigation types 已回到 navigation barrel 分组。
 
 测试维护证据：
 
 - `src/patterns/app-shell.test.tsx`、`src/patterns/page.test.tsx`、`src/patterns/section.test.tsx` 已将非契约用途的 DOM traversal 改为 role、text、button 操作或公开 layout contract 断言。
 - `src/patterns/filter-bar.test.tsx`、`src/patterns/data-table.test.tsx` 已将筛选、表格和 toolbar 相关断言改为 input/select/button 操作、callback payload 和明确组合边界断言。
 - `src/app.test.tsx` 已改为 demo entry smoke test，不再验证固定 demo copy。
+- Layout / feedback-overlay 非契约测试断言清理已完成；公开 layout contract 断言继续保留。
 - 本批次验证已执行 `pnpm exec prettier --write ...`、`pnpm lint`、`pnpm build`；全部代码任务完成后执行 `pnpm test`，结果为 69 个 test files、288 个 tests 通过。
 
 ## Boundaries
@@ -126,10 +132,7 @@ Recipe 守护：
 
 ## Pending Implementation Work
 
-本节只记录从本次系统性审核沉淀出的待修复方向；详细证据和风险见系统性审核报告。
-
-1. 降低复杂交互维护成本：持续关注 Combobox、DatePicker 的 overlay、focus 和 keyboard 行为。
-2. 处理剩余 P2/P3 维护项：Data Display / Layout root props 边界、剩余 `cn` import path、layout / feedback-overlay 测试内部标记耦合。
+无。2026-07 系统性审核沉淀的 implementation remediation 已完成；后续只保留常规维护要求。
 
 后续维护要求：
 

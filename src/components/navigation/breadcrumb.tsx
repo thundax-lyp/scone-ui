@@ -2,7 +2,7 @@ import * as React from "react";
 import { ChevronRightIcon, MoreHorizontalIcon } from "lucide-react";
 import { Slot } from "radix-ui";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 import type { Key } from "@/types/foundation";
 
 export interface SconeBreadcrumbItem {

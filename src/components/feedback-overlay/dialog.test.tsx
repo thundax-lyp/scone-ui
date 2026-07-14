@@ -18,12 +18,8 @@ describe("SconeDialog", () => {
 
         expect(screen.getByRole("dialog", { name: "Export report" })).toBeInTheDocument();
         expect(screen.getByText("Choose the report format.")).toBeInTheDocument();
-        expect(
-            screen.getByText("CSV or PDF").closest("[data-slot=dialog-body]"),
-        ).toBeInTheDocument();
-        expect(
-            screen.getByRole("button", { name: "Cancel" }).closest("[data-slot=dialog-footer]"),
-        ).toBeInTheDocument();
+        expect(screen.getByText("CSV or PDF")).toBeInTheDocument();
+        expect(screen.getByRole("button", { name: "Cancel" })).toBeInTheDocument();
     });
 
     it("supports ariaLabel when there is no visible title", () => {
