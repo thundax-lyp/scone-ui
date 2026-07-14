@@ -25,6 +25,23 @@ export type SconeStatus = "idle" | "active" | "success" | "error";
 export type OverlayCloseReason =
     "escape" | "outside" | "closeButton" | "footerAction" | "programmatic";
 
+export interface SconePaginationState {
+    page: number;
+    pageSize: number;
+    total: number;
+}
+
+export type SconePaginationChangeReason = "page" | "pageSize";
+
+export interface SconeRowSelection<T> {
+    selectedRowKeys: Key[];
+    onChange?: (keys: Key[], rows: T[]) => void;
+    getCheckboxProps?: (record: T) => {
+        disabled?: boolean;
+        ariaLabel?: string;
+    };
+}
+
 export interface SconeOption<Value = string> {
     value: Value;
     label: React.ReactNode;

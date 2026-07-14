@@ -10,14 +10,6 @@
 
 ## 当前任务项
 
-- [ ] `1. src/types/foundation.ts`：补齐分页和选择桥接类型
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DATA-TABLE-PAGINATION-PATTERN.md`
-    - 范围对象：`src/types/foundation.ts`、`src/types/foundation.test.ts`、`src/index.ts`
-    - 处理动作：新增分页状态、分页变更原因和行选择状态桥接类型。
-    - 验收点：`SconePaginationState.page/pageSize/total`、`SconePaginationChangeReason`、`SconeRowSelection<T>.selectedRowKeys/onChange/getCheckboxProps` 字段和参数顺序有测试覆盖。
-    - 重要度：9/10
-
 - [ ] `2. src/components/navigation/pagination.tsx`：实现受控分页控件
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DATA-TABLE-PAGINATION-PATTERN.md`
