@@ -49,3 +49,33 @@ Recent evidence before this review branch:
 - The current technology stack is intentionally small for a reusable UI library.
 - Absence of routing, network, and global state is aligned with repository scope.
 - The highest-risk review areas are public API shape, compound component exports, Pattern state ownership, and consistency between SPEC, DESIGN, readiness, and source.
+
+## 02 Public Entry And Export Guard
+
+### Evidence
+
+- `src/index.ts` exports component families, Admin Patterns, foundation types, and library utilities.
+- `src/index.test.ts` asserts runtime public exports, representative exported types, Pattern compound objects, and docs-only Recipe exclusions.
+- `docs/10-specs/COMPONENT-SELECTION.md` and `docs/30-designs/admin-ui/EXPORT-SURFACE-DESIGN.md` define Recipes as docs-only and forbid `src/recipes/`.
+- `find src -maxdepth 2 -type d` confirms there is no `src/recipes` directory.
+- `rg "Scone(Result|Logo|Popover|Grid|DrawerForm|ConfirmationFlow|DashboardMetric)|src/recipes|Recipe" src ...` only finds Recipe names in docs and negative export assertions.
+
+### Assessment
+
+- Public component and Pattern exports are aligned with current Export Groups.
+- Recipe boundaries are guarded by both absence of source directory and negative public export assertions.
+- Component-family barrels export only their own family members and public types.
+- No P0/P1 issue found in public export completeness or no-recipe-source guard.
+
+### Candidate Finding
+
+### [P3] Public entry grouping is harder to scan than family barrels
+
+* **位置**：`src/index.ts`
+* **类别**：结构
+* **问题**：库级入口同时使用 family barrel re-export 和 direct file re-export；feedback、layout、navigation 的顺序与族目录不完全一致。
+* **影响**：不会改变功能，但增加人工审核导出面时的扫描成本。
+* **证据**：`src/index.ts` 先通过 `./components/navigation` 导出大部分 navigation，再单独从 `./components/navigation` 导出 `SconePagination`；feedback 和 layout 直接按文件导出。
+* **建议**：后续触及导出入口时，按 Export Groups 分块，并优先复用组件族 barrel；保持 `src/index.test.ts` 的完整导出列表作为守护。
+* **功能风险**：低；只要导出名和类型保持不变，消费者不受影响。
+* **置信度**：高

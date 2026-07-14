@@ -9,14 +9,6 @@
 
 ## 当前任务项
 
-- [ ] `02-public-entry`：02 审核公共入口和导出守护
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
-    - 范围对象：`src/index.ts`、`src/index.test.ts`、`docs/10-specs/COMPONENT-SELECTION.md`
-    - 处理动作：核对公共导出、类型导出、Recipe 不导出和 Export Groups 的一致性。
-    - 验收点：输出公共 API 对齐结论，并列出任何导出过宽、缺失或重复 API。
-    - 重要度：10/10
-
 - [ ] `03-foundation-utils`：03 审核 Foundation、工具和主题边界
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-SYSTEMATIC-CODE-REVIEW-2026-07.md`
