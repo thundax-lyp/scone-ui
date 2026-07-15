@@ -23,6 +23,7 @@ const requiredVariables = [
     "--scone-color-success",
     "--scone-color-warning",
     "--scone-color-danger",
+    "--scone-color-overlay-backdrop",
     "--scone-spacing-2xs",
     "--scone-spacing-xs",
     "--scone-spacing-sm",
@@ -96,16 +97,17 @@ describe("theme variables", () => {
         expect(theme.trim()).toBe('@import "../default.theme.css";');
     });
 
-    it("keeps token values in default.theme.css", () => {
-        const tokenSourceFiles = listFiles(srcDir)
+    it("keeps token definitions in default.theme.css", () => {
+        const tokenDefinitionPattern = /(?:^|[\s{;])--scone-[\w-]+\s*:/;
+        const tokenDefinitionFiles = listFiles(srcDir)
             .filter((file) => /\.(css|ts|tsx)$/.test(file))
             .filter((file) => file !== defaultThemePath)
             .filter((file) => file !== compatibilityThemePath)
             .filter((file) => !file.endsWith(".test.ts") && !file.endsWith(".test.tsx"))
-            .filter((file) => readFileSync(file, "utf8").includes("--scone-"))
+            .filter((file) => tokenDefinitionPattern.test(readFileSync(file, "utf8")))
             .map((file) => relative(srcDir, file));
 
-        expect(tokenSourceFiles).toEqual(["styles.css"]);
+        expect(tokenDefinitionFiles).toEqual([]);
     });
 
     it("keeps Tailwind config mapped to current token names", () => {

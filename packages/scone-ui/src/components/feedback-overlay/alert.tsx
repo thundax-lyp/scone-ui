@@ -14,8 +14,10 @@ export interface SconeAlertProps extends Omit<React.HTMLAttributes<HTMLDivElemen
 const toneClasses: Record<SconeTone, string> = {
     neutral: "border-border bg-muted/40 text-foreground",
     info: "border-primary/25 bg-primary/5 text-foreground",
-    success: "border-emerald-500/25 bg-emerald-500/10 text-foreground",
-    warning: "border-amber-500/30 bg-amber-500/10 text-foreground",
+    success:
+        "border-[color-mix(in_srgb,var(--scone-color-success)_25%,transparent)] bg-[color-mix(in_srgb,var(--scone-color-success)_10%,transparent)] text-foreground",
+    warning:
+        "border-[color-mix(in_srgb,var(--scone-color-warning)_30%,transparent)] bg-[color-mix(in_srgb,var(--scone-color-warning)_10%,transparent)] text-foreground",
     danger: "border-destructive/30 bg-destructive/10 text-foreground",
 };
 

@@ -104,7 +104,7 @@ export const SconeDrawer = React.forwardRef<HTMLDivElement, SconeDrawerProps>(
         const content = (
             <DialogPrimitive.Portal>
                 <DialogPrimitive.Overlay
-                    className="fixed inset-0 z-50 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs data-closed:animate-out data-closed:fade-out-0 data-open:animate-in data-open:fade-in-0"
+                    className="fixed inset-0 z-50 bg-[var(--scone-color-overlay-backdrop)] duration-100 supports-backdrop-filter:backdrop-blur-xs data-closed:animate-out data-closed:fade-out-0 data-open:animate-in data-open:fade-in-0"
                     data-slot="drawer-overlay"
                 />
                 <DialogPrimitive.Content

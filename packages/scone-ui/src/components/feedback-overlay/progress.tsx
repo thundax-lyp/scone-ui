@@ -15,7 +15,7 @@ export interface SconeProgressProps extends React.HTMLAttributes<HTMLDivElement>
 const statusClasses: Record<SconeStatus, string> = {
     idle: "[&_[data-slot=progress-indicator]]:bg-muted-foreground",
     active: "[&_[data-slot=progress-indicator]]:bg-primary",
-    success: "[&_[data-slot=progress-indicator]]:bg-emerald-500",
+    success: "[&_[data-slot=progress-indicator]]:bg-[var(--scone-color-success)]",
     error: "[&_[data-slot=progress-indicator]]:bg-destructive",
 };
 

@@ -88,3 +88,31 @@
 - `pnpm exec vitest run packages/scone-ui/src/components/navigation/*.test.tsx`
 - `pnpm --filter scone-ui typecheck`
 - `pnpm run build:example`
+
+## Feedback Overlay
+
+范围对象：`packages/scone-ui/src/components/feedback-overlay`
+
+审核结论：反馈与浮层组件族的 overlay、surface、状态色和 focus 状态由 package theme token 覆盖；成功、警告和遮罩样式已从固定 Tailwind 色阶调整为 `--scone-*` token 引用。
+
+### Coverage
+
+| Component group            | Files                                     | Theme evidence                                                                                                                                 |
+| -------------------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Alert and progress         | `alert.tsx`、`progress.tsx`               | 成功、警告状态使用 `--scone-color-success`、`--scone-color-warning`；危险和 active 状态使用 `destructive`、`primary` bridge                    |
+| Dialog, drawer and confirm | `dialog.tsx`、`drawer.tsx`、`confirm.tsx` | overlay 使用 `--scone-color-overlay-backdrop`；surface、footer、focus 使用 `bg-popover`、`text-popover-foreground`、`bg-muted/50`、`ring-ring` |
+| Toast and notification     | `toast.tsx`、`notification.tsx`           | surface、action、close、tone border 使用 `bg-popover`、`text-popover-foreground`、`text-primary`、`text-muted-foreground` 和 `--scone-color-*` |
+| Empty and loading          | `empty.tsx`、`loading.tsx`                | empty、skeleton、loading mask 使用 `border-border`、`bg-muted`、`bg-background/60`、`text-muted-foreground`                                    |
+
+### Non-Changes
+
+- 未发现 `scone-example-*` 选择器或 example 专属样式依赖。
+- 未迁移页面级空状态、结果页或业务反馈布局样式。
+- 未改变 dialog、drawer、confirm、toast 或 notification 的公共 API。
+
+### Verification
+
+- `rg -n "bg-black|sky-|emerald-|amber-|scone-example" packages/scone-ui/src/components/feedback-overlay`
+- `pnpm exec vitest run packages/scone-ui/src/components/feedback-overlay/*.test.tsx`
+- `pnpm --filter scone-ui typecheck`
+- `pnpm run build:example`
