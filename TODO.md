@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `packages/scone-ui/src/styles/theme.css`：盘点默认主题 token 与 example 候选值
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
-    - 范围对象：`packages/scone-ui/src/styles/theme.css`、`apps/example/src/examples/library-example.css`
-    - 处理动作：建立 example 候选值、现有 `--scone-*`、shadcn/Tailwind bridge 和目标归属的映射表。
-    - 验收点：每个候选值都有来源、目标归属和是否迁移的判断。
-    - 重要度：9/10
-
 - [ ] `packages/scone-ui/src/default.theme.css`：创建默认主题 CSS 发布入口
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
