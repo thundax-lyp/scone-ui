@@ -17,6 +17,7 @@
 ## Governance Entry Map
 
 - 文档写作、目录和 RUNBOOK：本文档。
+- TypeScript、React、测试和代码审阅规则：[`CODE-RULES.md`](./CODE-RULES.md)。
 - Commit 标题、type/scope 白名单和提交粒度：根 [`AGENTS.md`](../../AGENTS.md)。
 - TODO 协作、任务项格式、删除和收窄：[`TODO-RULES.md`](./TODO-RULES.md)。
 - PR 描述、阶段性交付和验证证据：[`PR-RULES.md`](./PR-RULES.md)。
