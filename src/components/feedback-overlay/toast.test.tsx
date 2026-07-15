@@ -83,7 +83,7 @@ describe("toast", () => {
         vi.useFakeTimers();
         const onDismiss = vi.fn();
 
-        function Wrapper() {
+        const Wrapper = () => {
             const [version, setVersion] = React.useState(0);
 
             return (
@@ -93,7 +93,7 @@ describe("toast", () => {
                     </button>
                 </SconeToastProvider>
             );
-        }
+        };
 
         render(<Wrapper />);
 

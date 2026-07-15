@@ -67,7 +67,7 @@ const requiredVariables = [
     "--scone-drawer-width-full",
 ];
 
-function listFiles(directory: string): string[] {
+const listFiles = (directory: string): string[] => {
     return readdirSync(directory).flatMap((entry) => {
         const entryPath = join(directory, entry);
         const stat = statSync(entryPath);
@@ -78,7 +78,7 @@ function listFiles(directory: string): string[] {
 
         return entryPath;
     });
-}
+};
 
 describe("theme variables", () => {
     it("defines the required scone token variables", () => {

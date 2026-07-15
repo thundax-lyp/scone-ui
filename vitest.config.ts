@@ -11,6 +11,8 @@ export default defineConfig({
     test: {
         environment: "jsdom",
         globals: true,
+        reporters: ["./scripts/vitest-quiet-reporter.mjs"],
+        silent: "passed-only",
         setupFiles: ["src/test/setup.ts"],
     },
 });

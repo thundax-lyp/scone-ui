@@ -3,9 +3,9 @@ import { describe, expect, it, vi } from "vitest";
 
 import { SconeUpload } from "./upload";
 
-function file(name: string, type: string, size = 1): File {
+const file = (name: string, type: string, size = 1): File => {
     return new File(["x".repeat(size)], name, { type });
-}
+};
 
 describe("SconeUpload", () => {
     it("accepts local files and reports value changes", async () => {
