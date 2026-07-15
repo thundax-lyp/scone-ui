@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `packages/scone-ui/README.md`：同步默认主题导入说明
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
-    - 范围对象：`packages/scone-ui/README.md`、`packages/scone-ui/PACKAGE-AI-GUIDE.md`、`apps/scone-docs/static/llms.txt`
-    - 处理动作：说明 `styles.css` 零配置入口、`default.theme.css` 默认 token 入口、`styles/theme.css` 兼容入口和调用方覆盖顺序，并同步 `llms.txt`。
-    - 验收点：包 README、AI Guide 与 `llms.txt` 对导入顺序、覆盖方式和 example CSS 边界描述一致。
-    - 重要度：9/10
-
 - [ ] `apps/scone-docs/docs`：同步文档站默认主题说明
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`

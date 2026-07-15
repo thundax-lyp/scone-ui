@@ -31,6 +31,11 @@ If documentation conflicts with `dist/index.d.ts`, prefer the installed package 
 
 - Import components, patterns, services, hooks, helpers, and types from `scone-ui`.
 - Import styles once from `scone-ui/styles.css`.
+- `scone-ui/styles.css` includes the default theme.
+- `scone-ui/default.theme.css` is the default token file for theme review or advanced build splitting; ordinary apps do not need it in addition to `styles.css`.
+- `scone-ui/styles/theme.css` is a compatibility theme entry, not the preferred path for new code.
+- Theme overrides must be declared after `scone-ui/styles.css`.
+- Example CSS is only for the hosted example pages. Do not import it into consuming apps.
 - Do not import internal shadcn primitives, source paths, alias paths, or undocumented subpaths.
 - Use public props types such as `SconeButtonProps` when wrapping components.
 - Do not invent public APIs that are not exported by `scone-ui`.
