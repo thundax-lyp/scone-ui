@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `apps/example/src/examples/library-example.css`：删除已由 package theme 覆盖的 example 重复样式
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
-    - 范围对象：`apps/example/src/examples/library-example.css`
-    - 处理动作：在 package theme 覆盖公共组件后，删除只用于补组件默认主题的 example 重复 CSS。
-    - 验收点：删除项均有 package 等价能力，baseline 截图无非预期变化，页面布局样式未被误删。
-    - 重要度：8/10
-
 - [ ] `packages/scone-ui/README.md`：同步默认主题导入说明
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`

@@ -2,19 +2,18 @@
     --example-bg: color-mix(in oklch, var(--background) 96%, var(--foreground) 4%);
     --example-panel: color-mix(in oklch, var(--card) 97%, var(--foreground) 3%);
     --example-soft: color-mix(in oklch, var(--muted) 92%, var(--primary) 8%);
-    --example-accent: dodgerblue;
+    --example-accent: var(--scone-color-primary);
     --example-spark: color-mix(in oklch, orchid 72%, var(--primary));
-    --example-shadow:
-        0 1px 2px rgb(0 0 0 / 3%), 0 1px 6px -1px rgb(0 0 0 / 2%), 0 2px 4px rgb(0 0 0 / 2%);
-    --example-text: rgba(0, 0, 0, 0.88);
-    --example-text-secondary: rgba(0, 0, 0, 0.65);
-    --example-text-muted: rgba(0, 0, 0, 0.45);
-    --example-text-disabled: rgba(0, 0, 0, 0.25);
-    --example-border-subtle: rgba(5, 5, 5, 0.06);
-    --example-border-control: #d9d9d9;
-    --example-panel-muted: #fafafa;
-    --example-control-bg: rgba(0, 0, 0, 0.04);
-    --example-tag-bg: #f5f5f5;
+    --example-shadow: var(--scone-shadow-md);
+    --example-text: var(--foreground);
+    --example-text-secondary: color-mix(in oklch, var(--foreground) 74%, transparent);
+    --example-text-muted: var(--muted-foreground);
+    --example-text-disabled: color-mix(in oklch, var(--muted-foreground) 56%, transparent);
+    --example-border-subtle: color-mix(in oklch, var(--border) 44%, transparent);
+    --example-border-control: var(--input);
+    --example-panel-muted: var(--muted);
+    --example-control-bg: var(--secondary);
+    --example-tag-bg: var(--secondary);
     --example-scrollbar-track: transparent;
     --example-scrollbar-thumb: rgba(0, 0, 0, 0.12);
     --example-scrollbar-thumb-hover: rgba(0, 0, 0, 0.24);
@@ -215,8 +214,8 @@
 .scone-example[data-example-active="exception-500"] {
     --example-bg: #f5f5f5;
     --example-panel: #ffffff;
-    --example-accent: #1890ff;
-    --example-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    --example-accent: var(--scone-color-primary);
+    --example-shadow: var(--scone-shadow-sm);
     font-family:
         SconeSans,
         -apple-system,
@@ -818,7 +817,7 @@
 .scone-example[data-example-active="monitor"] {
     --example-bg: #f0f2f5;
     --example-panel: #ffffff;
-    --example-accent: #1677ff;
+    --example-accent: var(--scone-color-info);
     --example-shadow: none;
     font-family:
         SconeSans,
@@ -3967,8 +3966,8 @@
 .scone-example[data-example-active="workplace"] {
     --example-bg: #f0f2f5;
     --example-panel: #ffffff;
-    --example-accent: #1890ff;
-    --example-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    --example-accent: var(--scone-color-primary);
+    --example-shadow: var(--scone-shadow-sm);
 }
 
 .scone-example[data-example-active="workplace"] .scone-example-page {
@@ -4819,40 +4818,17 @@
 }
 
 .scone-example[data-example-theme="dark"] {
-    --background: #101722;
-    --foreground: #f3f7ff;
-    --card: #172131;
-    --card-foreground: var(--foreground);
-    --popover: #172131;
-    --popover-foreground: var(--foreground);
-    --primary: #69b1ff;
-    --primary-foreground: #06111f;
-    --secondary: #1c293a;
-    --secondary-foreground: var(--foreground);
-    --muted: #1c293a;
-    --muted-foreground: #a8b3c4;
-    --accent: #203249;
-    --accent-foreground: var(--foreground);
-    --border: rgb(255 255 255 / 12%);
-    --input: rgb(255 255 255 / 16%);
-    --ring: #69b1ff;
-    --sidebar: #172131;
-    --sidebar-foreground: var(--foreground);
-    --sidebar-accent: #203249;
-    --sidebar-accent-foreground: var(--foreground);
-    --sidebar-border: rgb(255 255 255 / 12%);
-    --sidebar-ring: #69b1ff;
     --example-bg: #0f1620;
-    --example-panel: #172131;
-    --example-soft: #203249;
-    --example-accent: #69b1ff;
-    --example-shadow: 0 1px 2px rgb(0 0 0 / 30%), 0 10px 24px rgb(0 0 0 / 22%);
+    --example-panel: var(--card);
+    --example-soft: var(--accent);
+    --example-accent: var(--scone-color-primary);
+    --example-shadow: var(--scone-shadow-md);
     --example-text: var(--foreground);
     --example-text-secondary: rgb(243 247 255 / 82%);
     --example-text-muted: var(--muted-foreground);
     --example-text-disabled: rgb(168 179 196 / 52%);
     --example-border-subtle: var(--border);
-    --example-border-control: rgb(255 255 255 / 18%);
+    --example-border-control: var(--input);
     --example-panel-muted: var(--secondary);
     --example-control-bg: var(--secondary);
     --example-tag-bg: var(--secondary);
