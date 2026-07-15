@@ -50,7 +50,6 @@
 .scone-example ::-webkit-scrollbar-thumb:hover {
     background: var(--example-scrollbar-thumb-hover);
 }
-
 .scone-example-sidebar,
 .scone-example-header,
 .scone-example-card,
