@@ -5,7 +5,7 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build",
+        "build": "vite build && node scripts/write-spa-fallbacks.mjs",
         "preview": "vite preview",
         "typecheck": "tsc --noEmit",
         "test": "vitest run --config ../../vitest.config.ts src/app.test.tsx"

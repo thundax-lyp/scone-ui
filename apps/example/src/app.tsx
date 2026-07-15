@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { LibraryExample } from "./examples";
 
 export const App = (): React.JSX.Element => (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
         <LibraryExample />
     </BrowserRouter>
 );
