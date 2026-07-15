@@ -59,3 +59,32 @@
 - `pnpm exec vitest run packages/scone-ui/src/components/data-display/*.test.tsx`
 - `pnpm --filter scone-ui typecheck`
 - `pnpm run build:example`
+
+## Navigation
+
+范围对象：`packages/scone-ui/src/components/navigation`
+
+审核结论：导航组件族已经通过 Tailwind / shadcn bridge 使用 package theme token，不需要迁移 example CSS 或新增组件结构样式。
+
+### Coverage
+
+| Component group           | Files                                             | Theme evidence                                                                                                                                      |
+| ------------------------- | ------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Menu and tree             | `menu.tsx`、`tree.tsx`                            | item 默认、hover、selected、focus 状态使用 `text-muted-foreground`、`bg-accent`、`text-accent-foreground`、`ring-ring`                              |
+| Tabs and segmented        | `tabs.tsx`、`segmented.tsx`                       | 容器、active、inactive 状态使用 `bg-muted`、`bg-background`、`text-foreground`、`text-muted-foreground`、`shadow-sm`                                |
+| Dropdown and command      | `dropdown.tsx`、`command.tsx`                     | overlay surface、item active、destructive、separator 使用 `bg-popover`、`text-popover-foreground`、`bg-accent`、`border-border`、`text-destructive` |
+| Breadcrumb and pagination | `breadcrumb.tsx`、`pagination.tsx`                | 链接、当前项、page item、select 使用 `text-muted-foreground`、`text-foreground`、`border-primary`、`bg-primary`、`border-border`                    |
+| Disclosure and tooltip    | `accordion.tsx`、`collapsible.tsx`、`tooltip.tsx` | focus、content、tooltip surface 使用 `ring-ring`、`text-muted-foreground`、`bg-foreground`、`text-background`                                       |
+
+### Non-Changes
+
+- 未发现 `scone-example-*` 选择器或 example 专属样式依赖。
+- 未发现导航组件内硬编码的 hex、rgb、oklch 或 `color-mix` 颜色值。
+- 未迁移 example shell、侧边栏布局或移动端页面结构样式。
+
+### Verification
+
+- `rg -n "#[0-9a-fA-F]{3,8}|rgba?\(|oklch\(|color-mix|scone-example|sky-|emerald-|amber-" packages/scone-ui/src/components/navigation`
+- `pnpm exec vitest run packages/scone-ui/src/components/navigation/*.test.tsx`
+- `pnpm --filter scone-ui typecheck`
+- `pnpm run build:example`

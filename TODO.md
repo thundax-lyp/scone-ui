@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `packages/scone-ui/src/components/navigation`：按导航组件族校准主题使用
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
-    - 范围对象：`packages/scone-ui/src/components/navigation`
-    - 处理动作：检查 Menu、Tabs、Dropdown、Breadcrumb、Pagination、Tree、Command、Tooltip 是否使用公共 token。
-    - 验收点：导航组件主题能力由 package token 覆盖，桌面和移动端 example shell 无非预期视觉回退。
-    - 重要度：8/10
-
 - [ ] `packages/scone-ui/src/components/feedback-overlay`：按反馈浮层组件族校准主题使用
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
