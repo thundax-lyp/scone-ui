@@ -31,6 +31,36 @@ import { SconeButton, SconeForm, SconeInput } from "scone-ui";
 import type { SconeButtonProps, SconeInputProps } from "scone-ui";
 ```
 
+`scone-ui/styles.css` 是零配置样式入口，已包含默认主题变量、组件样式、Tailwind bridge、shadcn 动画支持和 Geist 字体导入。普通应用只导入这一项。
+
+公开 CSS 入口：
+
+| 入口                         | 用途                                                                            |
+| ---------------------------- | ------------------------------------------------------------------------------- |
+| `scone-ui/styles.css`        | 推荐入口。完整组件库样式，包含默认 theme。                                      |
+| `scone-ui/default.theme.css` | 默认 token 文件。用于主题审阅、单独对比或高级构建拆分。普通应用不需要额外导入。 |
+| `scone-ui/styles/theme.css`  | 兼容入口，转发默认 theme。新代码不要优先使用。                                  |
+
+调用方覆盖主题时，必须在 `scone-ui/styles.css` 之后声明 token：
+
+```css
+@import "scone-ui/styles.css";
+
+:root {
+    --scone-color-primary: #1677ff;
+    --scone-color-success: #52c41a;
+}
+
+.dark,
+[data-theme="dark"] {
+    --scone-color-primary: #69b1ff;
+}
+```
+
+不要在普通应用中同时导入 `scone-ui/styles.css` 和 `scone-ui/default.theme.css`，因为 `styles.css` 已包含默认 theme。
+
+示例站 CSS 只服务在线 example 页面布局和演示视觉，不是发布包样式入口，也不是调用方应用的主题模板。
+
 AI 只能从包入口导入公共组件和类型：
 
 ```tsx
@@ -264,6 +294,7 @@ Admin Patterns are AppShell, Page, Section, FilterBar, and DataTable.
 Use Scone*Props public types when wrapping components.
 For exact props and event names, read scone-ui/dist/index.d.ts first.
 Do not import from scone-ui/components/ui, src paths, @/components/ui, shadcn/ui, or undocumented subpaths.
+Do not import scone-ui/default.theme.css together with scone-ui/styles.css in ordinary apps; styles.css already includes the default theme.
 Do not invent SconeDrawerForm, SconePopover, SconeLogo, SconeResult, SconeGrid, or other recipe names as public APIs.
 Keep fetching, routing, permissions, validation schemas, and product-specific text in the consuming app.
 ```

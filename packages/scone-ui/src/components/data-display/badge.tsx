@@ -15,9 +15,11 @@ export interface SconeBadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 const badgeToneClassNames: Record<SconeTone, string> = {
     neutral: "bg-muted text-muted-foreground ring-border",
-    info: "bg-sky-600 text-white ring-sky-600",
-    success: "bg-emerald-600 text-white ring-emerald-600",
-    warning: "bg-amber-500 text-white ring-amber-500",
+    info: "bg-[var(--scone-color-info)] text-primary-foreground ring-[var(--scone-color-info)]",
+    success:
+        "bg-[var(--scone-color-success)] text-primary-foreground ring-[var(--scone-color-success)]",
+    warning:
+        "bg-[var(--scone-color-warning)] text-primary-foreground ring-[var(--scone-color-warning)]",
     danger: "bg-destructive text-destructive-foreground ring-destructive",
 };
 

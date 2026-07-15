@@ -22,10 +22,11 @@ export interface SconeTimelineProps extends Omit<React.HTMLAttributes<HTMLDivEle
 
 const markerToneClassNames: Record<SconeTone, string> = {
     neutral: "border-border bg-background text-muted-foreground",
-    info: "border-sky-600 bg-sky-50 text-sky-700 dark:bg-sky-950 dark:text-sky-300",
+    info: "border-[var(--scone-color-info)] bg-[color-mix(in_srgb,var(--scone-color-info)_10%,transparent)] text-[var(--scone-color-info)]",
     success:
-        "border-emerald-600 bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300",
-    warning: "border-amber-500 bg-amber-50 text-amber-700 dark:bg-amber-950 dark:text-amber-300",
+        "border-[var(--scone-color-success)] bg-[color-mix(in_srgb,var(--scone-color-success)_10%,transparent)] text-[var(--scone-color-success)]",
+    warning:
+        "border-[var(--scone-color-warning)] bg-[color-mix(in_srgb,var(--scone-color-warning)_10%,transparent)] text-[var(--scone-color-warning)]",
     danger: "border-destructive bg-destructive/10 text-destructive",
 };
 

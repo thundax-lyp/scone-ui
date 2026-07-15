@@ -1,0 +1,347 @@
+.scone-example-account-page {
+    display: grid;
+    grid-template-columns: 15.875rem minmax(0, 1fr);
+    align-items: start;
+    gap: 1.5rem;
+    color: var(--example-text);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-account-profile-card,
+.scone-example-account-content-card {
+    border: 0;
+    border-radius: 0.5rem;
+    background: var(--example-panel);
+    box-shadow: var(--example-shadow);
+}
+
+.scone-example-account-profile-card > [data-slot="card-content"] {
+    height: auto;
+    padding: 1.5rem;
+}
+
+.scone-example-account-profile {
+    display: grid;
+    justify-items: center;
+    padding-bottom: 1.5rem;
+    text-align: center;
+}
+
+.scone-example-account-avatar {
+    display: grid;
+    width: 6.5rem;
+    height: 6.5rem;
+    place-items: center;
+    border-radius: 999px;
+    background:
+        radial-gradient(circle at 50% 44%, #ffffff 0 24%, transparent 25%),
+        radial-gradient(circle at 36% 43%, #263238 0 2px, transparent 3px),
+        radial-gradient(circle at 64% 43%, #263238 0 2px, transparent 3px),
+        linear-gradient(145deg, #91d5ff, #69c0ff);
+}
+
+.scone-example-account-avatar span {
+    display: block;
+    width: 3.75rem;
+    height: 2.875rem;
+    margin-top: 1.25rem;
+    border: 0.125rem solid #1677ff;
+    border-radius: 999px;
+    background: var(--example-panel);
+}
+
+.scone-example-account-profile h2 {
+    margin: 1.25rem 0 0.25rem;
+    color: var(--example-text);
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+.scone-example-account-profile p {
+    margin: 0;
+    color: var(--example-text);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-account-bio {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+    padding: 0 0 1.5rem;
+    border-bottom: 1px solid var(--example-border-subtle);
+}
+
+.scone-example-account-bio div {
+    display: grid;
+    grid-template-columns: 1.25rem minmax(0, 1fr);
+    gap: 0.5rem;
+    min-width: 0;
+}
+
+.scone-example-account-bio dt,
+.scone-example-account-bio dd {
+    margin: 0;
+}
+
+.scone-example-account-bio svg {
+    width: 0.875rem;
+    height: 0.875rem;
+    color: var(--example-text-secondary);
+}
+
+.scone-example-account-bio dd {
+    color: var(--example-text);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-account-section {
+    padding-top: 1.5rem;
+}
+
+.scone-example-account-section + .scone-example-account-section {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--example-border-subtle);
+}
+
+.scone-example-account-section h3 {
+    margin: 0 0 0.75rem;
+    color: var(--example-text);
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+.scone-example-account-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.scone-example-account-tags span,
+.scone-example-account-tags button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.375rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    background: #f5f5f5;
+    padding: 0 0.4375rem;
+    color: var(--example-text);
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+}
+
+.scone-example-account-tags button {
+    width: 1.75rem;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.scone-example-account-tags button svg {
+    width: 0.875rem;
+    height: 0.875rem;
+}
+
+.scone-example-account-teams {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.875rem 1rem;
+}
+
+.scone-example-account-teams a {
+    display: inline-flex;
+    min-width: 0;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--example-text);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    text-decoration: none;
+}
+
+.scone-example-account-teams a > span,
+.scone-example-account-mini-avatar {
+    display: inline-flex;
+    width: 1.5rem;
+    height: 1.5rem;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: #1677ff;
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.scone-example-account-teams span[data-tone="red"],
+.scone-example-account-mini-avatar {
+    background: #eb2f96;
+}
+
+.scone-example-account-teams span[data-tone="cyan"] {
+    background: #13c2c2;
+}
+
+.scone-example-account-teams span[data-tone="purple"] {
+    background: #722ed1;
+}
+
+.scone-example-account-teams span[data-tone="green"] {
+    background: #52c41a;
+}
+
+.scone-example-account-teams span[data-tone="dark"] {
+    background: #001529;
+}
+
+.scone-example-account-content-card > [data-slot="card-content"] {
+    height: auto;
+    padding: 0 1.5rem 1.5rem;
+}
+
+.scone-example-account-tabs {
+    gap: 0;
+}
+
+.scone-example-account-tabs [role="tablist"] {
+    width: calc(100% + 3rem);
+    gap: 2rem;
+    margin-inline: -1.5rem;
+    border-bottom: 1px solid var(--example-border-subtle);
+    border-radius: 0;
+    background: transparent;
+    padding: 0 1.5rem;
+}
+
+.scone-example-account-tabs [role="tab"] {
+    position: relative;
+    height: 4.5rem;
+    border-radius: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--example-text);
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+    box-shadow: none;
+}
+
+.scone-example-account-tabs [role="tab"][data-active] {
+    color: #1677ff;
+}
+
+.scone-example-account-tabs [role="tab"][data-active]::after {
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: 2px;
+    background: #1677ff;
+    content: "";
+}
+
+.scone-example-account-list {
+    margin-inline: -1.5rem;
+}
+
+.scone-example-account-article {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--example-border-subtle);
+}
+
+.scone-example-account-article h3,
+.scone-example-account-app h3,
+.scone-example-account-project h3 {
+    margin: 0;
+    color: var(--example-text);
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+.scone-example-account-article p,
+.scone-example-account-app p,
+.scone-example-account-project p {
+    margin: 0;
+    color: var(--example-text);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-account-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--example-text-muted);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-account-meta a {
+    color: #1677ff;
+    text-decoration: none;
+}
+
+.scone-example-account-actions {
+    display: flex;
+    gap: 1.5rem;
+    color: var(--example-text-muted);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-account-actions span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.scone-example-account-actions svg {
+    width: 0.875rem;
+    height: 0.875rem;
+}
+
+.scone-example-account-apps,
+.scone-example-account-projects {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    padding-top: 1.5rem;
+}
+
+.scone-example-account-app,
+.scone-example-account-project {
+    display: grid;
+    gap: 0.5rem;
+    min-width: 0;
+    border: 1px solid var(--example-border-subtle);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.scone-example-account-app {
+    grid-template-columns: 2rem minmax(0, 1fr);
+}
+
+.scone-example-account-app > span {
+    display: inline-flex;
+    width: 2rem;
+    height: 2rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: #e6f4ff;
+    color: #1677ff;
+    font-weight: 600;
+}

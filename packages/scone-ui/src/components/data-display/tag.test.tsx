@@ -16,7 +16,9 @@ describe("SconeTag", () => {
     it("maps semantic tone without embedding business vocabulary", () => {
         render(<SconeTag tone="success">Ready</SconeTag>);
 
-        expect(screen.getByText("Ready").parentElement).toHaveClass("text-emerald-700");
+        expect(screen.getByText("Ready").parentElement).toHaveClass(
+            "text-[var(--scone-color-success)]",
+        );
     });
 
     it("calls onClose from an accessible close button", () => {

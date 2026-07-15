@@ -13,11 +13,11 @@ export interface SconeTagProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 const tagToneClassNames: Record<SconeTone, string> = {
     neutral: "border-border bg-muted text-muted-foreground",
-    info: "border-sky-200 bg-sky-50 text-sky-700 dark:border-sky-900 dark:bg-sky-950 dark:text-sky-300",
+    info: "border-[color-mix(in_srgb,var(--scone-color-info)_28%,transparent)] bg-[color-mix(in_srgb,var(--scone-color-info)_10%,transparent)] text-[var(--scone-color-info)]",
     success:
-        "border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-900 dark:bg-emerald-950 dark:text-emerald-300",
+        "border-[color-mix(in_srgb,var(--scone-color-success)_28%,transparent)] bg-[color-mix(in_srgb,var(--scone-color-success)_10%,transparent)] text-[var(--scone-color-success)]",
     warning:
-        "border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-900 dark:bg-amber-950 dark:text-amber-300",
+        "border-[color-mix(in_srgb,var(--scone-color-warning)_28%,transparent)] bg-[color-mix(in_srgb,var(--scone-color-warning)_10%,transparent)] text-[var(--scone-color-warning)]",
     danger: "border-destructive/25 bg-destructive/10 text-destructive",
 };
 

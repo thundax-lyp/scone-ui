@@ -1,0 +1,471 @@
+.scone-example-standard-list-page {
+    display: grid;
+    gap: 1.5rem;
+    color: var(--example-text);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-standard-header {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.scone-example-standard-breadcrumb {
+    color: var(--example-text-muted);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-standard-header h2 {
+    margin: 0;
+    color: var(--example-text);
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+}
+
+.scone-example-standard-summary {
+    display: grid;
+    min-height: 6.625rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: center;
+    border-radius: 0.5rem;
+    background: var(--example-panel);
+    box-shadow: var(--example-shadow);
+}
+
+.scone-example-standard-summary-item {
+    display: grid;
+    justify-items: center;
+    gap: 0.25rem;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.scone-example-standard-summary-item:not(:last-child) {
+    border-right: 1px solid var(--example-border-subtle);
+}
+
+.scone-example-standard-summary-item span {
+    color: var(--example-text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-standard-summary-item strong {
+    color: var(--example-text);
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 400;
+}
+
+.scone-example-standard-card {
+    border-color: var(--example-border-subtle);
+    border-radius: 0.5rem;
+    background: var(--example-panel);
+    box-shadow: var(--example-shadow);
+}
+
+.scone-example-standard-card [data-slot="card-content"] {
+    display: block;
+    padding: 0;
+}
+
+.scone-example-standard-toolbar {
+    display: grid;
+    min-height: 4rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid var(--example-border-subtle);
+    padding: 1rem 1.25rem;
+}
+
+.scone-example-standard-toolbar h3 {
+    margin: 0;
+    color: var(--example-text);
+    font-size: 0.9375rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+}
+
+.scone-example-standard-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.scone-example-standard-controls [data-scone-navigation="segmented"] {
+    border: 0;
+    border-radius: 0.375rem;
+    background: var(--example-control-bg);
+    padding: 0;
+}
+
+.scone-example-standard-controls [data-scone-navigation="segmented"] button {
+    min-height: 2rem;
+    border-radius: 0.375rem;
+    padding: 0.25rem 0.875rem;
+    color: var(--example-text);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    font-weight: 400;
+}
+
+.scone-example-standard-controls [data-scone-search-input] {
+    width: 17rem;
+}
+
+.scone-example-standard-controls input {
+    height: 2rem;
+    border-color: transparent;
+    border-radius: 0.375rem;
+    background: var(--example-control-bg);
+    color: var(--example-text);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    box-shadow: none;
+}
+
+.scone-example-standard-controls input::placeholder {
+    color: var(--example-text-disabled);
+}
+
+.scone-example-standard-list {
+    border-top: 1px solid var(--example-border-subtle);
+    color: var(--example-text);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-standard-list > div {
+    padding: 1rem 1.5rem;
+}
+
+.scone-example-standard-item {
+    display: grid;
+    grid-template-columns:
+        4rem minmax(9rem, 1.5fr) minmax(5rem, 0.6fr) minmax(9.5rem, 0.85fr)
+        minmax(8rem, 0.8fr) auto;
+    align-items: center;
+    gap: 1.5rem;
+    min-height: 5.6875rem;
+}
+
+.scone-example-standard-avatar {
+    width: 3rem;
+    height: 3rem;
+    border: 0;
+    border-radius: 0.375rem;
+    color: #ffffff;
+    font-size: 1.5rem;
+    line-height: 1;
+    font-weight: 600;
+    box-shadow: none;
+}
+
+.scone-example-standard-avatar[data-tone="blue"] {
+    background: #1677ff;
+}
+
+.scone-example-standard-avatar[data-tone="red"] {
+    background: #d32029;
+}
+
+.scone-example-standard-avatar[data-tone="cyan"] {
+    background: #13c2c2;
+}
+
+.scone-example-standard-avatar[data-tone="green"] {
+    background: #52c41a;
+}
+
+.scone-example-standard-avatar[data-tone="orange"] {
+    background: #fa8c16;
+}
+
+.scone-example-standard-meta {
+    min-width: 0;
+}
+
+.scone-example-standard-meta h4 {
+    margin: 0 0 0.25rem;
+    color: var(--example-text);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    font-weight: 500;
+}
+
+.scone-example-standard-meta p {
+    display: -webkit-box;
+    margin: 0;
+    overflow: hidden;
+    color: var(--example-text-muted);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.scone-example-standard-owner,
+.scone-example-standard-date {
+    display: grid;
+    gap: 0.25rem;
+    margin: 0;
+    color: var(--example-text);
+}
+
+.scone-example-standard-owner dt,
+.scone-example-standard-date dt {
+    color: var(--example-text-muted);
+    font-weight: 400;
+}
+
+.scone-example-standard-owner dd,
+.scone-example-standard-date dd {
+    margin: 0;
+}
+
+.scone-example-standard-progress [data-scone-progress] {
+    min-width: 6.75rem;
+}
+
+.scone-example-standard-progress [data-slot="progress"] {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+.scone-example-standard-progress [data-slot="progress-indicator"] {
+    background: #1677ff;
+}
+
+.scone-example-standard-progress-error {
+    display: inline-grid;
+    width: 0.875rem;
+    height: 0.875rem;
+    place-items: center;
+    border-radius: 999px;
+    background: #ff4d4f;
+}
+
+.scone-example-standard-progress-error::before {
+    content: "×";
+    color: #ffffff;
+    font-size: 0.625rem;
+    line-height: 1;
+}
+
+.scone-example-standard-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    white-space: nowrap;
+}
+
+.scone-example-standard-actions button {
+    height: auto;
+    min-height: 0;
+    padding: 0;
+    color: #1677ff;
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    font-weight: 400;
+}
+
+.scone-example-standard-pagination {
+    display: flex;
+    min-height: 4rem;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem 1.5rem;
+    color: var(--example-text);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-standard-pagination button {
+    display: inline-grid;
+    min-width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border: 1px solid var(--example-border-control);
+    border-radius: 0.375rem;
+    background: var(--example-panel);
+    color: var(--example-text);
+}
+
+.scone-example-standard-pagination button[aria-current="page"] {
+    border-color: #1677ff;
+    color: #1677ff;
+}
+
+.scone-example-standard-pagination input {
+    width: 3rem;
+    height: 2rem;
+    border: 1px solid var(--example-border-control);
+    border-radius: 0.375rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.scone-example-card,
+.scone-example-hero-card,
+.scone-example-result-card {
+    border-color: color-mix(in oklch, var(--border) 82%, transparent);
+    border-radius: 8px;
+}
+
+.scone-example-card [data-slot="card-content"] {
+    height: 100%;
+}
+
+.scone-example-metric-card {
+    height: 14.8125rem;
+}
+
+.scone-example-metric-card [data-slot="card-content"] {
+    padding-block: 1.25rem;
+}
+
+.scone-example-statistic > div:first-child,
+.scone-example-statistic > div:last-child {
+    color: color-mix(in oklch, var(--foreground) 54%, transparent);
+    font-weight: 400;
+}
+
+.scone-example-statistic [class*="text-2xl"] {
+    font-size: 30px;
+    line-height: 38px;
+    font-weight: 400;
+}
+
+.scone-example-metric-title {
+    display: flex;
+    min-height: 3.5rem;
+    align-items: center;
+    margin: -1.25rem -1rem 0;
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.5rem;
+    font-size: 1rem;
+    line-height: 1.5715;
+    font-weight: 600;
+    color: var(--foreground);
+}
+
+.scone-example-analysis-card {
+    height: 25.75rem;
+}
+
+.scone-example-analysis-card > [data-slot="card-content"] {
+    height: 100%;
+    padding: 0;
+}
+
+.scone-example-analysis-tabs {
+    display: flex;
+    height: 3.5rem;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    padding-inline: 1rem 1.5rem;
+}
+
+.scone-example-analysis-tabs [data-scone-navigation="tabs"] {
+    min-width: 14rem;
+}
+
+.scone-example-analysis-filter {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    color: var(--foreground);
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.scone-example-analysis-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 18.5rem;
+    height: calc(100% - 3.5rem);
+    gap: 2rem;
+    padding: 1.5rem 1.5rem 1.25rem;
+}
+
+.scone-example-ranking {
+    display: grid;
+    align-content: start;
+    gap: 1.25rem;
+    padding-top: 1.75rem;
+}
+
+.scone-example-ranking h2 {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 22px;
+    font-weight: 600;
+}
+
+.scone-example-rank-index {
+    display: inline-grid;
+    width: 1.25rem;
+    height: 1.25rem;
+    place-items: center;
+    border-radius: 999px;
+    background: color-mix(in oklch, var(--foreground) 14%, transparent);
+    color: var(--foreground);
+    font-size: 0.75rem;
+    line-height: 1;
+}
+
+.scone-example-pagination {
+    display: flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    border-top: 1px solid var(--border);
+    padding: 0.75rem 0 0;
+    color: color-mix(in oklch, var(--foreground) 54%, transparent);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-pagination-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.scone-example-pagination button {
+    display: inline-flex;
+    min-width: 2rem;
+    height: 2rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--card);
+    padding: 0 0.75rem;
+    color: var(--foreground);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    transition:
+        border-color 0.16s ease,
+        color 0.16s ease,
+        background 0.16s ease;
+}
+
+.scone-example-pagination button:hover:not(:disabled) {
+    border-color: var(--example-accent);
+    color: var(--example-accent);
+}
+
+.scone-example-pagination button[aria-current="page"] {
+    border-color: var(--example-accent);
+    color: var(--example-accent);
+}
+
+.scone-example-pagination button:disabled {
+    cursor: not-allowed;
+    color: color-mix(in oklch, var(--foreground) 24%, transparent);
+}

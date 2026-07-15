@@ -1,0 +1,1072 @@
+.scone-example[data-example-active="workplace"] {
+    --example-bg: #f0f2f5;
+    --example-panel: #ffffff;
+    --example-accent: var(--scone-color-primary);
+    --example-shadow: var(--scone-shadow-sm);
+}
+
+.scone-example[data-example-active="workplace"] .scone-example-page {
+    padding: 0;
+}
+
+.scone-example-workplace {
+    min-width: 0;
+    color: var(--example-text);
+    font-family:
+        SconeSans,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        "Helvetica Neue",
+        Arial,
+        "Noto Sans",
+        sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    letter-spacing: 0;
+}
+
+.scone-example-workplace-hero {
+    min-height: 12.75rem;
+    padding: 0.5rem 2.5rem 1rem;
+    background: var(--example-panel);
+}
+
+.scone-example-workplace-breadcrumb {
+    min-height: 2rem;
+    padding-top: 0.5rem;
+    color: var(--example-text-muted);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-workplace-title-row {
+    display: flex;
+    min-height: 3rem;
+    align-items: center;
+    padding-top: 0.5rem;
+}
+
+.scone-example-workplace-title-row h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    line-height: 2rem;
+    font-weight: 500;
+    letter-spacing: 0;
+}
+
+.scone-example-workplace-intro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5.5rem;
+    padding-top: 0.75rem;
+}
+
+.scone-example-workplace-profile {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.scone-example-workplace-profile .scone-admin-logo-mark {
+    width: 4.5rem;
+    height: 4.5rem;
+}
+
+.scone-example-workplace-greeting {
+    margin: 0 0 0.75rem;
+    color: var(--example-text);
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 500;
+}
+
+.scone-example-workplace-role {
+    margin: 0;
+    color: var(--example-text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-workplace-stats {
+    display: grid;
+    width: max-content;
+    grid-template-columns: repeat(3, max-content);
+    color: var(--example-text);
+}
+
+.scone-example-workplace-stats > div {
+    min-width: 6.625rem;
+    padding-inline: 2rem;
+    text-align: center;
+}
+
+.scone-example-workplace-stats > div:not(:last-child) {
+    border-right: 1px solid var(--example-border-subtle);
+}
+
+.scone-example-workplace-stats span {
+    display: block;
+    padding-bottom: 0.25rem;
+    color: var(--example-text-muted);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-workplace-stats strong {
+    display: block;
+    color: var(--example-text);
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 400;
+}
+
+.scone-example-workplace-stats em {
+    color: var(--example-text-muted);
+    font-size: 0.875rem;
+    font-style: normal;
+    line-height: 1.375rem;
+}
+
+.scone-example-workplace-content {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(18.375rem, 1fr);
+    gap: 1.5rem;
+    padding: 1.5rem 2.5rem 2rem;
+}
+
+.scone-example-workplace-main,
+.scone-example-workplace-side {
+    display: grid;
+    align-content: start;
+    gap: 1.5rem;
+    min-width: 0;
+}
+
+.scone-example-workplace-card {
+    overflow: hidden;
+    border: 0;
+    border-radius: 0.125rem;
+    background: var(--example-panel);
+    padding-block: 0;
+    box-shadow: var(--example-shadow);
+}
+
+.scone-example-workplace-card > [data-slot="card-header"] {
+    display: flex;
+    min-height: 3.5rem;
+    align-items: center;
+    border-bottom: 1px solid var(--example-border-subtle);
+    padding: 0 1.5rem;
+}
+
+.scone-example-workplace-card > [data-slot="card-header"] [data-slot="card-title"] {
+    width: 100%;
+    color: var(--example-text);
+    font-size: 1rem;
+    line-height: 1.5715;
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+.scone-example-workplace-card > [data-slot="card-content"] {
+    padding: 0;
+}
+
+.scone-example-workplace-card > [data-slot="card-content"] > .relative {
+    min-height: 0;
+}
+
+.scone-example-workplace-card-title {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.scone-example-workplace-card-action {
+    display: inline-flex;
+    align-items: center;
+    color: var(--example-text-muted);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    font-weight: 400;
+}
+
+.scone-example-workplace-link,
+.scone-example-workplace a {
+    color: #1677ff;
+    text-decoration: none;
+}
+
+.scone-example-workplace-link:hover,
+.scone-example-workplace a:hover {
+    color: #4096ff;
+}
+
+.scone-example-workplace-projects {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: -1px;
+    margin-left: -1px;
+}
+
+.scone-example-workplace-project {
+    position: relative;
+    display: block;
+    min-height: 9rem;
+    border-top: 1px solid var(--example-border-subtle);
+    border-left: 1px solid var(--example-border-subtle);
+    padding: 1.5rem;
+    color: var(--example-text);
+}
+
+.scone-example-workplace-project:hover {
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+}
+
+.scone-example-workplace-project-icon {
+    display: inline-flex;
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    color: #1677ff;
+}
+
+.scone-example-workplace-project-icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.scone-example-workplace-project-body {
+    display: grid;
+    min-width: 0;
+    gap: 0.625rem;
+}
+
+.scone-example-workplace-project-name {
+    overflow: hidden;
+    padding-left: 2.75rem;
+    color: var(--example-text);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.scone-example-workplace-project-description {
+    display: -webkit-box;
+    overflow: hidden;
+    min-height: 2.75rem;
+    color: var(--example-text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.scone-example-workplace-project-meta {
+    display: flex;
+    min-width: 0;
+    margin-top: 0.25rem;
+    justify-content: space-between;
+    gap: 0.75rem;
+    color: var(--example-text-muted);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-workplace-project-meta span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.scone-example-workplace-activities {
+    display: grid;
+    margin: 0;
+    padding: 0 1.5rem;
+    list-style: none;
+}
+
+.scone-example-workplace-activities li {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 1rem;
+    padding: 1rem 0;
+}
+
+.scone-example-workplace-activities li:not(:last-child) {
+    border-bottom: 1px solid var(--example-border-subtle);
+}
+
+.scone-example-workplace-activities h3 {
+    margin: 0;
+    color: var(--example-text);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
+.scone-example-workplace-activities time {
+    display: block;
+    margin-top: 0.25rem;
+    color: var(--example-text-muted);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-workplace-quick-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+    padding: 1.5rem;
+}
+
+.scone-example-workplace-quick-links a,
+.scone-example-workplace-add {
+    min-width: 3.25rem;
+    height: 1.375rem;
+    padding: 0;
+    color: var(--example-text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-workplace-add {
+    gap: 0.25rem;
+    color: #1677ff;
+}
+
+.scone-example-workplace-index {
+    display: grid;
+    justify-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.scone-example-workplace-index svg {
+    width: 100%;
+    max-width: 13rem;
+    height: 5.5rem;
+    color: #1677ff;
+    opacity: 0.28;
+}
+
+.scone-example-workplace-index span {
+    color: var(--example-text);
+    font-size: 2rem;
+    line-height: 2.5rem;
+    font-weight: 500;
+}
+
+.scone-example-workplace-index p,
+.scone-example-workplace-guide p {
+    margin: 0;
+    color: var(--example-text-muted);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-workplace-teams {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 1.5rem;
+    padding: 1.5rem;
+}
+
+.scone-example-workplace-teams a {
+    display: inline-flex;
+    min-width: 0;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--example-text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-workplace-teams span {
+    display: inline-flex;
+    width: 1.5rem;
+    height: 1.5rem;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(22, 119, 255, 0.1);
+    color: #1677ff;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.scone-example-workplace-guide {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.5rem;
+}
+
+.scone-example-workplace-guide > svg {
+    width: 2rem;
+    height: 2rem;
+    color: #1677ff;
+}
+
+.scone-example-workplace-guide a {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-floating {
+    position: fixed;
+    right: 1rem;
+    top: 35%;
+    z-index: 100;
+    box-shadow: var(--example-shadow);
+}
+
+.scone-admin-logo {
+    --scone-logo-plate: #e6f4ff;
+    --scone-logo-plate-stroke: #1890ff;
+    --scone-logo-scone: #fff7df;
+    --scone-logo-bacon: #ff7a59;
+    --scone-logo-sandwich: #ffffff;
+    --scone-logo-cut: #1677ff;
+
+    display: inline-flex;
+    min-width: 0;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--example-accent);
+}
+
+.scone-example[data-example-theme="dark"] .scone-admin-logo {
+    --scone-logo-plate: #12243a;
+    --scone-logo-plate-stroke: #69b1ff;
+    --scone-logo-scone: #ffe8a3;
+    --scone-logo-bacon: #ff9a7a;
+    --scone-logo-sandwich: #f3f7ff;
+    --scone-logo-cut: #91caff;
+}
+
+.scone-admin-logo-mark {
+    width: 1.75rem;
+    height: 1.75rem;
+    flex: none;
+    overflow: visible;
+}
+
+.scone-admin-logo[data-size="sm"] .scone-admin-logo-mark {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.scone-admin-logo[data-size="lg"] .scone-admin-logo-mark {
+    width: 3.25rem;
+    height: 3.25rem;
+}
+
+.scone-admin-logo-plate {
+    fill: var(--scone-logo-plate);
+    stroke: var(--scone-logo-plate-stroke);
+    stroke-width: 3;
+}
+
+.scone-admin-logo-scone {
+    fill: var(--scone-logo-scone);
+}
+
+.scone-admin-logo-bacon {
+    fill: none;
+    stroke: var(--scone-logo-bacon);
+    stroke-linecap: round;
+    stroke-width: 5;
+}
+
+.scone-admin-logo-sandwich {
+    fill: var(--scone-logo-sandwich);
+}
+
+.scone-admin-logo-cut {
+    fill: none;
+    stroke: var(--scone-logo-cut);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 5;
+}
+
+.scone-admin-logo-wordmark {
+    display: grid;
+    min-width: 0;
+    color: var(--foreground);
+    line-height: 1.1;
+}
+
+.scone-admin-logo-wordmark span:first-child {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0;
+}
+
+.scone-admin-logo-wordmark span:last-child {
+    display: none;
+    margin-top: 0.25rem;
+    font-size: 0.8rem;
+    color: var(--muted-foreground);
+}
+
+@media (max-width: 767px) {
+    .scone-example-header {
+        padding-inline: 0.75rem;
+    }
+
+    .scone-example-header [data-scone-app-shell-header-actions] {
+        gap: 0.25rem;
+    }
+
+    .scone-example-header .scone-admin-logo-wordmark span:first-child {
+        font-size: 1rem;
+        line-height: 1;
+    }
+
+    .scone-example-api-action,
+    .scone-example-user span {
+        display: none;
+    }
+
+    .scone-example-body {
+        display: grid;
+    }
+
+    .scone-example-sidebar {
+        height: auto;
+        width: 100%;
+    }
+
+    .scone-example-sidebar-toggle {
+        right: 0.75rem;
+    }
+
+    .scone-example-page {
+        padding: 1rem;
+    }
+
+    .scone-example[data-example-active="basic-form"] .scone-example-page,
+    .scone-example[data-example-active="step-form"] .scone-example-page,
+    .scone-example[data-example-active="advanced-form"] .scone-example-page,
+    .scone-example[data-example-active="workplace"] .scone-example-page,
+    .scone-example[data-example-active="basic-list"] .scone-example-page,
+    .scone-example[data-example-active="advanced-profile"] .scone-example-page,
+    .scone-example[data-example-active="account-center"] .scone-example-page,
+    .scone-example[data-example-active="card-list"] .scone-example-page,
+    .scone-example[data-example-active="success"] .scone-example-page,
+    .scone-example[data-example-active="fail"] .scone-example-page,
+    .scone-example[data-example-active="exception-403"] .scone-example-page,
+    .scone-example[data-example-active="exception-404"] .scone-example-page,
+    .scone-example[data-example-active="exception-500"] .scone-example-page {
+        padding: 1rem;
+    }
+
+    .scone-example-fail-result-card {
+        min-height: 32rem;
+        padding: 5.5rem 1rem 2.5rem;
+    }
+
+    .scone-example-fail-result-errors {
+        box-sizing: border-box;
+        width: 100%;
+        margin-top: 1.5rem;
+        padding: 1.25rem 1rem;
+    }
+
+    .scone-example-fail-result-errors li {
+        flex-wrap: wrap;
+        row-gap: 0.25rem;
+    }
+
+    .scone-example[data-example-active="workplace"] .scone-example-page {
+        padding: 0;
+    }
+
+    .scone-example-workplace-hero {
+        min-height: 0;
+        padding: 1rem;
+    }
+
+    .scone-example-workplace-intro {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .scone-example-workplace-profile {
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .scone-example-workplace-profile .scone-admin-logo-mark {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .scone-example-workplace-stats {
+        width: 100%;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .scone-example-workplace-stats > div {
+        min-width: 0;
+        padding-inline: 0.75rem;
+    }
+
+    .scone-example-workplace-content {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .scone-example-workplace-projects,
+    .scone-example-workplace-teams {
+        grid-template-columns: 1fr;
+    }
+
+    .scone-example-workplace-project {
+        min-height: 0;
+    }
+
+    .scone-example-card-list-header {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .scone-example-card-list-illustration {
+        display: none;
+    }
+
+    .scone-example-card-list-heading h2 {
+        margin-bottom: 0.75rem;
+    }
+
+    .scone-example-card-list-links {
+        gap: 1rem;
+    }
+
+    .scone-example-card-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1rem;
+    }
+
+    .scone-example-card-add,
+    .scone-example-product-card {
+        width: 100%;
+    }
+
+    .scone-example-standard-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .scone-example-standard-summary-item:not(:last-child) {
+        border-right: 0;
+        border-bottom: 1px solid var(--example-border-subtle);
+    }
+
+    .scone-example-standard-toolbar,
+    .scone-example-standard-controls,
+    .scone-example-standard-item {
+        grid-template-columns: 1fr;
+    }
+
+    .scone-example-standard-controls {
+        display: grid;
+    }
+
+    .scone-example-standard-controls [data-scone-search-input] {
+        width: 100%;
+    }
+
+    .scone-example-standard-item {
+        gap: 0.75rem;
+        justify-items: start;
+    }
+
+    .scone-example-standard-pagination {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    .scone-example-step-form-card [data-slot="card-content"] {
+        padding: 1.5rem;
+    }
+
+    .scone-example-step-list {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .scone-example-step-item:not(:last-child)::after {
+        display: none;
+    }
+
+    .scone-example-step-title {
+        min-width: 0;
+    }
+
+    .scone-example-receiver-row {
+        grid-template-columns: 5.5rem minmax(0, 1fr);
+    }
+
+    .scone-example-pay-type {
+        width: 5.5rem;
+        min-width: 5.5rem;
+    }
+
+    .scone-example-advanced-card-body {
+        padding: 1.5rem;
+    }
+
+    .scone-example-advanced-grid {
+        grid-template-columns: 1fr;
+        column-gap: 0;
+    }
+
+    .scone-example-advanced-footer {
+        left: 0;
+    }
+
+    .scone-example-advanced-footer-actions {
+        padding-inline: 1rem;
+    }
+
+    .scone-example-advanced-profile-header {
+        margin: -1rem -1rem 0;
+        padding: 0.75rem 1rem 0;
+    }
+
+    .scone-example-advanced-profile-title,
+    .scone-example-advanced-profile-summary {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .scone-example-advanced-profile-actions {
+        flex-wrap: wrap;
+        padding-top: 0;
+    }
+
+    .scone-example-advanced-profile-aside {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .scone-example-advanced-profile-aside > div {
+        padding: 0.75rem 0 0;
+    }
+
+    .scone-example-advanced-profile-aside > div + div {
+        border-top: 1px solid var(--example-border-subtle);
+        border-left: 0;
+    }
+
+    .scone-example-advanced-profile-tabs {
+        margin-inline: -1rem;
+        padding-inline: 1rem;
+    }
+
+    .scone-example-advanced-profile-card > [data-slot="card-content"] {
+        padding: 1rem;
+    }
+
+    .scone-example-advanced-profile-steps {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1rem;
+    }
+
+    .scone-example-advanced-profile-steps li:not(:last-child)::after {
+        top: 2.25rem;
+        right: auto;
+        bottom: -0.75rem;
+        left: 1rem;
+        width: 1px;
+        height: auto;
+    }
+
+    .scone-example-advanced-profile-descriptions dl > div {
+        grid-template-columns: 5.5rem minmax(0, 1fr);
+    }
+
+    .scone-example-advanced-profile-inner-card {
+        padding: 1rem;
+    }
+
+    .scone-example-account-page {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1rem;
+    }
+
+    .scone-example-account-profile-card > [data-slot="card-content"] {
+        padding: 1rem;
+    }
+
+    .scone-example-account-content-card > [data-slot="card-content"] {
+        padding-inline: 1rem;
+    }
+
+    .scone-example-account-tabs [role="tablist"],
+    .scone-example-account-list {
+        width: calc(100% + 2rem);
+        margin-inline: -1rem;
+    }
+
+    .scone-example-account-tabs [role="tablist"] {
+        gap: 1.25rem;
+        overflow-x: auto;
+        padding-inline: 1rem;
+    }
+
+    .scone-example-account-teams,
+    .scone-example-account-apps,
+    .scone-example-account-projects {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .scone-example-account-article {
+        padding: 1rem;
+    }
+
+    .scone-example-floating {
+        display: none;
+    }
+}
+
+.scone-example[data-example-theme="dark"] {
+    --example-bg: #0f1620;
+    --example-panel: var(--card);
+    --example-soft: var(--accent);
+    --example-accent: var(--scone-color-primary);
+    --example-shadow: var(--scone-shadow-md);
+    --example-text: var(--foreground);
+    --example-text-secondary: rgb(243 247 255 / 82%);
+    --example-text-muted: var(--muted-foreground);
+    --example-text-disabled: rgb(168 179 196 / 52%);
+    --example-border-subtle: var(--border);
+    --example-border-control: var(--input);
+    --example-panel-muted: var(--secondary);
+    --example-control-bg: var(--secondary);
+    --example-tag-bg: var(--secondary);
+    --example-scrollbar-track: #0f1620;
+    --example-scrollbar-thumb: rgb(255 255 255 / 12%);
+    --example-scrollbar-thumb-hover: rgb(255 255 255 / 24%);
+}
+
+.scone-example[data-example-theme="dark"] .scone-example-page {
+    color: var(--example-text);
+}
+
+.scone-example[data-example-theme="dark"] .scone-example-header {
+    border-bottom: 1px solid var(--example-border-subtle);
+    background: var(--example-soft);
+}
+
+.scone-example[data-example-theme="dark"] .scone-example-sidebar {
+    background:
+        linear-gradient(180deg, rgb(49 75 112 / 38%), transparent 58%), var(--example-panel);
+}
+
+.scone-example[data-example-theme="dark"]
+    .scone-example-sidebar
+    [data-scone-navigation="menu"]
+    button {
+    color: var(--example-text-secondary);
+}
+
+.scone-example[data-example-theme="dark"]
+    .scone-example-sidebar
+    [data-scone-navigation="menu"]
+    button.scone-example-menu-root-active {
+    color: var(--example-accent);
+}
+
+.scone-example[data-example-theme="dark"]
+    .scone-example-sidebar
+    [data-scone-navigation="menu"]
+    button[aria-current="page"] {
+    background: rgb(105 177 255 / 18%);
+    color: var(--example-text);
+}
+
+.scone-example[data-example-theme="dark"]
+    :is(
+        .scone-example-card,
+        .scone-example-hero-card,
+        .scone-example-result-card,
+        .scone-example-workplace-hero,
+        .scone-example-workplace-card,
+        .scone-example-basic-form-card,
+        .scone-example-step-form-card,
+        .scone-example-advanced-card,
+        .scone-example-table-list-filter,
+        .scone-example-table-list-card,
+        .scone-example-standard-summary,
+        .scone-example-standard-card,
+        .scone-example-card-add,
+        .scone-example-product-card,
+        .scone-example-basic-profile-card,
+        .scone-example-advanced-profile-header,
+        .scone-example-advanced-profile-card,
+        .scone-result-page,
+        .scone-example-fail-result-card,
+        .scone-exception-card,
+        .scone-example-account-profile-card,
+        .scone-example-account-content-card,
+        .scone-account-settings-page,
+        .scone-example-advanced-footer
+    ) {
+    border-color: var(--example-border-subtle);
+    background: var(--example-panel);
+    color: var(--example-text);
+    box-shadow: var(--example-shadow);
+}
+
+.scone-example[data-example-theme="dark"] .scone-example-advanced-footer {
+    box-shadow: 0 -1px 0 var(--example-border-subtle);
+}
+
+.scone-example[data-example-theme="dark"]
+    :is(
+        .scone-result-detail,
+        .scone-example-fail-result-errors,
+        .scone-example-product-actions,
+        .scone-example-basic-profile-total,
+        .scone-example-advanced-profile-inner-card,
+        .scone-example-account-tags span,
+        .scone-example-account-tags button,
+        .scone-account-settings-nav button[aria-current="page"],
+        .scone-example-card-list-illustration span,
+        .scone-account-settings-avatar-image,
+        .scone-account-settings-upload,
+        .scone-example-table-list-reset,
+        .scone-example-advanced-add,
+        .scone-example-advanced-reset
+    ) {
+    border-color: var(--example-border-subtle);
+    background: var(--example-panel-muted);
+    color: var(--example-text);
+}
+
+.scone-example[data-example-theme="dark"]
+    .scone-example-page
+    :is(h2, h3, h4, label, strong, dt, dd, th, td) {
+    color: var(--example-text);
+}
+
+.scone-example[data-example-theme="dark"]
+    .scone-example-page
+    :is(
+        p,
+        small,
+        time,
+        em,
+        .scone-example-basic-profile-breadcrumb,
+        .scone-example-table-list-breadcrumb,
+        .scone-example-standard-breadcrumb,
+        .scone-example-card-list-breadcrumb,
+        .scone-example-advanced-profile-breadcrumb
+    ) {
+    color: var(--example-text-muted);
+}
+
+.scone-example[data-example-theme="dark"] .scone-example-page a,
+.scone-example[data-example-theme="dark"] .scone-example-page button[variant="link"],
+.scone-example[data-example-theme="dark"] .scone-example-table-list-expand,
+.scone-example[data-example-theme="dark"] .scone-example-card-list-links button,
+.scone-example[data-example-theme="dark"] .scone-example-workplace-link {
+    color: var(--example-accent);
+}
+
+.scone-example[data-example-theme="dark"]
+    :is(
+        input,
+        textarea,
+        select,
+        button[role="combobox"],
+        [data-scone-date-picker] > button,
+        .scone-example-date-range,
+        .scone-example-amount-input
+    ) {
+    border-color: var(--example-border-control);
+    background: var(--example-control-bg);
+    color: var(--example-text);
+    box-shadow: none;
+}
+
+.scone-example[data-example-theme="dark"] :is(input, textarea)::placeholder {
+    color: var(--example-text-disabled);
+}
+
+.scone-example[data-example-theme="dark"] :is(table, thead, tbody, tr, td, th) {
+    border-color: var(--example-border-subtle);
+}
+
+.scone-example[data-example-theme="dark"] :is(th, .scone-example-table-list th) {
+    background: var(--example-panel-muted);
+    color: var(--example-text);
+}
+
+.scone-example[data-example-theme="dark"] :is(td, .scone-example-table-list td) {
+    color: var(--example-text);
+}
+
+.scone-example[data-example-theme="dark"]
+    :is(
+        .scone-example-table-list table,
+        .scone-example-basic-profile-table table,
+        .scone-example-advanced-profile-table table
+    ) {
+    background: var(--example-panel);
+    color: var(--example-text);
+}
+
+.scone-example[data-example-theme="dark"]
+    :is(
+        .scone-example-standard-controls [data-scone-navigation="segmented"],
+        .scone-example-standard-controls [data-scone-navigation="segmented"] button,
+        .scone-example-account-tabs [role="tablist"],
+        .scone-example-advanced-profile-tabs [role="tablist"],
+        .scone-example-advanced-profile-log-tabs [role="tablist"]
+    ) {
+    border-color: var(--example-border-subtle);
+    background: transparent;
+    color: var(--example-text);
+}
+
+.scone-example[data-example-theme="dark"]
+    :is(
+        .scone-example-account-tabs [role="tab"],
+        .scone-example-advanced-profile-tabs [role="tab"],
+        .scone-example-advanced-profile-log-tabs [role="tab"]
+    ) {
+    color: var(--example-text);
+}
+
+.scone-example[data-example-theme="dark"]
+    :is(
+        .scone-example-account-tabs [role="tab"][data-active],
+        .scone-example-advanced-profile-tabs [role="tab"][data-active],
+        .scone-example-advanced-profile-log-tabs [role="tab"][data-active]
+    ) {
+    color: var(--example-accent);
+}

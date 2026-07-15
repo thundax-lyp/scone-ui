@@ -1,0 +1,538 @@
+.scone-example-basic-profile-page {
+    display: grid;
+    gap: 1.5rem;
+    color: var(--example-text);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-basic-profile-header {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.scone-example-basic-profile-breadcrumb {
+    color: var(--example-text-muted);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-basic-profile-header h2 {
+    margin: 0;
+    color: var(--example-text);
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+.scone-example-basic-profile-card {
+    border: 0;
+    border-radius: 0.5rem;
+    background: var(--example-panel);
+    box-shadow: var(--example-shadow);
+}
+
+.scone-example-basic-profile-card > [data-slot="card-content"] {
+    height: auto;
+    padding: 1.5rem 2rem 0.5rem;
+}
+
+.scone-example-basic-profile-section {
+    min-width: 0;
+    padding-bottom: 1.5rem;
+}
+
+.scone-example-basic-profile-section + .scone-example-basic-profile-section {
+    border-top: 1px solid var(--example-border-subtle);
+    padding-top: 1.5rem;
+}
+
+.scone-example-basic-profile-section h3 {
+    margin: 0 0 1rem;
+    color: var(--example-text);
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+.scone-example-basic-profile-descriptions {
+    color: var(--example-text);
+}
+
+.scone-example-basic-profile-descriptions dl {
+    gap: 0.75rem 1rem;
+}
+
+.scone-example-basic-profile-descriptions dl > div {
+    display: grid;
+    grid-template-columns: 6rem minmax(0, 1fr);
+    gap: 0.5rem;
+    padding: 0;
+}
+
+.scone-example-basic-profile-descriptions dt {
+    color: var(--example-text-muted);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    text-align: right;
+}
+
+.scone-example-basic-profile-descriptions dd {
+    color: var(--example-text);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-basic-profile-status > span {
+    min-height: 1.375rem;
+    border-color: rgba(82, 196, 26, 0.24);
+    background: #f6ffed;
+    color: #389e0d;
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+}
+
+.scone-example-basic-profile-table {
+    border: 1px solid var(--example-border-subtle);
+    border-bottom: 0;
+    border-radius: 0.375rem 0.375rem 0 0;
+}
+
+.scone-example-basic-profile-table table {
+    color: var(--example-text);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-basic-profile-table th {
+    height: 3.375rem;
+    border-bottom: 1px solid var(--example-border-subtle);
+    background: var(--example-panel-muted);
+    padding: 1rem;
+    color: var(--example-text);
+    font-weight: 600;
+}
+
+.scone-example-basic-profile-table td {
+    height: 3.375rem;
+    border-bottom: 1px solid var(--example-border-subtle);
+    padding: 1rem;
+    color: var(--example-text);
+}
+
+.scone-example-basic-profile-total {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 6rem;
+    align-items: center;
+    min-height: 3.375rem;
+    border: 1px solid var(--example-border-subtle);
+    border-top: 0;
+    border-radius: 0 0 0.375rem 0.375rem;
+    padding-inline: 1rem;
+    background: var(--example-panel-muted);
+    color: var(--example-text);
+}
+
+.scone-example-basic-profile-total span {
+    justify-self: end;
+    padding-right: 1rem;
+}
+
+.scone-example-basic-profile-total strong {
+    justify-self: end;
+    font-weight: 600;
+}
+
+.scone-example-basic-profile-timeline ol {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.scone-example-basic-profile-timeline li {
+    grid-template-columns: 1rem minmax(0, 1fr);
+    gap: 0.75rem;
+}
+
+.scone-example-basic-profile-timeline li::after {
+    left: 0.4375rem;
+    background: var(--example-border-subtle);
+}
+
+.scone-example-basic-profile-timeline li > span {
+    width: 0.875rem;
+    height: 0.875rem;
+    border: 2px solid #1677ff;
+    background: var(--example-panel);
+}
+
+.scone-example-basic-profile-timeline li > div {
+    padding-bottom: 1.25rem;
+}
+
+.scone-example-basic-profile-timeline [class*="font-medium"] {
+    color: var(--example-text);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    font-weight: 400;
+}
+
+.scone-example-basic-profile-timeline [class*="text-xs"],
+.scone-example-basic-profile-timeline [class*="text-muted-foreground"] {
+    color: var(--example-text-muted);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-advanced-profile-page {
+    display: grid;
+    gap: 1.5rem;
+    color: var(--example-text);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-advanced-profile-header {
+    display: grid;
+    gap: 1rem;
+    margin: -1.5rem -2.5rem 0;
+    padding: 0.5rem 2.5rem 0;
+    background: var(--example-panel);
+}
+
+.scone-example-advanced-profile-title {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 1.5rem;
+}
+
+.scone-example-advanced-profile-breadcrumb {
+    margin-bottom: 1rem;
+    color: var(--example-text-muted);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-advanced-profile-title h2 {
+    margin: 0;
+    color: var(--example-text);
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+.scone-example-advanced-profile-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-top: 2.5rem;
+}
+
+.scone-example-advanced-profile-actions button {
+    height: 2rem;
+    border-radius: 0.375rem;
+    padding-inline: 0.9375rem;
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    font-weight: 400;
+}
+
+.scone-example-advanced-profile-actions button:not(:first-child):not(:last-child) {
+    border-color: var(--example-border-control);
+    background: var(--example-panel);
+    color: var(--example-text);
+}
+
+.scone-example-advanced-profile-actions button:last-child {
+    border-color: #1677ff;
+    background: #1677ff;
+    color: #ffffff;
+}
+
+.scone-example-advanced-profile-summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 17.5rem;
+    gap: 2rem;
+    align-items: start;
+}
+
+.scone-example-advanced-profile-summary .scone-example-advanced-profile-descriptions {
+    max-width: 37.5rem;
+}
+
+.scone-example-advanced-profile-aside {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    align-self: stretch;
+}
+
+.scone-example-advanced-profile-aside > div {
+    display: grid;
+    align-content: start;
+    gap: 0.5rem;
+    min-width: 0;
+    padding-left: 2rem;
+}
+
+.scone-example-advanced-profile-aside > div + div {
+    border-left: 1px solid var(--example-border-subtle);
+}
+
+.scone-example-advanced-profile-aside span {
+    color: var(--example-text-muted);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-advanced-profile-aside strong {
+    color: var(--example-text);
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 400;
+}
+
+.scone-example-advanced-profile-tabs {
+    gap: 0;
+    min-height: 3.875rem;
+    margin: 0 -2.5rem;
+    padding-inline: 2.5rem;
+    border-top: 0;
+}
+
+.scone-example-advanced-profile-tabs [role="tablist"],
+.scone-example-advanced-profile-log-tabs [role="tablist"] {
+    width: 100%;
+    gap: 2rem;
+    border-radius: 0;
+    border-bottom: 1px solid var(--example-border-subtle);
+    background: transparent;
+    padding: 0;
+    color: var(--example-text);
+}
+
+.scone-example-advanced-profile-tabs [role="tab"],
+.scone-example-advanced-profile-log-tabs [role="tab"] {
+    position: relative;
+    height: 3.875rem;
+    border-radius: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--example-text);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    font-weight: 400;
+    box-shadow: none;
+}
+
+.scone-example-advanced-profile-tabs [role="tab"][data-active]::after,
+.scone-example-advanced-profile-log-tabs [role="tab"][data-active]::after {
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: 2px;
+    background: #1677ff;
+    content: "";
+}
+
+.scone-example-advanced-profile-card {
+    border: 0;
+    border-radius: 0.5rem;
+    background: var(--example-panel);
+    box-shadow: var(--example-shadow);
+}
+
+.scone-example-advanced-profile-card > [data-slot="card-content"] {
+    height: auto;
+    padding: 1.5rem;
+}
+
+.scone-example-advanced-profile-section {
+    min-width: 0;
+}
+
+.scone-example-advanced-profile-section + .scone-example-advanced-profile-section {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--example-border-subtle);
+    padding-top: 1.5rem;
+}
+
+.scone-example-advanced-profile-section h3,
+.scone-example-advanced-profile-inner-title {
+    margin: 0 0 1rem;
+    color: var(--example-text);
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+.scone-example-advanced-profile-progress-card > [data-slot="card-content"] {
+    padding-bottom: 1.5625rem;
+}
+
+.scone-example-advanced-profile-steps {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.scone-example-advanced-profile-steps li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 0.5rem;
+    min-width: 0;
+}
+
+.scone-example-advanced-profile-steps li:not(:last-child)::after {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    left: 2.5rem;
+    height: 1px;
+    background: #e5e5e5;
+    content: "";
+}
+
+.scone-example-advanced-profile-steps li > span {
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    background: #1677ff;
+    color: #ffffff;
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+.scone-example-advanced-profile-steps li[data-state="todo"] > span {
+    border: 1px solid var(--example-text-disabled);
+    background: var(--example-panel);
+    color: var(--example-text-muted);
+}
+
+.scone-example-advanced-profile-steps li > div {
+    display: grid;
+    gap: 0.25rem;
+    min-width: 0;
+    padding-right: 1rem;
+}
+
+.scone-example-advanced-profile-steps strong {
+    color: var(--example-text);
+    font-size: 1rem;
+    line-height: 2rem;
+    font-weight: 400;
+}
+
+.scone-example-advanced-profile-steps em,
+.scone-example-advanced-profile-steps small {
+    color: var(--example-text-muted);
+    font-size: 0.875rem;
+    font-style: normal;
+    line-height: 1.375rem;
+}
+
+.scone-example-advanced-profile-descriptions dl {
+    gap: 0.5rem 1rem;
+}
+
+.scone-example-advanced-profile-descriptions dl > div {
+    display: grid;
+    grid-template-columns: 6rem minmax(0, 1fr);
+    gap: 0.5rem;
+    padding: 0;
+}
+
+.scone-example-advanced-profile-descriptions dt {
+    color: var(--example-text-muted);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    text-align: right;
+}
+
+.scone-example-advanced-profile-descriptions dd {
+    color: var(--example-text);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-advanced-profile-inner-card {
+    border: 1px solid #f0f0f0;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+}
+
+.scone-example-advanced-profile-inner-title {
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-advanced-profile-divider {
+    height: 1px;
+    margin: 1.5rem 0;
+    background: var(--example-border-subtle);
+}
+
+.scone-example-advanced-profile-empty-card > [data-slot="card-content"] {
+    min-height: 14.5625rem;
+}
+
+.scone-example-advanced-profile-empty {
+    min-height: 8.75rem;
+    border: 0;
+    background: transparent;
+    color: var(--example-text-disabled);
+}
+
+.scone-example-advanced-profile-log-card > [data-slot="card-content"] {
+    padding-top: 0;
+}
+
+.scone-example-advanced-profile-log-tabs {
+    gap: 0.5rem;
+}
+
+.scone-example-advanced-profile-table {
+    border: 0;
+}
+
+.scone-example-advanced-profile-table table {
+    color: var(--example-text);
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+}
+
+.scone-example-advanced-profile-table th {
+    height: 3.375rem;
+    border-bottom: 1px solid var(--example-border-subtle);
+    background: var(--example-panel-muted);
+    padding: 1rem;
+    color: var(--example-text);
+    font-weight: 600;
+}
+
+.scone-example-advanced-profile-table td {
+    height: 3.375rem;
+    border-bottom: 1px solid var(--example-border-subtle);
+    padding: 1rem;
+    color: var(--example-text);
+}
+
+.scone-example-advanced-profile-log-badge > span {
+    min-height: 1.375rem;
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+}

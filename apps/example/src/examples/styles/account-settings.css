@@ -1,0 +1,273 @@
+.scone-account-settings-page {
+    display: grid;
+    grid-template-columns: 224px minmax(0, 1fr);
+    min-height: 600px;
+    border-radius: 2px;
+    background: var(--example-panel);
+    color: var(--example-text);
+    font-family:
+        SconeSans,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        "Helvetica Neue",
+        Arial,
+        "Noto Sans",
+        sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.scone-account-settings-nav {
+    display: grid;
+    align-content: start;
+    gap: 4px;
+    border-right: 1px solid var(--example-border-subtle);
+    padding: 24px 0;
+}
+
+.scone-account-settings-nav button {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0 24px;
+    color: var(--example-text);
+    font-size: 14px;
+    line-height: 40px;
+    text-align: left;
+}
+
+.scone-account-settings-nav button[aria-current="page"] {
+    background: #e6f4ff;
+    color: #1890ff;
+}
+
+.scone-account-settings-nav button[aria-current="page"]::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 3px;
+    content: "";
+    background: #1890ff;
+}
+
+.scone-account-settings-content {
+    min-width: 0;
+    padding: 24px 40px;
+}
+
+.scone-account-settings-content h2 {
+    margin: 0 0 24px;
+    color: var(--example-text);
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 500;
+    letter-spacing: 0;
+}
+
+.scone-account-settings-body {
+    display: grid;
+    grid-template-columns: minmax(280px, 328px) minmax(180px, 1fr);
+    align-items: start;
+    gap: 104px;
+}
+
+.scone-account-settings-form {
+    display: grid;
+    gap: 16px;
+    min-width: 0;
+}
+
+.scone-account-settings-form label {
+    display: grid;
+    gap: 8px;
+}
+
+.scone-account-settings-form label > span,
+.scone-account-settings-avatar > span {
+    color: var(--example-text);
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+}
+
+.scone-account-settings-form input,
+.scone-account-settings-form textarea,
+.scone-account-settings-form select {
+    width: 100%;
+    min-width: 0;
+    border: 1px solid var(--example-border-control);
+    border-radius: 6px;
+    background: var(--example-panel);
+    color: var(--example-text);
+    font-size: 14px;
+    line-height: 22px;
+    box-shadow: none;
+}
+
+.scone-account-settings-form input,
+.scone-account-settings-form select {
+    height: 32px;
+    padding: 4px 11px;
+}
+
+.scone-account-settings-form textarea {
+    min-height: 88px;
+    padding: 5px 11px;
+    resize: vertical;
+}
+
+.scone-account-settings-form input:focus,
+.scone-account-settings-form textarea:focus,
+.scone-account-settings-form select:focus {
+    border-color: #40a9ff;
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.1);
+    outline: 0;
+}
+
+.scone-account-settings-location {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.scone-account-settings-submit {
+    width: fit-content;
+    height: 32px;
+    border-color: #1890ff;
+    border-radius: 6px;
+    background: #1890ff;
+    padding: 4px 15px;
+    color: #fff;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+}
+
+.scone-account-settings-avatar {
+    display: grid;
+    justify-items: start;
+    gap: 8px;
+    padding-top: 1px;
+}
+
+.scone-account-settings-avatar-image {
+    width: 144px;
+    height: 144px;
+    border: 0;
+    background: var(--example-tag-bg);
+    color: var(--example-accent);
+    font-size: 56px;
+    line-height: 1;
+}
+
+.scone-account-settings-upload {
+    height: 32px;
+    border-color: var(--example-border-control);
+    border-radius: 6px;
+    background: var(--example-panel);
+    padding: 4px 15px;
+    color: var(--example-text);
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+}
+
+.scone-account-settings-upload svg {
+    width: 14px;
+    height: 14px;
+}
+
+.scone-account-settings-list {
+    display: grid;
+    width: min(100%, 640px);
+    border-top: 1px solid var(--example-border-subtle);
+}
+
+.scone-account-settings-list-item {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 24px;
+    min-height: 73px;
+    border-bottom: 1px solid var(--example-border-subtle);
+}
+
+.scone-account-settings-list-item strong {
+    display: block;
+    color: var(--example-text);
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+}
+
+.scone-account-settings-list-item p {
+    margin: 4px 0 0;
+    color: var(--example-text-muted);
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.scone-account-settings-list-item button {
+    border: 0;
+    background: transparent;
+    padding: 0;
+    color: #1890ff;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+@media (max-width: 900px) {
+    .scone-example[data-example-active="account-settings"] .scone-example-page {
+        padding: 1rem;
+    }
+
+    .scone-account-settings-page {
+        grid-template-columns: minmax(0, 1fr);
+        min-height: auto;
+    }
+
+    .scone-account-settings-nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        border-right: 0;
+        border-bottom: 1px solid var(--example-border-subtle);
+        padding: 12px;
+    }
+
+    .scone-account-settings-nav button {
+        border-radius: 6px;
+        padding-inline: 12px;
+    }
+
+    .scone-account-settings-nav button[aria-current="page"]::after {
+        display: none;
+    }
+
+    .scone-account-settings-content {
+        padding: 20px;
+    }
+
+    .scone-account-settings-body {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 24px;
+    }
+
+    .scone-account-settings-avatar {
+        order: -1;
+    }
+
+    .scone-account-settings-list-item {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
+        padding: 12px 0;
+    }
+
+    .scone-account-settings-list-item button {
+        justify-self: start;
+    }
+}

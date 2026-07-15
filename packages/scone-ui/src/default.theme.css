@@ -1,0 +1,157 @@
+:root {
+    --scone-color-background: #ffffff;
+    --scone-color-foreground: rgba(0, 0, 0, 0.88);
+    --scone-color-muted: #fafafa;
+    --scone-color-muted-foreground: rgba(0, 0, 0, 0.45);
+    --scone-color-border: #d9d9d9;
+    --scone-color-ring: rgba(24, 144, 255, 0.2);
+    --scone-color-primary: #1890ff;
+    --scone-color-primary-foreground: #ffffff;
+    --scone-color-neutral: #f5f5f5;
+    --scone-color-info: #1677ff;
+    --scone-color-success: #52c41a;
+    --scone-color-warning: #faad14;
+    --scone-color-danger: #ff4d4f;
+    --scone-color-overlay-backdrop: rgb(0 0 0 / 10%);
+
+    --scone-spacing-2xs: 0.125rem;
+    --scone-spacing-xs: 0.25rem;
+    --scone-spacing-sm: 0.5rem;
+    --scone-spacing-md: 0.75rem;
+    --scone-spacing-lg: 1rem;
+    --scone-spacing-xl: 1.5rem;
+
+    --scone-radius-sm: 0.375rem;
+    --scone-radius-md: 0.5rem;
+    --scone-radius-lg: 0.75rem;
+    --scone-radius-full: 9999px;
+
+    --scone-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.03);
+    --scone-shadow-md:
+        0 1px 2px rgb(0 0 0 / 3%), 0 1px 6px -1px rgb(0 0 0 / 2%), 0 2px 4px rgb(0 0 0 / 2%);
+    --scone-shadow-lg: 0 10px 24px rgb(0 0 0 / 12%);
+
+    --scone-font-body: "Geist Variable", sans-serif;
+    --scone-font-label: "Geist Variable", sans-serif;
+    --scone-font-title: "Geist Variable", sans-serif;
+    --scone-font-mono:
+        ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", monospace;
+
+    --scone-focus-ring: 0 0 0 2px var(--scone-color-ring);
+    --scone-focus-ring-offset: 2px;
+
+    --scone-duration-fast: 120ms;
+    --scone-duration-default: 180ms;
+    --scone-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+
+    --scone-z-sticky: 100;
+    --scone-z-dropdown: 1000;
+    --scone-z-popover: 1100;
+    --scone-z-drawer: 1200;
+    --scone-z-modal: 1300;
+    --scone-z-toast: 1400;
+
+    --scone-control-height-sm: 2rem;
+    --scone-control-height-md: 2.5rem;
+    --scone-control-height-lg: 3rem;
+    --scone-icon-size-sm: 1rem;
+    --scone-icon-size-md: 1.25rem;
+    --scone-icon-size-lg: 1.5rem;
+    --scone-hit-area-min: 2.5rem;
+
+    --scone-page-width-narrow: 48rem;
+    --scone-page-width-content: 72rem;
+    --scone-page-width-wide: 96rem;
+    --scone-page-width-full: 100%;
+    --scone-drawer-width-sm: 20rem;
+    --scone-drawer-width-md: 28rem;
+    --scone-drawer-width-lg: 36rem;
+    --scone-drawer-width-full: 100%;
+
+    --background: var(--scone-color-background);
+    --foreground: var(--scone-color-foreground);
+    --card: var(--scone-color-background);
+    --card-foreground: var(--scone-color-foreground);
+    --popover: var(--scone-color-background);
+    --popover-foreground: var(--scone-color-foreground);
+    --primary: var(--scone-color-primary);
+    --primary-foreground: var(--scone-color-primary-foreground);
+    --secondary: var(--scone-color-neutral);
+    --secondary-foreground: var(--scone-color-foreground);
+    --muted: var(--scone-color-muted);
+    --muted-foreground: var(--scone-color-muted-foreground);
+    --accent: var(--scone-color-neutral);
+    --accent-foreground: var(--scone-color-foreground);
+    --destructive: var(--scone-color-danger);
+    --border: var(--scone-color-border);
+    --input: var(--scone-color-border);
+    --ring: var(--scone-color-ring);
+    --chart-1: var(--scone-color-neutral);
+    --chart-2: var(--scone-color-muted-foreground);
+    --chart-3: var(--scone-color-primary);
+    --chart-4: var(--scone-color-info);
+    --chart-5: var(--scone-color-success);
+    --radius: var(--scone-radius-md);
+    --sidebar: var(--scone-color-background);
+    --sidebar-foreground: var(--scone-color-foreground);
+    --sidebar-primary: var(--scone-color-primary);
+    --sidebar-primary-foreground: var(--scone-color-primary-foreground);
+    --sidebar-accent: var(--scone-color-neutral);
+    --sidebar-accent-foreground: var(--scone-color-foreground);
+    --sidebar-border: var(--scone-color-border);
+    --sidebar-ring: var(--scone-color-ring);
+}
+
+.dark,
+[data-theme="dark"] {
+    --scone-color-background: #101722;
+    --scone-color-foreground: #f3f7ff;
+    --scone-color-muted: #1c293a;
+    --scone-color-muted-foreground: #a8b3c4;
+    --scone-color-border: rgb(255 255 255 / 18%);
+    --scone-color-ring: rgb(105 177 255 / 30%);
+    --scone-color-primary: #69b1ff;
+    --scone-color-primary-foreground: #06111f;
+    --scone-color-neutral: #1c293a;
+    --scone-color-info: #69b1ff;
+    --scone-color-success: #73d13d;
+    --scone-color-warning: #ffc53d;
+    --scone-color-danger: #ff7875;
+    --scone-color-overlay-backdrop: rgb(0 0 0 / 45%);
+
+    --scone-shadow-sm: 0 1px 2px rgb(0 0 0 / 30%);
+    --scone-shadow-md: 0 1px 2px rgb(0 0 0 / 30%), 0 10px 24px rgb(0 0 0 / 22%);
+    --scone-shadow-lg: 0 18px 36px rgb(0 0 0 / 30%);
+
+    --background: var(--scone-color-background);
+    --foreground: var(--scone-color-foreground);
+    --card: #172131;
+    --card-foreground: var(--scone-color-foreground);
+    --popover: #172131;
+    --popover-foreground: var(--scone-color-foreground);
+    --primary: var(--scone-color-primary);
+    --primary-foreground: var(--scone-color-primary-foreground);
+    --secondary: var(--scone-color-neutral);
+    --secondary-foreground: var(--scone-color-foreground);
+    --muted: var(--scone-color-muted);
+    --muted-foreground: var(--scone-color-muted-foreground);
+    --accent: #203249;
+    --accent-foreground: var(--scone-color-foreground);
+    --destructive: var(--scone-color-danger);
+    --border: var(--scone-color-border);
+    --input: var(--scone-color-border);
+    --ring: var(--scone-color-ring);
+    --chart-1: var(--scone-color-neutral);
+    --chart-2: var(--scone-color-muted-foreground);
+    --chart-3: var(--scone-color-primary);
+    --chart-4: var(--scone-color-info);
+    --chart-5: var(--scone-color-success);
+    --sidebar: #172131;
+    --sidebar-foreground: var(--scone-color-foreground);
+    --sidebar-primary: var(--scone-color-primary);
+    --sidebar-primary-foreground: var(--scone-color-primary-foreground);
+    --sidebar-accent: #203249;
+    --sidebar-accent-foreground: var(--scone-color-foreground);
+    --sidebar-border: var(--scone-color-border);
+    --sidebar-ring: var(--scone-color-ring);
+}

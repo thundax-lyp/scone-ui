@@ -1,0 +1,114 @@
+.scone-exception-card {
+    display: block;
+    min-height: min(586px, calc(100vh - 10rem));
+    border-color: #f0f0f0;
+    border-radius: 2px;
+    background: var(--example-panel);
+    color: var(--example-text);
+    box-shadow: none;
+    text-align: initial;
+}
+
+.scone-exception-page {
+    display: grid;
+    grid-template-columns: minmax(17.5rem, 28rem) minmax(16rem, 22rem);
+    min-height: min(586px, calc(100vh - 10rem));
+    align-items: center;
+    justify-content: center;
+    gap: 6.5rem;
+    padding: 3rem 1rem 5rem;
+    color: var(--example-text);
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.scone-exception-illustration {
+    display: block;
+    width: min(100%, 28rem);
+    height: auto;
+}
+
+.scone-exception-content {
+    min-width: 0;
+    padding-bottom: 2rem;
+}
+
+.scone-exception-content h2 {
+    margin: 0 0 1.5rem;
+    color: #434e59;
+    font-size: 72px;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: 0;
+}
+
+.scone-exception-content p {
+    margin: 0;
+    color: var(--example-text-muted);
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
+.scone-exception-action {
+    min-width: 5.5rem;
+    height: 2rem;
+    margin-top: 1.5rem;
+    border-color: #1890ff;
+    border-radius: 6px;
+    background: #1890ff;
+    padding-inline: 0.9375rem;
+    color: #ffffff;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+    box-shadow: 0 2px 0 rgb(5 145 255 / 10%);
+    letter-spacing: 0;
+}
+
+.scone-exception-action:hover {
+    border-color: #40a9ff;
+    background: #40a9ff;
+    color: #ffffff;
+}
+
+@media (max-width: 900px) {
+    .scone-example[data-example-active="exception-403"] .scone-example-page,
+    .scone-example[data-example-active="exception-404"] .scone-example-page,
+    .scone-example[data-example-active="exception-500"] .scone-example-page {
+        padding: 1rem;
+    }
+
+    .scone-exception-card {
+        min-height: auto;
+    }
+
+    .scone-exception-page {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        gap: 1.25rem;
+        align-content: center;
+        justify-items: center;
+        padding: 2rem 1rem;
+        text-align: center;
+    }
+
+    .scone-exception-illustration {
+        max-width: 14rem;
+    }
+
+    .scone-exception-content {
+        padding-bottom: 0;
+    }
+
+    .scone-exception-content h2 {
+        margin-bottom: 0.75rem;
+        font-size: 48px;
+    }
+
+    .scone-exception-content p {
+        font-size: 16px;
+        line-height: 24px;
+    }
+}

@@ -113,8 +113,8 @@ const placementClasses: Record<NotificationPlacement, string> = {
 const toneClasses: Record<SconeTone, string> = {
     neutral: "border-border",
     info: "border-primary/30",
-    success: "border-emerald-500/30",
-    warning: "border-amber-500/30",
+    success: "border-[color-mix(in_srgb,var(--scone-color-success)_30%,transparent)]",
+    warning: "border-[color-mix(in_srgb,var(--scone-color-warning)_30%,transparent)]",
     danger: "border-destructive/30",
 };
 
