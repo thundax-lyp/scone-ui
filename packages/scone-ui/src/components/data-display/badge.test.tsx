@@ -14,7 +14,10 @@ describe("SconeBadge", () => {
     it("renders a dot badge with an accessible label", () => {
         render(<SconeBadge dot tone="success" ariaLabel="Online status" />);
 
-        expect(screen.getByLabelText("Online status")).toHaveClass("size-2.5", "bg-emerald-600");
+        expect(screen.getByLabelText("Online status")).toHaveClass(
+            "size-2.5",
+            "bg-[var(--scone-color-success)]",
+        );
     });
 
     it("wraps marked children without changing their readable text", () => {
@@ -96,7 +99,7 @@ describe("SconeBadge", () => {
         expect(root).toHaveAttribute("role", "status");
         expect(root).toHaveStyle({ marginTop: "4px" });
         expect(indicator).not.toHaveClass("custom-badge");
-        expect(indicator).toHaveClass("bg-amber-500", "min-w-5");
+        expect(indicator).toHaveClass("bg-[var(--scone-color-warning)]", "min-w-5");
         expect(indicator).toHaveAccessibleName("Unread messages");
     });
 });

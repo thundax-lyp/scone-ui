@@ -18,9 +18,9 @@ export interface SconeStatisticProps extends Omit<
 
 const statisticToneClassNames: Record<SconeTone, string> = {
     neutral: "text-foreground",
-    info: "text-sky-700 dark:text-sky-300",
-    success: "text-emerald-700 dark:text-emerald-300",
-    warning: "text-amber-700 dark:text-amber-300",
+    info: "text-[var(--scone-color-info)]",
+    success: "text-[var(--scone-color-success)]",
+    warning: "text-[var(--scone-color-warning)]",
     danger: "text-destructive",
 };
 

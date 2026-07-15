@@ -37,8 +37,8 @@ const toneClassNames: Record<SconeTypographyTone, string> = {
     default: "text-foreground",
     muted: "text-muted-foreground",
     danger: "text-destructive",
-    success: "text-emerald-700 dark:text-emerald-400",
-    warning: "text-amber-700 dark:text-amber-400",
+    success: "text-[var(--scone-color-success)]",
+    warning: "text-[var(--scone-color-warning)]",
 };
 
 const getTruncateClassName = (truncate: boolean | number | undefined): string | undefined => {

@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `packages/scone-ui/src/components/data-display`：按数据展示组件族校准主题使用
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
-    - 范围对象：`packages/scone-ui/src/components/data-display`
-    - 处理动作：检查 Card、Table、Descriptions、List、Statistic、Badge、Tag、Timeline 是否使用公共 token。
-    - 验收点：数据展示组件主题能力由 package token 覆盖，分析页和查询表格页无非预期视觉回退。
-    - 重要度：9/10
-
 - [ ] `packages/scone-ui/src/components/navigation`：按导航组件族校准主题使用
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`

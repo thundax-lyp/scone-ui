@@ -32,3 +32,30 @@
 - `pnpm exec vitest run packages/scone-ui/src/components/form/*.test.tsx`
 - `pnpm --filter scone-ui typecheck`
 - `pnpm run build:example`
+
+## Data Display
+
+范围对象：`packages/scone-ui/src/components/data-display`
+
+审核结论：数据展示组件族的基础面板、列表、表格和描述组件已经使用 package theme bridge；语义 tone 组件已从 Tailwind 内置色阶调整为 `--scone-color-*` token 引用。
+
+### Coverage
+
+| Component group     | Files                                                   | Theme evidence                                                                                                                               |
+| ------------------- | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| Surface display     | `card.tsx`、`list.tsx`、`table.tsx`、`descriptions.tsx` | 表面、边框、loading、empty、error 状态使用 `bg-card`、`bg-background`、`border-border`、`text-muted-foreground`、`text-destructive`          |
+| Semantic indicators | `badge.tsx`、`tag.tsx`、`timeline.tsx`、`statistic.tsx` | `info`、`success`、`warning` 使用 `--scone-color-info`、`--scone-color-success`、`--scone-color-warning`；`danger` 使用 `destructive` bridge |
+| Typography          | `typography.tsx`                                        | 默认、弱化、危险、成功、警告文本使用 `foreground`、`muted-foreground`、`destructive` 和 `--scone-color-*` token                              |
+
+### Non-Changes
+
+- 未发现 `scone-example-*` 选择器或 example 专属样式依赖。
+- 未迁移 dashboard、table-list 或 account 页面布局样式。
+- 未改变数据展示组件 props、渲染结构或语义 tone API。
+
+### Verification
+
+- `rg -n "sky-|emerald-|amber-" packages/scone-ui/src/components/data-display`
+- `pnpm exec vitest run packages/scone-ui/src/components/data-display/*.test.tsx`
+- `pnpm --filter scone-ui typecheck`
+- `pnpm run build:example`

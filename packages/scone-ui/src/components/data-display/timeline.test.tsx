@@ -28,7 +28,7 @@ describe("SconeTimeline", () => {
         expect(screen.getByText("Created")).toBeInTheDocument();
         expect(screen.getByText("Record created")).toBeInTheDocument();
         expect(screen.getByText("09:00")).toBeInTheDocument();
-        expect(screen.getByText("1")).toHaveClass("border-sky-600");
+        expect(screen.getByText("1")).toHaveClass("border-[var(--scone-color-info)]");
     });
 
     it("renders pending at the end by default and at the front when reversed", () => {
