@@ -23,16 +23,16 @@
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
     - 范围对象：`packages/scone-ui/src/default.theme.css`、`packages/scone-ui/src/styles.css`、`packages/scone-ui/src/styles/theme.css`
-    - 处理动作：新增 `default.theme.css`，调整 `styles.css` 默认主题引用，并明确 `styles/theme.css` 兼容关系。
-    - 验收点：`styles.css` 仍可零配置使用，`default.theme.css` 可被单独解析，且不存在重复冲突主题块。
+    - 处理动作：新增 `default.theme.css`，调整 `styles.css` 默认主题引用，并保留 `styles/theme.css` 作为公开兼容入口。
+    - 验收点：`styles.css` 仍可零配置使用，`default.theme.css` 和 `styles/theme.css` 均可被单独解析，且不存在重复冲突主题块。
     - 重要度：10/10
 
 - [ ] `packages/scone-ui/package.json`：发布 default theme CSS
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
     - 范围对象：`packages/scone-ui/package.json`
-    - 处理动作：更新 `exports`、`files` 和 `build:styles`，把 `dist/default.theme.css` 纳入 npm 包。
-    - 验收点：`pnpm run pack:check` 输出包含 `dist/default.theme.css`，且 `scone-ui/styles.css` 保持可用。
+    - 处理动作：更新 `exports`、`files` 和 `build:styles`，把 `dist/default.theme.css` 与 `dist/styles/theme.css` 纳入 npm 包。
+    - 验收点：`pnpm run pack:check` 输出包含两个 theme CSS 入口，且 `scone-ui/styles.css` 保持可用。
     - 重要度：10/10
 
 - [ ] `packages/scone-ui/src/default.theme.css`：抽取 foundation 默认主题 token
@@ -94,9 +94,9 @@
 - [ ] `packages/scone-ui/README.md`：同步默认主题导入说明
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
-    - 范围对象：`packages/scone-ui/README.md`、`packages/scone-ui/PACKAGE-AI-GUIDE.md`
-    - 处理动作：说明 `styles.css` 零配置入口、`default.theme.css` 默认 token 入口和调用方覆盖顺序。
-    - 验收点：包 README 与 AI Guide 对导入顺序、覆盖方式和 example CSS 边界描述一致。
+    - 范围对象：`packages/scone-ui/README.md`、`packages/scone-ui/PACKAGE-AI-GUIDE.md`、`apps/scone-docs/static/llms.txt`
+    - 处理动作：说明 `styles.css` 零配置入口、`default.theme.css` 默认 token 入口、`styles/theme.css` 兼容入口和调用方覆盖顺序，并同步 `llms.txt`。
+    - 验收点：包 README、AI Guide 与 `llms.txt` 对导入顺序、覆盖方式和 example CSS 边界描述一致。
     - 重要度：9/10
 
 - [ ] `apps/scone-docs/docs`：同步文档站默认主题说明
@@ -124,15 +124,3 @@
     - 重要度：7/10
 
 ## 待讨论项
-
-- [ ] 是否保留 `scone-ui/styles/theme.css` 作为公开兼容入口
-    - 任务类型：待讨论项
-    - 关联任务：`packages/scone-ui/src/default.theme.css`
-    - 决策要求：确认 `styles/theme.css` 只作为内部兼容文件、公开导出兼容入口，还是在迁移后删除。
-    - 重要度：8/10
-
-- [ ] 是否把 `llms.txt` 同步列出 `default.theme.css`
-    - 任务类型：待讨论项
-    - 关联任务：`packages/scone-ui/README.md`
-    - 决策要求：确认 `docs/llms.txt` 是否需要把 `default.theme.css` 写入 AI 读取入口和导入规则。
-    - 重要度：6/10
