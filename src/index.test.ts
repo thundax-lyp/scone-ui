@@ -568,7 +568,7 @@ describe("public index exports", () => {
         expect(SconeAvatar).toBeDefined();
 
         expectTypeOf<SconeBreadcrumbProps["items"][number]["key"]>().toEqualTypeOf<Key>();
-        expectTypeOf<SconeSegmentedProps["options"]>().toEqualTypeOf<SconeOption<string>[]>();
+        expectTypeOf<SconeSegmentedProps["options"]>().toEqualTypeOf<SconeOption[]>();
         expectTypeOf<SconeTabsItem["value"]>().toEqualTypeOf<string>();
         expectTypeOf<SconeTabsProps["activationMode"]>().toEqualTypeOf<
             "automatic" | "manual" | undefined
