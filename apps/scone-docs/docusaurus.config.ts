@@ -1,6 +1,13 @@
 import type { Config } from "@docusaurus/types";
 import type { Options as PresetOptions } from "@docusaurus/preset-classic";
 
+const publicLinks = {
+    docs: "https://thundax-lyp.github.io/scone-ui/docs/",
+    example: "https://thundax-lyp.github.io/scone-ui/example/",
+    github: "https://github.com/thundax-lyp/scone-ui",
+    npm: "https://www.npmjs.com/package/scone-ui",
+} as const;
+
 const config: Config = {
     title: "Scone UI Docs",
     tagline: "后台组件库帮助文档",
@@ -46,17 +53,17 @@ const config: Config = {
                     label: "文档",
                 },
                 {
-                    href: "https://thundax-lyp.github.io/scone-ui/example/",
+                    href: publicLinks.example,
                     label: "示例",
                     position: "left",
                 },
                 {
-                    href: "https://github.com/thundax-lyp/scone-ui",
+                    href: publicLinks.github,
                     label: "GitHub",
                     position: "right",
                 },
                 {
-                    href: "https://www.npmjs.com/package/scone-ui",
+                    href: publicLinks.npm,
                     label: "npm",
                     position: "right",
                 },
@@ -83,15 +90,19 @@ const config: Config = {
                     items: [
                         {
                             label: "示例站",
-                            href: "https://thundax-lyp.github.io/scone-ui/example/",
+                            href: publicLinks.example,
+                        },
+                        {
+                            label: "文档站",
+                            href: publicLinks.docs,
                         },
                         {
                             label: "GitHub",
-                            href: "https://github.com/thundax-lyp/scone-ui",
+                            href: publicLinks.github,
                         },
                         {
                             label: "npm",
-                            href: "https://www.npmjs.com/package/scone-ui",
+                            href: publicLinks.npm,
                         },
                     ],
                 },

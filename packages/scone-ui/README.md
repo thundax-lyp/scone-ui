@@ -1,5 +1,7 @@
 # scone-ui
 
+[Docs](https://thundax-lyp.github.io/scone-ui/docs/) · [Example](https://thundax-lyp.github.io/scone-ui/example/) · [GitHub](https://github.com/thundax-lyp/scone-ui) · [npm](https://www.npmjs.com/package/scone-ui)
+
 本文档是随 `scone-ui` 发布包分发的独立 AI 入口文档，仅用于指导 AI、IDE Agent 和代码生成器理解并使用本包。
 
 `scone-ui` 是面向后台管理界面的 React + Tailwind CSS 组件库。它提供可复用的表单、数据展示、布局、反馈浮层、导航、媒体组件，以及后台页面 Pattern。
@@ -27,6 +29,13 @@ pnpm add scone-ui
 ```sh
 pnpm add react react-dom
 ```
+
+## 公开入口
+
+- 文档地址：[https://thundax-lyp.github.io/scone-ui/docs/](https://thundax-lyp.github.io/scone-ui/docs/)
+- 示例地址：[https://thundax-lyp.github.io/scone-ui/example/](https://thundax-lyp.github.io/scone-ui/example/)
+- GitHub 代码地址：[https://github.com/thundax-lyp/scone-ui](https://github.com/thundax-lyp/scone-ui)
+- npm 地址：[https://www.npmjs.com/package/scone-ui](https://www.npmjs.com/package/scone-ui)
 
 ## 样式
 

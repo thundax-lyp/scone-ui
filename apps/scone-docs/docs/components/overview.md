@@ -22,6 +22,10 @@ sidebar_position: 1
         <strong>快速开始</strong>
         <span>安装、样式引入和基础组件示例。</span>
     </a>
+    <a className="scone-overview-resource-card" href="https://thundax-lyp.github.io/scone-ui/docs/">
+        <strong>文档站</strong>
+        <span>公开文档入口。</span>
+    </a>
     <a className="scone-overview-resource-card" href="https://github.com/thundax-lyp/scone-ui">
         <strong>GitHub</strong>
         <span>源码、议题和发布包维护入口。</span>

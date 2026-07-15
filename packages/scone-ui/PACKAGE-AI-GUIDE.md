@@ -4,6 +4,13 @@
 
 `scone-ui` 是 React + Tailwind CSS 的后台 UI 组件库。AI 生成代码时，必须把它当作可复用组件包，不要把它当作产品应用框架、路由框架、请求层或业务规则来源。
 
+## 公开入口
+
+- 文档地址：[https://thundax-lyp.github.io/scone-ui/docs/](https://thundax-lyp.github.io/scone-ui/docs/)
+- 示例地址：[https://thundax-lyp.github.io/scone-ui/example/](https://thundax-lyp.github.io/scone-ui/example/)
+- GitHub 代码地址：[https://github.com/thundax-lyp/scone-ui](https://github.com/thundax-lyp/scone-ui)
+- npm 地址：[https://www.npmjs.com/package/scone-ui](https://www.npmjs.com/package/scone-ui)
+
 ## 读取顺序
 
 AI 生成或修改目标应用代码时，按此顺序读取：

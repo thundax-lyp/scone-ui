@@ -19,6 +19,13 @@ sidebar_position: 1
 - [组件总览](/components/overview)
 - [后台 Pattern](/components/patterns)
 
+## 公开入口
+
+- 文档地址：[https://thundax-lyp.github.io/scone-ui/docs/](https://thundax-lyp.github.io/scone-ui/docs/)
+- 示例地址：[https://thundax-lyp.github.io/scone-ui/example/](https://thundax-lyp.github.io/scone-ui/example/)
+- GitHub 代码地址：[https://github.com/thundax-lyp/scone-ui](https://github.com/thundax-lyp/scone-ui)
+- npm 地址：[https://www.npmjs.com/package/scone-ui](https://www.npmjs.com/package/scone-ui)
+
 ## 阅读顺序
 
 生成或维护调用方代码时按此顺序读取：
