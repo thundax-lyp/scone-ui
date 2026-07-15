@@ -30,11 +30,14 @@ pnpm test
 pnpm build
 pnpm build:example
 pnpm pack:check
+pnpm version:check
 ```
 
 - `pnpm dev`：启动 `apps/example` 示例应用。
 - `pnpm build`：构建 `packages/scone-ui` 发布包。
 - `pnpm build:example`：构建示例应用。
 - `pnpm pack:check`：在发布包目录执行 dry-run 打包检查。
+- `pnpm version:check`：检查所有 workspace package version 是否与根 `package.json` 同步。
+- `pnpm version:sync`：把所有 workspace package version 同步为根 `package.json` 的版本。
 
 发布包随包 AI 文档位于 `packages/scone-ui/README.md` 和 `packages/scone-ui/PACKAGE-AI-GUIDE.md`。

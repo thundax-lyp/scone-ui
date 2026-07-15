@@ -54,7 +54,7 @@ jobs:
                     [ -z "$file" ] && continue
 
                     case "$file" in
-                      pnpm-lock.yaml|pnpm-workspace.yaml|package.json|tsconfig.json|vite.config.*|vitest.config.*|eslint.config.*|.prettierrc*|.prettierignore|.github/workflows/*|.github/actions/*|.github/actions/**)
+                      pnpm-lock.yaml|pnpm-workspace.yaml|package.json|tsconfig.json|vite.config.*|vitest.config.*|eslint.config.*|.prettierrc*|.prettierignore|scripts/*|scripts/**|.github/workflows/*|.github/actions/*|.github/actions/**)
                         full=true
                         ;;
                     esac
@@ -116,6 +116,9 @@ jobs:
                     echo "Document filenames must not contain spaces" >&2
                     exit 1
                   fi
+
+            - name: Verify workspace versions
+              run: node scripts/sync-workspace-version.mjs --check
 
     verify-package:
         name: Verify Package
