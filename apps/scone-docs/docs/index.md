@@ -23,6 +23,7 @@ sidebar_position: 1
 
 - 文档地址：[https://thundax-lyp.github.io/scone-ui/docs/](https://thundax-lyp.github.io/scone-ui/docs/)
 - 示例地址：[https://thundax-lyp.github.io/scone-ui/example/](https://thundax-lyp.github.io/scone-ui/example/)
+- AI 索引：[https://thundax-lyp.github.io/scone-ui/docs/llms.txt](https://thundax-lyp.github.io/scone-ui/docs/llms.txt)
 - GitHub 代码地址：[https://github.com/thundax-lyp/scone-ui](https://github.com/thundax-lyp/scone-ui)
 - npm 地址：[https://www.npmjs.com/package/scone-ui](https://www.npmjs.com/package/scone-ui)
 
