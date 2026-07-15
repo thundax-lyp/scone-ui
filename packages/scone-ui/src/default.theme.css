@@ -1,17 +1,17 @@
 :root {
-    --scone-color-background: oklch(1 0 0);
-    --scone-color-foreground: oklch(0.145 0 0);
-    --scone-color-muted: oklch(0.97 0 0);
-    --scone-color-muted-foreground: oklch(0.556 0 0);
-    --scone-color-border: oklch(0.922 0 0);
-    --scone-color-ring: oklch(0.708 0 0);
-    --scone-color-primary: oklch(0.205 0 0);
-    --scone-color-primary-foreground: oklch(0.985 0 0);
-    --scone-color-neutral: oklch(0.97 0 0);
-    --scone-color-info: oklch(0.62 0.17 250);
-    --scone-color-success: oklch(0.62 0.16 145);
-    --scone-color-warning: oklch(0.78 0.16 80);
-    --scone-color-danger: oklch(0.577 0.245 27.325);
+    --scone-color-background: #ffffff;
+    --scone-color-foreground: rgba(0, 0, 0, 0.88);
+    --scone-color-muted: #fafafa;
+    --scone-color-muted-foreground: rgba(0, 0, 0, 0.45);
+    --scone-color-border: #d9d9d9;
+    --scone-color-ring: rgba(24, 144, 255, 0.2);
+    --scone-color-primary: #1890ff;
+    --scone-color-primary-foreground: #ffffff;
+    --scone-color-neutral: #f5f5f5;
+    --scone-color-info: #1677ff;
+    --scone-color-success: #52c41a;
+    --scone-color-warning: #faad14;
+    --scone-color-danger: #ff4d4f;
 
     --scone-spacing-2xs: 0.125rem;
     --scone-spacing-xs: 0.25rem;
@@ -25,9 +25,10 @@
     --scone-radius-lg: 0.75rem;
     --scone-radius-full: 9999px;
 
-    --scone-shadow-sm: 0 1px 2px 0 oklch(0 0 0 / 8%);
-    --scone-shadow-md: 0 8px 16px -8px oklch(0 0 0 / 18%);
-    --scone-shadow-lg: 0 18px 36px -18px oklch(0 0 0 / 24%);
+    --scone-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.03);
+    --scone-shadow-md:
+        0 1px 2px rgb(0 0 0 / 3%), 0 1px 6px -1px rgb(0 0 0 / 2%), 0 2px 4px rgb(0 0 0 / 2%);
+    --scone-shadow-lg: 0 10px 24px rgb(0 0 0 / 12%);
 
     --scone-font-body: "Geist Variable", sans-serif;
     --scone-font-label: "Geist Variable", sans-serif;
@@ -95,6 +96,59 @@
     --sidebar-primary: var(--scone-color-primary);
     --sidebar-primary-foreground: var(--scone-color-primary-foreground);
     --sidebar-accent: var(--scone-color-neutral);
+    --sidebar-accent-foreground: var(--scone-color-foreground);
+    --sidebar-border: var(--scone-color-border);
+    --sidebar-ring: var(--scone-color-ring);
+}
+
+.dark,
+[data-theme="dark"] {
+    --scone-color-background: #101722;
+    --scone-color-foreground: #f3f7ff;
+    --scone-color-muted: #1c293a;
+    --scone-color-muted-foreground: #a8b3c4;
+    --scone-color-border: rgb(255 255 255 / 18%);
+    --scone-color-ring: rgb(105 177 255 / 30%);
+    --scone-color-primary: #69b1ff;
+    --scone-color-primary-foreground: #06111f;
+    --scone-color-neutral: #1c293a;
+    --scone-color-info: #69b1ff;
+    --scone-color-success: #73d13d;
+    --scone-color-warning: #ffc53d;
+    --scone-color-danger: #ff7875;
+
+    --scone-shadow-sm: 0 1px 2px rgb(0 0 0 / 30%);
+    --scone-shadow-md: 0 1px 2px rgb(0 0 0 / 30%), 0 10px 24px rgb(0 0 0 / 22%);
+    --scone-shadow-lg: 0 18px 36px rgb(0 0 0 / 30%);
+
+    --background: var(--scone-color-background);
+    --foreground: var(--scone-color-foreground);
+    --card: #172131;
+    --card-foreground: var(--scone-color-foreground);
+    --popover: #172131;
+    --popover-foreground: var(--scone-color-foreground);
+    --primary: var(--scone-color-primary);
+    --primary-foreground: var(--scone-color-primary-foreground);
+    --secondary: var(--scone-color-neutral);
+    --secondary-foreground: var(--scone-color-foreground);
+    --muted: var(--scone-color-muted);
+    --muted-foreground: var(--scone-color-muted-foreground);
+    --accent: #203249;
+    --accent-foreground: var(--scone-color-foreground);
+    --destructive: var(--scone-color-danger);
+    --border: var(--scone-color-border);
+    --input: var(--scone-color-border);
+    --ring: var(--scone-color-ring);
+    --chart-1: var(--scone-color-neutral);
+    --chart-2: var(--scone-color-muted-foreground);
+    --chart-3: var(--scone-color-primary);
+    --chart-4: var(--scone-color-info);
+    --chart-5: var(--scone-color-success);
+    --sidebar: #172131;
+    --sidebar-foreground: var(--scone-color-foreground);
+    --sidebar-primary: var(--scone-color-primary);
+    --sidebar-primary-foreground: var(--scone-color-primary-foreground);
+    --sidebar-accent: #203249;
     --sidebar-accent-foreground: var(--scone-color-foreground);
     --sidebar-border: var(--scone-color-border);
     --sidebar-ring: var(--scone-color-ring);

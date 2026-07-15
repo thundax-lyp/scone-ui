@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `packages/scone-ui/src/default.theme.css`：抽取 foundation 默认主题 token
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
-    - 范围对象：`packages/scone-ui/src/default.theme.css`
-    - 处理动作：对齐组件库需要的色彩、字体、间距、圆角、阴影、focus ring、控件高度和暗色主题 token。
-    - 验收点：新增或改动的 token 都有公共组件用途，且不包含 `scone-example-*` 或页面布局选择器。
-    - 重要度：10/10
-
 - [ ] `packages/scone-ui/src/components/form`：按表单组件族校准主题使用
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
