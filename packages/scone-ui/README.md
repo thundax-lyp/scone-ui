@@ -1,4 +1,4 @@
-# scone-ui
+# Scone-UI
 
 React + Tailwind CSS admin UI component library.
 

@@ -1,4 +1,4 @@
-# scone-ui workspace
+# Scone-UI
 
 React + Tailwind CSS admin UI component library and governance workspace.
 
