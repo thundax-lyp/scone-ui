@@ -61,11 +61,11 @@ Theme 必须提供以下 token 族：
 
 ### Theme Source Files
 
-| 文件                   | 职责                                               |
-| ---------------------- | -------------------------------------------------- |
-| `src/styles/theme.css` | CSS variables 唯一数值源。                         |
-| `tailwind.config.*`    | 只映射 `src/styles/theme.css` 中的 CSS variables。 |
-| `src/styles.css`       | 引入 theme、Tailwind layers 和全局基础样式。       |
+| 文件                                     | 职责                                                                 |
+| ---------------------------------------- | -------------------------------------------------------------------- |
+| `packages/scone-ui/src/styles/theme.css` | CSS variables 唯一数值源。                                           |
+| `tailwind.config.*`                      | 只映射 `packages/scone-ui/src/styles/theme.css` 中的 CSS variables。 |
+| `packages/scone-ui/src/styles.css`       | 引入 theme、Tailwind layers 和全局基础样式。                         |
 
 不得创建第二套 `tokens.ts` 数值源。若实现需要 TypeScript token 名称，只能导出 token key，不导出数值。
 

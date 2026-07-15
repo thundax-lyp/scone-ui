@@ -1,5 +1,9 @@
 export default {
-    content: ["./index.html", "./src/**/*.{ts,tsx}"],
+    content: [
+        "./apps/example/index.html",
+        "./apps/example/src/**/*.{ts,tsx}",
+        "./packages/scone-ui/src/**/*.{ts,tsx}",
+    ],
     theme: {
         extend: {
             colors: {

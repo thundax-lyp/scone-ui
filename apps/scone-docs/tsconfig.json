@@ -1,0 +1,13 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["../../packages/scone-ui/src/*"],
+            "scone-ui": ["../../packages/scone-ui/src/index.ts"],
+            "scone-ui/styles.css": ["../../packages/scone-ui/src/styles.css"]
+        },
+        "types": ["node"]
+    },
+    "include": ["docusaurus.config.ts", "sidebars.ts", "docs", "src"]
+}

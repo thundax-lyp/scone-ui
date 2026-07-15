@@ -10,16 +10,16 @@
 
 本文档只定义后续验证策略，不表示测试文件已经创建。
 
-| 能力类型             | 验证对象                                                              | 验证行为                                                                                                            | 目标入口                                            |
-| -------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| Foundation/theme     | CSS variables、Tailwind 映射、token 消费                              | `src/styles/theme.css` 是唯一数值源；Tailwind 只映射变量；不创建第二套 `tokens.ts` 数值源。                         | `src/types/foundation.test.ts`、静态检查            |
-| Public exports       | `src/index.ts`、组件族入口、Pattern 入口                              | Export Groups 与 `docs/10-specs/COMPONENT-SELECTION.md` 一致；docs-only Recipe 不导出。                             | `src/index.test.ts`                                 |
-| Component 基础行为   | `className`、`ref`、可访问名称、核心状态                              | 每个组件的稳定 DOM 边界可透传 `className` 和 ref；无可见 label 时支持 `ariaLabel`。                                 | 与组件文件同目录的 `*.test.tsx`                     |
-| Radix/shadcn wrapper | focus、keyboard、ARIA、close、`asChild`                               | wrapper 不破坏 focus trap、focus restore、roving focus、typeahead、Escape、outside interaction、ARIA 和 `asChild`。 | 与 wrapper 文件同目录的 `*.test.tsx`                |
-| Custom component     | keyboard、ARIA、受控/非受控、边界条件                                 | Tree、SplitPane、NumberInput、DatePicker、Upload、Timeline 等 custom 能力必须单独验证交互模型。                     | 与组件文件同目录的 `*.test.tsx`                     |
-| Pattern              | slot 组合、状态归属、滚动/sticky、业务职责不进入                      | Page 主滚动唯一；DataTable 状态由调用方拥有并只留 props/callback 边界；Pattern 不发起请求或判断权限。               | 与 Pattern 文件同目录的 `*.test.tsx`                |
-| Recipe               | 组合可复制、无新增正式 API、关键状态可验证                            | docs-only Recipe 明确无源码落点；不创建 `src/recipes/` 源码入口。                                                   | 文档和示例验证                                      |
-| Type/data structure  | 公共类型导出、私有类型不泄漏、事件 payload、service options、ref 类型 | 公共类型从约定入口导出；回调不承载业务对象；service 类型不泄漏内部 queue/store。                                    | `src/types/foundation.test.ts`、`src/index.test.ts` |
+| 能力类型             | 验证对象                                                              | 验证行为                                                                                                            | 目标入口                                                              |
+| -------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| Foundation/theme     | CSS variables、Tailwind 映射、token 消费                              | `packages/scone-ui/src/styles/theme.css` 是唯一数值源；Tailwind 只映射变量；不创建第二套 `tokens.ts` 数值源。       | `src/types/foundation.test.ts`、静态检查                              |
+| Public exports       | `packages/scone-ui/src/index.ts`、组件族入口、Pattern 入口            | Export Groups 与 `docs/10-specs/COMPONENT-SELECTION.md` 一致；docs-only Recipe 不导出。                             | `packages/scone-ui/src/index.test.ts`                                 |
+| Component 基础行为   | `className`、`ref`、可访问名称、核心状态                              | 每个组件的稳定 DOM 边界可透传 `className` 和 ref；无可见 label 时支持 `ariaLabel`。                                 | 与组件文件同目录的 `*.test.tsx`                                       |
+| Radix/shadcn wrapper | focus、keyboard、ARIA、close、`asChild`                               | wrapper 不破坏 focus trap、focus restore、roving focus、typeahead、Escape、outside interaction、ARIA 和 `asChild`。 | 与 wrapper 文件同目录的 `*.test.tsx`                                  |
+| Custom component     | keyboard、ARIA、受控/非受控、边界条件                                 | Tree、SplitPane、NumberInput、DatePicker、Upload、Timeline 等 custom 能力必须单独验证交互模型。                     | 与组件文件同目录的 `*.test.tsx`                                       |
+| Pattern              | slot 组合、状态归属、滚动/sticky、业务职责不进入                      | Page 主滚动唯一；DataTable 状态由调用方拥有并只留 props/callback 边界；Pattern 不发起请求或判断权限。               | 与 Pattern 文件同目录的 `*.test.tsx`                                  |
+| Recipe               | 组合可复制、无新增正式 API、关键状态可验证                            | docs-only Recipe 明确无源码落点；不创建 `src/recipes/` 源码入口。                                                   | 文档和示例验证                                                        |
+| Type/data structure  | 公共类型导出、私有类型不泄漏、事件 payload、service options、ref 类型 | 公共类型从约定入口导出；回调不承载业务对象；service 类型不泄漏内部 queue/store。                                    | `src/types/foundation.test.ts`、`packages/scone-ui/src/index.test.ts` |
 
 最小验证清单：
 
@@ -39,7 +39,7 @@
 | 目标源码文件                                                                                      | 目标测试文件                                 | 必验收点                                                                                                                          |
 | ------------------------------------------------------------------------------------------------- | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | `src/types/foundation.ts`                                                                         | `src/types/foundation.test.ts`               | `OverlayCloseReason` 与 `FOUNDATIONS-SPEC.md` 一致；`SconeOption<Value = string>` 默认泛型；`ResponsiveValue<T>` 不接受数组形态。 |
-| `src/index.ts`                                                                                    | `src/index.test.ts`                          | 公共导出与 `COMPONENT-SELECTION.md` Export Groups 一致；Recipe 不导出；私有 helper 不泄漏。                                       |
+| `packages/scone-ui/src/index.ts`                                                                  | `packages/scone-ui/src/index.test.ts`        | 公共导出与 `COMPONENT-SELECTION.md` Export Groups 一致；Recipe 不导出；私有 helper 不泄漏。                                       |
 | `src/components/form/button.tsx`                                                                  | `src/components/form/button.test.tsx`        | `SconeButtonProps`、loading 禁止重复触发、disabled、`ariaLabel`、`asChild` ref/className。                                        |
 | `src/components/form/input.tsx`、`search-input.tsx`、`password-input.tsx`、`textarea.tsx`         | 同目录同名 `*.test.tsx`                      | `value/defaultValue/onValueChange`、disabled/readOnly/invalid、Field ARIA 关联、clear/password toggle/count。                     |
 | `src/components/form/select.tsx`、`combobox.tsx`                                                  | 同目录同名 `*.test.tsx`                      | `SconeOption<Value>`、open/value 受控组合、keyboard、loading/empty、Field invalid。                                               |

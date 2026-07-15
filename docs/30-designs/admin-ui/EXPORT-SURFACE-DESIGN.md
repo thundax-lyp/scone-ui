@@ -7,7 +7,7 @@
 - `docs/10-specs/COMPONENT-SELECTION.md`
 - `docs/10-specs/ADMIN-UI-SPEC.md`
 
-公共导出必须以 `docs/10-specs/COMPONENT-SELECTION.md` 的 Export Groups 为准。`src/index.ts` 是库级公共入口；组件族入口只导出本族能力和必要公共类型；Recipe 不默认形成正式 `Scone*` API。
+公共导出必须以 `docs/10-specs/COMPONENT-SELECTION.md` 的 Export Groups 为准。`packages/scone-ui/src/index.ts` 是库级公共入口；组件族入口只导出本族能力和必要公共类型；Recipe 不默认形成正式 `Scone*` API。
 
 | Export group           | 导出名称                                                                      | 所属文件路径                                                                                                                                                                            | 导出形态                | Compound               | Source strategy    | 类型归属                                               | 验证入口                                                |
 | ---------------------- | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- | ---------------------- | ------------------ | ------------------------------------------------------ | ------------------------------------------------------- |
@@ -44,8 +44,8 @@
 
 导出规则：
 
-- `src/index.ts` 只导出 `COMPONENT-SELECTION.md` 中列入 Export Groups 的能力。
-- `direct-docs-only` Recipe 不从 `src/index.ts` 导出。
+- `packages/scone-ui/src/index.ts` 只导出 `COMPONENT-SELECTION.md` 中列入 Export Groups 的能力。
+- `direct-docs-only` Recipe 不从 `packages/scone-ui/src/index.ts` 导出。
 - 不创建 `src/recipes/` 源码目录；Recipe 示例留在文档和示例边界内。
 - `pattern-only` 只导出明确 compound parts；禁止单一万能配置对象。
 - Provider/service export 必须同时导出必要 option 类型，避免调用方依赖私有结构。

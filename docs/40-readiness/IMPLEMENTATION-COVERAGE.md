@@ -20,24 +20,24 @@
 | 组件族实现         | 完成覆盖 | Form、Data Display、Layout、Feedback / Overlay、Navigation、Media 均有源码、公共导出和测试。 |
 | Admin Pattern 实现 | 完成覆盖 | `AppShell`、`Page`、`Section`、`FilterBar`、`DataTable` 均有源码、公共导出和测试。           |
 | Recipe 收口        | 完成     | Recipe 全部保持 docs-only，不创建 `src/recipes/`，不导出 recipe `Scone*` API。               |
-| 公共导出守护       | 完成     | `src/index.test.ts` 验证公共导出和 no-recipe-source 边界。                                   |
+| 公共导出守护       | 完成     | `packages/scone-ui/src/index.test.ts` 验证公共导出和 no-recipe-source 边界。                 |
 | 系统性代码审核     | 完成     | 2026-07 系统性审核 remediation 已收口，临时审核报告已关闭删除。                              |
 
 结论：当前 `docs/10-specs/` 与 `docs/30-designs/` 覆盖的 Admin UI 范围已完成实现或 docs-only 覆盖闭环；2026-07 系统性审核沉淀的问题已完成处理，长期证据保留在本文档和提交历史中。
 
 ## Coverage Matrix
 
-| 业务域                         | 状态 | 公共入口                                                       | 验证入口                                                                                            |
-| ------------------------------ | ---- | -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| Foundation / theme / utilities | 完成 | `src/types/foundation.ts`、`src/lib/*`、`src/styles/theme.css` | `src/types/foundation.test.ts`、`src/lib/*.test.*`、`src/styles/theme.test.ts`、`src/index.test.ts` |
-| Form                           | 完成 | `src/components/form/index.ts`、`src/index.ts`                 | `src/components/form/*.test.tsx`、`src/index.test.ts`                                               |
-| Data Display                   | 完成 | `src/components/data-display/index.ts`、`src/index.ts`         | `src/components/data-display/*.test.tsx`、`src/index.test.ts`                                       |
-| Layout                         | 完成 | `src/components/layout/*`、`src/index.ts`                      | `src/components/layout/*.test.tsx`、`src/index.test.ts`                                             |
-| Feedback / Overlay             | 完成 | `src/components/feedback-overlay/*`、`src/index.ts`            | `src/components/feedback-overlay/*.test.tsx`、`src/index.test.ts`                                   |
-| Navigation                     | 完成 | `src/components/navigation/index.ts`、`src/index.ts`           | `src/components/navigation/*.test.tsx`、`src/index.test.ts`                                         |
-| Media                          | 完成 | `src/components/media/index.ts`、`src/index.ts`                | `src/components/media/*.test.tsx`、`src/index.test.ts`                                              |
-| Admin Patterns                 | 完成 | `src/patterns/index.ts`、`src/index.ts`                        | `src/patterns/*.test.tsx`、`src/index.test.ts`                                                      |
-| Recipes                        | 完成 | docs-only，无源码入口                                          | `src/index.test.ts` no-recipe-source / no-recipe-export 守护                                        |
+| 业务域                         | 状态 | 公共入口                                                                         | 验证入口                                                                                                              |
+| ------------------------------ | ---- | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Foundation / theme / utilities | 完成 | `src/types/foundation.ts`、`src/lib/*`、`packages/scone-ui/src/styles/theme.css` | `src/types/foundation.test.ts`、`src/lib/*.test.*`、`src/styles/theme.test.ts`、`packages/scone-ui/src/index.test.ts` |
+| Form                           | 完成 | `src/components/form/index.ts`、`packages/scone-ui/src/index.ts`                 | `src/components/form/*.test.tsx`、`packages/scone-ui/src/index.test.ts`                                               |
+| Data Display                   | 完成 | `src/components/data-display/index.ts`、`packages/scone-ui/src/index.ts`         | `src/components/data-display/*.test.tsx`、`packages/scone-ui/src/index.test.ts`                                       |
+| Layout                         | 完成 | `src/components/layout/*`、`packages/scone-ui/src/index.ts`                      | `src/components/layout/*.test.tsx`、`packages/scone-ui/src/index.test.ts`                                             |
+| Feedback / Overlay             | 完成 | `src/components/feedback-overlay/*`、`packages/scone-ui/src/index.ts`            | `src/components/feedback-overlay/*.test.tsx`、`packages/scone-ui/src/index.test.ts`                                   |
+| Navigation                     | 完成 | `src/components/navigation/index.ts`、`packages/scone-ui/src/index.ts`           | `src/components/navigation/*.test.tsx`、`packages/scone-ui/src/index.test.ts`                                         |
+| Media                          | 完成 | `src/components/media/index.ts`、`packages/scone-ui/src/index.ts`                | `src/components/media/*.test.tsx`、`packages/scone-ui/src/index.test.ts`                                              |
+| Admin Patterns                 | 完成 | `src/patterns/index.ts`、`packages/scone-ui/src/index.ts`                        | `src/patterns/*.test.tsx`、`packages/scone-ui/src/index.test.ts`                                                      |
+| Recipes                        | 完成 | docs-only，无源码入口                                                            | `packages/scone-ui/src/index.test.ts` no-recipe-source / no-recipe-export 守护                                        |
 
 ## Implemented Surface
 
@@ -67,8 +67,8 @@ Recipe 全部为 docs-only，目标是说明可复制组合边界，不新增正
 Recipe 守护：
 
 - `src/recipes/` 不存在。
-- `src/index.ts` 不导出 `SconeDrawerForm`、`SconeConfirmationFlow`、`SconePopover`、`SconeLogo`、`SconeResult`、`SconeDashboardMetric`、`SconeGrid`。
-- `src/index.test.ts` 显式验证以上边界。
+- `packages/scone-ui/src/index.ts` 不导出 `SconeDrawerForm`、`SconeConfirmationFlow`、`SconePopover`、`SconeLogo`、`SconeResult`、`SconeDashboardMetric`、`SconeGrid`。
+- `packages/scone-ui/src/index.test.ts` 显式验证以上边界。
 
 ## Verification Evidence Summary
 
@@ -103,7 +103,7 @@ Recipe 守护：
 - `src/patterns/section.test.tsx` 覆盖 `Section.Root` title / description / actions shorthand。
 - `src/patterns/filter-bar.test.tsx` 覆盖 `defaultSearchValue` 渲染内置 search input 并提交可见 search value。
 - `src/lib/use-controllable-state.test.tsx` 覆盖 `value={undefined}` 继续按 uncontrolled sentinel 处理，并保留 setter 本地更新和 `onValueChange` 通知。
-- `src/index.test.ts` 覆盖 `SconeFieldContextValue.fieldId`、`labelId`、`descriptionId`、`messageId` 作为当前公共类型契约。
+- `packages/scone-ui/src/index.test.ts` 覆盖 `SconeFieldContextValue.fieldId`、`labelId`、`descriptionId`、`messageId` 作为当前公共类型契约。
 - `src/components/form/input.test.tsx`、`search-input.test.tsx`、`password-input.test.tsx`、`textarea.test.tsx` 覆盖 text controls 继续先触发 `onValueChange`，再触发原生 `onChange`。
 - `src/components/data-display/descriptions.test.tsx` 覆盖 Descriptions root `style` / `className` / HTML attributes / ref 与内部 `dl` columns style 的职责分离。
 - `src/components/data-display/badge.test.tsx` 覆盖 Badge children path 和 standalone path 的 root props / ref / style / className 与 indicator 可访问标签分离。
@@ -111,7 +111,7 @@ Recipe 守护：
 - `src/lib/cn.ts` 是 `cn` 唯一源码入口；`src/lib/utils.ts` 已删除，`components.json` 的 `aliases.utils` 已同步到 `@/lib/cn`，`rg "lib/utils|@/lib/utils|\\.\\./\\.\\./lib/utils" src components.json` 无结果。
 - `src/components/feedback-overlay/dialog.test.tsx`、`drawer.test.tsx`、`loading.test.tsx`、`notification.test.tsx`、`progress.test.tsx` 已将非契约用途的内部 slot / item selector 断言改为 role、text、ARIA、callback payload 或 caller-provided test id 断言。
 - `src/components/layout/scroll-area.test.tsx`、`split-pane.test.tsx` 已将非契约用途的 DOM traversal 定位改为 caller-provided test id；保留的 `data-scone-*` / class 断言仅用于明确 layout contract。
-- `src/index.ts` 已按 Data Display、Form、Layout、Feedback / Overlay、Media、Navigation、Patterns、Utils、Foundation 分组导出；`SconePagination` 和 navigation types 已回到 navigation barrel 分组。
+- `packages/scone-ui/src/index.ts` 已按 Data Display、Form、Layout、Feedback / Overlay、Media、Navigation、Patterns、Utils、Foundation 分组导出；`SconePagination` 和 navigation types 已回到 navigation barrel 分组。
 
 测试维护证据：
 
@@ -137,6 +137,6 @@ Recipe 守护：
 后续维护要求：
 
 1. SPEC 新增、排除或改名能力时，同步更新 `COMPONENT-SELECTION.md`、DESIGN 覆盖矩阵、源码导出和本文档。
-2. 新增源码组件或 Pattern 时，继续保持同目录测试和 `src/index.test.ts` 公共导出守护。
+2. 新增源码组件或 Pattern 时，继续保持同目录测试和 `packages/scone-ui/src/index.test.ts` 公共导出守护。
 3. Recipe 如继续保持 docs-only，不得创建 `src/recipes/`，不得新增 recipe `Scone*` export。
-4. `src/styles/theme.css` 继续作为 CSS variables 唯一数值源；不要创建第二套 token 数值源。
+4. `packages/scone-ui/src/styles/theme.css` 继续作为 CSS variables 唯一数值源；不要创建第二套 token 数值源。

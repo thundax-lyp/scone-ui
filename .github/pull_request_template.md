@@ -8,8 +8,19 @@
 
 ## Verification Evidence
 
+- Change areas:
+    - [ ] Governance
+    - [ ] Package
+    - [ ] Example
+    - [ ] Docs site
+    - [ ] Full / root tooling
+- Expected CI verify jobs:
+    - [ ] Verify Governance
+    - [ ] Verify Package
+    - [ ] Verify Example
+    - [ ] Verify Docs
 - [ ] Documentation/governance check:
-- [ ] Build/lint/test, if applicable:
+- [ ] Build/typecheck/test, if applicable:
 - [ ] Manual review:
 
 ## Not Covered

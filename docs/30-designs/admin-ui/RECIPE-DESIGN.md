@@ -16,7 +16,7 @@ Recipe 总规则：
 
 - Recipe 是可复制组合方案，不产生新的正式 `Scone*` 组件 API。
 - Recipe 可以复用组件、Layout 和 Pattern，但不新增业务流程、请求、权限或路由假设。
-- `direct-docs-only` Recipe 不创建 wrapper，不从 `src/index.ts` 导出。
+- `direct-docs-only` Recipe 不创建 wrapper，不从 `packages/scone-ui/src/index.ts` 导出。
 - 全部 Recipe 保持文档和示例边界，不创建 `src/recipes/` 源码入口。
 
 | Recipe           | 复用对象                                                                           | 目标落点                                     | 是否源码 | 不新增 `Scone*` API 的原因                   | 验证方式                    |

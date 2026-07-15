@@ -1,0 +1,18 @@
+import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+
+export default defineConfig({
+    base: "/scone-ui/example/",
+    plugins: [react(), tailwindcss()],
+    resolve: {
+        alias: {
+            "@": new URL("../../packages/scone-ui/src", import.meta.url).pathname,
+            "scone-ui/styles.css": new URL(
+                "../../packages/scone-ui/src/styles.css",
+                import.meta.url,
+            ).pathname,
+            "scone-ui": new URL("../../packages/scone-ui/src/index.ts", import.meta.url).pathname,
+        },
+    },
+});

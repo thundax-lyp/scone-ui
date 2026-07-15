@@ -45,8 +45,8 @@
 6. `docs/10-specs/ADMIN-PATTERNS-SPEC.md`
 7. `docs/30-designs/DESIGN-ADMIN-UI.md`
 8. `docs/40-readiness/IMPLEMENTATION-COVERAGE.md`
-9. `src/index.ts`
-10. `src/index.test.ts`
+9. `packages/scone-ui/src/index.ts`
+10. `packages/scone-ui/src/index.test.ts`
 11. `package.json`
 12. `eslint.config.mjs`
 13. `tsconfig.json`
@@ -75,8 +75,8 @@
 
 检查：
 
-- `src/index.ts` 是否与 `COMPONENT-SELECTION.md` Export Groups 一致。
-- `src/index.test.ts` 是否守住公共导出和 Recipe docs-only 边界。
+- `packages/scone-ui/src/index.ts` 是否与 `COMPONENT-SELECTION.md` Export Groups 一致。
+- `packages/scone-ui/src/index.test.ts` 是否守住公共导出和 Recipe docs-only 边界。
 - 组件族入口是否只导出本族公共组件和公共类型。
 - barrel export 是否掩盖跨模块内部依赖。
 

@@ -16,13 +16,19 @@
         "jsx": "react-jsx",
         "baseUrl": ".",
         "paths": {
-            "@/*": ["./src/*"]
+            "@/*": ["./packages/scone-ui/src/*"],
+            "scone-ui": ["./packages/scone-ui/src/index.ts"],
+            "scone-ui/styles.css": ["./packages/scone-ui/src/styles.css"]
         },
         "types": ["node", "vitest/globals", "@testing-library/jest-dom"]
     },
     "include": [
-        "src",
-        "vite.config.ts",
+        "packages/scone-ui/src",
+        "packages/scone-ui/vite.config.ts",
+        "apps/example/src",
+        "apps/example/vite.config.ts",
+        "apps/scone-docs/docusaurus.config.ts",
+        "apps/scone-docs/sidebars.ts",
         "vitest.config.ts",
         "tailwind.config.ts",
         "eslint.config.mjs"
