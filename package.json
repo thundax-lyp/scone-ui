@@ -10,16 +10,19 @@
     },
     "scripts": {
         "dev": "pnpm --filter @scone-ui/example dev",
+        "dev:docs": "pnpm --filter @scone-ui/docs dev",
         "build": "pnpm --filter scone-ui build",
         "build:example": "pnpm --filter @scone-ui/example build",
+        "build:docs": "pnpm --filter @scone-ui/docs build",
         "pack:check": "pnpm --filter scone-ui pack:check",
         "preview": "pnpm --filter @scone-ui/example preview",
+        "preview:docs": "pnpm --filter @scone-ui/docs preview",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
         "lint": "eslint .",
         "test": "vitest run",
         "test:example": "pnpm --filter @scone-ui/example test",
-        "typecheck": "pnpm --filter scone-ui typecheck && pnpm --filter @scone-ui/example typecheck"
+        "typecheck": "pnpm --filter scone-ui typecheck && pnpm --filter @scone-ui/example typecheck && pnpm --filter @scone-ui/docs typecheck"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",

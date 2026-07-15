@@ -27,6 +27,9 @@ replay_pid*
 # Node / package managers
 node_modules/
 dist/
+build/
+apps/*/.docusaurus/
+apps/*/.dumi/
 coverage/
 *.tsbuildinfo
 
