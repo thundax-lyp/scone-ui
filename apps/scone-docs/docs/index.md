@@ -14,5 +14,11 @@ sidebar_position: 1
 
 ## 内容入口
 
-- [快速开始](./guide/quick-start.md)
-- [组件总览](./components/overview.md)
+- [快速开始](/guide/quick-start)
+- [AI 使用指南](/guide/ai-usage)
+- [组件总览](/components/overview)
+- [后台 Pattern](/components/patterns)
+
+## 阅读顺序
+
+使用 `scone-ui` 生成或维护业务界面时，先读取当前安装包的 `dist/index.d.ts`，再读取随包发布的 `scone-ui/PACKAGE-AI-GUIDE.md`。本站文档用于解释分类、选择规则和组合边界，不替代已安装包的类型声明。
