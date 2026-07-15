@@ -5,7 +5,7 @@ import type { Key, SconeDensity } from "@/types/foundation";
 
 export interface SconeListProps<T> extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
     dataSource: T[];
-    renderItem: (item: T) => React.ReactNode;
+    renderItem: (item: T, index: number) => React.ReactNode;
     rowKey: string | ((item: T) => Key);
     loading?: boolean;
     renderEmpty?: React.ReactNode | (() => React.ReactNode);
@@ -75,12 +75,12 @@ const SconeListInner = <T,>(
             </div>
         );
     } else {
-        content = dataSource.map((item) => (
+        content = dataSource.map((item, index) => (
             <div
                 key={getItemKey(item, rowKey)}
                 className={cn("min-w-0", itemDensityClassNames[density])}
             >
-                {renderItem(item)}
+                {renderItem(item, index)}
             </div>
         ));
     }

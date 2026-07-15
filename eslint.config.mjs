@@ -4,7 +4,15 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-    { ignores: ["dist", "coverage", "src/components/ui/**/*.{ts,tsx}"] },
+    {
+        ignores: [
+            "dist",
+            "coverage",
+            "apps/*/dist",
+            "packages/*/dist",
+            "packages/scone-ui/src/components/ui/**/*.{ts,tsx}",
+        ],
+    },
     js.configs.recommended,
     ...tseslint.configs.recommended,
     {
@@ -46,9 +54,9 @@ export default tseslint.config(
     },
     {
         files: [
-            "src/components/form/field.tsx",
-            "src/components/form/form.tsx",
-            "src/patterns/*.tsx",
+            "packages/scone-ui/src/components/form/field.tsx",
+            "packages/scone-ui/src/components/form/form.tsx",
+            "packages/scone-ui/src/patterns/*.tsx",
         ],
         rules: {
             "react-refresh/only-export-components": "off",

@@ -6,7 +6,7 @@ import { describe, expect, it } from "vitest";
 
 const srcDir = dirname(dirname(fileURLToPath(import.meta.url)));
 const themePath = join(srcDir, "styles", "theme.css");
-const tailwindConfigPath = join(srcDir, "..", "tailwind.config.ts");
+const tailwindConfigPath = join(srcDir, "..", "..", "..", "tailwind.config.ts");
 
 const requiredVariables = [
     "--scone-color-background",

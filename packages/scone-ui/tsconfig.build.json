@@ -18,11 +18,5 @@
         "src/patterns/**/*.tsx",
         "src/types/**/*.ts"
     ],
-    "exclude": [
-        "src/**/*.test.ts",
-        "src/**/*.test.tsx",
-        "src/app.tsx",
-        "src/main.tsx",
-        "src/test/**"
-    ]
+    "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx", "src/test/**"]
 }
