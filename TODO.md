@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `packages/scone-ui/src/default.theme.css`：创建默认主题 CSS 发布入口
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
-    - 范围对象：`packages/scone-ui/src/default.theme.css`、`packages/scone-ui/src/styles.css`、`packages/scone-ui/src/styles/theme.css`
-    - 处理动作：新增 `default.theme.css`，调整 `styles.css` 默认主题引用，并保留 `styles/theme.css` 作为公开兼容入口。
-    - 验收点：`styles.css` 仍可零配置使用，`default.theme.css` 和 `styles/theme.css` 均可被单独解析，且不存在重复冲突主题块。
-    - 重要度：10/10
-
 - [ ] `packages/scone-ui/package.json`：发布 default theme CSS
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`

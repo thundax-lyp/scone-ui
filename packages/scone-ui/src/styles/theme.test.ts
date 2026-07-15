@@ -5,7 +5,8 @@ import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
 const srcDir = dirname(dirname(fileURLToPath(import.meta.url)));
-const themePath = join(srcDir, "styles", "theme.css");
+const defaultThemePath = join(srcDir, "default.theme.css");
+const compatibilityThemePath = join(srcDir, "styles", "theme.css");
 const tailwindConfigPath = join(srcDir, "..", "..", "..", "tailwind.config.ts");
 
 const requiredVariables = [
@@ -82,17 +83,24 @@ const listFiles = (directory: string): string[] => {
 
 describe("theme variables", () => {
     it("defines the required scone token variables", () => {
-        const theme = readFileSync(themePath, "utf8");
+        const theme = readFileSync(defaultThemePath, "utf8");
 
         for (const variable of requiredVariables) {
             expect(theme).toContain(`${variable}:`);
         }
     });
 
-    it("keeps token values in theme.css", () => {
+    it("keeps styles/theme.css as a compatibility entry", () => {
+        const theme = readFileSync(compatibilityThemePath, "utf8");
+
+        expect(theme.trim()).toBe('@import "../default.theme.css";');
+    });
+
+    it("keeps token values in default.theme.css", () => {
         const tokenSourceFiles = listFiles(srcDir)
             .filter((file) => /\.(css|ts|tsx)$/.test(file))
-            .filter((file) => file !== themePath)
+            .filter((file) => file !== defaultThemePath)
+            .filter((file) => file !== compatibilityThemePath)
             .filter((file) => !file.endsWith(".test.ts") && !file.endsWith(".test.tsx"))
             .filter((file) => readFileSync(file, "utf8").includes("--scone-"))
             .map((file) => relative(srcDir, file));
