@@ -40,7 +40,7 @@ const sectionDensityClassNames: Record<SconeDensity, string> = {
     comfortable: "gap-md",
 };
 
-function SectionRoot({
+const SectionRoot = ({
     density = "default",
     title,
     description,
@@ -48,7 +48,7 @@ function SectionRoot({
     className,
     children,
     ...props
-}: SectionRootProps) {
+}: SectionRootProps): React.JSX.Element => {
     const hasHeaderShorthand = Boolean(title || description || actions);
 
     return (
@@ -64,16 +64,16 @@ function SectionRoot({
             {children}
         </section>
     );
-}
+};
 
-function SectionHeader({
+const SectionHeader = ({
     title,
     description,
     actions,
     className,
     children,
     ...props
-}: SectionHeaderProps) {
+}: SectionHeaderProps): React.JSX.Element => {
     return (
         <div
             data-scone-section-part="header"
@@ -90,9 +90,14 @@ function SectionHeader({
             ) : null}
         </div>
     );
-}
+};
 
-function SectionTitle({ level = 2, className, children, ...props }: SectionTitleProps) {
+const SectionTitle = ({
+    level = 2,
+    className,
+    children,
+    ...props
+}: SectionTitleProps): React.JSX.Element => {
     const Heading = `h${level}` as "h2" | "h3" | "h4";
 
     return (
@@ -104,9 +109,13 @@ function SectionTitle({ level = 2, className, children, ...props }: SectionTitle
             {children}
         </Heading>
     );
-}
+};
 
-function SectionDescription({ className, children, ...props }: SectionDescriptionProps) {
+const SectionDescription = ({
+    className,
+    children,
+    ...props
+}: SectionDescriptionProps): React.JSX.Element => {
     return (
         <p
             data-scone-section-part="description"
@@ -116,9 +125,13 @@ function SectionDescription({ className, children, ...props }: SectionDescriptio
             {children}
         </p>
     );
-}
+};
 
-function SectionActions({ className, children, ...props }: SectionActionsProps) {
+const SectionActions = ({
+    className,
+    children,
+    ...props
+}: SectionActionsProps): React.JSX.Element => {
     return (
         <div
             data-scone-section-part="actions"
@@ -128,17 +141,25 @@ function SectionActions({ className, children, ...props }: SectionActionsProps) 
             {children}
         </div>
     );
-}
+};
 
-function SectionContent({ className, children, ...props }: SectionContentProps) {
+const SectionContent = ({
+    className,
+    children,
+    ...props
+}: SectionContentProps): React.JSX.Element => {
     return (
         <div data-scone-section-part="content" className={cn("min-w-0", className)} {...props}>
             {children}
         </div>
     );
-}
+};
 
-function SectionFooter({ className, children, ...props }: SectionFooterProps) {
+const SectionFooter = ({
+    className,
+    children,
+    ...props
+}: SectionFooterProps): React.JSX.Element => {
     return (
         <div
             data-scone-section-part="footer"
@@ -148,7 +169,7 @@ function SectionFooter({ className, children, ...props }: SectionFooterProps) {
             {children}
         </div>
     );
-}
+};
 
 export const Section = {
     Root: SectionRoot,

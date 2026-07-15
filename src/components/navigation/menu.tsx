@@ -28,18 +28,18 @@ export interface SconeMenuProps extends Omit<React.HTMLAttributes<HTMLDivElement
     className?: string;
 }
 
-function toggleKey(keys: string[], key: string): string[] {
+const toggleKey = (keys: string[], key: string): string[] => {
     return keys.includes(key) ? keys.filter((item) => item !== key) : [...keys, key];
-}
+};
 
-function getVisibleKeys(items: SconeNavigationItem[], openKeys: string[]): string[] {
+const getVisibleKeys = (items: SconeNavigationItem[], openKeys: string[]): string[] => {
     return items.flatMap((item) => [
         item.key,
         ...(item.children && openKeys.includes(item.key)
             ? getVisibleKeys(item.children, openKeys)
             : []),
     ]);
-}
+};
 
 export const SconeMenu = React.forwardRef<HTMLDivElement, SconeMenuProps>(
     (

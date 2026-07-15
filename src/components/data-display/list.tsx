@@ -27,19 +27,19 @@ const itemDensityClassNames: Record<SconeDensity, string> = {
     comfortable: "py-4",
 };
 
-function renderStateNode(node: React.ReactNode | (() => React.ReactNode)): React.ReactNode {
+const renderStateNode = (node: React.ReactNode | (() => React.ReactNode)): React.ReactNode => {
     return typeof node === "function" ? node() : node;
-}
+};
 
-function getItemKey<T>(item: T, rowKey: string | ((item: T) => Key)): Key {
+const getItemKey = <T,>(item: T, rowKey: string | ((item: T) => Key)): Key => {
     if (typeof rowKey === "function") {
         return rowKey(item);
     }
 
     return (item as Record<string, Key>)[rowKey];
-}
+};
 
-function SconeListInner<T>(
+const SconeListInner = <T,>(
     {
         dataSource,
         renderItem,
@@ -53,7 +53,7 @@ function SconeListInner<T>(
         ...props
     }: SconeListProps<T>,
     ref: React.ForwardedRef<HTMLDivElement>,
-) {
+) => {
     let content: React.ReactNode;
 
     if (loading) {
@@ -99,7 +99,7 @@ function SconeListInner<T>(
             {content}
         </div>
     );
-}
+};
 
 export const SconeList = React.forwardRef(SconeListInner) as <T>(
     props: SconeListProps<T> & React.RefAttributes<HTMLDivElement>,

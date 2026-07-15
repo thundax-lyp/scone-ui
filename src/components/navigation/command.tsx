@@ -29,13 +29,13 @@ export interface SconeCommandProps extends Omit<React.HTMLAttributes<HTMLDivElem
     className?: string;
 }
 
-function itemSearchText(item: SconeCommandItem): string {
+const itemSearchText = (item: SconeCommandItem): string => {
     return [item.value, item.key, item.keywords?.join(" ")].filter(Boolean).join(" ").toLowerCase();
-}
+};
 
-function renderEmptyState(renderEmpty: SconeCommandProps["renderEmpty"]): React.ReactNode {
+const renderEmptyState = (renderEmpty: SconeCommandProps["renderEmpty"]): React.ReactNode => {
     return typeof renderEmpty === "function" ? renderEmpty() : renderEmpty;
-}
+};
 
 export const SconeCommand = React.forwardRef<HTMLDivElement, SconeCommandProps>(
     (

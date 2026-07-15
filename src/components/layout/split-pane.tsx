@@ -43,20 +43,20 @@ const presetPixels: Record<SconeSplitPaneSizePreset, number> = {
 const cssLengthPattern =
     /^(?:-?\d*\.?\d+(?:px|rem|em|%|vh|vw|vmin|vmax|ch|ex)|calc\(.+\)|var\(--[\w-]+\))$/;
 
-function assertCssLength(value: string | undefined, propName: string): void {
+const assertCssLength = (value: string | undefined, propName: string): void => {
     if (value != null && !cssLengthPattern.test(value)) {
         throw new Error(`${propName} must be a CSS length with a unit or percentage.`);
     }
-}
+};
 
-function resolveInitialSize({
+const resolveInitialSize = ({
     defaultSize,
     defaultSizePreset,
-}: Pick<SconeSplitPaneProps, "defaultSize" | "defaultSizePreset">): string {
+}: Pick<SconeSplitPaneProps, "defaultSize" | "defaultSizePreset">): string => {
     return defaultSize ?? presetSize[defaultSizePreset ?? "medium"];
-}
+};
 
-function resolveSize({
+const resolveSize = ({
     size,
     sizePreset,
     internalSize,
@@ -64,27 +64,27 @@ function resolveSize({
     size?: string;
     sizePreset?: SconeSplitPaneSizePreset;
     internalSize: string;
-}): string {
+}): string => {
     return size ?? (sizePreset ? presetSize[sizePreset] : internalSize);
-}
+};
 
-function nextKeyboardSize(
+const nextKeyboardSize = (
     currentSize: string,
     fallbackPreset: SconeSplitPaneSizePreset,
     delta: number,
     bounds: SconeSplitPaneSizeBounds,
-): string {
+): string => {
     const pxMatch = /^(-?\d*\.?\d+)px$/.exec(currentSize);
     const currentPixels = pxMatch ? Number(pxMatch[1]) : presetPixels[fallbackPreset];
 
     return formatPixelSize(clampSizePixels(currentPixels + delta, bounds));
-}
+};
 
-function resolveSizeBounds(
+const resolveSizeBounds = (
     minSizePreset: SconeSplitPaneSizePreset,
     maxSizePreset: SconeSplitPaneSizePreset,
     fillPixels?: number,
-): SconeSplitPaneSizeBounds {
+): SconeSplitPaneSizeBounds => {
     const minPixels = resolvePresetPixels(minSizePreset, fillPixels);
     const maxPixels = resolvePresetPixels(maxSizePreset, fillPixels);
 
@@ -92,23 +92,23 @@ function resolveSizeBounds(
         minPixels: Math.min(minPixels, maxPixels),
         maxPixels: Math.max(minPixels, maxPixels),
     };
-}
+};
 
-function resolvePresetPixels(preset: SconeSplitPaneSizePreset, fillPixels?: number): number {
+const resolvePresetPixels = (preset: SconeSplitPaneSizePreset, fillPixels?: number): number => {
     if (preset === "fill" && fillPixels != null && fillPixels > 0) {
         return fillPixels;
     }
 
     return presetPixels[preset];
-}
+};
 
-function clampSizePixels(value: number, bounds: SconeSplitPaneSizeBounds): number {
+const clampSizePixels = (value: number, bounds: SconeSplitPaneSizeBounds): number => {
     return Math.min(bounds.maxPixels, Math.max(bounds.minPixels, Math.round(value)));
-}
+};
 
-function formatPixelSize(value: number): string {
+const formatPixelSize = (value: number): string => {
     return `${value}px`;
-}
+};
 
 export const SconeSplitPane = React.forwardRef<HTMLDivElement, SconeSplitPaneProps>(
     (
@@ -160,7 +160,11 @@ export const SconeSplitPane = React.forwardRef<HTMLDivElement, SconeSplitPanePro
 
         const resolveCurrentSizeBounds = React.useCallback(() => {
             const rect = rootRef.current?.getBoundingClientRect();
-            const fillPixels = rect ? (isHorizontal ? rect.width : rect.height) : undefined;
+            let fillPixels: number | undefined;
+
+            if (rect) {
+                fillPixels = isHorizontal ? rect.width : rect.height;
+            }
 
             return resolveSizeBounds(minSizePreset, maxSizePreset, fillPixels);
         }, [isHorizontal, maxSizePreset, minSizePreset]);

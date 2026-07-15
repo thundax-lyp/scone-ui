@@ -28,7 +28,7 @@ const inputSizeClassNames: Record<SconeControlSize, string> = {
     lg: "h-9 pr-10 text-base",
 };
 
-function clampNumber(value: number, min?: number | string, max?: number | string): number {
+const clampNumber = (value: number, min?: number | string, max?: number | string): number => {
     const numericMin = min === undefined ? undefined : Number(min);
     const numericMax = max === undefined ? undefined : Number(max);
     let nextValue = value;
@@ -41,7 +41,7 @@ function clampNumber(value: number, min?: number | string, max?: number | string
     }
 
     return nextValue;
-}
+};
 
 export const SconeNumberInput = React.forwardRef<HTMLInputElement, SconeNumberInputProps>(
     (

@@ -35,11 +35,11 @@ interface SconeDropdownContextValue {
 
 const SconeDropdownContext = React.createContext<SconeDropdownContextValue | null>(null);
 
-function useDropdownContext(): SconeDropdownContextValue {
+const useDropdownContext = (): SconeDropdownContextValue => {
     return React.useContext(SconeDropdownContext) ?? { close: () => undefined };
-}
+};
 
-export function SconeDropdown({
+export const SconeDropdown = ({
     trigger,
     items,
     children,
@@ -51,7 +51,7 @@ export function SconeDropdown({
     side = "bottom",
     ariaLabel,
     className,
-}: SconeDropdownProps) {
+}: SconeDropdownProps): React.JSX.Element => {
     const rootRef = React.useRef<HTMLDivElement | null>(null);
     const menuRef = React.useRef<HTMLDivElement | null>(null);
     const triggerRef = React.useRef<HTMLButtonElement | null>(null);
@@ -207,7 +207,7 @@ export function SconeDropdown({
             </div>
         </SconeDropdownContext.Provider>
     );
-}
+};
 
 export interface SconeDropdownItemProps extends React.HTMLAttributes<HTMLDivElement> {
     disabled?: boolean;
@@ -259,10 +259,13 @@ export const SconeDropdownItem = React.forwardRef<HTMLDivElement, SconeDropdownI
 );
 SconeDropdownItem.displayName = "SconeDropdownItem";
 
-export function SconeDropdownSeparator() {
+export const SconeDropdownSeparator = (): React.JSX.Element => {
     return <div role="separator" className="-mx-1 my-1 h-px bg-border" />;
-}
+};
 
-export function SconeDropdownLabel({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+export const SconeDropdownLabel = ({
+    className,
+    ...props
+}: React.HTMLAttributes<HTMLDivElement>): React.JSX.Element => {
     return <div className={cn("px-2 py-1 text-xs text-muted-foreground", className)} {...props} />;
-}
+};

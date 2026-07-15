@@ -8,11 +8,14 @@ export interface UseControllableStateOptions<T> {
 
 export type ControllableStateSetter<T> = (next: T | ((previous: T | undefined) => T)) => void;
 
-export function useControllableState<T>({
+export const useControllableState = <T>({
     value,
     defaultValue,
     onValueChange,
-}: UseControllableStateOptions<T>): [value: T | undefined, setValue: ControllableStateSetter<T>] {
+}: UseControllableStateOptions<T>): [
+    value: T | undefined,
+    setValue: ControllableStateSetter<T>,
+] => {
     const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
     // `undefined` is the uncontrolled sentinel for the current public contract.
     const isControlled = value !== undefined;
@@ -39,4 +42,4 @@ export function useControllableState<T>({
     );
 
     return [currentValue, setValue];
-}
+};

@@ -41,7 +41,7 @@ const toneClassNames: Record<SconeTypographyTone, string> = {
     warning: "text-amber-700 dark:text-amber-400",
 };
 
-function getTruncateClassName(truncate: boolean | number | undefined): string | undefined {
+const getTruncateClassName = (truncate: boolean | number | undefined): string | undefined => {
     if (truncate === true) {
         return "truncate";
     }
@@ -51,12 +51,12 @@ function getTruncateClassName(truncate: boolean | number | undefined): string | 
     }
 
     return undefined;
-}
+};
 
-function getTruncateStyle(
+const getTruncateStyle = (
     truncate: boolean | number | undefined,
     style: React.CSSProperties | undefined,
-): React.CSSProperties | undefined {
+): React.CSSProperties | undefined => {
     if (typeof truncate !== "number" || truncate <= 0) {
         return style;
     }
@@ -65,7 +65,7 @@ function getTruncateStyle(
         ...style,
         WebkitLineClamp: truncate,
     };
-}
+};
 
 export const SconeTypography = React.forwardRef<HTMLElement, SconeTypographyProps>(
     (

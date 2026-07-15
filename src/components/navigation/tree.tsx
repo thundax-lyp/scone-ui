@@ -54,24 +54,24 @@ interface VisibleTreeNode {
     level: number;
 }
 
-function keyEquals(left: Key, right: Key): boolean {
+const keyEquals = (left: Key, right: Key): boolean => {
     return String(left) === String(right);
-}
+};
 
-function hasKey(keys: Key[], key: Key): boolean {
+const hasKey = (keys: Key[], key: Key): boolean => {
     return keys.some((item) => keyEquals(item, key));
-}
+};
 
-function withoutKey(keys: Key[], key: Key): Key[] {
+const withoutKey = (keys: Key[], key: Key): Key[] => {
     return keys.filter((item) => !keyEquals(item, key));
-}
+};
 
-function flattenVisibleNodes(
+const flattenVisibleNodes = (
     nodes: SconeTreeNode[],
     expandedKeys: Key[],
     level = 1,
     parentKey?: Key,
-): VisibleTreeNode[] {
+): VisibleTreeNode[] => {
     return nodes.flatMap((node) => {
         const current = { node, key: node.key, parentKey, level };
         const children =
@@ -81,7 +81,7 @@ function flattenVisibleNodes(
 
         return [current, ...children];
     });
-}
+};
 
 export const SconeTree = React.forwardRef<HTMLDivElement, SconeTreeProps>(
     (
@@ -154,11 +154,15 @@ export const SconeTree = React.forwardRef<HTMLDivElement, SconeTreeProps>(
                 return;
             }
             const selected = hasKey(resolvedSelectedKeys, node.key);
-            const nextKeys = multiple
-                ? selected
-                    ? withoutKey(resolvedSelectedKeys, node.key)
-                    : [...resolvedSelectedKeys, node.key]
-                : [node.key];
+            let nextKeys: Key[];
+
+            if (!multiple) {
+                nextKeys = [node.key];
+            } else if (selected) {
+                nextKeys = withoutKey(resolvedSelectedKeys, node.key);
+            } else {
+                nextKeys = [...resolvedSelectedKeys, node.key];
+            }
             setSelectedKeys(nextKeys);
             onSelect?.(nextKeys, { node, selected: !selected });
         };

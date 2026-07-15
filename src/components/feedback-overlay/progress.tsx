@@ -19,14 +19,14 @@ const statusClasses: Record<SconeStatus, string> = {
     error: "[&_[data-slot=progress-indicator]]:bg-destructive",
 };
 
-function normalizeProgress(
+const normalizeProgress = (
     value: number,
     max: number,
 ): {
     value: number;
     max: number;
     percent: number;
-} {
+} => {
     const normalizedMax = Number.isFinite(max) && max > 0 ? max : 100;
     const finiteValue = Number.isFinite(value) ? value : 0;
     const normalizedValue = Math.min(Math.max(finiteValue, 0), normalizedMax);
@@ -36,7 +36,7 @@ function normalizeProgress(
         max: normalizedMax,
         percent: Math.round((normalizedValue / normalizedMax) * 100),
     };
-}
+};
 
 export const SconeProgress = React.forwardRef<HTMLDivElement, SconeProgressProps>(
     (

@@ -23,13 +23,16 @@ export interface SconeBreadcrumbProps extends React.HTMLAttributes<HTMLElement> 
     className?: string;
 }
 
-function getVisibleItems(items: SconeBreadcrumbItem[], maxItems?: number): SconeBreadcrumbItem[] {
+const getVisibleItems = (
+    items: SconeBreadcrumbItem[],
+    maxItems?: number,
+): SconeBreadcrumbItem[] => {
     if (!maxItems || maxItems < 2 || items.length <= maxItems) {
         return items;
     }
 
     return [items[0], ...items.slice(items.length - (maxItems - 1))];
-}
+};
 
 export const SconeBreadcrumb = React.forwardRef<HTMLElement, SconeBreadcrumbProps>(
     (
@@ -55,7 +58,13 @@ export const SconeBreadcrumb = React.forwardRef<HTMLElement, SconeBreadcrumbProp
                     {visibleItems.map((item, index) => {
                         const isFirst = index === 0;
                         const isCurrent = item.key === items[items.length - 1]?.key;
-                        const Comp = item.asChild ? Slot.Root : item.href ? "a" : "button";
+                        let Comp: typeof Slot.Root | "a" | "button" = "button";
+
+                        if (item.asChild) {
+                            Comp = Slot.Root;
+                        } else if (item.href) {
+                            Comp = "a";
+                        }
 
                         return (
                             <React.Fragment key={String(item.key)}>

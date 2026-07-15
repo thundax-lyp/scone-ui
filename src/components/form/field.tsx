@@ -21,11 +21,11 @@ export interface SconeFieldContextValue {
 
 const SconeFieldContext = React.createContext<SconeFieldContextValue | null>(null);
 
-export function useSconeFieldContext(): SconeFieldContextValue | null {
+export const useSconeFieldContext = (): SconeFieldContextValue | null => {
     return React.useContext(SconeFieldContext);
-}
+};
 
-function useRequiredSconeFieldContext(componentName: string): SconeFieldContextValue {
+const useRequiredSconeFieldContext = (componentName: string): SconeFieldContextValue => {
     const context = useSconeFieldContext();
 
     if (!context) {
@@ -33,7 +33,7 @@ function useRequiredSconeFieldContext(componentName: string): SconeFieldContextV
     }
 
     return context;
-}
+};
 
 export interface SconeFieldRootProps extends React.HTMLAttributes<HTMLDivElement> {
     name?: string;

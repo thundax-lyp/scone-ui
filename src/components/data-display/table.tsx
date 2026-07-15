@@ -55,19 +55,19 @@ const alignClassNames: Record<SconeAlign, string> = {
     end: "text-right",
 };
 
-function renderStateNode(node: React.ReactNode | (() => React.ReactNode)): React.ReactNode {
+const renderStateNode = (node: React.ReactNode | (() => React.ReactNode)): React.ReactNode => {
     return typeof node === "function" ? node() : node;
-}
+};
 
-function getRecordKey<T>(record: T, rowKey: string | ((record: T) => Key)): Key {
+const getRecordKey = <T,>(record: T, rowKey: string | ((record: T) => Key)): Key => {
     if (typeof rowKey === "function") {
         return rowKey(record);
     }
 
     return (record as Record<string, Key>)[rowKey];
-}
+};
 
-function getValue<T>(record: T, dataIndex: SconeTableColumn<T>["dataIndex"]): unknown {
+const getValue = <T,>(record: T, dataIndex: SconeTableColumn<T>["dataIndex"]): unknown => {
     if (dataIndex === undefined) {
         return undefined;
     }
@@ -83,9 +83,9 @@ function getValue<T>(record: T, dataIndex: SconeTableColumn<T>["dataIndex"]): un
     }
 
     return record[dataIndex as keyof T];
-}
+};
 
-function getScrollStyle(scroll: SconeTableScroll | undefined): React.CSSProperties | undefined {
+const getScrollStyle = (scroll: SconeTableScroll | undefined): React.CSSProperties | undefined => {
     if (!scroll?.x) {
         return undefined;
     }
@@ -95,9 +95,9 @@ function getScrollStyle(scroll: SconeTableScroll | undefined): React.CSSProperti
     }
 
     return { minWidth: scroll.x };
-}
+};
 
-function SconeTableInner<T>(
+const SconeTableInner = <T,>(
     {
         ariaLabel,
         columns,
@@ -114,7 +114,7 @@ function SconeTableInner<T>(
         ...props
     }: SconeTableProps<T>,
     ref: React.ForwardedRef<HTMLDivElement>,
-) {
+) => {
     const stateColSpan = Math.max(columns.length, 1);
 
     let body: React.ReactNode;
@@ -215,7 +215,7 @@ function SconeTableInner<T>(
             </Table>
         </div>
     );
-}
+};
 
 export const SconeTable = React.forwardRef(SconeTableInner) as <T>(
     props: SconeTableProps<T> & React.RefAttributes<HTMLDivElement>,

@@ -29,7 +29,7 @@ const markerToneClassNames: Record<SconeTone, string> = {
     danger: "border-destructive bg-destructive/10 text-destructive",
 };
 
-function TimelineMarker({ item }: { item: SconeTimelineItem }) {
+const TimelineMarker = ({ item }: { item: SconeTimelineItem }) => {
     return (
         <span
             className={cn(
@@ -41,7 +41,7 @@ function TimelineMarker({ item }: { item: SconeTimelineItem }) {
             {item.icon ?? ""}
         </span>
     );
-}
+};
 
 export const SconeTimeline = React.forwardRef<HTMLDivElement, SconeTimelineProps>(
     ({ items, pending, reverse = false, onItemClick, className, ...props }, ref) => {

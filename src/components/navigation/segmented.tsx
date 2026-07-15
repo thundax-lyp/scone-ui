@@ -6,7 +6,7 @@ import { useControllableState } from "@/lib/use-controllable-state";
 import type { SconeOption } from "@/types/foundation";
 
 export interface SconeSegmentedProps extends React.HTMLAttributes<HTMLDivElement> {
-    options: SconeOption<string>[];
+    options: SconeOption[];
     value?: string;
     defaultValue?: string;
     onValueChange?: (value: string) => void;

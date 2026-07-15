@@ -26,7 +26,10 @@ export interface SconeInlineProps extends React.HTMLAttributes<HTMLDivElement> {
     split?: React.ReactNode;
 }
 
-function renderInlineChildren(children: React.ReactNode, split: React.ReactNode): React.ReactNode {
+const renderInlineChildren = (
+    children: React.ReactNode,
+    split: React.ReactNode,
+): React.ReactNode => {
     const childItems = React.Children.toArray(children);
 
     if (split == null || childItems.length < 2) {
@@ -45,7 +48,7 @@ function renderInlineChildren(children: React.ReactNode, split: React.ReactNode)
             </span>,
         ];
     });
-}
+};
 
 export const SconeInline = React.forwardRef<HTMLDivElement, SconeInlineProps>(
     (

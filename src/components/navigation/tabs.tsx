@@ -35,13 +35,13 @@ interface SconeTabsContextValue {
 
 const SconeTabsContext = React.createContext<SconeTabsContextValue | null>(null);
 
-function useSconeTabsContext(component: string): SconeTabsContextValue {
+const useSconeTabsContext = (component: string): SconeTabsContextValue => {
     const context = React.useContext(SconeTabsContext);
     if (!context) {
         throw new Error(`${component} must be used inside SconeTabs.`);
     }
     return context;
-}
+};
 
 const SconeTabsRoot = React.forwardRef<HTMLDivElement, SconeTabsProps>(
     (

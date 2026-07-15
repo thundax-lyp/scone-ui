@@ -14,7 +14,7 @@ export interface SconeTooltipProps {
     className?: string;
 }
 
-export function SconeTooltip({
+export const SconeTooltip = ({
     content,
     children,
     open,
@@ -23,7 +23,7 @@ export function SconeTooltip({
     side = "top",
     delay = 0,
     className,
-}: SconeTooltipProps) {
+}: SconeTooltipProps): React.JSX.Element => {
     const tooltipId = React.useId();
     const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
     const [currentOpen, setOpen] = useControllableState({
@@ -135,4 +135,4 @@ export function SconeTooltip({
             ) : null}
         </span>
     );
-}
+};

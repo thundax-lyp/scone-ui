@@ -27,7 +27,7 @@ export interface AppShellAsideProps extends React.HTMLAttributes<HTMLElement> {
     defaultOpen?: boolean;
 }
 
-function AppShellRoot({ className, children, ...props }: AppShellRootProps) {
+const AppShellRoot = ({ className, children, ...props }: AppShellRootProps): React.JSX.Element => {
     return (
         <div
             data-scone-pattern="app-shell"
@@ -37,15 +37,15 @@ function AppShellRoot({ className, children, ...props }: AppShellRootProps) {
             {children}
         </div>
     );
-}
+};
 
-function AppShellSidebar({
+const AppShellSidebar = ({
     collapsed,
     defaultCollapsed = false,
     className,
     children,
     ...props
-}: AppShellSidebarProps) {
+}: AppShellSidebarProps): React.JSX.Element => {
     const effectiveCollapsed = collapsed ?? defaultCollapsed;
 
     return (
@@ -62,9 +62,14 @@ function AppShellSidebar({
             {children}
         </aside>
     );
-}
+};
 
-function AppShellHeader({ actions, className, children, ...props }: AppShellHeaderProps) {
+const AppShellHeader = ({
+    actions,
+    className,
+    children,
+    ...props
+}: AppShellHeaderProps): React.JSX.Element => {
     return (
         <header
             data-scone-app-shell-part="header"
@@ -87,9 +92,9 @@ function AppShellHeader({ actions, className, children, ...props }: AppShellHead
             ) : null}
         </header>
     );
-}
+};
 
-function AppShellMain({ className, children, ...props }: AppShellMainProps) {
+const AppShellMain = ({ className, children, ...props }: AppShellMainProps): React.JSX.Element => {
     return (
         <main
             data-scone-app-shell-part="main"
@@ -99,15 +104,15 @@ function AppShellMain({ className, children, ...props }: AppShellMainProps) {
             {children}
         </main>
     );
-}
+};
 
-function AppShellAside({
+const AppShellAside = ({
     open,
     defaultOpen = false,
     className,
     children,
     ...props
-}: AppShellAsideProps) {
+}: AppShellAsideProps): React.JSX.Element => {
     const effectiveOpen = open ?? defaultOpen;
 
     return (
@@ -125,7 +130,7 @@ function AppShellAside({
             {children}
         </aside>
     );
-}
+};
 
 export const AppShell = {
     Root: AppShellRoot,

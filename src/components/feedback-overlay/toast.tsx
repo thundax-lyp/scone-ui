@@ -43,30 +43,30 @@ let toastCounter = 0;
 let toastItems: SconeToastItem[] = [];
 const toastListeners = new Set<() => void>();
 
-function emitToastChange(): void {
+const emitToastChange = (): void => {
     for (const listener of toastListeners) {
         listener();
     }
-}
+};
 
-function getToastSnapshot(): SconeToastItem[] {
+const getToastSnapshot = (): SconeToastItem[] => {
     return toastItems;
-}
+};
 
-function subscribeToasts(listener: () => void): () => void {
+const subscribeToasts = (listener: () => void): (() => void) => {
     toastListeners.add(listener);
 
     return () => {
         toastListeners.delete(listener);
     };
-}
+};
 
-function nextToastId(): string {
+const nextToastId = (): string => {
     toastCounter += 1;
     return `toast-${toastCounter}`;
-}
+};
 
-function showToast(options: ToastOptions): string {
+const showToast = (options: ToastOptions): string => {
     const id = options.id ?? nextToastId();
     const item: SconeToastItem = { ...options, id };
 
@@ -74,7 +74,7 @@ function showToast(options: ToastOptions): string {
     emitToastChange();
 
     return id;
-}
+};
 
 // Provider and service are intentionally exported together as the public toast API.
 // eslint-disable-next-line react-refresh/only-export-components
@@ -124,13 +124,13 @@ const toneClasses: Record<SconeTone, string> = {
     danger: "border-destructive/30",
 };
 
-export function SconeToastProvider({
+export const SconeToastProvider = ({
     children,
     position = "top-right",
     duration = 5000,
     maxVisible = 3,
     onOpenChange,
-}: SconeToastProviderProps) {
+}: SconeToastProviderProps): React.JSX.Element => {
     const items = React.useSyncExternalStore(subscribeToasts, getToastSnapshot, getToastSnapshot);
     const visibleItems = React.useMemo(() => items.slice(-maxVisible), [items, maxVisible]);
 
@@ -209,4 +209,4 @@ export function SconeToastProvider({
             </div>
         </>
     );
-}
+};

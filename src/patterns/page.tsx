@@ -58,14 +58,14 @@ const stickyActionsAlignClassNames = {
     between: "justify-between",
 };
 
-function PageRoot({
+const PageRoot = ({
     maxWidth = "content",
     hasStickyActions = false,
     density = "default",
     className,
     children,
     ...props
-}: PageRootProps) {
+}: PageRootProps): React.JSX.Element => {
     const contextValue = React.useMemo<PageContextValue>(
         () => ({ hasStickyActions }),
         [hasStickyActions],
@@ -90,16 +90,16 @@ function PageRoot({
             </div>
         </PageContext.Provider>
     );
-}
+};
 
-function PageHeader({
+const PageHeader = ({
     title,
     description,
     actions,
     className,
     children,
     ...props
-}: PageHeaderProps) {
+}: PageHeaderProps): React.JSX.Element => {
     return (
         <header
             data-scone-page-part="header"
@@ -127,9 +127,14 @@ function PageHeader({
             ) : null}
         </header>
     );
-}
+};
 
-function PageMain({ asChild = false, className, children, ...props }: PageMainProps) {
+const PageMain = ({
+    asChild = false,
+    className,
+    children,
+    ...props
+}: PageMainProps): React.JSX.Element => {
     const { hasStickyActions } = React.useContext(PageContext);
     void asChild;
 
@@ -147,9 +152,9 @@ function PageMain({ asChild = false, className, children, ...props }: PageMainPr
             {children}
         </main>
     );
-}
+};
 
-function PageContent({ className, children, ...props }: PageContentProps) {
+const PageContent = ({ className, children, ...props }: PageContentProps): React.JSX.Element => {
     const { hasStickyActions } = React.useContext(PageContext);
 
     return (
@@ -166,14 +171,14 @@ function PageContent({ className, children, ...props }: PageContentProps) {
             {children}
         </div>
     );
-}
+};
 
-function PageStickyActions({
+const PageStickyActions = ({
     align = "end",
     className,
     children,
     ...props
-}: PageStickyActionsProps) {
+}: PageStickyActionsProps): React.JSX.Element => {
     return (
         <div
             data-scone-page-part="sticky-actions"
@@ -188,7 +193,7 @@ function PageStickyActions({
             {children}
         </div>
     );
-}
+};
 
 export const Page = {
     Root: PageRoot,

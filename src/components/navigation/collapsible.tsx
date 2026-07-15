@@ -12,14 +12,14 @@ export interface SconeCollapsibleProps {
     className?: string;
 }
 
-export function SconeCollapsible({
+export const SconeCollapsible = ({
     open,
     defaultOpen,
     onOpenChange,
     trigger,
     children,
     className,
-}: SconeCollapsibleProps) {
+}: SconeCollapsibleProps): React.JSX.Element => {
     return (
         <CollapsiblePrimitive.Root
             data-scone-navigation="collapsible"
@@ -36,4 +36,4 @@ export function SconeCollapsible({
             </CollapsiblePrimitive.Content>
         </CollapsiblePrimitive.Root>
     );
-}
+};

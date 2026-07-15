@@ -34,7 +34,12 @@ export type SconeAccordionProps = (SconeAccordionSingleProps | SconeAccordionMul
     className?: string;
 };
 
-export function SconeAccordion({ items, children, className, ...props }: SconeAccordionProps) {
+export const SconeAccordion = ({
+    items,
+    children,
+    className,
+    ...props
+}: SconeAccordionProps): React.JSX.Element => {
     const content = items
         ? items.map((item) => (
               <AccordionPrimitive.Item
@@ -84,4 +89,4 @@ export function SconeAccordion({ items, children, className, ...props }: SconeAc
             {content}
         </AccordionPrimitive.Root>
     );
-}
+};

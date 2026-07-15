@@ -64,6 +64,27 @@ export const SconeSearchInput = React.forwardRef<HTMLInputElement, SconeSearchIn
         });
         const hasValue = Boolean(currentValue);
         const canClear = clearable && hasValue && !controlProps.disabled && !controlProps.readOnly;
+        let trailingAction: React.ReactNode = null;
+
+        if (loading) {
+            trailingAction = (
+                <Loader2
+                    aria-label="Search loading"
+                    className="absolute right-2.5 top-1/2 size-4 -translate-y-1/2 animate-spin text-muted-foreground"
+                />
+            );
+        } else if (canClear) {
+            trailingAction = (
+                <button
+                    type="button"
+                    aria-label={clearLabel}
+                    className="absolute right-1.5 top-1/2 inline-flex size-5 -translate-y-1/2 items-center justify-center rounded-sm text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    onClick={() => setCurrentValue("")}
+                >
+                    <X aria-hidden="true" className="size-3.5" />
+                </button>
+            );
+        }
 
         return (
             <div data-scone-search-input="" className="relative">
@@ -79,21 +100,7 @@ export const SconeSearchInput = React.forwardRef<HTMLInputElement, SconeSearchIn
                     onChange={handleChange}
                     {...controlProps}
                 />
-                {loading ? (
-                    <Loader2
-                        aria-label="Search loading"
-                        className="absolute right-2.5 top-1/2 size-4 -translate-y-1/2 animate-spin text-muted-foreground"
-                    />
-                ) : canClear ? (
-                    <button
-                        type="button"
-                        aria-label={clearLabel}
-                        className="absolute right-1.5 top-1/2 inline-flex size-5 -translate-y-1/2 items-center justify-center rounded-sm text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                        onClick={() => setCurrentValue("")}
-                    >
-                        <X aria-hidden="true" className="size-3.5" />
-                    </button>
-                ) : null}
+                {trailingAction}
             </div>
         );
     },

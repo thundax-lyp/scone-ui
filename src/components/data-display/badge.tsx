@@ -21,7 +21,7 @@ const badgeToneClassNames: Record<SconeTone, string> = {
     danger: "bg-destructive text-destructive-foreground ring-destructive",
 };
 
-function formatCount(count: number | string | undefined, overflow: number): string | undefined {
+const formatCount = (count: number | string | undefined, overflow: number): string | undefined => {
     if (count === undefined || count === null || count === "" || count === 0) {
         return undefined;
     }
@@ -31,7 +31,7 @@ function formatCount(count: number | string | undefined, overflow: number): stri
     }
 
     return String(count);
-}
+};
 
 export const SconeBadge = React.forwardRef<HTMLSpanElement, SconeBadgeProps>(
     (

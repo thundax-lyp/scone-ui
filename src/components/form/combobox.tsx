@@ -45,9 +45,9 @@ const comboboxSizeClassNames: Record<SconeControlSize, string> = {
     lg: "h-9 text-base",
 };
 
-function optionLabelToText(label: React.ReactNode): string {
+const optionLabelToText = (label: React.ReactNode): string => {
     return typeof label === "string" || typeof label === "number" ? String(label) : "";
-}
+};
 
 export const SconeCombobox = React.forwardRef<HTMLButtonElement, SconeComboboxProps>(
     (
@@ -104,6 +104,31 @@ export const SconeCombobox = React.forwardRef<HTMLButtonElement, SconeComboboxPr
             optionLabelToText(option.label).toLowerCase().includes(currentSearch.toLowerCase()),
         );
         const listboxId = `${controlProps.id ?? "scone-combobox"}-listbox`;
+        let commandListContent: React.ReactNode;
+
+        if (loading) {
+            commandListContent = (
+                <div className="px-2 py-2 text-sm text-muted-foreground">Loading</div>
+            );
+        } else if (filteredOptions.length === 0) {
+            commandListContent = <CommandEmpty>{emptyText}</CommandEmpty>;
+        } else {
+            commandListContent = filteredOptions.map((option) => (
+                <CommandItem
+                    key={option.value}
+                    value={option.value}
+                    role="option"
+                    aria-selected={option.value === currentValue}
+                    disabled={option.disabled}
+                    onSelect={() => selectOption(option.value)}
+                >
+                    <span>{option.label}</span>
+                    {option.value === currentValue ? (
+                        <Check aria-hidden="true" className="ml-auto size-4" />
+                    ) : null}
+                </CommandItem>
+            ));
+        }
 
         const updateSearch = (nextValue: string) => {
             if (isDisabled) {
@@ -222,29 +247,7 @@ export const SconeCombobox = React.forwardRef<HTMLButtonElement, SconeComboboxPr
                             onValueChange={updateSearch}
                         />
                         <CommandList id={listboxId} role="listbox">
-                            {loading ? (
-                                <div className="px-2 py-2 text-sm text-muted-foreground">
-                                    Loading
-                                </div>
-                            ) : filteredOptions.length === 0 ? (
-                                <CommandEmpty>{emptyText}</CommandEmpty>
-                            ) : (
-                                filteredOptions.map((option) => (
-                                    <CommandItem
-                                        key={option.value}
-                                        value={option.value}
-                                        role="option"
-                                        aria-selected={option.value === currentValue}
-                                        disabled={option.disabled}
-                                        onSelect={() => selectOption(option.value)}
-                                    >
-                                        <span>{option.label}</span>
-                                        {option.value === currentValue ? (
-                                            <Check aria-hidden="true" className="ml-auto size-4" />
-                                        ) : null}
-                                    </CommandItem>
-                                ))
-                            )}
+                            {commandListContent}
                         </CommandList>
                     </Command>
                 </PopoverContent>

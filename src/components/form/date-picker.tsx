@@ -34,30 +34,30 @@ const triggerSizeClassNames: Record<SconeControlSize, string> = {
     lg: "h-9 text-base",
 };
 
-function defaultFormatLabel(date: Date): string {
+const defaultFormatLabel = (date: Date): string => {
     return date.toLocaleDateString(undefined, {
         year: "numeric",
         month: "2-digit",
         day: "2-digit",
     });
-}
+};
 
-function isSameDay(left: Date | undefined, right: Date): boolean {
+const isSameDay = (left: Date | undefined, right: Date): boolean => {
     return (
         left !== undefined &&
         left.getFullYear() === right.getFullYear() &&
         left.getMonth() === right.getMonth() &&
         left.getDate() === right.getDate()
     );
-}
+};
 
-function getMonthDays(anchorDate: Date): Date[] {
+const getMonthDays = (anchorDate: Date): Date[] => {
     const year = anchorDate.getFullYear();
     const month = anchorDate.getMonth();
     const days = new Date(year, month + 1, 0).getDate();
 
     return Array.from({ length: days }, (_, index) => new Date(year, month, index + 1));
-}
+};
 
 export const SconeDatePicker = React.forwardRef<HTMLButtonElement, SconeDatePickerProps>(
     (

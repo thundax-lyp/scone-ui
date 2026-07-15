@@ -41,28 +41,28 @@ let notificationCounter = 0;
 let notificationItems: SconeNotificationItem[] = [];
 const notificationListeners = new Set<() => void>();
 
-function emitNotificationChange(): void {
+const emitNotificationChange = (): void => {
     for (const listener of notificationListeners) {
         listener();
     }
-}
+};
 
-function getNotificationSnapshot(): SconeNotificationItem[] {
+const getNotificationSnapshot = (): SconeNotificationItem[] => {
     return notificationItems;
-}
+};
 
-function subscribeNotifications(listener: () => void): () => void {
+const subscribeNotifications = (listener: () => void): (() => void) => {
     notificationListeners.add(listener);
 
     return () => {
         notificationListeners.delete(listener);
     };
-}
+};
 
-function nextNotificationId(): string {
+const nextNotificationId = (): string => {
     notificationCounter += 1;
     return `notification-${notificationCounter}`;
-}
+};
 
 // Provider and service are intentionally exported together as the public notification API.
 // eslint-disable-next-line react-refresh/only-export-components
@@ -118,12 +118,12 @@ const toneClasses: Record<SconeTone, string> = {
     danger: "border-destructive/30",
 };
 
-export function SconeNotificationProvider({
+export const SconeNotificationProvider = ({
     children,
     placement = "top-right",
     maxVisible = 5,
     onOpenChange,
-}: SconeNotificationProviderProps) {
+}: SconeNotificationProviderProps): React.JSX.Element => {
     const items = React.useSyncExternalStore(
         subscribeNotifications,
         getNotificationSnapshot,
@@ -195,4 +195,4 @@ export function SconeNotificationProvider({
             </div>
         </>
     );
-}
+};

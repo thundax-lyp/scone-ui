@@ -19,9 +19,9 @@ export interface SconeControlStateProps {
     required?: boolean;
 }
 
-export function normalizeSconeAriaInvalid(
+export const normalizeSconeAriaInvalid = (
     value: React.AriaAttributes["aria-invalid"] | undefined,
-): SconeAriaInvalid | undefined {
+): SconeAriaInvalid | undefined => {
     if (value === true || value === "true") {
         return true;
     }
@@ -31,12 +31,12 @@ export function normalizeSconeAriaInvalid(
     }
 
     return undefined;
-}
+};
 
-export function getSconeControlStateProps(
+export const getSconeControlStateProps = (
     field: SconeFieldContextValue | null,
     props: SconeControlStateProps,
-): SconeControlStateProps {
+): SconeControlStateProps => {
     if (!field) {
         return props;
     }
@@ -62,4 +62,4 @@ export function getSconeControlStateProps(
         readOnly: readOnly || undefined,
         required: required || undefined,
     };
-}
+};

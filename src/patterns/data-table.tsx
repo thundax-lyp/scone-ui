@@ -102,15 +102,17 @@ const tableRegionHeightClassNames = {
 
 const selectionColumnKey = "__scone_selection__";
 
-function useDataTableContext(): DataTableContextValue {
+const useDataTableContext = (): DataTableContextValue => {
     return (
         React.useContext(DataTableContext) ?? {
             density: "default",
         }
     );
-}
+};
 
-function renderActions(actions: React.ReactNode | DataTableAction[] | undefined): React.ReactNode {
+const renderActions = (
+    actions: React.ReactNode | DataTableAction[] | undefined,
+): React.ReactNode => {
     if (!Array.isArray(actions)) {
         return actions;
     }
@@ -126,9 +128,9 @@ function renderActions(actions: React.ReactNode | DataTableAction[] | undefined)
             {action.label}
         </button>
     ));
-}
+};
 
-function DataTableRoot<T>({
+const DataTableRoot = <T,>({
     density = "default",
     rowSelection,
     pagination,
@@ -136,7 +138,7 @@ function DataTableRoot<T>({
     className,
     children,
     ...props
-}: DataTableRootProps<T>) {
+}: DataTableRootProps<T>): React.JSX.Element => {
     const contextValue = React.useMemo<DataTableContextValue>(
         () => ({
             density,
@@ -159,9 +161,13 @@ function DataTableRoot<T>({
             </div>
         </DataTableContext.Provider>
     );
-}
+};
 
-function DataTableFilterBar({ className, children, ...props }: DataTableFilterBarProps) {
+const DataTableFilterBar = ({
+    className,
+    children,
+    ...props
+}: DataTableFilterBarProps): React.JSX.Element => {
     return (
         <FilterBar.Root
             data-scone-data-table-part="filter-bar"
@@ -171,9 +177,9 @@ function DataTableFilterBar({ className, children, ...props }: DataTableFilterBa
             {children}
         </FilterBar.Root>
     );
-}
+};
 
-function DataTableToolbar({
+const DataTableToolbar = ({
     title,
     start,
     end,
@@ -181,7 +187,7 @@ function DataTableToolbar({
     selectedCount,
     className,
     ...props
-}: DataTableToolbarProps) {
+}: DataTableToolbarProps): React.JSX.Element => {
     const { density, rowSelection } = useDataTableContext();
     const derivedSelectedCount = selectedCount ?? rowSelection?.selectedRowKeys.length;
     const renderedActions = renderActions(actions);
@@ -210,9 +216,9 @@ function DataTableToolbar({
             {...props}
         />
     );
-}
+};
 
-function DataTableBulkActions({
+const DataTableBulkActions = ({
     selectedKeys,
     selectedRows,
     actions,
@@ -220,7 +226,7 @@ function DataTableBulkActions({
     className,
     children,
     ...props
-}: DataTableBulkActionsProps) {
+}: DataTableBulkActionsProps): React.JSX.Element | null => {
     const { rowSelection } = useDataTableContext();
     const effectiveSelectedKeys = selectedKeys ?? rowSelection?.selectedRowKeys ?? [];
     const effectiveSelectedRows = selectedRows ?? [];
@@ -264,36 +270,36 @@ function DataTableBulkActions({
             <span hidden>{effectiveSelectedRows.length}</span>
         </div>
     );
-}
+};
 
-function renderStateNode(node: React.ReactNode | (() => React.ReactNode)): React.ReactNode {
+const renderStateNode = (node: React.ReactNode | (() => React.ReactNode)): React.ReactNode => {
     return typeof node === "function" ? node() : node;
-}
+};
 
-function getRecordKey<T>(record: T, rowKey: string | ((record: T) => Key)): Key {
+const getRecordKey = <T,>(record: T, rowKey: string | ((record: T) => Key)): Key => {
     if (typeof rowKey === "function") {
         return rowKey(record);
     }
 
     return (record as Record<string, Key>)[rowKey];
-}
+};
 
-function getSelectedRows<T>(
+const getSelectedRows = <T,>(
     dataSource: T[],
     rowKey: string | ((record: T) => Key),
     selectedRowKeys: Key[],
-): T[] {
+): T[] => {
     const selectedKeySet = new Set(selectedRowKeys);
 
     return dataSource.filter((record) => selectedKeySet.has(getRecordKey(record, rowKey)));
-}
+};
 
-function withSelectionColumn<T>(
+const withSelectionColumn = <T,>(
     columns: SconeTableColumn<T>[],
     dataSource: T[],
     rowKey: string | ((record: T) => Key),
     rowSelection: SconeRowSelection<unknown>,
-): SconeTableColumn<T>[] {
+): SconeTableColumn<T>[] => {
     const typedRowSelection = rowSelection as SconeRowSelection<T>;
     const selectedKeySet = new Set(typedRowSelection.selectedRowKeys);
     const selectableRows = dataSource.filter(
@@ -368,9 +374,9 @@ function withSelectionColumn<T>(
     };
 
     return [selectionColumn, ...columns];
-}
+};
 
-function DataTableTableRegion<T>({
+const DataTableTableRegion = <T,>({
     ariaLabel,
     columns,
     dataSource,
@@ -385,7 +391,7 @@ function DataTableTableRegion<T>({
     scroll,
     className,
     ...props
-}: DataTableTableRegionProps<T>) {
+}: DataTableTableRegionProps<T>): React.JSX.Element => {
     const { density, rowSelection } = useDataTableContext();
     const hasDataMode = columns !== undefined && dataSource !== undefined && rowKey !== undefined;
     const isEmpty = hasDataMode
@@ -452,15 +458,15 @@ function DataTableTableRegion<T>({
             </div>
         </div>
     );
-}
+};
 
-function DataTablePagination({
+const DataTablePagination = ({
     state,
     onChange,
     pageSizeOptions,
     className,
     ...props
-}: DataTablePaginationProps) {
+}: DataTablePaginationProps): React.JSX.Element | null => {
     const { density, pagination, onPaginationChange } = useDataTableContext();
     const effectiveState = state ?? pagination;
     const effectiveOnChange = onChange ?? onPaginationChange;
@@ -483,7 +489,7 @@ function DataTablePagination({
             />
         </div>
     );
-}
+};
 
 export const DataTable = {
     Root: DataTableRoot,

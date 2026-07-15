@@ -26,22 +26,22 @@ const densityClassNames = {
     },
 };
 
-function getPageCount(state: SconePaginationState): number {
+const getPageCount = (state: SconePaginationState): number => {
     if (state.pageSize <= 0) {
         return 1;
     }
 
     return Math.max(1, Math.ceil(state.total / state.pageSize));
-}
+};
 
-function getVisiblePages(currentPage: number, pageCount: number): number[] {
+const getVisiblePages = (currentPage: number, pageCount: number): number[] => {
     const start = Math.max(1, currentPage - 2);
     const end = Math.min(pageCount, currentPage + 2);
 
     return Array.from({ length: end - start + 1 }, (_, index) => start + index);
-}
+};
 
-function getPageRange(state: SconePaginationState, currentPage: number): string {
+const getPageRange = (state: SconePaginationState, currentPage: number): string => {
     if (state.total <= 0 || state.pageSize <= 0) {
         return `0-0 / ${state.total}`;
     }
@@ -50,11 +50,11 @@ function getPageRange(state: SconePaginationState, currentPage: number): string 
     const end = Math.min(currentPage * state.pageSize, state.total);
 
     return `${start}-${end} / ${state.total}`;
-}
+};
 
-function getPageSizeOptions(options: number[], pageSize: number): number[] {
+const getPageSizeOptions = (options: number[], pageSize: number): number[] => {
     return Array.from(new Set([...options, pageSize])).sort((left, right) => left - right);
-}
+};
 
 export const SconePagination = React.forwardRef<HTMLElement, SconePaginationProps>(
     (

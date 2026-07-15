@@ -68,7 +68,7 @@ interface FilterBarContextValue {
 
 const FilterBarContext = React.createContext<FilterBarContextValue | null>(null);
 
-function useFilterBarContext(): FilterBarContextValue {
+const useFilterBarContext = (): FilterBarContextValue => {
     const context = React.useContext(FilterBarContext);
 
     if (!context) {
@@ -76,9 +76,9 @@ function useFilterBarContext(): FilterBarContextValue {
     }
 
     return context;
-}
+};
 
-function isFilterState(filters: FilterBarRootProps["filters"]): filters is FilterBarFilters {
+const isFilterState = (filters: FilterBarRootProps["filters"]): filters is FilterBarFilters => {
     return (
         filters !== null &&
         filters !== undefined &&
@@ -86,23 +86,26 @@ function isFilterState(filters: FilterBarRootProps["filters"]): filters is Filte
         !React.isValidElement(filters) &&
         !Array.isArray(filters)
     );
-}
+};
 
-function shouldRenderSearch({
+const shouldRenderSearch = ({
     search,
     searchValue,
     defaultSearchValue,
     onSearchChange,
-}: Pick<FilterBarRootProps, "search" | "searchValue" | "defaultSearchValue" | "onSearchChange">) {
+}: Pick<
+    FilterBarRootProps,
+    "search" | "searchValue" | "defaultSearchValue" | "onSearchChange"
+>) => {
     return (
         search !== undefined ||
         searchValue !== undefined ||
         defaultSearchValue !== undefined ||
         onSearchChange !== undefined
     );
-}
+};
 
-function FilterBarRoot({
+const FilterBarRoot = ({
     search,
     searchValue,
     defaultSearchValue,
@@ -127,7 +130,7 @@ function FilterBarRoot({
     children,
     onClick,
     ...props
-}: FilterBarRootProps) {
+}: FilterBarRootProps): React.JSX.Element => {
     const filterControls = isFilterState(filters) ? undefined : filters;
     const controlledFilters = isFilterState(filters) ? filters : undefined;
     const [effectiveSearchValue = "", setSearchValue] = useControllableState({
@@ -300,15 +303,15 @@ function FilterBarRoot({
             </div>
         </FilterBarContext.Provider>
     );
-}
+};
 
-function FilterBarSearch({
+const FilterBarSearch = ({
     ariaLabel = "Search filters",
     placeholder = "Search",
     className,
     onChange,
     ...props
-}: FilterBarSearchProps) {
+}: FilterBarSearchProps): React.JSX.Element => {
     const { searchValue, setSearchValue } = useFilterBarContext();
 
     return (
@@ -328,9 +331,13 @@ function FilterBarSearch({
             {...props}
         />
     );
-}
+};
 
-function FilterBarFields({ className, children, ...props }: FilterBarFieldsProps) {
+const FilterBarFields = ({
+    className,
+    children,
+    ...props
+}: FilterBarFieldsProps): React.JSX.Element => {
     const { expanded } = useFilterBarContext();
 
     return (
@@ -343,9 +350,13 @@ function FilterBarFields({ className, children, ...props }: FilterBarFieldsProps
             {children}
         </div>
     );
-}
+};
 
-function FilterBarActions({ className, children, ...props }: FilterBarActionsProps) {
+const FilterBarActions = ({
+    className,
+    children,
+    ...props
+}: FilterBarActionsProps): React.JSX.Element => {
     return (
         <div
             data-scone-filter-bar-part="actions"
@@ -355,9 +366,13 @@ function FilterBarActions({ className, children, ...props }: FilterBarActionsPro
             {children}
         </div>
     );
-}
+};
 
-function FilterBarSummary({ className, children, ...props }: FilterBarSummaryProps) {
+const FilterBarSummary = ({
+    className,
+    children,
+    ...props
+}: FilterBarSummaryProps): React.JSX.Element | null => {
     if (!children) {
         return null;
     }
@@ -371,7 +386,7 @@ function FilterBarSummary({ className, children, ...props }: FilterBarSummaryPro
             {children}
         </div>
     );
-}
+};
 
 export const FilterBar = {
     Root: FilterBarRoot,

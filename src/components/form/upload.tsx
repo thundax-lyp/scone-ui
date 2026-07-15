@@ -29,7 +29,7 @@ export interface SconeUploadProps extends Omit<
     buttonLabel?: React.ReactNode;
 }
 
-function acceptsFile(file: File, accept: string | undefined): boolean {
+const acceptsFile = (file: File, accept: string | undefined): boolean => {
     if (!accept) {
         return true;
     }
@@ -51,7 +51,7 @@ function acceptsFile(file: File, accept: string | undefined): boolean {
 
         return file.type.toLowerCase() === rule;
     });
-}
+};
 
 export const SconeUpload = React.forwardRef<HTMLInputElement, SconeUploadProps>(
     (

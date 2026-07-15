@@ -19,9 +19,9 @@ export interface SconeImageProps extends React.HTMLAttributes<HTMLDivElement> {
     className?: string;
 }
 
-function toCssSize(value: number | string | undefined): number | string | undefined {
+const toCssSize = (value: number | string | undefined): number | string | undefined => {
     return value;
-}
+};
 
 export const SconeImage = React.forwardRef<HTMLDivElement, SconeImageProps>(
     (

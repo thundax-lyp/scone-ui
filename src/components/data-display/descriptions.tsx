@@ -37,9 +37,9 @@ const itemDensityClassNames: Record<SconeDensity, string> = {
 
 type DescriptionsStyle = React.CSSProperties & Record<`--dd-columns${string}`, number>;
 
-function getColumnsStyle(
+const getColumnsStyle = (
     columns: number | ResponsiveValue<number> | undefined,
-): React.CSSProperties {
+): React.CSSProperties => {
     const resolved = columns ?? 3;
     const nextStyle: DescriptionsStyle = {
         "--dd-columns": typeof resolved === "number" ? resolved : (resolved.sm ?? 1),
@@ -53,7 +53,7 @@ function getColumnsStyle(
     }
 
     return nextStyle;
-}
+};
 
 export const SconeDescriptions = React.forwardRef<HTMLDivElement, SconeDescriptionsProps>(
     (

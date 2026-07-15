@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { useControllableState } from "@/lib/use-controllable-state";
+import { useControllableState, type ControllableStateSetter } from "@/lib/use-controllable-state";
 
 import {
     getSconeControlStateProps,
@@ -27,7 +27,17 @@ interface UseSconeTextControlOptions<
     controlProps: TControlProps;
 }
 
-export function useSconeTextControl<
+interface UseSconeTextControlResult<
+    TElement extends SconeTextControlElement,
+    TControlProps extends SconeTextControlProps,
+> {
+    currentValue: string | undefined;
+    setCurrentValue: ControllableStateSetter<string>;
+    controlProps: TControlProps & SconeControlStateProps;
+    handleChange: React.ChangeEventHandler<TElement>;
+}
+
+export const useSconeTextControl = <
     TElement extends SconeTextControlElement,
     TControlProps extends SconeTextControlProps,
 >({
@@ -38,7 +48,10 @@ export function useSconeTextControl<
     ariaLabel,
     invalid,
     controlProps,
-}: UseSconeTextControlOptions<TElement, TControlProps>) {
+}: UseSconeTextControlOptions<TElement, TControlProps>): UseSconeTextControlResult<
+    TElement,
+    TControlProps
+> => {
     const field = useSconeFieldContext();
     const [currentValue, setCurrentValue] = useControllableState<string>({
         value,
@@ -65,4 +78,4 @@ export function useSconeTextControl<
         controlProps: resolvedControlProps,
         handleChange,
     };
-}
+};

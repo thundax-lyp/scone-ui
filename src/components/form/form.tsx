@@ -10,9 +10,9 @@ export interface SconeFormContextValue {
 
 const SconeFormContext = React.createContext<SconeFormContextValue>({});
 
-export function useSconeFormContext(): SconeFormContextValue {
+export const useSconeFormContext = (): SconeFormContextValue => {
     return React.useContext(SconeFormContext);
-}
+};
 
 export interface SconeFormProps extends React.FormHTMLAttributes<HTMLFormElement> {
     disabled?: boolean;
