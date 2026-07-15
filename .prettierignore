@@ -2,4 +2,4 @@ dist
 coverage
 node_modules
 pnpm-lock.yaml
-src/components/ui
+src/components/ui/**/*.{ts,tsx}

@@ -4,7 +4,7 @@ import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-    { ignores: ["dist", "coverage"] },
+    { ignores: ["dist", "coverage", "src/components/ui/**/*.{ts,tsx}"] },
     js.configs.recommended,
     ...tseslint.configs.recommended,
     {
@@ -21,13 +21,27 @@ export default tseslint.config(
         },
         rules: {
             ...reactHooks.configs.recommended.rules,
+            "@typescript-eslint/no-explicit-any": "error",
+            "@typescript-eslint/explicit-module-boundary-types": "error",
+            "@typescript-eslint/no-inferrable-types": "error",
+            "@typescript-eslint/no-unnecessary-type-arguments": "error",
+            "@typescript-eslint/no-unnecessary-type-constraint": "error",
+            "@typescript-eslint/no-unnecessary-type-parameters": "error",
+            "@typescript-eslint/use-unknown-in-catch-callback-variable": "error",
+            "no-restricted-syntax": [
+                "error",
+                {
+                    selector: "FunctionDeclaration",
+                    message: "Use a const arrow function instead of a function declaration.",
+                },
+                {
+                    selector: "FunctionExpression",
+                    message: "Use an arrow function instead of a function expression.",
+                },
+            ],
+            "no-console": "error",
+            "no-nested-ternary": "error",
             "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
-        },
-    },
-    {
-        files: ["src/components/ui/**/*.{ts,tsx}"],
-        rules: {
-            "react-refresh/only-export-components": "off",
         },
     },
     {
