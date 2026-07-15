@@ -18,12 +18,12 @@ sidebar_position: 2
 
 ## 公共 API 形态
 
-| 形态 | 示例 | 使用规则 |
-| --- | --- | --- |
-| 基础组件 | `SconeButton`、`SconeSelect`、`SconeTable` | 组件名以 `Scone*` 为主，从 `"scone-ui"` 导入。 |
-| 后台 Pattern | `AppShell`、`Page`、`Section`、`FilterBar`、`DataTable` | 使用命名空间对象，例如 `Page.Root`、`DataTable.TableRegion`。 |
-| 反馈服务 | `toast`、`notification` | 必须配套 `SconeToastProvider` 或 `SconeNotificationProvider`。 |
-| 公共工具 | `cn`、`composeRefs`、`useControllableState`、ARIA helpers | 只在 wrapper 或库内组合需要时使用。 |
+| 形态         | 示例                                                      | 使用规则                                                       |
+| ------------ | --------------------------------------------------------- | -------------------------------------------------------------- |
+| 基础组件     | `SconeButton`、`SconeSelect`、`SconeTable`                | 组件名以 `Scone*` 为主，从 `"scone-ui"` 导入。                 |
+| 后台 Pattern | `AppShell`、`Page`、`Section`、`FilterBar`、`DataTable`   | 使用命名空间对象，例如 `Page.Root`、`DataTable.TableRegion`。  |
+| 反馈服务     | `toast`、`notification`                                   | 必须配套 `SconeToastProvider` 或 `SconeNotificationProvider`。 |
+| 公共工具     | `cn`、`composeRefs`、`useControllableState`、ARIA helpers | 只在 wrapper 或库内组合需要时使用。                            |
 
 ## 代码生成规则
 
@@ -38,19 +38,49 @@ sidebar_position: 2
 9. 不要发明新的导出名，例如不存在的 `SconeDrawerForm`、`SconePopover`、`SconeLogo`、`SconeResult`、`SconeGrid`。
 10. 不要依赖仓库内部规格、设计文档、RUNBOOK、TODO、PR 记录或源码路径生成调用方代码。
 
+## 样式和主题
+
+`scone-ui/styles.css` 是零配置样式入口，已包含默认主题变量、组件样式、Tailwind bridge、shadcn 动画支持和字体导入。普通应用只导入这一项。
+
+公开 CSS 入口：
+
+| 入口                         | 用途                                                                            |
+| ---------------------------- | ------------------------------------------------------------------------------- |
+| `scone-ui/styles.css`        | 推荐入口。完整组件库样式，包含默认 theme。                                      |
+| `scone-ui/default.theme.css` | 默认 token 文件。用于主题审阅、单独对比或高级构建拆分。普通应用不需要额外导入。 |
+| `scone-ui/styles/theme.css`  | 兼容入口，转发默认 theme。新代码不要优先使用。                                  |
+
+调用方覆盖主题时，必须在 `scone-ui/styles.css` 之后声明 token：
+
+```css
+@import "scone-ui/styles.css";
+
+:root {
+    --scone-color-primary: #1677ff;
+    --scone-color-success: #52c41a;
+}
+
+.dark,
+[data-theme="dark"] {
+    --scone-color-primary: #69b1ff;
+}
+```
+
+不要在普通应用中同时导入 `scone-ui/styles.css` 和 `scone-ui/default.theme.css`，因为 `styles.css` 已包含默认 theme。示例站 CSS 只服务在线 example 页面布局和演示视觉，不是发布包样式入口。
+
 ## Props 规则
 
 具体字段以 `dist/index.d.ts` 为准。AI 不确定时必须读取公共 props type，不要套用其他库或原生元素的字段。
 
-| 字段 | 约定 |
-| --- | --- |
-| `size` | 控件尺寸，通常是 `sm`、`md`、`lg`。 |
-| `density` | 数据展示密度，通常是 `compact`、`default`、`comfortable`。 |
-| `tone` | 语义色，通常是 `neutral`、`info`、`success`、`warning`、`danger`。 |
-| `value` / `defaultValue` | 受控/非受控值。不要同时依赖二者作为单一真相。 |
-| `onValueChange` | 组件值变化回调。不要猜成 `onChange`，除非 `.d.ts` 明确写出。 |
-| `ariaLabel` | 包装组件提供的人类可读标签字段，内部映射到 `aria-label`。 |
-| `className` | 作用在公共组件 root。不要依赖内部 DOM 结构选择器。 |
+| 字段                     | 约定                                                               |
+| ------------------------ | ------------------------------------------------------------------ |
+| `size`                   | 控件尺寸，通常是 `sm`、`md`、`lg`。                                |
+| `density`                | 数据展示密度，通常是 `compact`、`default`、`comfortable`。         |
+| `tone`                   | 语义色，通常是 `neutral`、`info`、`success`、`warning`、`danger`。 |
+| `value` / `defaultValue` | 受控/非受控值。不要同时依赖二者作为单一真相。                      |
+| `onValueChange`          | 组件值变化回调。不要猜成 `onChange`，除非 `.d.ts` 明确写出。       |
+| `ariaLabel`              | 包装组件提供的人类可读标签字段，内部映射到 `aria-label`。          |
+| `className`              | 作用在公共组件 root。不要依赖内部 DOM 结构选择器。                 |
 
 ## 最小提示词
 
@@ -63,5 +93,6 @@ Admin Patterns are AppShell, Page, Section, FilterBar, and DataTable.
 Use Scone*Props public types when wrapping components.
 For exact props and event names, read scone-ui/dist/index.d.ts first.
 Do not import from scone-ui/components/ui, src paths, @/components/ui, shadcn/ui, or undocumented subpaths.
+Do not import scone-ui/default.theme.css together with scone-ui/styles.css in ordinary apps; styles.css already includes the default theme.
 Do not invent SconeDrawerForm, SconePopover, SconeLogo, SconeResult, SconeGrid, or other recipe names as public APIs.
 ```

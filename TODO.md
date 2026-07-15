@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `apps/scone-docs/docs`：同步文档站默认主题说明
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
-    - 范围对象：`apps/scone-docs/docs/guide/quick-start.md`、`apps/scone-docs/docs/guide/ai-usage.md`
-    - 处理动作：更新文档站中关于样式导入、默认主题和自定义 token 覆盖的说明。
-    - 验收点：docs 站与 package README、AI Guide 对公开入口和导入顺序保持一致。
-    - 重要度：8/10
-
 - [ ] `docs/40-readiness/DEFAULT-THEME-BASELINE.md`：更新默认主题视觉基线
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
