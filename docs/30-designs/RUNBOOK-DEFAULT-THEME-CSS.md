@@ -95,41 +95,56 @@
 
 ## Target Shape
 
-目标样式入口建议：
+目标必须同时满足：
 
-```css
-/* calling app */
+1. 现有调用方继续零配置可用。
+2. 默认主题可以作为独立 CSS 文件随包发布。
+3. 自定义主题的覆盖顺序明确。
+4. AI 不会被引导去重复导入互相覆盖的 CSS。
+
+推荐导入方式保持不变：
+
+```tsx
 import "scone-ui/styles.css";
 ```
 
 默认零配置路径：
 
-- `styles.css` 继续保持一站式可用。
-- `styles.css` 内部引用默认 theme，确保旧调用方不需要新增导入。
+- `scone-ui/styles.css` 继续是一站式入口。
+- `styles.css` 内部引用 `default.theme.css`。
+- 旧调用方不需要新增导入。
 
-高级覆盖路径：
-
-```css
-/* optional explicit package theme */
-@import "scone-ui/default.theme.css";
-@import "scone-ui/styles.css";
-```
-
-或在应用中覆盖：
+自定义主题路径：
 
 ```css
 @import "scone-ui/styles.css";
 
-:root {
-    --scone-color-primary: ...;
+/* calling app override */
+:root,
+.dark {
+    --scone-color-primary: <custom-value>;
+    --background: <custom-value>;
 }
 ```
+
+覆盖规则：
+
+- 自定义 token 必须在 `scone-ui/styles.css` 之后声明。
+- 不推荐在普通应用中同时导入 `scone-ui/default.theme.css` 和 `scone-ui/styles.css`，因为 `styles.css` 已包含默认主题。
+- `scone-ui/default.theme.css` 的主要价值是作为独立发布的默认 token 文件、文档参考入口，以及未来拆分结构样式时的兼容基础。
 
 发布入口目标：
 
 - `scone-ui/styles.css`：完整组件库样式入口。
 - `scone-ui/default.theme.css`：默认主题变量入口。
-- `scone-ui/styles/theme.css`：是否保留由迁移兼容性决定；若保留，应文档化为内部兼容路径，不作为优先推荐。
+- `scone-ui/styles/theme.css`：兼容路径。若保留，应与 `default.theme.css` 内容一致或明确转发，不作为优先推荐。
+
+验收标准：
+
+- `import "scone-ui/styles.css";` 在调用方应用中继续可用。
+- `import "scone-ui/default.theme.css";` 可被 bundler 解析并出现在 npm dry-run 文件列表中。
+- `styles.css` 和 `default.theme.css` 不产生冲突定义顺序。
+- README、AI Guide 和 docs 对导入顺序的描述一致。
 
 ## Extraction Principles
 
@@ -216,11 +231,17 @@ import "scone-ui/styles.css";
     - shadcn/Tailwind 桥接变量。
     - 目标归属：package theme / component style / example only。
 - 明确不迁移清单。
+- 标出每个候选值的证据来源：
+    - example CSS 行号。
+    - 组件实现或 data attribute。
+    - baseline 截图。
+    - 是否已有 package token。
 
 产物：
 
 - 临时记录可放在 RUNBOOK 中。
 - 稳定结论迁移到 docs 或 package AI 文档。
+- 不允许直接从 example 整块复制到 package；必须先完成归属判断。
 
 ### Step 2. Create Explicit Theme Entry
 
@@ -229,17 +250,25 @@ import "scone-ui/styles.css";
 - 调整 `src/styles.css` 引用：
     - 推荐 `@import "./default.theme.css";`
     - 如保留 `src/styles/theme.css`，确保没有双重定义或冲突。
+    - 若 `src/styles/theme.css` 只是兼容入口，应让它转发或同步到 `default.theme.css`。
 - 更新 `build:styles`：
     - 输出 `dist/default.theme.css`。
     - 如保留兼容文件，也输出 `dist/styles/theme.css`。
 - 更新 `exports`：
     - 新增 `"./default.theme.css": "./dist/default.theme.css"`。
+    - 如保留兼容入口，可考虑新增或保留 `"./styles/theme.css"`，但不在 README 中优先推荐。
 - 更新 `files`：
     - 包含 `dist/default.theme.css`。
+- 更新 alias：
+    - 如果 example、docs 或测试通过 workspace alias 引用 CSS，确认不需要新增 Vite / TS path alias。
+- 验证 npm dry-run：
+    - `dist/default.theme.css` 必须出现在包内容中。
+    - `styles.css` 必须仍能被消费。
 
 验证：
 
 ```sh
+pnpm run version:check
 pnpm --filter scone-ui typecheck
 pnpm run build
 pnpm run pack:check
@@ -276,11 +305,18 @@ pnpm run build:example
     - 圆角。
 - 不追求复制 example 页面背景层次。
 - 确认暗色变量覆盖公共组件，而非 example 页面。
+- 建立最小 token 对照表：
+    - `--scone-color-*` 到 shadcn/Tailwind bridge。
+    - `--scone-control-height-*` 到表单控件。
+    - `--scone-radius-*` 到卡片、按钮、输入框。
+    - `--scone-shadow-*` 到浮层、卡片、drawer。
+- 对每个新增或改值的 token 写明用途。
 
 验证：
 
 - 对比 baseline 截图。
 - 重点检查 `analysis-dark-desktop.png` 对应路径。
+- 检查 package tests 中依赖 class 或 data attribute 的断言是否仍成立。
 
 ### Step 5. Extract By Component Family
 
@@ -325,6 +361,8 @@ pnpm run build:example
 - package 变更会触发 example 验证。
 - docs 变更会触发 docs 验证。
 - workflow / package.json 变更会触发 Full 验证。
+- 修改 `package.json` exports、files 或 build scripts 时，必须运行 `pack:check`。
+- 修改 public CSS 入口时，必须检查 README、AI Guide、docs、llms.txt 是否需要同步。
 - PR 描述必须写清：
     - 变更面。
     - 导入路径变化。
@@ -384,6 +422,22 @@ pnpm run build:docs
 - 修改 shadcn/Tailwind 桥接变量影响所有组件。
 - package files 或 exports 漏配导致 npm 包不可导入新 CSS。
 - 文档鼓励 AI 过度导入多个 CSS 入口，造成调用方困惑。
+- `src/styles/theme.css` 与 `src/default.theme.css` 产生内容漂移。
+- Vite 构建能通过但 npm 包缺少 CSS 文件。
+- 截图基线过旧，后续误把已有视觉变化归因于主题抽取。
+
+## Acceptance Criteria
+
+本任务完成时必须同时满足：
+
+- `scone-ui/styles.css` 仍是推荐的零配置样式入口。
+- `scone-ui/default.theme.css` 可从安装包导入。
+- `default.theme.css` 只包含组件库主题变量和必要 bridge，不包含 example 页面选择器。
+- `styles.css` 引用默认 theme 的关系清晰，没有重复且互相覆盖的主题块。
+- `packages/scone-ui/README.md`、`PACKAGE-AI-GUIDE.md`、docs 站说明一致。
+- `pack:check` 证明新 CSS 入口被包含在 npm 包中。
+- example 在 light、dark、desktop、mobile 基线下无非预期视觉回退。
+- RUNBOOK 关闭时已迁移长期规则，且 `docs/30-designs/` 不残留已完成计划。
 
 ## Decision Checklist
 
@@ -393,6 +447,7 @@ pnpm run build:docs
 - 是否能用 `--scone-*` token 表达？
 - 是否已有等价 token？
 - 是否需要保留旧导入路径兼容？
+- 是否会造成 `styles.css` 和 `default.theme.css` 重复覆盖？
 - 是否影响暗色主题？
 - 是否需要更新包 README / AI Guide？
 - 是否需要更新 docs 站？
