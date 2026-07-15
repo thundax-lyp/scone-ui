@@ -7,8 +7,9 @@ React + Tailwind CSS admin UI component library.
 [![License](https://img.shields.io/npm/l/scone-ui.svg)](https://github.com/thundax-lyp/scone-ui/blob/main/LICENSE)
 [![Docs](https://img.shields.io/badge/docs-scone--ui-1677ff.svg)](https://thundax-lyp.github.io/scone-ui/docs/)
 [![Example](https://img.shields.io/badge/example-online-52c41a.svg)](https://thundax-lyp.github.io/scone-ui/example/)
+[![LLMs](https://img.shields.io/badge/llms.txt-ai-722ed1.svg)](https://thundax-lyp.github.io/scone-ui/docs/llms.txt)
 
-[Docs](https://thundax-lyp.github.io/scone-ui/docs/) · [Example](https://thundax-lyp.github.io/scone-ui/example/) · [GitHub](https://github.com/thundax-lyp/scone-ui) · [npm](https://www.npmjs.com/package/scone-ui)
+[Docs](https://thundax-lyp.github.io/scone-ui/docs/) · [Example](https://thundax-lyp.github.io/scone-ui/example/) · [llms.txt](https://thundax-lyp.github.io/scone-ui/docs/llms.txt) · [GitHub](https://github.com/thundax-lyp/scone-ui) · [npm](https://www.npmjs.com/package/scone-ui)
 
 本文档是随 `scone-ui` 发布包分发的独立 AI 入口文档，仅用于指导 AI、IDE Agent 和代码生成器理解并使用本包。
 
@@ -42,6 +43,7 @@ pnpm add react react-dom
 
 - 文档地址：[https://thundax-lyp.github.io/scone-ui/docs/](https://thundax-lyp.github.io/scone-ui/docs/)
 - 示例地址：[https://thundax-lyp.github.io/scone-ui/example/](https://thundax-lyp.github.io/scone-ui/example/)
+- AI 索引：[https://thundax-lyp.github.io/scone-ui/docs/llms.txt](https://thundax-lyp.github.io/scone-ui/docs/llms.txt)
 - GitHub 代码地址：[https://github.com/thundax-lyp/scone-ui](https://github.com/thundax-lyp/scone-ui)
 - npm 地址：[https://www.npmjs.com/package/scone-ui](https://www.npmjs.com/package/scone-ui)
 

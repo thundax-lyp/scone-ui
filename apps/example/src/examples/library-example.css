@@ -50,47 +50,6 @@
 .scone-example ::-webkit-scrollbar-thumb:hover {
     background: var(--example-scrollbar-thumb-hover);
 }
-
-.scone-example[data-example-theme="dark"] {
-    --background: color-mix(in oklch, var(--primary) 14%, black);
-    --foreground: color-mix(in oklch, white 92%, var(--primary));
-    --card: color-mix(in oklch, var(--primary) 10%, black);
-    --card-foreground: var(--foreground);
-    --popover: var(--card);
-    --popover-foreground: var(--foreground);
-    --primary: color-mix(in oklch, dodgerblue 72%, white);
-    --primary-foreground: color-mix(in oklch, black 84%, dodgerblue);
-    --secondary: color-mix(in oklch, var(--primary) 16%, black);
-    --secondary-foreground: var(--foreground);
-    --muted: color-mix(in oklch, var(--primary) 12%, black);
-    --muted-foreground: color-mix(in oklch, var(--foreground) 68%, transparent);
-    --accent: color-mix(in oklch, var(--primary) 18%, black);
-    --accent-foreground: var(--foreground);
-    --destructive: color-mix(in oklch, red 68%, white);
-    --border: color-mix(in oklch, var(--foreground) 16%, transparent);
-    --input: var(--border);
-    --ring: color-mix(in oklch, var(--primary) 70%, white);
-    --sidebar: var(--background);
-    --sidebar-foreground: var(--foreground);
-    --sidebar-accent: var(--accent);
-    --sidebar-accent-foreground: var(--foreground);
-    --sidebar-border: var(--border);
-    --sidebar-ring: var(--ring);
-    --example-shadow: 0 1px 2px rgb(0 0 0 / 22%), 0 1px 8px rgb(0 0 0 / 18%);
-    --example-text: var(--foreground);
-    --example-text-secondary: rgb(243 247 255 / 82%);
-    --example-text-muted: var(--muted-foreground);
-    --example-text-disabled: rgb(168 179 196 / 52%);
-    --example-border-subtle: var(--border);
-    --example-border-control: rgb(255 255 255 / 18%);
-    --example-panel-muted: var(--secondary);
-    --example-control-bg: var(--secondary);
-    --example-tag-bg: var(--secondary);
-    --example-scrollbar-track: #0f1620;
-    --example-scrollbar-thumb: rgb(255 255 255 / 12%);
-    --example-scrollbar-thumb-hover: rgb(255 255 255 / 24%);
-}
-
 .scone-example-sidebar,
 .scone-example-header,
 .scone-example-card,

@@ -7,8 +7,9 @@ React + Tailwind CSS admin UI component library and governance workspace.
 [![License](https://img.shields.io/npm/l/scone-ui.svg)](https://github.com/thundax-lyp/scone-ui/blob/main/LICENSE)
 [![Docs](https://img.shields.io/badge/docs-scone--ui-1677ff.svg)](https://thundax-lyp.github.io/scone-ui/docs/)
 [![Example](https://img.shields.io/badge/example-online-52c41a.svg)](https://thundax-lyp.github.io/scone-ui/example/)
+[![LLMs](https://img.shields.io/badge/llms.txt-ai-722ed1.svg)](https://thundax-lyp.github.io/scone-ui/docs/llms.txt)
 
-[Docs](https://thundax-lyp.github.io/scone-ui/docs/) · [Example](https://thundax-lyp.github.io/scone-ui/example/) · [GitHub](https://github.com/thundax-lyp/scone-ui) · [npm](https://www.npmjs.com/package/scone-ui)
+[Docs](https://thundax-lyp.github.io/scone-ui/docs/) · [Example](https://thundax-lyp.github.io/scone-ui/example/) · [llms.txt](https://thundax-lyp.github.io/scone-ui/docs/llms.txt) · [GitHub](https://github.com/thundax-lyp/scone-ui) · [npm](https://www.npmjs.com/package/scone-ui)
 
 这是 `scone-ui` 的 monorepo 工作区。发布包位于 `packages/scone-ui`，示例应用位于 `apps/example`。
 
@@ -16,6 +17,7 @@ React + Tailwind CSS admin UI component library and governance workspace.
 
 - 文档地址：[https://thundax-lyp.github.io/scone-ui/docs/](https://thundax-lyp.github.io/scone-ui/docs/)
 - 示例地址：[https://thundax-lyp.github.io/scone-ui/example/](https://thundax-lyp.github.io/scone-ui/example/)
+- AI 索引：[https://thundax-lyp.github.io/scone-ui/docs/llms.txt](https://thundax-lyp.github.io/scone-ui/docs/llms.txt)
 - GitHub 代码地址：[https://github.com/thundax-lyp/scone-ui](https://github.com/thundax-lyp/scone-ui)
 - npm 地址：[https://www.npmjs.com/package/scone-ui](https://www.npmjs.com/package/scone-ui)
 
