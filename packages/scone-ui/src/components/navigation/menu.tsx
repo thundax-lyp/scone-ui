@@ -105,6 +105,7 @@ export const SconeMenu = React.forwardRef<HTMLDivElement, SconeMenuProps>(
             <ul
                 role={depth === 0 ? "menubar" : "menu"}
                 aria-orientation={depth === 0 ? orientation : "vertical"}
+                data-scone-menu-depth={depth}
                 className={cn(
                     depth === 0 &&
                         (orientation === "horizontal"
@@ -134,6 +135,7 @@ export const SconeMenu = React.forwardRef<HTMLDivElement, SconeMenuProps>(
                                 aria-expanded={hasChildren ? expanded : undefined}
                                 aria-disabled={item.disabled || undefined}
                                 disabled={item.disabled}
+                                data-scone-menu-item-depth={depth}
                                 title={collapsed ? String(item.label) : undefined}
                                 className={cn(
                                     "flex min-h-9 w-full min-w-0 items-center gap-2 rounded-md px-2 text-left text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50",

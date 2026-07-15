@@ -15,6 +15,20 @@ const items = [
     },
 ];
 
+const nestedItems = [
+    {
+        key: "list",
+        label: "List",
+        children: [
+            {
+                key: "search-list",
+                label: "Search List",
+                children: [{ key: "search-articles", label: "Search Articles" }],
+            },
+        ],
+    },
+];
+
 describe("SconeMenu", () => {
     it("selects leaf items without route assumptions", () => {
         const onSelect = vi.fn();
@@ -39,6 +53,23 @@ describe("SconeMenu", () => {
 
         expect(onOpenChange).toHaveBeenCalledWith(["settings"]);
         expect(screen.getByRole("menuitem", { name: "Profile" })).toBeInTheDocument();
+    });
+
+    it("renders stable depth markers for third-level navigation", () => {
+        render(<SconeMenu items={nestedItems} defaultOpenKeys={["list", "search-list"]} />);
+
+        expect(screen.getByRole("menuitem", { name: "List" })).toHaveAttribute(
+            "data-scone-menu-item-depth",
+            "0",
+        );
+        expect(screen.getByRole("menuitem", { name: "Search List" })).toHaveAttribute(
+            "data-scone-menu-item-depth",
+            "1",
+        );
+        expect(screen.getByRole("menuitem", { name: "Search Articles" })).toHaveAttribute(
+            "data-scone-menu-item-depth",
+            "2",
+        );
     });
 
     it("keeps collapsed item names accessible", () => {
