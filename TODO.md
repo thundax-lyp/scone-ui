@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `packages/scone-ui/package.json`：发布 default theme CSS
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
-    - 范围对象：`packages/scone-ui/package.json`
-    - 处理动作：更新 `exports`、`files` 和 `build:styles`，把 `dist/default.theme.css` 与 `dist/styles/theme.css` 纳入 npm 包。
-    - 验收点：`pnpm run pack:check` 输出包含两个 theme CSS 入口，且 `scone-ui/styles.css` 保持可用。
-    - 重要度：10/10
-
 - [ ] `packages/scone-ui/src/default.theme.css`：抽取 foundation 默认主题 token
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
