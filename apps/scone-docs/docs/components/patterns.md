@@ -5,7 +5,7 @@ sidebar_position: 9
 
 # 后台 Pattern
 
-Pattern 是后台页面的高频组合结构。它们提供推荐 anatomy 和状态归属，但不把业务流程封装成万能组件。
+Pattern 是后台页面的高频组合结构。它们提供结构和状态归属，不封装业务流程。
 
 ## Pattern
 

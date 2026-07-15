@@ -1,13 +1,13 @@
 ---
-title: Recipes
+title: Recipe 组合示例
 sidebar_position: 10
 ---
 
-# Recipes
+# Recipe 组合示例
 
-Recipe 是可复制的组合规范，不是新的公共组件 API。它们用于说明如何把已有组件和 Pattern 组合成常见后台场景。
+Recipe 是可复制的组合示例，不是新的公共组件 API。
 
-## 当前 Recipe
+## 可用 Recipe
 
 | Recipe | 主要组合 | 说明 |
 | --- | --- | --- |
@@ -27,4 +27,4 @@ Recipe 是可复制的组合规范，不是新的公共组件 API。它们用于
 
 ## 边界
 
-Recipe 不拥有独立 props 合同，不改变底层组件的事件、状态和可访问性规则。精确类型仍以 `"scone-ui"` 的公共导出和 `dist/index.d.ts` 为准。
+Recipe 不拥有独立 props 合同，不改变底层组件的事件、状态和可访问性规则。精确类型以 `"scone-ui"` 的公共导出和 `dist/index.d.ts` 为准。

@@ -5,7 +5,7 @@ sidebar_position: 8
 
 # 其他总览
 
-媒体组件用于头像、图片和 fallback 展示。Ant Design 的“其他”分类中包含全局配置、固钉、水印等能力；Scone UI 当前只公开与后台组件库通用性明确相关的媒体能力和公共工具。
+其他分类收录媒体展示和少量公共工具。
 
 ## 组件
 
@@ -29,4 +29,4 @@ sidebar_position: 8
 
 - 不提供独立 `SconeIcon`，图标由调用方传入。
 - 不内置产品 Logo、权限图标、资源类型图标或品牌资产。
-- 不复制 AntD `ConfigProvider`、`App`、`Watermark`、`Affix` 等完整“其他”矩阵。
+- 不在文档站发明未导出的全局配置、水印、固钉等组件。

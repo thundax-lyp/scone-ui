@@ -5,7 +5,7 @@ sidebar_position: 3
 
 # 布局总览
 
-布局组件只负责空间、排列、分隔和局部滚动。页面级结构由后台 Pattern 负责，局部布局才使用本组组件。
+布局组件只负责空间、排列、分隔和局部滚动。页面级结构使用后台 Pattern。
 
 ## 组件
 
@@ -21,13 +21,13 @@ sidebar_position: 3
 
 ## 选择规则
 
-- 页面结构优先使用 `Page`、`Section`、`AppShell`，不要用布局组件自造页面协议。
+- 页面结构优先使用 `Page`、`Section`、`AppShell`。
 - 页面主滚动由 `Page.Content` 承担；局部滚动才使用 `SconeScrollArea`。
 - 工具栏只组织空间，不定义筛选、批量操作或页面标题的业务语义。
 - 间距和尺寸应使用 token 或 preset；任意 CSS 长度只作为显式覆盖。
 
 ## 反模式
 
-- 用 `SconeCard` 或旧 Panel 包住整页来制造页面层级。
+- 用 `SconeCard` 包住整页来制造页面层级。
 - 在 body、main、PageContent 和 Table 区域同时设置滚动。
 - 用任意 number gap 拼页面节奏。

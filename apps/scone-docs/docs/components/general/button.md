@@ -7,12 +7,14 @@ sidebar_position: 20
 
 按钮、提交、加载和危险动作入口。
 
-## 定位
+## 快速信息
 
-- 站点分类：通用 / 数据录入
-- 导入入口：`"scone-ui"`
-- API 权威：当前安装包的 `scone-ui/dist/index.d.ts`
-- 规则来源：`scone-ui/PACKAGE-AI-GUIDE.md` 和仓库 specs
+| 项 | 值 |
+| --- | --- |
+| 导出 | `SconeButton` |
+| 分类 | 通用 / 数据录入 |
+| 导入 | `import { SconeButton } from "scone-ui";` |
+| 类型权威 | `scone-ui/dist/index.d.ts` |
 
 ## 导入
 
@@ -21,16 +23,11 @@ import { SconeButton } from "scone-ui";
 import type { SconeButtonProps } from "scone-ui";
 ```
 
-类型也从 `"scone-ui"` 导入；封装组件时优先复用公共 props 类型，不要重新声明不完整 props。
+## 使用
 
-## 何时使用
+按钮、提交、加载和危险动作入口。
 
-- 触发页面、表单、列表行或工具栏中的明确动作。
-- 表达提交、保存、取消、重置、删除等用户意图。
-- 需要加载态时，用 `loading` 保持按钮尺寸并避免重复触发。
-- 危险动作用 `destructive` 表达语义；确认流程另用 `SconeConfirm` 或 ConfirmationFlow Recipe。
-
-需要业务请求、权限判断、路由跳转、校验 schema 或产品文案时，由调用方应用组合，不写入组件内部。
+请求、路由、权限、校验 schema 和产品文案留在调用方应用。
 
 ## 基础用法
 
@@ -80,7 +77,7 @@ export function DangerAction() {
 
 ## Props
 
-下表来自 Scone specs，用于快速阅读组件能力。精确类型、默认值、泛型和 compound parts 仍以当前安装版本的 `scone-ui/dist/index.d.ts` 为准。
+Props 表用于快速阅读组件能力；精确类型、默认值和泛型以 `scone-ui/dist/index.d.ts` 为准。
 
 | Prop          | 类型                                            | 说明                         |
 | ------------- | ----------------------------------------------- | ---------------------------- |
@@ -98,9 +95,9 @@ export function DangerAction() {
 | `ariaLabel`   | `string`                                        | 无可见文本时必填。           |
 | `className`   | `string`                                        | 样式。                       |
 
-## 边界
+## 规则
 
-- 不导入 `scone-ui/components/ui/*`、源码路径、`@/components/ui`、`shadcn/ui` 或未文档化子路径。
-- 不按 Ant Design、shadcn、HTML 或历史记忆猜 props。
-- 不在组件内实现产品业务流程。
+- 只从 `"scone-ui"` 导入公共组件、服务和类型。
+- 不使用 `scone-ui/components/ui/*`、源码路径、`@/components/ui`、`shadcn/ui` 或未文档化子路径。
+- 不要套用其他库或原生元素的 props；不确定时读 `dist/index.d.ts`。
 - `destructive` 只表达危险语义，不替代影响说明、二次确认或权限判断。

@@ -29,7 +29,7 @@ sidebar_position: 6
 3. `empty`
 4. 正常数据
 
-这条规则适用于表格、列表、详情和 DataTable 区域。组件可以表达状态，但请求、重试和权限判断由调用方处理。
+这条规则适用于表格、列表、详情和 DataTable 区域。请求、重试和权限判断由调用方处理。
 
 ## 选择规则
 
@@ -40,5 +40,5 @@ sidebar_position: 6
 
 ## 边界
 
-- 不实现完整 AntD Table 配置对象、内置请求或万能 `onChange`。
+- 不实现大型 Table 配置对象、内置请求或万能 `onChange`。
 - 表格排序、筛选、分页和选择状态应由调用方或 DataTable Pattern 明确桥接。

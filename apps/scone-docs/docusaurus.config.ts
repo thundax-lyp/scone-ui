@@ -5,9 +5,9 @@ const config: Config = {
     title: "Scone UI Docs",
     tagline: "后台组件库帮助文档",
     favicon: "img/favicon.ico",
-    url: "https://scone-ui.github.io",
+    url: "https://thundax-lyp.github.io",
     baseUrl: "/scone-ui/",
-    organizationName: "scone-ui",
+    organizationName: "thundax-lyp",
     projectName: "scone-ui",
     onBrokenLinks: "throw",
     markdown: {
@@ -26,7 +26,7 @@ const config: Config = {
                 docs: {
                     routeBasePath: "/",
                     sidebarPath: "./sidebars.ts",
-                    editUrl: "https://github.com/scone-ui/scone-ui/tree/main/apps/scone-docs/",
+                    editUrl: "https://github.com/thundax-lyp/scone-ui/tree/main/apps/scone-docs/",
                 },
                 blog: false,
                 theme: {
@@ -46,13 +46,18 @@ const config: Config = {
                     label: "文档",
                 },
                 {
-                    href: "https://scone-ui.github.io/scone-ui/example/",
+                    href: "https://thundax-lyp.github.io/scone-ui/example/",
                     label: "示例",
                     position: "left",
                 },
                 {
-                    href: "https://github.com/scone-ui/scone-ui",
+                    href: "https://github.com/thundax-lyp/scone-ui",
                     label: "GitHub",
+                    position: "right",
+                },
+                {
+                    href: "https://www.npmjs.com/package/scone-ui",
+                    label: "npm",
                     position: "right",
                 },
             ],
@@ -78,11 +83,15 @@ const config: Config = {
                     items: [
                         {
                             label: "示例站",
-                            href: "https://scone-ui.github.io/scone-ui/example/",
+                            href: "https://thundax-lyp.github.io/scone-ui/example/",
                         },
                         {
                             label: "GitHub",
-                            href: "https://github.com/scone-ui/scone-ui",
+                            href: "https://github.com/thundax-lyp/scone-ui",
+                        },
+                        {
+                            label: "npm",
+                            href: "https://www.npmjs.com/package/scone-ui",
                         },
                     ],
                 },

@@ -6,11 +6,11 @@ sidebar_position: 1
 
 # Scone UI Docs
 
-面向后台组件库的帮助文档、使用指南和组件说明。
+面向 AI、IDE Agent 和开发者的 `scone-ui` 文档入口。
 
 ## 文档范围
 
-`scone-docs` 用于编写 Scone UI 的帮助文档。它只描述组件库、组件使用方式、文档入口和迁移支持，不承载产品业务流程或应用运行时规则。
+本站只描述组件库用法、组件选择、公共 API 边界和后台组合模式。产品业务流程、请求协议、权限策略、路由规则和校验 schema 留在调用方应用。
 
 ## 内容入口
 
@@ -21,4 +21,10 @@ sidebar_position: 1
 
 ## 阅读顺序
 
-使用 `scone-ui` 生成或维护业务界面时，先读取当前安装包的 `dist/index.d.ts`，再读取随包发布的 `scone-ui/PACKAGE-AI-GUIDE.md`。本站文档用于解释分类、选择规则和组合边界，不替代已安装包的类型声明。
+生成或维护调用方代码时按此顺序读取：
+
+1. `scone-ui/dist/index.d.ts`
+2. `scone-ui/PACKAGE-AI-GUIDE.md`
+3. 本站组件页
+
+本站解释分类、选择规则和组合边界，不替代已安装包的类型声明。
