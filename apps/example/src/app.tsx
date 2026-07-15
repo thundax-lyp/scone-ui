@@ -1,5 +1,10 @@
 import type * as React from "react";
+import { BrowserRouter } from "react-router-dom";
 
 import { LibraryExample } from "./examples";
 
-export const App = (): React.JSX.Element => <LibraryExample />;
+export const App = (): React.JSX.Element => (
+    <BrowserRouter>
+        <LibraryExample />
+    </BrowserRouter>
+);

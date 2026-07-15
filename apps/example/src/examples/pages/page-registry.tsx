@@ -20,6 +20,48 @@ import {
 
 export type { ExampleKey } from "./index";
 
+export const exampleRouteByKey: Record<ExampleKey, string> = {
+    welcome: "/welcome",
+    "admin-sub-page": "/admin/sub-page",
+    analysis: "/dashboard/analysis",
+    monitor: "/dashboard/monitor",
+    workplace: "/dashboard/workplace",
+    "basic-form": "/form/basic-form",
+    "step-form": "/form/step-form",
+    "advanced-form": "/form/advanced-form",
+    "search-articles": "/list/search/articles",
+    "search-projects": "/list/search/projects",
+    "search-applications": "/list/search/applications",
+    "table-list": "/list/table-list",
+    "basic-list": "/list/basic-list",
+    "card-list": "/list/card-list",
+    "basic-profile": "/profile/basic",
+    "advanced-profile": "/profile/advanced",
+    success: "/result/success",
+    fail: "/result/fail",
+    "exception-403": "/exception/403",
+    "exception-404": "/exception/404",
+    "exception-500": "/exception/500",
+    "account-center": "/account/center",
+    "account-settings": "/account/settings",
+    chatbot: "/chatbot",
+};
+
+const exampleKeyByRoute = new Map(
+    Object.entries(exampleRouteByKey).map(([key, path]) => [path, key as ExampleKey]),
+);
+
+export const defaultExampleRoute = exampleRouteByKey.analysis;
+
+export const getExampleRoute = (key: ExampleKey): string => exampleRouteByKey[key];
+
+export const getExampleKeyFromPath = (pathname: string): ExampleKey | undefined => {
+    const normalizedPathname =
+        pathname.length > 1 && pathname.endsWith("/") ? pathname.slice(0, -1) : pathname;
+
+    return exampleKeyByRoute.get(normalizedPathname);
+};
+
 export const pageMeta: Record<
     ExampleKey,
     { title: string; description: string; breadcrumb: string[] }

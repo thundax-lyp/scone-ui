@@ -21,10 +21,11 @@ export type LibraryExampleLayoutProps = {
     theme: ExampleTheme;
     menuItems: SconeNavigationItem[];
     selectedKeys: string[];
-    defaultOpenKeys: string[];
+    openKeys: string[];
     sidebarCollapsed: boolean;
     onThemeChange: (theme: ExampleTheme) => void;
     onSidebarCollapsedChange: (collapsed: boolean) => void;
+    onMenuOpenChange: (keys: string[]) => void;
     onMenuSelect: (key: string) => void;
     children: React.ReactNode;
 };
@@ -35,10 +36,11 @@ export const LibraryExampleLayout = ({
     theme,
     menuItems,
     selectedKeys,
-    defaultOpenKeys,
+    openKeys,
     sidebarCollapsed,
     onThemeChange,
     onSidebarCollapsedChange,
+    onMenuOpenChange,
     onMenuSelect,
     children,
 }: LibraryExampleLayoutProps): React.JSX.Element => {
@@ -120,8 +122,9 @@ export const LibraryExampleLayout = ({
                                 ariaLabel="组件示例 / Component examples"
                                 items={menuItems}
                                 selectedKeys={selectedKeys}
-                                defaultOpenKeys={defaultOpenKeys}
+                                openKeys={openKeys}
                                 collapsed={sidebarCollapsed}
+                                onOpenChange={onMenuOpenChange}
                                 onSelect={(key) => onMenuSelect(key)}
                             />
                         </div>
