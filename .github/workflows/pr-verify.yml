@@ -14,6 +14,83 @@ permissions:
     contents: read
 
 jobs:
+    detect-changes:
+        name: Detect Changes
+        runs-on: ubuntu-latest
+        timeout-minutes: 5
+        outputs:
+            package: ${{ steps.detect.outputs.package }}
+            example: ${{ steps.detect.outputs.example }}
+            docs: ${{ steps.detect.outputs.docs }}
+            full: ${{ steps.detect.outputs.full }}
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Detect changed areas
+              id: detect
+              shell: bash
+              run: |
+                  set -euo pipefail
+
+                  if [ "${{ github.event_name }}" = "pull_request" ]; then
+                    base_sha="${{ github.event.pull_request.base.sha }}"
+                  else
+                    base_sha="$(git rev-parse HEAD^ 2>/dev/null || git rev-parse HEAD)"
+                  fi
+
+                  changed_files="$(git diff --name-only "$base_sha" HEAD || true)"
+                  printf '%s\n' "$changed_files"
+
+                  package=false
+                  example=false
+                  docs=false
+                  full=false
+
+                  while IFS= read -r file; do
+                    [ -z "$file" ] && continue
+
+                    case "$file" in
+                      pnpm-lock.yaml|pnpm-workspace.yaml|package.json|tsconfig.json|vite.config.*|vitest.config.*|eslint.config.*|.prettierrc*|.prettierignore|.github/workflows/*|.github/actions/*|.github/actions/**)
+                        full=true
+                        ;;
+                    esac
+
+                    case "$file" in
+                      packages/scone-ui/*|packages/scone-ui/**)
+                        package=true
+                        ;;
+                    esac
+
+                    case "$file" in
+                      apps/example/*|apps/example/**)
+                        example=true
+                        ;;
+                    esac
+
+                    case "$file" in
+                      apps/scone-docs/*|apps/scone-docs/**|docs/*|docs/**|README.md|AGENTS.md|.github/pull_request_template.md)
+                        docs=true
+                        ;;
+                    esac
+                  done <<< "$changed_files"
+
+                  if [ "$full" = true ]; then
+                    package=true
+                    example=true
+                    docs=true
+                  fi
+
+                  {
+                    echo "package=$package"
+                    echo "example=$example"
+                    echo "docs=$docs"
+                    echo "full=$full"
+                  } >> "$GITHUB_OUTPUT"
+
     verify-governance:
         name: Verify Governance
         runs-on: ubuntu-latest
@@ -32,14 +109,17 @@ jobs:
                   test -f docs/00-governance/PR-RULES.md
                   test -f .github/pull_request_template.md
                   test -f .github/workflows/pr-verify.yml
+                  test -f .github/actions/setup-pnpm/action.yml
 
                   if find docs -name '*.md' -print | grep -q ' '; then
                     echo "Document filenames must not contain spaces" >&2
                     exit 1
                   fi
 
-    verify-frontend:
-        name: Verify Frontend
+    verify-package:
+        name: Verify Package
+        needs: detect-changes
+        if: needs.detect-changes.outputs.package == 'true'
         runs-on: ubuntu-latest
         timeout-minutes: 20
 
@@ -47,45 +127,60 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v4
 
-            - name: Setup Node
-              uses: actions/setup-node@v4
-              with:
-                  node-version: "22"
+            - name: Setup pnpm
+              uses: ./.github/actions/setup-pnpm
 
-            - name: Enable Corepack
-              run: corepack enable
+            - name: Verify package types
+              run: pnpm --filter scone-ui typecheck
 
-            - name: Resolve pnpm store path
-              id: pnpm-store
-              run: echo "path=$(pnpm store path --silent)" >> "$GITHUB_OUTPUT"
-
-            - name: Cache pnpm store
-              uses: actions/cache@v4
-              with:
-                  path: ${{ steps.pnpm-store.outputs.path }}
-                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
-                  restore-keys: |
-                      ${{ runner.os }}-pnpm-store-
-
-            - name: Verify package manifests
-              run: |
-                  node -e "JSON.parse(require('fs').readFileSync('package.json', 'utf8'))"
-                  node -e "JSON.parse(require('fs').readFileSync('tsconfig.json', 'utf8'))"
-
-            - name: Install dependencies
-              run: pnpm install --frozen-lockfile
-
-            - name: Verify format
-              run: pnpm run format:check
-
-            - name: Verify lint
-              run: pnpm run lint
-
-            - name: Verify types
-              run: pnpm run typecheck
-
-            - name: Verify tests
+            - name: Verify package tests
               run: pnpm run test
 
-            - name: Verify build
+            - name: Verify package build
               run: pnpm run build
+
+            - name: Verify package pack
+              run: pnpm run pack:check
+
+    verify-example:
+        name: Verify Example
+        needs: detect-changes
+        if: needs.detect-changes.outputs.example == 'true'
+        runs-on: ubuntu-latest
+        timeout-minutes: 20
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup pnpm
+              uses: ./.github/actions/setup-pnpm
+
+            - name: Verify example types
+              run: pnpm --filter @scone-ui/example typecheck
+
+            - name: Verify example tests
+              run: pnpm run test:example
+
+            - name: Verify example build
+              run: pnpm run build:example
+
+    verify-docs:
+        name: Verify Docs
+        needs: detect-changes
+        if: needs.detect-changes.outputs.docs == 'true'
+        runs-on: ubuntu-latest
+        timeout-minutes: 20
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup pnpm
+              uses: ./.github/actions/setup-pnpm
+
+            - name: Verify docs types
+              run: pnpm --filter @scone-ui/docs typecheck
+
+            - name: Verify docs build
+              run: pnpm run build:docs

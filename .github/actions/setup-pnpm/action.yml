@@ -1,0 +1,37 @@
+name: Setup pnpm
+description: Setup Node, Corepack, pnpm cache, and workspace dependencies.
+
+runs:
+    using: composite
+    steps:
+        - name: Setup Node
+          uses: actions/setup-node@v4
+          with:
+              node-version: "22"
+
+        - name: Enable Corepack
+          shell: bash
+          run: corepack enable
+
+        - name: Resolve pnpm store path
+          id: pnpm-store
+          shell: bash
+          run: echo "path=$(pnpm store path --silent)" >> "$GITHUB_OUTPUT"
+
+        - name: Cache pnpm store
+          uses: actions/cache@v4
+          with:
+              path: ${{ steps.pnpm-store.outputs.path }}
+              key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+              restore-keys: |
+                  ${{ runner.os }}-pnpm-store-
+
+        - name: Verify package manifests
+          shell: bash
+          run: |
+              node -e "JSON.parse(require('fs').readFileSync('package.json', 'utf8'))"
+              node -e "JSON.parse(require('fs').readFileSync('tsconfig.json', 'utf8'))"
+
+        - name: Install dependencies
+          shell: bash
+          run: pnpm install --frozen-lockfile
