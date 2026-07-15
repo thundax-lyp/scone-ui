@@ -11,4 +11,128 @@
 
 ## 待审阅任务项
 
+- [ ] `packages/scone-ui/src/styles/theme.css`：盘点默认主题 token 与 example 候选值
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
+    - 范围对象：`packages/scone-ui/src/styles/theme.css`、`apps/example/src/examples/library-example.css`
+    - 处理动作：建立 example 候选值、现有 `--scone-*`、shadcn/Tailwind bridge 和目标归属的映射表。
+    - 验收点：每个候选值都有来源、目标归属和是否迁移的判断。
+    - 重要度：9/10
+
+- [ ] `packages/scone-ui/src/default.theme.css`：创建默认主题 CSS 发布入口
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
+    - 范围对象：`packages/scone-ui/src/default.theme.css`、`packages/scone-ui/src/styles.css`、`packages/scone-ui/src/styles/theme.css`
+    - 处理动作：新增 `default.theme.css`，调整 `styles.css` 默认主题引用，并明确 `styles/theme.css` 兼容关系。
+    - 验收点：`styles.css` 仍可零配置使用，`default.theme.css` 可被单独解析，且不存在重复冲突主题块。
+    - 重要度：10/10
+
+- [ ] `packages/scone-ui/package.json`：发布 default theme CSS
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
+    - 范围对象：`packages/scone-ui/package.json`
+    - 处理动作：更新 `exports`、`files` 和 `build:styles`，把 `dist/default.theme.css` 纳入 npm 包。
+    - 验收点：`pnpm run pack:check` 输出包含 `dist/default.theme.css`，且 `scone-ui/styles.css` 保持可用。
+    - 重要度：10/10
+
+- [ ] `packages/scone-ui/src/default.theme.css`：抽取 foundation 默认主题 token
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
+    - 范围对象：`packages/scone-ui/src/default.theme.css`
+    - 处理动作：对齐组件库需要的色彩、字体、间距、圆角、阴影、focus ring、控件高度和暗色主题 token。
+    - 验收点：新增或改动的 token 都有公共组件用途，且不包含 `scone-example-*` 或页面布局选择器。
+    - 重要度：10/10
+
+- [ ] `packages/scone-ui/src/components/form`：按表单组件族校准主题使用
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
+    - 范围对象：`packages/scone-ui/src/components/form`
+    - 处理动作：检查 Button、Input、TextArea、Select、Combobox、Checkbox、RadioGroup、Switch、Slider、DatePicker、Upload 是否使用公共 token。
+    - 验收点：表单组件主题能力由 package token 覆盖，example 基础表单无非预期视觉回退。
+    - 重要度：9/10
+
+- [ ] `packages/scone-ui/src/components/data-display`：按数据展示组件族校准主题使用
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
+    - 范围对象：`packages/scone-ui/src/components/data-display`
+    - 处理动作：检查 Card、Table、Descriptions、List、Statistic、Badge、Tag、Timeline 是否使用公共 token。
+    - 验收点：数据展示组件主题能力由 package token 覆盖，分析页和查询表格页无非预期视觉回退。
+    - 重要度：9/10
+
+- [ ] `packages/scone-ui/src/components/navigation`：按导航组件族校准主题使用
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
+    - 范围对象：`packages/scone-ui/src/components/navigation`
+    - 处理动作：检查 Menu、Tabs、Dropdown、Breadcrumb、Pagination、Tree、Command、Tooltip 是否使用公共 token。
+    - 验收点：导航组件主题能力由 package token 覆盖，桌面和移动端 example shell 无非预期视觉回退。
+    - 重要度：8/10
+
+- [ ] `packages/scone-ui/src/components/feedback-overlay`：按反馈浮层组件族校准主题使用
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
+    - 范围对象：`packages/scone-ui/src/components/feedback-overlay`
+    - 处理动作：检查 Alert、Dialog、Drawer、Confirm、Empty、Loading、Progress、toast、notification 是否使用公共 token。
+    - 验收点：反馈浮层组件主题能力由 package token 覆盖，相关组件测试和 example 构建通过。
+    - 重要度：8/10
+
+- [ ] `packages/scone-ui/src/patterns`：按后台 Pattern 校准主题使用
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
+    - 范围对象：`packages/scone-ui/src/patterns`
+    - 处理动作：检查 AppShell、Page、Section、FilterBar、DataTable 是否使用公共 token，并避免吸收 example 页面布局样式。
+    - 验收点：Pattern 主题能力由 package token 覆盖，查询表格页和移动端 shell 无非预期视觉回退。
+    - 重要度：9/10
+
+- [ ] `apps/example/src/examples/library-example.css`：删除已由 package theme 覆盖的 example 重复样式
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
+    - 范围对象：`apps/example/src/examples/library-example.css`
+    - 处理动作：在 package theme 覆盖公共组件后，删除只用于补组件默认主题的 example 重复 CSS。
+    - 验收点：删除项均有 package 等价能力，baseline 截图无非预期变化，页面布局样式未被误删。
+    - 重要度：8/10
+
+- [ ] `packages/scone-ui/README.md`：同步默认主题导入说明
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
+    - 范围对象：`packages/scone-ui/README.md`、`packages/scone-ui/PACKAGE-AI-GUIDE.md`
+    - 处理动作：说明 `styles.css` 零配置入口、`default.theme.css` 默认 token 入口和调用方覆盖顺序。
+    - 验收点：包 README 与 AI Guide 对导入顺序、覆盖方式和 example CSS 边界描述一致。
+    - 重要度：9/10
+
+- [ ] `apps/scone-docs/docs`：同步文档站默认主题说明
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
+    - 范围对象：`apps/scone-docs/docs/guide/quick-start.md`、`apps/scone-docs/docs/guide/ai-usage.md`
+    - 处理动作：更新文档站中关于样式导入、默认主题和自定义 token 覆盖的说明。
+    - 验收点：docs 站与 package README、AI Guide 对公开入口和导入顺序保持一致。
+    - 重要度：8/10
+
+- [ ] `docs/40-readiness/DEFAULT-THEME-BASELINE.md`：更新默认主题视觉基线
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
+    - 范围对象：`docs/40-readiness/DEFAULT-THEME-BASELINE.md`、`docs/40-readiness/assets/default-theme-baseline`
+    - 处理动作：在主题抽取完成后重截受影响页面，并记录预期视觉变化。
+    - 验收点：baseline 文档反映最终视觉状态，PR 描述能引用截图对比结论。
+    - 重要度：8/10
+
+- [ ] `docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`：收口默认主题 RUNBOOK
+    - 任务类型：执行任务
+    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
+    - 范围对象：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
+    - 处理动作：任务完成后删除 RUNBOOK，或将长期规则迁移到治理文档和发布包文档。
+    - 验收点：`docs/30-designs/` 不残留已关闭 RUNBOOK，长期规则已在对应文档中沉淀。
+    - 重要度：7/10
+
 ## 待讨论项
+
+- [ ] 是否保留 `scone-ui/styles/theme.css` 作为公开兼容入口
+    - 任务类型：待讨论项
+    - 关联任务：`packages/scone-ui/src/default.theme.css`
+    - 决策要求：确认 `styles/theme.css` 只作为内部兼容文件、公开导出兼容入口，还是在迁移后删除。
+    - 重要度：8/10
+
+- [ ] 是否把 `llms.txt` 同步列出 `default.theme.css`
+    - 任务类型：待讨论项
+    - 关联任务：`packages/scone-ui/README.md`
+    - 决策要求：确认 `docs/llms.txt` 是否需要把 `default.theme.css` 写入 AI 读取入口和导入规则。
+    - 重要度：6/10
