@@ -116,3 +116,31 @@
 - `pnpm exec vitest run packages/scone-ui/src/components/feedback-overlay/*.test.tsx`
 - `pnpm --filter scone-ui typecheck`
 - `pnpm run build:example`
+
+## Patterns
+
+范围对象：`packages/scone-ui/src/patterns`
+
+审核结论：后台 Patterns 已经通过 package theme bridge 使用公共 token，不需要吸收 example 页面布局样式。
+
+### Coverage
+
+| Pattern group      | Files                       | Theme evidence                                                                                                                                  |
+| ------------------ | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| Shell and page     | `app-shell.tsx`、`page.tsx` | shell、header、sidebar、aside、sticky actions 使用 `bg-background`、`border-border`、`text-foreground`、`text-muted-foreground`                 |
+| Section            | `section.tsx`               | 标题、描述、actions、content、footer 使用 `text-foreground`、`text-muted-foreground`，并保持 section 默认不强制 card 化                         |
+| Filter bar         | `filter-bar.tsx`            | filter surface、search、expanded region 使用 `border-border`、`bg-background`、`border-input`、`ring-ring`                                      |
+| Data table pattern | `data-table.tsx`            | toolbar、bulk actions、state rows、pagination 使用 `border-border`、`bg-background`、`bg-muted/30`、`text-muted-foreground`、`text-destructive` |
+
+### Non-Changes
+
+- 未发现 `scone-example-*` 选择器或 example 专属样式依赖。
+- 未迁移 dashboard、查询表格页、shell 或移动端页面布局样式。
+- 未改变 AppShell、Page、Section、FilterBar 或 DataTable 公共 API。
+
+### Verification
+
+- `rg -n "#[0-9a-fA-F]{3,8}|rgba?\(|oklch\(|color-mix|scone-example|sky-|emerald-|amber-|bg-black" packages/scone-ui/src/patterns`
+- `pnpm exec vitest run packages/scone-ui/src/patterns/*.test.tsx`
+- `pnpm --filter scone-ui typecheck`
+- `pnpm run build:example`

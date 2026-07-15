@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `packages/scone-ui/src/patterns`：按后台 Pattern 校准主题使用
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
-    - 范围对象：`packages/scone-ui/src/patterns`
-    - 处理动作：检查 AppShell、Page、Section、FilterBar、DataTable 是否使用公共 token，并避免吸收 example 页面布局样式。
-    - 验收点：Pattern 主题能力由 package token 覆盖，查询表格页和移动端 shell 无非预期视觉回退。
-    - 重要度：9/10
-
 - [ ] `apps/example/src/examples/library-example.css`：删除已由 package theme 覆盖的 example 重复样式
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
