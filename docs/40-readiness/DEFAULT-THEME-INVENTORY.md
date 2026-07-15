@@ -1,8 +1,8 @@
 # Default Theme Inventory
 
-本文档记录 `default.theme.css` 抽取前的 token 盘点结果。
+本文档记录 `default.theme.css` 抽取任务的 token 盘点结果。
 
-依据文档：[`RUNBOOK-DEFAULT-THEME-CSS.md`](../30-designs/RUNBOOK-DEFAULT-THEME-CSS.md)
+稳定公开口径见 `packages/scone-ui/README.md`、`packages/scone-ui/PACKAGE-AI-GUIDE.md` 和文档站 guide。
 
 ## Source Files
 
@@ -62,6 +62,6 @@
 
 ## Execution Notes
 
-- `default.theme.css` should start from the existing `packages/scone-ui/src/styles/theme.css`.
-- `styles/theme.css` remains a public compatibility entry and must stay aligned with `default.theme.css`.
-- Any token value changed from the current package defaults must cite the candidate source and affected baseline screenshot in the implementation commit.
+- `scone-ui/styles.css` is the recommended complete style entry and includes the default theme.
+- `scone-ui/default.theme.css` is the default token entry.
+- `scone-ui/styles/theme.css` remains a compatibility entry that forwards the default theme.

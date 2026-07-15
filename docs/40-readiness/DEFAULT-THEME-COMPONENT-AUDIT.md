@@ -2,7 +2,7 @@
 
 本文档记录 `default.theme.css` 抽取后的组件族主题使用审核结果。
 
-依据文档：[`RUNBOOK-DEFAULT-THEME-CSS.md`](../30-designs/RUNBOOK-DEFAULT-THEME-CSS.md)
+稳定公开口径见 `packages/scone-ui/README.md`、`packages/scone-ui/PACKAGE-AI-GUIDE.md`、文档站 guide 和 [`DEFAULT-THEME-BASELINE.md`](./DEFAULT-THEME-BASELINE.md)。
 
 ## Form
 

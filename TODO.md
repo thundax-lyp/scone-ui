@@ -11,12 +11,4 @@
 
 ## 待审阅任务项
 
-- [ ] `docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`：收口默认主题 RUNBOOK
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
-    - 范围对象：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
-    - 处理动作：任务完成后删除 RUNBOOK，或将长期规则迁移到治理文档和发布包文档。
-    - 验收点：`docs/30-designs/` 不残留已关闭 RUNBOOK，长期规则已在对应文档中沉淀。
-    - 重要度：7/10
-
 ## 待讨论项
