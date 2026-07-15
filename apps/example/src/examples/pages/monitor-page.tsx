@@ -27,8 +27,8 @@ const categoryRatios = [
 ];
 
 const hotWords = [
-    "Ant Design",
-    "Pro Layout",
+    "Scone UI",
+    "AppShell",
     "数据中台",
     "活动",
     "监控",

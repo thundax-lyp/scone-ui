@@ -1,11 +1,8 @@
 import {
     AlertTriangleIcon,
     CheckCircle2Icon,
-    CrownIcon,
     FormInputIcon,
-    HomeIcon,
     LayoutDashboardIcon,
-    RocketIcon,
     SettingsIcon,
     Table2Icon,
     UserCircleIcon,
@@ -20,22 +17,6 @@ const renderMenuLabel = (children: string): React.ReactNode => (
 );
 
 export const menuItems: SconeNavigationItem[] = [
-    {
-        key: "welcome",
-        label: renderMenuLabel("欢迎"),
-        icon: <HomeIcon className="size-4" />,
-    },
-    {
-        key: "admin",
-        label: renderMenuLabel("管理页"),
-        icon: <CrownIcon className="size-4" />,
-        children: [
-            {
-                key: "admin-sub-page",
-                label: renderMenuLabel("二级管理页"),
-            },
-        ],
-    },
     {
         key: "dashboard",
         label: renderMenuLabel("Dashboard"),
@@ -79,24 +60,6 @@ export const menuItems: SconeNavigationItem[] = [
         label: renderMenuLabel("列表页"),
         icon: <Table2Icon className="size-4" />,
         children: [
-            {
-                key: "search-list",
-                label: renderMenuLabel("搜索列表"),
-                children: [
-                    {
-                        key: "search-articles",
-                        label: renderMenuLabel("搜索列表（文章）"),
-                    },
-                    {
-                        key: "search-projects",
-                        label: renderMenuLabel("搜索列表（项目）"),
-                    },
-                    {
-                        key: "search-applications",
-                        label: renderMenuLabel("搜索列表（应用）"),
-                    },
-                ],
-            },
             {
                 key: "table-list",
                 label: renderMenuLabel("查询表格"),
@@ -175,11 +138,6 @@ export const menuItems: SconeNavigationItem[] = [
             },
         ],
     },
-    {
-        key: "chatbot",
-        label: renderMenuLabel("AI 助手"),
-        icon: <RocketIcon className="size-4" />,
-    },
 ];
 
 export const getActiveMenuRoot = (activeKey: ExampleKey): string => {
@@ -222,13 +180,6 @@ export const getActiveMenuRoot = (activeKey: ExampleKey): string => {
 };
 
 export const getActiveMenuOpenKeys = (activeKey: ExampleKey): string[] => {
-    if (
-        activeKey === "search-articles" ||
-        activeKey === "search-projects" ||
-        activeKey === "search-applications"
-    ) {
-        return ["list", "search-list"];
-    }
     const activeRoot = getActiveMenuRoot(activeKey);
     return activeRoot === activeKey ? [] : [activeRoot];
 };

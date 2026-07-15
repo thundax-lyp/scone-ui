@@ -86,7 +86,7 @@ export const LibraryExampleLayout = ({
                             </SconeButton>
                             <div className="scone-example-user">
                                 <SconeAdminLogo size="sm" />
-                                <span>ProUser</span>
+                                <span>SconeUser</span>
                             </div>
                         </>
                     }
@@ -136,7 +136,7 @@ export const LibraryExampleLayout = ({
                             density="comfortable"
                             className="scone-example-page"
                         >
-                            <Page.Main aria-label="Pro component example">
+                            <Page.Main aria-label="Scone UI component example">
                                 <h1 className="sr-only">{activeTitle}</h1>
                                 <div className="grid gap-6">{children}</div>
                             </Page.Main>

@@ -12,8 +12,8 @@ export const CardListPage = (): React.JSX.Element => (
                 <div className="scone-example-card-list-breadcrumb">列表页 / 卡片列表</div>
                 <h2>卡片列表</h2>
                 <p>
-                    段落示意：蚂蚁集团设计平台 ant.design，用最小的工作量，无缝接入蚂蚁集团生态，
-                    提供跨越设计与开发的体验解决方案。
+                    段落示意：Scone UI 组件平台用一致的设计 token、组件组合和治理规则，
+                    提供跨越设计与开发的后台体验解决方案。
                 </p>
                 <div className="scone-example-card-list-links" aria-label="卡片列表快捷入口">
                     <SconeButton variant="link">

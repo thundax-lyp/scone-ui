@@ -319,14 +319,14 @@ export const initialAdvancedMemberRows: AdvancedMemberRow[] = [
 
 export const standardListItems: StandardListItem[] = [
     {
-        id: "alipay",
-        title: "Alipay",
+        id: "scone-shell",
+        title: "Scone Shell",
         description: "那是一种内在的东西，他们到达不了，也无法触及的",
         owner: "付小小",
         startAt: "2026-07-14 17:55",
         progress: 92,
         avatarTone: "blue",
-        avatarText: "支",
+        avatarText: "S",
     },
     {
         id: "angular",
@@ -338,8 +338,8 @@ export const standardListItems: StandardListItem[] = [
         avatarText: "A",
     },
     {
-        id: "ant-design",
-        title: "Ant Design",
+        id: "scone-ui",
+        title: "Scone UI",
         description: "生命就像一盒巧克力，结果往往出人意料",
         owner: "林东东",
         startAt: "2026-07-13 23:21",
@@ -348,8 +348,8 @@ export const standardListItems: StandardListItem[] = [
         avatarText: "◇",
     },
     {
-        id: "ant-design-pro",
-        title: "Ant Design Pro",
+        id: "scone-admin",
+        title: "Scone Admin",
         description: "城镇中有那么多的酒馆，她却偏偏走进了我的酒馆",
         owner: "周星星",
         startAt: "2026-07-11 01:45",
@@ -370,10 +370,10 @@ export const standardListItems: StandardListItem[] = [
 
 export const cardListItems: CardListItem[] = [
     {
-        id: "alipay",
-        title: "Alipay",
+        id: "scone-shell",
+        title: "Scone Shell",
         description: "在中台产品的研发过程中，会出现不同的设计规范和实现方式。",
-        avatarText: "支",
+        avatarText: "S",
         avatarTone: "blue",
     },
     {
@@ -384,17 +384,17 @@ export const cardListItems: CardListItem[] = [
         avatarTone: "red",
     },
     {
-        id: "ant-design",
-        title: "Ant Design",
+        id: "scone-ui",
+        title: "Scone UI",
         description: "在中台产品的研发过程中，会出现不同的设计规范和实现方式。",
-        avatarText: "◇",
+        avatarText: "UI",
         avatarTone: "cyan",
     },
     {
-        id: "ant-design-pro",
-        title: "Ant Design Pr",
+        id: "scone-admin",
+        title: "Scone Admin",
         description: "在中台产品的研发过程中，会出现不同的设计规范和实现方式。",
-        avatarText: "Pro",
+        avatarText: "Ad",
         avatarTone: "dark",
     },
     {

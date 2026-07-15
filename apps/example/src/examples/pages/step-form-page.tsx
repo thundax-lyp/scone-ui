@@ -43,9 +43,9 @@ export const StepFormPage = (): React.JSX.Element => (
                 >
                     <SconeSelect
                         className="scone-example-step-control"
-                        defaultValue="ant-design"
+                        defaultValue="scone-admin"
                         options={[
-                            { value: "ant-design", label: "ant-design@alipay.com" },
+                            { value: "scone-admin", label: "scone-admin@example.com" },
                             { value: "scone", label: "scone-ui@example.com" },
                         ]}
                     />
@@ -59,10 +59,10 @@ export const StepFormPage = (): React.JSX.Element => (
                     <div className="scone-example-receiver-row">
                         <SconeSelect
                             className="scone-example-pay-type"
-                            defaultValue="alipay"
+                            defaultValue="scone-pay"
                             ariaLabel="收款方式"
                             options={[
-                                { value: "alipay", label: "支付宝" },
+                                { value: "scone-pay", label: "Scone Pay" },
                                 { value: "bank", label: "银行卡" },
                             ]}
                         />

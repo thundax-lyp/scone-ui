@@ -25,18 +25,20 @@ export const LibraryExample = (): React.JSX.Element => {
     const activeKey = getExampleKeyFromPath(location.pathname) ?? "analysis";
     const [theme, setTheme] = React.useState<ExampleTheme>("light");
     const [sidebarCollapsed, setSidebarCollapsed] = React.useState(false);
-    const [userOpenKeys, setUserOpenKeys] = React.useState<string[]>([]);
+    const [openKeys, setOpenKeys] = React.useState<string[]>(() =>
+        getActiveMenuOpenKeys(activeKey),
+    );
     const activeMeta = pageMeta[activeKey];
     const activeMenuRoot = getActiveMenuRoot(activeKey);
-    const activeMenuOpenKeys = React.useMemo(() => getActiveMenuOpenKeys(activeKey), [activeKey]);
-    const openKeys = React.useMemo(
-        () => Array.from(new Set([...userOpenKeys, ...activeMenuOpenKeys])),
-        [activeMenuOpenKeys, userOpenKeys],
-    );
     const visibleMenuItems = React.useMemo(
         () => markActiveMenuRoot(menuItems, activeMenuRoot),
         [activeMenuRoot],
     );
+
+    React.useEffect(() => {
+        const routeOpenKeys = getActiveMenuOpenKeys(activeKey);
+        setOpenKeys((previous) => Array.from(new Set([...previous, ...routeOpenKeys])));
+    }, [activeKey]);
 
     React.useEffect(() => {
         if (getExampleKeyFromPath(location.pathname)) {
@@ -56,7 +58,7 @@ export const LibraryExample = (): React.JSX.Element => {
             sidebarCollapsed={sidebarCollapsed}
             onThemeChange={setTheme}
             onSidebarCollapsedChange={setSidebarCollapsed}
-            onMenuOpenChange={setUserOpenKeys}
+            onMenuOpenChange={setOpenKeys}
             onMenuSelect={(key) => {
                 if (isExampleKey(key)) {
                     navigate(getExampleRoute(key));

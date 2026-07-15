@@ -10,7 +10,9 @@ describe("App", () => {
     it("renders the admin component example shell and switches menu sections", async () => {
         render(<App />);
 
-        expect(screen.getByRole("main", { name: "Pro component example" })).toBeInTheDocument();
+        expect(
+            screen.getByRole("main", { name: "Scone UI component example" }),
+        ).toBeInTheDocument();
         expect(
             screen.getByRole("heading", { name: "分析页 / Analysis", level: 1 }),
         ).toBeInTheDocument();
@@ -61,6 +63,6 @@ describe("App", () => {
             "placeholder",
             "请输入",
         );
-        expect(screen.getByText("Alipay")).toBeInTheDocument();
+        expect(screen.getByText("Scone Shell")).toBeInTheDocument();
     });
 });

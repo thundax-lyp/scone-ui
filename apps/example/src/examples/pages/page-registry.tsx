@@ -2,12 +2,15 @@ import * as React from "react";
 
 import {
     AccountPage,
+    AccountSettingsPage,
     AdvancedFormPage,
+    AdvancedProfilePage,
     AnalysisPage,
     BasicFormPage,
     BasicProfilePage,
     CardListPage,
     ExceptionPage,
+    FailPage,
     MonitorPage,
     StandardListPage,
     StepFormPage,
@@ -68,7 +71,7 @@ export const pageMeta: Record<
 > = {
     welcome: {
         title: "欢迎 / Welcome",
-        description: "一个用于展示 scone-ui 公共组件的 Pro 风格后台示例。",
+        description: "一个用于展示 Scone UI 公共组件的后台示例。",
         breadcrumb: ["首页 Home", "欢迎 Welcome"],
     },
     "admin-sub-page": {
@@ -108,17 +111,17 @@ export const pageMeta: Record<
     },
     "search-articles": {
         title: "搜索列表（文章） / Search List Articles",
-        description: "展示搜索列表文章入口在 Ant Design Pro 菜单结构中的位置。",
+        description: "展示搜索列表文章入口在 Scone UI 示例菜单结构中的位置。",
         breadcrumb: ["列表页 Lists", "搜索列表 Search List", "文章 Articles"],
     },
     "search-projects": {
         title: "搜索列表（项目） / Search List Projects",
-        description: "展示搜索列表项目入口在 Ant Design Pro 菜单结构中的位置。",
+        description: "展示搜索列表项目入口在 Scone UI 示例菜单结构中的位置。",
         breadcrumb: ["列表页 Lists", "搜索列表 Search List", "项目 Projects"],
     },
     "search-applications": {
         title: "搜索列表（应用） / Search List Applications",
-        description: "展示搜索列表应用入口在 Ant Design Pro 菜单结构中的位置。",
+        description: "展示搜索列表应用入口在 Scone UI 示例菜单结构中的位置。",
         breadcrumb: ["列表页 Lists", "搜索列表 Search List", "应用 Applications"],
     },
     "table-list": {
@@ -128,12 +131,12 @@ export const pageMeta: Record<
     },
     "basic-list": {
         title: "标准列表 / Basic List",
-        description: "对齐 Ant Design Pro 标准列表的统计卡片、筛选栏和列表项密度。",
+        description: "展示 Scone UI 标准列表的统计卡片、筛选栏和列表项密度。",
         breadcrumb: ["列表页 Lists", "标准列表 Basic List"],
     },
     "card-list": {
         title: "卡片列表 / Card List",
-        description: "对齐 Ant Design Pro 卡片列表的页面头、快捷链接、新增卡片和三列卡片网格。",
+        description: "展示 Scone UI 卡片列表的页面头、快捷链接、新增卡片和三列卡片网格。",
         breadcrumb: ["列表页 Lists", "卡片列表 Card List"],
     },
     "basic-profile": {
@@ -143,7 +146,7 @@ export const pageMeta: Record<
     },
     "advanced-profile": {
         title: "高级详情页 / Advanced Profile",
-        description: "展示高级详情入口在 Ant Design Pro 菜单结构中的位置。",
+        description: "展示高级详情入口在 Scone UI 示例菜单结构中的位置。",
         breadcrumb: ["详情页 Profile", "高级详情 Advanced"],
     },
     success: {
@@ -153,7 +156,7 @@ export const pageMeta: Record<
     },
     fail: {
         title: "失败页 / Fail",
-        description: "展示失败反馈入口在 Ant Design Pro 菜单结构中的位置。",
+        description: "展示失败反馈入口在 Scone UI 示例菜单结构中的位置。",
         breadcrumb: ["结果页 Result", "失败 Fail"],
     },
     "exception-403": {
@@ -183,7 +186,7 @@ export const pageMeta: Record<
     },
     chatbot: {
         title: "AI 助手 / AI Assistant",
-        description: "展示 AI 助手入口在 Ant Design Pro 菜单结构中的位置。",
+        description: "展示 AI 助手入口在 Scone UI 示例菜单结构中的位置。",
         breadcrumb: ["AI 助手 AI Assistant"],
     },
 };
@@ -214,18 +217,23 @@ export const renderExample = (activeKey: ExampleKey): React.ReactNode => {
         case "card-list":
             return <CardListPage />;
         case "basic-profile":
-        case "advanced-profile":
             return <BasicProfilePage />;
+        case "advanced-profile":
+            return <AdvancedProfilePage />;
         case "success":
             return <SuccessPage />;
         case "fail":
+            return <FailPage />;
         case "exception-403":
+            return <ExceptionPage status="403" />;
         case "exception-404":
+            return <ExceptionPage status="404" />;
         case "exception-500":
-            return <ExceptionPage />;
+            return <ExceptionPage status="500" />;
         case "account-center":
-        case "account-settings":
             return <AccountPage />;
+        case "account-settings":
+            return <AccountSettingsPage />;
         case "analysis":
         default:
             return <AnalysisPage />;
