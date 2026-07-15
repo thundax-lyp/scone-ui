@@ -2258,6 +2258,13 @@
 }
 
 .scone-admin-logo {
+    --scone-logo-plate: #e6f4ff;
+    --scone-logo-plate-stroke: #1890ff;
+    --scone-logo-scone: #fff7df;
+    --scone-logo-bacon: #ff7a59;
+    --scone-logo-sandwich: #ffffff;
+    --scone-logo-cut: #1677ff;
+
     display: inline-flex;
     min-width: 0;
     align-items: center;
@@ -2265,11 +2272,20 @@
     color: var(--example-accent);
 }
 
+.scone-example[data-example-theme="dark"] .scone-admin-logo {
+    --scone-logo-plate: #12243a;
+    --scone-logo-plate-stroke: #69b1ff;
+    --scone-logo-scone: #ffe8a3;
+    --scone-logo-bacon: #ff9a7a;
+    --scone-logo-sandwich: #f3f7ff;
+    --scone-logo-cut: #91caff;
+}
+
 .scone-admin-logo-mark {
     width: 1.75rem;
     height: 1.75rem;
     flex: none;
-    filter: drop-shadow(0 1px 2px color-mix(in oklch, var(--foreground) 12%, transparent));
+    overflow: visible;
 }
 
 .scone-admin-logo[data-size="sm"] .scone-admin-logo-mark {
@@ -2280,6 +2296,35 @@
 .scone-admin-logo[data-size="lg"] .scone-admin-logo-mark {
     width: 3.25rem;
     height: 3.25rem;
+}
+
+.scone-admin-logo-plate {
+    fill: var(--scone-logo-plate);
+    stroke: var(--scone-logo-plate-stroke);
+    stroke-width: 3;
+}
+
+.scone-admin-logo-scone {
+    fill: var(--scone-logo-scone);
+}
+
+.scone-admin-logo-bacon {
+    fill: none;
+    stroke: var(--scone-logo-bacon);
+    stroke-linecap: round;
+    stroke-width: 5;
+}
+
+.scone-admin-logo-sandwich {
+    fill: var(--scone-logo-sandwich);
+}
+
+.scone-admin-logo-cut {
+    fill: none;
+    stroke: var(--scone-logo-cut);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 5;
 }
 
 .scone-admin-logo-wordmark {
