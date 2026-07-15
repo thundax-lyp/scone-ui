@@ -20,3 +20,72 @@
     --ifm-color-primary-lighter: #bae0ff;
     --ifm-color-primary-lightest: #e6f4ff;
 }
+
+.scone-overview-resource-grid,
+.scone-overview-grid {
+    display: grid;
+    gap: 12px;
+    margin: 16px 0 28px;
+}
+
+.scone-overview-resource-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.scone-overview-grid {
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+}
+
+.scone-overview-resource-card,
+.scone-overview-card {
+    border: 1px solid var(--ifm-color-emphasis-200);
+    border-radius: 8px;
+    background: var(--ifm-background-surface-color);
+}
+
+.scone-overview-resource-card {
+    display: flex;
+    min-height: 104px;
+    flex-direction: column;
+    gap: 8px;
+    padding: 18px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.scone-overview-resource-card:hover {
+    border-color: var(--ifm-color-primary);
+    color: inherit;
+    text-decoration: none;
+}
+
+.scone-overview-link-card {
+    color: inherit;
+    text-decoration: none;
+}
+
+.scone-overview-link-card:hover {
+    border-color: var(--ifm-color-primary);
+    color: inherit;
+    text-decoration: none;
+}
+
+.scone-overview-card {
+    min-height: 96px;
+    padding: 14px 16px;
+}
+
+.scone-overview-resource-card strong,
+.scone-overview-card strong {
+    display: block;
+    color: var(--ifm-heading-color);
+}
+
+.scone-overview-resource-card span,
+.scone-overview-card span {
+    display: block;
+    margin-top: 6px;
+    color: var(--ifm-color-emphasis-700);
+    font-size: 0.92rem;
+    line-height: 1.5;
+}
