@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
 export default defineConfig({
+    base: "/scone-ui/example/",
     plugins: [react(), tailwindcss()],
     resolve: {
         alias: {
