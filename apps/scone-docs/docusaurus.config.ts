@@ -6,7 +6,7 @@ const config: Config = {
     tagline: "后台组件库帮助文档",
     favicon: "img/favicon.ico",
     url: "https://thundax-lyp.github.io",
-    baseUrl: "/scone-ui/",
+    baseUrl: "/scone-ui/docs/",
     organizationName: "thundax-lyp",
     projectName: "scone-ui",
     onBrokenLinks: "throw",
