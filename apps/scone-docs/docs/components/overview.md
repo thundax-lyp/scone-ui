@@ -32,7 +32,7 @@ sidebar_position: 1
     </a>
 </div>
 
-## 通用 2
+## 通用
 
 通用组件是高频基础表达能力。为保持 Scone specs 的组件边界，`SconeButton` 的完整合同归入数据录入，Typography 组件的完整合同归入数据展示。
 
@@ -42,7 +42,7 @@ sidebar_position: 1
     <div className="scone-overview-card"><strong>SconeTypography</strong><span>标题、文本和段落排版能力。</span></div>
 </div>
 
-## 布局 7
+## 布局
 
 用于组织间距、对齐、滚动和局部区域结构。布局组件不定义产品导航协议，也不替代页面 Pattern。
 
@@ -57,7 +57,7 @@ sidebar_position: 1
     <div className="scone-overview-card"><strong>SconeSplitPane</strong><span>分隔面板。</span></div>
 </div>
 
-## 导航 14
+## 导航
 
 用于页面路径、菜单、分页、标签页、树和命令入口。导航组件只负责 UI 结构和状态表达，路由跳转由调用方应用接入。
 
@@ -79,7 +79,7 @@ sidebar_position: 1
     <div className="scone-overview-card"><strong>SconeCollapsible</strong><span>可折叠区域。</span></div>
 </div>
 
-## 数据录入 19
+## 数据录入
 
 用于收集、编辑和提交结构化信息。表单组件只表达 UI 状态和交互，不内置请求、权限、业务校验 schema 或产品字段规则。
 
@@ -106,7 +106,7 @@ sidebar_position: 1
     <div className="scone-overview-card"><strong>SconeFormActions</strong><span>表单操作区。</span></div>
 </div>
 
-## 数据展示 12
+## 数据展示
 
 用于展示列表、表格、说明信息、统计指标和文本内容。数据展示组件应接收已整理的数据，不承担数据获取或权限过滤。
 
@@ -126,7 +126,7 @@ sidebar_position: 1
     <div className="scone-overview-card"><strong>SconeParagraph</strong><span>段落文本。</span></div>
 </div>
 
-## 反馈和浮层 11
+## 反馈和浮层
 
 用于呈现结果、提示、加载、进度、对话框、抽屉和全局通知。服务型 API 必须配套对应 Provider。
 
@@ -145,7 +145,7 @@ sidebar_position: 1
     <div className="scone-overview-card"><strong>notification</strong><span>全局通知服务。</span></div>
 </div>
 
-## 其他 2
+## 其他
 
 用于头像、图片和媒体占位展示。
 
@@ -155,7 +155,7 @@ sidebar_position: 1
     <div className="scone-overview-card"><strong>SconeImage</strong><span>图片展示。</span></div>
 </div>
 
-## 后台 Pattern 5
+## 后台 Pattern
 
 Pattern 是后台页面组合协议，不是业务流程框架。它们适合组织页面骨架、筛选、表格区域和内容区块。
 
