@@ -58,6 +58,12 @@ body {
     --radius-2xl: var(--scone-radius-lg);
     --radius-3xl: var(--scone-radius-lg);
     --radius-4xl: var(--scone-radius-lg);
+    --spacing-2xs: var(--scone-spacing-2xs);
+    --spacing-xs: var(--scone-spacing-xs);
+    --spacing-sm: var(--scone-spacing-sm);
+    --spacing-md: var(--scone-spacing-md);
+    --spacing-lg: var(--scone-spacing-lg);
+    --spacing-xl: var(--scone-spacing-xl);
 }
 
 @layer base {
