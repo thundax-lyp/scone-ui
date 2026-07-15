@@ -1,0 +1,56 @@
+# Scone UI
+
+> React + Tailwind CSS admin UI component library and governance workspace.
+
+Scone UI is a reusable admin UI component package. Use it for forms, data display, layout, feedback, navigation, media components, and admin page patterns. Do not treat it as an application framework, router, request layer, permission model, validation schema source, or product copy source.
+
+## Public URLs
+
+- Docs: https://thundax-lyp.github.io/scone-ui/docs/
+- Example: https://thundax-lyp.github.io/scone-ui/example/
+- GitHub: https://github.com/thundax-lyp/scone-ui
+- npm: https://www.npmjs.com/package/scone-ui
+
+## Read First
+
+- AI usage guide: https://thundax-lyp.github.io/scone-ui/docs/guide/ai-usage/
+- Quick start: https://thundax-lyp.github.io/scone-ui/docs/guide/quick-start/
+- Component overview: https://thundax-lyp.github.io/scone-ui/docs/components/overview/
+- Patterns: https://thundax-lyp.github.io/scone-ui/docs/components/patterns/
+
+## Installed Package Authority
+
+When generating code against an installed package, read these files first:
+
+1. `scone-ui/dist/index.d.ts`
+2. `scone-ui/PACKAGE-AI-GUIDE.md`
+
+If documentation conflicts with `dist/index.d.ts`, prefer the installed package type declarations.
+
+## Import Rules
+
+- Import components, patterns, services, hooks, helpers, and types from `scone-ui`.
+- Import styles once from `scone-ui/styles.css`.
+- `scone-ui/styles.css` includes the default theme.
+- `scone-ui/default.theme.css` is the default token file for theme review or advanced build splitting; ordinary apps do not need it in addition to `styles.css`.
+- `scone-ui/styles/theme.css` is a compatibility theme entry, not the preferred path for new code.
+- Theme overrides must be declared after `scone-ui/styles.css`.
+- Example CSS is only for the hosted example pages. Do not import it into consuming apps.
+- Do not import internal shadcn primitives, source paths, alias paths, or undocumented subpaths.
+- Use public props types such as `SconeButtonProps` when wrapping components.
+- Do not invent public APIs that are not exported by `scone-ui`.
+
+## Main Public APIs
+
+- General: `SconeButton`, `SconeTypography`
+- Data entry: `SconeInput`, `SconeNumberInput`, `SconePasswordInput`, `SconeSearchInput`, `SconeSelect`, `SconeCombobox`, `SconeCheckbox`, `SconeRadioGroup`, `SconeForm`, `SconeField`, `SconeFieldGroup`, `SconeFormSection`, `SconeFormActions`
+- Data display: `SconeTable`, `SconeDescriptions`, `SconeCard`, `SconeBadge`, `SconeList`, `SconeStatistic`, `SconeTimeline`, `SconeTag`
+- Layout: `SconeStack`, `SconeInline`, `SconeCompact`, `SconeToolbar`, `SconeScrollArea`, `SconeSeparator`, `SconeSplitPane`
+- Feedback: `SconeAlert`, `SconeDialog`, `SconeDrawer`, `SconeConfirm`, `SconeEmpty`, `SconeLoading`, `SconeProgress`, `SconeToastProvider`, `toast`, `SconeNotificationProvider`, `notification`
+- Navigation and media: `SconeTabs`, `SconeDropdown`, `SconeMenu`, `SconeBreadcrumb`, `SconePagination`, `SconeTree`, `SconeCommand`, `SconeTooltip`, `SconeAvatar`, `SconeImage`
+- Admin patterns: `AppShell`, `Page`, `Section`, `FilterBar`, `DataTable`
+
+## Optional
+
+- Repository README: https://github.com/thundax-lyp/scone-ui#readme
+- Package README: https://www.npmjs.com/package/scone-ui
