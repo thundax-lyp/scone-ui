@@ -1,16 +1,25 @@
 # Default Theme Baseline
 
-本文档记录 `default.theme.css` 抽取前的 example 视觉基线。
+本文档记录 `default.theme.css` 抽取完成后的 example 视觉基线。
 
-基线用于后续从 example 抽取组件库默认主题时判断是否出现非预期视觉回退。它不是自动化测试，也不是产品 UI 规范。
+基线用于后续修改组件库默认主题、删除 example CSS 或调整公开样式入口时判断是否出现非预期视觉回退。它不是自动化测试，也不是产品 UI 规范。
 
 ## Capture
 
 - 日期：2026-07-15
-- 本地地址：`http://localhost:5173/scone-ui/example/`
-- 桌面视口：浏览器默认视口
+- 本地地址：`http://localhost:5175/scone-ui/example/`
+- 桌面视口：`1440x1000`
 - 移动视口：`390x844`
 - 控制台：截图采集时无 `error` / `warn`
+
+## Expected Changes
+
+本次基线反映以下已完成变更：
+
+- package 默认主题由 `scone-ui/default.theme.css` 集中提供。
+- `scone-ui/styles.css` 内置默认 theme，调用方不需要额外导入 `default.theme.css`。
+- 表单、数据展示、导航、反馈浮层和后台 Pattern 使用 package token 或 Tailwind / shadcn bridge。
+- example CSS 删除可由 package theme 覆盖的重复默认值，但保留示例站页面布局和演示视觉。
 
 ## Screenshots
 

@@ -11,14 +11,6 @@
 
 ## 待审阅任务项
 
-- [ ] `docs/40-readiness/DEFAULT-THEME-BASELINE.md`：更新默认主题视觉基线
-    - 任务类型：执行任务
-    - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
-    - 范围对象：`docs/40-readiness/DEFAULT-THEME-BASELINE.md`、`docs/40-readiness/assets/default-theme-baseline`
-    - 处理动作：在主题抽取完成后重截受影响页面，并记录预期视觉变化。
-    - 验收点：baseline 文档反映最终视觉状态，PR 描述能引用截图对比结论。
-    - 重要度：8/10
-
 - [ ] `docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`：收口默认主题 RUNBOOK
     - 任务类型：执行任务
     - 依据文档：`docs/30-designs/RUNBOOK-DEFAULT-THEME-CSS.md`
