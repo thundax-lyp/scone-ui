@@ -9,14 +9,14 @@
 
 类型文件归属：
 
-| 文件                                               | 类型范围                                                                       | 导出边界                                                                                                    |
-| -------------------------------------------------- | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
-| `src/types/foundation.ts`                          | Foundation shared types、词表类型、跨组件基础状态桥接类型。                    | 从 `src/index.ts` 公开导出。                                                                                |
-| `src/components/*/*.tsx`                           | 与单组件紧耦合的 props、item、state 和 event payload 类型。                    | 本族公共类型从对应 `src/components/*/index.ts` 汇总，再由 `src/index.ts` 汇总导出；内部 helper 类型不导出。 |
-| `src/components/*/index.ts`                        | 组件族公共组件和本族公共类型汇总入口。                                         | 只导出本组件族 API，不导出其他组件族类型。                                                                  |
-| `src/patterns/*.tsx`                               | Pattern compound parts props、slot props 和 Pattern 状态桥接。                 | Pattern 公共 props 可从 `src/patterns/index.ts` 和 `src/index.ts` 导出。                                    |
-| `src/components/feedback-overlay/toast.tsx`        | Toast provider props、service options、queue item、返回 id 和关闭原因。        | Provider、service function 和公共 option 类型公开导出。                                                     |
-| `src/components/feedback-overlay/notification.tsx` | Notification provider props、service options、queue item、返回 id 和关闭原因。 | Provider、service function 和公共 option 类型公开导出。                                                     |
+| 文件                                               | 类型范围                                                                       | 导出边界                                                                                                                      |
+| -------------------------------------------------- | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| `src/types/foundation.ts`                          | Foundation shared types、词表类型、跨组件基础状态桥接类型。                    | 从 `packages/scone-ui/src/index.ts` 公开导出。                                                                                |
+| `src/components/*/*.tsx`                           | 与单组件紧耦合的 props、item、state 和 event payload 类型。                    | 本族公共类型从对应 `src/components/*/index.ts` 汇总，再由 `packages/scone-ui/src/index.ts` 汇总导出；内部 helper 类型不导出。 |
+| `src/components/*/index.ts`                        | 组件族公共组件和本族公共类型汇总入口。                                         | 只导出本组件族 API，不导出其他组件族类型。                                                                                    |
+| `src/patterns/*.tsx`                               | Pattern compound parts props、slot props 和 Pattern 状态桥接。                 | Pattern 公共 props 可从 `src/patterns/index.ts` 和 `packages/scone-ui/src/index.ts` 导出。                                    |
+| `src/components/feedback-overlay/toast.tsx`        | Toast provider props、service options、queue item、返回 id 和关闭原因。        | Provider、service function 和公共 option 类型公开导出。                                                                       |
+| `src/components/feedback-overlay/notification.tsx` | Notification provider props、service options、queue item、返回 id 和关闭原因。 | Provider、service function 和公共 option 类型公开导出。                                                                       |
 
 公共 Foundation 类型：
 
@@ -884,7 +884,7 @@ Props 类型命名：
 - Compound part props 使用 `{Namespace}{Part}Props`，例如 `PageRootProps`、`DataTableTableRegionProps`。
 - Provider props 使用 `{ExportName}ProviderProps`，例如 `SconeToastProviderProps`。
 - Service option 类型使用 PascalCase service 名称，例如 `ToastOptions`、`NotificationOptions`。
-- 组件内部 helper 类型不从 `src/index.ts` 导出。
+- 组件内部 helper 类型不从 `packages/scone-ui/src/index.ts` 导出。
 
 泛型策略：
 
@@ -931,5 +931,5 @@ Provider/service 类型：
 类型验证入口：
 
 - `src/types/foundation.test.ts` 验证公共类型导出和关键泛型默认值。
-- `src/index.test.ts` 验证公共类型和 service 类型没有从私有文件隐式泄漏。
+- `packages/scone-ui/src/index.test.ts` 验证公共类型和 service 类型没有从私有文件隐式泄漏。
 - 组件族测试验证 props、事件 payload、ref 和可访问名称行为。

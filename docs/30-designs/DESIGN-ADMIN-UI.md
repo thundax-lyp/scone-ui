@@ -24,7 +24,7 @@
 ## Current Review Decisions
 
 - Pattern 导出固定使用 `Page`、`Section` 命名空间，不使用 `SconePage`、`SconeSection`。
-- `tailwind.config.ts` 是必要目标文件，默认只映射 `src/styles/theme.css` 中的 CSS variables。
+- `tailwind.config.ts` 是必要目标文件，默认只映射 `packages/scone-ui/src/styles/theme.css` 中的 CSS variables。
 - 公共类型按组件族分散定义并从组件族入口汇总；`src/types/foundation.ts` 只保留跨组件共享词表和基础类型。
 - Toast 和 Notification service API 返回稳定 id。
 - DataTable 不引入 TanStack Table 作为推荐 recipe 基座，只留出外部状态库 props/callback 边界。
