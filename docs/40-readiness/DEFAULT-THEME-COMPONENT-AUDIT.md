@@ -144,3 +144,30 @@
 - `pnpm exec vitest run packages/scone-ui/src/patterns/*.test.tsx`
 - `pnpm --filter scone-ui typecheck`
 - `pnpm run build:example`
+
+## Example CSS Cleanup
+
+范围对象：`apps/example/src/examples/library-example.css`
+
+审核结论：example CSS 已删除可由 package theme 覆盖的重复默认值，并保留只服务示例站页面布局和演示视觉的 `scone-example-*` 样式。
+
+### Cleanup
+
+| Cleanup group      | Change                                                                                                                                                                                                                   | Reason                                             |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------- |
+| Foundation aliases | `--example-accent`、`--example-shadow`、`--example-text`、`--example-text-muted`、`--example-border-control`、`--example-panel-muted`、`--example-control-bg`、`--example-tag-bg` 改为引用 package token 或 bridge token | 避免 example 重复定义 package 默认主题值           |
+| Page overrides     | Ant-like page overrides 中的 primary、info、shadow 改为 `--scone-color-primary`、`--scone-color-info`、`--scone-shadow-sm`                                                                                               | 保持示例页面视觉，同时让颜色来源回到 package theme |
+| Dark theme bridge  | 删除 dark example 中重复声明的 `--background`、`--foreground`、`--primary`、`--border`、`--sidebar-*` 等 bridge 变量                                                                                                     | 深色 bridge 已由 `.dark` 默认主题提供              |
+
+### Preserved
+
+- 保留 `--example-bg`、`--example-panel`、`--example-soft`、滚动条和页面布局变量，因为它们属于 example 页面外观，不是组件默认主题。
+- 保留 `scone-example-*` 页面选择器、dashboard/list/profile/workplace/result 页面样式和响应式规则。
+- 未把 example CSS 迁移到 `packages/scone-ui`，调用方应用也不应导入 example CSS。
+
+### Verification
+
+- `pnpm --filter @scone-ui/example test -- --run`
+- `pnpm run build:example`
+- `pnpm --filter scone-ui typecheck`
+- `pnpm exec prettier --check apps/example/src/examples/library-example.css TODO.md`
