@@ -13,6 +13,8 @@ import { AppShell, Page, SconeButton, SconeMenu, type SconeNavigationItem } from
 import { type ExampleKey } from "../pages/page-registry";
 import { SconeAdminLogo } from "./scone-admin-logo";
 
+const apiGuideUrl = "https://thundax-lyp.github.io/scone-ui/docs/guide/ai-usage/";
+
 export type ExampleTheme = "light" | "dark";
 
 export type LibraryExampleLayoutProps = {
@@ -78,11 +80,14 @@ export const LibraryExampleLayout = ({
                                 {isDark ? "浅色 / Light" : "深色 / Dark"}
                             </SconeButton>
                             <SconeButton
+                                asChild
                                 variant="ghost"
                                 size="sm"
                                 className="scone-example-api-action"
                             >
-                                API Guide
+                                <a href={apiGuideUrl} target="_blank" rel="noreferrer">
+                                    API Guide
+                                </a>
                             </SconeButton>
                             <div className="scone-example-user">
                                 <SconeAdminLogo size="sm" />
