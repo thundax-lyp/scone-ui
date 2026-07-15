@@ -18,6 +18,18 @@ import {
 } from "./navigation";
 
 import "../library-example.css";
+import "../styles/result-success.css";
+import "../styles/account-settings.css";
+import "../styles/monitor.css";
+import "../styles/table-list.css";
+import "../styles/profile-pages.css";
+import "../styles/account-center.css";
+import "../styles/form-pages.css";
+import "../styles/list-analysis.css";
+import "../styles/card-list.css";
+import "../styles/exception.css";
+import "../styles/result-fail.css";
+import "../styles/workplace-logo-theme.css";
 
 export const LibraryExample = (): React.JSX.Element => {
     const location = useLocation();
